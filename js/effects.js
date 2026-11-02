@@ -437,21 +437,21 @@ window.CARD_LAYOUT_CONFIG = {
     type: 'blue',
     name: 'Deus Ex Machina',
     frame: 'assets/layouts/layout_blue.webp',
-    icon: 'assets/icons/latout_deus ex machina.png',
+    icon: 'assets/icons/latout_deus ex machina.webp',
     color: '#4fb3c2'
   },
   purple: {
     type: 'purple',
     name: 'Carte Oscure',
     frame: 'assets/layouts/layout_purple.webp',
-    icon: 'assets/icons/oscuro.png',
+    icon: 'assets/icons/oscuro.webp',
     color: '#9b59b6'
   },
   red: {
     type: 'red',
     name: 'Minacce',
     frame: 'assets/layouts/layout_red.webp',
-    icon: 'assets/icons/minaccia.png',
+    icon: 'assets/icons/minaccia.webp',
     color: '#b83a4f'
   },
   silver: {

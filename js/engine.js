@@ -276,7 +276,7 @@ class MonomythosEngine {
       cosmico: 'Egemonia del Fato: la Parata Dinamica converte a 2:1 (somma dei Valori ÷ 2).',
       parryRate: 2,
       logica: 'Aggressivo → Attacca ad area e bersaglia chi ha meno carte',
-      img: data.chars_meta[bossHeroName]?.img || 'assets/icons/minaccia.png',
+      img: data.chars_meta[bossHeroName]?.img || 'assets/icons/minaccia.webp',
       mooks: [{
         id: 'boss_npc',
         name: `${bossHeroName} [Villain]`,
@@ -770,6 +770,39 @@ class MonomythosEngine {
   }
 
   // Enemy & Threat Phase execution (Point 6: Interactive Defense Window)
+  // Bersaglio di un attacco nemico: bersaglio forzato, poi Logica della Minaccia, poi Vita più bassa
+  pickEnemyTarget(livingPlayers, th) {
+    if (th.forcedTarget) {
+      const ft = livingPlayers.find(p => p.id === th.forcedTarget);
+      if (ft) return ft;
+    }
+    if (th.logica && th.logica.includes('meno carte')) {
+      return livingPlayers.reduce((min, p) => p.hand.length < min.hand.length ? p : min, livingPlayers[0]);
+    }
+    return livingPlayers.reduce((min, p) => p.vita < min.vita ? p : min, livingPlayers[0]);
+  }
+
+  // Intenzioni dei nemici per la prossima Fase Minaccia (mostrate sopra ogni nemico)
+  getEnemyIntents() {
+    const th = this.state.currentThreat;
+    const intents = {};
+    if (!th) return intents;
+    const living = this.state.players.filter(p => !p.isDead);
+    if (living.length === 0) return intents;
+    const target = this.pickEnemyTarget(living, th);
+    const ready = (th.mooks || []).filter(m => !m.isDead && !m.stunned);
+    const attackers = ready.filter(m => !m.subsidiary);
+    const list = attackers.length > 0 ? attackers : ready.slice(0, 1);
+    (th.mooks || []).forEach((m, i) => {
+      if (m.isDead) return;
+      if (list.includes(m)) intents[i] = { kind: 'attack', dmg: th.forza, target: target.name };
+      else if (m.stunned) intents[i] = { kind: 'stunned' };
+      else intents[i] = { kind: 'support' };
+    });
+    if (list.length === 0) intents.__boss = { kind: 'attack', dmg: th.forza, target: target.name };
+    return intents;
+  }
+
   runEnemyPhase() {
     this.state.phase = 'enemy';
     const th = this.state.currentThreat;
@@ -841,16 +874,8 @@ class MonomythosEngine {
       if (livingPlayers.length === 0) return;
 
       // Targeting
-      let target = livingPlayers[0];
-      if (th.forcedTarget) {
-        const ft = livingPlayers.find(p => p.id === th.forcedTarget);
-        if (ft) target = ft;
-        delete th.forcedTarget;
-      } else if (th.logica && th.logica.includes('meno carte')) {
-        target = livingPlayers.reduce((min, p) => p.hand.length < min.hand.length ? p : min, livingPlayers[0]);
-      } else {
-        target = livingPlayers.reduce((min, p) => p.vita < min.vita ? p : min, livingPlayers[0]);
-      }
+      const target = this.pickEnemyTarget(livingPlayers, th);
+      delete th.forcedTarget;
 
       this.resolveEnemyAttack(enemy, target, th.forza, () => {
         setTimeout(processNextAttack, 400);

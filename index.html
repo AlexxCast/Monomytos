@@ -63,7 +63,7 @@
   </div>
 
   <!-- Header -->
-  <header class="app-header">
+  <header class="app-header main-header">
     <div class="brand">
       <img src="assets/icons/logo_monograma.webp" alt="Monomythos" class="monogram-logo">
       <div class="brand-text">
@@ -75,10 +75,13 @@
       <div class="credits-pill" onclick="UI.openShop()" title="Crediti Cosmici">
         <span class="cr-badge">CR</span> <span class="creditsDisplay">500</span>
       </div>
-      <button class="icon-btn" onclick="UI.openServerSettings()" title="Server & Profilo">SERVER</button>
-      <button class="icon-btn" onclick="UI.showModal('modalQrCode')" title="QR Code Telefono">CONDIVIDI</button>
-      <button class="icon-btn" id="btnAudioMixer" onclick="UI.openAudioMixer()" title="Mixer Audio">MIXER</button>
-      <button class="icon-btn" onclick="UI.showModal('modalRules')" title="Regole">REGOLE</button>
+      <button class="icon-btn header-menu-btn" onclick="UI.toggleHeaderMenu()" aria-label="Menu" title="Menu">☰</button>
+      <div class="header-menu" onclick="UI.toggleHeaderMenu(false)">
+        <button class="icon-btn" onclick="UI.openServerSettings()" title="Server & Profilo">SERVER</button>
+        <button class="icon-btn" onclick="UI.showModal('modalQrCode')" title="QR Code Telefono">CONDIVIDI</button>
+        <button class="icon-btn" id="btnAudioMixer" onclick="UI.openAudioMixer()" title="Mixer Audio">MIXER</button>
+        <button class="icon-btn" onclick="UI.showModal('modalRules')" title="Regole">REGOLE</button>
+      </div>
     </div>
   </header>
 
@@ -272,7 +275,7 @@
       <div class="threat-central-card-wrap">
         <!-- Main Red Frame Threat Card with layout_red.webp -->
         <div class="threat-silver-frame-wrap" id="threatCentralCard" onclick="UI.inspectCurrentThreat()">
-          <img class="threat-bg-img" id="threatThumbImg" src="assets/icons/minaccia.png" alt="Minaccia">
+          <img class="threat-bg-img" id="threatThumbImg" src="assets/icons/minaccia.webp" alt="Minaccia">
           <img class="threat-frame-img" src="assets/layouts/layout_red.webp" alt="Frame Rosso">
           <div class="threat-vignette-bubble">
             <div class="threat-card-title" id="threatName">Minaccia</div>
@@ -353,8 +356,13 @@
         </div>
       </div>
 
-      <!-- Combat Log (Collapsible) -->
-      <div class="battle-log" id="battleLog"></div>
+      <!-- Combat Log (Collapsible): si vede solo l'ultimo evento, tocca per aprire -->
+      <div class="battle-log-wrap" id="battleLogWrap">
+        <button class="battle-log-toggle" onclick="UI.toggleBattleLog()" aria-label="Apri o chiudi il registro di battaglia">
+          <span class="battle-log-icon">📜</span><span class="battle-log-last" id="battleLogLast">Registro di battaglia</span><span class="battle-log-chev">▾</span>
+        </button>
+        <div class="battle-log" id="battleLog"></div>
+      </div>
     </div>
 
     <!-- 3. BOTTOM: PLAYER COMMAND DECK & HAND (Point 4 & 5: Icons Only, No Text) -->
@@ -885,7 +893,7 @@
         </div>
         <!-- Front of threat card -->
         <div class="threat-draw-card-front" id="threatDrawCardFront">
-          <img id="threatDrawFrontImg" src="assets/icons/minaccia.png" alt="Minaccia">
+          <img id="threatDrawFrontImg" src="assets/icons/minaccia.webp" alt="Minaccia">
           <div class="threat-draw-front-name" id="threatDrawFrontName">NOME MINACCIA</div>
         </div>
       </div>
@@ -1063,7 +1071,7 @@
           <!-- BACK FACE: Threat Card (Volto Minaccia Rivelato) -->
           <div class="intro-card-side intro-card-back">
             <div class="intro-threat-frame-wrap">
-              <img class="intro-threat-art" id="introThreatArt" src="assets/icons/minaccia.png" alt="Minaccia">
+              <img class="intro-threat-art" id="introThreatArt" src="assets/icons/minaccia.webp" alt="Minaccia">
               <img class="intro-threat-frame" src="assets/layouts/layout_red.webp" alt="Frame Rosso Minaccia">
               
               <!-- Vignette Title -->

@@ -101,6 +101,22 @@ class UIController {
     }, 500);
   }
 
+  toggleBattleLog(force) {
+    const wrap = document.getElementById('battleLogWrap');
+    if (!wrap) return;
+    const open = typeof force === 'boolean' ? force : !wrap.classList.contains('open');
+    wrap.classList.toggle('open', open);
+    const box = document.getElementById('battleLog');
+    if (open && box) box.scrollTop = box.scrollHeight;
+  }
+
+  toggleHeaderMenu(force) {
+    const header = document.querySelector('header.main-header');
+    if (!header) return;
+    const open = typeof force === 'boolean' ? force : !header.classList.contains('menu-open');
+    header.classList.toggle('menu-open', open);
+  }
+
   showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const target = document.getElementById(screenId);
@@ -108,6 +124,8 @@ class UIController {
       target.classList.add('active');
       this.activeScreen = screenId;
     }
+    document.body.classList.toggle('in-match', screenId === 'scr-game');
+    this.toggleHeaderMenu(false);
 
     if (screenId !== 'scr-game') {
       document.documentElement.classList.remove('theme-villain');
@@ -365,7 +383,7 @@ class UIController {
     const th = threat || { nome: 'Minaccia Sconosciuta', livello: 1, eff_desc: 'Preparati allo scontro' };
 
     // Threat Image
-    let imgUrl = th.img || 'assets/icons/minaccia.png';
+    let imgUrl = th.img || 'assets/icons/minaccia.webp';
     if (data?.card_img_map && th.nome) {
       const slug = th.nome.toLowerCase().replace(/[^a-z0-9]/g, '');
       if (data.card_img_map[slug]) {
@@ -385,7 +403,7 @@ class UIController {
 
     if (artEl) {
       artEl.src = imgUrl;
-      artEl.onerror = () => { artEl.src = 'assets/icons/minaccia.png'; };
+      artEl.onerror = () => { artEl.src = 'assets/icons/minaccia.webp'; };
     }
     if (titleEl) titleEl.textContent = th.nome || 'Minaccia';
     if (actEl) actEl.textContent = th.isBoss ? 'BOSS FINALE' : (th.isRogueHero ? 'BOSS CORROTTO' : 'ATTO I');
@@ -532,7 +550,7 @@ class UIController {
 
     const thImg = document.getElementById('threatThumbImg');
     if (thImg) {
-      thImg.src = th.img || 'assets/icons/minaccia.png';
+      thImg.src = th.img || 'assets/icons/minaccia.webp';
     }
 
     // Threat HP bar
@@ -575,12 +593,25 @@ class UIController {
     if (mookBox) {
       mookBox.innerHTML = '';
       if (th.mooks) {
-        th.mooks.forEach(m => {
+        const intents = (window.GameEngine.getEnemyIntents && window.GameEngine.getEnemyIntents()) || {};
+        const intentHTML = (it) => {
+          if (!it) return '';
+          if (it.kind === 'attack') return `<i class="mook-intent attack" title="Alla prossima Fase Minaccia attacca ${it.target} con Forza ${it.dmg}">⚔ ${it.dmg} → ${it.target.split(' ')[0]}</i>`;
+          if (it.kind === 'stunned') return `<i class="mook-intent stunned" title="Stordito: salta il prossimo attacco">✶ stordito</i>`;
+          return `<i class="mook-intent support" title="Minaccia sussidiaria: rinforza ma non attacca">⛨ supporto</i>`;
+        };
+        th.mooks.forEach((m, i) => {
           const chip = document.createElement('div');
           chip.className = `mook-chip ${m.isDead ? 'dead' : ''}`;
-          chip.innerHTML = `<span>${m.name}</span> <b class="mono">${m.isDead ? '0' : m.hp} HP</b>`;
+          chip.innerHTML = `${m.isDead ? '' : intentHTML(intents[i])}<span>${m.name}</span> <b class="mono">${m.isDead ? '0' : m.hp} HP</b>`;
           mookBox.appendChild(chip);
         });
+        if (intents.__boss) {
+          const chip = document.createElement('div');
+          chip.className = 'mook-chip boss-intent';
+          chip.innerHTML = `${intentHTML(intents.__boss)}<span>${th.nome}</span>`;
+          mookBox.appendChild(chip);
+        }
       }
     }
 
@@ -697,6 +728,9 @@ class UIController {
         logBox.appendChild(p);
       });
       logBox.scrollTop = logBox.scrollHeight;
+      const last = state.log[state.log.length - 1];
+      const ticker = document.getElementById('battleLogLast');
+      if (ticker && last) ticker.innerHTML = last.text;
     }
 
     // 6. Local Player Dock
@@ -793,16 +827,16 @@ class UIController {
       return window.CARD_LAYOUT_CONFIG.getLayout(card, isHero, isThreat);
     }
     if (isThreat) {
-      return { frame: 'assets/layouts/layout_red.webp', icon: 'assets/icons/minaccia.png', type: 'red' };
+      return { frame: 'assets/layouts/layout_red.webp', icon: 'assets/icons/minaccia.webp', type: 'red' };
     }
     if (isHero || card?.isHero || card?.role === 'personaggio') {
       return { frame: 'assets/layouts/layout_silver.webp', icon: 'assets/icons/vigore.png', type: 'silver' };
     }
     if (card?.osc || card?.cat === 'Oscuro') {
-      return { frame: 'assets/layouts/layout_purple.webp', icon: 'assets/icons/oscuro.png', type: 'purple' };
+      return { frame: 'assets/layouts/layout_purple.webp', icon: 'assets/icons/oscuro.webp', type: 'purple' };
     }
     if (card?.deus || card?.tipo === 'deus' || card?.nome?.includes('Defibrillazione')) {
-      return { frame: 'assets/layouts/layout_blue.webp', icon: 'assets/icons/latout_deus ex machina.png', type: 'blue' };
+      return { frame: 'assets/layouts/layout_blue.webp', icon: 'assets/icons/latout_deus ex machina.webp', type: 'blue' };
     }
     if (card?.cat === 'Intelligenza' || card?.tipo === 'abilita' || card?.tag?.includes('Tech') || card?.tag?.includes('Magia')) {
       return { frame: 'assets/layouts/layout_green.webp', icon: 'assets/icons/inteligenza.png', type: 'green' };
@@ -824,6 +858,9 @@ class UIController {
     const valText = card.valore !== undefined ? card.valore : 1;
     const bgArt = card.img || 'assets/cards/retrocartamazzo.webp';
     const effectText = card.effetto || card.desc || '';
+    // Versione breve per la mano: la prima frase (o parola chiave) dell'effetto
+    const plainText = String(effectText).replace(/<[^>]*>/g, '').trim();
+    const shortText = (plainText.split(/(?<=[.!:;])\s/)[0] || '').replace(/[.:;]$/, '');
 
     return `
       <div class="monomyth-card card-${layout.type} ${card.osc ? 'card-osc' : ''} ${card.deus ? 'card-deus' : ''} ${isLarge ? 'card-large' : ''}" data-uid="${card.uid || card.id}">
@@ -842,6 +879,7 @@ class UIController {
         <!-- Layer 4: Lower Central Transparent Box with Effect Description -->
         <div class="card-desc-box">
           <div class="card-desc-text">${effectText}</div>
+          <div class="card-desc-short">${shortText}</div>
         </div>
 
         <!-- Layer 5: Bottom Left Circle with Card Value -->
@@ -863,7 +901,7 @@ class UIController {
     const frontName = document.getElementById('threatDrawFrontName');
     if (!overlay) return;
 
-    if (frontImg) frontImg.src = th.img || 'assets/icons/minaccia.png';
+    if (frontImg) frontImg.src = th.img || 'assets/icons/minaccia.webp';
     if (frontName) frontName.textContent = th.nome || 'Minaccia';
 
     window.AudioEngine?.playSfx('fracture');
@@ -1308,7 +1346,7 @@ class UIController {
   inspectCard(card) {
     const c = card || this.selectedCard;
     if (!c) return;
-    document.getElementById('inspectCardImg').src = c.img || 'assets/icons/azione.png';
+    document.getElementById('inspectCardImg').src = c.img || 'assets/icons/azione.webp';
     document.getElementById('inspectCardTitle').textContent = c.nome;
     document.getElementById('inspectCardDesc').textContent = c.effetto;
     this.showModal('modalInspect');
@@ -1317,7 +1355,7 @@ class UIController {
   inspectCurrentThreat() {
     const th = window.GameEngine.state ? window.GameEngine.state.currentThreat : null;
     if (!th) return;
-    document.getElementById('inspectCardImg').src = th.img || 'assets/icons/minaccia.png';
+    document.getElementById('inspectCardImg').src = th.img || 'assets/icons/minaccia.webp';
     document.getElementById('inspectCardTitle').textContent = th.nome;
     document.getElementById('inspectCardDesc').textContent = `Pericoloso: ${th.pericoloso}\nCosmico: ${th.cosmico || 'Nessuno'}`;
     this.showModal('modalInspect');
@@ -1392,7 +1430,7 @@ class UIController {
       pb_name: pName,
       pb_desc: pCard.testo || '',
       archetipo: aName,
-      img: 'assets/icons/peronaggio.png'
+      img: 'assets/icons/peronaggio.webp'
     };
 
     data.action_cards[customKey] = data.action_cards['Iron Aegis']; // Preset deck
@@ -2148,7 +2186,7 @@ class UIController {
         card.className = `shop-item-card ${isUnlocked ? 'unlocked' : ''}`;
         card.innerHTML = `
           <div class="shop-item-thumb">
-            <img src="${h.img}" alt="${h.name}" onerror="this.src='assets/icons/peronaggio.png'">
+            <img src="${h.img}" alt="${h.name}" onerror="this.src='assets/icons/peronaggio.webp'">
           </div>
           <h4>${h.name}</h4>
           <p>${h.desc}</p>

@@ -1,5 +1,5 @@
 // Monomythos Service Worker - Fast offline cache
-const CACHE_NAME = 'monomythos-v1';
+const CACHE_NAME = 'monomythos-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -11,9 +11,9 @@ const ASSETS = [
   './js/net.js',
   './js/ui.js',
   './assets/icons/logo.png',
-  './assets/icons/azione.png',
-  './assets/icons/minaccia.png',
-  './assets/icons/peronaggio.png'
+  './assets/icons/azione.webp',
+  './assets/icons/minaccia.webp',
+  './assets/icons/peronaggio.webp'
 ];
 
 self.addEventListener('install', (e) => {
@@ -38,10 +38,16 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
+// Prima la rete (così gli aggiornamenti arrivano subito), la cache solo offline
 self.addEventListener('fetch', (e) => {
+  if (e.request.method !== 'GET') return;
   e.respondWith(
-    caches.match(e.request).then((res) => {
-      return res || fetch(e.request);
-    }).catch(() => fetch(e.request))
+    fetch(e.request).then((res) => {
+      if (res && res.ok && new URL(e.request.url).origin === self.location.origin) {
+        const copy = res.clone();
+        caches.open(CACHE_NAME).then((c) => c.put(e.request, copy));
+      }
+      return res;
+    }).catch(() => caches.match(e.request))
   );
 });
