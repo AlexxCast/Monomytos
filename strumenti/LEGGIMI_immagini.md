@@ -30,7 +30,7 @@ Da Actions puoi rilanciare a mano. Dal computer invece usa:
 python strumenti/genera_immagini_carte.py --solo ironaegis_1 --rifai
 ```
 
-Puoi anche cambiare la scena di quella carta in `scene_carte_en.json` prima di rifarla. Ogni carta usa sempre lo stesso "seme", quindi rilanciando senza cambiare la scena esce la stessa immagine: per averne una diversa cambia la scena.
+Ogni volta che rifai una carta esce un'immagine diversa: puoi rilanciare finché non ti piace. Se vuoi cambiare cosa rappresenta, modifica prima la sua scena in `scene_carte_en.json`.
 
 ## Uso dal computer (senza GitHub)
 

@@ -20,7 +20,7 @@ Uso:
   python strumenti/genera_immagini_carte.py --solo ironaegis_1 --rifai
   python strumenti/genera_immagini_carte.py --prova       # mostra i prompt, nessuna chiamata
 """
-import argparse, base64, hashlib, io, json, os, re, sys, time, urllib.request, urllib.error
+import argparse, base64, hashlib, http.client, io, json, os, re, sys, time, urllib.request, urllib.error
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_JS = os.path.join(ROOT, 'js', 'cards_data.js')
@@ -134,7 +134,8 @@ def call_cloudflare(prompt, seed):
     if not account or not token:
         sys.exit('Mancano CF_ACCOUNT_ID e/o CF_API_TOKEN (vedi istruzioni in testa al file).')
     url = f'{API_BASE}/accounts/{account}/ai/run/{MODEL}'
-    body = json.dumps({'prompt': prompt[:2000], 'steps': 6, 'seed': seed}).encode()
+    # Il modello accetta solo 'prompt' e 'steps' (max 8): 'seed' viene rifiutato con HTTP 400
+    body = json.dumps({'prompt': prompt[:2000], 'steps': 6}).encode()
     req = urllib.request.Request(url, data=body, method='POST', headers={
         'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'})
     for attempt in range(4):
@@ -149,9 +150,12 @@ def call_cloudflare(prompt, seed):
             msg = e.read().decode(errors='replace')[:300]
             if e.code == 429 or 'neuron' in msg.lower() or 'limit' in msg.lower():
                 raise QuotaExceeded(msg)
+            if 400 <= e.code < 500:
+                # Errore nella richiesta o nelle credenziali: riprovare non serve
+                raise RuntimeError(f'HTTP {e.code}: {msg}')
             if attempt == 3:
                 raise RuntimeError(f'HTTP {e.code}: {msg}')
-        except (urllib.error.URLError, TimeoutError) as e:
+        except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException) as e:
             if attempt == 3:
                 raise RuntimeError(str(e))
         time.sleep(2 ** (attempt + 1))
@@ -219,6 +223,7 @@ def main():
 
     print(f'Carte da generare: {len(todo)} (limite di questa esecuzione: {args.max})')
     done = 0
+    errors_in_a_row = 0
     for c in todo[:args.max]:
         prompt = build_prompt(c)
         if args.prova:
@@ -231,7 +236,12 @@ def main():
             break
         except RuntimeError as e:
             print(f"Errore su {c['id']}: {e}")
+            errors_in_a_row += 1
+            if errors_in_a_row >= 3:
+                print('Tre errori di fila: mi fermo. Controlla il messaggio qui sopra.')
+                break
             continue
+        errors_in_a_row = 0
         path = os.path.join(OUT_DIR, f"{c['id']}.webp")
         to_card_webp(img, path)
         update_card_refs(data, c, f"{REL_DIR}/{c['id']}.webp")
@@ -244,6 +254,8 @@ def main():
         save_data(prefix, data, suffix)
         write_preview(data)
     print(f'Fatto: {done} immagini nuove.')
+    if errors_in_a_row >= 3:
+        sys.exit(1)
 
 
 if __name__ == '__main__':
