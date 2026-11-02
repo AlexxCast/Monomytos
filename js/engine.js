@@ -203,7 +203,8 @@ class MonomythosEngine {
           name: `${g.name} ${String.fromCharCode(65 + i)}`,
           hp: mookHp,
           maxHp: mookHp,
-          isDead: false
+          isDead: false,
+          subsidiary: g.card !== raw
         });
       }
     });
@@ -818,7 +819,9 @@ class MonomythosEngine {
     if (th.mooks) {
       th.mooks.forEach(m => { m.stunned = false; }); // Clear stun for next round
     }
-    const enemies = livingMooks.length > 0 ? livingMooks : [{ name: th.nome, isBoss: true }];
+    // §5: le minacce sussidiarie della Crisi Composita sono solo potenziamento numerico, non attaccano
+    const attackers = livingMooks.filter(m => !m.subsidiary);
+    const enemies = attackers.length > 0 ? attackers : (livingMooks.length > 0 ? livingMooks.slice(0, 1) : [{ name: th.nome, isBoss: true }]);
 
     let enemyIndex = 0;
     const processNextAttack = () => {
