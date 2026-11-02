@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  monomythos:
+    build: .
+    container_name: monomythos-server
+    restart: always
+    ports:
+      - "8000:8000"

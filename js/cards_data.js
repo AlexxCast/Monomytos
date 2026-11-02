@@ -1,0 +1,7526 @@
+// Monomythos Full Cards & Game Database
+window.MONOMYTHOS_DATA = {
+  "threats": [
+    {
+      "nome": "Blackout Ostile",
+      "livello": 1,
+      "nemici": "3× Drone da Sorveglianza",
+      "vu": 2,
+      "forza": 1,
+      "timer": 4,
+      "primario": {
+        "val": 2,
+        "cat": "Intelligenza",
+        "raw": "2 [Intelligenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Potenza",
+        "raw": "3 [Potenza]"
+      },
+      "pericoloso": "Interferenza: i sacrifici sul Primario valgono 1 in meno (min 1).",
+      "cosmico": "Zona Morta Digitale: a fine round 1 danno diretto a tutti, bypassa la Parata.",
+      "logica": "Tattico → bersaglia chi ha speso più carte",
+      "img": "assets/cards/blackoutostile.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Torneo Clandestino",
+      "livello": 1,
+      "nemici": "2× Duellante",
+      "vu": 2,
+      "forza": 2,
+      "timer": 4,
+      "primario": {
+        "val": 2,
+        "cat": "Agilità",
+        "raw": "2 [Agilità]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Potenza",
+        "raw": "3 [Potenza]"
+      },
+      "pericoloso": "Regole d'Onore: massimo 1 Sacrificio Tattico per eroe per round.",
+      "cosmico": "Arena Assoluta: in Parata Dinamica si possono scartare al massimo 2 carte per colpo.",
+      "logica": "Tattico → bersaglia chi ha meno % Vita",
+      "img": "assets/cards/torneoclandestino.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Incursione dei Droni Cinetici",
+      "livello": 2,
+      "nemici": "3× Drone Cinetico",
+      "vu": 3,
+      "forza": 2,
+      "timer": 3,
+      "primario": {
+        "val": 2,
+        "cat": "Intelligenza",
+        "raw": "2 [Intelligenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Vigore",
+        "raw": "3 [Vigore]"
+      },
+      "pericoloso": "Sciame: finché tutti i droni sono vivi, +1 Forza ai loro colpi.",
+      "cosmico": "Zona Morta Radioattiva: 1 danno diretto a tutti a fine round (bypassa Parata) e Resistenza effettiva -1.",
+      "logica": "Tattico → bersaglia chi ha meno carte in mano",
+      "img": "assets/cards/incursionedeidronicinetici.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "L'Assedio dei Predoni delle Rovine",
+      "livello": 2,
+      "nemici": "2× Predone",
+      "vu": 3,
+      "forza": 2,
+      "timer": 3,
+      "primario": {
+        "val": 2,
+        "cat": "Potenza",
+        "raw": "2 [Potenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Intelligenza",
+        "raw": "3 [Intelligenza]"
+      },
+      "pericoloso": "Saccheggio: chi viene colpito scarta anche 1 carta a caso.",
+      "cosmico": "Carestia: nei round pari non si pesca la carta di inizio turno.",
+      "logica": "Tattico → bersaglia chi ha più carte in mano",
+      "img": "assets/cards/lassediodeipredonidellerovine.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Imboscata sulla Falesia",
+      "livello": 2,
+      "nemici": "2× Bandito Agile",
+      "vu": 3,
+      "forza": 3,
+      "timer": 3,
+      "primario": {
+        "val": 2,
+        "cat": "Agilità",
+        "raw": "2 [Agilità]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Vigore",
+        "raw": "3 [Vigore]"
+      },
+      "pericoloso": "Terreno sfavorevole: gli scudi valgono la metà (per difetto).",
+      "cosmico": "Buio Totale: gli scudi non superano mai 2.",
+      "logica": "Tattico → bersaglia chi ha meno carte in mano",
+      "img": "assets/cards/imboscatasullafalesia.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Cultisti del Velo",
+      "livello": 3,
+      "nemici": "3× Cultista",
+      "vu": 3,
+      "forza": 2,
+      "timer": 3,
+      "primario": {
+        "val": 2,
+        "cat": "Intelligenza",
+        "raw": "2 [Intelligenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Potenza",
+        "raw": "3 [Potenza]"
+      },
+      "pericoloso": "Tentazione: ogni Carta Oscura giocata cura tutti i Cultisti di 2.",
+      "cosmico": "Velo Squarciato: i Malus TRM delle Carte Oscure aumentano di 1.",
+      "logica": "Tattico → bersaglia chi ha più VP",
+      "img": "assets/cards/cultistidelvelo.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Rivolta della Fonderia",
+      "livello": 3,
+      "nemici": "2× Operaio Armato",
+      "vu": 4,
+      "forza": 3,
+      "timer": 3,
+      "primario": {
+        "val": 2,
+        "cat": "Potenza",
+        "raw": "2 [Potenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Intelligenza",
+        "raw": "3 [Intelligenza]"
+      },
+      "pericoloso": "Fiamme libere: la detonazione del Timer infligge 4 danni invece di 3.",
+      "cosmico": "Nucleo in Fusione: la detonazione del Timer infligge 5 danni.",
+      "logica": "Tattico → bersaglia chi ha meno carte in mano",
+      "img": "assets/cards/rivoltadellafonderia.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "L'Intelligenza Rogue",
+      "livello": 4,
+      "nemici": "1× IA Rogue",
+      "vu": 4,
+      "forza": 3,
+      "timer": 3,
+      "primario": {
+        "val": 2,
+        "cat": "Intelligenza",
+        "raw": "2 [Intelligenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Vigore",
+        "raw": "3 [Vigore]"
+      },
+      "pericoloso": "Interferenza sistemica: i sacrifici di carte Abilità/Gadget valgono la metà.",
+      "cosmico": "Controllo Totale: tutti i sacrifici valgono 1 in meno (min 1).",
+      "logica": "Tattico → copia l'ultimo Gadget e lo usa contro la squadra",
+      "img": "assets/cards/lintelligenzarogue.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Il Campione Imbattuto",
+      "livello": 4,
+      "nemici": "1× Campione",
+      "vu": 4,
+      "forza": 4,
+      "timer": 3,
+      "primario": {
+        "val": 2,
+        "cat": "Agilità",
+        "raw": "2 [Agilità]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Potenza",
+        "raw": "3 [Potenza]"
+      },
+      "pericoloso": "Regole d'Onore: massimo 1 Sacrificio Tattico per eroe per round.",
+      "cosmico": "Duello Finale: gli attacchi degli eroi infliggono 1 danno in meno (min 1).",
+      "logica": "Aggressivo → doppio attacco sul bersaglio con più Vita",
+      "img": "assets/cards/ilcampioneimbattuto.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Il Rivale Traditore",
+      "livello": 4,
+      "nemici": "1× Rivale",
+      "vu": 4,
+      "forza": 4,
+      "timer": 3,
+      "primario": {
+        "val": 2,
+        "cat": "Potenza",
+        "raw": "2 [Potenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Agilità",
+        "raw": "3 [Agilità]"
+      },
+      "pericoloso": "Specchio Infranto: ogni VP generato da un Villain → 2 danni diretti a quell'eroe.",
+      "cosmico": "Specchio Assoluto: ogni VP generato da chiunque → 2 danni diretti a quell'eroe.",
+      "logica": "Aggressivo → copia l'ultima Leva Villain contro la squadra",
+      "img": "",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Il Colosso di Rovina",
+      "livello": 5,
+      "nemici": "1× Colosso",
+      "vu": 5,
+      "forza": 4,
+      "timer": 4,
+      "primario": {
+        "val": 2,
+        "cat": "Potenza",
+        "raw": "2 [Potenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Intelligenza",
+        "raw": "3 [Intelligenza]"
+      },
+      "pericoloso": "Erosione: a ogni Fase Nemici, Resistenza effettiva di tutti -1 (max -2).",
+      "cosmico": "Rovina Totale: l'Erosione arriva fino a -3.",
+      "logica": "Aggressivo → attacco pesante con Travolgere sul bersaglio con più Vita",
+      "img": "assets/cards/ilcolossodirovina.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Il Custode d'Acciaio",
+      "livello": 5,
+      "nemici": "1× Custode",
+      "vu": 5,
+      "forza": 4,
+      "timer": 4,
+      "primario": {
+        "val": 2,
+        "cat": "Vigore",
+        "raw": "2 [Vigore]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Potenza",
+        "raw": "3 [Potenza]"
+      },
+      "pericoloso": "Fonderia in Fusione: ogni VP generato dà al Custode +1 Forza fino a fine round.",
+      "cosmico": "Fusione Totale: ogni 2 round il Custode guadagna +1 Forza permanente.",
+      "logica": "Aggressivo → doppio colpo ad area con Travolgere",
+      "img": "",
+      "layout_type": "red"
+    },
+    {
+      "nome": "Il Mietitore dell'Astro Oscuro",
+      "livello": 6,
+      "nemici": "1× Mietitore Cosmico",
+      "vu": 4,
+      "forza": 4,
+      "timer": 5,
+      "primario": {
+        "val": 2,
+        "cat": "Intelligenza",
+        "raw": "2 [Intelligenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Potenza",
+        "raw": "3 [Potenza]"
+      },
+      "pericoloso": "Falce Cosmica: il primo colpo di ogni round ha +1 Forza.",
+      "cosmico": "Mutazione del Tabellone: la Parata Dinamica converte a 2:1 (ogni carta assorbe metà Valore, min 1).",
+      "logica": "Aggressivo → doppio colpo ad area con Travolgere",
+      "img": "assets/cards/ilmietitoredellastrooscuro.webp",
+      "layout_type": "red"
+    },
+    {
+      "nome": "L'Eco Senza Nome",
+      "livello": 6,
+      "nemici": "1× Eco",
+      "vu": 4,
+      "forza": 4,
+      "timer": 5,
+      "primario": {
+        "val": 2,
+        "cat": "Intelligenza",
+        "raw": "2 [Intelligenza]"
+      },
+      "bruto": {
+        "val": 3,
+        "cat": "Potenza",
+        "raw": "3 [Potenza]"
+      },
+      "pericoloso": "Risonanza: quando un eroe pesca più di 1 carta in un turno, l'Eco si cura di 1.",
+      "cosmico": "Simbiosi Oscura: ogni VP generato cura l'Eco di 2.",
+      "logica": "Aggressivo → doppio colpo ad area con Travolgere",
+      "img": "",
+      "layout_type": "red"
+    }
+  ],
+  "creation_cards": [
+    {
+      "char": "Iron Aegis",
+      "full_name": "Origine: Ex-Geniere",
+      "name": "Ex-Geniere",
+      "type": "Statistica + Vita Base",
+      "role": "origine",
+      "str": 2,
+      "spd": 0,
+      "tech": 0,
+      "end": 2,
+      "vita": 30,
+      "testo": "—",
+      "img": "assets/cards/exgeniere.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Iron Aegis",
+      "full_name": "Archetipo: Avanguardia Pesante",
+      "name": "Avanguardia Pesante",
+      "type": "Tag ammessi (no statistiche)",
+      "role": "archetipo",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Tag Autorizzati: Attacco Fisico, Abilità Tech, Gadget",
+      "img": "assets/cards/avanguardiapesante.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Iron Aegis",
+      "full_name": "Costume: Armatura Exo-K",
+      "name": "Armatura Exo-K",
+      "type": "Statistica + Passiva Eccelsa",
+      "role": "costume",
+      "str": 0,
+      "spd": 0,
+      "tech": 2,
+      "end": 2,
+      "vita": 0,
+      "testo": "State Freezing: +2 slot Forza temporanei ogni turno; i danni fisici ignorano le resistenze dei nemici.",
+      "img": "assets/cards/armaturaexok.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Iron Aegis",
+      "full_name": "Potere Base: Sovraccarico Cinetico",
+      "name": "Sovraccarico Cinetico",
+      "type": "Azione gratuita (no statistiche)",
+      "role": "pb",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Azione gratuita 1/turno: Infliggi 1 danno fisico OPPURE alloca 1 punto Potenza su una Minaccia senza consumare carte.",
+      "img": "assets/cards/sovraccaricocinetico.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Neon Phantom",
+      "full_name": "Origine: Cavia Alpha",
+      "name": "Cavia Alpha",
+      "type": "Statistica + Vita Base",
+      "role": "origine",
+      "str": 0,
+      "spd": 2,
+      "tech": 2,
+      "end": 0,
+      "vita": 25,
+      "testo": "—",
+      "img": "assets/cards/caviaalpha.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Neon Phantom",
+      "full_name": "Archetipo: Spettro Cinetico",
+      "name": "Spettro Cinetico",
+      "type": "Tag ammessi (no statistiche)",
+      "role": "archetipo",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Tag Autorizzati: Attacco Fisico, Abilità Poteri, Burst",
+      "img": "assets/cards/spettrocinetico.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Neon Phantom",
+      "full_name": "Costume: Tuta Fotonica",
+      "name": "Tuta Fotonica",
+      "type": "Statistica + Passiva Eccelsa",
+      "role": "costume",
+      "str": 2,
+      "spd": 2,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "State Freezing: puoi dichiarare il Draw Rate Extra massimo (4 carte) senza accumulare mai Trauma da inazione o sforzo.",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Neon Phantom",
+      "full_name": "Potere Base: Scatto Quantistico",
+      "name": "Scatto Quantistico",
+      "type": "Azione gratuita (no statistiche)",
+      "role": "pb",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Azione gratuita 1/turno: Pesca 1 carta extra (senza rischiare Decking Out) OPPURE alloca 1 punto Agilità su una Minaccia.",
+      "img": "assets/cards/scattoquantistico.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Guardiana di Confine",
+      "full_name": "Origine: Sentinella di Frontiera",
+      "name": "Sentinella di Frontiera",
+      "type": "Statistica + Vita Base",
+      "role": "origine",
+      "str": 1,
+      "spd": 0,
+      "tech": 0,
+      "end": 3,
+      "vita": 28,
+      "testo": "—",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Guardiana di Confine",
+      "full_name": "Archetipo: Sentinella Adattiva",
+      "name": "Sentinella Adattiva",
+      "type": "Tag ammessi (no statistiche)",
+      "role": "archetipo",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Tag Autorizzati: Difesa, Abilità Tech, Attacco Fisico",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Guardiana di Confine",
+      "full_name": "Costume: Scudo Modulare",
+      "name": "Scudo Modulare",
+      "type": "Statistica + Passiva Eccelsa",
+      "role": "costume",
+      "str": 0,
+      "spd": 2,
+      "tech": 2,
+      "end": 0,
+      "vita": 0,
+      "testo": "State Freezing: ogni carta Difesa scartata in Opzione B vale +1 Valore extra.",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Guardiana di Confine",
+      "full_name": "Potere Base: Presidio",
+      "name": "Presidio",
+      "type": "Azione gratuita (no statistiche)",
+      "role": "pb",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Azione gratuita 1/turno: +1 Resistenza effettiva per il Travolgere questo turno OPPURE cura 1 HP a te stessa.",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Lama Errante",
+      "full_name": "Origine: Lama senza Casa",
+      "name": "Lama senza Casa",
+      "type": "Statistica + Vita Base",
+      "role": "origine",
+      "str": 3,
+      "spd": 0,
+      "tech": 1,
+      "end": 0,
+      "vita": 24,
+      "testo": "—",
+      "img": "assets/cards/lamasenzacasa.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Lama Errante",
+      "full_name": "Archetipo: Duellante Itinerante",
+      "name": "Duellante Itinerante",
+      "type": "Tag ammessi (no statistiche)",
+      "role": "archetipo",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Tag Autorizzati: Attacco Fisico, Difesa, Untagged",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Lama Errante",
+      "full_name": "Costume: Fodero Leggero",
+      "name": "Fodero Leggero",
+      "type": "Statistica + Passiva Eccelsa",
+      "role": "costume",
+      "str": 0,
+      "spd": 2,
+      "tech": 0,
+      "end": 2,
+      "vita": 0,
+      "testo": "State Freezing: il primo Attacco Fisico giocato ogni turno infligge +1 danno.",
+      "img": "assets/cards/foderoleggero.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Lama Errante",
+      "full_name": "Potere Base: Affondo Calcolato",
+      "name": "Affondo Calcolato",
+      "type": "Azione gratuita (no statistiche)",
+      "role": "pb",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Azione gratuita 1/turno: Infliggi 1 danno OPPURE scambia 1 carta dalla mano con una dagli scarti.",
+      "img": "assets/cards/affondocalcolato.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Titano d'Acciaio",
+      "full_name": "Origine: Sopravvissuto alla Fonderia",
+      "name": "Sopravvissuto alla Fonderia",
+      "type": "Statistica + Vita Base",
+      "role": "origine",
+      "str": 4,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 32,
+      "testo": "—",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Titano d'Acciaio",
+      "full_name": "Archetipo: Devastatore",
+      "name": "Devastatore",
+      "type": "Tag ammessi (no statistiche)",
+      "role": "archetipo",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Tag Autorizzati: Attacco Fisico, Gadget, Difesa",
+      "img": "assets/cards/devastatore.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Titano d'Acciaio",
+      "full_name": "Costume: Piastre Rubate",
+      "name": "Piastre Rubate",
+      "type": "Statistica + Passiva Eccelsa",
+      "role": "costume",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 4,
+      "vita": 0,
+      "testo": "State Freezing: una volta in Stato Villain, ogni VP generato dà anche +1 danno permanente sul prossimo attacco.",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Titano d'Acciaio",
+      "full_name": "Potere Base: Schiacciata",
+      "name": "Schiacciata",
+      "type": "Azione gratuita (no statistiche)",
+      "role": "pb",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Azione gratuita 1/turno: Infliggi 1 danno fisico ad area OPPURE +1 punto Potenza su una Minaccia.",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Architetto Ombra",
+      "full_name": "Origine: Genio Espulso dal Laboratorio",
+      "name": "Genio Espulso dal Laboratorio",
+      "type": "Statistica + Vita Base",
+      "role": "origine",
+      "str": 0,
+      "spd": 0,
+      "tech": 4,
+      "end": 0,
+      "vita": 24,
+      "testo": "—",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Architetto Ombra",
+      "full_name": "Archetipo: Ingegnere Tattico",
+      "name": "Ingegnere Tattico",
+      "type": "Tag ammessi (no statistiche)",
+      "role": "archetipo",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Tag Autorizzati: Abilità Tech, Gadget, Untagged",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Architetto Ombra",
+      "full_name": "Costume: Esoscheletro Leggero",
+      "name": "Esoscheletro Leggero",
+      "type": "Statistica + Passiva Eccelsa",
+      "role": "costume",
+      "str": 0,
+      "spd": 2,
+      "tech": 0,
+      "end": 2,
+      "vita": 0,
+      "testo": "State Freezing: i Gadget costano 1 Tech in meno (minimo 0).",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Architetto Ombra",
+      "full_name": "Potere Base: Prototipo Rapido",
+      "name": "Prototipo Rapido",
+      "type": "Azione gratuita (no statistiche)",
+      "role": "pb",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Azione gratuita 1/turno: spendi 1 Tech per +1 Valore a un Gadget giocato questo turno OPPURE guarda le prime 2 carte del tuo mazzo.",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Sussurro dell'Abisso",
+      "full_name": "Origine: Toccata dal Velo",
+      "name": "Toccata dal Velo",
+      "type": "Statistica + Vita Base",
+      "role": "origine",
+      "str": 0,
+      "spd": 0,
+      "tech": 2,
+      "end": 2,
+      "vita": 20,
+      "testo": "—",
+      "img": "assets/cards/toccatadalvelo.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Sussurro dell'Abisso",
+      "full_name": "Archetipo: Patto Proibito",
+      "name": "Patto Proibito",
+      "type": "Tag ammessi (no statistiche)",
+      "role": "archetipo",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Tag Autorizzati: Abilità Poteri, Untagged, Burst",
+      "img": "assets/cards/pattoproibito.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Sussurro dell'Abisso",
+      "full_name": "Costume: Manto Corrotto",
+      "name": "Manto Corrotto",
+      "type": "Statistica + Passiva Eccelsa",
+      "role": "costume",
+      "str": 0,
+      "spd": 2,
+      "tech": 2,
+      "end": 0,
+      "vita": 0,
+      "testo": "State Freezing: una volta in Stato Villain, ogni carta Poteri scartata in Opzione B genera anche 1 VP (max 1/turno).",
+      "img": "assets/cards/mantocorrotto.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Sussurro dell'Abisso",
+      "full_name": "Potere Base: Empito Oscuro",
+      "name": "Empito Oscuro",
+      "type": "Azione gratuita (no statistiche)",
+      "role": "pb",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Azione gratuita 1/turno: Infliggi 1 danno psichico ignorando Parata Dinamica OPPURE, se già in Stato Villain, genera 1 VP subendo 1 TRM.",
+      "img": "assets/cards/empitooscuro.webp",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Duellante Spezzato",
+      "full_name": "Origine: Espulsa dalla Gilda",
+      "name": "Espulsa dalla Gilda",
+      "type": "Statistica + Vita Base",
+      "role": "origine",
+      "str": 2,
+      "spd": 0,
+      "tech": 0,
+      "end": 2,
+      "vita": 26,
+      "testo": "—",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Duellante Spezzato",
+      "full_name": "Archetipo: Lama Rinnegata",
+      "name": "Lama Rinnegata",
+      "type": "Tag ammessi (no statistiche)",
+      "role": "archetipo",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Tag Autorizzati: Attacco Fisico, Burst, Difesa",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Duellante Spezzato",
+      "full_name": "Costume: Lama Spezzata",
+      "name": "Lama Spezzata",
+      "type": "Statistica + Passiva Eccelsa",
+      "role": "costume",
+      "str": 0,
+      "spd": 3,
+      "tech": 0,
+      "end": 1,
+      "vita": 0,
+      "testo": "State Freezing: una volta in Stato Villain, la prima Leva del Sacrificio Altrui ogni turno non genera TRM.",
+      "img": "",
+      "layout_type": "silver"
+    },
+    {
+      "char": "Duellante Spezzato",
+      "full_name": "Potere Base: Colpo Sleale",
+      "name": "Colpo Sleale",
+      "type": "Azione gratuita (no statistiche)",
+      "role": "pb",
+      "str": 0,
+      "spd": 0,
+      "tech": 0,
+      "end": 0,
+      "vita": 0,
+      "testo": "Azione gratuita 1/turno: Infliggi 1 danno OPPURE forza un alleato a scartare 1 carta per +1 danno al tuo prossimo attacco.",
+      "img": "",
+      "layout_type": "silver"
+    }
+  ],
+  "chars_meta": {
+    "Iron Aegis": {
+      "name": "Iron Aegis",
+      "str": 2,
+      "spd": 0,
+      "tech": 2,
+      "end": 4,
+      "vita": 30,
+      "pb_desc": "Azione gratuita 1/turno: Infliggi 1 danno fisico OPPURE alloca 1 punto Potenza su una Minaccia senza consumare carte.",
+      "pb_name": "Sovraccarico Cinetico",
+      "archetipo": "Avanguardia Pesante",
+      "arch_desc": "Tag Autorizzati: Attacco Fisico, Abilità Tech, Gadget",
+      "origine": "Ex-Geniere",
+      "costume": "Armatura Exo-K",
+      "img": "assets/cards/ironaegis.webp"
+    },
+    "Neon Phantom": {
+      "name": "Neon Phantom",
+      "str": 2,
+      "spd": 4,
+      "tech": 2,
+      "end": 0,
+      "vita": 25,
+      "pb_desc": "Azione gratuita 1/turno: Pesca 1 carta extra (senza rischiare Decking Out) OPPURE alloca 1 punto Agilità su una Minaccia.",
+      "pb_name": "Scatto Quantistico",
+      "archetipo": "Spettro Cinetico",
+      "arch_desc": "Tag Autorizzati: Attacco Fisico, Abilità Poteri, Burst",
+      "origine": "Cavia Alpha",
+      "costume": "Tuta Fotonica",
+      "img": "assets/cards/neonphantom.webp"
+    },
+    "Guardiana di Confine": {
+      "name": "Guardiana di Confine",
+      "str": 1,
+      "spd": 2,
+      "tech": 2,
+      "end": 3,
+      "vita": 28,
+      "pb_desc": "Azione gratuita 1/turno: +1 Resistenza effettiva per il Travolgere questo turno OPPURE cura 1 HP a te stessa.",
+      "pb_name": "Presidio",
+      "archetipo": "Sentinella Adattiva",
+      "arch_desc": "Tag Autorizzati: Difesa, Abilità Tech, Attacco Fisico",
+      "origine": "Sentinella di Frontiera",
+      "costume": "Scudo Modulare",
+      "img": "assets/cards/guardianadiconfine.webp"
+    },
+    "Lama Errante": {
+      "name": "Lama Errante",
+      "str": 3,
+      "spd": 2,
+      "tech": 1,
+      "end": 2,
+      "vita": 24,
+      "pb_desc": "Azione gratuita 1/turno: Infliggi 1 danno OPPURE scambia 1 carta dalla mano con una dagli scarti.",
+      "pb_name": "Affondo Calcolato",
+      "archetipo": "Duellante Itinerante",
+      "arch_desc": "Tag Autorizzati: Attacco Fisico, Difesa, Untagged",
+      "origine": "Lama senza Casa",
+      "costume": "Fodero Leggero",
+      "img": "assets/cards/lamaerrante.webp"
+    },
+    "Titano d'Acciaio": {
+      "name": "Titano d'Acciaio",
+      "str": 4,
+      "spd": 0,
+      "tech": 0,
+      "end": 4,
+      "vita": 32,
+      "pb_desc": "Azione gratuita 1/turno: Infliggi 1 danno fisico ad area OPPURE +1 punto Potenza su una Minaccia.",
+      "pb_name": "Schiacciata",
+      "archetipo": "Devastatore",
+      "arch_desc": "Tag Autorizzati: Attacco Fisico, Gadget, Difesa",
+      "origine": "Sopravvissuto alla Fonderia",
+      "costume": "Piastre Rubate",
+      "img": "assets/cards/titanoacciaio.webp"
+    },
+    "Architetto Ombra": {
+      "name": "Architetto Ombra",
+      "str": 0,
+      "spd": 2,
+      "tech": 4,
+      "end": 2,
+      "vita": 24,
+      "pb_desc": "Azione gratuita 1/turno: spendi 1 Tech per +1 Valore a un Gadget giocato questo turno OPPURE guarda le prime 2 carte del tuo mazzo.",
+      "pb_name": "Prototipo Rapido",
+      "archetipo": "Ingegnere Tattico",
+      "arch_desc": "Tag Autorizzati: Abilità Tech, Gadget, Untagged",
+      "origine": "Genio Espulso dal Laboratorio",
+      "costume": "Esoscheletro Leggero",
+      "img": "assets/cards/architettoombra.webp"
+    },
+    "Sussurro dell'Abisso": {
+      "name": "Sussurro dell'Abisso",
+      "str": 0,
+      "spd": 2,
+      "tech": 4,
+      "end": 2,
+      "vita": 20,
+      "pb_desc": "Azione gratuita 1/turno: Infliggi 1 danno psichico ignorando Parata Dinamica OPPURE, se già in Stato Villain, genera 1 VP subendo 1 TRM.",
+      "pb_name": "Empito Oscuro",
+      "archetipo": "Patto Proibito",
+      "arch_desc": "Tag Autorizzati: Abilità Poteri, Untagged, Burst",
+      "origine": "Toccata dal Velo",
+      "costume": "Manto Corrotto",
+      "img": "assets/cards/sussurrodellabisso.webp"
+    },
+    "Duellante Spezzato": {
+      "name": "Duellante Spezzato",
+      "str": 2,
+      "spd": 3,
+      "tech": 0,
+      "end": 3,
+      "vita": 26,
+      "pb_desc": "Azione gratuita 1/turno: Infliggi 1 danno OPPURE forza un alleato a scartare 1 carta per +1 danno al tuo prossimo attacco.",
+      "pb_name": "Colpo Sleale",
+      "archetipo": "Lama Rinnegata",
+      "arch_desc": "Tag Autorizzati: Attacco Fisico, Burst, Difesa",
+      "origine": "Espulsa dalla Gilda",
+      "costume": "Lama Spezzata",
+      "img": "assets/cards/duellantespezzato.webp"
+    }
+  },
+  "action_cards": {
+    "Iron Aegis": [
+      {
+        "id": "ironaegis_1",
+        "char": "Iron Aegis",
+        "num": 1,
+        "nome": "Impatto Devastante",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Infliggi 2 danni. [Eroe] +1 HP se un alleato è stato attaccato questo round. [Villain] +1 VP se un alleato è stato attaccato questo round.",
+        "hero_txt": "+1 HP se un alleato è stato attaccato questo round.",
+        "villain_txt": "+1 VP se un alleato è stato attaccato questo round.",
+        "kw": "—",
+        "illus": "Pugno rinforzato colpisce con scintille metalliche, inquadratura bassa",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/impattodevastante.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "heal",
+            "amount": 1,
+            "condition": "hero",
+            "target": "self",
+            "timing": "play",
+            "desc": "[Eroe] +1 HP"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "timing": "play",
+            "desc": "[Villain] +1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_2",
+        "char": "Iron Aegis",
+        "num": 2,
+        "nome": "Scudo Infrangibile",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "[Eroe] Reazione: intercetta un attacco su un alleato, assorbi con carte scartate. [Villain] Reazione: afferra un alleato come scudo; è lui a dover assorbire il colpo scartando le proprie carte.",
+        "hero_txt": "Reazione: intercetta un attacco su un alleato, assorbi con carte scartate.",
+        "villain_txt": "Reazione: afferra un alleato come scudo; è lui a dover assorbire il colpo scartando le proprie carte.",
+        "kw": "—",
+        "illus": "Scudo esagonale energetico intercetta un colpo diretto a un alleato",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/scudomodulare.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "hero",
+            "desc": "[Eroe] Intercetta attacco sull'alleato e assorbi/riduci 2 danni"
+          },
+          {
+            "type": "redirect",
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "villain",
+            "desc": "[Villain] Reindirizza l'attacco su un alleato"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_3",
+        "char": "Iron Aegis",
+        "num": 3,
+        "nome": "Kit di Riparazione",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Cura 2 HP a te o a un alleato.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Mani meccaniche saldano una ferita con luce blu curativa",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/kitdiriparazione.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "choose_ally",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "ironaegis_4",
+        "char": "Iron Aegis",
+        "num": 4,
+        "nome": "Granata a Frammentazione",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Spendi 2 Tech. 2 danni a un obiettivo + 1 a tutti gli altri nemici.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Granata metallica esplode in schegge luminose ad area",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/granataaframmentazione.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "all_enemies",
+            "timing": "play",
+            "splash": 1,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni ad area"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_5",
+        "char": "Iron Aegis",
+        "num": 5,
+        "nome": "Barriera Olografica",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Vigore",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Riduce di 2 tutti i danni subiti fino al tuo prossimo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Cupola olografica blu semitrasparente attorno al personaggio",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 2,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/barrieraolografica.webp",
+        "fx_list": [
+          {
+            "type": "damageReduction",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Riduce di 2 tutti i danni subiti fino al prossimo turno"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_6",
+        "char": "Iron Aegis",
+        "num": 6,
+        "nome": "Analisi del Terreno",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Guarda le prime due carte del Mazzo Minaccia o la mano di un avversario.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Scanner oculare proietta linee di dati sulla stanza",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/analisidelterreno.webp",
+        "fx_list": [
+          {
+            "type": "scry",
+            "amount": 2,
+            "target": "threat_deck",
+            "timing": "play",
+            "desc": "Guarda le prime 2 carte del Mazzo Minaccia"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "ironaegis_7",
+        "char": "Iron Aegis",
+        "num": 7,
+        "nome": "Gancio Balistico",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. [Eroe] Rimuovi lo stato Sfiancato da un alleato. [Villain] Un alleato a tua scelta subisce Sfiancato.",
+        "hero_txt": "Rimuovi lo stato Sfiancato da un alleato.",
+        "villain_txt": "Un alleato a tua scelta subisce Sfiancato.",
+        "kw": "—",
+        "illus": "Gancio d'acciaio si aggancia e strappa via un ostacolo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/ganciobalistico.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          },
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_8",
+        "char": "Iron Aegis",
+        "num": 8,
+        "nome": "Protocollo Defibrillazione",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "[Eroe] Risoluzione Critica: fuori turno, rianima un alleato con 1 HP. [Villain] Risoluzione Critica: fuori turno, rianima un alleato con 1 HP, poi rubagli 1 carta a caso dalla mano.",
+        "hero_txt": "Risoluzione Critica: fuori turno, rianima un alleato con 1 HP.",
+        "villain_txt": "Risoluzione Critica: fuori turno, rianima un alleato con 1 HP, poi rubagli 1 carta a caso dalla mano.",
+        "kw": "—",
+        "illus": "Scariche elettriche blu rianimano un alleato caduto",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/protocollodefibrillazione.webp",
+        "fx_list": [
+          {
+            "type": "revive",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "hero",
+            "desc": "[Eroe] Rianima alleato con 1 HP"
+          },
+          {
+            "type": "revive",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "villain",
+            "desc": "[Villain] Rianima alleato con 1 HP"
+          },
+          {
+            "type": "stealCard",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "villain",
+            "desc": "[Villain] Ruba 1 carta dalla mano dell'alleato rianimato"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "ironaegis_9",
+        "char": "Iron Aegis",
+        "num": 9,
+        "nome": "Carica di Contenimento",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Vigore",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Il bersaglio subisce Stordito.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Pugno con campo elettromagnetico stordisce il nemico",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/caricadicontenimento.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          },
+          {
+            "type": "stun",
+            "target": "choose",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_10",
+        "char": "Iron Aegis",
+        "num": 10,
+        "nome": "Prezzo dell'Acciaio",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Azione Morale — Spesa Morale. [Costo: 2 HP] Ottieni Scudo 4. [Villain — Costo: 1 VP] Infliggi 4 danni diretti.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Sangue sulle piastre: l'armatura si rinforza nutrendosi del suo portatore",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 4,
+          "shield": 4,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/prezzodellacciaio.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 4,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 4 danni "
+          },
+          {
+            "type": "shield",
+            "amount": 4,
+            "target": "self",
+            "timing": "play",
+            "desc": "Ottieni Scudo 4"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_11",
+        "char": "Iron Aegis",
+        "num": 11,
+        "nome": "Giuramento del Geniere",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Azione Morale. [Eroe] Rimuovi 1 Punto Trauma e cura 2 HP. [Villain] Genera 2 VP.",
+        "hero_txt": "Rimuovi 1 Punto Trauma e cura 2 HP.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "—",
+        "illus": "Mano guantata stretta sul cuore dell'armatura, luce dorata tra le piastre",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/giuramentodelgeniere.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_12",
+        "char": "Iron Aegis",
+        "num": 12,
+        "nome": "Muro di Piastre",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "+2 Resistenza per il calcolo del Travolgere questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Piastre metalliche si dispiegano a ventaglio come scudo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/murodipiastre.webp",
+        "fx_list": [
+          {
+            "type": "resistance",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+2 Resistenza effettiva contro Travolgere"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "ironaegis_13",
+        "char": "Iron Aegis",
+        "num": 13,
+        "nome": "Calcolo Balistico",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Raddoppia il Valore della prossima carta scartata per la Minaccia questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Traiettoria proiettata in realtà aumentata sopra la Minaccia",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/calcolobalistico.webp",
+        "fx_list": [
+          {
+            "type": "boostNextSacrifice",
+            "multiplier": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Raddoppia il Valore del prossimo Sacrificio Tattico"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "ironaegis_14",
+        "char": "Iron Aegis",
+        "num": 14,
+        "nome": "Generatore di Singolarità",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Spendi 2 Tech. 6 danni ad area. Malus: +1 TRM, Sfiancato 1 round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Sfera nera pulsante risucchia energia dai nemici circostanti",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/generatoredisingolarita.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 6,
+            "target": "all_enemies",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 6 danni ad area"
+          },
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          },
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "ironaegis_15",
+        "char": "Iron Aegis",
+        "num": 15,
+        "nome": "Sovraccarico del Core",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Vigore",
+        "valore": 4,
+        "effetto": "Spendi 2 slot Forza. 5 danni diretti. Malus: +1 TRM, 2 danni autoinflitti, no Parata fino al prossimo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Petto dell'armatura si apre, nucleo incandescente esposto",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/sovraccaricodelcore.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 5,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 5 danni "
+          },
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "ironaegis_16",
+        "char": "Iron Aegis",
+        "num": 16,
+        "nome": "Corazza Sacrificale",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 4,
+        "effetto": "Assorbi l'intero danno di un attacco diretto a un alleato, ignorando la tua Resistenza per questo colpo. Genera 1 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Corpo si interpone, l'armatura assorbe un colpo letale al posto di un alleato",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/murodipiastre.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "ironaegis_17",
+        "char": "Iron Aegis",
+        "num": 17,
+        "nome": "Ultimatum Cinetico",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Spendi tutti gli slot Forza rimasti. Infliggi danno pari al doppio della tua Resistenza attuale a un singolo nemico. Genera 1 VP (se in Stato Villain). Malus: +2 TRM permanente.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Pugno carico al massimo, crepe di energia lungo il braccio",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/ultimatumcinetico.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "ironaegis_18",
+        "char": "Iron Aegis",
+        "num": 18,
+        "nome": "Giuramento del Geniere",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Vigore",
+        "valore": 1,
+        "effetto": "[Eroe] Accumula 2 Punti Eroe e rimuovi 1 TRM. [Villain] Genera 2 VP.",
+        "hero_txt": "Accumula 2 Punti Eroe e rimuovi 1 TRM.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "Deus Ex Machina",
+        "illus": "Riflesso del volto nelle piastre dell'armatura, luce fredda",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/giuramentodelgeniere.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "pe": 2,
+            "vp": 0,
+            "trauma": -1,
+            "condition": "hero",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Eroe] +2 PE e -1 TRM"
+          },
+          {
+            "type": "heroPoints",
+            "pe": 0,
+            "vp": 2,
+            "condition": "villain",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Villain] +2 VP"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "ironaegis_19",
+        "char": "Iron Aegis",
+        "num": 19,
+        "nome": "Il Prezzo dell'Acciaio",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Spesa del Fato (§4.3): se hai 2+ VP, spendili: pesca 2 carte e rimuovi 1 TRM. Altrimenti spendi 2 Punti Eroe: +2 sul binario Multi-Path in testa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Deus Ex Machina",
+        "illus": "Mano che stringe una piastra rovente senza esitare",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/prezzodellacciaio.webp",
+        "fx_list": [
+          {
+            "type": "fateSpend",
+            "timing": "play",
+            "target": "self",
+            "desc": "Spesa del Fato: se hai 2+ VP pesca 2 carte e rimuovi 1 TRM; altrimenti con 2 PE avanza di +2 sul binario in testa."
+          }
+        ],
+        "layout_type": "blue"
+      }
+    ],
+    "Neon Phantom": [
+      {
+        "id": "neonphantom_1",
+        "char": "Neon Phantom",
+        "num": 1,
+        "nome": "Lama Fotonica",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Infliggi 2 danni fisici rapidi. [Eroe] +1 HP se attacchi prima di un alleato questo round. [Villain] +1 VP se un alleato attacca prima di te questo round. DISCIPLINA D'ASSALTO (2): +1 danno se hai 2+ carte in mano dopo aver giocato questa carta.",
+        "hero_txt": "+1 HP se attacchi prima di un alleato questo round.",
+        "villain_txt": "+1 VP se un alleato attacca prima di te questo round. DISCIPLINA D'ASSALTO (2): +1 danno se hai 2+ carte in mano dopo aver giocato questa carta.",
+        "kw": "—",
+        "illus": "Lama di luce fotonica in un fendente rapido, scia luminosa",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/lamafotonica.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "heal",
+            "amount": 1,
+            "condition": "hero",
+            "target": "self",
+            "timing": "play",
+            "desc": "[Eroe] +1 HP"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "timing": "play",
+            "desc": "[Villain] +1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_2",
+        "char": "Neon Phantom",
+        "num": 2,
+        "nome": "Passo d'Ombra",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Reazione: evita completamente un attacco nemico non ad area.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Silhouette sfocata scompare in una nuvola di pixel scuri",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/passodombra.webp",
+        "fx_list": [
+          {
+            "type": "dodge",
+            "timing": "reaction",
+            "target": "self",
+            "desc": "Reazione: evita completamente un attacco nemico"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_3",
+        "char": "Neon Phantom",
+        "num": 3,
+        "nome": "Pugnale Psichico",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Spendi 2 Tech. 2 danni psichici, ignorano Parata Dinamica. DISCIPLINA D'ASSALTO (2): +1 danno se hai 2+ carte in mano dopo.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Pugnale semi-trasparente violaceo trafigge ignorando ogni scudo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/pugnalepsichico.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 2 danni "
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "neonphantom_4",
+        "char": "Neon Phantom",
+        "num": 4,
+        "nome": "Focus Mentale",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Cura 1 HP e rimuovi Stordito da te stesso.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Aura mentale cyan avvolge la testa del personaggio, sguardo chiuso",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 1,
+          "trm": 0
+        },
+        "img": "assets/cards/focusmentale.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 1 HP"
+          },
+          {
+            "type": "stun",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "neonphantom_5",
+        "char": "Neon Phantom",
+        "num": 5,
+        "nome": "Riflessi Accelerati",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Aumenta temporaneamente il tuo limite di Draw Rate di +1 per il turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Multiple sagome sovrapposte suggeriscono velocità sovrumana",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/riflessiaccelerati.webp",
+        "fx_list": [
+          {
+            "type": "drawRateBoost",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+1 Draw Rate per il turno"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_6",
+        "char": "Neon Phantom",
+        "num": 6,
+        "nome": "Prezzo della Velocità",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Azione Morale — Spesa Morale. [Costo: 2 HP] Pesca 3 carte. [Villain — Costo: 1 VP] Infliggi 2 danni e pesca 1 carta.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Scia luminosa che brucia: la velocità consuma il corpo che la genera",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/prezzodellavelocita.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "draw",
+            "amount": 3,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 3 carte"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_7",
+        "char": "Neon Phantom",
+        "num": 7,
+        "nome": "Colpo di Slancio",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Se hai usato lo Scatto Quantistico questo turno, +1 danno extra.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Corpo inclinato in piena corsa colpisce di slancio",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/colpodislancio.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_8",
+        "char": "Neon Phantom",
+        "num": 8,
+        "nome": "Distorsione Speculare",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Fuori turno: [Eroe] intercetta un attacco diretto a un alleato, riducendone il danno di 2. [Villain] Rendi un alleato il nuovo bersaglio dell'attacco al posto tuo, senza alcuna riduzione di danno per lui.",
+        "hero_txt": "intercetta un attacco diretto a un alleato, riducendone il danno di 2.",
+        "villain_txt": "Rendi un alleato il nuovo bersaglio dell'attacco al posto tuo, senza alcuna riduzione di danno per lui.",
+        "kw": "—",
+        "illus": "Superficie a specchio deforma e rimanda l'attacco nemico",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/distorsionespeculare.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "hero",
+            "desc": "[Eroe] Intercetta attacco sull'alleato e assorbi/riduci 2 danni"
+          },
+          {
+            "type": "redirect",
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "villain",
+            "desc": "[Villain] Reindirizza l'attacco su un alleato"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_9",
+        "char": "Neon Phantom",
+        "num": 9,
+        "nome": "Assalto Fluido",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Concatena un secondo attacco da 1 slot Forza senza contarlo nel limite di mano. DISCIPLINA D'ASSALTO (1): +1 danno sulla seconda attivazione se hai ancora 1+ carta in mano.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Due colpi concatenati in un'unica scia di movimento",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/assaltofluido.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_10",
+        "char": "Neon Phantom",
+        "num": 10,
+        "nome": "Sovraccarico Neurale",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Riduci la Forza di un nemico di 1 punto per il round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Onde neurali viola disturbano la mente di un nemico",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sovraccariconeurale.webp",
+        "fx_list": [
+          {
+            "type": "weakenForza",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "duration": "round",
+            "desc": "Riduci la Forza del nemico di 1"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "neonphantom_11",
+        "char": "Neon Phantom",
+        "num": 11,
+        "nome": "Riflesso allo Specchio",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Azione Morale. [Eroe] Rimuovi 1 Punto Trauma e pesca 1 carta. [Villain] Genera 2 VP.",
+        "hero_txt": "Rimuovi 1 Punto Trauma e pesca 1 carta.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "—",
+        "illus": "Il Phantom fissa il proprio riflesso al neon: uno dei due distoglie lo sguardo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/riflessoallospecchio.webp",
+        "fx_list": [
+          {
+            "type": "draw",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 1 carte"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_12",
+        "char": "Neon Phantom",
+        "num": 12,
+        "nome": "Scatto Cinetico",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Paga 1 punto Vita Base. Pesca immediatamente 2 carte dal tuo mazzo.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Corpo scatta in avanti lasciando una scia di energia vitale",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/scattocinetico.webp",
+        "fx_list": [
+          {
+            "type": "selfDamage",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 1 HP autoinflitto"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "neonphantom_13",
+        "char": "Neon Phantom",
+        "num": 13,
+        "nome": "Calcolo dei Vettori",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "La prossima carta Agilità giocata questo turno ottiene +2 al suo effetto numerico.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Linee vettoriali cyan si sovrappongono alla prossima carta Agilità",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/calcolodeivettori.webp",
+        "fx_list": [
+          {
+            "type": "boostNextCategory",
+            "category": "Agilità",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+2 all'effetto numerico della prossima carta Agilità"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "neonphantom_14",
+        "char": "Neon Phantom",
+        "num": 14,
+        "nome": "Lacerazione Temporale",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 4,
+        "effetto": "Ottieni un sotto-turno immediato in cui puoi solo pescare e allocare risorse. Malus: +2 TRM, Sfiancata fino a fine Atto I.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Crepa nello spazio-tempo isola il personaggio in un sotto-turno",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/lacerazionetemporale.webp",
+        "fx_list": [
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "neonphantom_15",
+        "char": "Neon Phantom",
+        "num": 15,
+        "nome": "Esecuzione dall'Ombra",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Consuma tutti gli slot Forza. 6 danni diretti. Malus: +1 TRM, niente Potere Base al prossimo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Salto letale dall'alto, lama che intercetta la luce come un lampo",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/esecuzionedallombra.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 6,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 6 danni "
+          },
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "neonphantom_16",
+        "char": "Neon Phantom",
+        "num": 16,
+        "nome": "Lama senza Rimorso",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 4,
+        "effetto": "Infliggi 5 danni; se il bersaglio muore, ripeti l'attacco su un secondo nemico. Genera 1 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Lama che trapassa un nemico e continua la traiettoria verso un secondo",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 5,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/lamasenzarimorso.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 5,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 5 danni "
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "neonphantom_17",
+        "char": "Neon Phantom",
+        "num": 17,
+        "nome": "Rescissione",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 4,
+        "effetto": "Annulla permanentemente il tuo Potere Base per il resto della partita; guadagni +1 slot Forza permanente. Genera 1 VP (se in Stato Villain). Malus: +2 TRM permanente.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Impianto psichico si stacca in frantumi, braccio pulsante di energia grezza",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/rescissione.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "neonphantom_18",
+        "char": "Neon Phantom",
+        "num": 18,
+        "nome": "Respiro nel Neon",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "[Eroe] Accumula 2 Punti Eroe e rimuovi 1 TRM. [Villain] Genera 2 VP.",
+        "hero_txt": "Accumula 2 Punti Eroe e rimuovi 1 TRM.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "Deus Ex Machina",
+        "illus": "Momento di quiete su un tetto, neon spenti alle spalle",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/scattocinetico.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "pe": 2,
+            "vp": 0,
+            "trauma": -1,
+            "condition": "hero",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Eroe] +2 PE e -1 TRM"
+          },
+          {
+            "type": "heroPoints",
+            "pe": 0,
+            "vp": 2,
+            "condition": "villain",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Villain] +2 VP"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "neonphantom_19",
+        "char": "Neon Phantom",
+        "num": 19,
+        "nome": "Debito Quantico",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Spesa del Fato (§4.3): se hai 2+ VP, spendili: pesca 2 carte e rimuovi 1 TRM. Altrimenti spendi 2 Punti Eroe: +2 sul binario Multi-Path in testa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Deus Ex Machina",
+        "illus": "Scatto oltre il limite, sangue dal naso e occhi accesi",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sovraccaricocinetico.webp",
+        "fx_list": [
+          {
+            "type": "fateSpend",
+            "timing": "play",
+            "target": "self",
+            "desc": "Spesa del Fato: se hai 2+ VP pesca 2 carte e rimuovi 1 TRM; altrimenti con 2 PE avanza di +2 sul binario in testa."
+          }
+        ],
+        "layout_type": "blue"
+      }
+    ],
+    "Guardiana di Confine": [
+      {
+        "id": "guardianadiconfine_1",
+        "char": "Guardiana di Confine",
+        "num": 1,
+        "nome": "Presa Salda",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Infliggi 2 danni. Se hai 4+ carte in mano, il bersaglio subisce Stordito.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Mani guantate afferrano e immobilizzano il nemico con presa ferrea",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/baluardoreattivo.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "stun",
+            "target": "choose",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_2",
+        "char": "Guardiana di Confine",
+        "num": 2,
+        "nome": "Baluardo Reattivo",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Reazione: assorbi un attacco su di te scartando carte 1:1 sul Valore. RITENZIONE TATTICA (4): se hai <4 carte dopo, torna in mano.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Corpo si erge a scudo umano, luce ambrata attorno alle braccia",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/baluardoreattivo.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "self",
+            "desc": "Reazione: riduci di 2 il danno subito"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_3",
+        "char": "Guardiana di Confine",
+        "num": 3,
+        "nome": "Rete di Sicurezza",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "[Eroe] Reazione: intercetta un attacco su un alleato, dividi il danno a metà tra voi due. [Villain] Reazione: se sei bersagliata, rendi un alleato il nuovo bersaglio; lui subisce il danno per intero, tu nessuno.",
+        "hero_txt": "Reazione: intercetta un attacco su un alleato, dividi il danno a metà tra voi due.",
+        "villain_txt": "Reazione: se sei bersagliata, rendi un alleato il nuovo bersaglio; lui subisce il danno per intero, tu nessuno.",
+        "kw": "—",
+        "illus": "Rete energetica dorata protegge un alleato e la Guardiana insieme",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sentinellaadattiva.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "hero",
+            "desc": "[Eroe] Intercetta attacco sull'alleato e assorbi/riduci 2 danni"
+          },
+          {
+            "type": "redirect",
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "villain",
+            "desc": "[Villain] Reindirizza l'attacco su un alleato"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_4",
+        "char": "Guardiana di Confine",
+        "num": 4,
+        "nome": "Manutenzione Preventiva",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Cura 2 HP a te stessa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Impacco di luce curativa applicato su una ferita propria",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/guardianadiconfine.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "guardianadiconfine_5",
+        "char": "Guardiana di Confine",
+        "num": 5,
+        "nome": "Barriera a Strati",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Vigore",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. +1 Resistenza effettiva per il Travolgere fino al tuo prossimo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Strati di scudo translucido si sovrappongono attorno al corpo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/baluardoreattivo.webp",
+        "fx_list": [
+          {
+            "type": "resistance",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+1 Resistenza effettiva contro Travolgere"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_6",
+        "char": "Guardiana di Confine",
+        "num": 6,
+        "nome": "Osservazione Tattica",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Guarda le prime 2 carte del Mazzo Minaccia.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Occhio che scruta oltre un varco, linee guida proiettate",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sentinelladifrontiera.webp",
+        "fx_list": [
+          {
+            "type": "scry",
+            "amount": 2,
+            "target": "threat_deck",
+            "timing": "play",
+            "desc": "Guarda le prime 2 carte del Mazzo Minaccia"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "guardianadiconfine_7",
+        "char": "Guardiana di Confine",
+        "num": 7,
+        "nome": "Colpo di Rimando",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Se hai subito danno questo round, +1 danno extra.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Contrattacco secco dopo aver assorbito un colpo, polvere che si alza",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sentinellaadattiva.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_8",
+        "char": "Guardiana di Confine",
+        "num": 8,
+        "nome": "Protocollo di Emergenza",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "[Eroe] Risoluzione Critica: fuori turno, rianima un alleato con 1 HP o annulla 2 danni imminenti. [Villain] Risoluzione Critica: fuori turno, rianima un alleato con 1 HP, poi rubagli 1 carta a caso dalla mano.",
+        "hero_txt": "Risoluzione Critica: fuori turno, rianima un alleato con 1 HP o annulla 2 danni imminenti.",
+        "villain_txt": "Risoluzione Critica: fuori turno, rianima un alleato con 1 HP, poi rubagli 1 carta a caso dalla mano.",
+        "kw": "—",
+        "illus": "Mani che stabilizzano un alleato caduto con bagliore dorato",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/guardianadiconfine.webp",
+        "fx_list": [
+          {
+            "type": "revive",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "hero",
+            "desc": "[Eroe] Rianima alleato con 1 HP"
+          },
+          {
+            "type": "revive",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "villain",
+            "desc": "[Villain] Rianima alleato con 1 HP"
+          },
+          {
+            "type": "stealCard",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "villain",
+            "desc": "[Villain] Ruba 1 carta dalla mano dell'alleato rianimato"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "guardianadiconfine_9",
+        "char": "Guardiana di Confine",
+        "num": 9,
+        "nome": "Presa d'Angolo",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Vigore",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. [Eroe] Il bersaglio non può attaccare un alleato a tua scelta il round successivo. [Villain] Il bersaglio è costretto ad attaccare un alleato a tua scelta il round successivo.",
+        "hero_txt": "Il bersaglio non può attaccare un alleato a tua scelta il round successivo.",
+        "villain_txt": "Il bersaglio è costretto ad attaccare un alleato a tua scelta il round successivo.",
+        "kw": "—",
+        "illus": "Presa che blocca il nemico contro un muro di confine",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/baluardoreattivo.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_10",
+        "char": "Guardiana di Confine",
+        "num": 10,
+        "nome": "Prezzo del Presidio",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Azione Morale — Spesa Morale. [Costo: 2 HP] Ottieni Scudo 5. [Villain — Costo: 1 VP] Cura 4 HP.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Mani piantate nel terreno del confine: la terra chiede sangue per reggere",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 5,
+          "heal": 4,
+          "trm": 0
+        },
+        "img": "assets/cards/sentinelladifrontiera.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 4,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 4 HP"
+          },
+          {
+            "type": "shield",
+            "amount": 5,
+            "target": "self",
+            "timing": "play",
+            "desc": "Ottieni Scudo 5"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_11",
+        "char": "Guardiana di Confine",
+        "num": 11,
+        "nome": "Veglia al Confine",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Azione Morale. [Eroe] Rimuovi 1 Punto Trauma e cura 2 HP. [Villain] Genera 2 VP.",
+        "hero_txt": "Rimuovi 1 Punto Trauma e cura 2 HP.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "—",
+        "illus": "La Guardiana in veglia notturna sul bastione, lanterna ambrata accesa",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/sentinellaadattiva.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_12",
+        "char": "Guardiana di Confine",
+        "num": 12,
+        "nome": "Corazza Rinforzata",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "+2 Resistenza per il Travolgere questo turno. RITENZIONE TATTICA (4): se hai <4 carte dopo, torna in mano.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Piastre aggiuntive si serrano sopra l'armatura esistente",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/guardianadiconfine.webp",
+        "fx_list": [
+          {
+            "type": "resistance",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+2 Resistenza effettiva contro Travolgere"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "guardianadiconfine_13",
+        "char": "Guardiana di Confine",
+        "num": 13,
+        "nome": "Calcolo del Rischio",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Raddoppia il Valore della prossima carta scartata per la Minaccia questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Bilancia visualizzata tra rischio e Minaccia, luce fredda",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/baluardoreattivo.webp",
+        "fx_list": [
+          {
+            "type": "boostNextSacrifice",
+            "multiplier": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Raddoppia il Valore del prossimo Sacrificio Tattico"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "guardianadiconfine_14",
+        "char": "Guardiana di Confine",
+        "num": 14,
+        "nome": "Muro Vivente",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 3,
+        "effetto": "Spendi 2 Tech. Assorbi tutto il danno ad area di questo round per la squadra. Malus: +1 TRM, Sfiancata 1 round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "La Guardiana si distende a scudo totale, corpo teso come muro",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/sentinelladifrontiera.webp",
+        "fx_list": [
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          },
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "guardianadiconfine_15",
+        "char": "Guardiana di Confine",
+        "num": 15,
+        "nome": "Ultima Trincea",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Vigore",
+        "valore": 3,
+        "effetto": "Spendi 1 slot Forza. 5 danni diretti + Resistenza+2 fino a fine turno. Malus: +1 TRM, 2 danni autoinflitti.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Ultima resistenza in trincea, colpo disperato ma preciso",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/sentinellaadattiva.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 5,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 5 danni "
+          },
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "guardianadiconfine_16",
+        "char": "Guardiana di Confine",
+        "num": 16,
+        "nome": "Fortezza Egoista",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 3,
+        "effetto": "Ignori completamente il prossimo attacco ad area — gli alleati non sono protetti. Genera 1 VP (se in Stato Villain). Malus: +2 TRM, Sfiancata 1 round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Scudo si chiude solo su di lei, alleati lasciati fuori nella tempesta",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/guardianadiconfine.webp",
+        "fx_list": [
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "guardianadiconfine_17",
+        "char": "Guardiana di Confine",
+        "num": 17,
+        "nome": "Sacrificio Calcolato",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 3,
+        "effetto": "Forza un alleato a subire un attacco letale al posto tuo. Genera 1 VP (se in Stato Villain). Malus: +2 TRM permanente.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Spinge freddamente un alleato davanti al colpo letale",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/baluardoreattivo.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "guardianadiconfine_18",
+        "char": "Guardiana di Confine",
+        "num": 18,
+        "nome": "Veglia al Confine",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Vigore",
+        "valore": 1,
+        "effetto": "[Eroe] Accumula 2 Punti Eroe e rimuovi 1 TRM. [Villain] Genera 2 VP.",
+        "hero_txt": "Accumula 2 Punti Eroe e rimuovi 1 TRM.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "Deus Ex Machina",
+        "illus": "Guardia notturna al confine, lanterna e respiro calmo",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sentinelladifrontiera.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "pe": 2,
+            "vp": 0,
+            "trauma": -1,
+            "condition": "hero",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Eroe] +2 PE e -1 TRM"
+          },
+          {
+            "type": "heroPoints",
+            "pe": 0,
+            "vp": 2,
+            "condition": "villain",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Villain] +2 VP"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "guardianadiconfine_19",
+        "char": "Guardiana di Confine",
+        "num": 19,
+        "nome": "Pedaggio del Bastione",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Spesa del Fato (§4.3): se hai 2+ VP, spendili: pesca 2 carte e rimuovi 1 TRM. Altrimenti spendi 2 Punti Eroe: +2 sul binario Multi-Path in testa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Deus Ex Machina",
+        "illus": "Piantata a terra mentre il colpo arriva, per scelta",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sentinellaadattiva.webp",
+        "fx_list": [
+          {
+            "type": "fateSpend",
+            "timing": "play",
+            "target": "self",
+            "desc": "Spesa del Fato: se hai 2+ VP pesca 2 carte e rimuovi 1 TRM; altrimenti con 2 PE avanza di +2 sul binario in testa."
+          }
+        ],
+        "layout_type": "blue"
+      }
+    ],
+    "Lama Errante": [
+      {
+        "id": "lamaerrante_1",
+        "char": "Lama Errante",
+        "num": 1,
+        "nome": "Fendente Preciso",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Infliggi 2 danni. Se attacchi primo nel round, +1 HP.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Fendente netto e pulito, polvere di strada che si alza",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/fendentepreciso.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_2",
+        "char": "Lama Errante",
+        "num": 2,
+        "nome": "Parata Elegante",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Reazione: riduci di 2 il danno subito.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Lama gira in una parata fluida, riflesso di luce sull'acciaio",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/lamasenzacasa.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "self",
+            "desc": "Reazione: riduci di 2 il danno subito"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_3",
+        "char": "Lama Errante",
+        "num": 3,
+        "nome": "Doppio Taglio",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Infliggi 2 danni. Se hai usato il Potere Base questo turno, +1 danno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Doppio fendente incrociato in rapida sequenza",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/foderoleggero.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_4",
+        "char": "Lama Errante",
+        "num": 4,
+        "nome": "Medicazione Rapida",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Cura 1 HP e rimuovi Stordito.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Benda applicata al volo senza fermare il passo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 1,
+          "trm": 0
+        },
+        "img": "assets/cards/lamaerrante.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 1 HP"
+          },
+          {
+            "type": "stun",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "lamaerrante_5",
+        "char": "Lama Errante",
+        "num": 5,
+        "nome": "Fendente ad Arco",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno a un obiettivo + 1 a un secondo bersaglio adiacente.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Colpo ad arco che coinvolge due bersagli vicini",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/fendentepreciso.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_6",
+        "char": "Lama Errante",
+        "num": 6,
+        "nome": "Prezzo della Lama",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Azione Morale — Spesa Morale. [Costo: 2 HP] Infliggi 4 danni. [Villain — Costo: 1 VP] Infliggi 5 danni.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Il filo della lama morde anche la mano che la impugna",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 4,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/lamasenzacasa.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 4,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 4 danni "
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_7",
+        "char": "Lama Errante",
+        "num": 7,
+        "nome": "Affondo di Apertura",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Se è il primo attacco del round, +1 danno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Affondo fulmineo all'apertura del duello, mantello che scatta",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/foderoleggero.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_8",
+        "char": "Lama Errante",
+        "num": 8,
+        "nome": "Contrattacco Riflesso",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Reazione: subisci l'attacco ma infliggi 1 danno di ritorno all'attaccante.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Lama devia il colpo e risponde nello stesso movimento",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/lamaerrante.webp",
+        "fx_list": [
+          {
+            "type": "reflect",
+            "amount": 1,
+            "timing": "reaction",
+            "target": "attacker",
+            "desc": "Reazione: rifletti 1 danni sull'attaccante"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_9",
+        "char": "Lama Errante",
+        "num": 9,
+        "nome": "Scatto d'Anticipo",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Pesca 1 carta se il bersaglio muore.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Scatto in avanti che anticipa la guardia del nemico",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/fendentepreciso.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          },
+          {
+            "type": "draw",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 1 carte"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_10",
+        "char": "Lama Errante",
+        "num": 10,
+        "nome": "Studio dell'Avversario",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Riduci la Forza di un nemico di 1 per il round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Occhi che colgono un punto debole nella forma del nemico",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/lamasenzacasa.webp",
+        "fx_list": [
+          {
+            "type": "weakenForza",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "duration": "round",
+            "desc": "Riduci la Forza del nemico di 1"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "lamaerrante_11",
+        "char": "Lama Errante",
+        "num": 11,
+        "nome": "Codice del Viandante",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Azione Morale. [Eroe] Rimuovi 1 Punto Trauma e cura 2 HP. [Villain] Genera 2 VP.",
+        "hero_txt": "Rimuovi 1 Punto Trauma e cura 2 HP.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "—",
+        "illus": "La lama piantata a terra, il viandante in ginocchio rinnova il proprio codice",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/foderoleggero.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_12",
+        "char": "Lama Errante",
+        "num": 12,
+        "nome": "Guardia Alta",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "+1 Resistenza per il Travolgere questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Postura di guardia alta, lama verticale davanti al volto",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/lamaerrante.webp",
+        "fx_list": [
+          {
+            "type": "resistance",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+1 Resistenza effettiva contro Travolgere"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "lamaerrante_13",
+        "char": "Lama Errante",
+        "num": 13,
+        "nome": "Piano di Battaglia",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Raddoppia il Valore della prossima carta scartata per la Minaccia questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Mappa del campo tracciata nella polvere con la punta della lama",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/fendentepreciso.webp",
+        "fx_list": [
+          {
+            "type": "boostNextSacrifice",
+            "multiplier": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Raddoppia il Valore del prossimo Sacrificio Tattico"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "lamaerrante_14",
+        "char": "Lama Errante",
+        "num": 14,
+        "nome": "Lama Incandescente",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 3,
+        "effetto": "Spendi 2 slot Forza. 6 danni diretti. Malus: +1 TRM, niente Difesa fino al prossimo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Lama arroventata lascia una scia di calore nell'aria",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/lamasenzacasa.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 6,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 6 danni "
+          },
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "lamaerrante_15",
+        "char": "Lama Errante",
+        "num": 15,
+        "nome": "Ultimo Duello",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Consuma tutti gli slot Forza. 4 danni + ripeti l'attacco se il bersaglio è ancora vivo. Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Ultimo affondo disperato, mantello sollevato dal vento",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/foderoleggero.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 4,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 4 danni "
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "lamaerrante_16",
+        "char": "Lama Errante",
+        "num": 16,
+        "nome": "Colpo alle Spalle",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Infliggi 5 danni a un nemico già Stordito o Sfiancato da un alleato. Genera 1 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Colpo silenzioso alle spalle di un nemico già colpito da un alleato",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 5,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/lamaerrante.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 5,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 5 danni "
+          },
+          {
+            "type": "stun",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          },
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "lamaerrante_17",
+        "char": "Lama Errante",
+        "num": 17,
+        "nome": "Gloria Personale",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 3,
+        "effetto": "Raddoppia il danno del tuo prossimo attacco; la Minaccia non si disinnesca via Multi-Path questo turno anche se il valore lo permetterebbe. Genera 1 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Posa fiera sopra il nemico abbattuto, indifferente alla Minaccia sullo sfondo",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/fendentepreciso.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "lamaerrante_18",
+        "char": "Lama Errante",
+        "num": 18,
+        "nome": "Codice del Viandante",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 1,
+        "effetto": "[Eroe] Accumula 2 Punti Eroe e rimuovi 1 TRM. [Villain] Genera 2 VP.",
+        "hero_txt": "Accumula 2 Punti Eroe e rimuovi 1 TRM.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "Deus Ex Machina",
+        "illus": "Seduta accanto alla lama piantata nella polvere",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/lamasenzacasa.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "pe": 2,
+            "vp": 0,
+            "trauma": -1,
+            "condition": "hero",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Eroe] +2 PE e -1 TRM"
+          },
+          {
+            "type": "heroPoints",
+            "pe": 0,
+            "vp": 2,
+            "condition": "villain",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Villain] +2 VP"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "lamaerrante_19",
+        "char": "Lama Errante",
+        "num": 19,
+        "nome": "Taglia sull'Anima",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Spesa del Fato (§4.3): se hai 2+ VP, spendili: pesca 2 carte e rimuovi 1 TRM. Altrimenti spendi 2 Punti Eroe: +2 sul binario Multi-Path in testa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Deus Ex Machina",
+        "illus": "Ferita accettata per aprire la guardia avversaria",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/foderoleggero.webp",
+        "fx_list": [
+          {
+            "type": "fateSpend",
+            "timing": "play",
+            "target": "self",
+            "desc": "Spesa del Fato: se hai 2+ VP pesca 2 carte e rimuovi 1 TRM; altrimenti con 2 PE avanza di +2 sul binario in testa."
+          }
+        ],
+        "layout_type": "blue"
+      }
+    ],
+    "Titano d'Acciaio": [
+      {
+        "id": "titanodacciaio_1",
+        "char": "Titano d'Acciaio",
+        "num": 1,
+        "nome": "Colpo Devastante",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Infliggi 3 danni. Genera 1 VP (se in Stato Villain) e subisci 1 TRM (sempre).",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Pugno d'acciaio sfonda il terreno, onda d'urto visibile",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 3,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/colpodevastante.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 3,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 3 danni "
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_2",
+        "char": "Titano d'Acciaio",
+        "num": 2,
+        "nome": "Scudo Vivente",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "[Eroe] Ti metti tu stesso a scudo di un alleato, assorbendo l'attacco con le tue carte scartate. [Villain] Forza un alleato a subire l'attacco al posto tuo. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "Ti metti tu stesso a scudo di un alleato, assorbendo l'attacco con le tue carte scartate.",
+        "villain_txt": "Forza un alleato a subire l'attacco al posto tuo. Genera 1 VP (se in Stato Villain).",
+        "kw": "—",
+        "illus": "Mano enorme spinge un alleato davanti a sé come scudo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/titanoacciaio.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "hero",
+            "desc": "[Eroe] Intercetta attacco sull'alleato e assorbi/riduci 2 danni"
+          },
+          {
+            "type": "redirect",
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "villain",
+            "desc": "[Villain] Reindirizza l'attacco su un alleato"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] +1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_3",
+        "char": "Titano d'Acciaio",
+        "num": 3,
+        "nome": "Pugno Risonante",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Spendi 2 slot Forza. 2 danni a un obiettivo + 1 a tutti gli altri nemici.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Impatto che genera onde concentriche di frantumazione",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "all_enemies",
+            "timing": "play",
+            "splash": 1,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni ad area"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_4",
+        "char": "Titano d'Acciaio",
+        "num": 4,
+        "nome": "Assorbimento Brutale",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Vigore",
+        "valore": 1,
+        "effetto": "Riduci di 2 il danno subito; il prossimo attacco che infliggi guadagna +1 danno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Corpo assorbe l'impatto senza arretrare, crepe sulla corazza",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/piastrerubate.webp",
+        "fx_list": [
+          {
+            "type": "shield",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Scudo 2"
+          },
+          {
+            "type": "boostNextAttack",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+1 danno al prossimo attacco"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_5",
+        "char": "Titano d'Acciaio",
+        "num": 5,
+        "nome": "Presa Schiacciante",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Il bersaglio subisce Stordito.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Presa che stritola il nemico con forza brutale",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/colpodevastante.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          },
+          {
+            "type": "stun",
+            "target": "choose",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_6",
+        "char": "Titano d'Acciaio",
+        "num": 6,
+        "nome": "Intimidazione",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Un nemico Tattico è obbligato a bersagliare te il round successivo.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Titano ruggisce, nemici minori si voltano intimoriti verso di lui",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/titanoacciaio.webp",
+        "fx_list": [
+          {
+            "type": "taunt",
+            "target": "choose",
+            "timing": "play",
+            "duration": "round",
+            "desc": "Costringe il nemico a bersagliare te"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_7",
+        "char": "Titano d'Acciaio",
+        "num": 7,
+        "nome": "Sventramento",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Se il bersaglio è già Ferito, +1 danno extra.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Colpo dal basso verso l'alto che squarcia la corazza nemica",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_8",
+        "char": "Titano d'Acciaio",
+        "num": 8,
+        "nome": "Corazza Improvvisata",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Reazione: assorbi un attacco intero scartando 1 carta di Valore ≥2, indipendentemente dal danno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Detriti metallici assemblati al volo come scudo di fortuna",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/piastrerubate.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "self",
+            "desc": "Reazione: riduci di 2 il danno subito"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_9",
+        "char": "Titano d'Acciaio",
+        "num": 9,
+        "nome": "Colpo di Grazia",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Vigore",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno diretto, ignora la Parata Dinamica se il bersaglio ha meno del 25% Vita.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Colpo finale su un nemico già a terra, senza esitazione",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/colpodevastante.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_10",
+        "char": "Titano d'Acciaio",
+        "num": 10,
+        "nome": "Prezzo della Furia",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 3,
+        "effetto": "Azione Morale — Spesa Morale. [Costo: 2 HP] Infliggi 5 danni. [Villain — Costo: 1 VP] Infliggi 6 danni ad area.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Le vene del Titano brillano di calore di fonderia mentre carica il colpo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 5,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/titanoacciaio.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 5,
+            "target": "all_enemies",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 5 danni ad area"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_11",
+        "char": "Titano d'Acciaio",
+        "num": 11,
+        "nome": "Ricordo della Fonderia",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Azione Morale. [Eroe] Rimuovi 1 Punto Trauma e cura 2 HP. [Villain] Genera 2 VP.",
+        "hero_txt": "Rimuovi 1 Punto Trauma e cura 2 HP.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "—",
+        "illus": "Il Titano osserva una vecchia piastra con un nome inciso, pugno che trema",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_12",
+        "char": "Titano d'Acciaio",
+        "num": 12,
+        "nome": "Pelle di Ferro",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "+2 Resistenza per il Travolgere questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Pelle metallica che si irrigidisce come corazza naturale",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/piastrerubate.webp",
+        "fx_list": [
+          {
+            "type": "resistance",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+2 Resistenza effettiva contro Travolgere"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_13",
+        "char": "Titano d'Acciaio",
+        "num": 13,
+        "nome": "Sopraffazione",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 3,
+        "effetto": "Raddoppia il Valore della prossima carta scartata per la Minaccia questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Titano sovrasta la Minaccia con la sola mole del corpo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/colpodevastante.webp",
+        "fx_list": [
+          {
+            "type": "boostNextSacrifice",
+            "multiplier": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Raddoppia il Valore del prossimo Sacrificio Tattico"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "titanodacciaio_14",
+        "char": "Titano d'Acciaio",
+        "num": 14,
+        "nome": "Furia Incontrollata",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 4,
+        "effetto": "Spendi 2 slot Forza. 7 danni ad area. Genera 2 VP (se in Stato Villain). Malus: +2 TRM, Sfiancato 1 round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Esplosione di furia ad area, crepe di energia rossastra",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/titanoacciaio.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 7,
+            "target": "all_enemies",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 7 danni ad area"
+          },
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "titanodacciaio_15",
+        "char": "Titano d'Acciaio",
+        "num": 15,
+        "nome": "Trono di Ossa",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 4,
+        "effetto": "Forza TUTTI gli alleati a dividersi un attacco ad area al posto tuo. Genera 3 VP (se in Stato Villain). Malus: +1 TRM permanente per questo Atto.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Alleati scaraventati a formare uno scudo umano involontario",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 3,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 3 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "titanodacciaio_16",
+        "char": "Titano d'Acciaio",
+        "num": 16,
+        "nome": "Macello Indiscriminato",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Potenza",
+        "valore": 4,
+        "effetto": "8 danni ad area, inclusi eventuali alleati adiacenti al bersaglio. Genera 2 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Colpo ad area che non distingue nemici da alleati vicini",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/piastrerubate.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 8,
+            "target": "all_enemies",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 8 danni ad area"
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "titanodacciaio_17",
+        "char": "Titano d'Acciaio",
+        "num": 17,
+        "nome": "Il Mio Trionfo",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 4,
+        "effetto": "Prendi per te tutto il progresso Multi-Path generato dagli alleati questo turno. Genera 2 VP (se in Stato Villain). Malus: +2 TRM permanente.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Titano rivendica da solo il progresso ottenuto insieme alla squadra",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/colpodevastante.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "titanodacciaio_18",
+        "char": "Titano d'Acciaio",
+        "num": 18,
+        "nome": "Memoria della Fonderia",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 1,
+        "effetto": "[Eroe] Accumula 2 Punti Eroe e rimuovi 1 TRM. [Villain] Genera 2 VP.",
+        "hero_txt": "Accumula 2 Punti Eroe e rimuovi 1 TRM.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "Deus Ex Machina",
+        "illus": "Sguardo fisso su una vecchia cicatrice di saldatura",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/titanoacciaio.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "pe": 2,
+            "vp": 0,
+            "trauma": -1,
+            "condition": "hero",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Eroe] +2 PE e -1 TRM"
+          },
+          {
+            "type": "heroPoints",
+            "pe": 0,
+            "vp": 2,
+            "condition": "villain",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Villain] +2 VP"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "titanodacciaio_19",
+        "char": "Titano d'Acciaio",
+        "num": 19,
+        "nome": "Tributo di Ferro",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Potenza",
+        "valore": 2,
+        "effetto": "Spesa del Fato (§4.3): se hai 2+ VP, spendili: pesca 2 carte e rimuovi 1 TRM. Altrimenti spendi 2 Punti Eroe: +2 sul binario Multi-Path in testa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Deus Ex Machina",
+        "illus": "Piastre che si aprono per colpire più forte, carne esposta",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "fx_list": [
+          {
+            "type": "fateSpend",
+            "timing": "play",
+            "target": "self",
+            "desc": "Spesa del Fato: se hai 2+ VP pesca 2 carte e rimuovi 1 TRM; altrimenti con 2 PE avanza di +2 sul binario in testa."
+          }
+        ],
+        "layout_type": "blue"
+      }
+    ],
+    "Architetto Ombra": [
+      {
+        "id": "architettoombra_1",
+        "char": "Architetto Ombra",
+        "num": 1,
+        "nome": "Colpo Calibrato",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Infliggi 2 danni.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Guanto tecnologico rilascia un impulso calibrato di energia",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/architettoombra.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_2",
+        "char": "Architetto Ombra",
+        "num": 2,
+        "nome": "Scudo Energetico",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "Spendi 1 Tech. Reazione: riduci di 2 il danno subito. RITENZIONE TATTICA (4): se hai <4 carte dopo, torna in mano.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Campo di forza esagonale teal si materializza davanti al corpo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/barrieraolografica.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "self",
+            "desc": "Reazione: riduci di 2 il danno subito"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "architettoombra_3",
+        "char": "Architetto Ombra",
+        "num": 3,
+        "nome": "Drone da Supporto",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Spendi 2 Tech. Cura 2 HP a un alleato o infliggi 2 danni a un nemico.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Piccolo drone volante emette un raggio curativo o offensivo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/generatoredisingolarita.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "choose_ally",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_4",
+        "char": "Architetto Ombra",
+        "num": 4,
+        "nome": "Mina Adesiva",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Spendi 2 Tech. 2 danni + il bersaglio subisce Stordito.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Mina si attacca al nemico con un click luminoso prima di esplodere",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/frequenzadisturbante.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "stun",
+            "target": "choose",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_5",
+        "char": "Architetto Ombra",
+        "num": 5,
+        "nome": "Scanner Predittivo",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Guarda le prime 3 carte del Mazzo Minaccia, riordinale come vuoi.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Griglia di dati proiettata sopra il Mazzo Minaccia",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/architettoombra.webp",
+        "fx_list": [
+          {
+            "type": "scry",
+            "amount": 3,
+            "target": "threat_deck",
+            "timing": "play",
+            "desc": "Guarda le prime 3 carte del Mazzo Minaccia"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_6",
+        "char": "Architetto Ombra",
+        "num": 6,
+        "nome": "Impulso EM",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Riduci la Forza di un nemico di 1 per il round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Impulso elettromagnetico blu disattiva temporaneamente un nemico",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/barrieraolografica.webp",
+        "fx_list": [
+          {
+            "type": "weakenForza",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "duration": "round",
+            "desc": "Riduci la Forza del nemico di 1"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_7",
+        "char": "Architetto Ombra",
+        "num": 7,
+        "nome": "Kit di Emergenza",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Cura 2 HP a te stesso o un alleato.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Nano-cerotti applicati da un piccolo dispositivo da polso",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/generatoredisingolarita.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "choose_ally",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_8",
+        "char": "Architetto Ombra",
+        "num": 8,
+        "nome": "Backup su Cloud",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "[Eroe] Risoluzione Critica: fuori turno, rianima un alleato con 1 HP. [Villain] Risoluzione Critica: fuori turno, rianima un alleato con 1 HP, poi rubagli 1 carta a caso dalla mano.",
+        "hero_txt": "Risoluzione Critica: fuori turno, rianima un alleato con 1 HP.",
+        "villain_txt": "Risoluzione Critica: fuori turno, rianima un alleato con 1 HP, poi rubagli 1 carta a caso dalla mano.",
+        "kw": "—",
+        "illus": "Dati luminosi ricompongono un alleato caduto come un file ripristinato",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/frequenzadisturbante.webp",
+        "fx_list": [
+          {
+            "type": "revive",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "hero",
+            "desc": "[Eroe] Rianima alleato con 1 HP"
+          },
+          {
+            "type": "revive",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "villain",
+            "desc": "[Villain] Rianima alleato con 1 HP"
+          },
+          {
+            "type": "stealCard",
+            "amount": 1,
+            "target": "ally",
+            "timing": "critical",
+            "condition": "villain",
+            "desc": "[Villain] Ruba 1 carta dalla mano dell'alleato rianimato"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_9",
+        "char": "Architetto Ombra",
+        "num": 9,
+        "nome": "Turret Automatica",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Infliggi 1 danno ogni round per i prossimi 2 round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Piccola torretta si apre dal terreno e inizia a fuoco automatico",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/architettoombra.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_10",
+        "char": "Architetto Ombra",
+        "num": 10,
+        "nome": "Prezzo del Progresso",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Azione Morale — Spesa Morale. [Costo: 2 HP] Pesca 2 carte e ottieni Scudo 2. [Villain — Costo: 1 VP] Riduci la Forza di un nemico di 2 e infliggi 2 danni.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Cavi innestati nel braccio: il progresso si paga in carne",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 2,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/barrieraolografica.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "shield",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Ottieni Scudo 2"
+          },
+          {
+            "type": "draw",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 2 carte"
+          },
+          {
+            "type": "weakenForza",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "duration": "round",
+            "desc": "Riduci la Forza del nemico di 2"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_11",
+        "char": "Architetto Ombra",
+        "num": 11,
+        "nome": "Backup di Coscienza",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Azione Morale. [Eroe] Rimuovi 1 Punto Trauma e pesca 1 carta. [Villain] Genera 2 VP.",
+        "hero_txt": "Rimuovi 1 Punto Trauma e pesca 1 carta.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "—",
+        "illus": "Un ologramma della propria coscienza salvato su un drive, luce teal",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/generatoredisingolarita.webp",
+        "fx_list": [
+          {
+            "type": "draw",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 1 carte"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_12",
+        "char": "Architetto Ombra",
+        "num": 12,
+        "nome": "Guscio Rinforzato",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "+1 Resistenza per il Travolgere questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Guscio tecnologico si richiude attorno al torso",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/frequenzadisturbante.webp",
+        "fx_list": [
+          {
+            "type": "resistance",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+1 Resistenza effettiva contro Travolgere"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "architettoombra_13",
+        "char": "Architetto Ombra",
+        "num": 13,
+        "nome": "Sovraccarico Calcolato",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 3,
+        "effetto": "Raddoppia il Valore della prossima carta scartata per la Minaccia questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Doppio cerchio di calcolo proiettato sopra la prossima carta scartata",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/architettoombra.webp",
+        "fx_list": [
+          {
+            "type": "boostNextSacrifice",
+            "multiplier": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Raddoppia il Valore del prossimo Sacrificio Tattico"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "architettoombra_14",
+        "char": "Architetto Ombra",
+        "num": 14,
+        "nome": "Protocollo Zero",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Intelligenza",
+        "valore": 4,
+        "effetto": "Spendi 2 Tech. 6 danni ad area. Malus: +1 TRM, Sfiancato 1 round.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Tutti i droni dell'Architetto sparano simultaneamente ad area",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/barrieraolografica.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 6,
+            "target": "all_enemies",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 6 danni ad area"
+          },
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          },
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "architettoombra_15",
+        "char": "Architetto Ombra",
+        "num": 15,
+        "nome": "Singolarità Portatile",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 4,
+        "effetto": "Spendi 2 Tech. Annulla il prossimo attacco ad area su tutta la squadra. Malus: +1 TRM, niente Gadget al prossimo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Piccolo dispositivo genera una bolla che annulla un attacco intero",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/generatoredisingolarita.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "architettoombra_16",
+        "char": "Architetto Ombra",
+        "num": 16,
+        "nome": "Backdoor",
+        "copie": "x2",
+        "tag": "Abilità Tech",
+        "cat": "Intelligenza",
+        "valore": 4,
+        "effetto": "Disattiva permanentemente una difesa passiva di un alleato per il resto della partita, in cambio +2 Valore su un tuo Gadget. Genera 1 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Mano digita un codice che disattiva la difesa di un alleato a distanza",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/frequenzadisturbante.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "architettoombra_17",
+        "char": "Architetto Ombra",
+        "num": 17,
+        "nome": "Firmware Corrotto",
+        "copie": "x2",
+        "tag": "Gadget",
+        "cat": "Intelligenza",
+        "valore": 4,
+        "effetto": "I tuoi Gadget infliggono +2 danno permanente; ogni volta che ne giochi uno, un alleato a caso scarta 1 carta. Genera 1 VP (se in Stato Villain). Malus: +1 TRM permanente.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Simbolo di errore lampeggia sopra un gadget che sta scaricando un alleato",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/architettoombra.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "architettoombra_18",
+        "char": "Architetto Ombra",
+        "num": 18,
+        "nome": "Audit di Coscienza",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "[Eroe] Accumula 2 Punti Eroe e rimuovi 1 TRM. [Villain] Genera 2 VP.",
+        "hero_txt": "Accumula 2 Punti Eroe e rimuovi 1 TRM.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "Deus Ex Machina",
+        "illus": "Log di sistema che scorre, un errore evidenziato e corretto",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/barrieraolografica.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "pe": 2,
+            "vp": 0,
+            "trauma": -1,
+            "condition": "hero",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Eroe] +2 PE e -1 TRM"
+          },
+          {
+            "type": "heroPoints",
+            "pe": 0,
+            "vp": 2,
+            "condition": "villain",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Villain] +2 VP"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "architettoombra_19",
+        "char": "Architetto Ombra",
+        "num": 19,
+        "nome": "Costo di Progetto",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Spesa del Fato (§4.3): se hai 2+ VP, spendili: pesca 2 carte e rimuovi 1 TRM. Altrimenti spendi 2 Punti Eroe: +2 sul binario Multi-Path in testa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Deus Ex Machina",
+        "illus": "Dispositivo instabile impugnato a mani nude",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/generatoredisingolarita.webp",
+        "fx_list": [
+          {
+            "type": "fateSpend",
+            "timing": "play",
+            "target": "self",
+            "desc": "Spesa del Fato: se hai 2+ VP pesca 2 carte e rimuovi 1 TRM; altrimenti con 2 PE avanza di +2 sul binario in testa."
+          }
+        ],
+        "layout_type": "blue"
+      }
+    ],
+    "Sussurro dell'Abisso": [
+      {
+        "id": "sussurrodellabisso_1",
+        "char": "Sussurro dell'Abisso",
+        "num": 1,
+        "nome": "Dardo dell'Abisso",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Spendi 2 Tech. 2 danni psichici, ignorano Parata Dinamica. Genera 1 VP (se in Stato Villain) e subisci 1 TRM (sempre).",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Dardo psichico viola trafigge ignorando ogni scudo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/dardodellabisso.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_2",
+        "char": "Sussurro dell'Abisso",
+        "num": 2,
+        "nome": "Patto di Sangue",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Paga 1 HP. Genera 2 VP (se in Stato Villain).",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Goccia di sangue cade in un cerchio rituale che pulsa di energia",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sussurrodellabisso.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 1 HP autoinflitto"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_3",
+        "char": "Sussurro dell'Abisso",
+        "num": 3,
+        "nome": "Sifone Vitale",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Infliggi 2 danni e cura te stesso di 1 HP. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Filo di energia vitale viola scorre dal nemico al Sussurro",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/toccatadalvelo.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_4",
+        "char": "Sussurro dell'Abisso",
+        "num": 4,
+        "nome": "Visione Proibita",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "[Eroe] Guarda la mano di un alleato e aiutalo a scegliere quale carta scartare (la decisione finale resta sua). [Villain] Guarda la mano di un alleato; scegli tu 1 carta che deve scartare. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "Guarda la mano di un alleato e aiutalo a scegliere quale carta scartare (la decisione finale resta sua).",
+        "villain_txt": "Guarda la mano di un alleato; scegli tu 1 carta che deve scartare. Genera 1 VP (se in Stato Villain).",
+        "kw": "—",
+        "illus": "Occhio spettrale si apre sulla fronte, sguardo rivolto alla mano di un alleato",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/pugnalepsichico.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_5",
+        "char": "Sussurro dell'Abisso",
+        "num": 5,
+        "nome": "Bisbiglio Corruttore",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Un alleato pesca 1 carta; tu generi 1 VP (se in Stato Villain).",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Sussurro visibile come fumo viola che sfiora l'orecchio di un alleato",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/mantocorrotto.webp",
+        "fx_list": [
+          {
+            "type": "draw",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 1 carte"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "sussurrodellabisso_6",
+        "char": "Sussurro dell'Abisso",
+        "num": 6,
+        "nome": "Prezzo del Patto",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Azione Morale — Spesa Morale. [Costo: 2 HP] Infliggi 4 danni che ignorano la Parata Dinamica. [Villain — Costo: 1 VP] Cura 3 HP e pesca 1 carta.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Il patto reclama la sua parte: una vena si scurisce a ogni parola proibita",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 4,
+          "shield": 0,
+          "heal": 3,
+          "trm": 0
+        },
+        "img": "assets/cards/dardodellabisso.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 4,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 4 danni "
+          },
+          {
+            "type": "heal",
+            "amount": 3,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 3 HP"
+          },
+          {
+            "type": "draw",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 1 carte"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_7",
+        "char": "Sussurro dell'Abisso",
+        "num": 7,
+        "nome": "Marchio dell'Abisso",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Il bersaglio subisce +1 danno dal prossimo attacco di chiunque.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Marchio nero pulsante si imprime sulla pelle del nemico colpito",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sussurrodellabisso.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_8",
+        "char": "Sussurro dell'Abisso",
+        "num": 8,
+        "nome": "Legame Parassitico",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Reazione: rifletti 1 danno subito sull'attaccante invece di mitigarlo. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Filamenti oscuri deviano il colpo subito verso l'attaccante",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/toccatadalvelo.webp",
+        "fx_list": [
+          {
+            "type": "reflect",
+            "amount": 1,
+            "timing": "reaction",
+            "target": "attacker",
+            "desc": "Reazione: rifletti 1 danni sull'attaccante"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] +1 VP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_9",
+        "char": "Sussurro dell'Abisso",
+        "num": 9,
+        "nome": "Scintilla Nera",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Paga 1 HP. Pesca 2 carte dal tuo mazzo.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Scintilla nera pagata col proprio respiro, mazzo che si illumina brevemente",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/pugnalepsichico.webp",
+        "fx_list": [
+          {
+            "type": "draw",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 2 carte"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 1 HP autoinflitto"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "sussurrodellabisso_10",
+        "char": "Sussurro dell'Abisso",
+        "num": 10,
+        "nome": "Voto di Silenzio",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Azione Morale. [Eroe] Rimuovi 1 Punto Trauma e cura 2 HP. [Villain] Genera 3 VP.",
+        "hero_txt": "Rimuovi 1 Punto Trauma e cura 2 HP.",
+        "villain_txt": "Genera 3 VP.",
+        "kw": "—",
+        "illus": "Labbra cucite da fili di luce: il silenzio tiene fuori l'Abisso — o lo nutre",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/mantocorrotto.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 3,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 3 VP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_11",
+        "char": "Sussurro dell'Abisso",
+        "num": 11,
+        "nome": "Voto Infranto",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "La prossima carta Poteri giocata questo turno ottiene +2 all'effetto numerico. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Simbolo di un patto spezzato brilla sopra la prossima carta Poteri",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/dardodellabisso.webp",
+        "fx_list": [
+          {
+            "type": "boostNextCategory",
+            "category": "Intelligenza",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+2 alla prossima carta Poteri"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_12",
+        "char": "Sussurro dell'Abisso",
+        "num": 12,
+        "nome": "Scaglia Corrotta",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "Spendi 1 Tech. Riduce di 2 tutti i danni subiti fino al tuo prossimo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Scaglie scure crescono momentaneamente sulla pelle come scudo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 2,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/sussurrodellabisso.webp",
+        "fx_list": [
+          {
+            "type": "damageReduction",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Riduce di 2 tutti i danni subiti fino al prossimo turno"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_13",
+        "char": "Sussurro dell'Abisso",
+        "num": 13,
+        "nome": "Calcolo Ereticale",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 3,
+        "effetto": "Raddoppia il Valore della prossima carta scartata per la Minaccia questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Geometrie proibite si sovrappongono al calcolo della Minaccia",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/toccatadalvelo.webp",
+        "fx_list": [
+          {
+            "type": "boostNextSacrifice",
+            "multiplier": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Raddoppia il Valore del prossimo Sacrificio Tattico"
+          }
+        ],
+        "layout_type": "green"
+      },
+      {
+        "id": "sussurrodellabisso_14",
+        "char": "Sussurro dell'Abisso",
+        "num": 14,
+        "nome": "Invocazione dell'Abisso",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 4,
+        "effetto": "Consuma tutti gli slot Tech. 6 danni diretti. Genera 3 VP (se in Stato Villain). Malus: +2 TRM, Sfiancata fino a fine Atto.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Portale nero si apre dietro il Sussurro, tentacoli d'ombra colpiscono l'area",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/pugnalepsichico.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 6,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 6 danni "
+          },
+          {
+            "type": "weaken",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 3,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 3 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "sussurrodellabisso_15",
+        "char": "Sussurro dell'Abisso",
+        "num": 15,
+        "nome": "Patto Finale",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 4,
+        "effetto": "Paga 3 HP. 8 danni diretti a un singolo nemico. Genera 4 VP (se in Stato Villain). Malus: +2 TRM permanente.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Il Sussurro paga con la propria vita, sagoma che si consuma di luce nera",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/mantocorrotto.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 8,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 8 danni "
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 4,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 4 VP"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 3,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 3 HP autoinflitti"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "sussurrodellabisso_16",
+        "char": "Sussurro dell'Abisso",
+        "num": 16,
+        "nome": "Comunione Forzata",
+        "copie": "x2",
+        "tag": "Abilità Poteri",
+        "cat": "Intelligenza",
+        "valore": 4,
+        "effetto": "Trasferisci 2 dei tuoi TRM su un alleato a scelta. Genera 1 VP (se in Stato Villain). Malus: +1 TRM comunque per te.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Filo nero trasferisce il proprio trauma su un alleato riluttante",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/dardodellabisso.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "sussurrodellabisso_17",
+        "char": "Sussurro dell'Abisso",
+        "num": 17,
+        "nome": "Eco dell'Abisso",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 4,
+        "effetto": "Copia l'ultimo effetto Carta Oscura giocato da chiunque in partita. Genera 1 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Un'ombra ripete, distorta, l'ultimo gesto oscuro visto sul campo",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/sussurrodellabisso.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "sussurrodellabisso_18",
+        "char": "Sussurro dell'Abisso",
+        "num": 18,
+        "nome": "Silenzio Interiore",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 1,
+        "effetto": "[Eroe] Accumula 2 Punti Eroe e rimuovi 1 TRM. [Villain] Genera 2 VP.",
+        "hero_txt": "Accumula 2 Punti Eroe e rimuovi 1 TRM.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "Deus Ex Machina",
+        "illus": "Il velo si placa, i sussurri tacciono per un istante",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/toccatadalvelo.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "pe": 2,
+            "vp": 0,
+            "trauma": -1,
+            "condition": "hero",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Eroe] +2 PE e -1 TRM"
+          },
+          {
+            "type": "heroPoints",
+            "pe": 0,
+            "vp": 2,
+            "condition": "villain",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Villain] +2 VP"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "sussurrodellabisso_19",
+        "char": "Sussurro dell'Abisso",
+        "num": 19,
+        "nome": "Decima dell'Abisso",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Intelligenza",
+        "valore": 2,
+        "effetto": "Spesa del Fato (§4.3): se hai 2+ VP, spendili: pesca 2 carte e rimuovi 1 TRM. Altrimenti spendi 2 Punti Eroe: +2 sul binario Multi-Path in testa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Deus Ex Machina",
+        "illus": "Goccia di sangue offerta a un simbolo che pulsa",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/pugnalepsichico.webp",
+        "fx_list": [
+          {
+            "type": "fateSpend",
+            "timing": "play",
+            "target": "self",
+            "desc": "Spesa del Fato: se hai 2+ VP pesca 2 carte e rimuovi 1 TRM; altrimenti con 2 PE avanza di +2 sul binario in testa."
+          }
+        ],
+        "layout_type": "blue"
+      }
+    ],
+    "Duellante Spezzato": [
+      {
+        "id": "duellantespezzato_1",
+        "char": "Duellante Spezzato",
+        "num": 1,
+        "nome": "Affondo Sleale",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Infliggi 2 danni. Genera 1 VP (se in Stato Villain) e subisci 1 TRM (sempre) per +1 danno extra.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Affondo basso e scorretto, sguardo freddo e calcolatore",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 2,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/duellantespezzato.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 2,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 2 danni "
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_2",
+        "char": "Duellante Spezzato",
+        "num": 2,
+        "nome": "Schermo di Carne",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "[Eroe] Ti metti tu stessa a scudo di un alleato, assorbendo l'attacco con le tue carte scartate. [Villain] Forza un alleato a subire l'attacco al posto tuo. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "Ti metti tu stessa a scudo di un alleato, assorbendo l'attacco con le tue carte scartate.",
+        "villain_txt": "Forza un alleato a subire l'attacco al posto tuo. Genera 1 VP (se in Stato Villain).",
+        "kw": "—",
+        "illus": "Mano spinge bruscamente un alleato davanti al colpo in arrivo",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/duellanteitinerante.webp",
+        "fx_list": [
+          {
+            "type": "parry",
+            "amount": 2,
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "hero",
+            "desc": "[Eroe] Intercetta attacco sull'alleato e assorbi/riduci 2 danni"
+          },
+          {
+            "type": "redirect",
+            "timing": "reaction",
+            "target": "ally",
+            "condition": "villain",
+            "desc": "[Villain] Reindirizza l'attacco su un alleato"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] +1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_3",
+        "char": "Duellante Spezzato",
+        "num": 3,
+        "nome": "Ritorsione",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Reazione: rifletti 1 danno subito sull'attaccante. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Lama devia il colpo subito e lo rimanda al mittente",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/assaltofluido.webp",
+        "fx_list": [
+          {
+            "type": "reflect",
+            "amount": 1,
+            "timing": "reaction",
+            "target": "attacker",
+            "desc": "Reazione: rifletti 1 danni sull'attaccante"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] +1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_4",
+        "char": "Duellante Spezzato",
+        "num": 4,
+        "nome": "Passo Rubato",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "[Eroe] Scambia posizione con un alleato bersagliato: subisci tu lo Stordito al posto suo. [Villain] Scambia posizione con un alleato bersagliato: lui subisce lo Stordito al posto tuo. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "Scambia posizione con un alleato bersagliato: subisci tu lo Stordito al posto suo.",
+        "villain_txt": "Scambia posizione con un alleato bersagliato: lui subisce lo Stordito al posto tuo. Genera 1 VP (se in Stato Villain).",
+        "kw": "—",
+        "illus": "Scambio di posizione repentino, l'alleato resta scoperto al suo posto",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/affondocalcolato.webp",
+        "fx_list": [
+          {
+            "type": "stun",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_5",
+        "char": "Duellante Spezzato",
+        "num": 5,
+        "nome": "Affondo Basso",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Il bersaglio subisce Sfiancato.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Colpo alle gambe che destabilizza il nemico",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/duellantespezzato.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          },
+          {
+            "type": "weaken",
+            "target": "choose",
+            "timing": "play",
+            "desc": "Applica Sfiancato"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_6",
+        "char": "Duellante Spezzato",
+        "num": 6,
+        "nome": "Provocazione",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "[Eroe] Un nemico Aggressivo bersaglia te stessa il round successivo, invece di un alleato. [Villain] Un nemico Aggressivo bersaglia un alleato a tua scelta il round successivo. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "Un nemico Aggressivo bersaglia te stessa il round successivo, invece di un alleato.",
+        "villain_txt": "Un nemico Aggressivo bersaglia un alleato a tua scelta il round successivo. Genera 1 VP (se in Stato Villain).",
+        "kw": "—",
+        "illus": "Sorriso sprezzante che sposta lo sguardo del nemico su un alleato",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/duellanteitinerante.webp",
+        "fx_list": [
+          {
+            "type": "taunt",
+            "target": "choose",
+            "timing": "play",
+            "duration": "round",
+            "desc": "Costringe il nemico a bersagliare te"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_7",
+        "char": "Duellante Spezzato",
+        "num": 7,
+        "nome": "Scatto Rubato",
+        "copie": "x2",
+        "tag": "Burst",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "[Eroe] Paga 1 HP tuo. Pesca 2 carte. [Villain] Paga 1 HP di un alleato invece del tuo. Pesca 2 carte. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "Paga 1 HP tuo. Pesca 2 carte.",
+        "villain_txt": "Paga 1 HP di un alleato invece del tuo. Pesca 2 carte. Genera 1 VP (se in Stato Villain).",
+        "kw": "—",
+        "illus": "Scatto che costa la resistenza di un alleato, non la propria",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/assaltofluido.webp",
+        "fx_list": [
+          {
+            "type": "draw",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Pesca 2 carte"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          },
+          {
+            "type": "selfDamage",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 1 HP autoinflitto"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_8",
+        "char": "Duellante Spezzato",
+        "num": 8,
+        "nome": "Lama Nascosta",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "Infliggi 1 danno. Se hai attaccato per ultima nel round, +1 danno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Lama che appare all'ultimo istante da dietro il mantello",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 1,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/affondocalcolato.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 1,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 1 danni "
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_9",
+        "char": "Duellante Spezzato",
+        "num": 9,
+        "nome": "Voltafaccia",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "[Eroe] Reazione: dividi un attacco ad area, ti prendi anche la parte di un alleato a scelta. [Villain] Reazione: dividi un attacco ad area, la tua parte va a un alleato a scelta. Genera 1 VP (se in Stato Villain).",
+        "hero_txt": "Reazione: dividi un attacco ad area, ti prendi anche la parte di un alleato a scelta.",
+        "villain_txt": "Reazione: dividi un attacco ad area, la tua parte va a un alleato a scelta. Genera 1 VP (se in Stato Villain).",
+        "kw": "—",
+        "illus": "Corpo si gira di scatto lasciando che il colpo raggiunga un alleato",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/duellantespezzato.webp",
+        "fx_list": [
+          {
+            "type": "splitAreaAttack",
+            "condition": "hero",
+            "timing": "reaction",
+            "desc": "[Eroe] Assorbi anche la porzione di danno ad area di un alleato"
+          },
+          {
+            "type": "redirect",
+            "condition": "villain",
+            "timing": "reaction",
+            "target": "ally",
+            "desc": "[Villain] Dirotta la tua porzione di danno ad area su un alleato"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_10",
+        "char": "Duellante Spezzato",
+        "num": 10,
+        "nome": "Prezzo della Vendetta",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Azione Morale — Spesa Morale. [Costo: 2 HP] Infliggi 4 danni. [Villain — Costo: 1 VP] Infliggi 5 danni a un nemico già danneggiato.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "La vendetta ha un conto aperto: ogni colpo inferto lascia un segno anche su di lei",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 4,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/duellanteitinerante.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 4,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": false,
+            "desc": "Infliggi 4 danni "
+          },
+          {
+            "type": "selfDamage",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Costo: 2 HP autoinflitti"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_11",
+        "char": "Duellante Spezzato",
+        "num": 11,
+        "nome": "Onore Ritrovato",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Azione Morale. [Eroe] Rimuovi 1 Punto Trauma e cura 2 HP. [Villain] Genera 2 VP.",
+        "hero_txt": "Rimuovi 1 Punto Trauma e cura 2 HP.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "—",
+        "illus": "La Duellante raccoglie da terra l'emblema graffiato della gilda",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 2,
+          "trm": 0
+        },
+        "img": "assets/cards/assaltofluido.webp",
+        "fx_list": [
+          {
+            "type": "heal",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "Cura 2 HP"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_12",
+        "char": "Duellante Spezzato",
+        "num": 12,
+        "nome": "Guardia Cinica",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Vigore",
+        "valore": 2,
+        "effetto": "[Eroe] +1 Resistenza per il Travolgere questo turno anche per un alleato a tua scelta. [Villain] +2 Resistenza per il Travolgere questo turno, ma un alleato a tua scelta la perde.",
+        "hero_txt": "+1 Resistenza per il Travolgere questo turno anche per un alleato a tua scelta.",
+        "villain_txt": "+2 Resistenza per il Travolgere questo turno, ma un alleato a tua scelta la perde.",
+        "kw": "—",
+        "illus": "Guardia alzata solo per sé, spalle voltate a un alleato scoperto",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/affondocalcolato.webp",
+        "fx_list": [
+          {
+            "type": "resistance",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "+1 Resistenza effettiva contro Travolgere"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_13",
+        "char": "Duellante Spezzato",
+        "num": 13,
+        "nome": "Calcolo Spietato",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 3,
+        "effetto": "Raddoppia il Valore della prossima carta scartata per la Minaccia questo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Sguardo che valuta freddamente il costo di ogni scarto",
+        "osc": 0,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/duellantespezzato.webp",
+        "fx_list": [
+          {
+            "type": "boostNextSacrifice",
+            "multiplier": 2,
+            "target": "self",
+            "timing": "play",
+            "duration": "turn",
+            "desc": "Raddoppia il Valore del prossimo Sacrificio Tattico"
+          }
+        ],
+        "layout_type": "gold"
+      },
+      {
+        "id": "duellantespezzato_14",
+        "char": "Duellante Spezzato",
+        "num": 14,
+        "nome": "Duello all'Ultimo Sangue",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 3,
+        "effetto": "Consuma tutti gli slot Forza. 6 danni diretti. Genera 2 VP (se in Stato Villain). Malus: +1 TRM, niente Potere Base al prossimo turno.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Colpo finale che consuma ogni riserva rimasta",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 1
+        },
+        "img": "assets/cards/duellanteitinerante.webp",
+        "fx_list": [
+          {
+            "type": "damage",
+            "amount": 6,
+            "target": "choose",
+            "timing": "play",
+            "splash": 0,
+            "ignoreParry": true,
+            "desc": "Infliggi 6 danni "
+          },
+          {
+            "type": "trauma",
+            "amount": 1,
+            "target": "self",
+            "timing": "play",
+            "desc": "+1 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "duellantespezzato_15",
+        "char": "Duellante Spezzato",
+        "num": 15,
+        "nome": "Tradimento",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Agilità",
+        "valore": 3,
+        "effetto": "Forza un alleato a subire TUTTO il danno che avresti subito questo round. Genera 3 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "—",
+        "illus": "Il Duellante fa un passo indietro proprio mentre il colpo arriva su un alleato",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/assaltofluido.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 3,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 3 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "duellantespezzato_16",
+        "char": "Duellante Spezzato",
+        "num": 16,
+        "nome": "Nessuna Regola",
+        "copie": "x2",
+        "tag": "Attacco Fisico",
+        "cat": "Agilità",
+        "valore": 3,
+        "effetto": "Attacca un nemico Stordito per danno raddoppiato, ignorando qualsiasi effetto 'non bersagliabile'. Genera 1 VP (se in Stato Villain). Malus: +2 TRM.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Colpo raddoppiato su un nemico già a terra, senza onore",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/affondocalcolato.webp",
+        "fx_list": [
+          {
+            "type": "stun",
+            "target": "self",
+            "timing": "play",
+            "desc": "Applica Stordito al bersaglio"
+          },
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 1,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 1 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "duellantespezzato_17",
+        "char": "Duellante Spezzato",
+        "num": 17,
+        "nome": "L'Ultimo a Restare",
+        "copie": "x2",
+        "tag": "Difesa",
+        "cat": "Agilità",
+        "valore": 3,
+        "effetto": "Se sei l'unica eroina rimasta con Vita piena, gli attacchi ad area di questo round colpiscono solo alleati. Genera 2 VP (se in Stato Villain). Malus: +2 TRM permanente.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Extra Percorso Villain",
+        "illus": "Unica figura ancora in piedi, mentre l'area esplode attorno agli altri",
+        "osc": 1,
+        "deus": 0,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 2
+        },
+        "img": "assets/cards/duellantespezzato.webp",
+        "fx_list": [
+          {
+            "type": "trauma",
+            "amount": 2,
+            "target": "self",
+            "timing": "play",
+            "desc": "+2 Trauma (TRM)"
+          },
+          {
+            "type": "heroPoints",
+            "vp": 2,
+            "condition": "villain",
+            "target": "self",
+            "desc": "[Villain] Genera 2 VP"
+          }
+        ],
+        "layout_type": "purple"
+      },
+      {
+        "id": "duellantespezzato_18",
+        "char": "Duellante Spezzato",
+        "num": 18,
+        "nome": "Onore Infranto",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 1,
+        "effetto": "[Eroe] Accumula 2 Punti Eroe e rimuovi 1 TRM. [Villain] Genera 2 VP.",
+        "hero_txt": "Accumula 2 Punti Eroe e rimuovi 1 TRM.",
+        "villain_txt": "Genera 2 VP.",
+        "kw": "Deus Ex Machina",
+        "illus": "Riflesso in una lama spezzata, sguardo sostenuto a fatica",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/duellanteitinerante.webp",
+        "fx_list": [
+          {
+            "type": "heroPoints",
+            "pe": 2,
+            "vp": 0,
+            "trauma": -1,
+            "condition": "hero",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Eroe] +2 PE e -1 TRM"
+          },
+          {
+            "type": "heroPoints",
+            "pe": 0,
+            "vp": 2,
+            "condition": "villain",
+            "timing": "play",
+            "target": "self",
+            "desc": "[Villain] +2 VP"
+          }
+        ],
+        "layout_type": "blue"
+      },
+      {
+        "id": "duellantespezzato_19",
+        "char": "Duellante Spezzato",
+        "num": 19,
+        "nome": "Riscatto della Lama",
+        "copie": "x2",
+        "tag": "Untagged",
+        "cat": "Agilità",
+        "valore": 2,
+        "effetto": "Spesa del Fato (§4.3): se hai 2+ VP, spendili: pesca 2 carte e rimuovi 1 TRM. Altrimenti spendi 2 Punti Eroe: +2 sul binario Multi-Path in testa.",
+        "hero_txt": "",
+        "villain_txt": "",
+        "kw": "Deus Ex Machina",
+        "illus": "Colpo portato ignorando il dolore, sorriso amaro",
+        "osc": 0,
+        "deus": 1,
+        "fx": {
+          "dmg": 0,
+          "shield": 0,
+          "heal": 0,
+          "trm": 0
+        },
+        "img": "assets/cards/assaltofluido.webp",
+        "fx_list": [
+          {
+            "type": "fateSpend",
+            "timing": "play",
+            "target": "self",
+            "desc": "Spesa del Fato: se hai 2+ VP pesca 2 carte e rimuovi 1 TRM; altrimenti con 2 PE avanza di +2 sul binario in testa."
+          }
+        ],
+        "layout_type": "blue"
+      }
+    ]
+  },
+  "card_img_map": {
+    "ironaegis": "assets/cards/ironaegis.webp",
+    "Iron Aegis": "assets/cards/ironaegis.webp",
+    "neonphantom": "assets/cards/neonphantom.webp",
+    "Neon Phantom": "assets/cards/neonphantom.webp",
+    "guardianadiconfine": "assets/cards/guardianadiconfine.webp",
+    "Guardiana di Confine": "assets/cards/guardianadiconfine.webp",
+    "lamaerrante": "assets/cards/lamaerrante.webp",
+    "Lama Errante": "assets/cards/lamaerrante.webp",
+    "titanodacciaio": "assets/cards/titanoacciaio.webp",
+    "Titano d'Acciaio": "assets/cards/titanoacciaio.webp",
+    "architettoombra": "assets/cards/architettoombra.webp",
+    "Architetto Ombra": "assets/cards/architettoombra.webp",
+    "sussurrodellabisso": "assets/cards/sussurrodellabisso.webp",
+    "Sussurro dell'Abisso": "assets/cards/sussurrodellabisso.webp",
+    "duellantespezzato": "assets/cards/duellantespezzato.webp",
+    "Duellante Spezzato": "assets/cards/duellantespezzato.webp",
+    "carta minaccia retro": "assets/cards/cartaminacciaretro.webp",
+    "cartaminacciaretro": "assets/cards/cartaminacciaretro.webp",
+    "carta threat retro": "assets/cards/cartathreatretro.webp",
+    "cartathreatretro": "assets/cards/cartathreatretro.webp",
+    "retro carta mazzo": "assets/cards/retrocartamazzo.webp",
+    "retrocartamazzo": "assets/cards/retrocartamazzo.webp",
+    "Avanguardia Pesante": "assets/cards/avanguardiapesante.webp",
+    "avanguardiapesante": "assets/cards/avanguardiapesante.webp",
+    "Devastatore": "assets/cards/devastatore.webp",
+    "devastatore": "assets/cards/devastatore.webp",
+    "Patto Proibito": "assets/cards/pattoproibito.webp",
+    "pattoproibito": "assets/cards/pattoproibito.webp",
+    "Spettro Cinetico": "assets/cards/spettrocinetico.webp",
+    "spettrocinetico": "assets/cards/spettrocinetico.webp",
+    "Armatura Exo-K": "assets/cards/armaturaexok.webp",
+    "armaturaexok": "assets/cards/armaturaexok.webp",
+    "Fodero Leggero": "assets/cards/foderoleggero.webp",
+    "foderoleggero": "assets/cards/foderoleggero.webp",
+    "Manto Corrotto": "assets/cards/mantocorrotto.webp",
+    "mantocorrotto": "assets/cards/mantocorrotto.webp",
+    "tutta fotonica": "assets/cards/tuttafotonica.webp",
+    "tuttafotonica": "assets/cards/tuttafotonica.webp",
+    "Analisi del Terreno": "assets/cards/analisidelterreno.webp",
+    "analisidelterreno": "assets/cards/analisidelterreno.webp",
+    "Barriera Olografica": "assets/cards/barrieraolografica.webp",
+    "barrieraolografica": "assets/cards/barrieraolografica.webp",
+    "Calcolo Balistico": "assets/cards/calcolobalistico.webp",
+    "calcolobalistico": "assets/cards/calcolobalistico.webp",
+    "Carica di Contenimento": "assets/cards/caricadicontenimento.webp",
+    "caricadicontenimento": "assets/cards/caricadicontenimento.webp",
+    "CorazzaaSacrificale": "assets/cards/corazzaasacrificale.webp",
+    "corazzaasacrificale": "assets/cards/corazzaasacrificale.webp",
+    "Frequenza Disturbante": "assets/cards/frequenzadisturbante.webp",
+    "frequenzadisturbante": "assets/cards/frequenzadisturbante.webp",
+    "Gancio Balistico": "assets/cards/ganciobalistico.webp",
+    "ganciobalistico": "assets/cards/ganciobalistico.webp",
+    "Generatore di Singolarità": "assets/cards/generatoredisingolarita.webp",
+    "generatoredisingolarita": "assets/cards/generatoredisingolarita.webp",
+    "Giuramento del Geniere": "assets/cards/giuramentodelgeniere.webp",
+    "giuramentodelgeniere": "assets/cards/giuramentodelgeniere.webp",
+    "Granata a Frammentazione": "assets/cards/granataaframmentazione.webp",
+    "granataaframmentazione": "assets/cards/granataaframmentazione.webp",
+    "Impatto Devastante": "assets/cards/impattodevastante.webp",
+    "impattodevastante": "assets/cards/impattodevastante.webp",
+    "Kit di Riparazione": "assets/cards/kitdiriparazione.webp",
+    "kitdiriparazione": "assets/cards/kitdiriparazione.webp",
+    "Muro di Piastre": "assets/cards/murodipiastre.webp",
+    "murodipiastre": "assets/cards/murodipiastre.webp",
+    "Prezzo dell'Acciaio": "assets/cards/prezzodellacciaio.webp",
+    "prezzodellacciaio": "assets/cards/prezzodellacciaio.webp",
+    "Protocollo Defibrillazione": "assets/cards/protocollodefibrillazione.webp",
+    "protocollodefibrillazione": "assets/cards/protocollodefibrillazione.webp",
+    "Scudo infrangibie": "assets/cards/scudoinfrangibie.webp",
+    "scudoinfrangibie": "assets/cards/scudoinfrangibie.webp",
+    "Sovraccarico del Core": "assets/cards/sovraccaricodelcore.webp",
+    "sovraccaricodelcore": "assets/cards/sovraccaricodelcore.webp",
+    "Ultimatum Cinetico": "assets/cards/ultimatumcinetico.webp",
+    "ultimatumcinetico": "assets/cards/ultimatumcinetico.webp",
+    "Assalto Fluido": "assets/cards/assaltofluido.webp",
+    "assaltofluido": "assets/cards/assaltofluido.webp",
+    "Calcolo dei Vettori": "assets/cards/calcolodeivettori.webp",
+    "calcolodeivettori": "assets/cards/calcolodeivettori.webp",
+    "Colpo di Slancio": "assets/cards/colpodislancio.webp",
+    "colpodislancio": "assets/cards/colpodislancio.webp",
+    "Distorsione Speculare": "assets/cards/distorsionespeculare.webp",
+    "distorsionespeculare": "assets/cards/distorsionespeculare.webp",
+    "Esecuzione dall'Ombra": "assets/cards/esecuzionedallombra.webp",
+    "esecuzionedallombra": "assets/cards/esecuzionedallombra.webp",
+    "Focus Mentale": "assets/cards/focusmentale.webp",
+    "focusmentale": "assets/cards/focusmentale.webp",
+    "Lacerazione Temporale": "assets/cards/lacerazionetemporale.webp",
+    "lacerazionetemporale": "assets/cards/lacerazionetemporale.webp",
+    "Lama Fotonica": "assets/cards/lamafotonica.webp",
+    "lamafotonica": "assets/cards/lamafotonica.webp",
+    "Lama senza Rimorso": "assets/cards/lamasenzarimorso.webp",
+    "lamasenzarimorso": "assets/cards/lamasenzarimorso.webp",
+    "Passo d'Ombra": "assets/cards/passodombra.webp",
+    "passodombra": "assets/cards/passodombra.webp",
+    "prezzo della velocità": "assets/cards/prezzodellavelocita.webp",
+    "prezzodellavelocita": "assets/cards/prezzodellavelocita.webp",
+    "Pugnale Psichico": "assets/cards/pugnalepsichico.webp",
+    "pugnalepsichico": "assets/cards/pugnalepsichico.webp",
+    "Rescissione": "assets/cards/rescissione.webp",
+    "rescissione": "assets/cards/rescissione.webp",
+    "Riflessi Accelerati": "assets/cards/riflessiaccelerati.webp",
+    "riflessiaccelerati": "assets/cards/riflessiaccelerati.webp",
+    "Riflesso allo Specchio": "assets/cards/riflessoallospecchio.webp",
+    "riflessoallospecchio": "assets/cards/riflessoallospecchio.webp",
+    "Scatto Cinetico": "assets/cards/scattocinetico.webp",
+    "scattocinetico": "assets/cards/scattocinetico.webp",
+    "Sovraccarico Neurale": "assets/cards/sovraccariconeurale.webp",
+    "sovraccariconeurale": "assets/cards/sovraccariconeurale.webp",
+    "Blackout Ostile": "assets/cards/blackoutostile.webp",
+    "blackoutostile": "assets/cards/blackoutostile.webp",
+    "CULTISTI DEL VELO": "assets/cards/cultistidelvelo.webp",
+    "cultistidelvelo": "assets/cards/cultistidelvelo.webp",
+    "IL CAMPIONE IMBATTUTO": "assets/cards/ilcampioneimbattuto.webp",
+    "ilcampioneimbattuto": "assets/cards/ilcampioneimbattuto.webp",
+    "Il Colosso di Rovina": "assets/cards/ilcolossodirovina.webp",
+    "ilcolossodirovina": "assets/cards/ilcolossodirovina.webp",
+    "Il Mietitore dell'Astro Oscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
+    "ilmietitoredellastrooscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
+    "IMBOSCATA SULLA FALESIA": "assets/cards/imboscatasullafalesia.webp",
+    "imboscatasullafalesia": "assets/cards/imboscatasullafalesia.webp",
+    "Incursione dei Droni Cinetici": "assets/cards/incursionedeidronicinetici.webp",
+    "incursionedeidronicinetici": "assets/cards/incursionedeidronicinetici.webp",
+    "L'ASSEDIO DEI PREDONI DELLE ROVINE": "assets/cards/lassediodeipredonidellerovine.webp",
+    "lassediodeipredonidellerovine": "assets/cards/lassediodeipredonidellerovine.webp",
+    "L'Intelligenza Rogue": "assets/cards/lintelligenzarogue.webp",
+    "lintelligenzarogue": "assets/cards/lintelligenzarogue.webp",
+    "Rivolta della Fonderia": "assets/cards/rivoltadellafonderia.webp",
+    "rivoltadellafonderia": "assets/cards/rivoltadellafonderia.webp",
+    "Torneo Clandestino": "assets/cards/torneoclandestino.webp",
+    "torneoclandestino": "assets/cards/torneoclandestino.webp",
+    "Cavia Alpha": "assets/cards/caviaalpha.webp",
+    "caviaalpha": "assets/cards/caviaalpha.webp",
+    "Ex-Geniere": "assets/cards/exgeniere.webp",
+    "exgeniere": "assets/cards/exgeniere.webp",
+    "Lama senza Casa": "assets/cards/lamasenzacasa.webp",
+    "lamasenzacasa": "assets/cards/lamasenzacasa.webp",
+    "Toccata dal Velo": "assets/cards/toccatadalvelo.webp",
+    "toccatadalvelo": "assets/cards/toccatadalvelo.webp",
+    "Affondo Calcolato": "assets/cards/affondocalcolato.webp",
+    "affondocalcolato": "assets/cards/affondocalcolato.webp",
+    "Empito Oscuro": "assets/cards/empitooscuro.webp",
+    "empitooscuro": "assets/cards/empitooscuro.webp",
+    "Scatto Quantistico": "assets/cards/scattoquantistico.webp",
+    "scattoquantistico": "assets/cards/scattoquantistico.webp",
+    "Sovraccarico Cinetico": "assets/cards/sovraccaricocinetico.webp",
+    "sovraccaricocinetico": "assets/cards/sovraccaricocinetico.webp",
+    "Scudo Infrangibile": "assets/cards/scudomodulare.webp",
+    "scudoinfrangibile": "assets/cards/scudomodulare.webp",
+    "Corazza Sacrificale": "assets/cards/murodipiastre.webp",
+    "corazzasacrificale": "assets/cards/murodipiastre.webp",
+    "Il Prezzo dell'Acciaio": "assets/cards/prezzodellacciaio.webp",
+    "ilprezzodellacciaio": "assets/cards/prezzodellacciaio.webp",
+    "Prezzo della Velocità": "assets/cards/prezzodellavelocita.webp",
+    "Respiro nel Neon": "assets/cards/scattocinetico.webp",
+    "respironelneon": "assets/cards/scattocinetico.webp",
+    "Debito Quantico": "assets/cards/sovraccaricocinetico.webp",
+    "debitoquantico": "assets/cards/sovraccaricocinetico.webp",
+    "Presa Salda": "assets/cards/baluardoreattivo.webp",
+    "presasalda": "assets/cards/baluardoreattivo.webp",
+    "Baluardo Reattivo": "assets/cards/baluardoreattivo.webp",
+    "baluardoreattivo": "assets/cards/baluardoreattivo.webp",
+    "Rete di Sicurezza": "assets/cards/sentinellaadattiva.webp",
+    "retedisicurezza": "assets/cards/sentinellaadattiva.webp",
+    "Manutenzione Preventiva": "assets/cards/guardianadiconfine.webp",
+    "manutenzionepreventiva": "assets/cards/guardianadiconfine.webp",
+    "Barriera a Strati": "assets/cards/baluardoreattivo.webp",
+    "barrieraastrati": "assets/cards/baluardoreattivo.webp",
+    "Osservazione Tattica": "assets/cards/sentinelladifrontiera.webp",
+    "osservazionetattica": "assets/cards/sentinelladifrontiera.webp",
+    "Colpo di Rimando": "assets/cards/sentinellaadattiva.webp",
+    "colpodirimando": "assets/cards/sentinellaadattiva.webp",
+    "Protocollo di Emergenza": "assets/cards/guardianadiconfine.webp",
+    "protocollodiemergenza": "assets/cards/guardianadiconfine.webp",
+    "Presa d'Angolo": "assets/cards/baluardoreattivo.webp",
+    "presadangolo": "assets/cards/baluardoreattivo.webp",
+    "Prezzo del Presidio": "assets/cards/sentinelladifrontiera.webp",
+    "prezzodelpresidio": "assets/cards/sentinelladifrontiera.webp",
+    "Veglia al Confine": "assets/cards/sentinelladifrontiera.webp",
+    "vegliaalconfine": "assets/cards/sentinelladifrontiera.webp",
+    "Corazza Rinforzata": "assets/cards/guardianadiconfine.webp",
+    "corazzarinforzata": "assets/cards/guardianadiconfine.webp",
+    "Calcolo del Rischio": "assets/cards/baluardoreattivo.webp",
+    "calcolodelrischio": "assets/cards/baluardoreattivo.webp",
+    "Muro Vivente": "assets/cards/sentinelladifrontiera.webp",
+    "murovivente": "assets/cards/sentinelladifrontiera.webp",
+    "Ultima Trincea": "assets/cards/sentinellaadattiva.webp",
+    "ultimatrincea": "assets/cards/sentinellaadattiva.webp",
+    "Fortezza Egoista": "assets/cards/guardianadiconfine.webp",
+    "fortezzaegoista": "assets/cards/guardianadiconfine.webp",
+    "Sacrificio Calcolato": "assets/cards/baluardoreattivo.webp",
+    "sacrificiocalcolato": "assets/cards/baluardoreattivo.webp",
+    "Pedaggio del Bastione": "assets/cards/sentinellaadattiva.webp",
+    "pedaggiodelbastione": "assets/cards/sentinellaadattiva.webp",
+    "Fendente Preciso": "assets/cards/fendentepreciso.webp",
+    "fendentepreciso": "assets/cards/fendentepreciso.webp",
+    "Parata Elegante": "assets/cards/lamasenzacasa.webp",
+    "parataelegante": "assets/cards/lamasenzacasa.webp",
+    "Doppio Taglio": "assets/cards/foderoleggero.webp",
+    "doppiotaglio": "assets/cards/foderoleggero.webp",
+    "Medicazione Rapida": "assets/cards/lamaerrante.webp",
+    "medicazionerapida": "assets/cards/lamaerrante.webp",
+    "Fendente ad Arco": "assets/cards/fendentepreciso.webp",
+    "fendenteadarco": "assets/cards/fendentepreciso.webp",
+    "Prezzo della Lama": "assets/cards/lamasenzacasa.webp",
+    "prezzodellalama": "assets/cards/lamasenzacasa.webp",
+    "Affondo di Apertura": "assets/cards/foderoleggero.webp",
+    "affondodiapertura": "assets/cards/foderoleggero.webp",
+    "Contrattacco Riflesso": "assets/cards/lamaerrante.webp",
+    "contrattaccoriflesso": "assets/cards/lamaerrante.webp",
+    "Scatto d'Anticipo": "assets/cards/fendentepreciso.webp",
+    "scattodanticipo": "assets/cards/fendentepreciso.webp",
+    "Studio dell'Avversario": "assets/cards/lamasenzacasa.webp",
+    "studiodellavversario": "assets/cards/lamasenzacasa.webp",
+    "Codice del Viandante": "assets/cards/lamasenzacasa.webp",
+    "codicedelviandante": "assets/cards/lamasenzacasa.webp",
+    "Guardia Alta": "assets/cards/lamaerrante.webp",
+    "guardiaalta": "assets/cards/lamaerrante.webp",
+    "Piano di Battaglia": "assets/cards/fendentepreciso.webp",
+    "pianodibattaglia": "assets/cards/fendentepreciso.webp",
+    "Lama Incandescente": "assets/cards/lamasenzacasa.webp",
+    "lamaincandescente": "assets/cards/lamasenzacasa.webp",
+    "Ultimo Duello": "assets/cards/foderoleggero.webp",
+    "ultimoduello": "assets/cards/foderoleggero.webp",
+    "Colpo alle Spalle": "assets/cards/lamaerrante.webp",
+    "colpoallespalle": "assets/cards/lamaerrante.webp",
+    "Gloria Personale": "assets/cards/fendentepreciso.webp",
+    "gloriapersonale": "assets/cards/fendentepreciso.webp",
+    "Taglia sull'Anima": "assets/cards/foderoleggero.webp",
+    "tagliasullanima": "assets/cards/foderoleggero.webp",
+    "Colpo Devastante": "assets/cards/colpodevastante.webp",
+    "colpodevastante": "assets/cards/colpodevastante.webp",
+    "Scudo Vivente": "assets/cards/titanoacciaio.webp",
+    "scudovivente": "assets/cards/titanoacciaio.webp",
+    "Pugno Risonante": "assets/cards/sopravvissutoallafonderia.webp",
+    "pugnorisonante": "assets/cards/sopravvissutoallafonderia.webp",
+    "Assorbimento Brutale": "assets/cards/piastrerubate.webp",
+    "assorbimentobrutale": "assets/cards/piastrerubate.webp",
+    "Presa Schiacciante": "assets/cards/colpodevastante.webp",
+    "presaschiacciante": "assets/cards/colpodevastante.webp",
+    "Intimidazione": "assets/cards/titanoacciaio.webp",
+    "intimidazione": "assets/cards/titanoacciaio.webp",
+    "Sventramento": "assets/cards/sopravvissutoallafonderia.webp",
+    "sventramento": "assets/cards/sopravvissutoallafonderia.webp",
+    "Corazza Improvvisata": "assets/cards/piastrerubate.webp",
+    "corazzaimprovvisata": "assets/cards/piastrerubate.webp",
+    "Colpo di Grazia": "assets/cards/colpodevastante.webp",
+    "colpodigrazia": "assets/cards/colpodevastante.webp",
+    "Prezzo della Furia": "assets/cards/titanoacciaio.webp",
+    "prezzodellafuria": "assets/cards/titanoacciaio.webp",
+    "Ricordo della Fonderia": "assets/cards/sopravvissutoallafonderia.webp",
+    "ricordodellafonderia": "assets/cards/sopravvissutoallafonderia.webp",
+    "Pelle di Ferro": "assets/cards/piastrerubate.webp",
+    "pellediferro": "assets/cards/piastrerubate.webp",
+    "Sopraffazione": "assets/cards/colpodevastante.webp",
+    "sopraffazione": "assets/cards/colpodevastante.webp",
+    "Furia Incontrollata": "assets/cards/titanoacciaio.webp",
+    "furiaincontrollata": "assets/cards/titanoacciaio.webp",
+    "Trono di Ossa": "assets/cards/sopravvissutoallafonderia.webp",
+    "tronodiossa": "assets/cards/sopravvissutoallafonderia.webp",
+    "Macello Indiscriminato": "assets/cards/piastrerubate.webp",
+    "macelloindiscriminato": "assets/cards/piastrerubate.webp",
+    "Il Mio Trionfo": "assets/cards/colpodevastante.webp",
+    "ilmiotrionfo": "assets/cards/colpodevastante.webp",
+    "Memoria della Fonderia": "assets/cards/titanoacciaio.webp",
+    "memoriadellafonderia": "assets/cards/titanoacciaio.webp",
+    "Tributo di Ferro": "assets/cards/sopravvissutoallafonderia.webp",
+    "tributodiferro": "assets/cards/sopravvissutoallafonderia.webp",
+    "Colpo Calibrato": "assets/cards/architettoombra.webp",
+    "colpocalibrato": "assets/cards/architettoombra.webp",
+    "Scudo Energetico": "assets/cards/barrieraolografica.webp",
+    "scudoenergetico": "assets/cards/barrieraolografica.webp",
+    "Drone da Supporto": "assets/cards/generatoredisingolarita.webp",
+    "dronedasupporto": "assets/cards/generatoredisingolarita.webp",
+    "Mina Adesiva": "assets/cards/frequenzadisturbante.webp",
+    "minaadesiva": "assets/cards/frequenzadisturbante.webp",
+    "Scanner Predittivo": "assets/cards/architettoombra.webp",
+    "scannerpredittivo": "assets/cards/architettoombra.webp",
+    "Impulso EM": "assets/cards/barrieraolografica.webp",
+    "impulsoem": "assets/cards/barrieraolografica.webp",
+    "Kit di Emergenza": "assets/cards/generatoredisingolarita.webp",
+    "kitdiemergenza": "assets/cards/generatoredisingolarita.webp",
+    "Backup su Cloud": "assets/cards/frequenzadisturbante.webp",
+    "backupsucloud": "assets/cards/frequenzadisturbante.webp",
+    "Turret Automatica": "assets/cards/architettoombra.webp",
+    "turretautomatica": "assets/cards/architettoombra.webp",
+    "Prezzo del Progresso": "assets/cards/barrieraolografica.webp",
+    "prezzodelprogresso": "assets/cards/barrieraolografica.webp",
+    "Backup di Coscienza": "assets/cards/generatoredisingolarita.webp",
+    "backupdicoscienza": "assets/cards/generatoredisingolarita.webp",
+    "Guscio Rinforzato": "assets/cards/frequenzadisturbante.webp",
+    "gusciorinforzato": "assets/cards/frequenzadisturbante.webp",
+    "Sovraccarico Calcolato": "assets/cards/architettoombra.webp",
+    "sovraccaricocalcolato": "assets/cards/architettoombra.webp",
+    "Protocollo Zero": "assets/cards/barrieraolografica.webp",
+    "protocollozero": "assets/cards/barrieraolografica.webp",
+    "Singolarità Portatile": "assets/cards/generatoredisingolarita.webp",
+    "singolaritaportatile": "assets/cards/generatoredisingolarita.webp",
+    "Backdoor": "assets/cards/frequenzadisturbante.webp",
+    "backdoor": "assets/cards/frequenzadisturbante.webp",
+    "Firmware Corrotto": "assets/cards/architettoombra.webp",
+    "firmwarecorrotto": "assets/cards/architettoombra.webp",
+    "Audit di Coscienza": "assets/cards/barrieraolografica.webp",
+    "auditdicoscienza": "assets/cards/barrieraolografica.webp",
+    "Costo di Progetto": "assets/cards/generatoredisingolarita.webp",
+    "costodiprogetto": "assets/cards/generatoredisingolarita.webp",
+    "Dardo dell'Abisso": "assets/cards/dardodellabisso.webp",
+    "dardodellabisso": "assets/cards/dardodellabisso.webp",
+    "Patto di Sangue": "assets/cards/sussurrodellabisso.webp",
+    "pattodisangue": "assets/cards/sussurrodellabisso.webp",
+    "Sifone Vitale": "assets/cards/toccatadalvelo.webp",
+    "sifonevitale": "assets/cards/toccatadalvelo.webp",
+    "Visione Proibita": "assets/cards/pugnalepsichico.webp",
+    "visioneproibita": "assets/cards/pugnalepsichico.webp",
+    "Bisbiglio Corruttore": "assets/cards/mantocorrotto.webp",
+    "bisbigliocorruttore": "assets/cards/mantocorrotto.webp",
+    "Prezzo del Patto": "assets/cards/dardodellabisso.webp",
+    "prezzodelpatto": "assets/cards/dardodellabisso.webp",
+    "Marchio dell'Abisso": "assets/cards/sussurrodellabisso.webp",
+    "marchiodellabisso": "assets/cards/sussurrodellabisso.webp",
+    "Legame Parassitico": "assets/cards/toccatadalvelo.webp",
+    "legameparassitico": "assets/cards/toccatadalvelo.webp",
+    "Scintilla Nera": "assets/cards/pugnalepsichico.webp",
+    "scintillanera": "assets/cards/pugnalepsichico.webp",
+    "Voto di Silenzio": "assets/cards/mantocorrotto.webp",
+    "votodisilenzio": "assets/cards/mantocorrotto.webp",
+    "Voto Infranto": "assets/cards/dardodellabisso.webp",
+    "votoinfranto": "assets/cards/dardodellabisso.webp",
+    "Scaglia Corrotta": "assets/cards/sussurrodellabisso.webp",
+    "scagliacorrotta": "assets/cards/sussurrodellabisso.webp",
+    "Calcolo Ereticale": "assets/cards/toccatadalvelo.webp",
+    "calcoloereticale": "assets/cards/toccatadalvelo.webp",
+    "Invocazione dell'Abisso": "assets/cards/pugnalepsichico.webp",
+    "invocazionedellabisso": "assets/cards/pugnalepsichico.webp",
+    "Patto Finale": "assets/cards/mantocorrotto.webp",
+    "pattofinale": "assets/cards/mantocorrotto.webp",
+    "Comunione Forzata": "assets/cards/dardodellabisso.webp",
+    "comunioneforzata": "assets/cards/dardodellabisso.webp",
+    "Eco dell'Abisso": "assets/cards/sussurrodellabisso.webp",
+    "ecodellabisso": "assets/cards/sussurrodellabisso.webp",
+    "Silenzio Interiore": "assets/cards/toccatadalvelo.webp",
+    "silenziointeriore": "assets/cards/toccatadalvelo.webp",
+    "Decima dell'Abisso": "assets/cards/pugnalepsichico.webp",
+    "decimadellabisso": "assets/cards/pugnalepsichico.webp",
+    "Affondo Sleale": "assets/cards/duellantespezzato.webp",
+    "affondosleale": "assets/cards/duellantespezzato.webp",
+    "Schermo di Carne": "assets/cards/duellanteitinerante.webp",
+    "schermodicarne": "assets/cards/duellanteitinerante.webp",
+    "Ritorsione": "assets/cards/assaltofluido.webp",
+    "ritorsione": "assets/cards/assaltofluido.webp",
+    "Passo Rubato": "assets/cards/affondocalcolato.webp",
+    "passorubato": "assets/cards/affondocalcolato.webp",
+    "Affondo Basso": "assets/cards/duellantespezzato.webp",
+    "affondobasso": "assets/cards/duellantespezzato.webp",
+    "Provocazione": "assets/cards/duellanteitinerante.webp",
+    "provocazione": "assets/cards/duellanteitinerante.webp",
+    "Scatto Rubato": "assets/cards/assaltofluido.webp",
+    "scattorubato": "assets/cards/assaltofluido.webp",
+    "Lama Nascosta": "assets/cards/affondocalcolato.webp",
+    "lamanascosta": "assets/cards/affondocalcolato.webp",
+    "Voltafaccia": "assets/cards/duellantespezzato.webp",
+    "voltafaccia": "assets/cards/duellantespezzato.webp",
+    "Prezzo della Vendetta": "assets/cards/duellanteitinerante.webp",
+    "prezzodellavendetta": "assets/cards/duellanteitinerante.webp",
+    "Onore Ritrovato": "assets/cards/assaltofluido.webp",
+    "onoreritrovato": "assets/cards/assaltofluido.webp",
+    "Guardia Cinica": "assets/cards/affondocalcolato.webp",
+    "guardiacinica": "assets/cards/affondocalcolato.webp",
+    "Calcolo Spietato": "assets/cards/duellantespezzato.webp",
+    "calcolospietato": "assets/cards/duellantespezzato.webp",
+    "Duello all'Ultimo Sangue": "assets/cards/duellanteitinerante.webp",
+    "duelloallultimosangue": "assets/cards/duellanteitinerante.webp",
+    "Tradimento": "assets/cards/assaltofluido.webp",
+    "tradimento": "assets/cards/assaltofluido.webp",
+    "Nessuna Regola": "assets/cards/affondocalcolato.webp",
+    "nessunaregola": "assets/cards/affondocalcolato.webp",
+    "L'Ultimo a Restare": "assets/cards/duellantespezzato.webp",
+    "lultimoarestare": "assets/cards/duellantespezzato.webp",
+    "Onore Infranto": "assets/cards/duellanteitinerante.webp",
+    "onoreinfranto": "assets/cards/duellanteitinerante.webp",
+    "Riscatto della Lama": "assets/cards/assaltofluido.webp",
+    "riscattodellalama": "assets/cards/assaltofluido.webp"
+  }
+};

@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#090c12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Monomythos">
+  <title>Monomythos — Mobile Card Game Online</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+
+  <!-- PeerJS for Serverless WebRTC Multiplayer Online Fallback -->
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js" defer></script>
+
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+  <!-- Dedicated Native Audio Player Element -->
+  <audio id="bgmAudioPlayer" loop preload="auto" playsinline style="display:none;"></audio>
+
+  <!-- Fracture Overlay (Triggered by high Trauma) -->
+  <div class="fracture-overlay" id="screenFractureOverlay"></div>
+
+  <!-- App Launch Intro Splash Screen (3D Card Vertical Spin: Retro Gioco -> Retro Minaccia) -->
+  <div class="app-launch-splash active" id="appLaunchSplashOverlay" onclick="UI.dismissAppSplash()">
+    <div class="splash-cosmic-bg"></div>
+    <div class="splash-content">
+      <!-- 3D Card Scene -->
+      <div class="splash-card-scene">
+        <div class="splash-card-flipper" id="splashCardFlipper">
+          <!-- FRONT: Retro Carta da Gioco (Eroi / Giocatore) -->
+          <div class="splash-card-face splash-card-player">
+            <img src="assets/cards/retrocartamazzo.webp" alt="Retro Carta da Gioco" class="splash-card-img">
+            <div class="splash-card-shine"></div>
+            <div class="splash-card-border-glow"></div>
+          </div>
+          <!-- BACK: Retro Carta Minaccia (Calamità) -->
+          <div class="splash-card-face splash-card-threat">
+            <img src="assets/cards/cartaminacciaretro.webp" alt="Retro Carta Minaccia" class="splash-card-img">
+            <div class="splash-card-shine"></div>
+            <div class="splash-card-border-glow threat-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="splash-title">MONOMYTHOS</h1>
+      <div class="splash-sub" id="splashSubText">TACTICAL CARD GAME</div>
+      <div class="splash-tagline" id="splashLoadingText">IL DESTINO COSMICO DEGLI EROI</div>
+      <div class="splash-loader-bar"><div class="splash-loader-progress"></div></div>
+      <div class="splash-tap-hint">Tocca per entrare</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand">
+      <img src="assets/icons/logo_monograma.webp" alt="Monomythos" class="monogram-logo">
+      <div class="brand-text">
+        <h1>MONOMYTHOS</h1>
+        <span>Tactical Card Game</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="credits-pill" onclick="UI.openShop()" title="Crediti Cosmici">
+        <span class="cr-badge">CR</span> <span class="creditsDisplay">500</span>
+      </div>
+      <button class="icon-btn" onclick="UI.openServerSettings()" title="Server & Profilo">SERVER</button>
+      <button class="icon-btn" onclick="UI.showModal('modalQrCode')" title="QR Code Telefono">CONDIVIDI</button>
+      <button class="icon-btn" id="btnAudioMixer" onclick="UI.openAudioMixer()" title="Mixer Audio">MIXER</button>
+      <button class="icon-btn" onclick="UI.showModal('modalRules')" title="Regole">REGOLE</button>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       SCREEN 1: LOBBY / HOME
+       ========================================== -->
+  <section class="screen active" id="scr-lobby">
+    <div class="lobby-content">
+      <!-- Point 2: Centered Game Title and Audio On/Off Toggle Button -->
+      <div class="home-top-row">
+        <h1 class="home-main-title">MONOMYTHOS</h1>
+        <button class="home-audio-btn" id="homeAudioToggleBtn" onclick="UI.toggleAudioFromHome()" title="Audio On/Off" aria-label="Toggle Audio">
+          <svg class="audio-svg-on" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg class="audio-svg-off" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="hero-banner">
+        <h2>Il Destino Cosmico</h2>
+        <p>Affronta le Calamità in cooperativa da 2 a 4 eroi. Le tue scelte determineranno se salverai il cosmo come Eroe o se soccomberai al Trauma diventando un temibile Villain.</p>
+      </div>
+
+      <!-- Point 1: Mode Buttons without left icon square, uniform left alignment, transparent glass look -->
+      <div class="mode-cards">
+        <!-- Solo & Co-op Mode with Bots -->
+        <div class="mode-card mode-solo" onclick="UI.startQuickMissionSelection()">
+          <div class="mode-badge">1 - 4 EROI</div>
+          <div class="mode-info">
+            <h3>Missione Veloce (Solo / Bot Co-op)</h3>
+            <p>Affronta le Calamità da 1 a 4 eroi con bot IA tattici sul tuo dispositivo</p>
+          </div>
+        </div>
+
+        <!-- Custom Deck Builder -->
+        <div class="mode-card mode-deck" onclick="UI.openDeckBuilder()">
+          <div class="mode-badge">DECKBUILDER</div>
+          <div class="mode-info">
+            <h3>Mazzo Personalizzato</h3>
+            <p>Componi il tuo eroe custom e il tuo mazzo tattico da 30 carte</p>
+          </div>
+        </div>
+
+        <!-- Shop & Unlocks -->
+        <div class="mode-card mode-shop" onclick="UI.openShop()">
+          <div class="mode-badge">ARCHIVIO & BUSTINE</div>
+          <div class="mode-info">
+            <h3>Negozio Cosmico & Sblocchi</h3>
+            <p>Spendi i Crediti Cosmici per bustine d'espansione e nuovi Eroi</p>
+          </div>
+        </div>
+
+        <!-- Rogue Hero Boss Duel -->
+        <div class="mode-card mode-boss" onclick="UI.openRogueBossPicker()">
+          <div class="mode-badge">BOSS CORROTTO</div>
+          <div class="mode-info">
+            <h3>Sfida Eroe Corrotto (NPC Boss)</h3>
+            <p>Duello epico contro un eroe consumato dal Trauma passato al lato oscuro</p>
+          </div>
+        </div>
+
+        <!-- Multiplayer Online: Create Room -->
+        <div class="mode-card mode-multi" onclick="UI.openMultiplayerModal(true)">
+          <div class="mode-badge">HOST ONLINE</div>
+          <div class="mode-info">
+            <h3>Crea Stanza Online</h3>
+            <p>Ospita una missione cooperativa e condividi il codice a 4 lettere</p>
+          </div>
+        </div>
+
+        <!-- Multiplayer Online: Join Room -->
+        <div class="mode-card mode-join" onclick="UI.openMultiplayerModal(false)">
+          <div class="mode-badge">PARTECIPA</div>
+          <div class="mode-info">
+            <h3>Partecipa a Stanza</h3>
+            <p>Unisciti alla missione di un amico digitando il codice stanza</p>
+          </div>
+        </div>
+
+        <!-- Download Native APK -->
+        <a class="mode-card mode-apk" href="monomythos.apk" download="monomythos.apk">
+          <div class="mode-badge">APK NATIVO (55 MB)</div>
+          <div class="mode-info">
+            <h3 style="color:#a8e6cf;">Scarica APK Android (.apk)</h3>
+            <p>Installa l'applicazione nativa firmata direttamente sul tuo telefono</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SCREEN 2: HERO PICK CAROUSEL
+       ========================================== -->
+  <section class="screen" id="scr-hero-pick">
+    <div class="hero-pick-header">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <h2 style="margin:0 0 4px;">Scegli il tuo Eroe</h2>
+          <p style="margin:0;">Scorri per scoprire statistiche, poteri e stile di gioco</p>
+        </div>
+        <button class="btn btn-top-back" onclick="UI.showScreen('scr-lobby')">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Torna</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Squad Size Selector (1 to 4 heroes / bots) -->
+    <div class="squad-selector-bar">
+      <div class="squad-selector-label">Formato Squadra (1 - 4 Giocatori)</div>
+      <div class="squad-pills-row">
+        <button class="squad-pill" id="squadPill1" onclick="UI.setSquadSize(1)">1 Solo</button>
+        <button class="squad-pill active" id="squadPill2" onclick="UI.setSquadSize(2)">2 (Tu + 1 Bot)</button>
+        <button class="squad-pill" id="squadPill3" onclick="UI.setSquadSize(3)">3 (Tu + 2 Bot)</button>
+        <button class="squad-pill" id="squadPill4" onclick="UI.setSquadSize(4)">4 (Squadra)</button>
+      </div>
+    </div>
+
+    <div class="carousel-viewport" id="heroCarousel">
+      <!-- Populated by ui.js -->
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SCREEN 3: MULTIPLAYER ROOM LOBBY
+       ========================================== -->
+  <section class="screen" id="scr-room-wait">
+    <div class="lobby-content">
+      <div class="hero-banner" style="text-align: center;">
+        <h2 style="font-size: 16px; margin-bottom: 2px;">Codice Stanza Multiplayer</h2>
+        <div id="createdRoomCode" class="mono" style="font-size: 38px; color: var(--oro); font-weight: 700; letter-spacing: 0.15em; margin: 8px 0;">----</div>
+        <p style="font-size: 12px;">Condividi questo codice o il link con i tuoi amici dal loro telefono:</p>
+        <div style="display: flex; gap: 8px; margin-top: 10px;">
+          <input type="text" id="roomShareLink" readonly style="flex:1; background:#0d1118; border:1px solid var(--line); color:var(--bone); border-radius:8px; padding:8px 10px; font-size:11px;" value="">
+          <button class="btn btn-subtle" onclick="navigator.clipboard.writeText(document.getElementById('roomShareLink').value); UI.showToast('Link copiato negli appunti!');">Copia</button>
+        </div>
+      </div>
+
+      <div class="room-box">
+        <h3 style="font-size: 15px; color: var(--bone);">Eroi al Tavolo</h3>
+        <div id="roomPlayerList" style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; background:#111622; padding:10px 12px; border-radius:8px; border:1px solid var(--line);">
+            <span><b>Tu (Host)</b> • <span id="roomMyHero">Iron Aegis</span></span>
+            <span style="color:var(--ok); font-size:11px; font-weight:700;">Pronto</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; background:#111622; padding:10px 12px; border-radius:8px; border:1px solid var(--line);">
+            <span><b>Compagno (Bot / Ospite)</b> • Neon Phantom</span>
+            <span style="color:var(--oro); font-size:11px;">In attesa...</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="UI.startMultiplayerMatch()">Inizia la Missione</button>
+      <button class="btn btn-subtle btn-block" onclick="UI.showScreen('scr-lobby')">Annulla</button>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SCREEN 4: GAMEPLAY COMBAT ARENA
+       ========================================== -->
+  <section class="screen game-screen" id="scr-game">
+    <!-- Top Mission Control & Exit -->
+    <div class="mission-act-bar">
+      <div class="act-indicator">
+        <span id="missionActLabel" style="font-weight:700; color:var(--oro-soft)">ATTO I</span>
+        <div class="act-pip active"></div>
+        <div class="act-pip"></div>
+        <div class="act-pip"></div>
+      </div>
+      <button class="btn btn-top-back" onclick="UI.promptExitGame()">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Esci</span>
+      </button>
+    </div>
+
+    <!-- 1. TOP BATTLEFIELD AREA: ALLIES / COMPANIONS STRIP & CORNERS (Point 7) -->
+    <div class="battlefield-allies-row" id="battlefieldAlliesRow">
+      <!-- Populated dynamically: companions top-left, top-center, top-right with face-down hand, active effects, trauma, hero/villain theme -->
+    </div>
+
+    <!-- 2. CENTER BATTLEFIELD NEXUS: THE THREAT & CENTRAL COMBAT GROUND (Point 7) -->
+    <div class="battlefield-center-stage" id="battlefieldCenterStage">
+      <!-- Central Calamity / Threat Card & Data -->
+      <div class="threat-central-card-wrap">
+        <!-- Main Red Frame Threat Card with layout_red.webp -->
+        <div class="threat-silver-frame-wrap" id="threatCentralCard" onclick="UI.inspectCurrentThreat()">
+          <img class="threat-bg-img" id="threatThumbImg" src="assets/icons/minaccia.png" alt="Minaccia">
+          <img class="threat-frame-img" src="assets/layouts/layout_red.webp" alt="Frame Rosso">
+          <div class="threat-vignette-bubble">
+            <div class="threat-card-title" id="threatName">Minaccia</div>
+            <div class="threat-card-tag" id="threatLevelBadge">Liv. 1</div>
+          </div>
+          <div class="threat-card-desc-box">
+            <div class="threat-card-effect-title" id="threatEffectTitle">Tratto Calamità</div>
+            <div class="threat-card-effect-text" id="threatEffectText">Caricamento minaccia...</div>
+          </div>
+          <div class="threat-card-lvl-circle" id="threatLvlCircle">1</div>
+        </div>
+
+        <!-- Threat Tactical Data & Multi-Path Tracks -->
+        <div class="threat-tactical-data">
+          <div class="threat-title-row">
+            <span class="threat-type-badge" id="threatTypeBadge">CALAMITÀ CENTRALE</span>
+            <div class="timer-box" title="Timer Operativo">
+              <span style="font-size:10px; color:var(--muto); margin-right:4px;">TIMER:</span>
+              <div id="threatTimerPips" style="display:flex; gap:3px;"></div>
+            </div>
+          </div>
+
+          <!-- Boss HP bar -->
+          <div class="track-row">
+            <span class="track-lbl">Vita Boss</span>
+            <div class="progress-track"><div class="progress-fill fill-boss" id="fillThreatHp" style="width:100%"></div></div>
+            <span class="track-num mono" id="valThreatHp">--/--</span>
+          </div>
+
+          <!-- Primario Track -->
+          <div class="track-row">
+            <span class="track-lbl" id="lblPrimario">Primario</span>
+            <div class="progress-track"><div class="progress-fill fill-primario" id="fillPrimario" style="width:0%"></div></div>
+            <span class="track-num mono" id="valPrimario">0/--</span>
+          </div>
+
+          <!-- Bruto Track -->
+          <div class="track-row">
+            <span class="track-lbl" id="lblBruto">Bruto</span>
+            <div class="progress-track"><div class="progress-fill fill-bruto" id="fillBruto" style="width:0%"></div></div>
+            <span class="track-num mono" id="valBruto">0/--</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mooks / Minions Row flanking the Boss -->
+      <div class="mooks-row" id="mooksContainer"></div>
+
+      <!-- Center Drop Table Play Zone -->
+      <div class="table-play-nexus">
+        <div class="table-play-zone" id="tableZone">
+          <div class="table-play-placeholder" id="tablePlayPlaceholder">Trascina o tocca carte dalla mano per giocare sul campo...</div>
+        </div>
+
+        <!-- Mazzi Flanking Stack -->
+        <div class="table-decks-flank">
+          <div class="deck-stack-item threat-deck-stack" id="threatDeckStack" onclick="UI.showToast('Mazzo Calamità: La minaccia avanza tra gli Atti!')">
+            <div class="deck-stack-cards">
+              <img class="deck-back-card deck-card-2" src="assets/cards/cartaminacciaretro.webp" alt="Retro Minaccia">
+              <img class="deck-back-card deck-card-1" src="assets/cards/cartaminacciaretro.webp" alt="Retro Minaccia">
+            </div>
+            <div class="deck-stack-badge">
+              <span class="deck-badge-title">Calamità</span>
+              <span class="deck-badge-count" id="threatDeckCount">Atto I/III</span>
+            </div>
+          </div>
+
+          <div class="deck-stack-item player-deck-stack" id="playerDeckStack" onclick="UI.showToast('Il tuo Mazzo: 60 carte tattiche!')">
+            <div class="deck-stack-cards">
+              <img class="deck-back-card deck-card-2" src="assets/cards/retrocartamazzo.webp" alt="Retro Mazzo">
+              <img class="deck-back-card deck-card-1" src="assets/cards/retrocartamazzo.webp" alt="Retro Mazzo">
+            </div>
+            <div class="deck-stack-badge">
+              <span class="deck-badge-title">Tuo Mazzo</span>
+              <span class="deck-badge-count" id="playerDeckCount">60 carte</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combat Log (Collapsible) -->
+      <div class="battle-log" id="battleLog"></div>
+    </div>
+
+    <!-- 3. BOTTOM: PLAYER COMMAND DECK & HAND (Point 4 & 5: Icons Only, No Text) -->
+    <div class="player-command-deck">
+      <!-- Player Status Top -->
+      <div class="player-dock-top">
+        <div class="player-main-info">
+          <div class="player-avatar">
+            <img id="playerDockAvatarImg" src="assets/cards/ironaegis.webp" alt="Avatar">
+          </div>
+          <div class="player-vital-bars">
+            <div class="vital-label">
+              <span id="playerDockName">Iron Aegis</span>
+              <span class="hp-text mono" id="playerDockHp">30/30</span>
+            </div>
+            <div class="vital-bar-out">
+              <div class="vital-bar-fill" id="playerDockHpFill" style="width:100%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Local Active Effects & Trauma -->
+        <div class="player-dock-right-status">
+          <div class="player-local-effects" id="playerLocalEffects"></div>
+          <div class="trauma-box">
+            <span style="font-size:9px; color:var(--muto); text-transform:uppercase;">Trauma</span>
+            <div class="trauma-container" id="playerDockTrauma"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resource Slots Indicators with ICONS (Point 4: No Words, Only Icons) -->
+      <div class="slots-and-actions-bar">
+        <div class="slots-dock">
+          <div class="slot-token str" title="Slot Potenza">
+            <img src="assets/icons/potenza.png" class="slot-stat-icon" alt="Potenza">
+            <span id="slotPotenza" class="mono">2</span>
+          </div>
+          <div class="slot-token spd" title="Slot Agilità">
+            <img src="assets/icons/agilita.png" class="slot-stat-icon" alt="Agilità">
+            <span id="slotAgilita" class="mono">0</span>
+          </div>
+          <div class="slot-token tech" title="Slot Intelligenza">
+            <img src="assets/icons/inteligenza.png" class="slot-stat-icon" alt="Intelligenza">
+            <span id="slotTech" class="mono">2</span>
+          </div>
+          <div class="slot-token end" title="Slot Vigore">
+            <img src="assets/icons/vigore.png" class="slot-stat-icon" alt="Vigore">
+            <span id="slotVigore" class="mono">4</span>
+          </div>
+        </div>
+        <div class="action-toolbar">
+          <button class="btn btn-pb" id="btnPbDock" onclick="UI.openBasePowerSheet()">Potere Base</button>
+          <button class="btn btn-endturn" id="btnEndTurnDock" onclick="UI.confirmEndTurn()">Fine Turno</button>
+        </div>
+      </div>
+
+      <!-- Hand Cards Carousel -->
+      <div class="hand-carousel" id="playerHandCarousel"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       MODAL 1: CARD ACTION BOTTOM SHEET
+       ========================================== -->
+  <div class="modal-overlay" id="modalCardActionSheet" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3 id="sheetCardName">Nome Carta</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+
+      <div class="card-sheet-preview">
+        <div class="sheet-card-art" onclick="UI.inspectCard()">
+          <img id="sheetCardArt" src="" alt="Carta">
+        </div>
+        <div class="sheet-card-details">
+          <div class="card-name" id="sheetCardCategory">Categoria • Valore</div>
+          <p class="sheet-card-effect" id="sheetCardEffect">Testo effetto carta</p>
+          <button class="btn btn-subtle" style="padding:4px 0; font-size:11px;" onclick="UI.inspectCard()">Dettagli Carta</button>
+        </div>
+      </div>
+
+      <div class="sheet-action-options">
+        <!-- Option A: Play for Effect -->
+        <div class="action-opt-card" id="btnOptionPlayEffect" onclick="UI.confirmPlayCard()">
+          <div>
+            <h4>Opzione A: Gioca Effetto</h4>
+            <p>Consuma slot della Categoria per applicare danno, scudo o tech</p>
+          </div>
+          <div class="cost-badge">Costo</div>
+        </div>
+
+        <!-- Option B: Tactical Sacrifice (Primario) -->
+        <div class="action-opt-card" id="btnOptionSacrifice" onclick="UI.confirmSacrifice('primario')">
+          <div>
+            <h4>Opzione B: Sacrificio Tattico (Primario)</h4>
+            <p>Scarta per far avanzare il binario Primario (Nessun costo in slot)</p>
+          </div>
+          <div class="cost-badge" style="background:var(--ciano); color:#051317;">Primario</div>
+        </div>
+
+        <!-- Option B: Tactical Sacrifice (Bruto) -->
+        <div class="action-opt-card" onclick="UI.confirmSacrifice('bruto')">
+          <div>
+            <h4>Opzione B: Sacrificio Tattico (Bruto)</h4>
+            <p>Scarta per far avanzare il binario Bruto (Nessun costo in slot)</p>
+          </div>
+          <div class="cost-badge" style="background:var(--oro); color:#120e05;">Bruto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 2: BASE POWER BOTTOM SHEET
+       ========================================== -->
+  <div class="modal-overlay" id="modalBasePowerSheet" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3 id="pbSheetTitle">Potere Base</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+      <p id="pbSheetDesc" style="font-size:13px; color:var(--muto); margin-bottom:8px;"></p>
+      
+      <div class="sheet-action-options">
+        <div class="action-opt-card" onclick="UI.confirmBasePower(0)">
+          <div>
+            <h4>Ramo 1: Azione Immediata</h4>
+            <p>Applica l'effetto primario gratuito (es. Danno o Pescaggio)</p>
+          </div>
+          <div class="cost-badge" style="background:var(--oro); color:#120e05;">Gratis</div>
+        </div>
+        <div class="action-opt-card" onclick="UI.confirmBasePower(1)">
+          <div>
+            <h4>Ramo 2: Allocazione Slot</h4>
+            <p>Ottieni 1 punto di risorsa temporaneo per questo round</p>
+          </div>
+          <div class="cost-badge" style="background:var(--ciano); color:#051317;">+1 Slot</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 3: FULL CARD INSPECTOR
+       ========================================== -->
+  <div class="modal-overlay" id="modalInspect" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet" style="align-items:center;">
+      <div class="sheet-handle"></div>
+      <div class="full-card-inspect-wrap">
+        <img id="inspectCardImg" src="" alt="Carta">
+        <h3 id="inspectCardTitle" style="font-size:18px; color:var(--oro-soft)">Nome</h3>
+        <p id="inspectCardDesc" style="font-size:12px; color:var(--bone); text-align:center; max-width:320px;"></p>
+      </div>
+      <button class="btn btn-subtle btn-block" onclick="UI.hideModals()">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 4: CUSTOM HERO CREATOR
+       ========================================== -->
+  <div class="modal-overlay" id="modalCustomHero" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3>Creazione Eroe Custom</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+      <p style="font-size:12px; color:var(--muto);">Componi liberamente il tuo eroe selezionando le carte creazione ufficiali:</p>
+
+      <div style="display:flex; flex-direction:column; gap:10px; margin: 8px 0;">
+        <div>
+          <label style="font-size:10px; color:var(--muto); text-transform:uppercase;">1. Origine (Vita Base & Stats)</label>
+          <select id="selCustomOrigine" onchange="UI.recalculateCustomHero()" style="width:100%; background:#0f141d; border:1px solid var(--line); color:var(--bone); border-radius:8px; padding:8px; font-size:13px;"></select>
+        </div>
+        <div>
+          <label style="font-size:10px; color:var(--muto); text-transform:uppercase;">2. Archetipo (Tag ammessi)</label>
+          <select id="selCustomArchetipo" onchange="UI.recalculateCustomHero()" style="width:100%; background:#0f141d; border:1px solid var(--line); color:var(--bone); border-radius:8px; padding:8px; font-size:13px;"></select>
+        </div>
+        <div>
+          <label style="font-size:10px; color:var(--muto); text-transform:uppercase;">3. Costume (Stats & Passiva)</label>
+          <select id="selCustomCostume" onchange="UI.recalculateCustomHero()" style="width:100%; background:#0f141d; border:1px solid var(--line); color:var(--bone); border-radius:8px; padding:8px; font-size:13px;"></select>
+        </div>
+        <div>
+          <label style="font-size:10px; color:var(--muto); text-transform:uppercase;">4. Potere Base</label>
+          <select id="selCustomPb" onchange="UI.recalculateCustomHero()" style="width:100%; background:#0f141d; border:1px solid var(--line); color:var(--bone); border-radius:8px; padding:8px; font-size:13px;"></select>
+        </div>
+      </div>
+
+      <!-- Live Calculated Stats -->
+      <div class="stats-matrix" style="margin-top:6px;">
+        <div class="stat-chip str"><span class="val" id="custValStr">2</span><span class="lbl">Str</span></div>
+        <div class="stat-chip spd"><span class="val" id="custValSpd">2</span><span class="lbl">Spd</span></div>
+        <div class="stat-chip tech"><span class="val" id="custValTech">2</span><span class="lbl">Tech</span></div>
+        <div class="stat-chip end"><span class="val" id="custValEnd">2</span><span class="lbl">End</span></div>
+      </div>
+      <div style="text-align:center; font-size:12px; color:var(--ok); margin-bottom:10px;">
+        Vita Base risultante: <b id="custValVita">25</b> HP
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="UI.confirmCustomHero()">Crea & Gioca</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 5: JOIN ROOM INPUT
+       ========================================== -->
+  <div class="modal-overlay" id="modalJoinRoom" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3>Partecipa a Stanza Online</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+      <p style="font-size:12px; color:var(--muto);">Inserisci il codice a 4 caratteri fornito dall'Host:</p>
+      <div class="room-inputs">
+        <input type="text" id="joinRoomInput" maxlength="6" placeholder="ES: MYTH">
+        <button class="btn btn-primary" onclick="UI.joinMultiplayerRoom()">Entra</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 6: OFFICIAL RULES VIEWER (V7.7)
+       ========================================== -->
+  <div class="modal-overlay" id="modalRules" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet" style="max-height:90dvh;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3>Regole Ufficiali Monomythos (V7.7)</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px; font-size:12.5px; color:var(--muto); line-height:1.45; overflow-y:auto; padding-right:4px;">
+        <p><b style="color:var(--oro)">• Struttura della Missione:</b> Si estraggono 3 carte Minaccia a caso per i 3 Atti (Atto I, Atto II, Atto Finale / Boss). L'Effetto Cosmico si attiva nell'Atto Finale con State Freezing degli allineamenti.</p>
+        <p><b style="color:var(--oro)">• Formula Unica di Scaling:</b> Vita Totale = VitaUnitaria × (Livello + NumEroi). Soglia Binario = SogliaUnitaria × (Livello + NumEroi).</p>
+        <p><b style="color:var(--oro)">• Slot Risorsa e Doppio Uso (Dual-Use):</b> All'inizio del turno hai slot pari a Potenza (Str), Agilità (Spd), Intelligenza (Tech), Vigore (End). Le carte si possono giocare per il loro Effetto (Opzione A, consuma slot) o come Sacrificio Tattico (Opzione B, scarto gratuito sui binari del Multi-Path, max 2 volte a round).</p>
+        <p><b style="color:var(--frattura-soft)">• Travolgere (Trample) vs Parata Dinamica:</b> Se il danno di un nemico supera la tua Resistenza (End), l'attacco travolge e penetra direttamente sulla Vita Base, bypassando gli scudi! Se è inferiore o pari, si attiva la Parata Dinamica: puoi scartare carte per assorbire i danni.</p>
+        <p><b style="color:var(--frattura-soft)">• Trauma & Transizione a Villain:</b> Le Carte Oscure e le detonazioni infliggono Trauma (TRM). Al 5° punto TRM l'Eroe supera il Punto di Rottura e si corrompe in Villain, sbloccando effetti asimmetrici e PvP!</p>
+        <p><b style="color:var(--ok)">• Salvezza Critica e Permadeath:</b> Se un eroe scende a 0 HP, la squadra può salvarlo con *Protocollo Defibrillazione*. Se muore, scatta il Permadeath e il Multi-Path si ricalcola istantaneamente per evitare la spirale di sconfitta.</p>
+      </div>
+      <button class="btn btn-subtle btn-block" onclick="UI.hideModals()">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 8: PHONE QR CODE MODAL
+       ========================================== -->
+  <div class="modal-overlay" id="modalQrCode" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet" style="text-align:center; align-items:center;">
+      <div class="sheet-handle"></div>
+      <h3 style="font-size:18px; color:var(--oro-soft); margin-top:4px;">Inquadra con la Fotocamera</h3>
+      <p style="font-size:12px; color:var(--muto); margin:6px 0 14px;">Inquadra questo QR Code dal tuo smartphone per aprire istantaneamente l'app sulla rete Wi-Fi:</p>
+      <div style="background:#090c12; padding:12px; border-radius:16px; border:2px solid var(--oro); display:inline-block; box-shadow:0 0 20px var(--oro-glow);">
+        <img src="assets/qrcode_mobile.png" alt="QR Code Telefono" style="width:200px; height:200px; display:block; border-radius:8px;">
+      </div>
+      <p class="mono" style="font-size:12px; color:var(--oro); margin-top:12px;">http://192.168.0.2:8000</p>
+      <p style="font-size:11px; color:var(--muto); margin-top:4px;">Puoi installarla toccando "Aggiungi a schermata Home" dal browser per giocarci a schermo intero!</p>
+      <button class="btn btn-subtle btn-block" style="margin-top:14px;" onclick="UI.hideModals()">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SCREEN 5: DECK BUILDER
+       ========================================== -->
+  <section class="screen" id="scr-deckbuilder">
+    <!-- Pinned Top Navigation Bar: Back button ALWAYS in top right -->
+    <div class="deckbuilder-top-bar">
+      <div>
+        <h2 style="font-size:17px; color:var(--oro-soft); margin:0 0 2px;">Mazzo Personalizzato</h2>
+        <span style="font-size:11px; color:var(--muto);">Componi Eroe & Mazzo da 60 Carte</span>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button class="btn btn-primary btn-sm" id="btnSaveDeck" onclick="UI.saveCurrentDeck()">Salva Mazzo</button>
+        <button class="btn btn-top-back" onclick="UI.showScreen('scr-lobby')" title="Torna al Menu">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Torna</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scrollable Deckbuilder Body (Natural scrolling, no visual overlapping glitches) -->
+    <div class="deckbuilder-scroll-content">
+      <div>
+        <input type="text" id="deckNameInput" placeholder="Nome Mazzo Personalizzato" style="width:100%; box-sizing:border-box; background:#0f141d; border:1px solid var(--line); border-radius:8px; padding:8px 10px; color:var(--bone); font-size:13px; margin-bottom:4px;">
+      </div>
+
+      <!-- Visual Hero Creation Cards (Origine, Archetipo, Costume, Potere Base) -->
+      <div class="deck-hero-creator-box">
+        <div class="deck-roles-title">
+          <span>1. Componi il tuo Eroe (Tocca le carte per cambiarle):</span>
+        </div>
+
+        <!-- Hidden Synchronized Selects for Full Backward Compatibility -->
+        <div style="display:none;">
+          <select id="deckSelOrigine" onchange="UI.onDeckCreationChanged()"></select>
+          <select id="deckSelArchetipo" onchange="UI.onDeckCreationChanged()"></select>
+          <select id="deckSelCostume" onchange="UI.onDeckCreationChanged()"></select>
+          <select id="deckSelPb" onchange="UI.onDeckCreationChanged()"></select>
+        </div>
+
+        <!-- Visual Creation Cards Grid (Point 2: Card Design & Indications) -->
+        <div class="creation-cards-visual-grid" id="deckCreationCardSlots">
+          <!-- Populated dynamically by UI.renderDeckCreationSlots() -->
+        </div>
+
+        <!-- Real-Time Hero Summary: Stats with Icons, HP, Allowed Tags, Base Power -->
+        <div class="deck-hero-summary-row">
+          <div class="stats-matrix" style="margin:0; flex:1;">
+            <div class="stat-chip str"><img src="assets/icons/potenza.png" class="slot-stat-icon-mini" alt="STR"><span class="val" id="deckHeroStr">2</span></div>
+            <div class="stat-chip spd"><img src="assets/icons/agilita.png" class="slot-stat-icon-mini" alt="SPD"><span class="val" id="deckHeroSpd">2</span></div>
+            <div class="stat-chip tech"><img src="assets/icons/inteligenza.png" class="slot-stat-icon-mini" alt="TECH"><span class="val" id="deckHeroTech">2</span></div>
+            <div class="stat-chip end"><img src="assets/icons/vigore.png" class="slot-stat-icon-mini" alt="END"><span class="val" id="deckHeroEnd">2</span></div>
+          </div>
+          <div class="deck-hero-hp-pill">
+            <span>Vita Base:</span>
+            <b id="deckHeroHp">30</b> HP
+          </div>
+        </div>
+
+        <div class="deck-tags-banner">
+          <span class="tags-lbl">Tag Ammessi nel Mazzo:</span>
+          <div class="tags-container" id="deckAllowedTagsPills"></div>
+        </div>
+        <div class="deck-pb-banner" id="deckPbBanner">
+          <b id="deckPbNameDisplay">Potere Base</b>: <span id="deckPbTextDisplay">...</span>
+        </div>
+      </div>
+
+      <!-- Real-Time Deck Count & Rule Validation (Mazzo di 60 carte) -->
+      <div class="deck-count-bar">
+        <span>Carte nel Mazzo: <b id="deckTotalCount">0</b>/60</span>
+        <span>Carte Oscure: <b id="deckDarkCount">0</b>/24 max</span>
+      </div>
+      <div class="deck-rule-validation-msg" id="deckValidationStatus">Componi 60 carte per completare il mazzo (0/60)</div>
+
+      <!-- Category Filter Tabs for Easy Selection of 60 Cards -->
+      <div class="deck-category-tabs">
+        <button class="deck-filter-tab active" onclick="UI.filterDeckCards('all', this)">Tutte</button>
+        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Potenza', this)"><img src="assets/icons/potenza.png" class="filter-tab-icon" alt=""> Potenza</button>
+        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Agilità', this)"><img src="assets/icons/agilita.png" class="filter-tab-icon" alt=""> Agilità</button>
+        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Intelligenza', this)"><img src="assets/icons/inteligenza.png" class="filter-tab-icon" alt=""> Intelligenza</button>
+        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Vigore', this)"><img src="assets/icons/vigore.png" class="filter-tab-icon" alt=""> Vigore</button>
+        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Oscura', this)">Oscure</button>
+      </div>
+
+      <!-- Card Picker Grid (60-card pool) -->
+      <div class="card-picker-grid" id="deckCardsList"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SCREEN 6: SHOP & PROGRESSION
+       ========================================== -->
+  <section class="screen" id="scr-shop">
+    <header class="app-header" style="position:sticky; top:0;">
+      <div class="brand">
+        <h2 style="font-size:18px; color:var(--oro-soft)">Negozio & Archivio</h2>
+      </div>
+      <div class="header-actions">
+        <div class="credits-pill"><span class="cr-badge">CR</span> <span class="creditsDisplay">250</span></div>
+        <button class="btn btn-top-back" onclick="UI.showScreen('scr-lobby')">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Torna</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="shop-section-title">Bustine di Carte (Booster Packs)</div>
+    <div class="shop-grid">
+      <div class="shop-item-card" onclick="UI.buyBoosterPack('standard', 100)">
+        <div class="booster-thumb-icon"><img src="assets/cards/retrocartamazzo.webp" alt="Pack" style="width:40px; height:56px; border-radius:6px; object-fit:cover; margin:0 auto 8px; display:block;"></div>
+        <h4>Busta Assortita</h4>
+        <p>3 carte casuali per la tua collezione</p>
+        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">100 CR</button>
+      </div>
+      <div class="shop-item-card" onclick="UI.buyBoosterPack('kinetic', 100)">
+        <div class="booster-thumb-icon"><img src="assets/icons/agilita.png" alt="Cinetica" style="width:40px; height:40px; margin:0 auto 16px; display:block;"></div>
+        <h4>Busta Cinetica</h4>
+        <p>3 carte speciali Agilità & Potenza</p>
+        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">100 CR</button>
+      </div>
+      <div class="shop-item-card" onclick="UI.buyBoosterPack('techno', 120)">
+        <div class="booster-thumb-icon"><img src="assets/icons/inteligenza.png" alt="Tecno" style="width:40px; height:40px; margin:0 auto 16px; display:block;"></div>
+        <h4>Busta Tecno-Mistici</h4>
+        <p>3 carte rare Intelligenza & Carte Oscure</p>
+        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">120 CR</button>
+      </div>
+    </div>
+
+    <div class="shop-section-title">Sblocco Nuovi Eroi</div>
+    <div class="shop-grid" id="shopHeroesGrid" style="padding-bottom:30px;"></div>
+  </section>
+
+  <!-- ==========================================
+       MODAL 9: BOOSTER PACK REVEAL
+       ========================================== -->
+  <div class="modal-overlay" id="modalPackReveal">
+    <div class="bottom-sheet" style="text-align:center; align-items:center;">
+      <div class="sheet-handle"></div>
+      <h2 style="font-size:20px; color:var(--oro-soft); margin-top:4px;">Carte Sbloccate!</h2>
+      <p style="font-size:12px; color:var(--muto); margin-bottom:12px;">Le nuove carte sono state aggiunte alla tua collezione e al Deckbuilder:</p>
+      <div class="pack-reveal-stage" id="packRevealStage"></div>
+      <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="UI.hideModals()">Raccogli Carte</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 7: GAME OVER / VICTORY MODAL
+       ========================================== -->
+  <div class="modal-overlay" id="modalGameOver">
+    <div class="bottom-sheet" style="text-align:center;">
+      <div class="sheet-handle"></div>
+      <h2 id="gameOverTitle" style="font-size:24px; color:var(--oro-soft); margin-top:6px;">VITTORIA COSMICA!</h2>
+      <p id="gameOverSubtitle" style="font-size:13px; color:var(--muto); margin:10px 0 16px;"></p>
+      <button class="btn btn-primary btn-block" onclick="UI.hideModals(); UI.showScreen('scr-lobby');">Torna al Menu Principale</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 10: PICK ROGUE BOSS NPC
+       ========================================== -->
+  <div class="modal-overlay" id="modalPickRogueBoss">
+    <div class="bottom-sheet" style="max-height:85vh; overflow-y:auto; text-align:left;">
+      <div class="sheet-handle"></div>
+      <h2 style="font-size:20px; color:#ff5555; margin-top:4px;">Sfida Eroe Corrotto (Boss NPC)</h2>
+      <p style="font-size:12px; color:var(--muto); margin-bottom:12px;">Seleziona l'Eroe Corrotto passato al lato oscuro da affrontare in un epico duello boss:</p>
+      <div id="rogueBossList" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:10px; width:100%; margin-bottom:14px;"></div>
+      <button class="btn btn-secondary btn-block" onclick="UI.hideModals()">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 11: COSMIC AUDIO & MUSIC MIXER
+       ========================================== -->
+  <div class="modal-overlay" id="modalAudioMixer" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet mixer-bottom-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3 style="color:var(--oro-soft)">Mixer Audio Cosmico</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+
+      <!-- Master Volume -->
+      <div class="mixer-control-group">
+        <div class="mixer-label-row">
+          <span>Volume Generale (Master)</span>
+          <span class="mono" id="valMasterVol">100%</span>
+        </div>
+        <div class="mixer-slider-row">
+          <input type="range" id="sliderMasterVol" min="0" max="100" value="100" oninput="UI.onMasterVolChange(this.value)">
+          <button class="btn btn-subtle mixer-mute-btn" id="btnMasterMute" onclick="UI.toggleMasterMute()">Mute</button>
+        </div>
+      </div>
+
+      <!-- Music Volume -->
+      <div class="mixer-control-group">
+        <div class="mixer-label-row">
+          <span>Musica di Sottofondo (BGM)</span>
+          <span class="mono" id="valMusicVol">65%</span>
+        </div>
+        <div class="mixer-slider-row">
+          <input type="range" id="sliderMusicVol" min="0" max="100" value="65" oninput="UI.onMusicVolChange(this.value)">
+          <button class="btn btn-subtle mixer-mute-btn" id="btnMusicMute" onclick="UI.toggleMusicMute()">Mute</button>
+        </div>
+      </div>
+
+      <!-- SFX Volume -->
+      <div class="mixer-control-group">
+        <div class="mixer-label-row">
+          <span>Effetti Sonori Carte (SFX)</span>
+          <span class="mono" id="valSfxVol">85%</span>
+        </div>
+        <div class="mixer-slider-row">
+          <input type="range" id="sliderSfxVol" min="0" max="100" value="85" oninput="UI.onSfxVolChange(this.value)">
+          <button class="btn btn-subtle mixer-mute-btn" id="btnSfxMute" onclick="UI.toggleSfxMute()">Mute</button>
+        </div>
+      </div>
+
+      <!-- Music Track Selector -->
+      <div class="mixer-control-group">
+        <div class="mixer-label-row">
+          <span>Brano Musicale Attivo</span>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-subtle mixer-track-btn active" id="btnTrackLobby" onclick="UI.switchMusicTrack('m1_selezione.mp3')">Selezione Eroi</button>
+          <button class="btn btn-subtle mixer-track-btn" id="btnTrackCombat" onclick="UI.switchMusicTrack('m2_combat.mp3')">Battaglia Cosmica</button>
+        </div>
+      </div>
+
+      <!-- SFX Sound Test Buttons -->
+      <div class="mixer-control-group">
+        <div class="mixer-label-row">
+          <span>Test Effetti Sonori Carte</span>
+        </div>
+        <div class="mixer-sfx-grid">
+          <button class="btn btn-subtle sfx-test-chip" onclick="window.AudioEngine.playSfx('card_draw')">Pesca</button>
+          <button class="btn btn-subtle sfx-test-chip" onclick="window.AudioEngine.playSfx('card_tap')">Tocco</button>
+          <button class="btn btn-subtle sfx-test-chip" onclick="window.AudioEngine.playSfx('card_attack')">Attacco (Oro)</button>
+          <button class="btn btn-subtle sfx-test-chip" onclick="window.AudioEngine.playSfx('card_defense')">Parata (Scudo)</button>
+          <button class="btn btn-subtle sfx-test-chip" onclick="window.AudioEngine.playSfx('card_tech')">Abilità (Verde)</button>
+          <button class="btn btn-subtle sfx-test-chip" onclick="window.AudioEngine.playSfx('card_deus')">Deus Ex (Blu)</button>
+          <button class="btn btn-subtle sfx-test-chip" onclick="window.AudioEngine.playSfx('card_dark')">Oscura (Viola)</button>
+          <button class="btn btn-subtle sfx-test-chip" onclick="window.AudioEngine.playSfx('card_sacrifice')">Sacrificio</button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="UI.hideModals()">Chiudi Mixer</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       THREAT ENTRY DRAW 3D ANIMATION OVERLAY
+       ========================================== -->
+  <div class="threat-entry-animation-overlay" id="threatEntryAnimOverlay">
+    <div class="threat-draw-card-wrapper" id="threatDrawCardWrapper">
+      <div class="threat-draw-card-inner" id="threatDrawCardInner">
+        <!-- Back of threat card -->
+        <div class="threat-draw-card-back">
+          <img src="assets/cards/cartaminacciaretro.webp" alt="Retro Minaccia">
+        </div>
+        <!-- Front of threat card -->
+        <div class="threat-draw-card-front" id="threatDrawCardFront">
+          <img id="threatDrawFrontImg" src="assets/icons/minaccia.png" alt="Minaccia">
+          <div class="threat-draw-front-name" id="threatDrawFrontName">NOME MINACCIA</div>
+        </div>
+      </div>
+    </div>
+    <div class="threat-draw-banner" id="threatDrawBanner">NUOVA CALAMITÀ RILEVATA!</div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 12: TARGET SELECTION (Point 7)
+       ========================================== -->
+  <div class="modal-overlay" id="modalTargetSelect" onclick="if(event.target===this) UI.cancelTargetSelection()">
+    <div class="bottom-sheet" style="max-height:85vh; overflow-y:auto;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3 id="targetModalTitle" style="color:var(--oro-soft)">Scegli il Bersaglio</h3>
+        <button class="sheet-close-btn" onclick="UI.cancelTargetSelection()">&times;</button>
+      </div>
+      <p id="targetModalDesc" style="font-size:12px; color:var(--muto); margin-bottom:12px;">Seleziona il bersaglio per l'effetto:</p>
+
+      <div class="target-candidates-list" id="targetCandidatesList"></div>
+
+      <button class="btn btn-primary btn-block" id="btnConfirmTarget" style="margin-top:12px;" disabled onclick="UI.executeTargetSelection()">Conferma Bersaglio</button>
+      <button class="btn btn-subtle btn-block" style="margin-top:6px;" onclick="UI.cancelTargetSelection()">Annulla</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 13: DEFENSE & REACTION WINDOW (Point 6: Dynamic Parry & Out-of-turn Reaction)
+       ========================================== -->
+  <div class="modal-overlay" id="modalDefenseWindow">
+    <div class="bottom-sheet defense-sheet" style="max-height:88vh; overflow-y:auto;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header" style="border-bottom:1px solid rgba(255,118,117,0.25); padding-bottom:8px;">
+        <div>
+          <h3 style="color:#ff7675; margin:0 0 2px;">Finestra di Difesa & Reazione</h3>
+          <span style="font-size:11px; color:var(--muto);">Tempo limitato per parare o giocare carte fuori turno!</span>
+        </div>
+      </div>
+
+      <!-- Real-time Reaction Countdown Bar -->
+      <div class="defense-timer-wrap">
+        <div class="defense-timer-header">
+          <span class="defense-timer-label">TEMPO DI REAZIONE</span>
+          <span class="defense-timer-sec mono" id="defenseTimerSeconds">8s</span>
+        </div>
+        <div class="defense-timer-bar">
+          <div class="defense-timer-fill" id="defenseTimerFill" style="width:100%;"></div>
+        </div>
+      </div>
+
+      <div class="defense-threat-announcement">
+        <div style="font-size:14px; font-weight:700; color:var(--bone);" id="defenseEnemyName">Attacco nemico in arrivo!</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+          <div style="font-size:13px; font-weight:700; color:#ff7675;" id="defenseDmgAmount">Danno dichiarato: 2</div>
+          <div style="font-size:11px; color:var(--ciano);" id="defenseAbsorbedNotice">Assorbito: 0</div>
+        </div>
+        <div style="font-size:11px; color:var(--oro-soft); margin-top:4px;" id="defenseTrampleNotice"></div>
+      </div>
+
+      <!-- Dynamic Parry Discard Section -->
+      <div class="parry-dynamic-section">
+        <div class="parry-section-title">
+          <span>PARATA DINAMICA: Scarta carte per assorbire danni</span>
+          <span class="parry-sub-tip">1 carta = 1 danno assorbito</span>
+        </div>
+        <div class="parry-cards-grid" id="parryCardsSelectionGrid">
+          <!-- Populated with player hand cards that can be discarded for parry -->
+        </div>
+        <button class="btn btn-primary btn-block" id="btnConfirmParry" style="margin-top:8px;" onclick="UI.executeDynamicParry()">
+          Conferma Parata (Scarta 0 carte)
+        </button>
+      </div>
+
+      <!-- Fast Reactions / Out-of-turn Cards Section -->
+      <div class="defense-reactions-section">
+        <div class="parry-section-title">
+          <span>CARTE REAZIONE FUORI TURNO</span>
+          <span class="parry-sub-tip">Gioca istantaneamente dalla mano</span>
+        </div>
+        <div class="defense-options-list" id="defenseOptionsList"></div>
+      </div>
+
+      <button class="btn btn-subtle btn-block" style="margin-top:10px;" onclick="UI.confirmDefenseTakeHit()">Incassa Danno Residuo</button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 14: VISUAL CREATION CARD PICKER (Point 2)
+       ========================================== -->
+  <div class="modal-overlay" id="modalPickCreationCard" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet creation-picker-sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div>
+          <h3 id="creationPickerTitle" style="color:var(--oro-soft); font-size:17px; margin-bottom:2px;">Scegli Carta Creazione</h3>
+          <p id="creationPickerSubtitle" style="font-size:12px; color:var(--muto); margin:0;">Tocca una carta per equipaggiarla al tuo Eroe</p>
+        </div>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+      <div class="creation-picker-list" id="creationPickerList">
+        <!-- Rendered dynamically with 8 visual cards per role -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 15: SERVER & PLAYER PROFILE SETTINGS (OTA Live Server)
+       ========================================== -->
+  <div class="modal-overlay" id="modalServerSettings" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet" style="max-height:90dvh;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div>
+          <h3 style="color:var(--oro-soft); margin:0;">Server & Profilo Giocatore</h3>
+          <p style="font-size:11px; color:var(--muto); margin:2px 0 0;">Dinamiche e grafica live dal Server • Dati fissi nel dispositivo</p>
+        </div>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px; padding:8px 0; overflow-y:auto;">
+        <div style="background:#0c1017; border:1px solid var(--line); border-radius:10px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:700; color:var(--bone);">Stato Dinamiche & Grafica:</span>
+            <span id="serverConnectionBadge" style="font-size:11px; font-weight:700; padding:2px 8px; border-radius:12px; background:rgba(80,176,107,0.18); color:#50b06b;">Verifica...</span>
+          </div>
+          <div style="font-size:11px; color:var(--muto); line-height:1.4;">
+            Tutti gli aggiornamenti di regole, carte e grafica vengono caricati direttamente dal Server in tempo reale. L'APK mantiene salvati i tuoi dati giocatore in locale.
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size:11px; color:var(--oro-soft); font-weight:700; display:block; margin-bottom:4px;">Indirizzo Server Remoto Monomythos (VPS / Dominio / IP Pubblico):</label>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="serverAddressInput" style="flex:1; background:#0d1118; border:1px solid var(--line); color:var(--bone); border-radius:8px; padding:8px 10px; font-size:12px;" placeholder="https://timely-gnome-a87041.netlify.app">
+            <button class="btn btn-primary" onclick="UI.testAndSaveServerUrl()">Connetti</button>
+          </div>
+        </div>
+
+        <div style="background:#0c1017; border:1px solid var(--line); border-radius:10px; padding:12px;">
+          <div style="font-size:12px; font-weight:700; color:var(--bone); margin-bottom:6px;">Dati Giocatore (Fissi nel Dispositivo):</div>
+          <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--muto); margin-bottom:4px;">
+            <span>ID Giocatore:</span> <b id="serverPlayerId" style="color:var(--bone);">p_0</b>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--muto); margin-bottom:4px;">
+            <span>Crediti Cosmici:</span> <b id="serverPlayerCredits" style="color:var(--oro);">500 CR</b>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--muto);">
+            <span>Eroe Selezionato:</span> <b id="serverPlayerHero" style="color:var(--bone);">Iron Aegis</b>
+          </div>
+        </div>
+
+        <button class="btn btn-subtle btn-block" onclick="UI.syncPlayerProfileToServer()">Backup Profilo su Server</button>
+        <button class="btn btn-primary btn-block" onclick="UI.reloadAppFromServer()">Ricarica Grafica & Dinamiche dal Server</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MATCH INTRO / LOADING 3D SPIN-FLIP SCREEN (Point 4)
+       ========================================== -->
+  <div class="match-intro-overlay" id="matchIntroLoadingOverlay">
+    <div class="intro-backdrop-fx"></div>
+    <div class="intro-content-container">
+      <div class="intro-stage-label" id="introStageBadge">ESTRAZIONE MINACCIA — ATTO I</div>
+      
+      <!-- 3D Card Scene -->
+      <div class="intro-card-scene">
+        <div class="intro-card-flipper" id="introCardFlipper">
+          <!-- FRONT FACE: Card Back (Retro Carta Calamità) -->
+          <div class="intro-card-side intro-card-front">
+            <img class="intro-card-back-img" src="assets/cards/cartaminacciaretro.webp" alt="Retro Carta Minaccia">
+            <div class="intro-card-back-shine"></div>
+          </div>
+
+          <!-- BACK FACE: Threat Card (Volto Minaccia Rivelato) -->
+          <div class="intro-card-side intro-card-back">
+            <div class="intro-threat-frame-wrap">
+              <img class="intro-threat-art" id="introThreatArt" src="assets/icons/minaccia.png" alt="Minaccia">
+              <img class="intro-threat-frame" src="assets/layouts/layout_red.webp" alt="Frame Rosso Minaccia">
+              
+              <!-- Vignette Title -->
+              <div class="intro-threat-banner">
+                <div class="intro-threat-title" id="introThreatTitle">Minaccia</div>
+                <div class="intro-threat-act" id="introThreatAct">ATTO I</div>
+              </div>
+
+              <!-- Rules / Effect Box -->
+              <div class="intro-threat-desc-box">
+                <div class="intro-threat-effect-title" id="introThreatEffectTitle">Minaccia Imminente</div>
+                <div class="intro-threat-effect-text" id="introThreatEffectText">Preparati alla battaglia...</div>
+              </div>
+
+              <!-- Level Badge -->
+              <div class="intro-threat-lvl-badge" id="introThreatLvlBadge">Liv. 1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Subtitle & Pulse Bar -->
+      <div class="intro-footer-box">
+        <h2 class="intro-loading-title" id="introLoadingTitle">PREPARAZIONE SCONTRO</h2>
+        <p class="intro-loading-sub" id="introLoadingSub">Inizializzazione tavolo tattico in corso...</p>
+        <div class="intro-pulse-bar">
+          <div class="intro-pulse-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Core Scripts -->
+<script src="js/cards_data.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/progression.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/net.js"></script>
+<script src="js/ui.js"></script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    window.UI.init();
+  });
+</script>
+
+</body>
+</html>

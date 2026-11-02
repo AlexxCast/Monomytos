@@ -1,0 +1,22 @@
+{
+  "name": "Monomythos",
+  "short_name": "Monomythos",
+  "description": "Tactical Cosmic Card Game Online & Mobile",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#090c12",
+  "theme_color": "#090c12",
+  "icons": [
+    {
+      "src": "assets/icons/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
