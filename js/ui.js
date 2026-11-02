@@ -760,6 +760,14 @@ class UIController {
       btnEnd.classList.toggle('my-turn', isMyTurn);
       btnEnd.textContent = isMyTurn ? 'Fine Turno' : 'Attendi Turno...';
 
+      // Draw choice label (§8.5)
+      const drawLbl = document.getElementById('drawChoiceLabel');
+      if (drawLbl) {
+        const maxDraw = window.GameEngine.getMaxDraw(localPlayer);
+        const choice = localPlayer.drawChoice == null ? maxDraw : Math.min(localPlayer.drawChoice, maxDraw);
+        drawLbl.textContent = `Pesca ${choice}/${maxDraw}`;
+      }
+
       // 7. Cards Hand Carousel using Official 5-Layout System
       const handBox = document.getElementById('playerHandCarousel');
       handBox.innerHTML = '';
@@ -937,9 +945,17 @@ class UIController {
     const optB = document.getElementById('btnOptionSacrifice');
     optB.style.opacity = canSacrifice ? '1' : '0.5';
 
-    const pContrib = card.cat === th.primario.cat ? card.valore : Math.max(1, Math.floor(card.valore / 2));
-    const bContrib = card.cat === th.bruto.cat ? card.valore : Math.max(1, Math.floor(card.valore / 2));
-    optB.querySelector('p').textContent = `+${pContrib} Primario [${th.primario.cat}] o +${bContrib} Bruto [${th.bruto.cat}] (${localPlayer.sacrificesThisRound}/2 usati)`;
+    // §5: nessuna conversione tra categorie, la carta vale solo sul binario della sua Categoria
+    const eng = window.GameEngine;
+    const okP = eng.normalizeCategory(card.cat) === eng.normalizeCategory(th.primario.cat);
+    const okB = eng.normalizeCategory(card.cat) === eng.normalizeCategory(th.bruto.cat);
+    const parts = [];
+    if (okP) parts.push(`+${card.valore} Primario [${th.primario.cat}]`);
+    if (okB) parts.push(`+${card.valore} Bruto [${th.bruto.cat}]`);
+    optB.querySelector('p').textContent = parts.length
+      ? `${parts.join(' o ')} (${localPlayer.sacrificesThisRound}/2 usati)`
+      : `Nessun binario accetta ${card.cat} (Primario: ${th.primario.cat}, Bruto: ${th.bruto.cat})`;
+    if (!parts.length) optB.style.opacity = '0.5';
 
     this.showModal('modalCardActionSheet');
   }
@@ -1057,7 +1073,7 @@ class UIController {
 
     this.currentDefenseData = data;
     this.selectedParryCards = new Set();
-    const rawDmg = data.rawDmg || 1;
+    const rawDmg = data.mitigable != null ? data.mitigable : (data.rawDmg || 1);
     const localPlayer = window.GameEngine.state.players.find(p => p.isLocal || p.id === this.localPlayerId) || window.GameEngine.state.players[0];
     const isDirectAttack = data.target ? (data.target.id === localPlayer?.id) : true;
 
@@ -1068,12 +1084,14 @@ class UIController {
         enemyNameEl.textContent = `🛡️ COMPAGNO ${data.target?.name || 'Alleato'} SOTTO ATTACCO da: ${data.enemy?.nome || 'Minaccia'}`;
       }
     }
-    if (dmgAmountEl) dmgAmountEl.textContent = `Danno dichiarato: ${rawDmg}`;
+    if (dmgAmountEl) dmgAmountEl.textContent = data.isTrample
+      ? `Danno dichiarato: ${data.rawDmg} (${data.rawDmg - rawDmg} imparabili per Travolgere, ${rawDmg} parabili)`
+      : `Danno dichiarato: ${rawDmg}`;
     if (absorbedNoticeEl) absorbedNoticeEl.textContent = `Assorbito: 0 / ${rawDmg} Danni`;
     if (trampleEl) {
       trampleEl.textContent = data.enemy?.pericoloso
         ? `Effetto Pericoloso: ${data.enemy.pericoloso}`
-        : (data.isTrample ? '⚠️ TRAVOLGERE ATTIVO (il danno penetra i normali scudi)' : (isDirectAttack ? '' : '💡 Puoi scartare carte per parare il colpo e proteggere il tuo compagno!'));
+        : (data.isTrample ? `⚠️ TRAVOLGERE: la parte oltre la Resistenza (${data.effectiveEnd}) va sempre a segno` : (isDirectAttack ? '' : '💡 Puoi scartare carte per parare il colpo e proteggere il tuo compagno!'));
     }
     if (btnConfirm) {
       btnConfirm.textContent = isDirectAttack ? `Incassa Senza Parare` : `Lascia difendere al compagno`;
@@ -1170,8 +1188,12 @@ class UIController {
     });
 
     const count = this.selectedParryCards.size;
-    const rawDmg = this.currentDefenseData?.rawDmg || 1;
-    const absorbed = Math.min(rawDmg, count);
+    const dd = this.currentDefenseData || {};
+    const rawDmg = dd.mitigable != null ? dd.mitigable : (dd.rawDmg || 1);
+    // §3.3: assorbimento = ⌊somma dei Valori scartati ÷ tasso⌋, limitato alla parte parabile
+    const allCards = window.GameEngine.state.players.flatMap(p => p.hand);
+    const valueSum = [...this.selectedParryCards].reduce((sum, uid) => sum + ((allCards.find(c => c.uid === uid) || {}).valore || 0), 0);
+    const absorbed = Math.min(rawDmg, Math.floor(valueSum / window.GameEngine.getParryRate()));
 
     const absorbedNoticeEl = document.getElementById('defenseAbsorbedNotice');
     if (absorbedNoticeEl) absorbedNoticeEl.textContent = `Assorbito: ${absorbed} / ${rawDmg} Danni`;
@@ -1258,8 +1280,30 @@ class UIController {
     }
   }
 
+  changeDrawChoice(delta) {
+    const engine = window.GameEngine;
+    const p = engine.state?.players.find(x => x.isLocal || x.id === 'p_0');
+    if (!p) return;
+    const maxDraw = engine.getMaxDraw(p);
+    const current = p.drawChoice == null ? maxDraw : p.drawChoice;
+    engine.setDrawChoice(p.id, current + delta);
+    const drawLbl = document.getElementById('drawChoiceLabel');
+    if (drawLbl) drawLbl.textContent = `Pesca ${p.drawChoice}/${maxDraw}`;
+  }
+
   confirmEndTurn() {
-    window.GameEngine.endTurn();
+    const engine = window.GameEngine;
+    const p = engine.state?.players.find(x => x.isLocal || x.id === 'p_0');
+    // Penalità per Passività e Scarto di Sopravvivenza (§3)
+    if (p && !p.isDead && !p.actedThisRound) {
+      if (engine.hasLegalMove(p)) {
+        if (!confirm('Non hai fatto nessuna azione: a fine round subirai 1 Punto Trauma. Terminare comunque il turno?')) return;
+      } else if (p.hand.length > 0) {
+        engine.survivalDiscard(p.id);
+        this.showToast('Nessuna mossa possibile: Scarto di Sopravvivenza della carta di valore più basso');
+      }
+    }
+    engine.endTurn();
   }
 
   inspectCard(card) {

@@ -56,6 +56,11 @@ class MonomythosEngine {
         if (cr.pb_desc) meta.pb_desc = cr.pb_desc;
       }
 
+      // §8.5: ogni statistica parte da 1; i modificatori si sommano; valore nominale massimo 5
+      ['str', 'spd', 'tech', 'end'].forEach(k => {
+        meta[k] = Math.max(1, Math.min(5, 1 + (meta[k] || 0)));
+      });
+
       if (customDeckConfig && customDeckConfig.cards && Object.keys(customDeckConfig.cards).length > 0) {
         // Build deck from custom deck map
         Object.keys(customDeckConfig.cards).forEach(cid => {
@@ -72,11 +77,21 @@ class MonomythosEngine {
 
       // Ensure deck has 60 cards (standard Monomythos deck rule)
       const availableCards = data.action_cards[cfg.name] || data.action_cards['Iron Aegis'];
+      // §8.8: massimo 4 copie per carta e massimo 12 Carte Oscure
+      const isDark = c => !!(c.osc || c.cat === 'Oscuro' || c.layout_type === 'purple');
+      const copies = {};
+      deck.forEach(c => { copies[c.id] = (copies[c.id] || 0) + 1; });
+      let darkCount = deck.filter(isDark).length;
       let padIdx = 0;
-      while (deck.length < 60 && availableCards && availableCards.length > 0) {
+      let misses = 0;
+      while (deck.length < 60 && availableCards && availableCards.length > 0 && misses < availableCards.length) {
         const c = availableCards[padIdx % availableCards.length];
-        deck.push({ ...c, uid: Math.random().toString(36).substring(2, 9) });
         padIdx++;
+        if ((copies[c.id] || 0) >= 4 || (isDark(c) && darkCount >= 12)) { misses++; continue; }
+        misses = 0;
+        copies[c.id] = (copies[c.id] || 0) + 1;
+        if (isDark(c)) darkCount++;
+        deck.push({ ...c, uid: Math.random().toString(36).substring(2, 9) });
       }
       deck = deck.sort(() => Math.random() - 0.5);
 
@@ -104,6 +119,11 @@ class MonomythosEngine {
         pbDesc: meta.pb_desc,
         pbUsedThisTurn: false,
         sacrificesThisRound: 0,
+        actedThisRound: false,
+        retentionUsedThisRound: false,
+        retainedCards: [],
+        logoramento: false,
+        drawChoice: null, // null = massimo consentito (§8.5)
         maxHand: maxHand,
         slots: {
           Potenza: meta.str,
@@ -149,30 +169,44 @@ class MonomythosEngine {
   setupCurrentThreat() {
     const raw = this.state.actThreats[this.state.actIndex];
     const numHeroes = this.state.players.filter(p => !p.isDead).length || 2;
-    const liv = raw.livello;
 
-    // Formula unica: Vita totale = VitaUnitaria × (Livello + NumeroEroi)
-    const totalHp = raw.vu * (liv + numHeroes);
-    
-    // Parse mooks
-    let mookCount = 1;
-    let mookName = 'Nemico';
-    const mMatch = raw.nemici.match(/(\d+)×?\s*(.+)/);
-    if (mMatch) {
-      mookCount = parseInt(mMatch[1]) || 1;
-      mookName = mMatch[2].trim();
+    // §8.2 Crisi Composita: negli Atti I e II, una Minaccia di Livello ≤ 3 si fonde con una seconda dal pool
+    let secondary = null;
+    if (this.state.actIndex < 2 && raw.livello <= 3) {
+      const used = new Set(this.state.actThreats.map(t => t.nome));
+      const pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !used.has(t.nome));
+      if (pool.length > 0) secondary = pool[Math.floor(Math.random() * pool.length)];
     }
+    const liv = raw.livello + (secondary ? secondary.livello : 0);
+
+    const parseEnemies = (card) => {
+      const m = String(card.nemici || '').match(/(\d+)×?\s*(.+)/);
+      return m ? { count: parseInt(m[1]) || 1, name: m[2].trim() } : { count: 1, name: card.nemici || 'Nemico' };
+    };
+
+    // §8.1 Formula unica: Vita totale = Vita Unitaria × (Livello + Numero Eroi), divisa tra i nemici della carta.
+    // Nella Crisi Composita il Livello è quello composito; i nemici di entrambe le carte entrano in gioco.
+    const groups = [{ card: raw, ...parseEnemies(raw) }];
+    if (secondary) groups.push({ card: secondary, ...parseEnemies(secondary) });
 
     const mooks = [];
-    const mookHp = Math.ceil(totalHp / mookCount);
-    for (let i = 0; i < mookCount; i++) {
-      mooks.push({
-        id: `mook_${i}`,
-        name: `${mookName} ${String.fromCharCode(65 + i)}`,
-        hp: mookHp,
-        maxHp: mookHp,
-        isDead: false
-      });
+    let totalHp = 0;
+    groups.forEach(g => {
+      const groupHp = g.card.vu * (liv + numHeroes);
+      totalHp += groupHp;
+      const mookHp = Math.ceil(groupHp / g.count);
+      for (let i = 0; i < g.count; i++) {
+        mooks.push({
+          id: `mook_${mooks.length}`,
+          name: `${g.name} ${String.fromCharCode(65 + i)}`,
+          hp: mookHp,
+          maxHp: mookHp,
+          isDead: false
+        });
+      }
+    });
+    if (secondary) {
+      this.addLog('threat', `[CRISI COMPOSITA] ${raw.nome} si fonde con ${secondary.nome}: Livello ${liv}`);
     }
 
     // Thresholds: SogliaUnitaria × (Livello + NumeroEroi)
@@ -181,6 +215,9 @@ class MonomythosEngine {
 
     this.state.currentThreat = {
       ...raw,
+      livello: liv,
+      fusedWith: secondary ? secondary.nome : null,
+      parryRate: 1,
       hp: totalHp,
       maxHp: totalHp,
       mooks: mooks,
@@ -204,6 +241,8 @@ class MonomythosEngine {
         p.stateFrozen = true;
       });
       this.state.cosmicMutationActive = true;
+      const rateMatch = String(raw.cosmico || '').match(/(\d)\s*:\s*1/);
+      this.state.currentThreat.parryRate = rateMatch ? parseInt(rateMatch[1]) : 1;
       this.addLog('threat', `[COSMICO] STATE FREEZING & EFFETTO ATTIVO: ${raw.cosmico}`);
     }
   }
@@ -231,7 +270,8 @@ class MonomythosEngine {
       brutoProgress: 0,
       brutoMax: 4 * (4 + numHeroes),
       pericoloso: 'Furia Eroe Corrotto: Colpi devastanti che infliggono +1 TRM.',
-      cosmico: 'Egemonia del Fato: La Parata Dinamica assorbe 1 danno ogni 2 carte scartate.',
+      cosmico: 'Egemonia del Fato: la Parata Dinamica converte a 2:1 (somma dei Valori ÷ 2).',
+      parryRate: 2,
       logica: 'Aggressivo → Attacca ad area e bersaglia chi ha meno carte',
       img: data.chars_meta[bossHeroName]?.img || 'assets/icons/minaccia.png',
       mooks: [{
@@ -258,6 +298,8 @@ class MonomythosEngine {
       p.shield = 0;
       p.sacrificesThisRound = 0;
       p.pbUsedThisTurn = false;
+      p.actedThisRound = false;
+      p.retentionUsedThisRound = false;
       p.slots = {
         Potenza: p.str,
         Agilità: p.spd,
@@ -270,23 +312,24 @@ class MonomythosEngine {
         vigore: p.end
       };
 
-      // Draw cards: 1 base + floor(Spd / 2)
-      const drawCount = 1 + Math.floor(p.spd / 2);
-      for (let i = 0; i < drawCount; i++) {
-        if (p.hand.length < p.maxHand) {
-          if (p.deck.length === 0) {
-            // Decking Out penalty: shuffle discard, +10 TRM (§4.1)
-            if (p.discard.length > 0) {
-              p.deck = [...p.discard].sort(() => Math.random() - 0.5);
-              p.discard = [];
-              p.trm = Math.min(5, p.trm + 2); // Cap at 5 with breaking point check
-              this.addLog('threat', `[DECKOUT] ${p.name} ha esaurito il mazzo! (+2 TRM)`);
-              this.checkBreakingPoint(p);
-            }
-          }
-          if (p.deck.length > 0) {
-            p.hand.push(p.deck.pop());
-          }
+      // Ritenzione Tattica: le carte trattenute tornano in mano a fine round (§3.3.3)
+      if (p.retainedCards && p.retainedCards.length > 0) {
+        p.retainedCards.forEach(rc => {
+          const di = p.discard.findIndex(c => c.uid === rc.uid);
+          if (di !== -1) p.discard.splice(di, 1);
+          p.hand.push(rc);
+        });
+        p.retainedCards = [];
+      }
+
+      // Dal Round 2: pescaggio a scelta da 1 a min(5, Velocità + 1) (§8.5). Al Round 1 vale la mano iniziale.
+      if (this.state.round > 1) {
+        const maxDraw = this.getMaxDraw(p);
+        const wanted = p.drawChoice == null ? this.getBotDrawChoice(p, maxDraw) : p.drawChoice;
+        const drawCount = Math.max(1, Math.min(maxDraw, wanted));
+        for (let i = 0; i < drawCount; i++) {
+          if (p.hand.length >= p.maxHand) break;
+          this.drawOne(p);
         }
       }
     });
@@ -296,6 +339,46 @@ class MonomythosEngine {
     this.emit('round_started', this.state);
 
     this.checkTurn();
+  }
+
+  // Pescaggio massimo: min(5, Velocità + 1); Sfiancato blocca le carte extra (§3.4, §8.5)
+  getMaxDraw(p) {
+    if (p.weakened && !p.logoramento) return 1;
+    return Math.min(5, (p.spd || 1) + 1);
+  }
+
+  // Scelta del bot: pesca al massimo, ma si ferma se il mazzo sta per finire (Push Your Luck)
+  getBotDrawChoice(p, maxDraw) {
+    if (p.deck.length <= maxDraw) return Math.max(1, p.deck.length - 1);
+    return maxDraw;
+  }
+
+  // Il giocatore umano dichiara quante carte pescherà al prossimo round
+  setDrawChoice(playerId, n) {
+    const p = this.state.players.find(x => x.id === playerId);
+    if (!p) return;
+    p.drawChoice = Math.max(1, Math.min(this.getMaxDraw(p), n));
+    this.emit('draw_choice_changed', p);
+  }
+
+  drawOne(p) {
+    if (p.deck.length === 0) this.handleDeckOut(p);
+    if (p.deck.length > 0) {
+      p.hand.push(p.deck.pop());
+      return true;
+    }
+    return false;
+  }
+
+  // Decking Out (§4.2): rimescola gli scarti, +10 TRM, Villain immediato e Logoramento Sistemico permanente
+  handleDeckOut(p) {
+    if (p.discard.length === 0) return;
+    p.deck = [...p.discard].sort(() => Math.random() - 0.5);
+    p.discard = [];
+    p.trm = Math.min(5, p.trm + 10);
+    p.logoramento = true;
+    this.addLog('threat', `[DECKOUT] ${p.name} ha esaurito il mazzo! +10 TRM e Logoramento Sistemico: ogni carta giocata costa 1 Vita.`);
+    this.checkBreakingPoint(p);
   }
 
   checkTurn() {
@@ -464,9 +547,26 @@ class MonomythosEngine {
     this.deductPlayerSlot(player, cat, cost);
     player.hand.splice(cardIdx, 1);
     player.discard.push(card);
+    player.actedThisRound = true;
     this.state.playedCardsThisRound.push({ player: player.name, card: card });
 
     this.addLog('hero', `${player.name} gioca [${card.nome}]: ${card.effetto}`);
+
+    // Logoramento Sistemico (§3.4): ogni giocata costa 1 Punto di Vita Base
+    if (player.logoramento) {
+      player.vita = Math.max(0, player.vita - 1);
+      this.addLog('threat', `[LOGORAMENTO] ${player.name} paga 1 Vita per giocare la carta (${player.vita}/${player.vitaMax})`);
+      this.checkPlayerDeath(player);
+      if (player.isDead) return { ok: true };
+    }
+
+    // Disciplina d'Assalto (N) (§3.3.3): +1 danno se dopo la giocata restano almeno N carte in mano
+    const text = String(card.effetto || '');
+    const discMatch = text.match(/DISCIPLINA D['’]ASSALTO\s*\((\d+)\)/i);
+    if (discMatch && player.hand.length >= parseInt(discMatch[1])) {
+      player.boostedAttack = (player.boostedAttack || 0) + 1;
+      this.addLog('hero', `[DISCIPLINA D'ASSALTO] ${player.name} ha ancora ${player.hand.length} carte: +1 danno`);
+    }
 
     // Modular Execution via EffectRegistry
     const targetEntity = this.resolveTarget(targetId);
@@ -517,6 +617,14 @@ class MonomythosEngine {
       });
     }
 
+    // Ritenzione Tattica (X) (§3.3.3): se dopo l'effetto la mano ha meno di X carte, la carta torna in mano a fine round. Max 1 per round.
+    const retMatch = text.match(/RITENZIONE TATTICA\s*\((\d+)\)/i);
+    if (retMatch && !player.retentionUsedThisRound && player.hand.length < parseInt(retMatch[1])) {
+      player.retentionUsedThisRound = true;
+      player.retainedCards.push(card);
+      this.addLog('hero', `[RITENZIONE TATTICA] [${card.nome}] tornerà in mano a ${player.name} a fine round`);
+    }
+
     this.emit('card_played', { player, card, targetId });
     this.checkThreatDefeated();
     return { ok: true };
@@ -538,11 +646,11 @@ class MonomythosEngine {
     const th = this.state.currentThreat;
     const reqCat = trackChoice === 'primario' ? th.primario.cat : th.bruto.cat;
 
-    // Rule: Matching Category = Full Value, Different Category = Half Value (min 1)
-    let contribution = card.valore;
-    if (card.cat !== reqCat) {
-      contribution = Math.max(1, Math.floor(card.valore / 2));
+    // §5: nessun tasso di conversione tra categorie diverse; vale solo la Categoria richiesta dal binario
+    if (this.normalizeCategory(card.cat) !== this.normalizeCategory(reqCat)) {
+      return { ok: false, msg: `Questo binario accetta solo carte ${reqCat}` };
     }
+    let contribution = card.valore;
 
     if (trackChoice === 'primario') {
       th.primarioProgress = Math.min(th.primarioMax, th.primarioProgress + contribution);
@@ -553,6 +661,7 @@ class MonomythosEngine {
     }
 
     player.sacrificesThisRound++;
+    player.actedThisRound = true;
     player.hand.splice(cardIdx, 1);
     player.discard.push(card);
 
@@ -568,6 +677,7 @@ class MonomythosEngine {
     if (player.pbUsedThisTurn) return { ok: false, msg: 'Potere Base già usato questo turno' };
 
     player.pbUsedThisTurn = true;
+    player.actedThisRound = true;
     const th = this.state.currentThreat;
 
     if (player.name === 'Iron Aegis') {
@@ -599,7 +709,38 @@ class MonomythosEngine {
     return { ok: true };
   }
 
+  // Esiste almeno una mossa legale? (carta giocabile con gli slot, sacrificio su un binario compatibile o Potere Base)
+  hasLegalMove(player) {
+    const th = this.state.currentThreat;
+    if (!player.pbUsedThisTurn) return true;
+    return player.hand.some(c => {
+      if (this.getPlayerSlot(player, c.cat) >= (c.valore || 0)) return true;
+      if (th && player.sacrificesThisRound < 2) {
+        const n = this.normalizeCategory(c.cat);
+        return n === this.normalizeCategory(th.primario.cat) || n === this.normalizeCategory(th.bruto.cat);
+      }
+      return false;
+    });
+  }
+
+  // Scarto di Sopravvivenza (§3): chi non può agire brucia 1 carta ed evita la penalità per passività
+  survivalDiscard(playerId, cardUid = null) {
+    const player = this.state.players.find(p => p.id === playerId);
+    if (!player || player.isDead || player.hand.length === 0) return { ok: false, msg: 'Nessuna carta da scartare' };
+    let idx = cardUid ? player.hand.findIndex(c => c.uid === cardUid) : -1;
+    if (idx === -1) {
+      idx = player.hand.reduce((best, c, i, arr) => (c.valore || 0) < (arr[best].valore || 0) ? i : best, 0);
+    }
+    const card = player.hand.splice(idx, 1)[0];
+    player.discard.push(card);
+    player.actedThisRound = true;
+    this.addLog('hero', `[SCARTO DI SOPRAVVIVENZA] ${player.name} brucia [${card.nome}] per evitare la penalità`);
+    return { ok: true };
+  }
+
   checkBreakingPoint(player) {
+    // §8.4: dopo lo State Freezing (Atto Finale) nessuno cambia schieramento
+    if (player.stateFrozen) return;
     if (player.trm >= 5 && player.state === 'hero') {
       player.state = 'villain';
       this.addLog('threat', `[TRAUMA] PUNTO DI ROTTURA! ${player.name} ha accumulato 5 Trauma e si trasforma in VILLAIN!`);
@@ -608,6 +749,13 @@ class MonomythosEngine {
   }
 
   endTurn() {
+    const ending = this.getActivePlayer();
+    if (ending && !ending.isDead && ending.hand.length > ending.maxHand) {
+      ending.hand.sort((a, b) => (b.valore || 0) - (a.valore || 0));
+      const excess = ending.hand.splice(ending.maxHand);
+      ending.discard.push(...excess);
+      this.addLog('sys', `[CLEANUP] ${ending.name} scarta ${excess.length} carte oltre il limite di mano`);
+    }
     this.state.turnIndex++;
     if (this.state.turnIndex >= this.state.players.length) {
       // All players took turn -> Enemy Phase
@@ -623,6 +771,21 @@ class MonomythosEngine {
     this.state.phase = 'enemy';
     const th = this.state.currentThreat;
     this.addLog('threat', `=== FASE MINACCIA ===`);
+
+    // Penalità per Passività (§3): +1 TRM a chi non ha fatto alcuna mossa nel round
+    this.state.players.forEach(p => {
+      if (p.isDead || p.actedThisRound) return;
+      p.trm = Math.min(5, p.trm + 1);
+      this.addLog('threat', `[PASSIVITÀ] ${p.name} non ha agito questo round: +1 TRM`);
+      this.checkBreakingPoint(p);
+    });
+
+    // Respiro Tattico (§3.3.2): chi entra nella Fase Nemici senza carte pesca 1 carta gratis
+    this.state.players.forEach(p => {
+      if (!p.isDead && p.hand.length === 0 && this.drawOne(p)) {
+        this.addLog('hero', `[RESPIRO TATTICO] ${p.name} pesca 1 carta d'emergenza`);
+      }
+    });
 
     // Reset temporary buffs
     this.state.players.forEach(p => {
@@ -701,8 +864,11 @@ class MonomythosEngine {
       effectiveDmg = Math.max(0, effectiveDmg - target.damageReduction);
     }
 
-    const effectiveEnd = target.end + (target.tempResistance || 0);
+    // §3.3 Travolgere: solo la parte di danno oltre la Resistenza (minimo 1, §3.3.2) è imparabile
+    const effectiveEnd = Math.max(1, target.end + (target.tempResistance || 0));
     const isTrample = (effectiveDmg > effectiveEnd);
+    const excess = Math.max(0, effectiveDmg - effectiveEnd);
+    const mitigable = effectiveDmg - excess;
 
     this.addLog('threat', `${enemy.name} attacca ${target.name} con Forza ${effectiveDmg}! (Resistenza: ${effectiveEnd}${isTrample ? ' — Travolgere!' : ''})`);
 
@@ -718,19 +884,14 @@ class MonomythosEngine {
         return;
       }
 
-      const unabsorbed = Math.max(0, effectiveDmg - absorbed);
-      let penetrated = 0;
-
-      if (isTrample) {
-        // Trample: unabsorbed damage bypasses shield directly to base HP (§7.7)
-        penetrated = unabsorbed;
-        if (unabsorbed > 0) {
-          this.addLog('threat', `[TRAVOLGERE] Danno residuo (${unabsorbed}) penetra direttamente la Vita Base bypassando gli scudi!`);
-        }
-      } else {
-        // Normal damage: shield absorbs first, then HP
-        penetrated = Math.max(0, unabsorbed - target.shield);
-        target.shield = Math.max(0, target.shield - unabsorbed);
+      // Parata e Scudo agiscono solo sulla parte mitigabile; l'eccedenza di Travolgere va sempre a segno
+      let rest = Math.max(0, mitigable - absorbed);
+      const fromShield = Math.min(target.shield || 0, rest);
+      target.shield = (target.shield || 0) - fromShield;
+      rest -= fromShield;
+      const penetrated = excess + rest;
+      if (excess > 0) {
+        this.addLog('threat', `[TRAVOLGERE] ${excess} danni oltre la Resistenza (${effectiveEnd}) vanno a segno senza parata!`);
       }
 
       target.vita = Math.max(0, target.vita - penetrated);
@@ -755,6 +916,7 @@ class MonomythosEngine {
         target,
         defender: target,
         rawDmg: effectiveDmg,
+        mitigable,
         effectiveEnd,
         isTrample,
         applyRemainingDamage
@@ -764,6 +926,7 @@ class MonomythosEngine {
         target,
         defender: target,
         rawDmg: effectiveDmg,
+        mitigable,
         effectiveEnd,
         isTrample,
         reactionCards,
@@ -779,6 +942,7 @@ class MonomythosEngine {
         target,
         defender: localPlayer,
         rawDmg: effectiveDmg,
+        mitigable,
         effectiveEnd,
         isTrample,
         reactionCards,
@@ -790,6 +954,7 @@ class MonomythosEngine {
         target,
         defender: localPlayer,
         rawDmg: effectiveDmg,
+        mitigable,
         effectiveEnd,
         isTrample,
         reactionCards: localReactions,
@@ -798,8 +963,14 @@ class MonomythosEngine {
       });
     } else {
       // Bot-only match / no living human: execute bot AI defense directly
-      this.executeBotDefense(target, effectiveDmg, reactionCards, parryCards, applyRemainingDamage);
+      this.executeBotDefense(target, mitigable, reactionCards, parryCards, applyRemainingDamage);
     }
+  }
+
+  // Tasso di conversione della Parata Dinamica (§3.3): assorbito = ⌊somma dei Valori ÷ tasso⌋
+  getParryRate() {
+    const th = this.state.currentThreat;
+    return (th && th.parryRate) || 1;
   }
 
   executeBotDefense(target, effectiveDmg, reactionCards, parryCards, applyRemainingDamage) {
@@ -822,14 +993,16 @@ class MonomythosEngine {
       });
       applyRemainingDamage(ctx.incomingAttack.parried || 0, ctx.incomingAttack.dodged, 0);
     } else if (target.hand.length > 0 && effectiveDmg > 0) {
-      // Bot discards cards to absorb damage
-      let absorbedTotal = 0;
-      while (target.hand.length > 0 && absorbedTotal < effectiveDmg) {
+      // Bot discards cards to absorb the mitigable damage
+      const rate = this.getParryRate();
+      let valueSum = 0;
+      target.hand.sort((a, b) => (a.valore || 0) - (b.valore || 0));
+      while (target.hand.length > 1 && Math.floor(valueSum / rate) < effectiveDmg) {
         const pCard = target.hand.pop();
         target.discard.push(pCard);
-        const val = this.state.cosmicMutationActive ? 1 : Math.max(1, pCard.valore || 1);
-        absorbedTotal += val;
+        valueSum += (pCard.valore || 0);
       }
+      const absorbedTotal = Math.floor(valueSum / rate);
       this.addLog('hero', `[PARATA] ${target.name} effettua Parata Dinamica, assorbendo ${absorbedTotal} danni`);
       applyRemainingDamage(absorbedTotal, false, 0);
     } else {
@@ -840,7 +1013,7 @@ class MonomythosEngine {
   // Response callback from user defense window
   respondToDefense(choice) {
     if (!this.pendingDefense) return;
-    const { enemy, target, rawDmg, reactionCards, parryCards, applyRemainingDamage } = this.pendingDefense;
+    const { enemy, target, rawDmg, mitigable, reactionCards, parryCards, applyRemainingDamage } = this.pendingDefense;
     this.pendingDefense = null;
 
     if (choice.type === 'reaction_card') {
@@ -870,7 +1043,7 @@ class MonomythosEngine {
       }
     } else if (choice.type === 'parry' || choice.type === 'parry_cards' || choice.type === 'parry_card' || choice.type === 'parry_multi') {
       const uids = choice.cardUids || (choice.cardUid ? [choice.cardUid] : []);
-      let totalAbsorb = 0;
+      let valueSum = 0;
       uids.forEach(uid => {
         const playerWithCard = this.state.players.find(p => p.hand.some(c => c.uid === uid));
         if (playerWithCard) {
@@ -878,20 +1051,21 @@ class MonomythosEngine {
           if (cIdx !== -1) {
             const card = playerWithCard.hand.splice(cIdx, 1)[0];
             playerWithCard.discard.push(card);
-            // Dynamic Parry: 1:1 card discarded or card value (min 1)
-            const absorb = Math.max(1, card.valore || 1);
-            totalAbsorb += absorb;
-            this.addLog('hero', `[PARATA] ${playerWithCard.name} scarta [${card.nome}] (+${absorb} assorbimento${target.id !== playerWithCard.id ? ' per difendere ' + target.name : ''})`);
+            // Parata Dinamica: assorbe in base al Valore Caratteristica (§3.3)
+            valueSum += (card.valore || 0);
+            this.addLog('hero', `[PARATA] ${playerWithCard.name} scarta [${card.nome}] (Valore ${card.valore || 0}${target.id !== playerWithCard.id ? ', per difendere ' + target.name : ''})`);
           }
         }
       });
+      const rate = this.getParryRate();
+      const totalAbsorb = Math.floor(valueSum / rate);
       if (totalAbsorb > 0) {
         this.addLog('hero', `[PARATA DINAMICA] Assorbiti in totale ${totalAbsorb} danni scartando ${uids.length} carte.`);
       }
       applyRemainingDamage(totalAbsorb, false, 0);
     } else if (choice.type === 'bot_fallback') {
       // Let companion bot defend itself
-      this.executeBotDefense(target, rawDmg, reactionCards, parryCards, applyRemainingDamage);
+      this.executeBotDefense(target, mitigable != null ? mitigable : rawDmg, reactionCards, parryCards, applyRemainingDamage);
     } else {
       // Take hit directly
       applyRemainingDamage(0, false, 0);
@@ -1001,7 +1175,7 @@ class MonomythosEngine {
     // Check playable cards
     const playableCards = bot.hand.filter(c => {
       const cost = c.valore;
-      return (bot.slots[c.cat] || 0) >= cost;
+      return this.getPlayerSlot(bot, c.cat) >= cost;
     });
 
     if (playableCards.length > 0 && (th.hp > 0 || primRatio < 0.8)) {
@@ -1020,10 +1194,18 @@ class MonomythosEngine {
       }
       this.playCardEffect(bot.id, c.uid, chosenTargetId);
     } else if (bot.hand.length > 1 && bot.sacrificesThisRound < 2) {
-      // Tactical sacrifice
-      const track = primRatio >= brutRatio ? 'primario' : 'bruto';
-      const c = bot.hand[0];
-      this.tacticalSacrifice(bot.id, c.uid, track);
+      // Tactical sacrifice: solo carte della Categoria richiesta; il bot resta sul binario già avviato (§5)
+      const preferred = primRatio >= brutRatio ? ['primario', 'bruto'] : ['bruto', 'primario'];
+      for (const track of preferred) {
+        const reqCat = this.normalizeCategory(track === 'primario' ? th.primario.cat : th.bruto.cat);
+        const c = bot.hand.find(x => this.normalizeCategory(x.cat) === reqCat);
+        if (c) { this.tacticalSacrifice(bot.id, c.uid, track); break; }
+      }
+    }
+
+    // Se non ha potuto agire, Scarto di Sopravvivenza per evitare la penalità per passività
+    if (!bot.actedThisRound && bot.hand.length > 0) {
+      this.survivalDiscard(bot.id);
     }
 
     setTimeout(() => {

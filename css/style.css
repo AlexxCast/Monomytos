@@ -1360,6 +1360,23 @@ header.app-header {
 .slot-token.tech { color: #ce93d8; border-color: rgba(206, 147, 216, 0.3); }
 .slot-token.end { color: #a5d6a7; border-color: rgba(165, 214, 167, 0.3); }
 
+/* Draw choice stepper (§8.5) */
+.draw-stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--bone);
+}
+.draw-stepper .btn {
+  min-width: 28px;
+  padding: 6px 0;
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--bone);
+}
+
 /* Quick Action Toolbar */
 .action-toolbar {
   display: flex;

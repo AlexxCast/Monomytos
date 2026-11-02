@@ -408,6 +408,11 @@
         </div>
         <div class="action-toolbar">
           <button class="btn btn-pb" id="btnPbDock" onclick="UI.openBasePowerSheet()">Potere Base</button>
+          <div class="draw-stepper" title="Carte da pescare al prossimo round (da 1 a Velocità + 1, max 5)">
+            <button class="btn" onclick="UI.changeDrawChoice(-1)" aria-label="Pesca meno">−</button>
+            <span id="drawChoiceLabel" class="mono">Pesca 2</span>
+            <button class="btn" onclick="UI.changeDrawChoice(1)" aria-label="Pesca di più">+</button>
+          </div>
           <button class="btn btn-endturn" id="btnEndTurnDock" onclick="UI.confirmEndTurn()">Fine Turno</button>
         </div>
       </div>

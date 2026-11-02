@@ -326,8 +326,9 @@ class EffectRegistryClass {
     // 21. STEAL CARD (VILLAIN CRITICAL REACTION)
     this.register('stealCard', (engine, ctx, fx) => {
       const { source } = ctx;
-      const targetPlayer = ctx.targetEntity?.entity;
-      if (targetPlayer && targetPlayer.hand.length > 0) {
+      // Si può rubare solo dalla mano di un giocatore (non da un nemico o dalla Minaccia)
+      const targetPlayer = ctx.targetEntity?.type === 'player' ? ctx.targetEntity.entity : null;
+      if (targetPlayer && Array.isArray(targetPlayer.hand) && targetPlayer.hand.length > 0) {
         const stolen = targetPlayer.hand.pop();
         source.hand.push(stolen);
         engine.addLog('threat', `[VILLAIN FURTO] ${source.name} ruba [${stolen.nome}] dalla mano di ${targetPlayer.name}!`);
