@@ -192,7 +192,9 @@ class MonomythosEngine {
     const mooks = [];
     let totalHp = 0;
     groups.forEach(g => {
-      const groupHp = g.card.vu * (liv + numHeroes);
+      // Bilanciamento (scelta di Alessio): i nemici della carta secondaria usano il proprio Livello, non quello composito
+      const groupLiv = g.card === raw ? liv : g.card.livello;
+      const groupHp = g.card.vu * (groupLiv + numHeroes);
       totalHp += groupHp;
       const mookHp = Math.ceil(groupHp / g.count);
       for (let i = 0; i < g.count; i++) {
