@@ -942,20 +942,19 @@ class UIController {
 
     // Opzione B Tactical Sacrifice contribution calculation
     const canSacrifice = localPlayer.sacrificesThisRound < 2 && window.GameEngine.state.turnIndex === 0;
-    const optB = document.getElementById('btnOptionSacrifice');
-    optB.style.opacity = canSacrifice ? '1' : '0.5';
-
     // §5: nessuna conversione tra categorie, la carta vale solo sul binario della sua Categoria
     const eng = window.GameEngine;
-    const okP = eng.normalizeCategory(card.cat) === eng.normalizeCategory(th.primario.cat);
-    const okB = eng.normalizeCategory(card.cat) === eng.normalizeCategory(th.bruto.cat);
-    const parts = [];
-    if (okP) parts.push(`+${card.valore} Primario [${th.primario.cat}]`);
-    if (okB) parts.push(`+${card.valore} Bruto [${th.bruto.cat}]`);
-    optB.querySelector('p').textContent = parts.length
-      ? `${parts.join(' o ')} (${localPlayer.sacrificesThisRound}/2 usati)`
-      : `Nessun binario accetta ${card.cat} (Primario: ${th.primario.cat}, Bruto: ${th.bruto.cat})`;
-    if (!parts.length) optB.style.opacity = '0.5';
+    const used = `${localPlayer.sacrificesThisRound}/2 usati`;
+    [['primario', 'btnOptionSacrifice', 'Primario'], ['bruto', 'btnOptionSacrificeBruto', 'Bruto']].forEach(([track, id, label]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const reqCat = th[track].cat;
+      const ok = eng.normalizeCategory(card.cat) === eng.normalizeCategory(reqCat);
+      el.style.opacity = canSacrifice && ok ? '1' : '0.5';
+      el.querySelector('p').textContent = ok
+        ? `+${card.valore} sul binario ${label} [${reqCat}] (${used})`
+        : `Il binario ${label} accetta solo carte ${reqCat}`;
+    });
 
     this.showModal('modalCardActionSheet');
   }
