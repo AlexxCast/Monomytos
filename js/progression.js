@@ -58,6 +58,7 @@ class ProgressionSystem {
   }
 
   addCredits(amount, reason = '') {
+    if (amount > 0 && window.Collezione) amount = Math.round(amount * window.Collezione.moltiplicatoreCrediti());
     this.data.credits = Math.max(0, this.data.credits + amount);
     this.save();
     return this.data.credits;
@@ -72,26 +73,14 @@ class ProgressionSystem {
     if (this.data.credits < cost) return { ok: false, msg: 'Crediti insufficienti' };
 
     this.data.credits -= cost;
-    this.data.unlockedHeroes.push(heroName);
-
-    // Give 2 copies of each card of this hero
-    if (window.MONOMYTHOS_DATA && window.MONOMYTHOS_DATA.action_cards) {
-      const cards = window.MONOMYTHOS_DATA.action_cards[heroName] || [];
-      cards.forEach(c => {
-        this.data.unlockedCards[c.id] = (this.data.unlockedCards[c.id] || 0) + 2;
-      });
-    }
+    window.Collezione.sbloccaEroe(heroName);
 
     this.save();
     return { ok: true, credits: this.data.credits };
   }
 
   getCardOwnedCount(cardId) {
-    if (this.data.unlockedCards[cardId] !== undefined) {
-      return this.data.unlockedCards[cardId];
-    }
-    this.data.unlockedCards[cardId] = 2;
-    return 2;
+    return this.data.unlockedCards[cardId] || 0;
   }
 
   addCardCopies(cardId, count = 1) {
@@ -101,6 +90,7 @@ class ProgressionSystem {
 
   // Open Booster Pack (contains 3 cards)
   openBoosterPack(packType = 'standard', cost = 100) {
+    if (window.Collezione) return window.Collezione.apriBustina(packType, cost);
     if (this.data.credits < cost) return { ok: false, msg: 'Crediti insufficienti per acquistare il pacchetto' };
 
     const data = window.MONOMYTHOS_DATA;

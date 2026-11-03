@@ -141,6 +141,16 @@
     </div>
   </section>
 
+  <!-- SCELTA DEL MAZZO STARTER (solo la prima volta) -->
+  <section class="screen" id="scr-starter">
+    <div class="starter-wrap">
+      <img src="assets/icons/logo_titolo.webp" class="starter-logo" alt="Monomythos">
+      <div class="comic-caption">Benvenuto, eroe! <b>Scegli il tuo mazzo starter</b></div>
+      <p class="starter-sub">Parti con un eroe e il suo mazzo. Gli altri eroi e le carte più rare li sblocchi con la Storia e con le bustine.</p>
+      <div class="starter-grid" id="starterChoices"></div>
+    </div>
+  </section>
+
   <section class="screen active" id="scr-lobby">
     <div class="home">
       <div class="home-main">
@@ -165,6 +175,11 @@
           <span class="btn-play-label">GIOCA</span>
           <span class="btn-play-sub">Missione da 1 a 4 eroi</span>
           <span class="comic-burst play-burst">VAI!</span>
+        </button>
+
+        <button class="home-story" onclick="Collezione.apriStoria()">
+          <span class="home-story-label">STORIA</span>
+          <span class="home-story-sub" id="homeStorySub">Stagione 1 · La Prima Calamità</span>
         </button>
 
         <!-- Modalità secondarie -->
@@ -614,6 +629,17 @@
   <!-- ==========================================
        MODAL 6: OFFICIAL RULES VIEWER (V7.7)
        ========================================== -->
+  <div class="modal-overlay" id="modalStoria" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet" style="max-height:90dvh;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3>Storia</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+      <div id="storiaBody" class="storia-body"></div>
+    </div>
+  </div>
+
   <div class="modal-overlay" id="modalRules" onclick="if(event.target===this) UI.hideModals()">
     <div class="bottom-sheet" style="max-height:90dvh;">
       <div class="sheet-handle"></div>
@@ -756,25 +782,27 @@
       </div>
     </header>
 
-    <div class="shop-section-title">Bustine di Carte (Booster Packs)</div>
+    <div class="shop-section-title">Bustine di Carte</div>
+    <div class="shop-free-pack" id="shopFreePack"></div>
+    <p class="shop-odds">Ogni bustina ha 5 carte: 3 Comuni o Non comuni, 1 Non comune o Rara, 1 Rara o meglio (Epica 20%, Leggendaria 4%). Le copie oltre la quarta diventano crediti.</p>
     <div class="shop-grid">
-      <div class="shop-item-card" onclick="UI.buyBoosterPack('standard', 100)">
+      <div class="shop-item-card" onclick="UI.buyBoosterPack('standard', 150)">
         <div class="booster-thumb-icon"><img src="assets/cards/retrocartamazzo.webp" alt="Pack" style="width:40px; height:56px; border-radius:6px; object-fit:cover; margin:0 auto 8px; display:block;"></div>
         <h4>Busta Assortita</h4>
-        <p>3 carte casuali per la tua collezione</p>
-        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">100 CR</button>
+        <p>5 carte da tutti gli eroi</p>
+        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">150 CR</button>
       </div>
-      <div class="shop-item-card" onclick="UI.buyBoosterPack('kinetic', 100)">
+      <div class="shop-item-card" onclick="UI.buyBoosterPack('kinetic', 150)">
         <div class="booster-thumb-icon"><img src="assets/icons/agilita.png" alt="Cinetica" style="width:40px; height:40px; margin:0 auto 16px; display:block;"></div>
         <h4>Busta Cinetica</h4>
-        <p>3 carte speciali Agilità & Potenza</p>
-        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">100 CR</button>
+        <p>5 carte di Agilità e Potenza</p>
+        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">150 CR</button>
       </div>
-      <div class="shop-item-card" onclick="UI.buyBoosterPack('techno', 120)">
+      <div class="shop-item-card" onclick="UI.buyBoosterPack('techno', 150)">
         <div class="booster-thumb-icon"><img src="assets/icons/inteligenza.png" alt="Tecno" style="width:40px; height:40px; margin:0 auto 16px; display:block;"></div>
         <h4>Busta Tecno-Mistici</h4>
-        <p>3 carte rare Intelligenza & Carte Oscure</p>
-        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">120 CR</button>
+        <p>5 carte di Intelligenza e Oscure</p>
+        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">150 CR</button>
       </div>
     </div>
 
@@ -1133,6 +1161,7 @@
 <script src="js/ui.js"></script>
 <script src="js/firebase-config.js"></script>
 <script src="js/account.js"></script>
+<script src="js/collezione.js"></script>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {

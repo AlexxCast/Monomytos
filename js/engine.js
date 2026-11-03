@@ -1153,7 +1153,7 @@ class MonomythosEngine {
       if (this.state.actIndex < 2) {
         // Advance to next Act
         this.state.actIndex++;
-        if (window.Progression) window.Progression.addCredits(100, 'Minaccia risolta');
+        if (window.Progression) window.Progression.addCredits(100, 'Minaccia risolta'); if (window.Collezione && !this.state.isOnlineGuest) window.Collezione.registraMinaccia();
         this.setupCurrentThreat();
         this.addLog('sys', `=== AVANZAMENTO: ATTO ${this.state.actIndex === 1 ? 'II' : 'FINALE'} — ${this.state.currentThreat.nome} ===`);
         this.emit('act_advanced', this.state);
@@ -1163,7 +1163,7 @@ class MonomythosEngine {
         // Final Victory!
         this.state.phase = 'gameover';
         this.state.winner = 'heroes';
-        if (window.Progression) window.Progression.addCredits(300, 'Vittoria Finale Cosmica');
+        if (window.Progression) window.Progression.addCredits(300, 'Vittoria Finale Cosmica'); if (window.Collezione && !this.state.isOnlineGuest) window.Collezione.registraMinaccia();
         this.addLog('hero', `[VITTORIA] VITTORIA COSMICA! La Calamità è stata sventata! (+300 Crediti Cosmici)`);
         this.emit('game_over', { winner: 'heroes' });
         return true;

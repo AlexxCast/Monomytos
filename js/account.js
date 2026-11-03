@@ -90,6 +90,7 @@
         console.error('Profilo:', e);
         this.setMsg('Accesso riuscito, ma il profilo non si è caricato. Giochi con i dati di questo dispositivo.', true);
       }
+      if (window.Collezione) window.Collezione.migra();
       document.body.classList.remove('needs-auth');
       this.updateBadge();
       try { window.UI.updateCreditsDisplay && window.UI.updateCreditsDisplay(); } catch (e) {}

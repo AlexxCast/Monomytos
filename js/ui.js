@@ -338,15 +338,20 @@ class UIController {
     container.style.display = 'flex';
 
     const heroKeys = Object.keys(data.chars_meta).filter(k => k !== 'Custom Hero');
+    if (window.Progression) heroKeys.sort((x, y) => window.Progression.isHeroUnlocked(y) - window.Progression.isHeroUnlocked(x));
     if (!this.selectedHero || !data.chars_meta[this.selectedHero] || this.selectedHero === 'Custom Hero') {
       this.selectedHero = heroKeys[0] || 'Iron Aegis';
+    }
+    if (window.Progression && !window.Progression.isHeroUnlocked(this.selectedHero)) {
+      this.selectedHero = heroKeys.find(k => window.Progression.isHeroUnlocked(k)) || this.selectedHero;
     }
 
     heroKeys.forEach((key, idx) => {
       const meta = data.chars_meta[key];
       const slide = document.createElement('div');
       slide.setAttribute('data-hero', key);
-      slide.className = `hero-slide ${key === this.selectedHero ? 'selected' : ''}`;
+      const locked = window.Progression && !window.Progression.isHeroUnlocked(key);
+      slide.className = `hero-slide ${key === this.selectedHero ? 'selected' : ''} ${locked ? 'locked' : ''}`;
       slide.onclick = () => {
         try { window.AudioEngine?.playSfx('card_tap'); } catch (e) {}
         if (this.selectedHero === key) {
@@ -407,7 +412,8 @@ class UIController {
       // Button attached via JS event listener to avoid escaping issues with apostrophes
       const chooseBtn = document.createElement('button');
       chooseBtn.className = 'btn btn-primary btn-block';
-      chooseBtn.textContent = `Scegli ${key}`;
+      chooseBtn.textContent = locked ? 'Bloccato' : `Scegli ${key}`;
+      if (locked) slide.insertAdjacentHTML('beforeend', '<div class="hero-lock-badge">🔒 Sbloccalo nella Storia o nel Negozio</div>');
       chooseBtn.onclick = (e) => {
         e.stopPropagation();
         try { window.AudioEngine?.playSfx('card_tap'); } catch (err) {}
@@ -439,6 +445,9 @@ class UIController {
   }
 
   confirmHero(name) {
+    if (window.Progression && !window.Progression.isHeroUnlocked(name)) {
+      return this.showToast(`${name} è bloccato: lo sblocchi avanzando nella Storia o nel Negozio.`);
+    }
     this.selectHero(name);
     if (this.pendingMultiplayer) {
       this.openMultiplayerModal(true);
@@ -2026,8 +2035,22 @@ class UIController {
       }
     }
 
+    // Collezione: nel mazzo vanno solo le carte che possiedi
+    const totaleFiltro = filteredCards.length;
+    filteredCards = filteredCards.filter(c => window.Progression.getCardOwnedCount(c.id) > 0);
+    if (window.Collezione) {
+      filteredCards.sort((a, b) => window.Collezione.infoRarita(b).ordine - window.Collezione.infoRarita(a).ordine);
+    }
+    const nascoste = totaleFiltro - filteredCards.length;
+    if (nascoste > 0) {
+      const info = document.createElement('div');
+      info.className = 'deck-locked-info';
+      info.innerHTML = `Hai <b>${filteredCards.length}</b> di ${totaleFiltro} carte di questo filtro. Le altre ${nascoste} si trovano nelle <a href="#" onclick="UI.openShop(); return false;">bustine</a> e nella Storia.`;
+      container.appendChild(info);
+    }
+
     if (filteredCards.length === 0) {
-      container.innerHTML = '<div style="font-size:12px; color:var(--muto); padding:20px; text-align:center;">Nessuna carta corrisponde ai filtri selezionati.</div>';
+      container.insertAdjacentHTML('beforeend', '<div style="font-size:12px; color:var(--muto); padding:20px; text-align:center;">Nessuna carta posseduta con questi filtri.</div>');
       return;
     }
 
@@ -2040,7 +2063,7 @@ class UIController {
       const effectText = c.effetto || c.desc || 'Azione standard';
 
       // Build tag badges
-      let tagHtml = `<span class="builder-tag-badge tag-${layout.type}">${c.tag || c.cat}</span>`;
+      let tagHtml = (window.Collezione ? window.Collezione.badge(c) : '') + `<span class="builder-tag-badge tag-${layout.type}">${c.tag || c.cat}</span>`;
       if (c.osc) tagHtml += `<span class="builder-tag-badge tag-purple">Oscura</span>`;
       if (c.deus || c.nome?.includes('Defibrillazione')) tagHtml += `<span class="builder-tag-badge tag-blue">Deus Ex</span>`;
       if (c.fx?.dmg) tagHtml += `<span class="builder-tag-badge tag-red">Danno +${c.fx.dmg}</span>`;
@@ -2286,12 +2309,18 @@ class UIController {
     const heroesContainer = document.getElementById('shopHeroesGrid');
     if (heroesContainer) {
       heroesContainer.innerHTML = '';
-      const heroList = [
-        { name: "Titano d'Acciaio", cost: 300, desc: "Colosso difensivo a danno massiccio", img: "assets/cards/titanoacciaio.webp" },
-        { name: "Guardiana di Confine", cost: 300, desc: "Sentinella tattica con scudo energetico", img: "assets/cards/guardianadiconfine.webp" },
-        { name: "Lama Errante", cost: 400, desc: "Duellante ad alta velocità e fendenti critici", img: "assets/cards/lamaerrante.webp" },
-        { name: "Sussurro dell'Abisso", cost: 500, desc: "Mistico cosmico specialista in Carte Oscure", img: "assets/cards/sussurrodellabisso.webp" }
-      ];
+      const meta = (window.MONOMYTHOS_DATA || {}).chars_meta || {};
+      const imgMap = (window.MONOMYTHOS_DATA || {}).card_img_map || {};
+      const costo = window.Collezione ? window.Collezione.COSTO_EROE : 600;
+      const heroList = Object.keys(meta).filter(k => k !== 'Custom Hero').map(name => ({
+        name, cost: costo, desc: (meta[name].archetipo || '') + (meta[name].pb_name ? ' · ' + meta[name].pb_name : ''),
+        img: imgMap[name.toLowerCase().replace(/[^a-z0-9]/g, '')] || meta[name].img || 'assets/icons/peronaggio.webp'
+      }));
+      const free = document.getElementById('shopFreePack');
+      if (free) {
+        const n = window.Progression.data.bustineGratis || 0;
+        free.innerHTML = n > 0 ? `<button class="btn btn-primary btn-free-pack" onclick="UI.buyBoosterPack('standard', 0)">APRI BUSTINA IN REGALO (${n})</button>` : '';
+      }
 
       heroList.forEach(h => {
         const isUnlocked = window.Progression.isHeroUnlocked(h.name);
@@ -2303,8 +2332,10 @@ class UIController {
           </div>
           <h4>${h.name}</h4>
           <p>${h.desc}</p>
-          ${isUnlocked ? '<span style="color:var(--ok); font-size:11px; font-weight:700;">SBLOCCATO</span>' : `<button class="btn btn-primary" style="padding:6px 12px; font-size:12px;" onclick="UI.buyHero('${h.name}', ${h.cost})">${h.cost} CR</button>`}
+          ${isUnlocked ? '<span class="shop-unlocked">SBLOCCATO</span>' : `<button class="btn btn-primary btn-buy-hero" style="padding:6px 12px; font-size:12px;">${h.cost} CR</button>`}
         `;
+        const buy = card.querySelector('.btn-buy-hero');
+        if (buy) buy.onclick = () => this.buyHero(h.name, h.cost);
         heroesContainer.appendChild(card);
       });
     }
@@ -2324,6 +2355,7 @@ class UIController {
 
   buyBoosterPack(packType, cost) {
     const res = window.Progression.openBoosterPack(packType, cost);
+    this._lastPackDetails = res.dettagli || [];
     if (!res.ok) {
       this.showToast(res.msg);
     } else {
@@ -2337,11 +2369,15 @@ class UIController {
     const stage = document.getElementById('packRevealStage');
     stage.innerHTML = '';
 
+    const dettagli = this._lastPackDetails || [];
     cards.forEach((c, idx) => {
       const el = document.createElement('div');
-      el.className = 'pack-card-reveal';
+      const d = dettagli[idx] || {};
+      const r = window.Collezione ? window.Collezione.infoRarita(c) : null;
+      el.className = 'pack-card-reveal' + (r ? ' rar-' + window.Collezione.rarita(c) : '');
       el.style.animationDelay = `${idx * 0.2}s`;
-      el.innerHTML = this.getCardDOM(c, false);
+      el.innerHTML = this.getCardDOM(c, false) +
+        (r ? `<div class="pack-card-label" style="--rar:${r.colore}">${r.nome}${d.nuova ? ' · NUOVA' : ''}${d.crediti ? ` · +${d.crediti} CR` : ''}</div>` : '');
       stage.appendChild(el);
     });
 

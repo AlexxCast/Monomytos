@@ -887,3 +887,66 @@ body.theme-villain .home-showcase { background: #1d0618; }
 .stepper-val { color: var(--ink) !important; font-size: 16px !important; }
 .builder-tag-badge { color: #000 !important; border: 1.5px solid #000 !important; font-weight: 800 !important; }
 .builder-card-meta-line { color: #444 !important; }
+
+/* ===== Collezione: starter, Storia, rarità ===== */
+body[data-screen="scr-starter"] #bottomNav { display: none !important; }
+#scr-starter { overflow-y: auto; }
+.starter-wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 40px; display: flex; flex-direction: column; align-items: center; gap: 12px; box-sizing: border-box; }
+.starter-logo { width: min(80vw, 380px); filter: drop-shadow(4px 4px 0 #000); }
+.starter-sub { color: var(--on-night); text-align: center; max-width: 560px; margin: 0; font-size: 14px; text-shadow: 1px 1px 0 #000; }
+.starter-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; width: 100%; margin-top: 6px; }
+@media (min-width: 900px) { .starter-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+.starter-card { position: relative; display: flex; flex-direction: column; padding: 0; overflow: hidden; text-align: left; cursor: pointer;
+  background: var(--cream); color: var(--ink); border: 3px solid #000; border-radius: 14px; box-shadow: var(--hard-lg); transition: transform .12s; }
+.starter-card:hover, .starter-card:focus-visible { transform: translate(-2px, -3px) rotate(-.6deg); }
+.starter-art { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; border-bottom: 3px solid #000; display: block; }
+.starter-stat { position: absolute; top: 8px; left: 8px; display: flex; align-items: center; gap: 4px; background: var(--gold); border: 2px solid #000; border-radius: 8px; padding: 2px 8px 2px 4px; font: 400 15px 'Bangers', cursive; letter-spacing: .05em; box-shadow: 2px 2px 0 #000; }
+.starter-stat img { width: 18px; height: 18px; }
+.starter-info { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px 12px; }
+.starter-deck { font: 400 22px/1 'Bangers', cursive; letter-spacing: .04em; color: #b3122c; }
+.starter-hero { font-weight: 800; font-size: 13px; }
+.starter-text { font-size: 12.5px; line-height: 1.35; color: #333; }
+
+.home-story { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; padding: 10px 14px; cursor: pointer; text-align: left;
+  background: linear-gradient(120deg, #0b3845, #1f9a92); color: #fff; border: 3px solid #000; border-radius: 12px; box-shadow: var(--hard); }
+.home-story-label { font: 400 24px/1 'Bangers', cursive; letter-spacing: .08em; -webkit-text-stroke: .8px #000; text-shadow: 2px 2px 0 #000; }
+.home-story-sub { font-size: 12.5px; font-weight: 700; color: #dffaf5; }
+body.theme-villain .home-story { background: linear-gradient(120deg, #3c0b3e, #9a35b8); }
+
+.storia-body { overflow-y: auto; display: flex; flex-direction: column; gap: 12px; color: var(--ink); }
+.storia-evento { background: var(--gold); border: 2.5px solid #000; border-radius: 10px; padding: 8px 12px; box-shadow: 3px 3px 0 #000; display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.storia-evento b { font-family: 'Bangers', cursive; font-weight: 400; font-size: 17px; letter-spacing: .05em; }
+.storia-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.storia-stats div { background: #fff; border: 2.5px solid #000; border-radius: 10px; padding: 8px; text-align: center; display: flex; flex-direction: column; }
+.storia-stats b { font: 400 24px 'Bangers', cursive; }
+.storia-stats span { font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.storia-season { margin: 4px 0 0; font: 400 20px 'Bangers', cursive !important; letter-spacing: .05em; color: #b3122c !important; }
+.storia-capitoli { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.storia-capitoli li { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2.5px solid #000; border-radius: 10px; padding: 8px 10px; opacity: .65; }
+.storia-capitoli li.done { opacity: 1; background: #d4f7e3; }
+.storia-capitoli li.current { opacity: 1; background: #fff6d6; box-shadow: 3px 3px 0 #000; }
+.cap-num { flex: 0 0 30px; height: 30px; border-radius: 50%; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; font: 400 17px 'Bangers', cursive; }
+.storia-capitoli li.current .cap-num { background: var(--pop-red); }
+.cap-body { display: flex; flex-direction: column; gap: 1px; font-size: 13px; }
+.cap-body small { font-size: 12px; color: #444; }
+.cap-body em { font-style: normal; font-size: 12px; font-weight: 700; color: #1d3f9e; }
+.storia-note { font-size: 12px; color: #444; margin: 0; }
+
+.rarity-badge { display: inline-block; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; padding: 1px 6px; border-radius: 6px;
+  background: var(--rar); color: #000; border: 1.5px solid #000; }
+.pack-card-reveal { position: relative; overflow: visible !important; margin-bottom: 14px; }
+.pack-card-reveal.rar-rara { border-color: #2bc4e6 !important; box-shadow: 0 0 14px 3px rgba(43,196,230,.6) !important; }
+.pack-card-reveal.rar-epica { border-color: #a35cff !important; box-shadow: 0 0 20px 6px rgba(163,92,255,.75) !important; }
+.pack-card-reveal.rar-leggendaria { border-color: #f5b82e !important; box-shadow: 0 0 24px 8px rgba(245,184,46,.8) !important; }
+.pack-card-label { position: absolute; left: 50%; bottom: -12px; transform: translateX(-50%); white-space: nowrap; z-index: 2; font-size: 12px !important; display: inline-block; background: var(--rar); color: #000; border: 2px solid #000; border-radius: 8px; padding: 2px 8px; font: 400 14px 'Bangers', cursive; letter-spacing: .05em; box-shadow: 2px 2px 0 #000; }
+.deck-locked-info { grid-column: 1 / -1; background: #fff6d6; color: var(--ink); border: 2px solid #000; border-radius: 10px; padding: 8px 12px; font-size: 13px; box-shadow: 2px 2px 0 #000; }
+.deck-locked-info a { color: #b3122c; font-weight: 800; }
+.shop-free-pack { display: flex; justify-content: center; }
+.btn-free-pack { font-family: 'Bangers', cursive !important; font-size: 20px !important; letter-spacing: .06em; padding: 10px 18px !important; margin: 6px 0; animation: freePulse 1.4s ease-in-out infinite; }
+@keyframes freePulse { 50% { transform: scale(1.04); } }
+.shop-odds { color: var(--on-night); font-size: 12.5px; text-align: center; margin: 0 auto 8px; max-width: 640px; text-shadow: 1px 1px 0 #000; }
+.shop-unlocked { color: #0d6b3a; font-size: 12px; font-weight: 900; }
+.hero-slide.locked .hero-silver-frame-wrap { filter: grayscale(.85) brightness(.6); }
+.hero-slide.locked .btn { background: #666 !important; }
+.hero-lock-badge { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%) rotate(-4deg); width: 80%; text-align: center; background: var(--cream); color: var(--ink); border: 2.5px solid #000; border-radius: 10px; padding: 6px 8px; font-weight: 800; font-size: 12px; box-shadow: 3px 3px 0 #000; z-index: 3; }
+.hero-slide { position: relative; }
