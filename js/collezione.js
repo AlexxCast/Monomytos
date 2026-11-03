@@ -27,7 +27,7 @@
   // Quante copie dà lo sblocco di un eroe (starter compreso). Epiche e Leggendarie solo dalle bustine.
   const COPIE_SBLOCCO = { comune: 2, noncomune: 2, rara: 1, epica: 0, leggendaria: 0 };
   // Mazzo personalizzato: solo carte possedute, al massimo 2 copie per carta
-  const REGOLE_MAZZO = { carteMin: 40, carteMax: 40, copieMax: 2, oscureMax: 16 };
+  const REGOLE_MAZZO = { carteMin: 60, carteMax: 60, copieMax: 2, oscureMax: 24 };
   // Copie oltre questo numero diventano crediti (le copie oltre la seconda sono doppioni da scambiare)
   const COPIE_MAX_COLLEZIONE = 6;
   const CREDITI_INIZIALI = 300;
