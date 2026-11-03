@@ -1,11 +1,12 @@
 // Monomythos Service Worker - Fast offline cache
-const CACHE_NAME = 'monomythos-v3';
+const CACHE_NAME = 'monomythos-v4';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './css/style.css',
   './css/tema.css',
+  './css/tema-pop.css',
   './js/cards_data.js',
   './js/audio.js',
   './js/engine.js',
