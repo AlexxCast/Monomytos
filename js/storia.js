@@ -41,7 +41,7 @@
       ],
       missioni: [
         {
-          id: 'c1m1', titolo: 'La notte senza luce', luogo: 'Piazza del Faro', alleato: 'Neon Phantom',
+          id: 'c1m1', difficolta: 1.6, titolo: 'La notte senza luce', luogo: 'Piazza del Faro', alleato: 'Neon Phantom',
           atti: ['Blackout Ostile', 'Torneo Clandestino', 'Incursione dei Droni Cinetici'],
           premio: { crediti: 150, bustine: 1 },
           prima: [
@@ -60,7 +60,7 @@
           sconfitta: 'Il buio vince questa notte. Ma la notte non è finita.'
         },
         {
-          id: 'c1m2', titolo: 'Le Arene di Sotto', luogo: 'Sotterranei di Lumen', alleato: 'Lama Errante',
+          id: 'c1m2', difficolta: 2.2, titolo: 'Le Arene di Sotto', luogo: 'Sotterranei di Lumen', alleato: 'Lama Errante',
           atti: ['Torneo Clandestino', "L'Assedio dei Predoni delle Rovine", 'Cultisti del Velo'],
           premio: { eroe: 1 },
           prima: [
@@ -80,7 +80,7 @@
           sconfitta: 'Le Arene non perdonano. Rialzati e torna giù.'
         },
         {
-          id: 'c1m3', titolo: 'Il Forno Sette', luogo: 'La Fonderia', alleato: "Titano d'Acciaio",
+          id: 'c1m3', difficolta: 1.6, titolo: 'Il Forno Sette', luogo: 'La Fonderia', alleato: "Titano d'Acciaio",
           atti: ['Incursione dei Droni Cinetici', 'Imboscata sulla Falesia', 'Rivolta della Fonderia'],
           premio: { crediti: 200, minaccia: 1 },
           prima: [
@@ -99,7 +99,7 @@
           sconfitta: 'Le macchine sono più forti stanotte. Ripara la squadra e riprova.'
         },
         {
-          id: 'c1m4', titolo: 'La Falesia dei Sussurri', luogo: 'Bordo della città', alleato: "Sussurro dell'Abisso",
+          id: 'c1m4', difficolta: 1.2, titolo: 'La Falesia dei Sussurri', luogo: 'Bordo della città', alleato: "Sussurro dell'Abisso",
           atti: ['Imboscata sulla Falesia', 'Cultisti del Velo', 'Il Rivale Traditore'],
           premio: { bustine: 1, epica: 1 },
           prima: [
@@ -118,7 +118,7 @@
           sconfitta: 'Il Velo vi ha confuso. Respira, e torna sulla Falesia.'
         },
         {
-          id: 'c1m5', titolo: 'La Gilda chiusa', luogo: 'I Piani Alti', alleato: 'Duellante Spezzato',
+          id: 'c1m5', difficolta: 1.2, titolo: 'La Gilda chiusa', luogo: 'I Piani Alti', alleato: 'Duellante Spezzato',
           atti: ["L'Assedio dei Predoni delle Rovine", 'Rivolta della Fonderia', 'Il Campione Imbattuto'],
           premio: { eroe: 1, crediti: 200 },
           prima: [
@@ -136,7 +136,7 @@
           sconfitta: 'Il Campione resta imbattuto. Per ora.'
         },
         {
-          id: 'c1m6', titolo: 'In cima al Faro', luogo: 'Il Grande Faro', alleato: 'Architetto Ombra', boss: true,
+          id: 'c1m6', difficolta: 1.4, titolo: 'In cima al Faro', luogo: 'Il Grande Faro', alleato: 'Architetto Ombra', boss: true,
           atti: ['Incursione dei Droni Cinetici', 'Il Rivale Traditore', "L'Intelligenza Rogue"],
           premio: { eroe: 1, crediti: 400, bustine: 2, leggendaria: 1, minaccia: 1 },
           prima: [
@@ -302,7 +302,8 @@
         E.startMatch({
           heroes: [{ name: this.mioEroe(), isBot: false }, { name: this.alleatoDi(m), isBot: true }],
           actThreats: m.atti,
-          story: m.id
+          story: m.id,
+          difficolta: m.difficolta || 1
         });
         ui.playMatchIntroLoading(E.state.currentThreat, () => {
           ui.showScreen('scr-game');

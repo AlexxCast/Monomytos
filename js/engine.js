@@ -163,6 +163,8 @@ class MonomythosEngine {
       ranked: !!options.ranked,
       story: options.story || null,
       noCrisi: !!options.story,
+      // Moltiplicatore di difficoltà (Vita e soglie dei nemici), usato dalle missioni della Storia
+      difficolta: options.difficolta || 1,
       threatPool: pool.map(t => t.nome),
       currentThreat: null,
       round: 1,
@@ -216,7 +218,7 @@ class MonomythosEngine {
     groups.forEach(g => {
       // Bilanciamento (scelta di Alessio): i nemici della carta secondaria usano il proprio Livello, non quello composito
       const groupLiv = g.card === raw ? liv : g.card.livello;
-      const groupHp = Math.max(g.count, Math.round(g.card.vu * (groupLiv + numHeroes * (BIL.pesoEroi || 1)) * (BIL.scalaVita || 1)));
+      const groupHp = Math.max(g.count, Math.round(g.card.vu * (groupLiv + (numHeroes * (BIL.pesoEroi || 1) + Math.max(0, numHeroes - 2) * (BIL.pesoEroiOltre2 || 0))) * (BIL.scalaVita || 1) * (this.state.difficolta || 1)));
       totalHp += groupHp;
       const mookHp = Math.ceil(groupHp / g.count);
       for (let i = 0; i < g.count; i++) {
@@ -235,8 +237,9 @@ class MonomythosEngine {
     }
 
     // Thresholds: SogliaUnitaria × (Livello + NumeroEroi)
-    const primMax = Math.max(1, Math.round(raw.primario.val * (liv + numHeroes * (BIL.pesoEroi || 1)) * (BIL.scalaSoglie || 1)));
-    const brutMax = Math.max(1, Math.round(raw.bruto.val * (liv + numHeroes * (BIL.pesoEroi || 1)) * (BIL.scalaSoglie || 1)));
+    const D = this.state.difficolta || 1;
+    const primMax = Math.max(1, Math.round(raw.primario.val * (liv + (numHeroes * (BIL.pesoEroi || 1) + Math.max(0, numHeroes - 2) * (BIL.pesoEroiOltre2 || 0))) * (BIL.scalaSoglie || 1) * D));
+    const brutMax = Math.max(1, Math.round(raw.bruto.val * (liv + (numHeroes * (BIL.pesoEroi || 1) + Math.max(0, numHeroes - 2) * (BIL.pesoEroiOltre2 || 0))) * (BIL.scalaSoglie || 1) * D));
 
     this.state.currentThreat = {
       ...raw,
