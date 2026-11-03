@@ -1127,3 +1127,41 @@ body.theme-villain .home-story { background: linear-gradient(120deg, #3c0b3e, #9
 .sm-burst { display: inline-block; font-family: var(--font-display); font-size: 40px; letter-spacing: .04em; color: var(--gold); -webkit-text-stroke: 2px #000; text-shadow: 4px 4px 0 var(--pop-red); padding: 4px 18px; animation: smBurst .6s cubic-bezier(.2, 1.6, .4, 1) both; }
 .sm-burst.is-lose { color: #ddd; text-shadow: 4px 4px 0 #333; }
 .sp-tappa.sx .sp-tappa-txt, .sp-tappa.dx .sp-tappa-txt { background: rgba(7, 10, 31, .55); border-radius: 10px; padding: 4px 8px; }
+
+/* Carta Minaccia stampata: si mostra l'immagine così com'è */
+.threat-silver-frame-wrap.is-printed .threat-frame-img,
+.threat-silver-frame-wrap.is-printed .threat-vignette-bubble,
+.threat-silver-frame-wrap.is-printed .threat-card-desc-box,
+.threat-silver-frame-wrap.is-printed .threat-card-lvl-circle { display: none !important; }
+.threat-silver-frame-wrap.is-printed .threat-bg-img { object-fit: fill; }
+
+/* Mano aperta nel tuo turno (telefono): carte in fila, grandi e leggibili, scorrimento laterale */
+#playerHandCarousel.hand-spread {
+  --hand-card-w: 108px !important;
+  justify-content: flex-start !important;
+  overflow-x: auto !important; overflow-y: visible;
+  gap: 10px !important;
+  padding: 14px 16px 16px !important;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 16px;
+  -webkit-overflow-scrolling: touch;
+}
+#playerHandCarousel.hand-spread .monomyth-card {
+  flex: 0 0 var(--hand-card-w);
+  margin-left: 0 !important;
+  transform: none !important;
+  scroll-snap-align: start;
+  z-index: 1 !important;
+}
+#playerHandCarousel.hand-spread .monomyth-card:active { transform: translateY(-6px) !important; }
+#playerHandCarousel.hand-spread .monomyth-card .card-vignette-title { font-size: 12px; }
+#playerHandCarousel.hand-spread .monomyth-card .card-desc-short { font-size: 11px; }
+@media (min-height: 860px) { #playerHandCarousel.hand-spread { --hand-card-w: 126px !important; } }
+#playerHandCarousel.hand-spread { padding: 8px 16px 10px !important; }
+
+/* Mazzi sul tavolo più grandi, con lo spessore del mazzo */
+.table-decks-flank .deck-stack-item { width: auto !important; flex: 0 0 auto !important; }
+.table-decks-flank .deck-stack-cards { width: 58px !important; height: 85px !important; }
+.table-decks-flank .deck-back-card { border-radius: 6px !important; border: 2px solid #000 !important; }
+.table-decks-flank .deck-card-2 { transform: translate(4px, 4px) !important; box-shadow: 2px 2px 0 #000, 4px 4px 0 rgba(0,0,0,.5) !important; }
+.table-decks-flank .deck-card-1 { transform: translate(0, 0) rotate(-2deg); }

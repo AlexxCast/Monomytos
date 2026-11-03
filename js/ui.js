@@ -650,6 +650,9 @@ class UIController {
     if (thImg) {
       thImg.src = th.img || 'assets/icons/minaccia.webp';
     }
+    // Le carte Minaccia stampate hanno già cornice, titolo, testo e livello: niente doppioni sopra
+    const thCard = document.getElementById('threatCentralCard');
+    if (thCard) thCard.classList.toggle('is-printed', !th.isRogueHero && /^assets\/cards\/[^/]+\.webp$/.test(th.img || ''));
 
     // Threat HP bar
     const hpRatio = Math.max(0, Math.min(1, th.hp / th.maxHp));
@@ -911,10 +914,14 @@ class UIController {
       const handBox = document.getElementById('playerHandCarousel');
       handBox.innerHTML = '';
       const n = localPlayer.hand.length;
+      // Sul telefono, nel tuo turno, la mano si apre in fila (carte grandi, scorri di lato) per sceglierle bene;
+      // fuori turno resta a ventaglio
+      const spread = state.turnIndex === 0 && !localPlayer.isDead && state.phase === 'action' && window.innerWidth < 900;
+      handBox.classList.toggle('hand-spread', spread);
       // Ventaglio: sovrapposizione calcolata per far stare tutte le carte nella larghezza dello schermo
       const cardW = parseFloat(getComputedStyle(handBox).getPropertyValue('--hand-card-w')) || 100;
       const avail = Math.max(200, (handBox.clientWidth || window.innerWidth) - 30);
-      const overlap = n > 1 ? Math.max(0, Math.min(cardW * 0.62, (cardW * n - avail) / (n - 1))) : 0;
+      const overlap = spread ? 0 : (n > 1 ? Math.max(0, Math.min(cardW * 0.62, (cardW * n - avail) / (n - 1))) : 0);
       localPlayer.hand.forEach((c, i) => {
         const wrapper = document.createElement('div');
         wrapper.innerHTML = this.getCardDOM(c, false);

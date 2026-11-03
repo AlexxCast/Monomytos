@@ -477,22 +477,27 @@ window.CARD_LAYOUT_CONFIG = {
       return this.silver;
     }
 
+    // Il cerchio in basso a destra mostra il simbolo della statistica del costo (Potenza, Agilità, Vigore, Intelligenza),
+    // anche sulle carte Oscure e Deus Ex Machina: il loro tipo lo dice già il colore della cornice
+    const catIcon = { 'Potenza': 'assets/icons/potenza.png', 'Agilità': 'assets/icons/agilita.png', 'Vigore': 'assets/icons/vigore.png', 'Intelligenza': 'assets/icons/inteligenza.png' }[card.cat];
+    const withCat = (l) => (catIcon ? { ...l, icon: catIcon } : l);
+
     // 3. Carte Oscure (Viola)
     if (card.osc || card.cat === 'Oscuro' || card.layout_type === 'purple') {
-      return this.purple;
+      return withCat(this.purple);
     }
 
     // 4. Deus Ex Machina (Blu)
     if (card.deus || card.tipo === 'deus' || card.nome?.includes('Defibrillazione') ||
         card.tag?.includes('Deus Ex') || card.layout_type === 'blue') {
-      return this.blue;
+      return withCat(this.blue);
     }
 
     // 5. Abilità Tech / Magia (Verde)
     if (card.cat === 'Intelligenza' || card.tipo === 'abilita' ||
         card.tag?.includes('Tech') || card.tag?.includes('Magia') ||
         card.tag?.includes('Abilità') || card.layout_type === 'green') {
-      return this.green;
+      return withCat(this.green);
     }
 
     // 6. Azioni di Attacco e Difesa (Oro)
