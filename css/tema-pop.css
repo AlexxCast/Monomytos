@@ -950,3 +950,13 @@ body.theme-villain .home-story { background: linear-gradient(120deg, #3c0b3e, #9
 .hero-slide.locked .btn { background: #666 !important; }
 .hero-lock-badge { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%) rotate(-4deg); width: 80%; text-align: center; background: var(--cream); color: var(--ink); border: 2.5px solid #000; border-radius: 10px; padding: 6px 8px; font-weight: 800; font-size: 12px; box-shadow: 3px 3px 0 #000; z-index: 3; }
 .hero-slide { position: relative; }
+
+/* ===== Stanza online ===== */
+.room-player-list { display: flex; flex-direction: column; gap: 8px; }
+.room-player { display: flex; justify-content: space-between; align-items: center; gap: 8px; background: #fff; color: var(--ink); border: 2.5px solid #000; border-radius: 10px; padding: 10px 12px; font-size: 14px; box-shadow: 2px 2px 0 #000; }
+.room-player.is-host { background: #fff6d6; }
+.room-player.empty { opacity: .6; border-style: dashed; box-shadow: none; }
+.room-player-tag { font-size: 11px; font-weight: 900; text-transform: uppercase; color: #0d6b3a; }
+.room-player.empty .room-player-tag { color: #555; }
+.room-guest-wait { color: var(--on-night); text-align: center; font-weight: 700; text-shadow: 1px 1px 0 #000; }
+#btnStartOnline:disabled { opacity: .55; filter: grayscale(.6); }

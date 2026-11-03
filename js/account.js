@@ -97,6 +97,7 @@
       document.querySelectorAll('.creditsDisplay').forEach(el => { el.textContent = window.Progression.getCredits(); });
       window.UI.showScreen('scr-lobby');
       window.UI.showToast(`Bentornato, ${this.nickname()}!`);
+      if (window.Online && window.Collezione && window.Collezione.haStarter()) window.Online.dopoAccesso();
     },
 
     nickname() {

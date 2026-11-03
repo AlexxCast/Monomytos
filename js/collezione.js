@@ -135,6 +135,7 @@
       this.aggiornaHome();
       window.UI.showScreen('scr-lobby');
       window.UI.showToast(`Mazzo "${s.mazzo}" pronto! Hai anche 1 bustina in regalo nel Negozio.`);
+      if (window.Online) window.Online.dopoAccesso();
     },
 
     prossimoEroeBloccato() {

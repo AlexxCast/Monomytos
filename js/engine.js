@@ -41,7 +41,7 @@ class MonomythosEngine {
       // Check if player has a custom deck specified or saved in progression
       let deck = [];
       let customDeckConfig = cfg.customDeck;
-      if (!customDeckConfig && window.Progression && !cfg.isBot) {
+      if (!customDeckConfig && window.Progression && !cfg.isBot && !cfg.remoteUid) {
         customDeckConfig = window.Progression.getActiveDeckForHero(cfg.name) || (window.Progression.data.activeDeckName ? window.Progression.getCustomDeck(window.Progression.data.activeDeckName) : null);
       }
 
@@ -102,6 +102,9 @@ class MonomythosEngine {
         id: `p_${idx}`,
         name: cfg.name,
         isBot: !!cfg.isBot,
+        uid: cfg.uid || null,
+        remoteUid: cfg.remoteUid || null,
+        displayName: cfg.displayName || null,
         isLocal: cfg.isLocal !== undefined ? cfg.isLocal : !cfg.isBot,
         str: meta.str,
         spd: meta.spd,
@@ -937,6 +940,13 @@ class MonomythosEngine {
       this.emit('damage_taken', { target, dmg: penetrated, parried: absorbed, reflected, trample: isTrample });
       if (onComplete) onComplete();
     };
+
+    // Online: l'attacco a un giocatore remoto apre la finestra di difesa sul suo dispositivo
+    if (target.remoteUid && typeof this.onRemoteDefense === 'function') {
+      this.pendingDefense = { enemy, target, defender: target, rawDmg: effectiveDmg, mitigable, effectiveEnd, isTrample, reactionCards, parryCards, applyRemainingDamage };
+      this.onRemoteDefense({ enemy, target, rawDmg: effectiveDmg, mitigable, effectiveEnd, isTrample });
+      return;
+    }
 
     const localPlayer = this.state.players.find(p => (p.isLocal || p.id === 'p_0') && !p.isDead) || this.state.players.find(p => !p.isDead);
     const isTargetLocal = Boolean(target.isLocal || (localPlayer && target.id === localPlayer.id));

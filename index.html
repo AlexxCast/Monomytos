@@ -261,21 +261,12 @@
       </div>
 
       <div class="room-box">
-        <h3 style="font-size: 15px; color: var(--bone);">Eroi al Tavolo</h3>
-        <div id="roomPlayerList" style="display:flex; flex-direction:column; gap:8px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; background:#111622; padding:10px 12px; border-radius:8px; border:1px solid var(--line);">
-            <span><b>Tu (Host)</b> • <span id="roomMyHero">Iron Aegis</span></span>
-            <span style="color:var(--ok); font-size:11px; font-weight:700;">Pronto</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; align-items:center; background:#111622; padding:10px 12px; border-radius:8px; border:1px solid var(--line);">
-            <span><b>Compagno (Bot / Ospite)</b> • Neon Phantom</span>
-            <span style="color:var(--oro); font-size:11px;">In attesa...</span>
-          </div>
-        </div>
+        <h3 style="font-size: 15px;">Eroi al Tavolo</h3>
+        <div id="roomPlayerList" class="room-player-list"></div>
       </div>
-
-      <button class="btn btn-primary btn-block" onclick="UI.startMultiplayerMatch()">Inizia la Missione</button>
-      <button class="btn btn-subtle btn-block" onclick="UI.showScreen('scr-lobby')">Annulla</button>
+      <p id="roomGuestWait" class="room-guest-wait" style="display:none">Sei dentro! Aspetta che l'host faccia partire la missione.</p>
+      <button class="btn btn-primary btn-block" id="btnStartOnline" onclick="UI.startMultiplayerMatch()">Inizia la Missione</button>
+      <button class="btn btn-subtle btn-block" onclick="Online.esci(); UI.showScreen('scr-lobby')">Esci dalla stanza</button>
     </div>
   </section>
 
@@ -1163,6 +1154,7 @@
 <script src="js/firebase-config.js"></script>
 <script src="js/account.js"></script>
 <script src="js/collezione.js"></script>
+<script src="js/online.js"></script>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {

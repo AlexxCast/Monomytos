@@ -19,8 +19,25 @@ Il piano Spark è gratuito e non chiede carta di credito: 50.000 utenti attivi a
    rules_version = '2';
    service cloud.firestore {
      match /databases/{database}/documents {
+       // Profilo: solo il proprietario lo legge e lo scrive
        match /users/{uid} {
          allow read, write: if request.auth != null && request.auth.uid == uid;
+       }
+       // Stanze online
+       match /rooms/{code} {
+         allow read: if request.auth != null;
+         allow create: if request.auth != null && request.resource.data.host == request.auth.uid;
+         // L'host aggiorna tutto; gli altri possono solo entrare o uscire mentre la stanza è in attesa
+         allow update: if request.auth != null && (
+           resource.data.host == request.auth.uid ||
+           (resource.data.status == 'lobby' && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['players']))
+         );
+         allow delete: if request.auth != null && resource.data.host == request.auth.uid;
+         // Mosse dei giocatori: ognuno scrive le proprie, solo l'host le legge
+         match /actions/{id} {
+           allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+           allow read: if request.auth != null && get(/databases/$(database)/documents/rooms/$(code)).data.host == request.auth.uid;
+         }
        }
      }
    }
@@ -36,3 +53,9 @@ Il piano Spark è gratuito e non chiede carta di credito: 50.000 utenti attivi a
 
 Un documento `users/{uid}` per giocatore con `nickname`, `createdAt`, `updatedAt` e `progression`
 (crediti, carte, mazzi). Il profilo sul server vince su quello del telefono, così si gioca da più dispositivi.
+
+## Gioco online
+
+Le stanze stanno in `rooms/{codice}`. L'host fa girare la partita e pubblica lo stato; gli altri mandano le mosse in
+`rooms/{codice}/actions`. Ogni partita online usa circa 150-300 scritture: con il piano gratuito (20.000 al giorno)
+bastano per circa 70 partite online al giorno. Se il gioco cresce, si valuterà il piano a consumo.

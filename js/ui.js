@@ -29,7 +29,8 @@ class UIController {
       if (roomParam) {
         const inp = document.getElementById('joinRoomInput');
         if (inp) inp.value = roomParam;
-        this.joinMultiplayerRoom(roomParam);
+        // Si entra dopo l'accesso all'account (vedi Online.dopoAccesso)
+        if (window.Online) window.Online._pendingJoin = { code: roomParam };
       }
     } catch (e) {}
   }
@@ -562,11 +563,15 @@ class UIController {
   openMultiplayerModal(isHost = true) {
     this.pendingMultiplayer = isHost;
     if (isHost) {
-      const code = window.NetEngine.createRoom('Giocatore 1', this.selectedHero);
-      document.getElementById('createdRoomCode').textContent = code;
-      const shareUrl = `${window.location.origin}${window.location.pathname}?room=${code}`;
-      document.getElementById('roomShareLink').value = shareUrl;
+      if (window.Progression && !window.Progression.isHeroUnlocked(this.selectedHero)) {
+        this.selectedHero = window.Progression.data.unlockedHeroes[0] || this.selectedHero;
+      }
+      document.getElementById('createdRoomCode').textContent = '....';
       this.showScreen('scr-room-wait');
+      window.Online.creaStanza(this.selectedHero).then(code => {
+        if (!code) return this.showScreen('scr-lobby');
+        window.Online.renderLobby();
+      });
     } else {
       this.showModal('modalJoinRoom');
     }
@@ -575,12 +580,12 @@ class UIController {
   joinMultiplayerRoom(code) {
     const c = code || document.getElementById('joinRoomInput').value;
     if (!c) return alert('Inserisci un codice stanza valido!');
-    window.NetEngine.joinRoom(c, 'Ospite', this.selectedHero);
-    this.showScreen('scr-room-wait');
     this.hideModals();
+    window.Online.entra(c, this.selectedHero);
   }
 
   startMultiplayerMatch() {
+    if (window.Online) return window.Online.avviaPartita();
     try {
       window.NetEngine?.broadcast('GAME_START', {
         heroes: [
