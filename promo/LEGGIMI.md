@@ -143,3 +143,7 @@ repository Monomytos → permesso **Secrets: Read and write**. Mettilo nel Secre
 - L'orario programmato di GitHub può slittare di qualche minuto.
 - Ogni video è diverso anche con lo stesso copione, perché la partita è giocata dal vivo.
 - I nuovi testi dei copioni vanno scritti sia in `it` sia in `en`.
+- La dicitura sulle immagini AI è in `copioni.json`: `nota_ai_video` (cartello finale), `nota_ai`
+  (fondo delle didascalie) e `nota_ai_breve` (Bluesky). Su TikTok in pubblicazione diretta viene
+  attivata anche l'etichetta "contenuto AI". Quando le immagini saranno disegnate a mano basta svuotarle.
+- `"tema": "villain"` in un copione usa il cosmo viola nel cartello finale.

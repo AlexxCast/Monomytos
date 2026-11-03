@@ -99,7 +99,7 @@ const tiktok = {
       if (opzioni.length && !opzioni.includes(privacy)) throw new Error(`privacy ${privacy} non permessa: ${opzioni.join(', ')}`);
       init = await json(await fetch('https://open.tiktokapis.com/v2/post/publish/video/init/', {
         method: 'POST', headers: h,
-        body: JSON.stringify({ post_info: { title: `${testo}\n\n${tag.join(' ')}`.slice(0, 2200), privacy_level: privacy, disable_comment: false, disable_duet: false, disable_stitch: false, video_cover_timestamp_ms: 1200 }, source_info })
+        body: JSON.stringify({ post_info: { title: `${testo}\n\n${tag.join(' ')}`.slice(0, 2200), privacy_level: privacy, is_aigc: true, disable_comment: false, disable_duet: false, disable_stitch: false, video_cover_timestamp_ms: 1200 }, source_info })
       }), 'avvio post TikTok');
     } else {
       init = await json(await fetch('https://open.tiktokapis.com/v2/post/publish/inbox/video/init/', { method: 'POST', headers: h, body: JSON.stringify({ source_info }) }), 'avvio bozza TikTok');
