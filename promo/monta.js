@@ -21,12 +21,21 @@ const T = v => (v && typeof v === 'object') ? (v[lingua] || v.it || '') : (v || 
 // Transizioni: nome nel copione → effetto ffmpeg (xfade), durata, suono
 const TRANS = {
   taglio: null,
-  flash: { xf: 'fadewhite', d: 0.16, suono: 'impatto' },
-  zoom: { xf: 'zoomin', d: 0.28, suono: 'whoosh' },
-  scorri: { xf: 'smoothup', d: 0.26, suono: 'whoosh' },
-  scorri_sx: { xf: 'smoothleft', d: 0.26, suono: 'whoosh' },
-  dissolvenza: { xf: 'fade', d: 0.35, suono: null }
+  // Transizioni morbide e tutte della stessa famiglia: niente lampi o zoom improvvisi
+  flash: { xf: 'fade', d: 0.4, suono: null },
+  zoom: { xf: 'fade', d: 0.4, suono: null },
+  scorri: { xf: 'smoothleft', d: 0.5, suono: 'whoosh' },
+  scorri_sx: { xf: 'smoothleft', d: 0.5, suono: 'whoosh' },
+  dissolvenza: { xf: 'fade', d: 0.45, suono: null }
 };
+
+// Ritmo: ogni inquadratura resta almeno 2 s (il gancio 2,2 s), così lo spettatore legge
+// il testo e capisce l'azione prima dello stacco. Niente scosse dello schermo.
+const DURATA_MIN = +(process.env.DURATA_MIN || 2);
+copione.inquadrature.forEach((q, i) => {
+  q.durata = Math.max(q.durata, i === 0 ? DURATA_MIN + 0.2 : DURATA_MIN);
+  delete q.scossa;
+});
 
 // "da" può essere un numero (secondi della ripresa) o un evento del gioco:
 // "game_over-1.2" = 1,2 s prima della vittoria; "card_played#2+0.3" = 0,3 s dopo la seconda carta giocata
@@ -119,7 +128,7 @@ function testoInquadratura(q, da, a, primo) {
       evento(da, a, 'Grande', `{\\an${an}\\pos(${x},${y})\\fscx116\\fscy116\\t(0,200,\\fscx100\\fscy100)\\t(200,${ms(durata)},\\fscx108\\fscy108)\\fad(0,90)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
     } else if (stile === 'grande') {
       // Parola o numero che "sbatte" sullo schermo
-      evento(da, a, 'Grande', `{\\an${an}\\pos(${x},${y})\\fscx230\\fscy230\\alpha&HFF&\\t(0,130,\\fscx96\\fscy96\\alpha&H00&)\\t(130,230,\\fscx104\\fscy104)\\t(230,${ms(durata)},\\fscx112\\fscy112)\\fad(0,90)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
+      evento(da, a, 'Grande', `{\\an${an}\\pos(${x},${y})\\fscx135\\fscy135\\alpha&HFF&\\t(0,260,\\fscx100\\fscy100\\alpha&H00&)\\t(260,${ms(durata)},\\fscx106\\fscy106)\\fad(0,150)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
     } else if (stile === 'box') {
       evento(da, a, 'Box', `{\\an${an}\\pos(${x},${y})\\fscx80\\fscy80\\t(0,120,\\fscx106\\fscy106)\\t(120,220,\\fscx100\\fscy100)\\fad(60,90)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
     } else {

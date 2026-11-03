@@ -5,7 +5,7 @@
 // Un copione ha delle "riprese" (registrazioni continue del gioco) e delle "inquadrature"
 // (pezzi di 1-3 secondi presi dalle riprese, montati da promo/monta.js). Durante una ripresa:
 //  - "camera": movimenti di macchina (zoom su un elemento del gioco) a tempi precisi;
-//  - "segui": zoom automatico sul tavolo quando un eroe gioca una carta;
+//  - "segui": "sempre" = zoom automatico sul tavolo a ogni carta giocata (spento di base: distrae);
 //  - "momento" e "azioni": situazioni preparate (colpo finale, Villain, leggendaria) che usano
 //    le vere regole e animazioni del gioco.
 // Ogni ripresa diventa una cartella di fotogrammi 1080x1920 con l'elenco dei tempi.
@@ -78,6 +78,8 @@ async function preparaPagina(ctx) {
     root.style.transformOrigin = '0 0';
     root.style.willChange = 'transform';
     window.__camera = (chi, zoom = 1, durata = 0.6) => {
+      // Movimenti contenuti e lenti: zoom massimo 1,25 e almeno 1 s per spostarsi
+      zoom = Math.min(zoom, 1.25); if (durata > 0) durata = Math.max(durata, 1);
       const W = innerWidth, H = innerHeight;
       let tx = 0, ty = 0;
       const sel = B[chi] || chi;
@@ -94,7 +96,7 @@ async function preparaPagina(ctx) {
       } else if (zoom > 1) {
         tx = (W - W * zoom) / 2; ty = (H - H * zoom) / 2;
       }
-      root.style.transition = durata > 0 ? `transform ${durata}s cubic-bezier(.22,1,.36,1)` : 'none';
+      root.style.transition = durata > 0 ? `transform ${durata}s cubic-bezier(.45,0,.25,1)` : 'none';
       root.style.transform = zoom === 1 && !el ? 'none' : `translate(${tx}px, ${ty}px) scale(${zoom})`;
     };
   }, BERSAGLI);
@@ -195,7 +197,7 @@ const RIPRESE = {
       GameEngine.emit = (ev, d) => {
         if (['card_played', 'damage_taken', 'act_advanced', 'player_corrupted', 'game_over', 'round_started', 'defense_window_opened', 'player_died'].includes(ev)) window.__evento(ev);
         emit(ev, d);
-        if (segui && ev === 'card_played' && Date.now() - ultimo > 1600) {
+        if (segui === 'sempre' && ev === 'card_played' && Date.now() - ultimo > 1600) {
           ultimo = Date.now();
           window.__camera('centro', 1.3, 0.35);
           setTimeout(() => window.__camera(null, 1, 0.5), 900);
