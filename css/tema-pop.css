@@ -1165,3 +1165,27 @@ body.theme-villain .home-story { background: linear-gradient(120deg, #3c0b3e, #9
 .table-decks-flank .deck-back-card { border-radius: 6px !important; border: 2px solid #000 !important; }
 .table-decks-flank .deck-card-2 { transform: translate(4px, 4px) !important; box-shadow: 2px 2px 0 #000, 4px 4px 0 rgba(0,0,0,.5) !important; }
 .table-decks-flank .deck-card-1 { transform: translate(0, 0) rotate(-2deg); }
+
+/* ===== Partita: campo di battaglia (blu da Eroe, viola da Villain) ===== */
+html.in-match, body.in-match {
+  background-color: #0b1b22 !important;
+  background-image:
+    radial-gradient(130% 90% at 50% 40%, transparent 50%, rgba(0, 0, 0, 0.5) 100%),
+    linear-gradient(rgba(3, 10, 20, 0.22), rgba(3, 10, 20, 0.22)), url("../assets/bg/campo_eroe.webp") !important;
+  background-size: auto, auto, cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center, center, 50% 70% !important;
+  background-attachment: fixed !important;
+}
+html.in-match.theme-villain, body.in-match.theme-villain, html.theme-villain body.in-match {
+  background-color: #1a0812 !important;
+  background-image:
+    radial-gradient(130% 90% at 50% 40%, transparent 50%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(rgba(20, 3, 12, 0.2), rgba(20, 3, 12, 0.2)), url("../assets/bg/campo_villain.webp") !important;
+  background-size: auto, auto, cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center, center, 50% 70% !important;
+}
+#campoParticelle { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; display: none; }
+body.in-match #campoParticelle { display: block; }
+body.in-match #scr-game { position: relative; z-index: 1; }

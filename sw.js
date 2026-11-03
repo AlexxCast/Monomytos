@@ -1,5 +1,5 @@
 // Monomythos Service Worker - Fast offline cache
-const CACHE_NAME = 'monomythos-v21';
+const CACHE_NAME = 'monomythos-v22';
 const ASSETS = [
   './',
   './index.html',
@@ -19,6 +19,7 @@ const ASSETS = [
   './js/online.js',
   './js/scambi.js',
   './js/storia.js',
+  './js/particelle.js',
   './assets/icons/logo_titolo.webp',
   './assets/bg/cosmo_eroe.webp',
   './assets/bg/cosmo_villain.webp',

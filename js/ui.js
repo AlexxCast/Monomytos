@@ -194,6 +194,7 @@ class UIController {
       this.activeScreen = screenId;
     }
     document.body.classList.toggle('in-match', screenId === 'scr-game');
+    document.documentElement.classList.toggle('in-match', screenId === 'scr-game');
     document.querySelectorAll('#bottomNav .nav-item').forEach(b => b.classList.toggle('active', b.dataset.screen === screenId));
     document.body.dataset.screen = screenId;
     this.toggleHeaderMenu(false);
