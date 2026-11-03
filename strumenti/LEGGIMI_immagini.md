@@ -5,7 +5,8 @@ Il sistema crea uno sfondo cartoon per ogni carta Azione (152), lo salva in `ass
 - **Stile:** ricavato dalle illustrazioni che hai già (fumetto con inchiostro spesso, primi piani d'azione, esplosioni di energia).
 - **Colore:** dipende dalla Categoria: Potenza arancio e oro, Agilità verde acqua, Intelligenza blu, Vigore verde smeraldo, Carte Oscure viola noir.
 - **Contenuto:** l'azione del titolo (le scene sono in `scene_carte_en.json`), mai personaggi riconoscibili né volti, mai testo.
-- **Costo:** 0 €. Usa Cloudflare Workers AI con il modello FLUX.1 schnell, che ha licenza Apache 2.0 e permette l'uso commerciale. Il piano gratuito dà 10.000 "neuroni" al giorno, circa 150 immagini: in uno o due giorni le fa tutte.
+- **Costo:** 0 €. Usa Cloudflare Workers AI con il modello FLUX.2 klein 4B (licenza Apache 2.0, uso commerciale permesso). Il piano gratuito dà 10.000 "neuroni" al giorno, circa 90-100 immagini: in due notti le fa tutte.
+- **Stile:** a ogni richiesta viene passato come riferimento un ritaglio di un'illustrazione originale della stessa Categoria (`strumenti/riferimenti_stile/`). Per cambiare lo stile basta sostituire quei file.
 
 ## Configurazione (una volta sola, circa 10 minuti)
 

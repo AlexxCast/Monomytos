@@ -27,7 +27,12 @@ DATA_JS = os.path.join(ROOT, 'js', 'cards_data.js')
 DATA_JSON = os.path.join(ROOT, 'js', 'cards_data.json')
 OUT_DIR = os.path.join(ROOT, 'assets', 'cards', 'gen')
 REL_DIR = 'assets/cards/gen'
-MODEL = '@cf/black-forest-labs/flux-1-schnell'
+# FLUX.2 klein 4B: molto più pulito di flux-1-schnell (meno artefatti, niente scritte casuali),
+# accetta immagini di riferimento per lo stile e costa circa lo stesso nella quota gratuita.
+MODEL = os.environ.get('CF_MODEL', '@cf/black-forest-labs/flux-2-klein-4b')
+GEN_W, GEN_H = 640, 960
+# Riferimenti di stile: ritagli delle illustrazioni originali, uno per Categoria
+REF_DIR = os.path.join(ROOT, 'strumenti', 'riferimenti_stile')
 API_BASE = os.environ.get('CF_API_BASE', 'https://api.cloudflare.com/client/v4')
 
 # Stile ricavato dalle illustrazioni già presenti (Impatto Devastante, Gancio Balistico,
@@ -94,17 +99,21 @@ def build_prompt(card):
     # Le descrizioni italiane nei dati nominano a volte l'eroe: il prompt chiede comunque nessun volto.
     # Il titolo NON va nel prompt: il modello tende a scriverlo nell'immagine come un fumetto.
     parts = [
-        'Wordless illustration without any lettering',
-        f'{scene}' if scene else hint,
+        'Create a brand-new illustration drawn in exactly the same art style as image 0: '
+        'same line work, ink thickness, cel shading, halftone texture and color treatment. '
+        'Do not copy the subject or the composition of image 0',
+        f'New scene: {scene}' if scene else f'New scene: {hint}',
         STYLE, palette, RULES,
-        'The image must contain no writing of any kind: no title, no caption, no speech bubble, no sound effect words, no signature, no watermark',
+        'The image must contain no writing of any kind: no title, no caption, no speech bubble, '
+        'no sound effect words, no signature, no watermark, no frame',
     ]
     return '. '.join(p.rstrip('.') for p in parts) + '.'
 
 
 # Versione del prompt: le immagini fatte con una versione precedente vengono rifatte
-# (dopo quelle mancanti). v1 metteva il titolo nel prompt e il modello lo scriveva nell'immagine.
-PROMPT_VERSION = 2
+# (dopo quelle mancanti). v1 metteva il titolo nel prompt e il modello lo scriveva nell'immagine;
+# v3 passa a FLUX.2 klein con il riferimento di stile.
+PROMPT_VERSION = 3
 VERSIONS_PATH = os.path.join(ROOT, 'strumenti', 'sfondi_versioni.json')
 
 
@@ -121,7 +130,7 @@ def save_versions(v):
 
 
 def seed_for(card_id):
-    return int(hashlib.sha256(card_id.encode()).hexdigest()[:8], 16)
+    return int(hashlib.sha256(card_id.encode()).hexdigest()[:7], 16)
 
 
 def load_data():
@@ -147,27 +156,63 @@ def save_data(prefix, data, suffix):
         open(path, 'w', encoding='utf-8', newline='').write(text)
 
 
-def call_cloudflare(prompt, seed):
+def style_ref_for(card):
+    key = 'oscura' if card.get('osc') else category_key(card.get('cat'))
+    path = os.path.join(REF_DIR, f'{key}.png')
+    return path if os.path.exists(path) else None
+
+
+def encode_multipart(fields, files):
+    boundary = 'monomythos' + hashlib.sha1(os.urandom(16)).hexdigest()
+    out = io.BytesIO()
+    for name, value in fields.items():
+        out.write(f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"\r\n\r\n'.encode())
+        out.write(str(value).encode('utf-8') + b'\r\n')
+    for name, (filename, data, ctype) in files.items():
+        out.write(f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"; filename="{filename}"\r\n'
+                  f'Content-Type: {ctype}\r\n\r\n'.encode())
+        out.write(data + b'\r\n')
+    out.write(f'--{boundary}--\r\n'.encode())
+    return out.getvalue(), f'multipart/form-data; boundary={boundary}'
+
+
+def build_request(prompt, seed, ref_path):
+    if 'flux-1-schnell' in MODEL:
+        # Il vecchio modello accetta solo 'prompt' e 'steps' (max 8): 'seed' viene rifiutato con HTTP 400
+        return json.dumps({'prompt': prompt[:2000], 'steps': 8}).encode(), 'application/json'
+    # FLUX.2: sempre multipart, anche senza immagini; steps fisso a 4
+    fields = {'prompt': prompt[:2000], 'width': GEN_W, 'height': GEN_H, 'seed': seed}
+    files = {}
+    if ref_path:
+        files['input_image_0'] = (os.path.basename(ref_path), open(ref_path, 'rb').read(), 'image/png')
+    return encode_multipart(fields, files)
+
+
+def call_cloudflare(prompt, seed, ref_path=None):
     account = os.environ.get('CF_ACCOUNT_ID')
     token = os.environ.get('CF_API_TOKEN')
     if not account or not token:
         sys.exit('Mancano CF_ACCOUNT_ID e/o CF_API_TOKEN (vedi istruzioni in testa al file).')
     url = f'{API_BASE}/accounts/{account}/ai/run/{MODEL}'
-    # Il modello accetta solo 'prompt' e 'steps' (max 8): 'seed' viene rifiutato con HTTP 400
-    body = json.dumps({'prompt': prompt[:2000], 'steps': 6}).encode()
+    body, ctype = build_request(prompt, seed, ref_path)
     req = urllib.request.Request(url, data=body, method='POST', headers={
-        'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'})
+        'Authorization': f'Bearer {token}', 'Content-Type': ctype})
     for attempt in range(4):
         try:
-            with urllib.request.urlopen(req, timeout=120) as r:
-                payload = json.loads(r.read())
-            img = (payload.get('result') or {}).get('image')
+            with urllib.request.urlopen(req, timeout=180) as r:
+                raw = r.read()
+                rtype = r.headers.get('Content-Type', '')
+            if rtype.startswith('image/'):
+                return raw
+            payload = json.loads(raw)
+            result = payload.get('result') or {}
+            img = result.get('image') if isinstance(result, dict) else None
             if not img:
                 raise RuntimeError(f'Risposta senza immagine: {str(payload)[:300]}')
             return base64.b64decode(img)
         except urllib.error.HTTPError as e:
             msg = e.read().decode(errors='replace')[:300]
-            if e.code == 429 or 'neuron' in msg.lower() or 'limit' in msg.lower():
+            if e.code == 429 or 'neuron' in msg.lower() or 'daily free allocation' in msg.lower():
                 raise QuotaExceeded(msg)
             if 400 <= e.code < 500:
                 # Errore nella richiesta o nelle credenziali: riprovare non serve
@@ -254,7 +299,7 @@ def main():
             print(f"\n[{c['id']}] {c['nome']}\n{prompt}")
             continue
         try:
-            img = call_cloudflare(prompt, seed_for(c['id']))
+            img = call_cloudflare(prompt, seed_for(c['id']), style_ref_for(c))
         except QuotaExceeded as e:
             print(f'Quota gratuita di oggi esaurita, riprendo domani. ({e})')
             break
