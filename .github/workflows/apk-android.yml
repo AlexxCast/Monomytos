@@ -1,0 +1,107 @@
+name: APK Android
+
+# Costruisce l'app Android (Capacitor: il gioco web dentro un'app) e la pubblica
+# come download nella release "android-latest" del repository. Gratis con GitHub Actions.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'js/**'
+      - 'css/**'
+      - 'assets/**'
+      - 'manifest.json'
+      - '.github/workflows/apk-android.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apk-android
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+
+      - name: Prepara i file del gioco
+        run: |
+          mkdir -p app/www
+          cp -r index.html manifest.json sw.js js css assets app/www/
+          cd app
+          npm init -y >/dev/null
+          npm install @capacitor/core@6.2.0 @capacitor/cli@6.2.0 @capacitor/android@6.2.0
+          cat > capacitor.config.json <<'EOF'
+          {
+            "appId": "com.alexxcast.monomythos",
+            "appName": "Monomythos",
+            "webDir": "www",
+            "backgroundColor": "#090c12",
+            "android": { "allowMixedContent": false }
+          }
+          EOF
+          npx cap add android
+          npx cap sync android
+
+      - name: Icona e impostazioni dell'app
+        run: |
+          python - <<'EOF'
+          from PIL import Image
+          import os, re
+          src = Image.open('assets/icons/app_icon_512.png').convert('RGBA')
+          res = 'app/android/app/src/main/res'
+          for d, s in {'mdpi': 48, 'hdpi': 72, 'xhdpi': 96, 'xxhdpi': 144, 'xxxhdpi': 192}.items():
+              for n in ('ic_launcher.png', 'ic_launcher_round.png'):
+                  src.resize((s, s), Image.LANCZOS).save(f'{res}/mipmap-{d}/{n}')
+              # icona adattiva: il logo occupa la zona sicura centrale (66%)
+              f = int(s * 108 / 48); fg = Image.new('RGBA', (f, f), (0, 0, 0, 0))
+              inner = int(f * 0.66); fg.paste(src.resize((inner, inner), Image.LANCZOS), ((f - inner) // 2,) * 2)
+              fg.save(f'{res}/mipmap-{d}/ic_launcher_foreground.png')
+          bg = f'{res}/values/ic_launcher_background.xml'
+          if os.path.exists(bg):
+              x = open(bg).read()
+              open(bg, 'w').write(re.sub(r'#[0-9A-Fa-f]{6,8}', '#090C12', x))
+          # verticale e schermo intero come la versione web su telefono
+          m = 'app/android/app/src/main/AndroidManifest.xml'
+          x = open(m).read()
+          if 'screenOrientation' not in x:
+              x = x.replace('android:name=".MainActivity"', 'android:name=".MainActivity"\n            android:screenOrientation="portrait"', 1)
+          open(m, 'w').write(x)
+          EOF
+
+      - name: Compila l'APK
+        run: |
+          cd app/android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+          cp app/build/outputs/apk/debug/app-debug.apk ../../Monomythos.apk
+
+      - name: Pubblica il download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete android-latest -y --cleanup-tag || true
+          gh release create android-latest Monomythos.apk \
+            --title "Monomythos per Android (ultima versione)" \
+            --notes "APK di prova costruito automaticamente dal commit ${GITHUB_SHA::7}. Scaricalo sul telefono, aprilo e consenti l'installazione da questa fonte." \
+            --target "$GITHUB_SHA"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Monomythos-apk
+          path: Monomythos.apk
+          retention-days: 14

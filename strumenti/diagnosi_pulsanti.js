@@ -15,6 +15,8 @@ const SALTA = /logout|esci dall'account|eliminaAccount|signOut|window\.open|loca
   p._accetta = false;
   p.on('dialog', d => (p._accetta ? d.accept() : d.dismiss()).catch(() => {}));
   await p.route('**/js/firebase-config.js', r => r.fulfill({ body: 'window.MONOMYTHOS_FIREBASE=null;', contentType: 'application/javascript' }));
+  // Lingua della prova: LINGUA=it oppure LINGUA=en (di base quella del browser)
+  if (process.env.LINGUA) await p.addInitScript(l => { try { localStorage.setItem('monomythos_lingua', l); } catch (e) {} }, process.env.LINGUA);
   await p.goto(base + '/index.html'); await p.waitForTimeout(1500);
   await p.evaluate(() => { const s = document.getElementById('appLaunchSplashOverlay'); if (s) s.style.display = 'none'; });
   if (await p.$('.starter-card')) { p._accetta = true; await p.evaluate(() => Collezione.scegliStarter(Collezione.STARTER[0].eroe)); p._accetta = false; await p.waitForTimeout(500); }

@@ -82,6 +82,7 @@
         <button class="icon-btn" onclick="UI.showModal('modalQrCode')" title="QR Code Telefono">CONDIVIDI</button>
         <button class="icon-btn" id="btnAudioMixer" onclick="UI.openAudioMixer()" title="Mixer Audio">MIXER</button>
         <button class="icon-btn" onclick="UI.showModal('modalRules')" title="Regole">REGOLE</button>
+        <button class="icon-btn btn-lingua" onclick="I18N.cambia()" title="Lingua / Language" data-no-i18n>ENGLISH</button>
         <button class="icon-btn" id="accountMenuBtn" style="display:none" onclick="Account.user ? Account.logout() : Account.showAuth()" title="Account">ACCEDI</button>
       </div>
     </div>
@@ -1233,6 +1234,8 @@
 </div>
 
 <!-- Core Scripts -->
+<script src="js/lingua_en.js"></script>
+<script src="js/lingua.js"></script>
 <script src="js/cards_data.js"></script>
 <script src="js/effects.js"></script>
 <script src="js/audio.js"></script>

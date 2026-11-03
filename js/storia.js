@@ -431,7 +431,7 @@
       const mostra = () => {
         const r = righe[i];
         const p = this.parlante(r, m);
-        const testo = String(r.testo).replace('{alleato}', m ? this.alleatoDi(m) : '').replace('{eroe}', this.mioEroe());
+        const T = window.I18N ? window.I18N.t : (x => x); const testo = T(String(r.testo)).replace('{alleato}', T(m ? this.alleatoDi(m) : '')).replace('{eroe}', T(this.mioEroe()));
         stage.innerHTML = p.tipo === 'narratore'
           ? `<div class="ss-panel ss-narra"><div class="ss-caption"><span class="ss-testo"></span></div></div>`
           : `<div class="ss-panel ss-${p.lato} ${p.nemico ? 'is-enemy' : ''}">
