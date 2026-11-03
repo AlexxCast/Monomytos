@@ -1513,6 +1513,7 @@ window.MONOMYTHOS_EN_REGOLE = [
 Object.assign(window.MONOMYTHOS_EN, {
   "Tocca per continuare": "Tap to continue",
   "Salta ▸▸": "Skip ▸▸",
+  "Illustrazioni provvisorie generate con l'AI · progetto indipendente, saranno ridisegnate a mano": "Temporary AI-generated illustrations · indie project, to be hand-redrawn",
   "Le illustrazioni di questa prima versione sono generate con l'AI: Monomythos è un progetto indipendente nato da una sola persona. Col tempo saranno ridisegnate a mano.": "The illustrations in this first version are AI-generated: Monomythos is an independent project made by one person. Over time they will be redrawn by hand.",
   "Salta tutorial": "Skip tutorial",
   "Ho capito": "Got it",
