@@ -42,6 +42,28 @@ jobs:
         run: |
           mkdir -p app/www
           cp -r index.html manifest.json sw.js js css assets app/www/
+          rm -f app/www/js/cards_data.json
+          # Alleggerisco l'app: illustrazioni ricompresse (max 640 px), altre immagini e musica più leggere
+          python - <<'EOF'
+          from PIL import Image
+          import glob, os
+          prima = dopo = 0
+          for f in glob.glob('app/www/assets/**/*.webp', recursive=True):
+              prima += os.path.getsize(f)
+              im = Image.open(f); im.load()
+              carta = '/assets/cards/' in f
+              if carta and max(im.size) > 640: im.thumbnail((640, 640), Image.LANCZOS)
+              tmp = f + '.tmp'
+              im.save(tmp, 'WEBP', quality=72 if carta else 82, method=6)
+              if os.path.getsize(tmp) < os.path.getsize(f): os.replace(tmp, f)
+              else: os.remove(tmp)
+              dopo += os.path.getsize(f)
+          print(f'immagini: {prima//1024} KB -> {dopo//1024} KB')
+          EOF
+          for f in app/www/assets/audio/*.mp3; do
+            ffmpeg -loglevel error -y -i "$f" -codec:a libmp3lame -b:a 96k "$f.tmp.mp3" && mv "$f.tmp.mp3" "$f"
+          done
+          du -sh app/www
           cd app
           npm init -y >/dev/null
           npm install @capacitor/core@6.2.0 @capacitor/cli@6.2.0 @capacitor/android@6.2.0
