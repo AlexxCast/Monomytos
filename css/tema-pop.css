@@ -237,7 +237,7 @@ header.main-header .header-menu { background: var(--paper-2) !important; border:
 /* ==========================================================
    PARTITA: la pagina di un fumetto, ogni zona è una vignetta
    ========================================================== */
-#scr-game { background: transparent !important; }
+#scr-game, body.theme-villain #scr-game { background: transparent !important; }
 body.theme-villain, html.theme-villain body {
   background-color: #2a1440 !important;
   background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.5px) !important;
@@ -842,3 +842,31 @@ body.needs-auth #bottomNav { display: none !important; }
 .auth-msg.error { color: #b3122c; }
 .auth-note { color: #e8e2d4; font-size: 13px; text-align: center; margin: 0; text-shadow: 1px 1px 0 #000; }
 @media (min-width: 900px) { header.main-header .brand-logo .logo-title { height: 42px; } }
+
+/* ===== Sfondo cosmico cartoon ispirato ai retro delle carte =====
+   Eroi: nebulosa verde acqua e blu (retro mazzo).
+   Villain: nebulosa viola e rossa con galassia a spirale (retro Minaccia). */
+html, body {
+  background-color: #03121a !important;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.05) 1.2px, transparent 1.5px),
+    radial-gradient(130% 90% at 50% 40%, transparent 45%, rgba(0, 0, 0, 0.5) 100%),
+    url("../assets/bg/cosmo_eroe.svg") !important;
+  background-size: 10px 10px, auto, cover !important;
+  background-repeat: repeat, no-repeat, no-repeat !important;
+  background-position: 0 0, center, center !important;
+  background-attachment: fixed !important;
+}
+html.theme-villain, body.theme-villain, html.theme-villain body {
+  background-color: #14030d !important;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.05) 1.2px, transparent 1.5px),
+    radial-gradient(130% 90% at 50% 40%, transparent 45%, rgba(0, 0, 0, 0.55) 100%),
+    url("../assets/bg/cosmo_villain.svg") !important;
+  background-size: 10px 10px, auto, cover !important;
+  background-repeat: repeat, no-repeat, no-repeat !important;
+  background-position: 0 0, center, center !important;
+}
+#scr-game, body.theme-villain #scr-game { background: transparent !important; }
+.home-showcase { background: #061b24; }
+body.theme-villain .home-showcase { background: #1d0618; }
