@@ -44,6 +44,8 @@ class ProgressionSystem {
   }
 
   save(localOnly = false) {
+    // Ora dell'ultima modifica: serve a non perdere le partite fatte offline
+    if (!localOnly) this.data._modificato = Date.now();
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(this.data));
     } catch (e) {

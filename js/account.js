@@ -38,7 +38,16 @@
         await loadScript(SDK + 'firebase-auth-compat.js');
         await loadScript(SDK + 'firebase-firestore-compat.js');
       } catch (e) {
-        this.setMsg('Non riesco a raggiungere il server degli account. Controlla la connessione e ricarica.', true);
+        // Senza internet si gioca lo stesso con i dati salvati sul telefono;
+        // al prossimo accesso online le partite fatte offline vengono tenute
+        this.offline = true;
+        this.ospiteLocale = true;
+        document.body.classList.remove('needs-auth');
+        this.updateBadge();
+        if (window.Collezione) window.Collezione.migra();
+        if (window.Tutorial && window.Tutorial.serve()) window.Tutorial.avvia();
+        else window.UI.showScreen('scr-lobby');
+        window.UI.showToast('Sei offline: giochi con i dati di questo telefono.');
         return;
       }
       firebase.initializeApp(cfg);
@@ -108,14 +117,20 @@
         if (snap.exists && snap.data().progression) {
           const data = snap.data();
           this.profile = data;
-          // Il profilo sul server vince su quello del dispositivo
-          window.Progression.data = { ...window.Progression.getDefaultData(), ...data.progression };
+          // Il profilo sul server vince su quello del dispositivo, tranne se sul telefono ci sono
+          // progressi più recenti dello stesso account (partite fatte offline)
+          const loc = window.Progression.data || {};
+          const piuRecenteQui = loc._uid === u.uid && (loc._modificato || 0) > (data.progression._modificato || 0);
+          if (piuRecenteQui) this.queueSave();
+          else window.Progression.data = { ...window.Progression.getDefaultData(), ...data.progression };
+          window.Progression.data._uid = u.uid;
           window.Progression.save(true);
         } else {
           // Account nuovo: profilo pulito (niente dati rimasti sul dispositivo da altri account),
           // tranne quando un ospite senza account si registra: tiene i suoi progressi
           window.Progression.data = this._portaDati ? { ...window.Progression.getDefaultData(), ...this._portaDati } : window.Progression.getDefaultData();
           this._portaDati = null; this.ospiteLocale = false;
+          window.Progression.data._uid = u.uid;
           if (window.Collezione) window.Collezione.migra();
           this.profile = {
             nickname: (snap.exists && snap.data().nickname) || this._pendingNick || (u.isAnonymous ? 'Ospite' : (u.email || 'Eroe').split('@')[0]),

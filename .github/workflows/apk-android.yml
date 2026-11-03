@@ -6,12 +6,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+    # L'app apre il sito e si aggiorna da sola: va ricostruita solo se cambia l'app stessa
     paths:
-      - 'index.html'
-      - 'js/**'
-      - 'css/**'
-      - 'assets/**'
-      - 'manifest.json'
+      - 'assets/icons/app_icon_512.png'
       - '.github/workflows/apk-android.yml'
 
 permissions:
@@ -75,6 +72,11 @@ jobs:
             "appName": "Monomythos",
             "webDir": "www",
             "backgroundColor": "#090c12",
+            "server": {
+              "url": "https://alexxcast.github.io/Monomytos/index.html",
+              "errorPath": "index.html",
+              "allowNavigation": ["alexxcast.github.io", "*.firebaseapp.com", "*.googleapis.com", "www.gstatic.com"]
+            },
             "android": { "allowMixedContent": false }
           }
           EOF
@@ -121,7 +123,7 @@ jobs:
           gh release delete android-latest -y --cleanup-tag || true
           gh release create android-latest Monomythos.apk \
             --title "Monomythos per Android (ultima versione)" \
-            --notes "APK di prova costruito automaticamente dal commit ${GITHUB_SHA::7}. Scaricalo sul telefono, aprilo e consenti l'installazione da questa fonte." \
+            --notes "APK di prova. L'app scarica da sola gli aggiornamenti del gioco quando c'è internet e funziona anche offline. Scaricala sul telefono, aprila e consenti l'installazione da questa fonte." \
             --target "$GITHUB_SHA"
 
       - uses: actions/upload-artifact@v4

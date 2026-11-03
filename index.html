@@ -1252,6 +1252,28 @@
 <script src="js/scambi.js"></script>
 <script src="js/storia.js"></script>
 <script src="js/tutorial.js"></script>
+<script>
+  // Funziona anche offline: il service worker salva il gioco sul dispositivo.
+  // Quando c'è internet scarica in sottofondo le immagini e la musica che mancano, così poi si gioca senza rete.
+  if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    navigator.serviceWorker.register('sw.js').then(() => navigator.serviceWorker.ready).then(() => {
+      if (!navigator.onLine || !window.caches) return;
+      setTimeout(async () => {
+        const D = window.MONOMYTHOS_DATA || {};
+        const urls = new Set(['assets/audio/m1_selezione.mp3', 'assets/audio/m2_combat.mp3']);
+        Object.values(D.action_cards || {}).flat().forEach(c => c.img && urls.add(c.img));
+        (D.threats || []).forEach(t => t.img && urls.add(t.img));
+        (D.creation_cards || []).forEach(c => c.img && urls.add(c.img));
+        Object.values(D.chars_meta || {}).forEach(c => c.img && urls.add(c.img));
+        Object.values(D.card_img_map || {}).forEach(u => u && urls.add(u));
+        document.querySelectorAll('img[src^="assets/"]').forEach(i => urls.add(i.getAttribute('src')));
+        for (const u of urls) {
+          try { if (!(await caches.match(u))) await fetch(u); } catch (e) { break; }
+        }
+      }, 8000);
+    }).catch(() => {});
+  }
+</script>
 <script src="js/particelle.js"></script>
 
 <script>
