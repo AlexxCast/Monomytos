@@ -111,41 +111,57 @@
        ========================================== -->
   <section class="screen active" id="scr-lobby">
     <div class="home">
-      <!-- Vetrina: l'eroe in evidenza -->
-      <div class="home-showcase" onclick="UI.startQuickMissionSelection()">
-        <img class="home-showcase-art" id="homeShowcaseArt" src="assets/cards/ironaegis.webp" alt="">
-        <div class="home-showcase-shade"></div>
-        <div class="home-showcase-info">
-          <span class="home-kicker" id="homeShowcaseArch">Avanguardia Pesante</span>
-          <h2 class="home-hero-name" id="homeShowcaseName">Iron Aegis</h2>
-          <div class="home-hero-stats" id="homeShowcaseStats"></div>
+      <div class="home-main">
+        <div class="comic-caption home-caption">Episodio 1 · <b>Una Calamità minaccia il Cosmo</b></div>
+        <!-- Vetrina: l'eroe in evidenza -->
+        <div class="home-showcase" onclick="UI.startQuickMissionSelection()">
+          <img class="home-showcase-art" id="homeShowcaseArt" src="assets/cards/ironaegis.webp" alt="">
+          <div class="home-showcase-shade"></div>
+          <div class="comic-burst home-burst" id="homeShowcaseCount">EROE<br>1/8</div>
+          <div class="home-showcase-info">
+            <span class="home-kicker" id="homeShowcaseArch">Avanguardia Pesante</span>
+            <h2 class="home-hero-name" id="homeShowcaseName">Iron Aegis</h2>
+            <div class="home-hero-stats" id="homeShowcaseStats"></div>
+          </div>
+          <div class="home-showcase-dots" id="homeShowcaseDots"></div>
         </div>
-        <div class="home-showcase-dots" id="homeShowcaseDots"></div>
       </div>
 
-      <!-- Azione principale -->
-      <button class="btn-play" onclick="UI.startQuickMissionSelection()">
-        <span class="btn-play-label">GIOCA</span>
-        <span class="btn-play-sub">Missione da 1 a 4 eroi</span>
-      </button>
+      <div class="home-side">
+        <!-- Azione principale -->
+        <button class="btn-play" onclick="UI.startQuickMissionSelection()">
+          <span class="btn-play-label">GIOCA</span>
+          <span class="btn-play-sub">Missione da 1 a 4 eroi</span>
+          <span class="comic-burst play-burst">VAI!</span>
+        </button>
 
-      <!-- Modalità secondarie -->
-      <div class="home-modes">
-        <button class="home-mode mode-boss" onclick="UI.openRogueBossPicker()">
-          <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8z"/></svg></span>
-          <span class="home-mode-text"><b>Eroe Corrotto</b><small>Duello contro un boss</small></span>
-        </button>
-        <button class="home-mode mode-online" onclick="UI.openMultiplayerModal(true)">
-          <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M10 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></span>
-          <span class="home-mode-text"><b>Con gli amici</b><small>Crea una stanza</small></span>
-        </button>
-        <button class="home-mode mode-join" onclick="UI.openMultiplayerModal(false)">
-          <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></svg></span>
-          <span class="home-mode-text"><b>Entra</b><small>Codice stanza</small></span>
-        </button>
+        <!-- Modalità secondarie -->
+        <div class="home-modes">
+          <button class="home-mode mode-boss" onclick="UI.openRogueBossPicker()">
+            <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8z"/></svg></span>
+            <span class="home-mode-text"><b>Eroe Corrotto</b><small>Duello contro un boss</small></span>
+          </button>
+          <button class="home-mode mode-online" onclick="UI.openMultiplayerModal(true)">
+            <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M10 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></span>
+            <span class="home-mode-text"><b>Con gli amici</b><small>Crea una stanza</small></span>
+          </button>
+          <button class="home-mode mode-join" onclick="UI.openMultiplayerModal(false)">
+            <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></svg></span>
+            <span class="home-mode-text"><b>Entra</b><small>Codice stanza</small></span>
+          </button>
+        </div>
+
+        <!-- Fumetto del giorno: consigli che cambiano -->
+        <div class="home-tip">
+          <div class="home-tip-avatar"><img id="homeTipAvatar" src="assets/cards/ironaegis.webp" alt=""></div>
+          <div class="speech-bubble" onclick="UI.nextHomeTip()">
+            <small>Consiglio dell'eroe</small>
+            <p id="homeTipText">Pesca meno carte quando il mazzo sta finendo: restare senza carte costa 10 Trauma!</p>
+          </div>
+        </div>
+
+        <p class="home-tagline comic-caption">Affronta le Calamità in cooperativa. Resisti al Trauma, o diventa il Villain.</p>
       </div>
-
-      <p class="home-tagline">Affronta le Calamità in cooperativa. Resisti al Trauma, o diventa il Villain.</p>
     </div>
   </section>
 

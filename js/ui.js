@@ -16,6 +16,7 @@ class UIController {
     try { this.renderCustomHeroOptions(); } catch (e) { console.error('renderCustomHeroOptions error:', e); }
     try { this.showScreen('scr-lobby'); } catch (e) { console.error('showScreen error:', e); }
     try { this.startHomeShowcase(); } catch (e) { console.error('startHomeShowcase error:', e); }
+    try { this._tipIdx = Math.floor(Math.random() * 8) - 1; this.nextHomeTip(); } catch (e) {}
     try { window.AudioEngine?.playMusic('m1_selezione.mp3'); } catch (e) {}
 
     // App Launch Intro Cinematic Animation
@@ -102,6 +103,27 @@ class UIController {
     }, 500);
   }
 
+  // Consigli nella Home (fumetto dell'eroe)
+  nextHomeTip() {
+    const tips = [
+      'Pesca meno carte quando il mazzo sta finendo: restare senza carte costa 10 Trauma!',
+      'Guarda le etichette sopra i nemici: ti dicono chi attaccheranno e con che Forza.',
+      'Se non giochi nessuna carta nel round prendi +1 Trauma. Muoviti sempre!',
+      'Il Sacrificio Tattico accetta solo carte della Categoria del binario.',
+      'A 5 Trauma l\'eroe diventa Villain: da lì gioca per i suoi Punti Vittoria.',
+      'Travolgere: il danno oltre la tua Resistenza passa anche se pari.',
+      'Nella Crisi Composita la seconda minaccia rinforza ma non attacca.',
+      'Il Potere Base si usa una volta per turno ed è gratis: non dimenticarlo!'
+    ];
+    this._tipIdx = ((this._tipIdx ?? -1) + 1) % tips.length;
+    const el = document.getElementById('homeTipText');
+    if (el) {
+      el.classList.remove('pop-in'); void el.offsetWidth;
+      el.textContent = tips[this._tipIdx];
+      el.classList.add('pop-in');
+    }
+  }
+
   // Barra di navigazione in basso
   navTo(screenId) {
     if (screenId === 'scr-hero-pick') return this.startQuickMissionSelection();
@@ -132,6 +154,10 @@ class UIController {
           .map(k => `<span class="stat-${k}"><b>${Math.min(5, 1 + (h[k] || 0))}</b>${statLabel[k]}</span>`).join('') +
           `<span class="stat-hp"><b>${h.vita}</b>VITA</span>`;
         if (dots) [...dots.children].forEach((d, i) => d.classList.toggle('on', i === idx % heroes.length));
+        const cnt = document.getElementById('homeShowcaseCount');
+        if (cnt) cnt.innerHTML = `EROE<br>${(idx % heroes.length) + 1}/${heroes.length}`;
+        const av = document.getElementById('homeTipAvatar');
+        if (av) av.src = h.img;
         art.classList.add('in');
       }, 250);
     };
