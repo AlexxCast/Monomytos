@@ -356,6 +356,8 @@ class MonomythosEngine {
           if (p.hand.length >= p.maxHand) break;
           this.drawOne(p);
         }
+        p.drawBonus = 0;
+        if (p.weakened && p.weakenedRound != null && p.weakenedRound < this.state.round) { p.weakened = false; p.weakenedRound = null; }
       }
     });
 
@@ -369,7 +371,7 @@ class MonomythosEngine {
   // Pescaggio massimo: min(5, Velocità + 1); Sfiancato blocca le carte extra (§3.4, §8.5)
   getMaxDraw(p) {
     if (p.weakened && !p.logoramento) return 1;
-    return Math.min(5, (p.spd || 1) + 1);
+    return Math.min(5, (p.spd || 1) + 1) + (p.drawBonus || 0);
   }
 
   // Scelta del bot: pesca al massimo, ma si ferma se il mazzo sta per finire (Push Your Luck)
@@ -676,6 +678,12 @@ class MonomythosEngine {
       return { ok: false, msg: `Questo binario accetta solo carte ${reqCat}` };
     }
     let contribution = card.valore;
+    // Calcolo Balistico e simili: raddoppia il prossimo Sacrificio Tattico
+    if (player.boostedSacrifice) {
+      contribution = Math.round(contribution * player.boostedSacrifice);
+      this.addLog('hero', `[POTENZIAMENTO] Sacrificio raddoppiato: ${card.valore} → ${contribution}`);
+      delete player.boostedSacrifice;
+    }
 
     if (trackChoice === 'primario') {
       th.primarioProgress = Math.min(th.primarioMax, th.primarioProgress + contribution);
@@ -884,6 +892,8 @@ class MonomythosEngine {
       if (this.isGameOver() || this.checkThreatDefeated() || this.checkAllHeroesDead()) return;
 
       if (enemyIndex >= enemies.length) {
+        // La riduzione di Forza vale un round
+        if (th._forzaBase != null) { th.forza = th._forzaBase; delete th._forzaBase; }
         // Proceed to next round
         this.state.round++;
         setTimeout(() => {
@@ -895,13 +905,17 @@ class MonomythosEngine {
       const enemy = enemies[enemyIndex++];
       const livingPlayers = this.state.players.filter(p => !p.isDead);
       if (livingPlayers.length === 0) return;
+      // Nemico Sfiancato: questo attacco fa 1 danno in meno
+      const sfiancato = enemy.weakened || (enemy.isBoss && th.weakened);
+      if (enemy.weakened) enemy.weakened = false;
+      if (enemy.isBoss && th.weakened) th.weakened = false;
 
       // Targeting
       const target = this.pickEnemyTarget(livingPlayers, th);
       delete th.forcedTarget;
 
       const forzaExtra = Math.floor((livingPlayers.length - 1) * ((window.MONOMYTHOS_BILANCIAMENTO || {}).forzaPerEroe || 0));
-      this.resolveEnemyAttack(enemy, target, th.forza + forzaExtra, () => {
+      this.resolveEnemyAttack(enemy, target, Math.max(0, th.forza + forzaExtra - (sfiancato ? 1 : 0)), () => {
         setTimeout(processNextAttack, 400);
       });
     };

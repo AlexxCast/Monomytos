@@ -210,6 +210,14 @@ class EffectRegistryClass {
 
     // 9. WEAKEN (SFIANCATO)
     this.register('weaken', (engine, ctx, fx) => {
+      // Malus "Applica Sfiancato" sulle carte Oscure: colpisce chi gioca la carta (pesca 1 sola carta al prossimo round)
+      if (fx.target === 'self') {
+        ctx.source.weakened = true;
+        ctx.source.weakenedRound = engine.state.round;
+        engine.addLog('threat', `[SFIANCATO] ${ctx.source.name} è sfiancato: al prossimo round pesca 1 sola carta`);
+        return { ok: true };
+      }
+      // Su un nemico: il suo prossimo attacco fa 1 danno in meno
       const targetEntity = ctx.targetEntity || engine.resolveTarget(ctx.targetId);
       if (targetEntity && targetEntity.entity) {
         targetEntity.entity.weakened = true;
@@ -222,7 +230,9 @@ class EffectRegistryClass {
     this.register('weakenForza', (engine, ctx, fx) => {
       const amt = fx.amount || 1;
       const th = engine.state.currentThreat;
-      th.forza = Math.max(1, th.forza - amt);
+      // Vale per questo round: a fine Fase Nemici la Forza torna quella di prima
+      if (th._forzaBase == null) th._forzaBase = th.forza;
+      th.forza = Math.max(0, th.forza - amt);
       engine.addLog('hero', `[DEPOTENZIAMENTO] La Forza della Minaccia è ridotta di ${amt} per questo round (Forza attuale: ${th.forza})`);
       return { ok: true, newForza: th.forza };
     });
@@ -241,7 +251,7 @@ class EffectRegistryClass {
       const { source } = ctx;
       const amt = fx.amount || 2;
       const threats = engine.state.actThreats || [];
-      const preview = threats.slice(engine.state.actIndex, engine.state.actIndex + amt).map(t => t.nome);
+      const preview = threats.slice(engine.state.actIndex + 1, engine.state.actIndex + 1 + amt).map(t => t.nome);
       engine.addLog('hero', `[ANALISI TATTICA] ${source.name} scruta le prossime calamità: ${preview.join(' → ') || 'Nessuna carta restante'}`);
       engine.emit('scry_performed', { source, preview });
       return { ok: true, preview };
@@ -270,6 +280,7 @@ class EffectRegistryClass {
       const { source } = ctx;
       const amt = fx.amount || 1;
       source.tempDrawRate = (source.tempDrawRate || 0) + amt;
+      source.drawBonus = (source.drawBonus || 0) + amt; // usato al pescaggio del prossimo round
       engine.addLog('hero', `${source.name} ottiene +${amt} al limite di Draw Rate per questo turno`);
       return { ok: true, amount: amt };
     });

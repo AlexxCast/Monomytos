@@ -272,6 +272,14 @@ class UIController {
     }
 
     // Engine Event Listeners
+    // Carte "Guarda il Mazzo Minaccia": mostra al giocatore le prossime Minacce
+    window.GameEngine.on('scry_performed', (ev, data) => {
+      if (!data || !data.source || !data.source.isLocal) return;
+      const st = window.GameEngine.state;
+      const next = (st.actThreats || []).slice(st.actIndex + 1).map(t => t.nome);
+      this.fxBanner('ANALISI', next.length ? 'Prossime Minacce: ' + next.join(' → ') : 'Questa è l\'ultima Minaccia', 'gold');
+      this.showToast(next.length ? `Prossime Minacce: ${next.join(' → ')}` : 'Nessuna altra Minaccia dopo questa.');
+    });
     window.GameEngine.on('match_started', (ev, data, state) => {
       this.renderGameView(state);
       this.triggerThreatDrawAnimation(state.currentThreat);
@@ -1548,9 +1556,13 @@ class UIController {
   inspectCurrentThreat() {
     const th = window.GameEngine.state ? window.GameEngine.state.currentThreat : null;
     if (!th) return;
-    document.getElementById('inspectCardImg').src = th.img || 'assets/icons/minaccia.webp';
-    document.getElementById('inspectCardTitle').textContent = th.nome;
-    document.getElementById('inspectCardDesc').textContent = `Pericoloso: ${th.pericoloso}\nCosmico: ${th.cosmico || 'Nessuno'}`;
+    // La finestra può contenere una carta ispezionata prima: si ricostruisce ogni volta
+    const wrap = document.querySelector('.full-card-inspect-wrap');
+    const esc = t => String(t == null ? '' : t).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+    if (wrap) wrap.innerHTML = `
+      <img src="${th.img || 'assets/icons/minaccia.webp'}" alt="${esc(th.nome)}" style="width:min(320px, 80vw); border-radius:12px; display:block; margin:0 auto 10px; box-shadow:4px 4px 0 #000;">
+      <h3 style="font-size:18px; color:var(--oro-soft)">${esc(th.nome)}</h3>
+      <p style="font-size:12px; color:var(--bone); text-align:center; max-width:320px;">Pericoloso: ${esc(th.pericoloso)}<br>Cosmico: ${esc(th.cosmico || 'Nessuno')}</p>`;
     this.showModal('modalInspect');
   }
 
