@@ -1,0 +1,97 @@
+{
+ "nota": "Scaletta dei video. Ogni giorno alle 17:00 (ora italiana) il workflow promo-video cerca qui la data di oggi, registra il copione, lo monta e lo pubblica. Per cambiare un giorno modifica la riga; per saltarlo cancellala. piattaforme e lingua_testi si possono cambiare anche su una singola riga.",
+ "fuso_orario": "Europe/Rome",
+ "lingua_testi": "it",
+ "piattaforme": [
+  "youtube",
+  "tiktok",
+  "instagram",
+  "bluesky",
+  "telegram",
+  "discord"
+ ],
+ "giorni": [
+  { "data": "2026-11-10", "copione": "coop_non_contro" },
+  {
+   "data": "2026-11-11",
+   "copione": "bustina_leggendaria",
+   "manuale": "Reddit: post su r/playmygame (testo nel piano), rispondi ai commenti"
+  },
+  { "data": "2026-11-12", "copione": "fatto_da_solo" },
+  { "data": "2026-11-13", "copione": "minaccia_boss" },
+  {
+   "data": "2026-11-14",
+   "copione": "carta_settimana",
+   "manuale": "#screenshotsaturday su Bluesky/X e diario di sviluppo su r/IndieDev"
+  },
+  { "data": "2026-11-17", "copione": "storia_lumen" },
+  {
+   "data": "2026-11-18",
+   "copione": "villain",
+   "manuale": "Reddit: post su r/IndieDev (testo nel piano), rispondi ai commenti"
+  },
+  { "data": "2026-11-19", "copione": "indovina_carta" },
+  { "data": "2026-11-20", "copione": "otto_eroi" },
+  {
+   "data": "2026-11-21",
+   "copione": "carta_settimana",
+   "manuale": "#screenshotsaturday su Bluesky/X e diario di sviluppo su r/IndieDev"
+  },
+  { "data": "2026-11-24", "copione": "mazzo_60" },
+  {
+   "data": "2026-11-25",
+   "copione": "parata",
+   "manuale": "Reddit: post su r/AndroidGaming (testo nel piano), rispondi ai commenti"
+  },
+  { "data": "2026-11-26", "copione": "round_veloce" },
+  { "data": "2026-11-27", "copione": "bustina_leggendaria" },
+  {
+   "data": "2026-11-28",
+   "copione": "carta_settimana",
+   "manuale": "#screenshotsaturday su Bluesky/X e diario di sviluppo su r/IndieDev"
+  },
+  { "data": "2026-12-01", "copione": "coop_non_contro" },
+  {
+   "data": "2026-12-02",
+   "copione": "minaccia_boss",
+   "manuale": "Reddit: post su r/cardgames (testo nel piano), rispondi ai commenti"
+  },
+  { "data": "2026-12-03", "copione": "indovina_carta" },
+  { "data": "2026-12-04", "copione": "villain" },
+  {
+   "data": "2026-12-05",
+   "copione": "carta_settimana",
+   "manuale": "#screenshotsaturday su Bluesky/X e diario di sviluppo su r/IndieDev"
+  },
+  { "data": "2026-12-08", "copione": "fatto_da_solo" },
+  {
+   "data": "2026-12-09",
+   "copione": "storia_lumen",
+   "manuale": "Reddit: post su r/indiegaming (testo nel piano), rispondi ai commenti"
+  },
+  { "data": "2026-12-10", "copione": "parata" },
+  { "data": "2026-12-11", "copione": "otto_eroi" },
+  {
+   "data": "2026-12-12",
+   "copione": "carta_settimana",
+   "manuale": "#screenshotsaturday su Bluesky/X e diario di sviluppo su r/IndieDev"
+  },
+  {
+   "data": "2026-12-15",
+   "copione": "trailer_lancio",
+   "nota": "Giorno di lancio: spostalo alla data vera del lancio"
+  },
+  {
+   "data": "2026-12-16",
+   "copione": "round_veloce",
+   "manuale": "Reddit: post su r/AndroidGaming (testo nel piano), rispondi ai commenti"
+  },
+  { "data": "2026-12-17", "copione": "mazzo_60" },
+  { "data": "2026-12-18", "copione": "bustina_leggendaria" },
+  {
+   "data": "2026-12-19",
+   "copione": "carta_settimana",
+   "manuale": "#screenshotsaturday su Bluesky/X e diario di sviluppo su r/IndieDev"
+  }
+ ]
+}

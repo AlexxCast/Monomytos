@@ -1,0 +1,179 @@
+{
+  "nota": "Copioni dei video brevi verticali (TikTok, YouTube Shorts, Reels). Ogni scena viene registrata dal vivo dal gioco, quindi ogni video è diverso anche se il copione è lo stesso. Tipi di scena: home, partita, bustina, storia, mazzo, eroi, carta. Testi in italiano (it) e inglese (en).",
+  "link": "https://alexxcast.github.io/Monomytos/",
+  "hashtag_base": ["monomythos", "cardgame", "indiegame", "giochidicarte", "gamedev"],
+  "copioni": [
+    {
+      "id": "coop_non_contro",
+      "titolo": { "it": "Il gioco di carte in cui giochi CON i tuoi amici", "en": "The card game where you play WITH your friends" },
+      "gancio": { "it": "NON giochi contro i tuoi amici…", "en": "You DON'T play against your friends…" },
+      "scene": [
+        { "tipo": "partita", "durata": 9, "eroi": 3, "testo": { "it": "…ci giochi INSIEME", "en": "…you play TOGETHER" }, "sotto": { "it": "3 eroi contro 1 Minaccia", "en": "3 heroes vs 1 Threat" } },
+        { "tipo": "partita", "durata": 6, "eroi": 3, "salta": 9, "testo": { "it": "Si vince o si perde in squadra", "en": "Win or lose as a team" } },
+        { "tipo": "bustina", "durata": 5, "testo": { "it": "E sblocchi carte nuove", "en": "And unlock new cards" } }
+      ],
+      "chiusura": { "it": "GIOCA GRATIS\\Ncon i tuoi amici", "en": "PLAY FREE\\Nwith your friends" },
+      "didascalia": { "it": "Un card game cooperativo: tu e i tuoi amici contro le Minacce. Gratis su Android e browser. Con chi ci giocheresti?", "en": "A co-op card game: you and your friends vs the Threats. Free on Android and browser. Who would you play with?" },
+      "hashtag": ["coop", "giochiconamici", "mobilegame"]
+    },
+    {
+      "id": "bustina_leggendaria",
+      "titolo": { "it": "Apro una bustina: esce la leggendaria?", "en": "Opening a pack: will I pull a legendary?" },
+      "gancio": { "it": "Bustina da 150 crediti…", "en": "150-credit pack…" },
+      "scene": [
+        { "tipo": "bustina", "durata": 7, "testo": { "it": "…esce la LEGGENDARIA?", "en": "…LEGENDARY pull?" }, "sotto": { "it": "scrivi nei commenti cosa è uscito", "en": "comment what you see" } }
+      ],
+      "musica": "m1_selezione.mp3",
+      "chiusura": { "it": "APRI LA TUA\\Nlink in bio", "en": "OPEN YOURS\\Nlink in bio" },
+      "didascalia": { "it": "Apertura bustina in Monomythos. Comuni, rare, epiche, leggendarie: tu cosa speri di trovare?", "en": "Pack opening in Monomythos. Common, rare, epic, legendary: what are you hoping for?" },
+      "hashtag": ["packopening", "bustine", "tcg"]
+    },
+    {
+      "id": "fatto_da_solo",
+      "titolo": { "it": "Ho creato un gioco di carte da solo", "en": "I made a card game by myself" },
+      "gancio": { "it": "Ho creato un gioco di carte DA SOLO", "en": "I made a card game ALONE" },
+      "scene": [
+        { "tipo": "home", "durata": 3, "testo": "" },
+        { "tipo": "partita", "durata": 7, "eroi": 2, "testo": { "it": "Partite tattiche in cooperativa", "en": "Tactical co-op matches" } },
+        { "tipo": "storia", "durata": 6, "testo": { "it": "Una Storia a fumetti", "en": "A comic-book story mode" } },
+        { "tipo": "mazzo", "durata": 4, "testo": { "it": "Il tuo mazzo da 60 carte", "en": "Your own 60-card deck" } }
+      ],
+      "chiusura": { "it": "È GRATIS\\Nprovalo e dimmi cosa ne pensi", "en": "IT'S FREE\\Ntry it and tell me what you think" },
+      "didascalia": { "it": "Sviluppatore indie, un solo progetto: Monomythos. Ogni feedback mi aiuta, scrivimi cosa miglioreresti.", "en": "Solo indie dev, one project: Monomythos. Every bit of feedback helps, tell me what you'd improve." },
+      "hashtag": ["indiedev", "solodev", "devlog"]
+    },
+    {
+      "id": "minaccia_boss",
+      "titolo": { "it": "Riusciamo a battere questa Minaccia?", "en": "Can we beat this Threat?" },
+      "gancio": { "it": "Questa Minaccia vuole distruggerci", "en": "This Threat wants us gone" },
+      "scene": [
+        { "tipo": "partita", "durata": 16, "eroi": 3, "testo": { "it": "Riusciremo a batterla?", "en": "Can we beat it?" }, "sotto": { "it": "guarda fino alla fine", "en": "watch till the end" } }
+      ],
+      "chiusura": { "it": "TOCCA A TE\\Nlink in bio", "en": "YOUR TURN\\Nlink in bio" },
+      "didascalia": { "it": "Tre eroi, una Minaccia in tre atti. Partita vera, giocata dall'IA del gioco.", "en": "Three heroes, one Threat in three acts. Real match, played by the game's AI." },
+      "hashtag": ["boss", "strategia", "strategygame"]
+    },
+    {
+      "id": "storia_lumen",
+      "titolo": { "it": "La città di Lumen ha perso la sua luce", "en": "The city of Lumen lost its light" },
+      "gancio": { "it": "Il Grande Faro si è spento…", "en": "The Great Lighthouse went dark…" },
+      "scene": [
+        { "tipo": "storia", "durata": 11, "testo": "", "sotto": { "it": "Capitolo 1: Il Faro Spento", "en": "Chapter 1: The Dark Lighthouse" } },
+        { "tipo": "partita", "durata": 6, "eroi": 2, "testo": { "it": "Riaccendilo tu", "en": "Light it up again" } }
+      ],
+      "musica": "m1_selezione.mp3",
+      "chiusura": { "it": "INIZIA LA STORIA\\Nlink in bio", "en": "START THE STORY\\Nlink in bio" },
+      "didascalia": { "it": "La modalità Storia di Monomythos: 6 missioni nel primo capitolo, dialoghi a fumetto e un mondo tutto da scoprire.", "en": "Monomythos story mode: 6 missions in chapter one, comic dialogues and a world to discover." },
+      "hashtag": ["storymode", "fumetti", "lore"]
+    },
+    {
+      "id": "carta_settimana",
+      "titolo": { "it": "Carta della settimana", "en": "Card of the week" },
+      "gancio": { "it": "CARTA DELLA SETTIMANA", "en": "CARD OF THE WEEK" },
+      "scene": [
+        { "tipo": "carta", "durata": 6, "testo": "", "sotto": { "it": "forte o da scartare?", "en": "strong or trash?" } },
+        { "tipo": "partita", "durata": 6, "eroi": 2, "salta": 4, "testo": { "it": "Dimmi nei commenti", "en": "Tell me in the comments" } }
+      ],
+      "chiusura": { "it": "COLLEZIONALE TUTTE\\Nlink in bio", "en": "COLLECT THEM ALL\\Nlink in bio" },
+      "didascalia": { "it": "Ogni settimana una carta di Monomythos. Voi la mettereste nel mazzo?", "en": "A Monomythos card every week. Would you put it in your deck?" },
+      "hashtag": ["cartadellasettimana", "deckbuilding"]
+    },
+    {
+      "id": "villain",
+      "titolo": { "it": "Il tuo compagno può diventare il Villain", "en": "Your teammate can become the Villain" },
+      "gancio": { "it": "Il tuo compagno può TRADIRTI", "en": "Your teammate can BETRAY you" },
+      "scene": [
+        { "tipo": "partita", "durata": 8, "eroi": 3, "testo": { "it": "Troppo Trauma…", "en": "Too much Trauma…" } },
+        { "tipo": "partita", "durata": 7, "eroi": 3, "salta": 10, "testo": { "it": "…e passa dalla parte del Villain", "en": "…and they turn Villain" }, "sotto": { "it": "fidarsi o no?", "en": "trust them or not?" } }
+      ],
+      "chiusura": { "it": "DI CHI TI FIDI?\\Nlink in bio", "en": "WHO DO YOU TRUST?\\Nlink in bio" },
+      "didascalia": { "it": "In Monomythos chi accumula troppo Trauma diventa Villain. Cooperativo... finché dura.", "en": "In Monomythos, too much Trauma turns you into the Villain. Co-op... while it lasts." },
+      "hashtag": ["traditore", "betrayal", "boardgame"]
+    },
+    {
+      "id": "mazzo_60",
+      "titolo": { "it": "Costruisci il tuo mazzo da 60 carte", "en": "Build your own 60-card deck" },
+      "gancio": { "it": "60 carte. Le scegli TU.", "en": "60 cards. YOU pick them." },
+      "scene": [
+        { "tipo": "mazzo", "durata": 8, "testo": "", "sotto": { "it": "massimo 2 copie per carta", "en": "max 2 copies per card" } },
+        { "tipo": "partita", "durata": 6, "eroi": 2, "salta": 4, "testo": { "it": "Poi lo porti in battaglia", "en": "Then take it to battle" } }
+      ],
+      "chiusura": { "it": "CREA IL TUO MAZZO\\Nlink in bio", "en": "BUILD YOUR DECK\\Nlink in bio" },
+      "didascalia": { "it": "Deckbuilding in Monomythos: 60 carte, massimo 2 copie. Qual è la vostra strategia preferita?", "en": "Deckbuilding in Monomythos: 60 cards, max 2 copies. What's your favourite strategy?" },
+      "hashtag": ["deckbuilding", "tcg", "strategia"]
+    },
+    {
+      "id": "otto_eroi",
+      "titolo": { "it": "8 eroi, 8 modi di giocare", "en": "8 heroes, 8 ways to play" },
+      "gancio": { "it": "Quale eroe sei?", "en": "Which hero are you?" },
+      "scene": [
+        { "tipo": "eroi", "durata": 8, "testo": "", "sotto": { "it": "8 eroi, 8 stili", "en": "8 heroes, 8 styles" } },
+        { "tipo": "partita", "durata": 6, "eroi": 2, "salta": 4, "testo": { "it": "Scrivi il tuo nei commenti", "en": "Comment yours" } }
+      ],
+      "chiusura": { "it": "SCEGLI IL TUO EROE\\Nlink in bio", "en": "PICK YOUR HERO\\Nlink in bio" },
+      "didascalia": { "it": "Potenza, Agilità, Intelligenza, Vigore: ogni eroe di Monomythos gioca in modo diverso. Il tuo preferito?", "en": "Power, Agility, Intelligence, Vigor: every Monomythos hero plays differently. Your favourite?" },
+      "hashtag": ["eroi", "heroes", "characterdesign"]
+    },
+    {
+      "id": "indovina_carta",
+      "titolo": { "it": "Indovina cosa fa questa carta", "en": "Guess what this card does" },
+      "gancio": { "it": "Indovina cosa fa questa carta", "en": "Guess what this card does" },
+      "scene": [
+        { "tipo": "carta", "durata": 5, "testo": "", "sotto": { "it": "hai 5 secondi", "en": "you have 5 seconds" } },
+        { "tipo": "partita", "durata": 5, "eroi": 2, "salta": 5, "testo": { "it": "Risposta nei commenti", "en": "Answer in the comments" } }
+      ],
+      "chiusura": { "it": "SCOPRI LE ALTRE\\Nlink in bio", "en": "DISCOVER MORE\\Nlink in bio" },
+      "didascalia": { "it": "Gioco: guardate la carta e scrivete nei commenti cosa pensate che faccia.", "en": "Game: look at the card and comment what you think it does." },
+      "hashtag": ["quiz", "indovina", "cardgame"]
+    },
+    {
+      "id": "parata",
+      "titolo": { "it": "Paro i danni scartando carte", "en": "Blocking damage by discarding cards" },
+      "gancio": { "it": "Ti attaccano? SCARTA e para", "en": "Under attack? DISCARD to block" },
+      "scene": [
+        { "tipo": "partita", "durata": 14, "eroi": 3, "salta": 4, "testo": { "it": "Ogni carta scartata assorbe danni", "en": "Every discarded card absorbs damage" }, "sotto": { "it": "ma ti restano meno carte", "en": "but you keep fewer cards" } }
+      ],
+      "chiusura": { "it": "QUANTO RISCHI?\\Nlink in bio", "en": "HOW MUCH DO YOU RISK?\\Nlink in bio" },
+      "didascalia": { "it": "La Parata Dinamica di Monomythos: difendi te o i compagni scartando carte. Rischio contro sicurezza.", "en": "Monomythos Dynamic Parry: protect yourself or your teammates by discarding cards. Risk vs safety." },
+      "hashtag": ["meccaniche", "gamedesign", "strategygame"]
+    },
+    {
+      "id": "round_veloce",
+      "titolo": { "it": "Un round di Monomythos in 20 secondi", "en": "A Monomythos round in 20 seconds" },
+      "gancio": { "it": "Un round in 20 secondi", "en": "One round in 20 seconds" },
+      "scene": [
+        { "tipo": "partita", "durata": 20, "eroi": 4, "testo": "", "sotto": { "it": "4 eroi contro la Minaccia", "en": "4 heroes vs the Threat" } }
+      ],
+      "chiusura": { "it": "PROVALO GRATIS\\Nlink in bio", "en": "TRY IT FREE\\Nlink in bio" },
+      "didascalia": { "it": "Pesca, gioca, para, colpisci. Un round completo di Monomythos con quattro eroi.", "en": "Draw, play, parry, strike. A full Monomythos round with four heroes." },
+      "hashtag": ["gameplay", "mobilegaming"]
+    },
+    {
+      "id": "aggiornamento",
+      "titolo": { "it": "Nuovo aggiornamento di Monomythos", "en": "New Monomythos update" },
+      "gancio": { "it": "NUOVO AGGIORNAMENTO", "en": "NEW UPDATE" },
+      "scene": [
+        { "tipo": "bustina", "durata": 6, "testo": { "it": "Carte nuove", "en": "New cards" } },
+        { "tipo": "partita", "durata": 8, "eroi": 3, "testo": { "it": "Minacce più dure", "en": "Tougher Threats" } }
+      ],
+      "chiusura": { "it": "AGGIORNA ORA\\Nlink in bio", "en": "UPDATE NOW\\Nlink in bio" },
+      "didascalia": { "it": "Aggiornamento di Monomythos: scrivi le novità qui prima di pubblicare.", "en": "Monomythos update: write the changes here before publishing." },
+      "hashtag": ["update", "patchnotes"]
+    },
+    {
+      "id": "trailer_lancio",
+      "titolo": { "it": "Monomythos è uscito: gioco di carte cooperativo gratis", "en": "Monomythos is out: free co-op card game" },
+      "gancio": { "it": "È USCITO", "en": "IT'S OUT" },
+      "scene": [
+        { "tipo": "home", "durata": 3, "testo": "" },
+        { "tipo": "partita", "durata": 10, "eroi": 3, "testo": { "it": "Gioca in squadra con gli amici", "en": "Team up with friends" } },
+        { "tipo": "bustina", "durata": 5, "testo": { "it": "Colleziona le carte", "en": "Collect cards" } },
+        { "tipo": "storia", "durata": 6, "testo": { "it": "Vivi la Storia", "en": "Live the Story" } },
+        { "tipo": "eroi", "durata": 4, "testo": { "it": "Scegli il tuo eroe", "en": "Pick your hero" } }
+      ],
+      "chiusura": { "it": "GRATIS\\NAndroid e browser", "en": "FREE\\NAndroid and browser" },
+      "didascalia": { "it": "Monomythos è disponibile! Gioco di carte tattico cooperativo, gratis. Link in bio.", "en": "Monomythos is out! Free tactical co-op card game. Link in bio." },
+      "hashtag": ["lancio", "launch", "newgame"]
+    }
+  ]
+}

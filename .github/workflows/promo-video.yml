@@ -1,0 +1,149 @@
+name: Video promozionali
+
+# Ogni giorno: guarda promo/scaletta.json, registra il gameplay del copione di oggi con un
+# browser automatico, monta il video verticale con testi e musica e lo pubblica sulle
+# piattaforme configurate. Il video resta anche come file nella release "promo-video" e
+# arriva una issue con il video, le didascalie pronte e l'esito di ogni piattaforma.
+# Gratis: GitHub Actions è illimitato per i repository pubblici.
+on:
+  schedule:
+    - cron: '0 16 * * *'   # 17:00 ora italiana d'inverno, 18:00 d'estate
+  workflow_dispatch:
+    inputs:
+      copione:
+        description: 'Copione da girare (vuoto = quello della scaletta di oggi)'
+        required: false
+        default: ''
+      piattaforme:
+        description: 'Piattaforme separate da virgola (vuoto = quelle della scaletta)'
+        required: false
+        default: ''
+      prova:
+        description: 'Prova: crea il video ma non pubblica sui social'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: promo-video
+  cancel-in-progress: false
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Video di oggi
+        id: oggi
+        env:
+          COPIONE: ${{ inputs.copione }}
+          PIATTAFORME: ${{ inputs.piattaforme }}
+        run: node promo/oggi.js
+
+      - name: Strumenti (browser e ffmpeg)
+        if: steps.oggi.outputs.copione != ''
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.48.2
+          npx playwright install --with-deps chromium
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+
+      - name: Registra il gameplay
+        if: steps.oggi.outputs.copione != ''
+        env:
+          LINGUA: ${{ steps.oggi.outputs.lingua }}
+        run: |
+          python3 -m http.server 8799 >/dev/null 2>&1 &
+          sleep 2
+          node promo/registra.js "${{ steps.oggi.outputs.copione }}" http://localhost:8799 promo/uscita
+
+      - name: Monta il video
+        if: steps.oggi.outputs.copione != ''
+        env:
+          LINGUA_TESTI: ${{ steps.oggi.outputs.lingua }}
+        run: node promo/monta.js "${{ steps.oggi.outputs.copione }}" promo/uscita
+
+      - name: Carica il video nella release promo-video
+        if: steps.oggi.outputs.copione != ''
+        id: file
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ID="${{ steps.oggi.outputs.copione }}"
+          NOME="${{ steps.oggi.outputs.data }}_${ID}"
+          cp "promo/uscita/$ID/$ID.mp4" "$NOME.mp4"
+          cp "promo/uscita/$ID/copertina.jpg" "${NOME}_copertina.jpg"
+          gh release view promo-video >/dev/null 2>&1 || gh release create promo-video --prerelease --title "Video promozionali" --notes "Video generati in automatico dal workflow Video promozionali. Ogni file è pronto da pubblicare su TikTok, Shorts e Reels."
+          gh release upload promo-video "$NOME.mp4" "${NOME}_copertina.jpg" --clobber
+          echo "url=https://github.com/${{ github.repository }}/releases/download/promo-video/$NOME.mp4" >> "$GITHUB_OUTPUT"
+          echo "nome=$NOME" >> "$GITHUB_OUTPUT"
+
+      - name: Pubblica sui social
+        if: steps.oggi.outputs.copione != ''
+        env:
+          PROVA: ${{ github.event_name == 'workflow_dispatch' && inputs.prova && '1' || '0' }}
+          VIDEO_URL: ${{ steps.file.outputs.url }}
+          LINGUA_TESTI: ${{ steps.oggi.outputs.lingua }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_PRIVACY: ${{ vars.YT_PRIVACY }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          TIKTOK_MODO: ${{ vars.TIKTOK_MODO }}
+          TIKTOK_PRIVACY: ${{ vars.TIKTOK_PRIVACY }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
+          BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: node promo/pubblica.js "${{ steps.oggi.outputs.copione }}" "${{ steps.oggi.outputs.piattaforme }}" promo/uscita
+
+      # I token di Instagram (60 giorni) e TikTok si rinnovano da soli. Per salvarli serve il
+      # Secret PAT_SEGRETI (token GitHub con permesso "Secrets: read and write" su questo repo).
+      - name: Salva i token rinnovati
+        if: steps.oggi.outputs.copione != ''
+        env:
+          GH_TOKEN: ${{ secrets.PAT_SEGRETI }}
+        run: |
+          [ -n "$GH_TOKEN" ] || { echo "PAT_SEGRETI non configurato: salto"; exit 0; }
+          D="promo/uscita/${{ steps.oggi.outputs.copione }}/nuovi_segreti"
+          [ -d "$D" ] || exit 0
+          for f in "$D"/*.txt; do gh secret set "$(basename "$f" .txt)" < "$f"; echo "rinnovato $(basename "$f" .txt)"; done
+
+      - name: Avviso con video e didascalie
+        if: steps.oggi.outputs.copione != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ID="${{ steps.oggi.outputs.copione }}"
+          DIR="promo/uscita/$ID"
+          {
+            echo "## 🎬 Video del ${{ steps.oggi.outputs.data }}: \`$ID\`"
+            echo
+            echo "[Scarica il video](${{ steps.file.outputs.url }}) · [copertina](https://github.com/${{ github.repository }}/releases/download/promo-video/${{ steps.file.outputs.nome }}_copertina.jpg)"
+            echo
+            echo "### Esito per piattaforma"
+            node -e "const e=require('./$DIR/esito.json');for(const[k,v]of Object.entries(e.piattaforme))console.log('- **'+k+'**: '+v.esito+(v.link?' → '+v.link:'')+(v.nota?' ('+v.nota+')':'')+(v.stato?' · '+v.stato:''))"
+            if [ -n "${{ steps.oggi.outputs.manuale }}" ]; then echo; echo "### Da fare a mano oggi"; echo "- [ ] ${{ steps.oggi.outputs.manuale }}"; fi
+            echo
+            echo "### Didascalie pronte da copiare"
+            echo '```'
+            cat "$DIR/didascalie.txt"
+            echo '```'
+          } > avviso.md
+          cat avviso.md >> "$GITHUB_STEP_SUMMARY"
+          gh issue create --title "🎬 Video del ${{ steps.oggi.outputs.data }}: $ID" --body-file avviso.md --assignee "${{ github.repository_owner }}" \
+            || gh issue create --title "🎬 Video del ${{ steps.oggi.outputs.data }}: $ID" --body-file avviso.md \
+            || echo "Issue non creata (le issue sono disattivate nel repository?)"
