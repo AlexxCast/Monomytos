@@ -662,3 +662,152 @@ body.theme-villain {
   .threat-central-card-wrap { padding: 12px 18px; }
   .threat-type-badge { font-size: 34px !important; }
 }
+
+/* ==========================================================
+   TERZO GIRO: FUMETTO NOTTURNO COSMICO
+   Pagina di notte (blu inchiostro, stelle, pianeta), pannelli
+   color carta antica, accenti rosso, oro e ciano.
+   ========================================================== */
+:root {
+  --night-0: #070a1f;
+  --night-1: #0d1336;
+  --night-2: #151d4a;
+  --cream: #f3ead6;
+  --cream-2: #e8dcc0;
+  --gold: #f5b82e;
+  --paper: var(--gold);
+  --paper-2: var(--cream);
+  --pop-red: #e2324d;
+  --pop-cyan: #2bc4e6;
+  --pop-purple: #8b6be8;
+  --pop-green: #3fcf86;
+  --on-night: #f3ead6;
+  --hard: 4px 4px 0 #000;
+  --hard-lg: 6px 6px 0 #000;
+}
+
+html, body {
+  background-color: var(--night-0) !important;
+  background-image:
+    radial-gradient(circle at 84% 14%, #ffd88a 0 26px, #f5b82e 27px 40px, rgba(245, 184, 46, 0.18) 41px 70px, transparent 71px),
+    radial-gradient(1.4px 1.4px at 12% 22%, #fff 99%, transparent),
+    radial-gradient(1.2px 1.2px at 30% 8%, #fff 99%, transparent),
+    radial-gradient(1.6px 1.6px at 47% 30%, #fff 99%, transparent),
+    radial-gradient(1.1px 1.1px at 63% 12%, #fff 99%, transparent),
+    radial-gradient(1.5px 1.5px at 72% 44%, #fff 99%, transparent),
+    radial-gradient(1.2px 1.2px at 92% 34%, #fff 99%, transparent),
+    radial-gradient(1.3px 1.3px at 8% 52%, #fff 99%, transparent),
+    radial-gradient(1.1px 1.1px at 22% 66%, #fff 99%, transparent),
+    radial-gradient(1.4px 1.4px at 88% 62%, #fff 99%, transparent),
+    radial-gradient(rgba(255, 255, 255, 0.07) 1.2px, transparent 1.5px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='170' viewBox='0 0 600 170'%3E%3Cpath fill='%23030511' d='M0 170V96h28V60h22v36h18V40h30v56h14V74h26v-30h12v30h20v96zM190 170V84h24V30h10v-14h6v14h10v54h20V66h34v104zM300 170V104h16V50h40v54h16V80h22v-26h20v26h18v90zM438 170V70h14V36h26v34h20V92h30V58h18v112zM560 170V88h40v82z'/%3E%3Cg fill='%23f5b82e'%3E%3Crect x='34' y='70' width='6' height='8'/%3E%3Crect x='76' y='52' width='6' height='8'/%3E%3Crect x='86' y='70' width='6' height='8'/%3E%3Crect x='200' y='96' width='6' height='8'/%3E%3Crect x='242' y='78' width='6' height='8'/%3E%3Crect x='326' y='62' width='6' height='8'/%3E%3Crect x='340' y='80' width='6' height='8'/%3E%3Crect x='456' y='46' width='6' height='8'/%3E%3Crect x='508' y='104' width='6' height='8'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(120% 80% at 50% 30%, transparent 30%, rgba(0, 0, 0, 0.55) 100%),
+    repeating-conic-gradient(from 0deg at 50% 36%, #111a45 0deg 6deg, #0b1236 6deg 12deg) !important;
+  background-size: auto, auto, auto, auto, auto, auto, auto, auto, auto, auto, 10px 10px, 600px 170px, auto, auto !important;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat-x, no-repeat, no-repeat !important;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, left bottom, center, center !important;
+  background-attachment: fixed !important;
+  color: var(--on-night);
+}
+body.theme-villain {
+  background-color: #12041f !important;
+  background-image:
+    radial-gradient(circle at 84% 14%, #ff8fb0 0 26px, #c2185b 27px 40px, rgba(194, 24, 91, 0.2) 41px 70px, transparent 71px),
+    radial-gradient(rgba(255, 255, 255, 0.07) 1.2px, transparent 1.5px),
+    radial-gradient(120% 80% at 50% 30%, transparent 30%, rgba(0, 0, 0, 0.6) 100%),
+    repeating-conic-gradient(from 0deg at 50% 36%, #2b0c45 0deg 6deg, #1a0630 6deg 12deg) !important;
+  background-size: auto, 10px 10px, auto, auto !important;
+  background-repeat: no-repeat, repeat, no-repeat, no-repeat !important;
+  background-position: 0 0, 0 0, center, center !important;
+}
+#app::before, #app::after { opacity: 0.08; color: var(--cream); }
+#app::after { color: var(--pop-cyan); }
+#scr-game { background: repeating-conic-gradient(from 0deg at 50% 28%, rgba(226, 50, 77, 0.07) 0deg 6deg, transparent 6deg 12deg) !important; }
+
+/* Testi che stanno direttamente sullo sfondo notturno: chiari */
+.hero-pick-header h2, .hero-pick-header p, #scr-shop h2, #scr-deckbuilder h2, .deckbuilder-top-bar h2, .deckbuilder-top-bar p,
+.deck-badge-title, .deck-badge-count, .home-tagline, #scr-room-wait > .lobby-content > h3 {
+  color: var(--on-night) !important;
+}
+.hero-pick-header h2, #scr-shop h2, .deckbuilder-top-bar h2 { text-shadow: 3px 3px 0 #000; }
+header.main-header .brand-text h1 { color: var(--gold); -webkit-text-stroke: 1.6px #000; text-shadow: 3px 3px 0 var(--pop-red); }
+#missionActLabel { color: var(--ink) !important; }
+
+/* Pannelli carta antica */
+.btn, .icon-btn, .btn-top-back, .credits-pill { background: var(--cream) !important; }
+.home-mode.mode-boss { background: #c42d47 !important; }
+.home-mode.mode-online { background: #1f8fb3 !important; }
+.home-mode.mode-join { background: #6a4fc4 !important; }
+.home-mode .home-mode-text b, .home-mode .home-mode-text small { color: #fff !important; }
+.home-mode .home-mode-text b { -webkit-text-stroke: 0.6px #000; text-shadow: 2px 2px 0 #000; }
+.home-mode-ico { background: var(--cream) !important; }
+.home-showcase { background: var(--night-1); }
+.speech-bubble, .speech-bubble::before { background: var(--cream); }
+.comic-caption { background: var(--gold); }
+.comic-caption b { color: var(--ink); }
+.home-tagline.comic-caption { background: var(--cream); color: var(--ink) !important; }
+.home-burst { background: var(--gold); }
+.play-burst { background: var(--pop-cyan); }
+.btn-play-sub { background: var(--gold) !important; }
+
+.companion-battlefield-card, .mook-chip, .player-command-deck, .shop-item-card, .creation-card-slot, .hero-slide,
+.bottom-sheet, .modal-content, .battle-log, .battle-log-toggle, .squad-pills-row, .stat-chip, .slot-token,
+.action-opt-card, .speech-bubble {
+  background-color: var(--cream) !important;
+}
+.hero-slide.selected { background: #fbe6a6 !important; }
+.shop-item-card.unlocked { background: #cdeedd !important; }
+.companion-battlefield-card.is-villain, body.theme-villain .player-command-deck { background: #d9c8f5 !important; }
+.slot-token.str { background: #f7c89a !important; } .slot-token.spd { background: #a9e4f2 !important; }
+.slot-token.tech { background: #bfcdf5 !important; } .slot-token.end { background: #b4e8cb !important; }
+
+/* Minaccia: vignetta notturna rosso scuro */
+.threat-central-card-wrap {
+  background-color: #3b0b1a !important;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.07) 1.2px, transparent 1.5px),
+    radial-gradient(80% 120% at 20% 50%, rgba(226, 50, 77, 0.45), transparent 70%) !important;
+  background-size: 8px 8px, auto !important;
+  border-color: #000 !important;
+}
+.threat-central-card-wrap .track-lbl, .threat-central-card-wrap .track-num, .threat-central-card-wrap .timer-box span { color: var(--cream) !important; }
+.threat-type-badge { color: var(--gold) !important; -webkit-text-stroke: 1.5px #000; }
+.threat-central-card-wrap .progress-track { background: #1a0510 !important; border-color: #000; }
+.fill-primario { background: var(--gold) !important; }
+
+/* Tavolo: zona tratteggiata sul cielo */
+.table-play-zone { background: rgba(7, 10, 31, 0.55) !important; border-color: var(--cream) !important; }
+.table-play-placeholder { color: var(--cream) !important; }
+
+/* Navigazione */
+.nav-item { color: var(--gold) !important; }
+.nav-item svg { stroke: var(--gold); }
+.bottom-nav { background: #03050f !important; border-color: #000 !important; }
+.nav-item.active span { border-color: var(--gold); }
+
+/* Notifiche: fumetto chiaro, sempre leggibile */
+.app-toast {
+  background: var(--cream) !important;
+  color: var(--ink) !important;
+  border: 3px solid #000 !important;
+  border-radius: 14px !important;
+  box-shadow: 4px 4px 0 #000 !important;
+  font-weight: 800 !important;
+  top: calc(64px + var(--safe-top)) !important;
+}
+.floating-num { color: var(--gold) !important; }
+.fx-banner-band { background: var(--pop-red) !important; }
+.btn-primary, .btn-endturn, .bottom-sheet .btn-primary { background: var(--pop-red) !important; color: #fff !important; }
+.btn-pb { background: var(--pop-purple) !important; color: #fff !important; text-shadow: 1px 1px 0 #000; }
+.stat-chip .val { color: var(--ink) !important; }
+.stat-chip.str { background: #f7c89a !important; } .stat-chip.spd { background: #a9e4f2 !important; }
+.stat-chip.tech { background: #bfcdf5 !important; } .stat-chip.end { background: #b4e8cb !important; }
+.deckbuilder-top-bar > div > span, .deckbuilder-top-bar h2 { color: var(--on-night) !important; }
+.bottom-sheet [style*="background:#0"], .bottom-sheet [style*="background: #0"], .bottom-sheet [style*="background:#1"], .bottom-sheet [style*="background: rgba(0"], .bottom-sheet [style*="background:rgba(0"] {
+  background: var(--white) !important;
+  border: 2px solid var(--ink) !important;
+  color: var(--ink) !important;
+}
+.bottom-sheet [style*="color"]:not(.btn):not(.btn *):not(.parry-card-title) { color: var(--ink) !important; }
+.bottom-sheet h3[style*="color"], .bottom-sheet h2[style*="color"] { color: #b3122c !important; }
+.parry-check-badge { background: var(--pop-green) !important; color: #000 !important; border: 2px solid #000; }

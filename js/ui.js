@@ -1572,13 +1572,7 @@ class UIController {
 
   showToast(msg) {
     const toast = document.createElement('div');
-    toast.style.cssText = `
-      position: fixed; top: 70px; left: 50%; transform: translateX(-50%);
-      background: rgba(13, 17, 24, 0.95); border: 1.5px solid var(--oro);
-      color: var(--bone); padding: 8px 18px; border-radius: 20px;
-      font-size: 13px; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.7);
-      z-index: 1000; pointer-events: none; animation: toastIn 0.3s ease;
-    `;
+    toast.className = 'app-toast';
     toast.textContent = msg;
     document.body.appendChild(toast);
     setTimeout(() => {
