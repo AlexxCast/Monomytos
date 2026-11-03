@@ -626,6 +626,17 @@
   <!-- ==========================================
        MODAL 6: OFFICIAL RULES VIEWER (V7.7)
        ========================================== -->
+  <div class="modal-overlay" id="modalScambi" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet" style="max-height:90dvh;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3>Scambi con gli amici</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+      <div id="scambiBody" class="scambi-body"></div>
+    </div>
+  </div>
+
   <div class="modal-overlay" id="modalMinacce" onclick="if(event.target===this) UI.hideModals()">
     <div class="bottom-sheet" style="max-height:90dvh;">
       <div class="sheet-handle"></div>
@@ -692,10 +703,11 @@
     <div class="deckbuilder-top-bar">
       <div>
         <h2 style="font-size:17px; color:var(--oro-soft); margin:0 0 2px;">Mazzo Personalizzato</h2>
-        <span style="font-size:11px; color:var(--muto);">Componi Eroe & Mazzo da 60 Carte</span>
+        <span style="font-size:11px; color:var(--muto);">Componi il tuo Eroe e un mazzo con le carte che possiedi</span>
       </div>
       <div style="display:flex; gap:8px; align-items:center;">
         <button class="btn btn-sm btn-threat-deck" onclick="Collezione.apriMinacce()">Minacce</button>
+        <button class="btn btn-sm btn-trade" onclick="Scambi.apri()">Scambi <span class="scambi-badge" style="display:none">0</span></button>
         <button class="btn btn-primary btn-sm" id="btnSaveDeck" onclick="UI.saveCurrentDeck()">Salva Mazzo</button>
         <button class="btn btn-top-back" onclick="UI.showScreen('scr-lobby')" title="Torna al Menu">
           <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -754,10 +766,10 @@
 
       <!-- Real-Time Deck Count & Rule Validation (Mazzo di 60 carte) -->
       <div class="deck-count-bar">
-        <span>Carte nel Mazzo: <b id="deckTotalCount">0</b>/60</span>
-        <span>Carte Oscure: <b id="deckDarkCount">0</b>/24 max</span>
+        <span>Carte nel Mazzo: <b id="deckTotalCount">0</b>/<span class="deckSizeLabel">40</span></span>
+        <span>Carte Oscure: <b id="deckDarkCount">0</b>/<span class="deckDarkMaxLabel">16</span> max</span>
       </div>
-      <div class="deck-rule-validation-msg" id="deckValidationStatus">Componi 60 carte per completare il mazzo (0/60)</div>
+      <div class="deck-rule-validation-msg" id="deckValidationStatus">Componi 40 carte per completare il mazzo (0/40)</div>
 
       <!-- Category Filter Tabs for Easy Selection of 60 Cards -->
       <div class="deck-category-tabs">
@@ -793,7 +805,7 @@
 
     <div class="shop-section-title">Bustine di Carte</div>
     <div class="shop-free-pack" id="shopFreePack"></div>
-    <p class="shop-odds">Ogni bustina ha 5 carte: 3 Comuni o Non comuni, 1 Non comune o Rara, 1 Rara o meglio (Epica 20%, Leggendaria 4%). Le copie oltre la quarta diventano crediti.</p>
+    <p class="shop-odds">Ogni bustina ha 5 carte: 3 Comuni o Non comuni, 1 Non comune o Rara, 1 Rara o meglio (Epica 20%, Leggendaria 4%). Nel mazzo vanno al massimo 2 copie per carta: le altre sono doppioni da scambiare con gli amici (oltre la sesta copia diventano crediti).</p>
     <div class="shop-grid">
       <div class="shop-item-card" onclick="UI.buyBoosterPack('standard', 150)">
         <div class="booster-thumb-icon"><img src="assets/cards/retrocartamazzo.webp" alt="Pack" style="width:40px; height:56px; border-radius:6px; object-fit:cover; margin:0 auto 8px; display:block;"></div>
@@ -828,6 +840,16 @@
         <h4>Il tuo mazzo Minacce</h4>
         <p>Scegli quali Minacce porti in partita</p>
         <button class="btn btn-subtle" style="padding:6px 12px; font-size:12px;">Apri</button>
+      </div>
+    </div>
+
+    <div class="shop-section-title">Scambi</div>
+    <div class="shop-grid">
+      <div class="shop-item-card" onclick="Scambi.apri()">
+        <div class="booster-thumb-icon"><img src="assets/cards/retrocartamazzo.webp" alt="" style="width:40px; height:56px; border-radius:6px; object-fit:cover; margin:0 auto 8px; display:block;"></div>
+        <h4>Scambia doppioni <span class="scambi-badge" style="display:none">0</span></h4>
+        <p>Dai i tuoi doppioni agli amici in cambio delle carte che ti mancano</p>
+        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">Apri scambi</button>
       </div>
     </div>
 
@@ -1189,6 +1211,7 @@
 <script src="js/account.js"></script>
 <script src="js/collezione.js"></script>
 <script src="js/online.js"></script>
+<script src="js/scambi.js"></script>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {

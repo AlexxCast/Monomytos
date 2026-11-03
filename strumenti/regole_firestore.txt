@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+    match /rooms/{code} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.resource.data.host == request.auth.uid;
+      allow update: if request.auth != null && (
+        resource.data.host == request.auth.uid ||
+        (resource.data.status == 'lobby' && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['players']))
+      );
+      allow delete: if request.auth != null && resource.data.host == request.auth.uid;
+      match /actions/{id} {
+        allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+        allow read: if request.auth != null && get(/databases/$(database)/documents/rooms/$(code)).data.host == request.auth.uid;
+      }
+    }
+    // Codici amico: chiunque abbia un account può cercarli, ognuno gestisce solo il proprio
+    match /amici/{code} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+    // Scambi di carte: li vedono solo i due giocatori coinvolti
+    match /scambi/{id} {
+      allow read: if request.auth != null && (resource.data.da == request.auth.uid || resource.data.a == request.auth.uid);
+      allow create: if request.auth != null && request.resource.data.da == request.auth.uid && request.resource.data.stato == 'proposto';
+      allow update: if request.auth != null && (
+        (resource.data.a == request.auth.uid && resource.data.stato == 'proposto' && request.resource.data.stato in ['accettato', 'rifiutato']) ||
+        (resource.data.da == request.auth.uid && resource.data.stato == 'proposto' && request.resource.data.stato == 'annullato') ||
+        (resource.data.da == request.auth.uid && resource.data.stato in ['accettato', 'rifiutato', 'annullato'] && request.resource.data.stato == 'chiuso')
+      );
+    }
+  }
+}

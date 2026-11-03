@@ -88,7 +88,9 @@ class MonomythosEngine {
       let darkCount = deck.filter(isDark).length;
       let padIdx = 0;
       let misses = 0;
-      while (deck.length < 60 && availableCards && availableCards.length > 0 && misses < availableCards.length) {
+      // Il mazzo personalizzato si gioca così com'è (solo carte possedute); il mazzo base dell'eroe arriva a 60
+      const targetSize = deck.length > 0 && customDeckConfig ? deck.length : 60;
+      while (deck.length < targetSize && availableCards && availableCards.length > 0 && misses < availableCards.length) {
         const c = availableCards[padIdx % availableCards.length];
         padIdx++;
         if ((copies[c.id] || 0) >= 4 || (isDark(c) && darkCount >= 12)) { misses++; continue; }

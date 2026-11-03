@@ -25,7 +25,11 @@
   ];
 
   // Quante copie dà lo sblocco di un eroe (starter compreso). Epiche e Leggendarie solo dalle bustine.
-  const COPIE_SBLOCCO = { comune: 4, noncomune: 2, rara: 1, epica: 0, leggendaria: 0 };
+  const COPIE_SBLOCCO = { comune: 2, noncomune: 2, rara: 1, epica: 0, leggendaria: 0 };
+  // Mazzo personalizzato: solo carte possedute, al massimo 2 copie per carta
+  const REGOLE_MAZZO = { carteMin: 40, carteMax: 40, copieMax: 2, oscureMax: 16 };
+  // Copie oltre questo numero diventano crediti (le copie oltre la seconda sono doppioni da scambiare)
+  const COPIE_MAX_COLLEZIONE = 6;
   const CREDITI_INIZIALI = 300;
   const COSTO_EROE = 600;
 
@@ -91,7 +95,8 @@
   }
 
   const Collezione = {
-    RARITA, STARTER, STAGIONE, EVENTI, COSTO_EROE, MAZZO_MINACCE, COSTO_BUSTA_MINACCE,
+    RARITA, STARTER, STAGIONE, EVENTI, COSTO_EROE, MAZZO_MINACCE, COSTO_BUSTA_MINACCE, REGOLE_MAZZO, COPIE_MAX_COLLEZIONE,
+    doppioni(id) { return Math.max(0, ((this.p && this.p.data.unlockedCards[id]) || 0) - REGOLE_MAZZO.copieMax); },
 
     // ---------- Minacce ----------
     tutteMinacce() { return (window.MONOMYTHOS_DATA || {}).threats || []; },
@@ -234,7 +239,7 @@
       const d = this.p.data;
       const r = this.rarita(card);
       const prima = d.unlockedCards[card.id] || 0;
-      if (prima >= 4) {
+      if (prima >= COPIE_MAX_COLLEZIONE) {
         d.credits += RARITA[r].doppione;
         risultati.push({ card, rarita: r, nuova: false, crediti: RARITA[r].doppione });
       } else {

@@ -101,6 +101,7 @@
       window.UI.showScreen('scr-lobby');
       window.UI.showToast(`Bentornato, ${this.nickname()}!`);
       if (window.Online && window.Collezione && window.Collezione.haStarter()) window.Online.dopoAccesso();
+      if (window.Scambi) window.Scambi.avvia();
     },
 
     nickname() {
@@ -181,6 +182,7 @@
       // I progressi stanno nell'account: sul dispositivo non resta nulla
       try { localStorage.removeItem(window.Progression.storageKey); } catch (e) {}
       window.Progression.data = window.Progression.getDefaultData();
+      if (window.Scambi) window.Scambi.ferma();
       await this.auth.signOut();
     },
 

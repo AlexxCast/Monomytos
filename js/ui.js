@@ -2090,7 +2090,7 @@ class UIController {
         <div class="builder-card-details" onclick="UI.inspectCardById('${c.id}')">
           <div class="builder-card-details-top">
             <h4>${c.nome}</h4>
-            <span class="builder-card-meta-line">Possedute: ${owned}</span>
+            <span class="builder-card-meta-line">Possedute: ${owned}${owned > 2 ? ` · ${owned - 2} da scambiare` : ''}</span>
           </div>
           <div class="builder-card-tags-row">${tagHtml}</div>
           <div class="builder-card-effect-text">${effectText}</div>
@@ -2236,12 +2236,13 @@ class UIController {
   changeCardDeckCount(cardId, delta) {
     const current = this.currentDeckBuilding.cards[cardId] || 0;
     const owned = window.Progression.getCardOwnedCount(cardId);
-    const maxAllowed = Math.min(4, owned); // Max 4 copies per rulebook §4.1
+    const R = window.Collezione ? window.Collezione.REGOLE_MAZZO : { copieMax: 2 };
+    const maxAllowed = Math.min(R.copieMax, owned); // massimo 2 copie, e non più di quelle possedute
 
     let next = current + delta;
     if (next < 0) next = 0;
     if (next > maxAllowed) {
-      return this.showToast(`Limite raggiunto! Massimo ${maxAllowed} copie disponibili`);
+      return this.showToast(owned < R.copieMax ? `Ne possiedi solo ${owned}: non puoi metterne di più.` : `Massimo ${R.copieMax} copie per carta nel mazzo.`);
     }
 
     if (next === 0) {
@@ -2273,19 +2274,21 @@ class UIController {
     const statusEl = document.getElementById('deckValidationStatus');
     if (totEl) totEl.textContent = total;
     if (darkEl) darkEl.textContent = dark;
+    const R = window.Collezione ? window.Collezione.REGOLE_MAZZO : { carteMin: 60, carteMax: 60, oscureMax: 24 };
+    const sizeLbl = R.carteMin === R.carteMax ? `${R.carteMin}` : `${R.carteMin}-${R.carteMax}`;
+    document.querySelectorAll('.deckSizeLabel').forEach(el => { el.textContent = sizeLbl; });
+    document.querySelectorAll('.deckDarkMaxLabel').forEach(el => { el.textContent = R.oscureMax; });
+    this._deckValid = total >= R.carteMin && total <= R.carteMax && dark <= R.oscureMax;
     if (statusEl) {
-      if (total === 60 && dark <= 24) {
-        statusEl.textContent = 'Mazzo valido (60 carte)! Pronto per il salvataggio.';
-        statusEl.style.color = 'var(--ok)';
-      } else if (total > 60) {
-        statusEl.textContent = `Troppe carte nel mazzo (${total}/60). Rimuovi ${total - 60} carte.`;
-        statusEl.style.color = '#ff5555';
-      } else if (dark > 24) {
-        statusEl.textContent = `Troppe Carte Oscure (${dark}/24 max). Riduci le carte oscure.`;
-        statusEl.style.color = '#ff5555';
+      statusEl.classList.toggle('valid', this._deckValid);
+      if (this._deckValid) {
+        statusEl.textContent = `Mazzo valido (${total} carte)! Pronto per il salvataggio.`;
+      } else if (total > R.carteMax) {
+        statusEl.textContent = `Troppe carte nel mazzo (${total}/${sizeLbl}). Rimuovi ${total - R.carteMax} carte.`;
+      } else if (dark > R.oscureMax) {
+        statusEl.textContent = `Troppe Carte Oscure (${dark}/${R.oscureMax} max). Riduci le carte oscure.`;
       } else {
-        statusEl.textContent = `Componi 60 carte per completare il mazzo (${total}/60).`;
-        statusEl.style.color = 'var(--oro-soft)';
+        statusEl.textContent = `Componi ${sizeLbl} carte per completare il mazzo (${total}/${sizeLbl}).`;
       }
     }
   }
@@ -2294,6 +2297,8 @@ class UIController {
     const nameInput = document.getElementById('deckNameInput');
     const name = (nameInput && nameInput.value.trim()) || 'Mazzo Personalizzato';
     const hero = this.currentDeckBuilding.hero || 'Custom Hero';
+    this.updateDeckBuilderCounts();
+    if (!this._deckValid) return this.showToast('Il mazzo non è ancora valido: guarda il messaggio sopra i filtri.');
 
     window.Progression.saveCustomDeck(name, hero, this.currentDeckBuilding.cards);
     this.showToast(`Mazzo "${name}" salvato con successo!`);
