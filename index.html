@@ -15,13 +15,14 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- PeerJS for Serverless WebRTC Multiplayer Online Fallback -->
   <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js" defer></script>
 
   <!-- App Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tema.css">
 </head>
 <body>
 
@@ -84,98 +85,66 @@
       </div>
     </div>
   </header>
+  <!-- Navigazione in basso (nascosta in partita) -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="nav-item active" data-screen="scr-lobby" onclick="UI.navTo('scr-lobby')">
+      <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span>
+    </button>
+    <button class="nav-item" data-screen="scr-hero-pick" onclick="UI.navTo('scr-hero-pick')">
+      <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg><span>Eroi</span>
+    </button>
+    <button class="nav-item" data-screen="scr-deckbuilder" onclick="UI.navTo('scr-deckbuilder')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="12" height="16" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v13"/></svg><span>Mazzo</span>
+    </button>
+    <button class="nav-item" data-screen="scr-shop" onclick="UI.navTo('scr-shop')">
+      <svg viewBox="0 0 24 24"><path d="M4 8h16l-1.5 12a1 1 0 0 1-1 .9h-11a1 1 0 0 1-1-.9z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span>Negozio</span>
+    </button>
+    <button class="nav-item" onclick="UI.showModal('modalRules')">
+      <svg viewBox="0 0 24 24"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg><span>Regole</span>
+    </button>
+  </nav>
+
 
   <!-- ==========================================
        SCREEN 1: LOBBY / HOME
        ========================================== -->
   <section class="screen active" id="scr-lobby">
-    <div class="lobby-content">
-      <!-- Point 2: Centered Game Title and Audio On/Off Toggle Button -->
-      <div class="home-top-row">
-        <h1 class="home-main-title">MONOMYTHOS</h1>
-        <button class="home-audio-btn" id="homeAudioToggleBtn" onclick="UI.toggleAudioFromHome()" title="Audio On/Off" aria-label="Toggle Audio">
-          <svg class="audio-svg-on" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-          </svg>
-          <svg class="audio-svg-off" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <line x1="23" y1="9" x2="17" y2="15"></line>
-            <line x1="17" y1="9" x2="23" y2="15"></line>
-          </svg>
+    <div class="home">
+      <!-- Vetrina: l'eroe in evidenza -->
+      <div class="home-showcase" onclick="UI.startQuickMissionSelection()">
+        <img class="home-showcase-art" id="homeShowcaseArt" src="assets/cards/ironaegis.webp" alt="">
+        <div class="home-showcase-shade"></div>
+        <div class="home-showcase-info">
+          <span class="home-kicker" id="homeShowcaseArch">Avanguardia Pesante</span>
+          <h2 class="home-hero-name" id="homeShowcaseName">Iron Aegis</h2>
+          <div class="home-hero-stats" id="homeShowcaseStats"></div>
+        </div>
+        <div class="home-showcase-dots" id="homeShowcaseDots"></div>
+      </div>
+
+      <!-- Azione principale -->
+      <button class="btn-play" onclick="UI.startQuickMissionSelection()">
+        <span class="btn-play-label">GIOCA</span>
+        <span class="btn-play-sub">Missione da 1 a 4 eroi</span>
+      </button>
+
+      <!-- Modalità secondarie -->
+      <div class="home-modes">
+        <button class="home-mode mode-boss" onclick="UI.openRogueBossPicker()">
+          <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8z"/></svg></span>
+          <span class="home-mode-text"><b>Eroe Corrotto</b><small>Duello contro un boss</small></span>
+        </button>
+        <button class="home-mode mode-online" onclick="UI.openMultiplayerModal(true)">
+          <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M10 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></span>
+          <span class="home-mode-text"><b>Con gli amici</b><small>Crea una stanza</small></span>
+        </button>
+        <button class="home-mode mode-join" onclick="UI.openMultiplayerModal(false)">
+          <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></svg></span>
+          <span class="home-mode-text"><b>Entra</b><small>Codice stanza</small></span>
         </button>
       </div>
 
-      <div class="hero-banner">
-        <h2>Il Destino Cosmico</h2>
-        <p>Affronta le Calamità in cooperativa da 2 a 4 eroi. Le tue scelte determineranno se salverai il cosmo come Eroe o se soccomberai al Trauma diventando un temibile Villain.</p>
-      </div>
-
-      <!-- Point 1: Mode Buttons without left icon square, uniform left alignment, transparent glass look -->
-      <div class="mode-cards">
-        <!-- Solo & Co-op Mode with Bots -->
-        <div class="mode-card mode-solo" onclick="UI.startQuickMissionSelection()">
-          <div class="mode-badge">1 - 4 EROI</div>
-          <div class="mode-info">
-            <h3>Missione Veloce (Solo / Bot Co-op)</h3>
-            <p>Affronta le Calamità da 1 a 4 eroi con bot IA tattici sul tuo dispositivo</p>
-          </div>
-        </div>
-
-        <!-- Custom Deck Builder -->
-        <div class="mode-card mode-deck" onclick="UI.openDeckBuilder()">
-          <div class="mode-badge">DECKBUILDER</div>
-          <div class="mode-info">
-            <h3>Mazzo Personalizzato</h3>
-            <p>Componi il tuo eroe custom e il tuo mazzo tattico da 30 carte</p>
-          </div>
-        </div>
-
-        <!-- Shop & Unlocks -->
-        <div class="mode-card mode-shop" onclick="UI.openShop()">
-          <div class="mode-badge">ARCHIVIO & BUSTINE</div>
-          <div class="mode-info">
-            <h3>Negozio Cosmico & Sblocchi</h3>
-            <p>Spendi i Crediti Cosmici per bustine d'espansione e nuovi Eroi</p>
-          </div>
-        </div>
-
-        <!-- Rogue Hero Boss Duel -->
-        <div class="mode-card mode-boss" onclick="UI.openRogueBossPicker()">
-          <div class="mode-badge">BOSS CORROTTO</div>
-          <div class="mode-info">
-            <h3>Sfida Eroe Corrotto (NPC Boss)</h3>
-            <p>Duello epico contro un eroe consumato dal Trauma passato al lato oscuro</p>
-          </div>
-        </div>
-
-        <!-- Multiplayer Online: Create Room -->
-        <div class="mode-card mode-multi" onclick="UI.openMultiplayerModal(true)">
-          <div class="mode-badge">HOST ONLINE</div>
-          <div class="mode-info">
-            <h3>Crea Stanza Online</h3>
-            <p>Ospita una missione cooperativa e condividi il codice a 4 lettere</p>
-          </div>
-        </div>
-
-        <!-- Multiplayer Online: Join Room -->
-        <div class="mode-card mode-join" onclick="UI.openMultiplayerModal(false)">
-          <div class="mode-badge">PARTECIPA</div>
-          <div class="mode-info">
-            <h3>Partecipa a Stanza</h3>
-            <p>Unisciti alla missione di un amico digitando il codice stanza</p>
-          </div>
-        </div>
-
-        <!-- Download Native APK -->
-        <a class="mode-card mode-apk" href="monomythos.apk" download="monomythos.apk">
-          <div class="mode-badge">APK NATIVO (55 MB)</div>
-          <div class="mode-info">
-            <h3 style="color:#a8e6cf;">Scarica APK Android (.apk)</h3>
-            <p>Installa l'applicazione nativa firmata direttamente sul tuo telefono</p>
-          </div>
-        </a>
-      </div>
+      <p class="home-tagline">Affronta le Calamità in cooperativa. Resisti al Trauma, o diventa il Villain.</p>
     </div>
   </section>
 

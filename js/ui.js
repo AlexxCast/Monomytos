@@ -15,6 +15,7 @@ class UIController {
     try { this.renderHeroSelectionCarousel(); } catch (e) { console.error('renderHeroSelectionCarousel error:', e); }
     try { this.renderCustomHeroOptions(); } catch (e) { console.error('renderCustomHeroOptions error:', e); }
     try { this.showScreen('scr-lobby'); } catch (e) { console.error('showScreen error:', e); }
+    try { this.startHomeShowcase(); } catch (e) { console.error('startHomeShowcase error:', e); }
     try { window.AudioEngine?.playMusic('m1_selezione.mp3'); } catch (e) {}
 
     // App Launch Intro Cinematic Animation
@@ -101,6 +102,47 @@ class UIController {
     }, 500);
   }
 
+  // Barra di navigazione in basso
+  navTo(screenId) {
+    if (screenId === 'scr-hero-pick') return this.startQuickMissionSelection();
+    if (screenId === 'scr-deckbuilder') return this.openDeckBuilder();
+    if (screenId === 'scr-shop') return this.openShop();
+    this.showScreen(screenId);
+  }
+
+  // Vetrina della Home: gli eroi scorrono uno alla volta
+  startHomeShowcase() {
+    const meta = window.MONOMYTHOS_DATA?.chars_meta || {};
+    const heroes = Object.values(meta).filter(h => h && h.img);
+    if (!heroes.length) return;
+    const dots = document.getElementById('homeShowcaseDots');
+    if (dots) dots.innerHTML = heroes.map(() => '<i></i>').join('');
+    let idx = 0;
+    const statLabel = { str: 'POT', spd: 'AGI', tech: 'INT', end: 'VIG' };
+    const show = () => {
+      const h = heroes[idx % heroes.length];
+      const art = document.getElementById('homeShowcaseArt');
+      if (!art) return;
+      art.classList.remove('in');
+      setTimeout(() => {
+        art.src = h.img;
+        document.getElementById('homeShowcaseName').textContent = h.name;
+        document.getElementById('homeShowcaseArch').textContent = h.archetipo || '';
+        document.getElementById('homeShowcaseStats').innerHTML = Object.keys(statLabel)
+          .map(k => `<span class="stat-${k}"><b>${Math.min(5, 1 + (h[k] || 0))}</b>${statLabel[k]}</span>`).join('') +
+          `<span class="stat-hp"><b>${h.vita}</b>VITA</span>`;
+        if (dots) [...dots.children].forEach((d, i) => d.classList.toggle('on', i === idx % heroes.length));
+        art.classList.add('in');
+      }, 250);
+    };
+    show();
+    clearInterval(this._showcaseTimer);
+    this._showcaseTimer = setInterval(() => {
+      if (this.activeScreen !== 'scr-lobby' || document.hidden) return;
+      idx++; show();
+    }, 4500);
+  }
+
   toggleBattleLog(force) {
     const wrap = document.getElementById('battleLogWrap');
     if (!wrap) return;
@@ -125,6 +167,8 @@ class UIController {
       this.activeScreen = screenId;
     }
     document.body.classList.toggle('in-match', screenId === 'scr-game');
+    document.querySelectorAll('#bottomNav .nav-item').forEach(b => b.classList.toggle('active', b.dataset.screen === screenId));
+    document.body.dataset.screen = screenId;
     this.toggleHeaderMenu(false);
 
     if (screenId !== 'scr-game') {
@@ -206,7 +250,7 @@ class UIController {
     });
     window.GameEngine.on('round_started', (ev, data, state) => {
       this.renderGameView(state);
-      this.showToast(`Round ${state.round} iniziato!`);
+      this.fxBanner(`ROUND ${state.round}`, state.currentThreat ? state.currentThreat.nome : '');
     });
     window.GameEngine.on('turn_changed', (ev, data, state) => this.renderGameView(state));
     window.GameEngine.on('card_played', (ev, data, state) => {
@@ -222,8 +266,15 @@ class UIController {
     });
     window.GameEngine.on('damage_taken', (ev, data, state) => {
       window.AudioEngine?.playSfx('hit');
-      this.spawnFloatingNumber(data.dmg, 'dmg');
       this.renderGameView(state);
+      const idx = state.players.indexOf(data.target);
+      const anchor = idx === 0 ? document.querySelector('.player-dock-top')
+        : document.querySelectorAll('#battlefieldAlliesRow .companion-battlefield-card')[idx - 1];
+      this.spawnFloatingNumber(data.dmg, 'dmg', anchor);
+      if (data.dmg > 0) {
+        this.fxHit(anchor);
+        if (idx === 0) this.fxHit(document.getElementById('scr-game'), 'fx-shake');
+      }
     });
     window.GameEngine.on('base_power_used', (ev, data, state) => {
       window.AudioEngine?.playSfx('heal');
@@ -231,12 +282,12 @@ class UIController {
     });
     window.GameEngine.on('player_corrupted', (ev, player, state) => {
       window.AudioEngine?.playSfx('fracture');
-      this.showToast(`${player.name} È DIVENTATO UN VILLAIN!`);
+      this.fxBanner('VILLAIN', `${player.name} cede al Trauma`, 'violet');
       this.renderGameView(state);
     });
     window.GameEngine.on('act_advanced', (ev, data, state) => {
       window.AudioEngine?.playSfx('victory');
-      this.showToast(`Atto completato! Entrando nell'Atto ${state.actIndex + 1}!`);
+      this.fxBanner(`ATTO ${['I', 'II', 'III'][state.actIndex] || state.actIndex + 1}`, 'Minaccia sconfitta: si avanza', 'gold');
       this.renderGameView(state);
       this.triggerThreatDrawAnimation(state.currentThreat);
     });
@@ -320,10 +371,10 @@ class UIController {
 
         <!-- Live Stats Matrix -->
         <div class="stats-matrix" style="width:100%; margin-bottom:10px;">
-          <div class="stat-chip str"><span class="val">${meta.str}</span><span class="lbl">Str</span></div>
-          <div class="stat-chip spd"><span class="val">${meta.spd}</span><span class="lbl">Spd</span></div>
-          <div class="stat-chip tech"><span class="val">${meta.tech}</span><span class="lbl">Tech</span></div>
-          <div class="stat-chip end"><span class="val">${meta.end}</span><span class="lbl">End</span></div>
+          <div class="stat-chip str"><span class="val">${Math.min(5, 1 + (meta.str || 0))}</span><span class="lbl">Pot</span></div>
+          <div class="stat-chip spd"><span class="val">${Math.min(5, 1 + (meta.spd || 0))}</span><span class="lbl">Agi</span></div>
+          <div class="stat-chip tech"><span class="val">${Math.min(5, 1 + (meta.tech || 0))}</span><span class="lbl">Int</span></div>
+          <div class="stat-chip end"><span class="val">${Math.min(5, 1 + (meta.end || 0))}</span><span class="lbl">Vig</span></div>
         </div>
       `;
 
@@ -539,6 +590,8 @@ class UIController {
     })    // 2. Threat Card & Metrics (Point 7: Central Threat in Battlefield Nexus)
     const thNameEl = document.getElementById('threatName');
     if (thNameEl) thNameEl.textContent = th.nome;
+    const thBadge = document.getElementById('threatTypeBadge');
+    if (thBadge) thBadge.textContent = th.nome;
     const thLvlBadge = document.getElementById('threatLevelBadge');
     if (thLvlBadge) thLvlBadge.textContent = `Liv. ${th.livello || 1}`;
     const thCircle = document.getElementById('threatLvlCircle');
@@ -559,6 +612,13 @@ class UIController {
     if (fillHpEl) fillHpEl.style.width = `${hpRatio * 100}%`;
     const valHpEl = document.getElementById('valThreatHp');
     if (valHpEl) valHpEl.textContent = `${th.hp}/${th.maxHp}`;
+    if (this._lastThreat === th && this._lastThreatHp != null && th.hp < this._lastThreatHp) {
+      const card = document.getElementById('threatCentralCard');
+      this.spawnFloatingNumber(this._lastThreatHp - th.hp, 'dmg', card);
+      this.fxHit(card);
+    }
+    this._lastThreat = th;
+    this._lastThreatHp = th.hp;
 
     // Timer pips
     const timerBox = document.getElementById('threatTimerPips');
@@ -805,11 +865,19 @@ class UIController {
       // 7. Cards Hand Carousel using Official 5-Layout System
       const handBox = document.getElementById('playerHandCarousel');
       handBox.innerHTML = '';
-      localPlayer.hand.forEach(c => {
+      const n = localPlayer.hand.length;
+      // Ventaglio: sovrapposizione calcolata per far stare tutte le carte nella larghezza dello schermo
+      const cardW = parseFloat(getComputedStyle(handBox).getPropertyValue('--hand-card-w')) || 100;
+      const avail = Math.max(200, (handBox.clientWidth || window.innerWidth) - 30);
+      const overlap = n > 1 ? Math.max(0, Math.min(cardW * 0.62, (cardW * n - avail) / (n - 1))) : 0;
+      localPlayer.hand.forEach((c, i) => {
         const wrapper = document.createElement('div');
         wrapper.innerHTML = this.getCardDOM(c, false);
         const cardEl = wrapper.firstElementChild;
         cardEl.onclick = () => this.openCardActionSheet(c);
+        cardEl.style.setProperty('--d', (i - (n - 1) / 2).toFixed(2));
+        cardEl.style.setProperty('--z', i + 1);
+        cardEl.style.setProperty('--overlap', overlap.toFixed(1) + 'px');
         handBox.appendChild(cardEl);
       });
     }
@@ -1440,15 +1508,40 @@ class UIController {
   }
 
   // Floating combat number animation
-  spawnFloatingNumber(num, type) {
+  spawnFloatingNumber(num, type, anchorEl) {
     if (num <= 0) return;
     const el = document.createElement('div');
     el.className = `floating-num ${type}`;
     el.textContent = type === 'dmg' ? `-${num}` : `+${num}`;
-    el.style.left = '50%';
-    el.style.top = '40%';
+    if (anchorEl && anchorEl.getBoundingClientRect) {
+      const r = anchorEl.getBoundingClientRect();
+      el.style.position = 'fixed';
+      el.style.left = `${r.left + r.width / 2}px`;
+      el.style.top = `${r.top + r.height * 0.35}px`;
+    } else {
+      el.style.left = '50%';
+      el.style.top = '40%';
+    }
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 850);
+    setTimeout(() => el.remove(), 1100);
+  }
+
+  // Effetti: colpo su un elemento (lampo + scossa)
+  fxHit(el, cls = 'fx-hit') {
+    if (!el) return;
+    el.classList.remove(cls);
+    void el.offsetWidth;
+    el.classList.add(cls);
+    setTimeout(() => el.classList.remove(cls), 650);
+  }
+
+  // Effetti: striscione a tutto schermo (inizio round, nuovo Atto, vittoria)
+  fxBanner(title, sub = '', tone = 'gold') {
+    const b = document.createElement('div');
+    b.className = `fx-banner tone-${tone}`;
+    b.innerHTML = `<div class="fx-banner-band"><b>${title}</b>${sub ? `<small>${sub}</small>` : ''}</div>`;
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 1700);
   }
 
   showToast(msg) {
