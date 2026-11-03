@@ -78,8 +78,9 @@ async function preparaPagina(ctx) {
     root.style.transformOrigin = '0 0';
     root.style.willChange = 'transform';
     window.__camera = (chi, zoom = 1, durata = 0.6) => {
-      // Movimenti contenuti e lenti: zoom massimo 1,25 e almeno 1 s per spostarsi
-      zoom = Math.min(zoom, 1.25); if (durata > 0) durata = Math.max(durata, 1);
+      // Solo leggere spinte in avanti: zoom massimo 1,06, sempre centrato in orizzontale
+      // (con zoom più forti o spostati di lato si tagliano nomi e pulsanti ai bordi), almeno 1 s
+      zoom = Math.min(zoom, 1.06); if (durata > 0) durata = Math.max(durata, 1);
       const W = innerWidth, H = innerHeight;
       let tx = 0, ty = 0;
       const sel = B[chi] || chi;
@@ -90,8 +91,8 @@ async function preparaPagina(ctx) {
         root.style.transition = 'none'; root.style.transform = 'none';
         const r = el.getBoundingClientRect();
         root.style.transform = prima; void root.offsetWidth;
-        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-        tx = Math.min(0, Math.max(W - W * zoom, W / 2 - cx * zoom));
+        const cy = r.top + r.height / 2;
+        tx = (W - W * zoom) / 2;
         ty = Math.min(0, Math.max(H - H * zoom, H / 2 - cy * zoom));
       } else if (zoom > 1) {
         tx = (W - W * zoom) / 2; ty = (H - H * zoom) / 2;

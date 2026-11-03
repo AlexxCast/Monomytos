@@ -11,7 +11,8 @@ const { execFileSync } = require('child_process');
 const id = process.argv[2];
 const outRoot = process.argv[3] || path.join(__dirname, 'uscita');
 const RADICE = path.join(__dirname, '..');
-const copione = JSON.parse(fs.readFileSync(path.join(__dirname, 'copioni.json'), 'utf8')).copioni.find(c => c.id === id);
+const dati = JSON.parse(fs.readFileSync(path.join(__dirname, 'copioni.json'), 'utf8'));
+const copione = dati.copioni.find(c => c.id === id);
 if (!copione) { console.error('Copione non trovato: ' + id); process.exit(1); }
 const dir = path.join(outRoot, id);
 const reg = JSON.parse(fs.readFileSync(path.join(dir, 'riprese.json'), 'utf8'));
@@ -86,6 +87,7 @@ Style: Grande,Bangers,200,&H0033E0FF,&H000000FF,&H00000000,&H80000000,0,0,0,0,10
 Style: Box,Bangers,88,&H00111111,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,2,0,3,16,0,8,110,110,300,1
 Style: Sotto,Bangers,64,&H00FFFFFF,&H000000FF,&H28000000,&H00000000,0,0,0,0,100,100,1,0,3,14,0,2,120,120,560,1
 Style: Cta,Bangers,118,&H00111111,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,3,0,3,22,0,5,80,80,0,1
+Style: NotaAI,Bangers,40,&H30FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,1,0,1,3,2,2,90,90,70,1
 Style: CtaSotto,Bangers,78,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,2,0,1,6,3,5,80,80,0,1
 
 [Events]
@@ -97,7 +99,7 @@ const ms = s => Math.round(s * 1000);
 const FASCE = { alto: [200, 640], centro: [720, 1140], basso: [1250, 1580] };
 function fascia(da, a, pos, forte) {
   const [y0, y1] = FASCE[pos] || FASCE.alto;
-  ass += `Dialogue: 0,${tempo(da)},${tempo(a)},Fascia,,0,0,0,,{\\an7\\pos(0,${y0})\\bord0\\shad0\\blur45\\1c&H000000&\\1a&H${forte ? '50' : '78'}&\\fad(120,120)\\p1}m -60 0 l 1140 0 1140 ${y1 - y0} -60 ${y1 - y0}{\\p0}\n`;
+  ass += `Dialogue: 0,${tempo(da)},${tempo(a)},Fascia,,0,0,0,,{\\an7\\pos(0,${y0})\\bord0\\shad0\\blur45\\1c&H000000&\\1a&H${forte ? '30' : '48'}&\\fad(120,120)\\p1}m -60 0 l 1140 0 1140 ${y1 - y0} -60 ${y1 - y0}{\\p0}\n`;
 }
 
 // Parole che compaiono una dopo l'altra; *parola* = evidenziata in giallo
@@ -155,6 +157,9 @@ if (FINE) {
   const a = inizioFine + 0.35;
   evento(a, totale, 'Cta', `{\\an5\\pos(540,1290)\\fscx40\\fscy40\\alpha&HFF&\\t(0,160,\\fscx110\\fscy110\\alpha&H00&)\\t(160,260,\\fscx100\\fscy100)\\t(900,1100,\\fscx106\\fscy106)\\t(1100,1300,\\fscx100\\fscy100)}${cta.replace(/[{}*]/g, '')}`);
   evento(a + 0.35, totale, 'CtaSotto', `{\\an5\\pos(540,1450)\\fad(200,0)}${sottoCta.replace(/[{}*]/g, '')}`);
+  // Dicitura sulle immagini AI: piccola ma leggibile, in fondo al cartello finale
+  const notaAI = T(dati.nota_ai_video);
+  if (notaAI) evento(inizioFine + 0.5, totale, 'NotaAI', `{\\fad(250,0)}${notaAI.replace(/[{}*]/g, '')}`);
   if (T(c.sopra)) evento(inizioFine + 0.1, totale, 'CtaSotto', `{\\an5\\pos(540,500)\\fad(200,0)}${T(c.sopra).replace(/[{}*]/g, '')}`);
 }
 const fileAss = path.join(dir, 'testi.ass');
@@ -187,9 +192,11 @@ Q.forEach((q, i) => {
 });
 if (FINE) {
   // Nebulosa che scorre lenta + logo che entra dall'alto con dissolvenza
-  args.push('-loop', '1', '-framerate', '30', '-t', String(FINE), '-i', path.join(RADICE, 'assets/bg/cosmic_bg.jpg'));
+  // Cosmo a fumetto del gioco: azzurro per gli eroi, viola-rosso quando il video parla dei Villain
+  const sfondoFine = copione.tema === 'villain' ? 'cosmo_villain.webp' : 'cosmo_eroe.webp';
+  args.push('-loop', '1', '-framerate', '30', '-t', String(FINE), '-i', path.join(RADICE, 'assets/bg', sfondoFine));
   args.push('-loop', '1', '-framerate', '30', '-t', String(FINE), '-i', path.join(RADICE, 'assets/icons/logo_titolo.webp'));
-  filtri.push(`[${n}:v]scale=1240:2204:force_original_aspect_ratio=increase,crop=1080:1920:x='80-40*t/${FINE}':y='142-60*t/${FINE}',setsar=1,format=yuv420p[sfondo]`);
+  filtri.push(`[${n}:v]scale=-2:2204,crop=1080:1920:x='(iw-1080)/2+70-140*t/${FINE}':y='142-60*t/${FINE}',eq=brightness=-0.07,vignette=PI/5,setsar=1,format=yuv420p[sfondo]`);
   filtri.push(`[${n + 1}:v]scale=900:-1,format=rgba,fade=t=in:st=0.05:d=0.35:alpha=1[logo]`);
   filtri.push(`[sfondo][logo]overlay=x=(W-w)/2:y='600-70*exp(-t*9)':format=auto,trim=duration=${FINE},setpts=PTS-STARTPTS,format=yuv420p,fps=30,settb=AVTB[qfine]`);
   etichette.push('[qfine]');

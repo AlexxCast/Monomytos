@@ -1,5 +1,5 @@
 {
-  "nota": "Copioni dei video verticali in stile pubblicità (TikTok, YouTube Shorts, Reels). 'riprese' = registrazioni continue del gioco (partita, bustina, storia, mazzo, eroi, carta, home) con movimenti di macchina ('camera'), zoom automatico sulle giocate ('segui'), situazioni preparate ('momento': atto_quasi_vinto, vittoria_vicina, trauma_alto, leggendaria) e azioni a tempo ('azioni': villain, chiudi_atto, apri_bustina, avanti_storia, scorri_eroi). 'inquadrature' = pezzi di 0,8-2 s presi dalle riprese: 'da' in secondi o legato a un evento del gioco ('game_over-1.2', 'card_played#2', 'player_corrupted', 'bustina+1.5', 'defense_window_opened'), 'velocita' (0.5 = rallentatore), 'transizione' in entrata (taglio, flash, zoom, scorri, scorri_sx, dissolvenza), 'scossa' (tremolio d'impatto), testo con 'stile' pop (parole in sequenza, *parola* in giallo), grande (parola che sbatte al centro) o box (didascalia gialla), 'pos' alto/centro/basso, 'tieni' (il testo resta sulle n inquadrature successive). Testi in italiano (it) e inglese (en).",
+  "nota": "Copioni dei video verticali in stile pubblicità (TikTok, YouTube Shorts, Reels). 'riprese' = registrazioni continue del gioco (partita, bustina, storia, mazzo, eroi, carta, home) con movimenti di macchina ('camera'), zoom automatico sulle giocate ('segui': 'sempre', spento di base), situazioni preparate ('momento': atto_quasi_vinto, vittoria_vicina, trauma_alto, leggendaria) e azioni a tempo ('azioni': villain, chiudi_atto, apri_bustina, avanti_storia, scorri_eroi). 'inquadrature' = pezzi di 0,8-2 s presi dalle riprese: 'da' in secondi o legato a un evento del gioco ('game_over-1.2', 'card_played#2', 'player_corrupted', 'bustina+1.5', 'defense_window_opened'), 'velocita' (0.5 = rallentatore), 'transizione' in entrata (taglio, dissolvenza, scorri; flash e zoom diventano dissolvenze morbide), ogni inquadratura dura almeno 2 s, testo con 'stile' pop (parole in sequenza, *parola* in giallo), grande (parola che sbatte al centro) o box (didascalia gialla), 'pos' alto/centro/basso, 'tieni' (il testo resta sulle n inquadrature successive). Testi in italiano (it) e inglese (en). 'tema': 'villain' usa il cosmo viola nel cartello finale. 'nota_ai_video' compare in piccolo nel cartello finale, 'nota_ai' in fondo alle didascalie.",
   "link": "https://alexxcast.github.io/Monomytos/",
   "hashtag_base": [
     "monomythos",
@@ -8,6 +8,18 @@
     "giochidicarte",
     "gamedev"
   ],
+  "nota_ai_video": {
+    "it": "Immagini create con l'AI per ora · presto disegnate a mano",
+    "en": "AI-made images for now · hand-drawn art coming"
+  },
+  "nota_ai": {
+    "it": "🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.",
+    "en": "🎨 For now the images are AI-generated: Monomythos is a one-person indie project and this let me get started. Later on they'll be hand-drawn, by me or by illustrators."
+  },
+  "nota_ai_breve": {
+    "it": "🎨 Immagini AI per ora, poi disegnate a mano",
+    "en": "🎨 AI images for now, hand-drawn later"
+  },
   "copioni": [
     {
       "id": "ultima_carta",
@@ -231,7 +243,8 @@
         "pov",
         "giochiconamici",
         "coop"
-      ]
+      ],
+      "tema": "villain"
     },
     {
       "id": "tre_motivi",
@@ -671,7 +684,8 @@
         "traditore",
         "betrayal",
         "plottwist"
-      ]
+      ],
+      "tema": "villain"
     },
     {
       "id": "parata_perfetta",

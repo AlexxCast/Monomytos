@@ -25,7 +25,10 @@ const VIDEO_URL = E.VIDEO_URL || ''; // indirizzo pubblico del video (serve a In
 
 const tag = [...new Set([...(dati.hashtag_base || []), ...(copione.hashtag || [])])].map(h => '#' + h);
 const titolo = T(copione.titolo);
-const testo = T(copione.didascalia);
+// Didascalia + dicitura sulle immagini AI (sempre presente, in fondo al testo)
+const didascalia = T(copione.didascalia);
+const notaAI = T(dati.nota_ai);
+const testo = notaAI ? `${didascalia}\n\n${notaAI}` : didascalia;
 const linkTxt = lingua === 'it' ? 'Gioca gratis' : 'Play free';
 
 const attendi = ms => new Promise(r => setTimeout(r, ms));
@@ -182,8 +185,9 @@ const bluesky = {
     }
     if (!blob) throw new Error('Bluesky non ha finito di elaborare il video in tempo');
     // Testo con link e hashtag cliccabili (le "facets" usano posizioni in byte UTF-8)
-    let corpo = testo;
-    const coda = `\n\n${linkTxt}: ${LINK}\n${tag.slice(0, 4).join(' ')}`;
+    // Bluesky ha 300 caratteri: dicitura AI in versione breve, sempre inclusa
+    let corpo = didascalia;
+    const coda = `\n\n${T(dati.nota_ai_breve) ? T(dati.nota_ai_breve) + '\n' : ''}${linkTxt}: ${LINK}\n${tag.slice(0, 4).join(' ')}`;
     if ([...(corpo + coda)].length > 300) corpo = [...corpo].slice(0, 300 - [...coda].length - 1).join('') + '…';
     const txt = corpo + coda;
     const enc = new TextEncoder();
