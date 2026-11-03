@@ -1,8 +1,14 @@
-// Registra le scene di gameplay di un copione con Playwright (browser senza schermo).
+// Registra le riprese di gameplay di un copione con Playwright (browser senza schermo).
 // Uso: node promo/registra.js <id_copione> [url_sito] [cartella_uscita]
-// Esempio: node promo/registra.js bustina_leggendaria http://localhost:8799 promo/uscita
-// Per ogni scena del copione salva i fotogrammi verticali (1080x1920) in una cartella e un
-// elenco con la durata di ciascuno; promo/monta.js li trasforma in video.
+// Esempio: node promo/registra.js colpo_finale http://localhost:8799 promo/uscita
+//
+// Un copione ha delle "riprese" (registrazioni continue del gioco) e delle "inquadrature"
+// (pezzi di 1-3 secondi presi dalle riprese, montati da promo/monta.js). Durante una ripresa:
+//  - "camera": movimenti di macchina (zoom su un elemento del gioco) a tempi precisi;
+//  - "segui": zoom automatico sul tavolo quando un eroe gioca una carta;
+//  - "momento" e "azioni": situazioni preparate (colpo finale, Villain, leggendaria) che usano
+//    le vere regole e animazioni del gioco.
+// Ogni ripresa diventa una cartella di fotogrammi 1080x1920 con l'elenco dei tempi.
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
@@ -18,10 +24,29 @@ const outDir = path.join(outRoot, id);
 fs.mkdirSync(outDir, { recursive: true });
 
 // Formato verticale 9:16. La pagina è larga come un telefono (432x768) e ogni pixel
-// vale 2,5 pixel reali, così le immagini catturate sono nitide in Full HD (1080x1920).
+// vale 2,5 pixel reali, così i fotogrammi sono nitidi in Full HD (1080x1920).
 const VIEW = { width: 432, height: 768 };
 const DPR = 2.5;
 const attesa = (p, ms) => p.waitForTimeout(ms);
+
+// Nomi brevi degli elementi del gioco da inquadrare
+const BERSAGLI = {
+  minaccia: '.threat-central-card-wrap',
+  centro: '#battlefieldCenterStage',
+  barre: '.threat-tactical-data',
+  nemici: '#mooksContainer',
+  tavolo: '#tableZone',
+  alleati: '#battlefieldAlliesRow',
+  eroe: '.player-dock-top',
+  mano: '#playerHandCarousel',
+  difesa: '#modalDefense .modal-content, .modal-overlay.active .modal-content',
+  bustina: '#packRevealStage',
+  leggendaria: '#packRevealStage .pack-card-reveal:last-child',
+  carta: '.full-card-inspect-wrap',
+  eroi: '#heroCarousel',
+  squadra: '.squad-pills-row',
+  storia: '#storiaScena'
+};
 
 async function preparaPagina(ctx) {
   const p = await ctx.newPage();
@@ -37,7 +62,7 @@ async function preparaPagina(ctx) {
     await p.evaluate(() => Collezione.scegliStarter(Collezione.STARTER[0].eroe));
     await attesa(p, 500);
   }
-  // Account dimostrativo: crediti e tutte le carte, così le schermate sono piene
+  // Account dimostrativo: crediti, tutte le carte e tutti gli eroi, così le schermate sono piene
   await p.evaluate(() => {
     const d = Progression.data;
     d.credits = 99999;
@@ -47,6 +72,32 @@ async function preparaPagina(ctx) {
     Progression.save && Progression.save();
     UI.hideModals && UI.hideModals();
   });
+  // Macchina da presa: zoom morbido su un elemento spostando tutta la pagina (resta nitida)
+  await p.evaluate(B => {
+    const root = document.documentElement;
+    root.style.transformOrigin = '0 0';
+    root.style.willChange = 'transform';
+    window.__camera = (chi, zoom = 1, durata = 0.6) => {
+      const W = innerWidth, H = innerHeight;
+      let tx = 0, ty = 0;
+      const sel = B[chi] || chi;
+      const el = sel && [...document.querySelectorAll(sel)].find(e => e.getBoundingClientRect().width > 0);
+      if (el && zoom > 1) {
+        // Le coordinate vanno lette senza la trasformazione attuale
+        const prima = root.style.transform;
+        root.style.transition = 'none'; root.style.transform = 'none';
+        const r = el.getBoundingClientRect();
+        root.style.transform = prima; void root.offsetWidth;
+        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        tx = Math.min(0, Math.max(W - W * zoom, W / 2 - cx * zoom));
+        ty = Math.min(0, Math.max(H - H * zoom, H / 2 - cy * zoom));
+      } else if (zoom > 1) {
+        tx = (W - W * zoom) / 2; ty = (H - H * zoom) / 2;
+      }
+      root.style.transition = durata > 0 ? `transform ${durata}s cubic-bezier(.22,1,.36,1)` : 'none';
+      root.style.transform = zoom === 1 && !el ? 'none' : `translate(${tx}px, ${ty}px) scale(${zoom})`;
+    };
+  }, BERSAGLI);
   return p;
 }
 
@@ -56,148 +107,242 @@ async function scorri(p, selettore, durata) {
   for (let i = 0; i < passi; i++) {
     await p.evaluate(([s, i, n]) => {
       const el = (s && document.querySelector(s)) || document.querySelector('.screen.active') || document.scrollingElement;
-      const max = el.scrollHeight - el.clientHeight;
-      el.scrollTop = max * (i / n);
+      el.scrollTop = (el.scrollHeight - el.clientHeight) * (i / n);
     }, [selettore, i, passi]);
     await attesa(p, 50);
   }
 }
 
-const AZIONI = {
-  // Schermata principale
-  async home(p, s) {
+// Situazioni preparate nella partita, applicate con le regole vere del gioco (codice eseguito nella pagina)
+const MOMENTI_JS = `window.__MOMENTI = {
+  // La Minaccia è a un passo dalla sconfitta: il prossimo progresso chiude l'atto
+  atto_quasi_vinto() {
+    const th = GameEngine.state.currentThreat;
+    th.primarioProgress = Math.max(0, th.primarioMax - 1);
+    th.brutoProgress = Math.max(0, th.brutoMax - 1);
+  },
+  // Atto finale quasi vinto: il prossimo progresso dà la VITTORIA
+  vittoria_vicina() {
+    GameEngine.state.actIndex = 2;
+    GameEngine.setupCurrentThreat();
+    this.atto_quasi_vinto();
+  },
+  // Un compagno è al limite del Trauma
+  trauma_alto() {
+    const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
+    const p = GameEngine.state.players[1];
+    if (p) p.trm = soglia - 1;
+  }
+};`;
+const AZIONI_TEMPO = {
+  // Un compagno raggiunge il Punto di Rottura e diventa Villain (banner del gioco)
+  villain: () => {
+    const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
+    const p = GameEngine.state.players.find((x, i) => i > 0 && x.state === 'hero' && !x.isDead);
+    if (p) { p.stateFrozen = false; p.trm = soglia; GameEngine.checkBreakingPoint(p); }
+  },
+  // Chiude l'atto in corso con un ultimo progresso
+  // Se l'atto non si è ancora chiuso da solo, lo chiude con un ultimo progresso
+  chiudi_atto: () => {
+    const st = GameEngine.state;
+    if (st.phase === 'gameover' || st.actIndex !== window.__attoIniziale) return;
+    st.currentThreat.primarioProgress = st.currentThreat.primarioMax;
+    GameEngine.checkThreatDefeated();
+  },
+  // Se la partita non è ancora vinta, la vince (serve con il momento "vittoria_vicina")
+  vinci: () => {
+    const st = GameEngine.state;
+    if (st.phase === 'gameover') return;
+    if (st.actIndex < 2) { st.actIndex = 2; GameEngine.setupCurrentThreat(); }
+    st.currentThreat.primarioProgress = st.currentThreat.primarioMax;
+    GameEngine.checkThreatDefeated();
+  },
+  apri_bustina: () => { window.__evento('bustina'); UI.buyBoosterPack('standard', 150); },
+  avanti_storia: () => { const sc = document.getElementById('storiaScena'); if (sc) sc.click(); },
+  scorri_eroi: () => { const c = document.getElementById('heroCarousel'); if (c) c.scrollBy({ left: c.clientWidth * 0.8, behavior: 'smooth' }); }
+};
+
+// Prepara la schermata della ripresa; restituisce l'attività di fondo da svolgere mentre si registra
+const RIPRESE = {
+  async home(p, r) {
     await p.evaluate(() => UI.showScreen('scr-lobby'));
-    return async () => { await scorri(p, null, s.durata * 1000); };
+    return async durata => { if (r.scorri) await scorri(p, null, durata); else await attesa(p, durata); };
   },
-  // Partita vera giocata dai bot: tutti i giocatori sono comandati dall'IA del gioco
-  async partita(p, s) {
-    await p.evaluate(([n, eroe]) => {
+  async partita(p, r) {
+    await p.evaluate(([n, eroe, intro]) => {
       UI.squadSize = n;
-      UI.startSoloGame(eroe || Progression.data.unlockedHeroes[0] || 'Iron Aegis');
-    }, [s.eroi || 3, s.eroe || null]);
-    await attesa(p, 300);
-    return async () => {
-      // Dopo l'introduzione della Minaccia, il giocatore locale passa al bot
-      await attesa(p, Math.min(3500, s.durata * 1000));
-      await p.evaluate(() => {
-        const st = GameEngine.state;
-        st.players.forEach(pl => { pl.isBot = true; });
-        // La finestra di difesa si vede per un attimo, poi difende l'IA (niente attese di 8 secondi)
-        const emit = GameEngine.emit.bind(GameEngine);
-        GameEngine.emit = (ev, d) => {
-          emit(ev, d);
-          if (ev !== 'defense_window_opened') return;
-          setTimeout(() => {
-            const pd = GameEngine.pendingDefense;
-            if (!pd) return;
-            pd.reactionCards = pd.reactionCards || (d && d.reactionCards) || [];
-            pd.parryCards = pd.parryCards || (d && d.parryCards) || [];
-            clearInterval(UI._defenseCountdownInterval); UI._defenseCountdownInterval = null;
-            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
-            GameEngine.respondToDefense({ type: 'bot_fallback' });
-          }, 1400);
-        };
-        if (st.phase === 'action') GameEngine.checkTurn();
-      });
-      const resto = s.durata * 1000 - 3500;
-      if (resto > 0) await attesa(p, resto);
+      // I banner "ROUND n" coprono la scena: nei video restano solo quelli importanti (ATTO, VILLAIN)
+      const banner = UI.fxBanner.bind(UI);
+      UI.fxBanner = (titolo, ...resto) => (/^ROUND/i.test(titolo) ? null : banner(titolo, ...resto));
+      // Anche la carta Minaccia che si gira a ogni atto copre la scena: nei video resta il banner ATTO
+      UI.triggerThreatDrawAnimation = () => {};
+      const nome = eroe || Progression.data.unlockedHeroes[0] || 'Iron Aegis';
+      if (intro) { UI.startSoloGame(nome); return; }
+      // Senza animazione d'apertura: si entra subito nel vivo della partita
+      const orig = UI.playMatchIntroLoading;
+      UI.playMatchIntroLoading = (t, fine) => { UI.playMatchIntroLoading = orig; fine(); };
+      UI.startSoloGame(nome);
+      const ov = document.getElementById('threatEntryAnimOverlay'); if (ov) ov.classList.remove('active');
+    }, [r.eroi || 3, r.eroe || null, r.intro !== false]);
+    // Bot al comando, situazione preparata e zoom automatico sulle giocate
+    const avvia = () => p.evaluate(([mom, segui]) => {
+      const st = GameEngine.state;
+      st.players.forEach(pl => { pl.isBot = true; });
+      if (mom && window.__MOMENTI[mom]) { window.__MOMENTI[mom](); UI.renderGameView(st); }
+      if (window.__attoIniziale == null) window.__attoIniziale = st.actIndex;
+      const emit = GameEngine.emit.bind(GameEngine);
+      let ultimo = 0;
+      GameEngine.emit = (ev, d) => {
+        if (['card_played', 'damage_taken', 'act_advanced', 'player_corrupted', 'game_over', 'round_started', 'defense_window_opened', 'player_died'].includes(ev)) window.__evento(ev);
+        emit(ev, d);
+        if (segui && ev === 'card_played' && Date.now() - ultimo > 1600) {
+          ultimo = Date.now();
+          window.__camera('centro', 1.3, 0.35);
+          setTimeout(() => window.__camera(null, 1, 0.5), 900);
+        }
+        if (ev !== 'defense_window_opened') return;
+        // La finestra di difesa si vede per un attimo, poi difende l'IA
+        setTimeout(() => {
+          const pd = GameEngine.pendingDefense;
+          if (!pd) return;
+          pd.reactionCards = pd.reactionCards || (d && d.reactionCards) || [];
+          pd.parryCards = pd.parryCards || (d && d.parryCards) || [];
+          clearInterval(UI._defenseCountdownInterval); UI._defenseCountdownInterval = null;
+          document.querySelectorAll('.modal-overlay.active').forEach(m => { if (m.id !== 'modalGameOver') m.classList.remove('active'); });
+          GameEngine.respondToDefense({ type: 'bot_fallback' });
+        }, 1400);
+      };
+      // I bot partono un attimo dopo l'inizio della registrazione
+      if (st.phase === 'action') setTimeout(() => GameEngine.checkTurn(), 300);
+    }, [r.intro === false ? null : (r.momento || null), !!r.segui]);
+    if (r.intro === false) {
+      await p.evaluate(() => { const st = GameEngine.state; st.players.forEach(pl => { pl.isBot = true; }); });
+      await p.evaluate(m => { if (m && window.__MOMENTI[m]) { window.__MOMENTI[m](); UI.renderGameView(GameEngine.state); } }, r.momento || null);
+      await p.evaluate(() => { window.__attoIniziale = GameEngine.state.actIndex; });
+    }
+    return async durata => {
+      if (r.intro !== false) await attesa(p, 2900);
+      await avvia();
+      await attesa(p, Math.max(0, durata - (r.intro !== false ? 2900 : 0)));
     };
   },
-  // Apertura di una bustina con le carte che si girano
-  async bustina(p, s) {
-    await p.evaluate(() => UI.navTo ? UI.navTo('scr-shop') : UI.showScreen('scr-shop'));
-    return async () => {
-      await attesa(p, 1200);
-      await p.evaluate(t => UI.buyBoosterPack(t || 'standard', 150), s.tipo);
-      await attesa(p, s.durata * 1000 - 1200);
-    };
+  async bustina(p, r) {
+    await p.evaluate(leggendaria => {
+      UI.navTo ? UI.navTo('scr-shop') : UI.showScreen('scr-shop');
+      if (leggendaria) {
+        // L'ultima carta della bustina è una Leggendaria (per il video "apertura fortunata")
+        const orig = Collezione.pescaDiRarita.bind(Collezione);
+        let n = 0;
+        Collezione.pescaDiRarita = (rr, f) => orig(++n === 5 ? 'leggendaria' : rr, f);
+      }
+    }, r.momento === 'leggendaria');
+    return async durata => { await attesa(p, durata); };
   },
-  // Modalità Storia: prologo con i dialoghi a fumetto
-  async storia(p, s) {
-    await p.evaluate(() => { if (Storia.dati) Storia.dati.introViste = {}; });
-    return async () => {
-      await p.evaluate(() => Storia.apri());
-      const fine = Date.now() + s.durata * 1000;
+  async storia(p, r) {
+    await p.evaluate(() => { if (Storia.dati) Storia.dati.introViste = {}; Storia.apri(); });
+    return async durata => {
+      const fine = Date.now() + durata;
       while (Date.now() < fine) {
-        await attesa(p, 2600);
-        // Avanza il dialogo toccando la scena, come farebbe il giocatore
-        await p.evaluate(() => { const sc = document.getElementById('storiaScena'); if (sc) sc.click(); });
+        await attesa(p, Math.min(2600, Math.max(0, fine - Date.now())));
+        if (Date.now() < fine) await p.evaluate(() => { const sc = document.getElementById('storiaScena'); if (sc) sc.click(); });
       }
     };
   },
-  // Costruzione del mazzo
-  async mazzo(p, s) {
+  async mazzo(p, r) {
     await p.evaluate(() => UI.navTo ? UI.navTo('scr-deckbuilder') : UI.showScreen('scr-deckbuilder'));
-    return async () => { await attesa(p, 800); await scorri(p, null, s.durata * 1000 - 800); };
+    return async durata => { await attesa(p, 400); await scorri(p, null, durata - 400); };
   },
-  // Scelta dell'eroe
-  async eroi(p, s) {
+  async eroi(p, r) {
     await p.evaluate(() => UI.navTo ? UI.navTo('scr-hero-pick') : UI.showScreen('scr-hero-pick'));
-    return async () => {
-      // Sfoglia il carosello degli eroi uno alla volta
-      await attesa(p, 600);
-      const fine = Date.now() + s.durata * 1000 - 600;
-      while (Date.now() < fine) {
-        await attesa(p, 1100);
+    return async durata => {
+      const fine = Date.now() + durata;
+      await attesa(p, 500);
+      while (Date.now() < fine - 300) {
+        await attesa(p, r.passo || 1000);
         await p.evaluate(() => { const c = document.getElementById('heroCarousel'); if (c) c.scrollBy({ left: c.clientWidth * 0.8, behavior: 'smooth' }); });
       }
+      await attesa(p, Math.max(0, fine - Date.now()));
     };
   },
-  // Una carta a tutto schermo (es. "carta della settimana")
-  async carta(p, s) {
-    return async () => {
-      await p.evaluate(nome => {
-        const tutte = Object.values(window.MONOMYTHOS_DATA.action_cards).flat();
-        const c = (nome && tutte.find(x => x.id === nome || x.nome === nome || x.name === nome)) || tutte[Math.floor(Math.random() * tutte.length)];
-        UI.inspectCard(c);
-      }, s.carta || null);
-      await attesa(p, s.durata * 1000);
-    };
+  async carta(p, r) {
+    await p.evaluate(nome => {
+      const tutte = Object.values(window.MONOMYTHOS_DATA.action_cards).flat();
+      const c = (nome && tutte.find(x => x.id === nome || x.nome === nome)) || tutte[Math.floor(Math.random() * tutte.length)];
+      UI.inspectCard(c);
+    }, r.carta || null);
+    return async durata => { await attesa(p, durata); };
   }
 };
+
+// Durata da registrare: fino alla fine dell'ultima inquadratura che usa la ripresa
+function durataRipresa(nome) {
+  const r = copione.riprese[nome];
+  const fine = copione.inquadrature.filter(q => q.ripresa === nome && typeof (q.da || 0) === 'number').map(q => (q.da || 0) + q.durata * (q.velocita || 1));
+  return Math.max(r.durata || 0, ...fine) + 0.3;
+}
 
 (async () => {
   // Il flag fa uscire i fotogrammi alla risoluzione reale (1080x1920) e non a quella della pagina
   const browser = await chromium.launch({ args: ['--force-device-scale-factor=' + DPR] });
-  const scene = [];
-  for (let i = 0; i < copione.scene.length; i++) {
-    const s = copione.scene[i];
-    const azione = AZIONI[s.tipo];
-    if (!azione) { console.error(`Scena ${i}: tipo sconosciuto "${s.tipo}"`); process.exit(1); }
-    const dir = path.join(outDir, 'scena_' + i);
+  const riprese = {};
+  for (const nome of Object.keys(copione.riprese)) {
+    const r = copione.riprese[nome];
+    const prepara = RIPRESE[r.tipo];
+    if (!prepara) { console.error(`Ripresa ${nome}: tipo sconosciuto "${r.tipo}"`); process.exit(1); }
+    const durata = durataRipresa(nome);
+    const dir = path.join(outDir, 'ripresa_' + nome);
     fs.rmSync(dir, { recursive: true, force: true });
     fs.mkdirSync(dir, { recursive: true });
     const ctx = await browser.newContext({ viewport: VIEW, deviceScaleFactor: DPR, isMobile: true, hasTouch: true });
     const p = await preparaPagina(ctx);
-    // "salta": secondi registrati in più all'inizio e poi tagliati nel montaggio
-    const gira = await azione(p, { ...s, durata: s.durata + (s.salta || 0) });
+    // Eventi del gioco con il loro tempo: il montaggio può tagliare "1 secondo prima della vittoria"
+    const eventiGrezzi = [];
+    await p.exposeFunction('__evento', nome => { eventiGrezzi.push({ nome, t: Date.now() / 1000 }); });
+    await p.addScriptTag({ content: MOMENTI_JS });
+    const gira = await prepara(p, r);
+    // L'inquadratura iniziale (t = 0) è già pronta nel primo fotogramma
+    for (const c of (r.camera || []).filter(c => c.t === 0)) await p.evaluate(([a, z]) => window.__camera(a, z, 0), [c.su || null, c.zoom || 1]);
+    await attesa(p, 300);
     // Cattura lo schermo con il protocollo DevTools: arriva un fotogramma JPEG a ogni cambiamento
     const cdp = await ctx.newCDPSession(p);
     const fotogrammi = [];
     let n = 0;
-    cdp.on('Page.screencastFrame', async f => {
-      const nome = String(n++).padStart(5, '0') + '.jpg';
-      fs.writeFileSync(path.join(dir, nome), Buffer.from(f.data, 'base64'));
-      fotogrammi.push({ nome, t: f.metadata.timestamp });
+    cdp.on('Page.screencastFrame', f => {
+      const file = String(n++).padStart(5, '0') + '.jpg';
+      fs.writeFileSync(path.join(dir, file), Buffer.from(f.data, 'base64'));
+      fotogrammi.push({ file, t: f.metadata.timestamp });
       cdp.send('Page.screencastFrameAck', { sessionId: f.sessionId }).catch(() => {});
     });
-    await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 88, maxWidth: 1080, maxHeight: 1920, everyNthFrame: 1 });
+    await cdp.send('Page.startScreencast', { format: 'jpeg', quality: 90, maxWidth: 1080, maxHeight: 1920, everyNthFrame: 1 });
     const t0 = Date.now() / 1000;
-    await gira();
+    // Movimenti di macchina e azioni a tempo, in parallelo all'attività della ripresa
+    const timers = [];
+    (r.camera || []).filter(c => c.t > 0).forEach(c => timers.push(setTimeout(() => p.evaluate(([a, z, d]) => window.__camera(a, z, d), [c.su || null, c.zoom || 1, c.dur == null ? 0.6 : c.dur]).catch(() => {}), c.t * 1000)));
+    (r.azioni || []).forEach(a => {
+      const f = AZIONI_TEMPO[a.fai];
+      if (!f) { console.error(`Azione sconosciuta "${a.fai}"`); process.exit(1); }
+      timers.push(setTimeout(() => p.evaluate(f).catch(e => console.warn('  azione', a.fai, e.message)), a.t * 1000));
+    });
+    await gira(durata * 1000);
+    timers.forEach(clearTimeout);
     const t1 = Date.now() / 1000;
     await cdp.send('Page.stopScreencast').catch(() => {});
     await ctx.close();
-    // Elenco per ffmpeg (concat demuxer): ogni fotogramma resta a schermo fino al successivo
+    // Elenco per ffmpeg (concat demuxer): il primo fotogramma parte da t0, ognuno resta fino al successivo
+    const validi = fotogrammi.filter(f => f.t <= t1);
     let lista = 'ffconcat version 1.0\n';
-    fotogrammi.forEach((f, k) => {
-      const fine = k + 1 < fotogrammi.length ? fotogrammi[k + 1].t : t1;
-      lista += `file '${f.nome}'\nduration ${Math.max(0.001, fine - f.t).toFixed(3)}\n`;
+    validi.forEach((f, k) => {
+      const inizio = Math.max(f.t, t0);
+      const fine = k + 1 < validi.length ? Math.max(validi[k + 1].t, t0) : t1;
+      if (fine - inizio <= 0 && k + 1 < validi.length) return;
+      lista += `file '${f.file}'\nduration ${Math.max(0.001, fine - inizio).toFixed(3)}\n`;
     });
-    if (fotogrammi.length) lista += `file '${fotogrammi[fotogrammi.length - 1].nome}'\n`;
+    if (validi.length) lista += `file '${validi[validi.length - 1].file}'\n`;
     fs.writeFileSync(path.join(dir, 'fotogrammi.txt'), lista);
-    scene.push({ cartella: path.basename(dir), fotogrammi: fotogrammi.length, salta: s.salta || 0, durata: s.durata, registrati: +(t1 - t0).toFixed(2) });
-    console.log(`scena ${i} (${s.tipo}) registrata: ${fotogrammi.length} fotogrammi in ${(t1 - t0).toFixed(1)} s`);
+    const eventi = eventiGrezzi.filter(e => e.t >= t0 && e.t <= t1).map(e => ({ nome: e.nome, t: +(e.t - t0).toFixed(2) }));
+    riprese[nome] = { cartella: path.basename(dir), fotogrammi: validi.length, durata: +(t1 - t0).toFixed(2), eventi };
+    console.log(`ripresa ${nome} (${r.tipo}): ${validi.length} fotogrammi in ${(t1 - t0).toFixed(1)} s` + (eventi.length ? ' · eventi: ' + eventi.map(e => e.nome + '@' + e.t).join(', ') : ''));
   }
   await browser.close();
-  fs.writeFileSync(path.join(outDir, 'scene.json'), JSON.stringify({ id, lingua, scene }, null, 1));
+  fs.writeFileSync(path.join(outDir, 'riprese.json'), JSON.stringify({ id, lingua, riprese }, null, 1));
 })().catch(e => { console.error(e); process.exit(1); });

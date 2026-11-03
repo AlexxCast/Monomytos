@@ -1,179 +1,1483 @@
 {
-  "nota": "Copioni dei video brevi verticali (TikTok, YouTube Shorts, Reels). Ogni scena viene registrata dal vivo dal gioco, quindi ogni video è diverso anche se il copione è lo stesso. Tipi di scena: home, partita, bustina, storia, mazzo, eroi, carta. Testi in italiano (it) e inglese (en).",
+  "nota": "Copioni dei video verticali in stile pubblicità (TikTok, YouTube Shorts, Reels). 'riprese' = registrazioni continue del gioco (partita, bustina, storia, mazzo, eroi, carta, home) con movimenti di macchina ('camera'), zoom automatico sulle giocate ('segui'), situazioni preparate ('momento': atto_quasi_vinto, vittoria_vicina, trauma_alto, leggendaria) e azioni a tempo ('azioni': villain, chiudi_atto, apri_bustina, avanti_storia, scorri_eroi). 'inquadrature' = pezzi di 0,8-2 s presi dalle riprese: 'da' in secondi o legato a un evento del gioco ('game_over-1.2', 'card_played#2', 'player_corrupted', 'bustina+1.5', 'defense_window_opened'), 'velocita' (0.5 = rallentatore), 'transizione' in entrata (taglio, flash, zoom, scorri, scorri_sx, dissolvenza), 'scossa' (tremolio d'impatto), testo con 'stile' pop (parole in sequenza, *parola* in giallo), grande (parola che sbatte al centro) o box (didascalia gialla), 'pos' alto/centro/basso, 'tieni' (il testo resta sulle n inquadrature successive). Testi in italiano (it) e inglese (en).",
   "link": "https://alexxcast.github.io/Monomytos/",
-  "hashtag_base": ["monomythos", "cardgame", "indiegame", "giochidicarte", "gamedev"],
+  "hashtag_base": [
+    "monomythos",
+    "cardgame",
+    "indiegame",
+    "giochidicarte",
+    "gamedev"
+  ],
   "copioni": [
     {
-      "id": "coop_non_contro",
-      "titolo": { "it": "Il gioco di carte in cui giochi CON i tuoi amici", "en": "The card game where you play WITH your friends" },
-      "gancio": { "it": "NON giochi contro i tuoi amici…", "en": "You DON'T play against your friends…" },
-      "scene": [
-        { "tipo": "partita", "durata": 9, "eroi": 3, "testo": { "it": "…ci giochi INSIEME", "en": "…you play TOGETHER" }, "sotto": { "it": "3 eroi contro 1 Minaccia", "en": "3 heroes vs 1 Threat" } },
-        { "tipo": "partita", "durata": 6, "eroi": 3, "salta": 9, "testo": { "it": "Si vince o si perde in squadra", "en": "Win or lose as a team" } },
-        { "tipo": "bustina", "durata": 5, "testo": { "it": "E sblocchi carte nuove", "en": "And unlock new cards" } }
+      "id": "ultima_carta",
+      "formato": "Colpo finale: tensione, giocata decisiva, vittoria",
+      "titolo": {
+        "it": "Manca un solo punto per vincere",
+        "en": "One point away from winning"
+      },
+      "riprese": {
+        "p": {
+          "tipo": "partita",
+          "eroi": 3,
+          "intro": false,
+          "momento": "vittoria_vicina",
+          "segui": true,
+          "durata": 16,
+          "camera": [
+            {
+              "t": 0,
+              "su": "minaccia",
+              "zoom": 1.5,
+              "dur": 0
+            },
+            {
+              "t": 1.1,
+              "su": "barre",
+              "zoom": 1.25,
+              "dur": 0.6
+            },
+            {
+              "t": 2.6,
+              "zoom": 1,
+              "dur": 0.5
+            }
+          ],
+          "azioni": [
+            {
+              "t": 4.5,
+              "fai": "vinci"
+            }
+          ]
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "p",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "ULTIMO ATTO.",
+            "en": "FINAL ACT."
+          },
+          "stile": "grande",
+          "pos": "centro"
+        },
+        {
+          "ripresa": "p",
+          "da": 1.2,
+          "durata": 1.3,
+          "testo": {
+            "it": "Manca *1 punto*",
+            "en": "*1 point* left"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "game_over-2.2",
+          "riserva": 4,
+          "durata": 1.5,
+          "transizione": "scorri",
+          "testo": {
+            "it": "Ultima carta…",
+            "en": "Last card…"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "game_over-0.4",
+          "riserva": 6,
+          "durata": 1.3,
+          "transizione": "flash",
+          "scossa": true,
+          "testo": {
+            "it": "VITTORIA",
+            "en": "VICTORY"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "p",
+          "da": "game_over+0.9",
+          "riserva": 7.5,
+          "durata": 1.7,
+          "testo": {
+            "it": "Si vince *in squadra*",
+            "en": "You win *as a team*"
+          }
+        }
       ],
-      "chiusura": { "it": "GIOCA GRATIS\\Ncon i tuoi amici", "en": "PLAY FREE\\Nwith your friends" },
-      "didascalia": { "it": "Un card game cooperativo: tu e i tuoi amici contro le Minacce. Gratis su Android e browser. Con chi ci giocheresti?", "en": "A co-op card game: you and your friends vs the Threats. Free on Android and browser. Who would you play with?" },
-      "hashtag": ["coop", "giochiconamici", "mobilegame"]
+      "chiusura": {
+        "sopra": {
+          "it": "Card game cooperativo",
+          "en": "Co-op card game"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        }
+      },
+      "didascalia": {
+        "it": "Un punto alla fine dell'atto finale. Voi quale carta avreste giocato?",
+        "en": "One point from the end of the final act. Which card would you play?"
+      },
+      "hashtag": [
+        "clutch",
+        "strategia",
+        "mobilegame"
+      ]
+    },
+    {
+      "id": "pov_amici",
+      "formato": "POV: situazione in cui il pubblico si riconosce",
+      "titolo": {
+        "it": "POV: giochi con i tuoi amici, non contro",
+        "en": "POV: you play with your friends, not against them"
+      },
+      "riprese": {
+        "s": {
+          "tipo": "eroi",
+          "durata": 2.4,
+          "camera": [
+            {
+              "t": 0,
+              "su": "squadra",
+              "zoom": 1.6,
+              "dur": 0
+            },
+            {
+              "t": 1.4,
+              "zoom": 1,
+              "dur": 0.6
+            }
+          ]
+        },
+        "p": {
+          "tipo": "partita",
+          "eroi": 4,
+          "intro": false,
+          "segui": true,
+          "momento": "trauma_alto",
+          "durata": 14,
+          "azioni": [
+            {
+              "t": 9.5,
+              "fai": "villain"
+            }
+          ]
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "s",
+          "da": 0,
+          "durata": 1.8,
+          "testo": {
+            "it": "POV: i tuoi amici giocano *con* te",
+            "en": "POV: your friends play *with* you"
+          },
+          "stile": "box"
+        },
+        {
+          "ripresa": "p",
+          "da": "defense_window_opened+0.1",
+          "riserva": 2,
+          "durata": 1.4,
+          "transizione": "zoom",
+          "testo": {
+            "it": "Uno para i colpi…",
+            "en": "One blocks the hits…"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#2-0.2",
+          "riserva": 4,
+          "durata": 1.4,
+          "transizione": "scorri_sx",
+          "testo": {
+            "it": "…uno *distrugge* la Minaccia…",
+            "en": "…one *wrecks* the Threat…"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "player_corrupted+0.35",
+          "riserva": 9.8,
+          "durata": 1.6,
+          "transizione": "flash",
+          "scossa": true,
+          "testo": {
+            "it": "…e uno diventa *VILLAIN*",
+            "en": "…and one turns *VILLAIN*"
+          }
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Chi è il Villain del tuo gruppo?",
+          "en": "Who's the Villain in your group?"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        }
+      },
+      "didascalia": {
+        "it": "Tagga l'amico che diventerebbe Villain al primo turno 👀",
+        "en": "Tag the friend who'd turn Villain on turn one 👀"
+      },
+      "hashtag": [
+        "pov",
+        "giochiconamici",
+        "coop"
+      ]
+    },
+    {
+      "id": "tre_motivi",
+      "formato": "Lista: 3 motivi in 15 secondi",
+      "titolo": {
+        "it": "3 motivi per provare Monomythos",
+        "en": "3 reasons to try Monomythos"
+      },
+      "riprese": {
+        "p": {
+          "tipo": "partita",
+          "eroi": 3,
+          "intro": false,
+          "segui": true,
+          "durata": 8
+        },
+        "m": {
+          "tipo": "mazzo",
+          "durata": 3,
+          "camera": [
+            {
+              "t": 0,
+              "zoom": 1.15,
+              "dur": 0
+            },
+            {
+              "t": 0.2,
+              "zoom": 1,
+              "dur": 2.6
+            }
+          ]
+        },
+        "b": {
+          "tipo": "bustina",
+          "durata": 4,
+          "azioni": [
+            {
+              "t": 0.4,
+              "fai": "apri_bustina"
+            }
+          ],
+          "camera": [
+            {
+              "t": 1.4,
+              "su": "bustina",
+              "zoom": 1.25,
+              "dur": 1.6
+            }
+          ]
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "p",
+          "da": 0.5,
+          "durata": 1.1,
+          "testo": {
+            "it": "3 MOTIVI",
+            "en": "3 REASONS"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.2",
+          "riserva": 2,
+          "durata": 2.2,
+          "transizione": "flash",
+          "testo": {
+            "it": "1. Si gioca *in squadra*",
+            "en": "1. You play *as a team*"
+          }
+        },
+        {
+          "ripresa": "m",
+          "da": 0.3,
+          "durata": 2.2,
+          "transizione": "scorri",
+          "testo": {
+            "it": "2. Il mazzo da *60 carte* lo fai tu",
+            "en": "2. *60 cards*, your own deck"
+          }
+        },
+        {
+          "ripresa": "b",
+          "da": 0.9,
+          "durata": 2.4,
+          "transizione": "scorri",
+          "testo": {
+            "it": "3. È *gratis*. Davvero.",
+            "en": "3. It's *free*. Really."
+          }
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Il quarto motivo? Provalo",
+          "en": "Reason four? Try it"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        }
+      },
+      "didascalia": {
+        "it": "Tre motivi, quindici secondi. Il quarto lo scopri giocando.",
+        "en": "Three reasons, fifteen seconds. The fourth one you find out by playing."
+      },
+      "hashtag": [
+        "mobilegame",
+        "freetoplay",
+        "tcg"
+      ]
+    },
+    {
+      "id": "non_scaricarlo",
+      "formato": "Gancio al contrario: 'non scaricare questo gioco se…'",
+      "titolo": {
+        "it": "Non scaricare questo gioco se…",
+        "en": "Don't download this game if…"
+      },
+      "riprese": {
+        "h": {
+          "tipo": "home",
+          "durata": 2,
+          "camera": [
+            {
+              "t": 0,
+              "zoom": 1.12,
+              "dur": 0
+            },
+            {
+              "t": 0.1,
+              "zoom": 1,
+              "dur": 1.8
+            }
+          ]
+        },
+        "p": {
+          "tipo": "partita",
+          "eroi": 3,
+          "intro": false,
+          "segui": true,
+          "momento": "atto_quasi_vinto",
+          "durata": 12,
+          "azioni": [
+            {
+              "t": 4.5,
+              "fai": "chiudi_atto"
+            }
+          ]
+        },
+        "e": {
+          "tipo": "eroi",
+          "durata": 3
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "h",
+          "da": 0,
+          "durata": 1.7,
+          "testo": {
+            "it": "*NON* scaricare questo gioco…",
+            "en": "*DON'T* download this game…"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": 0.8,
+          "durata": 1.7,
+          "transizione": "scorri",
+          "testo": {
+            "it": "…se non hai amici con cui giocare",
+            "en": "…if you have no friends to play with"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "act_advanced-0.3",
+          "riserva": 5,
+          "durata": 1.4,
+          "transizione": "flash",
+          "scossa": true,
+          "testo": {
+            "it": "Scherzo.",
+            "en": "Just kidding."
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "e",
+          "da": 0.6,
+          "durata": 2,
+          "transizione": "scorri_sx",
+          "testo": {
+            "it": "Ci sono anche i *bot*",
+            "en": "There are *bots* too"
+          }
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ok, ora scaricalo",
+          "en": "Ok, now download it"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        }
+      },
+      "didascalia": {
+        "it": "Si gioca con gli amici, online o contro i bot. Nessuna scusa 😄",
+        "en": "Play with friends, online or against bots. No excuses 😄"
+      },
+      "hashtag": [
+        "giochiconamici",
+        "coop",
+        "mobilegaming"
+      ]
     },
     {
       "id": "bustina_leggendaria",
-      "titolo": { "it": "Apro una bustina: esce la leggendaria?", "en": "Opening a pack: will I pull a legendary?" },
-      "gancio": { "it": "Bustina da 150 crediti…", "en": "150-credit pack…" },
-      "scene": [
-        { "tipo": "bustina", "durata": 7, "testo": { "it": "…esce la LEGGENDARIA?", "en": "…LEGENDARY pull?" }, "sotto": { "it": "scrivi nei commenti cosa è uscito", "en": "comment what you see" } }
-      ],
+      "formato": "Apertura bustina con rallentatore e zoom sulla carta rara",
+      "titolo": {
+        "it": "Apro una bustina e…",
+        "en": "I open a pack and…"
+      },
       "musica": "m1_selezione.mp3",
-      "chiusura": { "it": "APRI LA TUA\\Nlink in bio", "en": "OPEN YOURS\\Nlink in bio" },
-      "didascalia": { "it": "Apertura bustina in Monomythos. Comuni, rare, epiche, leggendarie: tu cosa speri di trovare?", "en": "Pack opening in Monomythos. Common, rare, epic, legendary: what are you hoping for?" },
-      "hashtag": ["packopening", "bustine", "tcg"]
+      "musica_da": 60,
+      "riprese": {
+        "b": {
+          "tipo": "bustina",
+          "momento": "leggendaria",
+          "durata": 6.5,
+          "azioni": [
+            {
+              "t": 0.9,
+              "fai": "apri_bustina"
+            }
+          ],
+          "camera": [
+            {
+              "t": 0,
+              "zoom": 1.2,
+              "dur": 0
+            },
+            {
+              "t": 0.3,
+              "zoom": 1,
+              "dur": 0.6
+            },
+            {
+              "t": 2.7,
+              "su": "leggendaria",
+              "zoom": 2.1,
+              "dur": 0.7
+            }
+          ]
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.1,
+          "testo": {
+            "it": "Ultima bustina…",
+            "en": "Last pack…"
+          }
+        },
+        {
+          "ripresa": "b",
+          "da": "bustina+0.05",
+          "riserva": 0.9,
+          "durata": 1.6,
+          "velocita": 0.6,
+          "transizione": "zoom",
+          "testo": {
+            "it": "dai, dai, *dai*…",
+            "en": "come on, come *on*…"
+          }
+        },
+        {
+          "ripresa": "b",
+          "da": "bustina+1.9",
+          "riserva": 2.8,
+          "durata": 1.5,
+          "transizione": "flash",
+          "scossa": true,
+          "testo": {
+            "it": "LEGGENDARIA",
+            "en": "LEGENDARY"
+          },
+          "stile": "grande",
+          "pos": "alto"
+        },
+        {
+          "ripresa": "b",
+          "da": "bustina+3.4",
+          "riserva": 4.3,
+          "durata": 1.4,
+          "testo": {
+            "it": "A te cosa esce?",
+            "en": "What will you pull?"
+          },
+          "pos": "basso"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Bustine gratis giocando",
+          "en": "Free packs as you play"
+        },
+        "invito": {
+          "it": "APRI LA TUA",
+          "en": "OPEN YOURS"
+        }
+      },
+      "didascalia": {
+        "it": "4% di probabilità di Leggendaria nell'ultimo slot. Fortuna o skill?",
+        "en": "4% legendary chance in the last slot. Luck or skill?"
+      },
+      "hashtag": [
+        "packopening",
+        "bustine",
+        "leggendaria"
+      ]
     },
     {
-      "id": "fatto_da_solo",
-      "titolo": { "it": "Ho creato un gioco di carte da solo", "en": "I made a card game by myself" },
-      "gancio": { "it": "Ho creato un gioco di carte DA SOLO", "en": "I made a card game ALONE" },
-      "scene": [
-        { "tipo": "home", "durata": 3, "testo": "" },
-        { "tipo": "partita", "durata": 7, "eroi": 2, "testo": { "it": "Partite tattiche in cooperativa", "en": "Tactical co-op matches" } },
-        { "tipo": "storia", "durata": 6, "testo": { "it": "Una Storia a fumetti", "en": "A comic-book story mode" } },
-        { "tipo": "mazzo", "durata": 4, "testo": { "it": "Il tuo mazzo da 60 carte", "en": "Your own 60-card deck" } }
+      "id": "villain_twist",
+      "formato": "Colpo di scena: il compagno che tradisce",
+      "titolo": {
+        "it": "Il mio compagno mi ha tradito",
+        "en": "My teammate betrayed me"
+      },
+      "riprese": {
+        "p": {
+          "tipo": "partita",
+          "eroi": 3,
+          "intro": false,
+          "segui": true,
+          "momento": "trauma_alto",
+          "durata": 11,
+          "azioni": [
+            {
+              "t": 6.5,
+              "fai": "villain"
+            }
+          ],
+          "camera": [
+            {
+              "t": 0,
+              "su": "alleati",
+              "zoom": 1.7,
+              "dur": 0
+            },
+            {
+              "t": 1.5,
+              "zoom": 1,
+              "dur": 0.5
+            },
+            {
+              "t": 6.4,
+              "zoom": 1.25,
+              "dur": 0.2
+            },
+            {
+              "t": 7.4,
+              "zoom": 1,
+              "dur": 0.6
+            }
+          ]
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "p",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Lui mi copre le spalle…",
+            "en": "He's got my back…"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.1",
+          "riserva": 2.5,
+          "durata": 1.4,
+          "transizione": "scorri",
+          "testo": {
+            "it": "…mi difende…",
+            "en": "…he defends me…"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "player_corrupted+0.35",
+          "riserva": 6.9,
+          "durata": 1.6,
+          "transizione": "flash",
+          "scossa": true,
+          "testo": {
+            "it": "…POI QUESTO.",
+            "en": "…THEN THIS."
+          },
+          "stile": "grande",
+          "pos": "alto"
+        },
+        {
+          "ripresa": "p",
+          "da": "player_corrupted+2.0",
+          "riserva": 8.5,
+          "durata": 1.6,
+          "testo": {
+            "it": "Troppo *Trauma* = Villain",
+            "en": "Too much *Trauma* = Villain"
+          }
+        }
       ],
-      "chiusura": { "it": "È GRATIS\\Nprovalo e dimmi cosa ne pensi", "en": "IT'S FREE\\Ntry it and tell me what you think" },
-      "didascalia": { "it": "Sviluppatore indie, un solo progetto: Monomythos. Ogni feedback mi aiuta, scrivimi cosa miglioreresti.", "en": "Solo indie dev, one project: Monomythos. Every bit of feedback helps, tell me what you'd improve." },
-      "hashtag": ["indiedev", "solodev", "devlog"]
+      "chiusura": {
+        "sopra": {
+          "it": "Ti fidi dei tuoi amici?",
+          "en": "Do you trust your friends?"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        }
+      },
+      "didascalia": {
+        "it": "In Monomythos chi accumula troppo Trauma passa dalla parte del Villain. Cooperativo… finché dura.",
+        "en": "In Monomythos, too much Trauma turns you into the Villain. Co-op… while it lasts."
+      },
+      "hashtag": [
+        "traditore",
+        "betrayal",
+        "plottwist"
+      ]
     },
     {
-      "id": "minaccia_boss",
-      "titolo": { "it": "Riusciamo a battere questa Minaccia?", "en": "Can we beat this Threat?" },
-      "gancio": { "it": "Questa Minaccia vuole distruggerci", "en": "This Threat wants us gone" },
-      "scene": [
-        { "tipo": "partita", "durata": 16, "eroi": 3, "testo": { "it": "Riusciremo a batterla?", "en": "Can we beat it?" }, "sotto": { "it": "guarda fino alla fine", "en": "watch till the end" } }
+      "id": "parata_perfetta",
+      "formato": "Meccanica spiegata in 3 tagli",
+      "titolo": {
+        "it": "Come parare un attacco in Monomythos",
+        "en": "How to block an attack in Monomythos"
+      },
+      "riprese": {
+        "p": {
+          "tipo": "partita",
+          "eroi": 3,
+          "intro": false,
+          "durata": 14
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "p",
+          "da": "defense_window_opened-0.6",
+          "riserva": 3,
+          "durata": 1.1,
+          "testo": {
+            "it": "Ti attaccano.",
+            "en": "You're under attack."
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "p",
+          "da": "defense_window_opened+0.15",
+          "riserva": 3.7,
+          "durata": 1.4,
+          "transizione": "zoom",
+          "testo": {
+            "it": "*Scarta* carte…",
+            "en": "*Discard* cards…"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "damage_taken-0.2",
+          "riserva": 5,
+          "durata": 1.5,
+          "transizione": "flash",
+          "scossa": true,
+          "testo": {
+            "it": "…e assorbi i *danni*",
+            "en": "…and absorb the *damage*"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "round_started#1+0.2",
+          "riserva": 7,
+          "durata": 1.6,
+          "transizione": "scorri",
+          "testo": {
+            "it": "Ma ti restano *meno carte*",
+            "en": "But you keep *fewer cards*"
+          },
+          "sotto": {
+            "it": "rischio o sicurezza?",
+            "en": "risk or safety?"
+          }
+        }
       ],
-      "chiusura": { "it": "TOCCA A TE\\Nlink in bio", "en": "YOUR TURN\\Nlink in bio" },
-      "didascalia": { "it": "Tre eroi, una Minaccia in tre atti. Partita vera, giocata dall'IA del gioco.", "en": "Three heroes, one Threat in three acts. Real match, played by the game's AI." },
-      "hashtag": ["boss", "strategia", "strategygame"]
-    },
-    {
-      "id": "storia_lumen",
-      "titolo": { "it": "La città di Lumen ha perso la sua luce", "en": "The city of Lumen lost its light" },
-      "gancio": { "it": "Il Grande Faro si è spento…", "en": "The Great Lighthouse went dark…" },
-      "scene": [
-        { "tipo": "storia", "durata": 11, "testo": "", "sotto": { "it": "Capitolo 1: Il Faro Spento", "en": "Chapter 1: The Dark Lighthouse" } },
-        { "tipo": "partita", "durata": 6, "eroi": 2, "testo": { "it": "Riaccendilo tu", "en": "Light it up again" } }
-      ],
-      "musica": "m1_selezione.mp3",
-      "chiusura": { "it": "INIZIA LA STORIA\\Nlink in bio", "en": "START THE STORY\\Nlink in bio" },
-      "didascalia": { "it": "La modalità Storia di Monomythos: 6 missioni nel primo capitolo, dialoghi a fumetto e un mondo tutto da scoprire.", "en": "Monomythos story mode: 6 missions in chapter one, comic dialogues and a world to discover." },
-      "hashtag": ["storymode", "fumetti", "lore"]
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni carta conta",
+          "en": "Every card counts"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        }
+      },
+      "didascalia": {
+        "it": "La Parata Dinamica: più carte scarti, meno danni prendi. Ma il turno dopo?",
+        "en": "Dynamic Parry: discard more, take less damage. But what about next turn?"
+      },
+      "hashtag": [
+        "gamedesign",
+        "meccaniche",
+        "strategygame"
+      ]
     },
     {
       "id": "carta_settimana",
-      "titolo": { "it": "Carta della settimana", "en": "Card of the week" },
-      "gancio": { "it": "CARTA DELLA SETTIMANA", "en": "CARD OF THE WEEK" },
-      "scene": [
-        { "tipo": "carta", "durata": 6, "testo": "", "sotto": { "it": "forte o da scartare?", "en": "strong or trash?" } },
-        { "tipo": "partita", "durata": 6, "eroi": 2, "salta": 4, "testo": { "it": "Dimmi nei commenti", "en": "Tell me in the comments" } }
+      "formato": "Rubrica fissa: una carta, un'opinione da commentare",
+      "titolo": {
+        "it": "Carta della settimana",
+        "en": "Card of the week"
+      },
+      "riprese": {
+        "c": {
+          "tipo": "carta",
+          "durata": 4.5,
+          "camera": [
+            {
+              "t": 0,
+              "su": "carta",
+              "zoom": 1.5,
+              "dur": 0
+            },
+            {
+              "t": 0.3,
+              "su": "carta",
+              "zoom": 1.05,
+              "dur": 3.5
+            }
+          ]
+        },
+        "p": {
+          "tipo": "partita",
+          "eroi": 2,
+          "intro": false,
+          "segui": true,
+          "durata": 6
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.1,
+          "testo": {
+            "it": "CARTA DELLA SETTIMANA",
+            "en": "CARD OF THE WEEK"
+          },
+          "stile": "grande",
+          "pos": "alto"
+        },
+        {
+          "ripresa": "c",
+          "da": 1.1,
+          "durata": 2.6,
+          "testo": {
+            "it": "È *rotta*?",
+            "en": "Is it *broken*?"
+          },
+          "pos": "alto"
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.2",
+          "riserva": 2,
+          "durata": 1.8,
+          "transizione": "flash",
+          "testo": {
+            "it": "Forte o da *scartare*?",
+            "en": "Strong or *trash*?"
+          }
+        }
       ],
-      "chiusura": { "it": "COLLEZIONALE TUTTE\\Nlink in bio", "en": "COLLECT THEM ALL\\Nlink in bio" },
-      "didascalia": { "it": "Ogni settimana una carta di Monomythos. Voi la mettereste nel mazzo?", "en": "A Monomythos card every week. Would you put it in your deck?" },
-      "hashtag": ["cartadellasettimana", "deckbuilding"]
-    },
-    {
-      "id": "villain",
-      "titolo": { "it": "Il tuo compagno può diventare il Villain", "en": "Your teammate can become the Villain" },
-      "gancio": { "it": "Il tuo compagno può TRADIRTI", "en": "Your teammate can BETRAY you" },
-      "scene": [
-        { "tipo": "partita", "durata": 8, "eroi": 3, "testo": { "it": "Troppo Trauma…", "en": "Too much Trauma…" } },
-        { "tipo": "partita", "durata": 7, "eroi": 3, "salta": 10, "testo": { "it": "…e passa dalla parte del Villain", "en": "…and they turn Villain" }, "sotto": { "it": "fidarsi o no?", "en": "trust them or not?" } }
-      ],
-      "chiusura": { "it": "DI CHI TI FIDI?\\Nlink in bio", "en": "WHO DO YOU TRUST?\\Nlink in bio" },
-      "didascalia": { "it": "In Monomythos chi accumula troppo Trauma diventa Villain. Cooperativo... finché dura.", "en": "In Monomythos, too much Trauma turns you into the Villain. Co-op... while it lasts." },
-      "hashtag": ["traditore", "betrayal", "boardgame"]
-    },
-    {
-      "id": "mazzo_60",
-      "titolo": { "it": "Costruisci il tuo mazzo da 60 carte", "en": "Build your own 60-card deck" },
-      "gancio": { "it": "60 carte. Le scegli TU.", "en": "60 cards. YOU pick them." },
-      "scene": [
-        { "tipo": "mazzo", "durata": 8, "testo": "", "sotto": { "it": "massimo 2 copie per carta", "en": "max 2 copies per card" } },
-        { "tipo": "partita", "durata": 6, "eroi": 2, "salta": 4, "testo": { "it": "Poi lo porti in battaglia", "en": "Then take it to battle" } }
-      ],
-      "chiusura": { "it": "CREA IL TUO MAZZO\\Nlink in bio", "en": "BUILD YOUR DECK\\Nlink in bio" },
-      "didascalia": { "it": "Deckbuilding in Monomythos: 60 carte, massimo 2 copie. Qual è la vostra strategia preferita?", "en": "Deckbuilding in Monomythos: 60 cards, max 2 copies. What's your favourite strategy?" },
-      "hashtag": ["deckbuilding", "tcg", "strategia"]
-    },
-    {
-      "id": "otto_eroi",
-      "titolo": { "it": "8 eroi, 8 modi di giocare", "en": "8 heroes, 8 ways to play" },
-      "gancio": { "it": "Quale eroe sei?", "en": "Which hero are you?" },
-      "scene": [
-        { "tipo": "eroi", "durata": 8, "testo": "", "sotto": { "it": "8 eroi, 8 stili", "en": "8 heroes, 8 styles" } },
-        { "tipo": "partita", "durata": 6, "eroi": 2, "salta": 4, "testo": { "it": "Scrivi il tuo nei commenti", "en": "Comment yours" } }
-      ],
-      "chiusura": { "it": "SCEGLI IL TUO EROE\\Nlink in bio", "en": "PICK YOUR HERO\\Nlink in bio" },
-      "didascalia": { "it": "Potenza, Agilità, Intelligenza, Vigore: ogni eroe di Monomythos gioca in modo diverso. Il tuo preferito?", "en": "Power, Agility, Intelligence, Vigor: every Monomythos hero plays differently. Your favourite?" },
-      "hashtag": ["eroi", "heroes", "characterdesign"]
+      "chiusura": {
+        "sopra": {
+          "it": "Scrivilo nei commenti",
+          "en": "Tell me in the comments"
+        },
+        "invito": {
+          "it": "COLLEZIONALE",
+          "en": "COLLECT THEM"
+        }
+      },
+      "didascalia": {
+        "it": "Ogni settimana una carta di Monomythos. Voi la mettereste nel mazzo?",
+        "en": "A Monomythos card every week. Would you put it in your deck?"
+      },
+      "hashtag": [
+        "cartadellasettimana",
+        "deckbuilding"
+      ]
     },
     {
       "id": "indovina_carta",
-      "titolo": { "it": "Indovina cosa fa questa carta", "en": "Guess what this card does" },
-      "gancio": { "it": "Indovina cosa fa questa carta", "en": "Guess what this card does" },
-      "scene": [
-        { "tipo": "carta", "durata": 5, "testo": "", "sotto": { "it": "hai 5 secondi", "en": "you have 5 seconds" } },
-        { "tipo": "partita", "durata": 5, "eroi": 2, "salta": 5, "testo": { "it": "Risposta nei commenti", "en": "Answer in the comments" } }
+      "formato": "Quiz con conto alla rovescia",
+      "titolo": {
+        "it": "Indovina cosa fa questa carta",
+        "en": "Guess what this card does"
+      },
+      "riprese": {
+        "c": {
+          "tipo": "carta",
+          "durata": 5.5,
+          "camera": [
+            {
+              "t": 0,
+              "su": "carta",
+              "zoom": 1.25,
+              "dur": 0
+            },
+            {
+              "t": 3.4,
+              "su": "carta",
+              "zoom": 1,
+              "dur": 0.4
+            }
+          ]
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "Cosa fa questa carta?",
+            "en": "What does this card do?"
+          }
+        },
+        {
+          "ripresa": "c",
+          "da": 1.3,
+          "durata": 0.6,
+          "testo": "3",
+          "stile": "grande"
+        },
+        {
+          "ripresa": "c",
+          "da": 1.9,
+          "durata": 0.6,
+          "testo": "2",
+          "stile": "grande"
+        },
+        {
+          "ripresa": "c",
+          "da": 2.5,
+          "durata": 0.6,
+          "testo": "1",
+          "stile": "grande"
+        },
+        {
+          "ripresa": "c",
+          "da": 3.4,
+          "durata": 1.8,
+          "transizione": "flash",
+          "testo": {
+            "it": "Ci avevi preso?",
+            "en": "Did you get it?"
+          },
+          "pos": "basso"
+        }
       ],
-      "chiusura": { "it": "SCOPRI LE ALTRE\\Nlink in bio", "en": "DISCOVER MORE\\Nlink in bio" },
-      "didascalia": { "it": "Gioco: guardate la carta e scrivete nei commenti cosa pensate che faccia.", "en": "Game: look at the card and comment what you think it does." },
-      "hashtag": ["quiz", "indovina", "cardgame"]
+      "chiusura": {
+        "sopra": {
+          "it": "Ne abbiamo altre 200",
+          "en": "We've got 200 more"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        }
+      },
+      "didascalia": {
+        "it": "Avevi indovinato? Scrivi la tua risposta prima di guardare la fine.",
+        "en": "Did you guess right? Comment your answer before the end."
+      },
+      "hashtag": [
+        "quiz",
+        "indovina",
+        "cardgame"
+      ]
     },
     {
-      "id": "parata",
-      "titolo": { "it": "Paro i danni scartando carte", "en": "Blocking damage by discarding cards" },
-      "gancio": { "it": "Ti attaccano? SCARTA e para", "en": "Under attack? DISCARD to block" },
-      "scene": [
-        { "tipo": "partita", "durata": 14, "eroi": 3, "salta": 4, "testo": { "it": "Ogni carta scartata assorbe danni", "en": "Every discarded card absorbs damage" }, "sotto": { "it": "ma ti restano meno carte", "en": "but you keep fewer cards" } }
+      "id": "otto_eroi",
+      "formato": "Carrellata a ritmo di musica",
+      "titolo": {
+        "it": "Quale eroe sei?",
+        "en": "Which hero are you?"
+      },
+      "riprese": {
+        "e": {
+          "tipo": "eroi",
+          "durata": 9,
+          "passo": 900,
+          "camera": [
+            {
+              "t": 0,
+              "su": "eroi",
+              "zoom": 1.15,
+              "dur": 0
+            }
+          ]
+        },
+        "p": {
+          "tipo": "partita",
+          "eroi": 4,
+          "intro": false,
+          "segui": true,
+          "durata": 6
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "e",
+          "da": 0.3,
+          "durata": 1.2,
+          "testo": {
+            "it": "8 EROI",
+            "en": "8 HEROES"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "e",
+          "da": 1.9,
+          "durata": 0.9,
+          "transizione": "scorri_sx",
+          "testo": {
+            "it": "Il *tank*",
+            "en": "The *tank*"
+          }
+        },
+        {
+          "ripresa": "e",
+          "da": 3.7,
+          "durata": 0.9,
+          "transizione": "scorri_sx",
+          "testo": {
+            "it": "Il *veloce*",
+            "en": "The *fast one*"
+          }
+        },
+        {
+          "ripresa": "e",
+          "da": 5.5,
+          "durata": 0.9,
+          "transizione": "scorri_sx",
+          "testo": {
+            "it": "Il *cervello*",
+            "en": "The *brain*"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.2",
+          "riserva": 2,
+          "durata": 1.8,
+          "transizione": "flash",
+          "testo": {
+            "it": "E tu quale sei?",
+            "en": "Which one are you?"
+          }
+        }
       ],
-      "chiusura": { "it": "QUANTO RISCHI?\\Nlink in bio", "en": "HOW MUCH DO YOU RISK?\\Nlink in bio" },
-      "didascalia": { "it": "La Parata Dinamica di Monomythos: difendi te o i compagni scartando carte. Rischio contro sicurezza.", "en": "Monomythos Dynamic Parry: protect yourself or your teammates by discarding cards. Risk vs safety." },
-      "hashtag": ["meccaniche", "gamedesign", "strategygame"]
+      "chiusura": {
+        "sopra": {
+          "it": "Scegli il tuo eroe",
+          "en": "Pick your hero"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        }
+      },
+      "didascalia": {
+        "it": "Potenza, Agilità, Intelligenza, Vigore: ogni eroe gioca in modo diverso. Il tuo?",
+        "en": "Power, Agility, Intelligence, Vigor: every hero plays differently. Yours?"
+      },
+      "hashtag": [
+        "eroi",
+        "heroes",
+        "characterdesign"
+      ]
     },
     {
-      "id": "round_veloce",
-      "titolo": { "it": "Un round di Monomythos in 20 secondi", "en": "A Monomythos round in 20 seconds" },
-      "gancio": { "it": "Un round in 20 secondi", "en": "One round in 20 seconds" },
-      "scene": [
-        { "tipo": "partita", "durata": 20, "eroi": 4, "testo": "", "sotto": { "it": "4 eroi contro la Minaccia", "en": "4 heroes vs the Threat" } }
+      "id": "storia_lumen",
+      "formato": "Mini trailer narrativo",
+      "titolo": {
+        "it": "La città di Lumen è al buio",
+        "en": "The city of Lumen has gone dark"
+      },
+      "musica": "m1_selezione.mp3",
+      "musica_da": 60,
+      "riprese": {
+        "s": {
+          "tipo": "storia",
+          "durata": 6,
+          "camera": [
+            {
+              "t": 0,
+              "zoom": 1.12,
+              "dur": 0
+            },
+            {
+              "t": 0.1,
+              "zoom": 1,
+              "dur": 5.5
+            }
+          ]
+        },
+        "p": {
+          "tipo": "partita",
+          "eroi": 3,
+          "intro": false,
+          "segui": true,
+          "momento": "atto_quasi_vinto",
+          "durata": 10,
+          "azioni": [
+            {
+              "t": 4.5,
+              "fai": "chiudi_atto"
+            }
+          ]
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "s",
+          "da": 0.2,
+          "durata": 2.2,
+          "testo": {
+            "it": "Il Grande Faro si è *spento*",
+            "en": "The Great Lighthouse went *dark*"
+          }
+        },
+        {
+          "ripresa": "s",
+          "da": 3,
+          "durata": 2,
+          "transizione": "dissolvenza",
+          "testo": {
+            "it": "Lumen ha bisogno di *eroi*",
+            "en": "Lumen needs *heroes*"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.2",
+          "riserva": 2,
+          "durata": 1.5,
+          "transizione": "flash",
+          "testo": {
+            "it": "Riaccendilo",
+            "en": "Light it up"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "p",
+          "da": "act_advanced-0.2",
+          "riserva": 5,
+          "durata": 1.6,
+          "transizione": "scorri",
+          "scossa": true,
+          "testo": {
+            "it": "Capitolo 1 *disponibile*",
+            "en": "Chapter 1 *out now*"
+          }
+        }
       ],
-      "chiusura": { "it": "PROVALO GRATIS\\Nlink in bio", "en": "TRY IT FREE\\Nlink in bio" },
-      "didascalia": { "it": "Pesca, gioca, para, colpisci. Un round completo di Monomythos con quattro eroi.", "en": "Draw, play, parry, strike. A full Monomythos round with four heroes." },
-      "hashtag": ["gameplay", "mobilegaming"]
+      "chiusura": {
+        "sopra": {
+          "it": "Modalità Storia",
+          "en": "Story mode"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "didascalia": {
+        "it": "La modalità Storia di Monomythos: 6 missioni nel primo capitolo e dialoghi a fumetto.",
+        "en": "Monomythos story mode: 6 missions in chapter one and comic-book dialogues."
+      },
+      "hashtag": [
+        "storymode",
+        "fumetti",
+        "lore"
+      ]
+    },
+    {
+      "id": "mazzo_60",
+      "formato": "Mostra lo strumento, poi il risultato in partita",
+      "titolo": {
+        "it": "Il tuo mazzo, le tue regole",
+        "en": "Your deck, your rules"
+      },
+      "riprese": {
+        "m": {
+          "tipo": "mazzo",
+          "durata": 5,
+          "camera": [
+            {
+              "t": 0,
+              "zoom": 1.3,
+              "dur": 0
+            },
+            {
+              "t": 0.2,
+              "zoom": 1,
+              "dur": 3
+            }
+          ]
+        },
+        "p": {
+          "tipo": "partita",
+          "eroi": 2,
+          "intro": false,
+          "segui": true,
+          "momento": "atto_quasi_vinto",
+          "durata": 8,
+          "azioni": [
+            {
+              "t": 4.5,
+              "fai": "chiudi_atto"
+            }
+          ]
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "m",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "60 CARTE",
+            "en": "60 CARDS"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "m",
+          "da": 1.2,
+          "durata": 2,
+          "testo": {
+            "it": "Le scegli *tu*",
+            "en": "*You* pick them"
+          },
+          "sotto": {
+            "it": "massimo 2 copie",
+            "en": "max 2 copies"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.2",
+          "riserva": 2,
+          "durata": 1.5,
+          "transizione": "scorri",
+          "testo": {
+            "it": "Poi le porti in *battaglia*",
+            "en": "Then take them to *battle*"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "act_advanced-0.3",
+          "riserva": 5,
+          "durata": 1.4,
+          "transizione": "flash",
+          "scossa": true,
+          "testo": {
+            "it": "E vinci.",
+            "en": "And win."
+          },
+          "stile": "grande"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Qual è il tuo mazzo?",
+          "en": "What's your deck?"
+        },
+        "invito": {
+          "it": "CREA IL TUO",
+          "en": "BUILD YOURS"
+        }
+      },
+      "didascalia": {
+        "it": "Deckbuilding in Monomythos: 60 carte, massimo 2 copie. Che strategia usi?",
+        "en": "Deckbuilding in Monomythos: 60 cards, max 2 copies. What's your strategy?"
+      },
+      "hashtag": [
+        "deckbuilding",
+        "tcg",
+        "strategia"
+      ]
     },
     {
       "id": "aggiornamento",
-      "titolo": { "it": "Nuovo aggiornamento di Monomythos", "en": "New Monomythos update" },
-      "gancio": { "it": "NUOVO AGGIORNAMENTO", "en": "NEW UPDATE" },
-      "scene": [
-        { "tipo": "bustina", "durata": 6, "testo": { "it": "Carte nuove", "en": "New cards" } },
-        { "tipo": "partita", "durata": 8, "eroi": 3, "testo": { "it": "Minacce più dure", "en": "Tougher Threats" } }
+      "formato": "Annuncio novità (da usare quando esce un aggiornamento)",
+      "titolo": {
+        "it": "Nuovo aggiornamento di Monomythos",
+        "en": "New Monomythos update"
+      },
+      "riprese": {
+        "b": {
+          "tipo": "bustina",
+          "durata": 4,
+          "azioni": [
+            {
+              "t": 0.3,
+              "fai": "apri_bustina"
+            }
+          ],
+          "camera": [
+            {
+              "t": 1.2,
+              "su": "bustina",
+              "zoom": 1.3,
+              "dur": 1.5
+            }
+          ]
+        },
+        "p": {
+          "tipo": "partita",
+          "eroi": 3,
+          "intro": false,
+          "segui": true,
+          "durata": 7
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "p",
+          "da": 0.3,
+          "durata": 1.1,
+          "testo": {
+            "it": "AGGIORNAMENTO",
+            "en": "UPDATE"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0.9,
+          "durata": 2,
+          "transizione": "flash",
+          "testo": {
+            "it": "Carte *nuove*",
+            "en": "*New* cards"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.2",
+          "riserva": 2,
+          "durata": 1.8,
+          "transizione": "scorri",
+          "testo": {
+            "it": "Minacce più *dure*",
+            "en": "*Tougher* Threats"
+          }
+        }
       ],
-      "chiusura": { "it": "AGGIORNA ORA\\Nlink in bio", "en": "UPDATE NOW\\Nlink in bio" },
-      "didascalia": { "it": "Aggiornamento di Monomythos: scrivi le novità qui prima di pubblicare.", "en": "Monomythos update: write the changes here before publishing." },
-      "hashtag": ["update", "patchnotes"]
+      "chiusura": {
+        "sopra": {
+          "it": "Disponibile ora",
+          "en": "Out now"
+        },
+        "invito": {
+          "it": "AGGIORNA",
+          "en": "UPDATE NOW"
+        }
+      },
+      "didascalia": {
+        "it": "Aggiornamento di Monomythos: scrivi le novità qui prima di pubblicare.",
+        "en": "Monomythos update: write the changes here before publishing."
+      },
+      "hashtag": [
+        "update",
+        "patchnotes"
+      ]
     },
     {
       "id": "trailer_lancio",
-      "titolo": { "it": "Monomythos è uscito: gioco di carte cooperativo gratis", "en": "Monomythos is out: free co-op card game" },
-      "gancio": { "it": "È USCITO", "en": "IT'S OUT" },
-      "scene": [
-        { "tipo": "home", "durata": 3, "testo": "" },
-        { "tipo": "partita", "durata": 10, "eroi": 3, "testo": { "it": "Gioca in squadra con gli amici", "en": "Team up with friends" } },
-        { "tipo": "bustina", "durata": 5, "testo": { "it": "Colleziona le carte", "en": "Collect cards" } },
-        { "tipo": "storia", "durata": 6, "testo": { "it": "Vivi la Storia", "en": "Live the Story" } },
-        { "tipo": "eroi", "durata": 4, "testo": { "it": "Scegli il tuo eroe", "en": "Pick your hero" } }
+      "formato": "Trailer di lancio a tagli rapidi",
+      "titolo": {
+        "it": "Monomythos è uscito: card game cooperativo gratis",
+        "en": "Monomythos is out: free co-op card game"
+      },
+      "riprese": {
+        "p": {
+          "tipo": "partita",
+          "eroi": 4,
+          "intro": false,
+          "segui": true,
+          "momento": "vittoria_vicina",
+          "durata": 14,
+          "azioni": [
+            {
+              "t": 6.5,
+              "fai": "vinci"
+            }
+          ]
+        },
+        "b": {
+          "tipo": "bustina",
+          "momento": "leggendaria",
+          "durata": 4.5,
+          "azioni": [
+            {
+              "t": 0.2,
+              "fai": "apri_bustina"
+            }
+          ],
+          "camera": [
+            {
+              "t": 1.8,
+              "su": "leggendaria",
+              "zoom": 1.9,
+              "dur": 0.6
+            }
+          ]
+        },
+        "s": {
+          "tipo": "storia",
+          "durata": 3
+        },
+        "e": {
+          "tipo": "eroi",
+          "durata": 3,
+          "passo": 700
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "p",
+          "da": 0.2,
+          "durata": 1,
+          "testo": {
+            "it": "È USCITO",
+            "en": "IT'S OUT"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "e",
+          "da": 0.6,
+          "durata": 1.2,
+          "transizione": "scorri_sx",
+          "testo": {
+            "it": "Scegli il tuo *eroe*",
+            "en": "Pick your *hero*"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.2",
+          "riserva": 2,
+          "durata": 1.3,
+          "transizione": "flash",
+          "testo": {
+            "it": "Gioca *in squadra*",
+            "en": "Play *as a team*"
+          }
+        },
+        {
+          "ripresa": "b",
+          "da": 1.5,
+          "durata": 1.5,
+          "transizione": "zoom",
+          "testo": {
+            "it": "Colleziona *leggende*",
+            "en": "Collect *legends*"
+          }
+        },
+        {
+          "ripresa": "s",
+          "da": 0.3,
+          "durata": 1.3,
+          "transizione": "scorri",
+          "testo": {
+            "it": "Vivi la *Storia*",
+            "en": "Live the *Story*"
+          }
+        },
+        {
+          "ripresa": "p",
+          "da": "game_over-0.4",
+          "riserva": 8,
+          "durata": 1.5,
+          "transizione": "flash",
+          "scossa": true,
+          "testo": {
+            "it": "VINCI INSIEME",
+            "en": "WIN TOGETHER"
+          },
+          "stile": "grande"
+        }
       ],
-      "chiusura": { "it": "GRATIS\\NAndroid e browser", "en": "FREE\\NAndroid and browser" },
-      "didascalia": { "it": "Monomythos è disponibile! Gioco di carte tattico cooperativo, gratis. Link in bio.", "en": "Monomythos is out! Free tactical co-op card game. Link in bio." },
-      "hashtag": ["lancio", "launch", "newgame"]
+      "chiusura": {
+        "sopra": {
+          "it": "Card game cooperativo",
+          "en": "Co-op card game"
+        },
+        "invito": {
+          "it": "GIOCA GRATIS",
+          "en": "PLAY FREE"
+        },
+        "sotto": {
+          "it": "Android · Browser",
+          "en": "Android · Browser"
+        }
+      },
+      "didascalia": {
+        "it": "Monomythos è disponibile! Gioco di carte tattico cooperativo, gratis. Link in bio.",
+        "en": "Monomythos is out! Free tactical co-op card game. Link in bio."
+      },
+      "hashtag": [
+        "lancio",
+        "launch",
+        "newgame"
+      ]
     }
   ]
 }
