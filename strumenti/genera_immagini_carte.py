@@ -89,6 +89,70 @@ if os.path.exists(_scenes_path):
     SCENES_EN = json.load(open(_scenes_path, encoding='utf-8'))
 
 
+_extra_path = os.path.join(ROOT, 'strumenti', 'scene_extra_en.json')
+SCENES_EXTRA = json.load(open(_extra_path, encoding='utf-8')) if os.path.exists(_extra_path) else {}
+
+THREAT_PALETTE = 'menacing villain mood, dominant crimson red and deep purple palette, red glow against a dark night sky'
+HERO_RULES = (
+    'One original costumed hero of our own design, full figure, heroic pose, seen from behind or in dramatic backlight: '
+    'the face is never visible (helmet, visor, hood or deep shadow). Not a known superhero, no logos'
+)
+
+
+def jslug(name):
+    # Stesso slug che usa il gioco (card_img_map): minuscole, solo lettere e cifre senza accenti
+    return re.sub(r'[^a-z0-9]', '', (name or '').lower())
+
+
+def primary_stat_key(m):
+    vals = {'potenza': m.get('str', 0), 'agilita': m.get('spd', 0), 'intelligenza': m.get('tech', 0), 'vigore': m.get('end', 0)}
+    return max(vals, key=vals.get)
+
+
+def extra_items(data):
+    """Minacce, eroi e carte creazione: stesse regole delle carte Azione, così tutte le carte sono uniformi."""
+    meta = data.get('chars_meta', {})
+    items = []
+    for t in data.get('threats', []):
+        items.append({'id': 't_' + jslug(t['nome']), 'kind': 'threat', 'obj': t, 'nome': t['nome'],
+                      'palette': THREAT_PALETTE, 'ref': 'oscura'})
+    for name, m in meta.items():
+        if name == 'Custom Hero':
+            continue
+        k = 'oscura' if 'Abisso' in name else primary_stat_key(m)
+        items.append({'id': 'h_' + jslug(name), 'kind': 'hero', 'obj': m, 'nome': name,
+                      'palette': DARK if k == 'oscura' else PALETTE[k], 'ref': k})
+    for c in data.get('creation_cards', []):
+        m = meta.get(c.get('char'), {})
+        k = 'oscura' if 'Abisso' in (c.get('char') or '') else primary_stat_key(m)
+        items.append({'id': 'c_' + jslug(c['name']), 'kind': 'creation', 'obj': c, 'nome': c['name'],
+                      'palette': DARK if k == 'oscura' else PALETTE[k], 'ref': k})
+    return items
+
+
+def build_prompt_extra(it):
+    scene = SCENES_EXTRA.get(it['id'], it['nome'])
+    parts = [
+        'Create a brand-new illustration drawn in exactly the same art style as image 0: '
+        'same line work, ink thickness, cel shading, halftone texture and color treatment. '
+        'Do not copy the subject or the composition of image 0',
+        f'New scene: {scene}', STYLE, it['palette'],
+        HERO_RULES if it['kind'] == 'hero' else RULES,
+        'The image must contain no writing of any kind: no title, no caption, no speech bubble, '
+        'no sound effect words, no signature, no watermark, no frame',
+    ]
+    return '. '.join(p.rstrip('.') for p in parts) + '.'
+
+
+def update_extra_refs(data, it, rel):
+    o = it['obj']
+    o['img'] = rel
+    if it['kind'] in ('threat', 'hero'):
+        m = data.setdefault('card_img_map', {})
+        m[it['nome']] = rel
+        m[jslug(it['nome'])] = rel
+
+
 def build_prompt(card):
     # Scena in inglese (il modello capisce meglio); se manca, usa la descrizione italiana dei dati
     scene = SCENES_EN.get(card.get('id')) or (card.get('illus') or '').strip().rstrip('.')
@@ -256,6 +320,9 @@ def write_preview(data):
         for c in cards:
             if str(c.get('img', '')).startswith(REL_DIR):
                 rows.append(f'<figure><img src="../{c["img"]}" loading="lazy"><figcaption>{hero}<br><b>{c["nome"]}</b></figcaption></figure>')
+    for it in extra_items(data):
+        if str(it['obj'].get('img', '')).startswith(REL_DIR):
+            rows.append(f'<figure><img src="../{it["obj"]["img"]}" loading="lazy"><figcaption>{it["kind"]}<br><b>{it["nome"]}</b></figcaption></figure>')
     html = ('<!doctype html><meta charset="utf-8"><title>Anteprima sfondi carte</title>'
             '<style>body{background:#111;color:#eee;font:13px sans-serif;display:flex;flex-wrap:wrap;gap:12px;padding:16px}'
             'figure{margin:0;width:180px}img{width:180px;border-radius:8px}</style>' + ''.join(rows))
@@ -287,19 +354,34 @@ def main():
                     outdated.append(c)
                 continue
             todo.append(c)
-    print(f'Mancanti: {len(todo)}, da rifare con il prompt nuovo: {len(outdated)}')
-    todo += outdated
+    # Minacce, eroi e carte creazione (dopo le carte Azione mancanti, prima di quelle da rifare)
+    extra = []
+    for it in extra_items(data):
+        if args.solo and it['id'] not in args.solo:
+            continue
+        path = os.path.join(OUT_DIR, f"{it['id']}.webp")
+        if os.path.exists(path) and not args.rifai:
+            rel = f"{REL_DIR}/{it['id']}.webp"
+            if it['obj'].get('img') != rel:
+                update_extra_refs(data, it, rel)
+            continue
+        extra.append(it)
+    print(f'Mancanti: {len(todo)} carte Azione e {len(extra)} tra Minacce, eroi e carte creazione; da rifare con il prompt nuovo: {len(outdated)}')
+    # prima Minacce ed eroi (le più in vista), poi le carte Azione mancanti, poi quelle da rifare
+    todo = extra + todo + outdated
 
     print(f'Carte da generare: {len(todo)} (limite di questa esecuzione: {args.max})')
     done = 0
     errors_in_a_row = 0
     for c in todo[:args.max]:
-        prompt = build_prompt(c)
+        is_extra = 'kind' in c
+        prompt = build_prompt_extra(c) if is_extra else build_prompt(c)
         if args.prova:
             print(f"\n[{c['id']}] {c['nome']}\n{prompt}")
             continue
         try:
-            img = call_cloudflare(prompt, seed_for(c['id']), style_ref_for(c))
+            ref = os.path.join(REF_DIR, f"{c['ref']}.png") if is_extra else style_ref_for(c)
+            img = call_cloudflare(prompt, seed_for(c['id']), ref if ref and os.path.exists(ref) else None)
         except QuotaExceeded as e:
             print(f'Quota gratuita di oggi esaurita, riprendo domani. ({e})')
             break
@@ -313,7 +395,10 @@ def main():
         errors_in_a_row = 0
         path = os.path.join(OUT_DIR, f"{c['id']}.webp")
         to_card_webp(img, path)
-        update_card_refs(data, c, f"{REL_DIR}/{c['id']}.webp")
+        if is_extra:
+            update_extra_refs(data, c, f"{REL_DIR}/{c['id']}.webp")
+        else:
+            update_card_refs(data, c, f"{REL_DIR}/{c['id']}.webp")
         versions[c['id']] = PROMPT_VERSION
         done += 1
         print(f"OK {done}: {c['id']} {c['nome']}")

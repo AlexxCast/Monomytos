@@ -501,6 +501,9 @@ class UIController {
     if (artEl) {
       artEl.src = imgUrl;
       artEl.onerror = () => { artEl.src = 'assets/icons/minaccia.webp'; };
+      // Vecchia scansione con cornice e testi già stampati: niente seconda cornice né testi sopra
+      const wrap = artEl.closest('.intro-threat-frame-wrap');
+      if (wrap) wrap.classList.toggle('is-printed', /^assets\/cards\/[^/]+\.webp$/.test(imgUrl));
     }
     if (titleEl) titleEl.textContent = th.nome || 'Minaccia';
     if (actEl) actEl.textContent = th.isBoss ? 'BOSS FINALE' : (th.isRogueHero ? 'BOSS CORROTTO' : 'ATTO I');

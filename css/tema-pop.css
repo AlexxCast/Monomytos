@@ -1234,3 +1234,10 @@ body.theme-villain #scr-game > .player-command-deck { background: rgba(217, 200,
 }
 /* Pesca su telefono: la carta passa al centro dello schermo, ingrandita, prima di andare in mano */
 .draw-fly.is-center { transition-duration: .45s; }
+
+/* Carte con la vecchia scansione (cornice e testi già nell'immagine): si mostra solo l'immagine */
+.intro-threat-frame-wrap.is-printed .intro-threat-frame,
+.intro-threat-frame-wrap.is-printed .intro-threat-banner,
+.intro-threat-frame-wrap.is-printed .intro-threat-desc-box,
+.intro-threat-frame-wrap.is-printed .intro-threat-lvl-badge { display: none !important; }
+.intro-threat-frame-wrap.is-printed .intro-threat-art { object-fit: fill; inset: 0; width: 100%; height: 100%; }
