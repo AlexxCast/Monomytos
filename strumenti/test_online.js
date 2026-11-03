@@ -39,6 +39,14 @@ function client(uid,name){
   const H=client('host1','Ale'), G=client('guest1','Amico');
   H.ctx.Collezione={mazzoMinacce:()=>['Blackout Ostile','Torneo Clandestino','Cultisti del Velo'],registraMinaccia(){}};
   G.ctx.Collezione={mazzoMinacce:()=>["Il Colosso di Rovina","L'Eco Senza Nome"],registraMinaccia(){}};
+  if(process.env.GARA){ // i due cercano nello stesso momento: devono finire nella stessa stanza
+    await Promise.all([H.ctx.Online.cercaPartita('Iron Aegis'),G.ctx.Online.cercaPartita('Neon Phantom')]);
+    console.log('stanze subito',H.ctx.Online.code,G.ctx.Online.code);
+    const t1=Date.now(); while(H.ctx.Online.code!==G.ctx.Online.code && Date.now()-t1<15000) await new Promise(r=>setTimeout(r,100));
+    console.log('stanze dopo',H.ctx.Online.code,G.ctx.Online.code,'host',H.ctx.Online.isHost,G.ctx.Online.isHost);
+    if(G.ctx.Online.isHost){const t=H;}
+    process.exit(0);
+  }
   await H.ctx.Online.cercaPartita('Iron Aegis');
   const code=H.ctx.Online.code; console.log('host public room',code,store['rooms/'+code].public);
   await G.ctx.Online.cercaPartita('Neon Phantom');

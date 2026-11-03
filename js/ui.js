@@ -1265,14 +1265,17 @@ class UIController {
         item.classList.add('selected');
         this.selectedTargetId = t.id;
         const confirmBtn = document.getElementById('btnConfirmTarget');
-        if (confirmBtn) confirmBtn.disabled = false;
+        if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.textContent = `Conferma: ${t.name}`; }
       };
 
       list.appendChild(item);
     });
 
     const confirmBtn = document.getElementById('btnConfirmTarget');
-    if (confirmBtn) confirmBtn.disabled = targets.length === 0;
+    if (confirmBtn) {
+      confirmBtn.disabled = targets.length === 0;
+      confirmBtn.textContent = targets[0] ? `Conferma: ${targets[0].name}` : 'Conferma Bersaglio';
+    }
 
     this.showModal('modalTargetSelect');
   }

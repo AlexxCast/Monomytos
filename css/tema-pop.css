@@ -1259,3 +1259,18 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 @keyframes tutorialPulsa { 50% { outline-color: #ff7043; } }
 @keyframes tutorialEntra { from { opacity: 0; transform: translate(-50%, -8px); } }
 .auth-guest { display: block; width: min(360px, 100%); margin: 12px auto 0; }
+
+/* Bersaglio scelto: si vede subito quale è selezionato */
+.target-candidates-list > .target-candidate-item { position: relative; transition: transform .12s ease, background .12s ease; }
+.target-candidates-list > .target-candidate-item.selected {
+  background: var(--giallo, #ffd54a) !important;
+  border-width: 4px !important;
+  box-shadow: 4px 4px 0 var(--ink, #000) !important;
+  padding-left: 44px;
+}
+.target-candidates-list > .target-candidate-item.selected::before {
+  content: '✓'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  width: 26px; height: 26px; border-radius: 50%; background: var(--pop-red, #e63946); color: #fff;
+  font-weight: 900; font-size: 16px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--ink, #000);
+}
+.target-candidates-list > .target-candidate-item:not(.selected) { opacity: .78; }

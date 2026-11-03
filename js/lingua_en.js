@@ -1453,6 +1453,7 @@ window.MONOMYTHOS_EN_REGOLE = [
   ['^Le altre (\\d+) si trovano nelle$', 'The other $1 are in the'],
   ['^(.+) ([A-H])$', '$1 $2'],
   ['^(.+) \\[Villain\\]$', '$1 [Villain]'],
+  ['^Conferma: (.+)$', 'Confirm: $1'],
   ['^Hai$', 'You have'],
   ['^e nella Storia\\.$', 'and in the Story.'],
   ['^bustine$', 'packs'],
