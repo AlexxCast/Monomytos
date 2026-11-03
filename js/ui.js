@@ -960,12 +960,14 @@ class UIController {
     this._handUids = new Set(uids);
     this._handMatch = key;
     this._arriving = this._arriving || new Set();
-    if (!prev || !sameMatch || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!prev || !sameMatch) return;
     const nuove = uids.filter(u => !prev.has(u)).slice(0, 7);
     if (!nuove.length || nuove.length === uids.length && uids.length > 7) return;
     const deck = document.querySelector('#playerDeckStack .deck-card-1');
     const dr = deck && deck.getBoundingClientRect();
     const from = dr && dr.width ? dr : { left: window.innerWidth - 90, top: window.innerHeight - 260, width: 70, height: 103 };
+    const phone = window.innerWidth < 1000;
+    const step = phone ? 520 : 160;
     nuove.forEach((uid, k) => {
       const target = handBox.querySelector(`.monomyth-card[data-uid="${uid}"]`);
       const card = player.hand.find(c => (c.uid || c.id) === uid);
@@ -974,19 +976,35 @@ class UIController {
       this._arriving.add(uid);
       const qs = () => handBox.querySelector(`.monomyth-card[data-uid="${uid}"]`);
       setTimeout(() => {
-        const tr = (qs() || target).getBoundingClientRect();
         const fly = document.createElement('div');
         fly.className = 'draw-fly';
         Object.assign(fly.style, { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px' });
         fly.innerHTML = `<div class="draw-fly-inner"><div class="draw-fly-back"><img src="assets/cards/retrocartamazzo.webp" alt=""></div><div class="draw-fly-front">${this.getCardDOM(card, false)}</div></div>`;
         document.body.appendChild(fly);
         try { window.AudioEngine?.playSfx('card_draw'); } catch (e) {}
+        const toHand = () => {
+          const el = qs() || target;
+          const scorre = handBox.scrollWidth > handBox.clientWidth + 4;
+          // Nella mano in fila la carta nuova può essere fuori schermo: si scorre fino a lei
+          if (scorre) el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          setTimeout(() => {
+            const tr = (qs() || target).getBoundingClientRect();
+            Object.assign(fly.style, { left: tr.left + 'px', top: tr.top + 'px', width: tr.width + 'px', height: tr.height + 'px' });
+            setTimeout(() => { this._arriving.delete(uid); const e2 = qs(); if (e2) e2.classList.remove('is-arriving'); fly.remove(); }, 600);
+          }, scorre ? 220 : 0);
+        };
         requestAnimationFrame(() => requestAnimationFrame(() => {
           fly.classList.add('is-flipped');
-          Object.assign(fly.style, { left: tr.left + 'px', top: tr.top + 'px', width: tr.width + 'px', height: tr.height + 'px' });
+          if (phone) {
+            // Prima al centro, grande, per vederla bene; poi in mano
+            const w = Math.min(190, window.innerWidth * 0.5), h = w * 1.475;
+            Object.assign(fly.style, { left: (window.innerWidth - w) / 2 + 'px', top: (window.innerHeight - h) / 2 - 40 + 'px', width: w + 'px', height: h + 'px' });
+            setTimeout(toHand, 750);
+          } else {
+            toHand();
+          }
         }));
-        setTimeout(() => { this._arriving.delete(uid); const el = qs(); if (el) el.classList.remove('is-arriving'); fly.remove(); }, 650);
-      }, k * 160);
+      }, k * step);
     });
   }
 

@@ -1188,7 +1188,7 @@ html.in-match.theme-villain, body.in-match.theme-villain, html.theme-villain bod
 }
 #campoParticelle { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; display: none; }
 body.in-match #campoParticelle { display: block; }
-body.in-match #scr-game { position: relative; z-index: 1; }
+body.in-match #scr-game { z-index: 1; }
 
 /* Zona della mano semitrasparente (50%): si intravede il campo di battaglia */
 #scr-game > .player-command-deck { background: rgba(243, 234, 214, 0.5) !important; background-color: rgba(243, 234, 214, 0.5) !important; }
@@ -1226,3 +1226,11 @@ body.theme-villain #scr-game > .player-command-deck { background: rgba(217, 200,
   #sideDecks .deck-stack-cards { width: 96px !important; height: 140px !important; }
   #sideDecks, #sideDecks .table-decks-flank { gap: 14px !important; }
 }
+
+/* Telefono: la mano non deve uscire dal bordo in basso (barra di sistema Android) */
+@media (max-width: 999px) {
+  #scr-game > .player-command-deck { padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important; }
+  #playerHandCarousel { padding-bottom: 8px !important; }
+}
+/* Pesca su telefono: la carta passa al centro dello schermo, ingrandita, prima di andare in mano */
+.draw-fly.is-center { transition-duration: .45s; }
