@@ -87,18 +87,37 @@ if os.path.exists(_scenes_path):
 def build_prompt(card):
     # Scena in inglese (il modello capisce meglio); se manca, usa la descrizione italiana dei dati
     scene = SCENES_EN.get(card.get('id')) or (card.get('illus') or '').strip().rstrip('.')
-    title = card.get('nome', '')
     tag = norm(card.get('tag'))
     hint = next((v for k, v in TAG_HINT.items() if k in tag), 'a dramatic action moment')
     is_dark = bool(card.get('osc'))
     palette = DARK if is_dark else PALETTE[category_key(card.get('cat'))]
     # Le descrizioni italiane nei dati nominano a volte l'eroe: il prompt chiede comunque nessun volto.
+    # Il titolo NON va nel prompt: il modello tende a scriverlo nell'immagine come un fumetto.
     parts = [
-        f'Card art for an original card game, the action "{title}"',
-        f'scene: {scene}' if scene else f'scene: {hint}',
+        'Wordless illustration without any lettering',
+        f'{scene}' if scene else hint,
         STYLE, palette, RULES,
+        'The image must contain no writing of any kind: no title, no caption, no speech bubble, no sound effect words, no signature, no watermark',
     ]
     return '. '.join(p.rstrip('.') for p in parts) + '.'
+
+
+# Versione del prompt: le immagini fatte con una versione precedente vengono rifatte
+# (dopo quelle mancanti). v1 metteva il titolo nel prompt e il modello lo scriveva nell'immagine.
+PROMPT_VERSION = 2
+VERSIONS_PATH = os.path.join(ROOT, 'strumenti', 'sfondi_versioni.json')
+
+
+def load_versions():
+    if os.path.exists(VERSIONS_PATH):
+        return json.load(open(VERSIONS_PATH, encoding='utf-8'))
+    return {}
+
+
+def save_versions(v):
+    with open(VERSIONS_PATH, 'w', encoding='utf-8') as f:
+        json.dump(dict(sorted(v.items())), f, ensure_ascii=False, indent=1)
+        f.write('\n')
 
 
 def seed_for(card_id):
@@ -208,7 +227,8 @@ def main():
 
     prefix, data, suffix = load_data()
     os.makedirs(OUT_DIR, exist_ok=True)
-    todo = []
+    versions = load_versions()
+    todo, outdated = [], []
     for hero, cards in data['action_cards'].items():
         for c in cards:
             if args.solo and c['id'] not in args.solo:
@@ -218,8 +238,12 @@ def main():
                 rel = f"{REL_DIR}/{c['id']}.webp"
                 if c.get('img') != rel:
                     update_card_refs(data, c, rel)
+                if versions.get(c['id'], 1) < PROMPT_VERSION:
+                    outdated.append(c)
                 continue
             todo.append(c)
+    print(f'Mancanti: {len(todo)}, da rifare con il prompt nuovo: {len(outdated)}')
+    todo += outdated
 
     print(f'Carte da generare: {len(todo)} (limite di questa esecuzione: {args.max})')
     done = 0
@@ -245,13 +269,16 @@ def main():
         path = os.path.join(OUT_DIR, f"{c['id']}.webp")
         to_card_webp(img, path)
         update_card_refs(data, c, f"{REL_DIR}/{c['id']}.webp")
+        versions[c['id']] = PROMPT_VERSION
         done += 1
         print(f"OK {done}: {c['id']} {c['nome']}")
         if done % 10 == 0:
             save_data(prefix, data, suffix)
+            save_versions(versions)
 
     if not args.prova:
         save_data(prefix, data, suffix)
+        save_versions(versions)
         write_preview(data)
     print(f'Fatto: {done} immagini nuove.')
     if errors_in_a_row >= 3:

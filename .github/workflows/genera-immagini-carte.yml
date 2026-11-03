@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name "monomythos-bot"
           git config user.email "monomythos-bot@users.noreply.github.com"
-          git add assets/cards/gen js/cards_data.js js/cards_data.json strumenti/anteprima_sfondi.html || true
+          git add assets/cards/gen js/cards_data.js js/cards_data.json strumenti/anteprima_sfondi.html strumenti/sfondi_versioni.json || true
           if git diff --cached --quiet; then echo "Niente di nuovo"; exit 0; fi
           git commit -m "Nuovi sfondi carte generati"
           # Nel frattempo qualcuno può aver aggiornato main: riallinea e riprova
