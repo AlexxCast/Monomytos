@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <h1 class="splash-title">MONOMYTHOS</h1>
+      <h1 class="splash-title"><img src="assets/icons/logo_titolo.webp" class="logo-title" alt="Monomythos"></h1>
       <div class="splash-sub" id="splashSubText">TACTICAL CARD GAME</div>
       <div class="splash-tagline" id="splashLoadingText">IL DESTINO COSMICO DEGLI EROI</div>
       <div class="splash-loader-bar"><div class="splash-loader-progress"></div></div>
@@ -69,8 +69,7 @@
     <div class="brand">
       <img src="assets/icons/logo_monograma.webp" alt="Monomythos" class="monogram-logo">
       <div class="brand-text">
-        <h1>MONOMYTHOS</h1>
-        <span>Tactical Card Game</span>
+        <h1 class="brand-logo"><img src="assets/icons/logo_titolo.webp" class="logo-title" alt="Monomythos"></h1>
       </div>
     </div>
     <div class="header-actions">
@@ -83,6 +82,7 @@
         <button class="icon-btn" onclick="UI.showModal('modalQrCode')" title="QR Code Telefono">CONDIVIDI</button>
         <button class="icon-btn" id="btnAudioMixer" onclick="UI.openAudioMixer()" title="Mixer Audio">MIXER</button>
         <button class="icon-btn" onclick="UI.showModal('modalRules')" title="Regole">REGOLE</button>
+        <button class="icon-btn" id="accountMenuBtn" style="display:none" onclick="Account.user ? Account.logout() : Account.showAuth()" title="Account">ACCEDI</button>
       </div>
     </div>
   </header>
@@ -109,6 +109,38 @@
   <!-- ==========================================
        SCREEN 1: LOBBY / HOME
        ========================================== -->
+  <!-- ACCESSO / REGISTRAZIONE (attivo solo quando Firebase è configurato) -->
+  <section class="screen" id="scr-auth">
+    <div class="auth-wrap">
+      <img src="assets/icons/logo_titolo.webp" class="auth-logo" alt="Monomythos">
+      <div class="comic-caption auth-caption">Crea il tuo eroe e salva i progressi su ogni dispositivo</div>
+      <div class="auth-panel">
+        <div class="auth-tabs">
+          <button type="button" class="auth-tab active" data-tab="login" onclick="Account.setTab('login')">ACCEDI</button>
+          <button type="button" class="auth-tab" data-tab="register" onclick="Account.setTab('register')">REGISTRATI</button>
+        </div>
+        <form class="auth-form" onsubmit="return Account.submit(event)" novalidate>
+          <label class="auth-row" id="authNickRow" style="display:none">
+            <span>Nome eroe</span>
+            <input id="authNick" type="text" maxlength="20" autocomplete="nickname" placeholder="Es. StellaNova">
+          </label>
+          <label class="auth-row">
+            <span>Email</span>
+            <input id="authEmail" type="email" autocomplete="email" placeholder="tu@email.it" required>
+          </label>
+          <label class="auth-row">
+            <span>Password</span>
+            <input id="authPassword" type="password" autocomplete="current-password" minlength="6" placeholder="Almeno 6 caratteri" required>
+          </label>
+          <button type="submit" class="btn btn-primary auth-submit" id="authSubmit">ENTRA</button>
+          <button type="button" class="auth-link" onclick="Account.resetPassword()">Password dimenticata?</button>
+          <div class="auth-msg" id="authMsg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+      <p class="auth-note">L'account è gratuito. Usiamo la tua email solo per l'accesso.</p>
+    </div>
+  </section>
+
   <section class="screen active" id="scr-lobby">
     <div class="home">
       <div class="home-main">
@@ -1099,6 +1131,8 @@
 <script src="js/engine.js"></script>
 <script src="js/net.js"></script>
 <script src="js/ui.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/account.js"></script>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {

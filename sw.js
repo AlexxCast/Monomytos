@@ -1,5 +1,5 @@
 // Monomythos Service Worker - Fast offline cache
-const CACHE_NAME = 'monomythos-v6';
+const CACHE_NAME = 'monomythos-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -12,6 +12,9 @@ const ASSETS = [
   './js/engine.js',
   './js/net.js',
   './js/ui.js',
+  './js/firebase-config.js',
+  './js/account.js',
+  './assets/icons/logo_titolo.webp',
   './assets/icons/logo.png',
   './assets/icons/azione.webp',
   './assets/icons/minaccia.webp',

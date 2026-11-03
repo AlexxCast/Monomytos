@@ -43,12 +43,14 @@ class ProgressionSystem {
     return initial;
   }
 
-  save() {
+  save(localOnly = false) {
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(this.data));
     } catch (e) {
       console.error('Error saving progression:', e);
     }
+    // Con l'account attivo, il profilo si salva anche sul server
+    if (!localOnly && window.Account) window.Account.queueSave();
   }
 
   getCredits() {

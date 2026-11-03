@@ -811,3 +811,34 @@ header.main-header .brand-text h1 { color: var(--gold); -webkit-text-stroke: 1.6
 .bottom-sheet [style*="color"]:not(.btn):not(.btn *):not(.parry-card-title) { color: var(--ink) !important; }
 .bottom-sheet h3[style*="color"], .bottom-sheet h2[style*="color"] { color: #b3122c !important; }
 .parry-check-badge { background: var(--pop-green) !important; color: #000 !important; border: 2px solid #000; }
+
+/* ===== Logo del titolo (dal manuale) ===== */
+.logo-title { display: block; height: auto; max-width: 100%; filter: drop-shadow(3px 3px 0 #000); }
+header.main-header .brand-logo { margin: 0; line-height: 0; -webkit-text-stroke: 0; text-shadow: none; }
+header.main-header .brand-logo .logo-title { height: 34px; width: auto; }
+.splash-title { background: none !important; -webkit-text-fill-color: initial !important; text-shadow: none !important; margin: 0 auto 6px !important; line-height: 0; }
+.splash-title .logo-title { width: min(78vw, 420px); margin: 0 auto; }
+@media (max-width: 420px) { header.main-header .brand-logo .logo-title { height: 26px; } }
+
+/* ===== Accesso / registrazione ===== */
+body.needs-auth header.main-header,
+body.needs-auth #bottomNav { display: none !important; }
+#scr-auth { overflow-y: auto; }
+.auth-wrap { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 28px 16px 40px; box-sizing: border-box; }
+.auth-logo { width: min(86vw, 460px); height: auto; filter: drop-shadow(4px 4px 0 #000); }
+.auth-caption { max-width: 420px; text-align: center; }
+.auth-panel { width: 100%; max-width: 400px; background: var(--cream, #f3ead6); color: var(--ink); border: 3px solid var(--ink); border-radius: 14px; box-shadow: var(--hard-lg); padding: 16px; box-sizing: border-box; }
+.auth-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.auth-tab { font-family: 'Bangers', cursive; font-size: 20px; letter-spacing: .06em; padding: 8px 0; border: 3px solid var(--ink); border-radius: 10px; background: #fff; color: var(--ink); cursor: pointer; }
+.auth-tab.active { background: var(--pop-red); color: #fff; box-shadow: 3px 3px 0 var(--ink); -webkit-text-stroke: .6px #000; }
+.auth-form { display: flex; flex-direction: column; gap: 12px; }
+.auth-row { display: flex; flex-direction: column; gap: 4px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink); }
+.auth-row input { font: 500 16px 'Outfit', sans-serif; padding: 11px 12px; border: 2.5px solid var(--ink); border-radius: 10px; background: #fff; color: var(--ink); outline: none; }
+.auth-row input:focus { box-shadow: 3px 3px 0 var(--pop-red); }
+.auth-submit { font-family: 'Bangers', cursive !important; font-size: 22px !important; letter-spacing: .08em; padding: 12px !important; margin-top: 4px; }
+.auth-submit:disabled { opacity: .6; }
+.auth-link { background: none; border: 0; color: #1d3f9e; font-weight: 700; text-decoration: underline; cursor: pointer; font-size: 14px; padding: 2px; }
+.auth-msg { min-height: 18px; font-size: 14px; font-weight: 600; text-align: center; color: var(--ink); }
+.auth-msg.error { color: #b3122c; }
+.auth-note { color: #e8e2d4; font-size: 13px; text-align: center; margin: 0; text-shadow: 1px 1px 0 #000; }
+@media (min-width: 900px) { header.main-header .brand-logo .logo-title { height: 42px; } }
