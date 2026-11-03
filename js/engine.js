@@ -172,7 +172,8 @@ class MonomythosEngine {
 
     // §8.2 Crisi Composita: negli Atti I e II, una Minaccia di Livello ≤ 3 si fonde con una seconda dal pool
     let secondary = null;
-    if (this.state.actIndex < 2 && raw.livello <= 3) {
+    const BIL = window.MONOMYTHOS_BILANCIAMENTO || {};
+    if (BIL.crisiComposita !== false && this.state.actIndex < 2 && raw.livello <= 3) {
       const used = new Set(this.state.actThreats.map(t => t.nome));
       const pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !used.has(t.nome));
       if (pool.length > 0) secondary = pool[Math.floor(Math.random() * pool.length)];
@@ -194,7 +195,7 @@ class MonomythosEngine {
     groups.forEach(g => {
       // Bilanciamento (scelta di Alessio): i nemici della carta secondaria usano il proprio Livello, non quello composito
       const groupLiv = g.card === raw ? liv : g.card.livello;
-      const groupHp = g.card.vu * (groupLiv + numHeroes);
+      const groupHp = Math.max(g.count, Math.round(g.card.vu * (groupLiv + numHeroes * (BIL.pesoEroi || 1)) * (BIL.scalaVita || 1)));
       totalHp += groupHp;
       const mookHp = Math.ceil(groupHp / g.count);
       for (let i = 0; i < g.count; i++) {
@@ -213,8 +214,8 @@ class MonomythosEngine {
     }
 
     // Thresholds: SogliaUnitaria × (Livello + NumeroEroi)
-    const primMax = raw.primario.val * (liv + numHeroes);
-    const brutMax = raw.bruto.val * (liv + numHeroes);
+    const primMax = Math.max(1, Math.round(raw.primario.val * (liv + numHeroes * (BIL.pesoEroi || 1)) * (BIL.scalaSoglie || 1)));
+    const brutMax = Math.max(1, Math.round(raw.bruto.val * (liv + numHeroes * (BIL.pesoEroi || 1)) * (BIL.scalaSoglie || 1)));
 
     this.state.currentThreat = {
       ...raw,
@@ -744,7 +745,7 @@ class MonomythosEngine {
   checkBreakingPoint(player) {
     // §8.4: dopo lo State Freezing (Atto Finale) nessuno cambia schieramento
     if (player.stateFrozen) return;
-    if (player.trm >= 5 && player.state === 'hero') {
+    if (player.trm >= ((window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5) && player.state === 'hero') {
       player.state = 'villain';
       this.addLog('threat', `[TRAUMA] PUNTO DI ROTTURA! ${player.name} ha accumulato 5 Trauma e si trasforma in VILLAIN!`);
       this.emit('player_corrupted', player);
@@ -877,7 +878,8 @@ class MonomythosEngine {
       const target = this.pickEnemyTarget(livingPlayers, th);
       delete th.forcedTarget;
 
-      this.resolveEnemyAttack(enemy, target, th.forza, () => {
+      const forzaExtra = Math.floor((livingPlayers.length - 1) * ((window.MONOMYTHOS_BILANCIAMENTO || {}).forzaPerEroe || 0));
+      this.resolveEnemyAttack(enemy, target, th.forza + forzaExtra, () => {
         setTimeout(processNextAttack, 400);
       });
     };
@@ -1202,13 +1204,15 @@ class MonomythosEngine {
     const primRatio = th.primarioProgress / th.primarioMax;
     const brutRatio = th.brutoProgress / th.brutoMax;
 
-    // Check playable cards
-    const playableCards = bot.hand.filter(c => {
-      const cost = c.valore;
-      return this.getPlayerSlot(bot, c.cat) >= cost;
-    });
+    // Carte giocabili: il bot evita le carte che danno Trauma quando è vicino al Punto di Rottura
+    const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
+    const traumaOf = c => (c.fx_list || []).reduce((t, f) => t + (f.type === 'trauma' && f.amount > 0 ? f.amount : 0), 0);
+    const getPlayable = () => bot.hand.filter(c => this.getPlayerSlot(bot, c.cat) >= c.valore && bot.trm + traumaOf(c) < soglia - 1)
+      .sort((a, b) => traumaOf(a) - traumaOf(b));
+    let playableCards = getPlayable();
+    let plays = 0;
 
-    if (playableCards.length > 0 && (th.hp > 0 || primRatio < 0.8)) {
+    while (playableCards.length > 0 && plays < 4 && !this.isGameOver() && this.state.phase === 'action' && this.state.currentThreat === th && (th.hp > 0 || primRatio < 0.8)) {
       const c = playableCards[0];
       const targetInfo = this.getValidTargetsForCard(bot.id, c);
       let chosenTargetId = 'threat_boss';
@@ -1222,8 +1226,14 @@ class MonomythosEngine {
           chosenTargetId = valids[0].id;
         }
       }
+      const before = bot.hand.length;
       this.playCardEffect(bot.id, c.uid, chosenTargetId);
-    } else if (bot.hand.length > 1 && bot.sacrificesThisRound < 2) {
+      plays++;
+      if (bot.hand.length === before || bot.isDead) break;
+      playableCards = getPlayable();
+    }
+    if (this.isGameOver() || this.state.currentThreat !== th) { setTimeout(() => this.endTurn(), 600); return; }
+    if (plays === 0 && bot.hand.length > 1 && bot.sacrificesThisRound < 2) {
       // Tactical sacrifice: solo carte della Categoria richiesta; il bot resta sul binario già avviato (§5)
       const preferred = primRatio >= brutRatio ? ['primario', 'bruto'] : ['bruto', 'primario'];
       for (const track of preferred) {
