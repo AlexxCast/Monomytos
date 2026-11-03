@@ -80,6 +80,9 @@
           window.Progression.data = { ...window.Progression.getDefaultData(), ...data.progression };
           window.Progression.save(true);
         } else {
+          // Account nuovo: profilo pulito (niente dati rimasti sul dispositivo da altri account)
+          window.Progression.data = window.Progression.getDefaultData();
+          if (window.Collezione) window.Collezione.migra();
           this.profile = {
             nickname: (snap.exists && snap.data().nickname) || this._pendingNick || (u.email || 'Eroe').split('@')[0],
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -170,6 +173,14 @@
     async logout() {
       if (!this.auth) return;
       if (!confirm('Vuoi uscire dal tuo account?')) return;
+      clearTimeout(this._saveTimer);
+      try {
+        await this.db.collection('users').doc(this.user.uid)
+          .set({ progression: window.Progression.data, updatedAt: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
+      } catch (e) {}
+      // I progressi stanno nell'account: sul dispositivo non resta nulla
+      try { localStorage.removeItem(window.Progression.storageKey); } catch (e) {}
+      window.Progression.data = window.Progression.getDefaultData();
       await this.auth.signOut();
     },
 

@@ -960,3 +960,6 @@ body.theme-villain .home-story { background: linear-gradient(120deg, #3c0b3e, #9
 .room-player.empty .room-player-tag { color: #555; }
 .room-guest-wait { color: var(--on-night); text-align: center; font-weight: 700; text-shadow: 1px 1px 0 #000; }
 #btnStartOnline:disabled { opacity: .55; filter: grayscale(.6); }
+.auth-caption, .starter-wrap .comic-caption { align-self: center; margin-top: -4px; font-size: 13px; }
+.auth-msg:empty { display: none; }
+.auth-panel { padding-bottom: 14px; }
