@@ -9,7 +9,10 @@ service cloud.firestore {
       allow create: if request.auth != null && request.resource.data.host == request.auth.uid;
       allow update: if request.auth != null && (
         resource.data.host == request.auth.uid ||
-        (resource.data.status == 'lobby' && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['players']))
+        (resource.data.status == 'lobby' && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['players'])) ||
+        // se l'host esce a partita in corso, un altro giocatore ne prende il posto
+        (resource.data.status == 'playing' && request.resource.data.host == request.auth.uid &&
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['host', 'hostLeft', 'hostPing']))
       );
       allow delete: if request.auth != null && resource.data.host == request.auth.uid;
       match /actions/{id} {

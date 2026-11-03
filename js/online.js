@@ -6,6 +6,9 @@
     'base_power_used', 'player_corrupted', 'act_advanced', 'game_over', 'attack_dodged', 'player_died', 'draw_choice_changed'];
   const MAX_PLAYERS = 4;
   const DEFENSE_TIMEOUT_MS = 30000;
+  const PING_MS = 10000;          // l'host segnala ogni 10 secondi che è ancora collegato
+  const HOST_SPARITO_MS = 30000;  // senza segnali per 30 secondi un altro giocatore prende il posto dell'host
+  const TURNO_MAX_MS = 90000;     // un giocatore fermo per 90 secondi nel suo turno passa al bot
   const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
   let _cardIndex = null;
@@ -104,7 +107,9 @@
       clearTimeout(this._flushTimer);
       clearTimeout(this._defenseTimer);
       clearTimeout(this._autoTimer);
+      clearTimeout(this._watchTimer);
       this._nPlayers = 0;
+      this._segnale = 0; this._firma = null; this._subentrando = false; this._turnoKey = null;
       if (this._mirror) this.unmirror();
       this.code = null; this.room = null; this.isHost = false; this.lastSeq = -1;
       if (window.GameEngine) window.GameEngine.onRemoteDefense = null;
@@ -234,8 +239,15 @@
       this.stop();
       if (!code || !this.db) return;
       try {
-        if (wasHost) await this.roomRef(code).update({ status: 'ended' });
-        else if (room && room.status === 'lobby') {
+        // Se la partita è in corso l'host non la chiude: un altro giocatore ne prende il posto
+        if (wasHost && room && room.status === 'playing') await this.roomRef(code).update({ hostLeft: true });
+        else if (wasHost) await this.roomRef(code).update({ status: 'ended' });
+        else if (room && room.status === 'playing') {
+          await this.roomRef(code).collection('actions').add({
+            uid: this.me.uid, type: 'leave', args: [], n: this.me.uid.slice(0, 6) + '_esce_' + Date.now(),
+            ts: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        } else if (room && room.status === 'lobby') {
           await this.roomRef(code).update({ players: (room.players || []).filter(p => p.uid !== this.me.uid) });
         }
       } catch (e) {}
@@ -246,6 +258,8 @@
         if (!snap.exists) return;
         const r = snap.data();
         this.room = r;
+        const firma = r.host + '|' + (r.seq || 0) + '|' + (r.hostPing || 0) + '|' + !!r.hostLeft;
+        if (firma !== this._firma) { this._firma = firma; this._segnale = Date.now(); }
         if (r.status === 'ended' && !this.isHost) {
           this.toast('L\'host ha chiuso la stanza.');
           this.stop();
@@ -306,6 +320,7 @@
       E.onRemoteDefense = (d) => this.chiediDifesa(d);
       this.agganciaEventiHost();
       await this.pubblica(true);
+      this.sorveglia();
       const threat = E.state.currentThreat;
       window.UI.playMatchIntroLoading(threat, () => window.UI.showScreen('scr-game'));
     },
@@ -367,9 +382,16 @@
       this.programmaPubblica();
     },
 
-    ascoltaAzioni() {
+    ascoltaAzioni(saltaEsistenti = false) {
+      let primo = saltaEsistenti;
       const unsub = this.roomRef().collection('actions').orderBy('ts').onSnapshot(snap => {
-        snap.docChanges().forEach(ch => { if (ch.type === 'added') this.applicaAzione(ch.doc.data()); });
+        const salta = primo; primo = false;
+        snap.docChanges().forEach(ch => {
+          if (ch.type !== 'added') return;
+          const a = ch.doc.data();
+          if (salta) { (this._done = this._done || new Set()).add(a.n); return; }
+          this.applicaAzione(a);
+        });
       }, e => this.erroreRegole(e));
       this._unsubs.push(unsub);
     },
@@ -384,8 +406,12 @@
       const args = a.args || [];
       const active = E.getActivePlayer();
       const mioTurno = active && active.id === player.id;
+      if (mioTurno) this._turnoDal = Date.now();
       try {
         switch (a.type) {
+          case 'leave':
+            this.passaAlBot(player, 'ha lasciato la partita');
+            break;
           case 'defense':
             if (this._defense && this._defense.uid === a.uid) this.risolviDifesa(args[0]);
             break;
@@ -409,6 +435,87 @@
             break;
         }
       } catch (e) { console.error('Azione online:', a.type, e); }
+      this.programmaPubblica();
+    },
+
+    // ---------- CONTINUITÀ: host che esce, giocatori fermi ----------
+    // Un giocatore remoto che esce o resta fermo viene giocato dal bot, così la partita non si blocca
+    passaAlBot(player, motivo) {
+      const E = window.GameEngine;
+      if (!player || player.isBot) return;
+      player.isBot = true; player.remoteUid = null; player.isLocal = false; player.botOnline = true;
+      E.addLog && E.addLog('sys', `[ONLINE] ${player.displayName || player.name} ${motivo}: continua il bot`);
+      if (this._defense && this._defense.targetId === player.id) this.risolviDifesa({ type: 'bot_fallback' });
+      const active = E.getActivePlayer();
+      if (E.state.phase === 'action' && active && active.id === player.id) E.checkTurn();
+      this.programmaPubblica();
+    },
+
+    // Controllo periodico: l'host segnala di essere vivo, gli altri controllano che l'host ci sia ancora
+    sorveglia() {
+      clearTimeout(this._watchTimer);
+      if (!this.code) return;
+      const r = this.room, E = window.GameEngine, ora = Date.now();
+      if (r && r.status === 'playing' && E && E.state) {
+        if (this.isHost) {
+          if (ora - (this._ping || 0) > PING_MS) {
+            this._ping = ora;
+            this.roomRef().update({ hostPing: ora, hostLeft: false }).catch(() => {});
+          }
+          const active = E.getActivePlayer();
+          if (E.state.phase === 'action' && active && active.remoteUid && !active.isDead) {
+            const key = E.state.round + ':' + E.state.turnIndex;
+            if (this._turnoKey !== key) { this._turnoKey = key; this._turnoDal = ora; }
+            else if (ora - this._turnoDal > TURNO_MAX_MS) this.passaAlBot(active, 'non risponde');
+          }
+        } else if (!this._subentrando && this.lastSeq >= 0) {
+          // Chi prende il posto dell'host: il primo della lista, poi il secondo se il primo non c'è, e così via
+          const altri = (r.players || []).filter(p => p.uid !== r.host).map(p => p.uid);
+          const k = Math.max(0, altri.indexOf(this.me.uid));
+          const attesa = (r.hostLeft ? 1500 : HOST_SPARITO_MS) + k * 12000;
+          if (ora - this._segnale > attesa) this.subentra(r.host);
+        }
+      }
+      this._watchTimer = setTimeout(() => this.sorveglia(), 2000);
+    },
+
+    async subentra(vecchioHost) {
+      this._subentrando = true;
+      const ref = this.roomRef();
+      let ok = false;
+      try {
+        await this.db.runTransaction(async (tx) => {
+          const snap = await tx.get(ref);
+          const r = snap.exists && snap.data();
+          if (!r || r.status !== 'playing' || r.host !== vecchioHost) return;
+          tx.update(ref, { host: this.me.uid, hostLeft: false, hostPing: Date.now() });
+          ok = true;
+        });
+      } catch (e) { console.error('Subentro host:', e); }
+      if (!ok) { this._subentrando = false; this._segnale = Date.now(); return; }
+      const E = window.GameEngine;
+      this.unmirror();
+      E.state.players.forEach(p => {
+        if (p.uid === this.me.uid) { p.isLocal = true; p.isBot = false; p.remoteUid = null; }
+        else if (p.uid === vecchioHost || p.botOnline) { p.isLocal = false; p.isBot = true; p.remoteUid = null; p.botOnline = true; }
+        else { p.isLocal = false; p.isBot = false; p.remoteUid = p.uid; }
+      });
+      const vecchio = E.state.players.find(p => p.uid === vecchioHost);
+      E.addLog && E.addLog('sys', `[ONLINE] ${(vecchio && (vecchio.displayName || vecchio.name)) || 'L\'host'} è uscito: ora sei tu l'host, il suo eroe continua col bot`);
+      this.isHost = true;
+      this.seq = this.lastSeq;
+      this._defense = null;
+      E.pendingDefense = null;
+      E.onRemoteDefense = (d) => this.chiediDifesa(d);
+      this.agganciaEventiHost();
+      this.ascoltaAzioni(true);
+      this._subentrando = false;
+      this.toast('L\'host è uscito: la partita continua, ora la guidi tu.');
+      await this.pubblica();
+      // Riprendo da dove si era fermato: a metà Fase Minaccia si passa al round successivo
+      if (E.state.phase === 'enemy') E.startRound();
+      else if (E.state.phase === 'action') E.checkTurn();
+      try { window.UI.renderGameView(E.state); } catch (e) {}
       this.programmaPubblica();
     },
 
@@ -461,6 +568,7 @@
       }
       E.state = full;
       if (primo) {
+        this.sorveglia();
         window.UI.playMatchIntroLoading(full.currentThreat, () => window.UI.showScreen('scr-game'));
       }
       (r.events || []).forEach(ev => {

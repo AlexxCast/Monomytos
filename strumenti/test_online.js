@@ -37,7 +37,7 @@ function client(uid,name){
 }
 (async()=>{
   const H=client('host1','Ale'), G=client('guest1','Amico');
-  H.ctx.Collezione={mazzoMinacce:()=>['Blackout Ostile','Torneo Clandestino','Cultisti del Velo']};
+  H.ctx.Collezione={mazzoMinacce:()=>['Blackout Ostile','Torneo Clandestino','Cultisti del Velo'],registraMinaccia(){}};
   G.ctx.Collezione={mazzoMinacce:()=>["Il Colosso di Rovina","L'Eco Senza Nome"],registraMinaccia(){}};
   await H.ctx.Online.cercaPartita('Iron Aegis');
   const code=H.ctx.Online.code; console.log('host public room',code,store['rooms/'+code].public);
@@ -53,10 +53,15 @@ function client(uid,name){
     if(c){const t=E.getValidTargetsForCard(me.id,c);const v=(t.candidates||[]).find(x=>x.isValid);E.playCardEffect(me.id,c.uid,v?v.id:'threat_boss');}
     setTimeout(()=>{ if(!c && me.hand.length) E.survivalDiscard(me.id); E.endTurn(); },20);
   },15);
-  autoplay(H,false);autoplay(G,true);
+  const iH=autoplay(H,false);autoplay(G,true);
+  if(process.env.MIGRA){ // l'host esce a metà partita: l'ospite deve prenderne il posto
+    setTimeout(async()=>{clearInterval(iH);console.log('HOST ESCE al round',H.ctx.GameEngine.state.round);await H.ctx.Online.esci();const w=setInterval(()=>{if(G.ctx.Online.isHost){G._busy=null;clearInterval(w);console.log('ospite ora host');}},20);},+process.env.MIGRA);
+  }
   const t0=Date.now();
   while(Date.now()-t0<(+process.env.DUR||20000)){await new Promise(r=>setTimeout(r,200)); if((Date.now()-t0)%10000<200){const s=H.ctx.GameEngine.state;console.log('t',Math.round((Date.now()-t0)/1000),'round',s.round,'act',s.actIndex,'turn',s.turnIndex,'phase',s.phase,'def',!!H.ctx.Online._defense,'pend',!!H.ctx.GameEngine.pendingDefense);}if(H.ctx.GameEngine.state.phase==='gameover')break;}
   await new Promise(r=>setTimeout(r,1500));
+  if(process.env.MIGRA){const r=store['rooms/'+code];const gs=G.ctx.GameEngine.state;
+    console.log('nuovo host',r.host,'ospite isHost',G.ctx.Online.isHost,'stato',r.status,'fase',gs.phase,'round',gs.round,'vincitore',gs.winner,'vecchio host bot',gs.players.find(p=>p.uid==='host1').isBot,'log',G.log.filter(x=>x.startsWith('toast')));process.exit(0);}
   const hs=H.ctx.GameEngine.state, gs=G.ctx.GameEngine.state;
   console.log('host phase',hs.phase,'winner',hs.winner,'round',hs.round,'act',hs.actIndex);
   console.log('guest phase',gs.phase,'round',gs.round,'local player',gs.players[0].name, gs.players[0].isLocal,'vita host/guest view',hs.players[1].vita,gs.players[0].vita);
