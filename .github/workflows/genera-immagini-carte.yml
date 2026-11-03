@@ -7,7 +7,7 @@ on:
         description: 'Immagini massime in questa esecuzione'
         default: '150'
   schedule:
-    - cron: '30 3 * * *'   # ogni notte riprende dalle carte che mancano
+    - cron: '15 0 * * *'   # subito dopo il rinnovo della quota Cloudflare (00:00 UTC)
 
 permissions:
   contents: write
