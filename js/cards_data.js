@@ -952,7 +952,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/impattodevastante.webp",
+        "img": "assets/cards/gen/ironaegis_1.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1004,7 +1004,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/scudomodulare.webp",
+        "img": "assets/cards/gen/ironaegis_2.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -1046,7 +1046,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/kitdiriparazione.webp",
+        "img": "assets/cards/gen/ironaegis_3.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -1080,7 +1080,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/granataaframmentazione.webp",
+        "img": "assets/cards/gen/ironaegis_4.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1116,7 +1116,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/barrieraolografica.webp",
+        "img": "assets/cards/gen/ironaegis_5.webp",
         "fx_list": [
           {
             "type": "damageReduction",
@@ -1151,7 +1151,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/analisidelterreno.webp",
+        "img": "assets/cards/gen/ironaegis_6.webp",
         "fx_list": [
           {
             "type": "scry",
@@ -1185,7 +1185,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/ganciobalistico.webp",
+        "img": "assets/cards/gen/ironaegis_7.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1227,7 +1227,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/protocollodefibrillazione.webp",
+        "img": "assets/cards/gen/ironaegis_8.webp",
         "fx_list": [
           {
             "type": "revive",
@@ -1278,7 +1278,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/caricadicontenimento.webp",
+        "img": "assets/cards/gen/ironaegis_9.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1320,7 +1320,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/prezzodellacciaio.webp",
+        "img": "assets/cards/gen/ironaegis_10.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1370,7 +1370,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/giuramentodelgeniere.webp",
+        "img": "assets/cards/gen/ironaegis_11.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -1411,7 +1411,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/murodipiastre.webp",
+        "img": "assets/cards/gen/ironaegis_12.webp",
         "fx_list": [
           {
             "type": "resistance",
@@ -1446,7 +1446,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/calcolobalistico.webp",
+        "img": "assets/cards/gen/ironaegis_13.webp",
         "fx_list": [
           {
             "type": "boostNextSacrifice",
@@ -1481,7 +1481,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/generatoredisingolarita.webp",
+        "img": "assets/cards/gen/ironaegis_14.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1530,7 +1530,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/sovraccaricodelcore.webp",
+        "img": "assets/cards/gen/ironaegis_15.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1580,7 +1580,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/murodipiastre.webp",
+        "img": "assets/cards/gen/ironaegis_16.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -1621,7 +1621,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/ultimatumcinetico.webp",
+        "img": "assets/cards/gen/ironaegis_17.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -1662,7 +1662,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/giuramentodelgeniere.webp",
+        "img": "assets/cards/gen/ironaegis_18.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -1708,7 +1708,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/prezzodellacciaio.webp",
+        "img": "assets/cards/gen/ironaegis_19.webp",
         "fx_list": [
           {
             "type": "fateSpend",
@@ -1743,7 +1743,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/lamafotonica.webp",
+        "img": "assets/cards/gen/neonphantom_1.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1795,7 +1795,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/passodombra.webp",
+        "img": "assets/cards/gen/neonphantom_2.webp",
         "fx_list": [
           {
             "type": "dodge",
@@ -1864,7 +1864,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 1,
           "trm": 0
         },
-        "img": "assets/cards/focusmentale.webp",
+        "img": "assets/cards/gen/neonphantom_4.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -1904,7 +1904,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/riflessiaccelerati.webp",
+        "img": "assets/cards/gen/neonphantom_5.webp",
         "fx_list": [
           {
             "type": "drawRateBoost",
@@ -1939,7 +1939,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/prezzodellavelocita.webp",
+        "img": "assets/cards/gen/neonphantom_6.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -1989,7 +1989,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/colpodislancio.webp",
+        "img": "assets/cards/gen/neonphantom_7.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -2025,7 +2025,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/distorsionespeculare.webp",
+        "img": "assets/cards/gen/neonphantom_8.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -2067,7 +2067,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/assaltofluido.webp",
+        "img": "assets/cards/gen/neonphantom_9.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -2103,7 +2103,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sovraccariconeurale.webp",
+        "img": "assets/cards/gen/neonphantom_10.webp",
         "fx_list": [
           {
             "type": "weakenForza",
@@ -2138,7 +2138,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/riflessoallospecchio.webp",
+        "img": "assets/cards/gen/neonphantom_11.webp",
         "fx_list": [
           {
             "type": "draw",
@@ -2179,7 +2179,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/scattocinetico.webp",
+        "img": "assets/cards/gen/neonphantom_12.webp",
         "fx_list": [
           {
             "type": "selfDamage",
@@ -2213,7 +2213,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/calcolodeivettori.webp",
+        "img": "assets/cards/gen/neonphantom_13.webp",
         "fx_list": [
           {
             "type": "boostNextCategory",
@@ -2249,7 +2249,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/lacerazionetemporale.webp",
+        "img": "assets/cards/gen/neonphantom_14.webp",
         "fx_list": [
           {
             "type": "weaken",
@@ -2289,7 +2289,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/esecuzionedallombra.webp",
+        "img": "assets/cards/gen/neonphantom_15.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -2332,7 +2332,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/lamasenzarimorso.webp",
+        "img": "assets/cards/gen/neonphantom_16.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -2382,7 +2382,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/rescissione.webp",
+        "img": "assets/cards/gen/neonphantom_17.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -2423,7 +2423,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/scattocinetico.webp",
+        "img": "assets/cards/gen/neonphantom_18.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -2469,7 +2469,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sovraccaricocinetico.webp",
+        "img": "assets/cards/gen/neonphantom_19.webp",
         "fx_list": [
           {
             "type": "fateSpend",
@@ -2504,7 +2504,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/baluardoreattivo.webp",
+        "img": "assets/cards/gen/guardianadiconfine_1.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -2546,7 +2546,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/baluardoreattivo.webp",
+        "img": "assets/cards/gen/guardianadiconfine_2.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -2580,7 +2580,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sentinellaadattiva.webp",
+        "img": "assets/cards/gen/guardianadiconfine_3.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -2622,7 +2622,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/guardianadiconfine.webp",
+        "img": "assets/cards/gen/guardianadiconfine_4.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -2656,7 +2656,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/baluardoreattivo.webp",
+        "img": "assets/cards/gen/guardianadiconfine_5.webp",
         "fx_list": [
           {
             "type": "resistance",
@@ -2691,7 +2691,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sentinelladifrontiera.webp",
+        "img": "assets/cards/gen/guardianadiconfine_6.webp",
         "fx_list": [
           {
             "type": "scry",
@@ -2725,7 +2725,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sentinellaadattiva.webp",
+        "img": "assets/cards/gen/guardianadiconfine_7.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -2761,7 +2761,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/guardianadiconfine.webp",
+        "img": "assets/cards/gen/guardianadiconfine_8.webp",
         "fx_list": [
           {
             "type": "revive",
@@ -2812,7 +2812,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/baluardoreattivo.webp",
+        "img": "assets/cards/gen/guardianadiconfine_9.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -2848,7 +2848,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 4,
           "trm": 0
         },
-        "img": "assets/cards/sentinelladifrontiera.webp",
+        "img": "assets/cards/gen/guardianadiconfine_10.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -2896,7 +2896,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/sentinellaadattiva.webp",
+        "img": "assets/cards/gen/guardianadiconfine_11.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -2937,7 +2937,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/guardianadiconfine.webp",
+        "img": "assets/cards/gen/guardianadiconfine_12.webp",
         "fx_list": [
           {
             "type": "resistance",
@@ -2972,7 +2972,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/baluardoreattivo.webp",
+        "img": "assets/cards/gen/guardianadiconfine_13.webp",
         "fx_list": [
           {
             "type": "boostNextSacrifice",
@@ -3007,7 +3007,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/sentinelladifrontiera.webp",
+        "img": "assets/cards/gen/guardianadiconfine_14.webp",
         "fx_list": [
           {
             "type": "weaken",
@@ -3047,7 +3047,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/sentinellaadattiva.webp",
+        "img": "assets/cards/gen/guardianadiconfine_15.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3097,7 +3097,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/guardianadiconfine.webp",
+        "img": "assets/cards/gen/guardianadiconfine_16.webp",
         "fx_list": [
           {
             "type": "weaken",
@@ -3144,7 +3144,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/baluardoreattivo.webp",
+        "img": "assets/cards/gen/guardianadiconfine_17.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -3185,7 +3185,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sentinelladifrontiera.webp",
+        "img": "assets/cards/gen/guardianadiconfine_18.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -3231,7 +3231,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sentinellaadattiva.webp",
+        "img": "assets/cards/gen/guardianadiconfine_19.webp",
         "fx_list": [
           {
             "type": "fateSpend",
@@ -3266,7 +3266,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/fendentepreciso.webp",
+        "img": "assets/cards/gen/lamaerrante_1.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3302,7 +3302,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/lamasenzacasa.webp",
+        "img": "assets/cards/gen/lamaerrante_2.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -3336,7 +3336,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/foderoleggero.webp",
+        "img": "assets/cards/gen/lamaerrante_3.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3372,7 +3372,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 1,
           "trm": 0
         },
-        "img": "assets/cards/lamaerrante.webp",
+        "img": "assets/cards/gen/lamaerrante_4.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -3412,7 +3412,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/fendentepreciso.webp",
+        "img": "assets/cards/gen/lamaerrante_5.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3448,7 +3448,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/lamasenzacasa.webp",
+        "img": "assets/cards/gen/lamaerrante_6.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3491,7 +3491,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/foderoleggero.webp",
+        "img": "assets/cards/gen/lamaerrante_7.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3527,7 +3527,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/lamaerrante.webp",
+        "img": "assets/cards/gen/lamaerrante_8.webp",
         "fx_list": [
           {
             "type": "reflect",
@@ -3561,7 +3561,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/fendentepreciso.webp",
+        "img": "assets/cards/gen/lamaerrante_9.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3604,7 +3604,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/lamasenzacasa.webp",
+        "img": "assets/cards/gen/lamaerrante_10.webp",
         "fx_list": [
           {
             "type": "weakenForza",
@@ -3639,7 +3639,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/foderoleggero.webp",
+        "img": "assets/cards/gen/lamaerrante_11.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -3680,7 +3680,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/lamaerrante.webp",
+        "img": "assets/cards/gen/lamaerrante_12.webp",
         "fx_list": [
           {
             "type": "resistance",
@@ -3715,7 +3715,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/fendentepreciso.webp",
+        "img": "assets/cards/gen/lamaerrante_13.webp",
         "fx_list": [
           {
             "type": "boostNextSacrifice",
@@ -3750,7 +3750,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/lamasenzacasa.webp",
+        "img": "assets/cards/gen/lamaerrante_14.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3793,7 +3793,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/foderoleggero.webp",
+        "img": "assets/cards/gen/lamaerrante_15.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3836,7 +3836,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/lamaerrante.webp",
+        "img": "assets/cards/gen/lamaerrante_16.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -3898,7 +3898,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/fendentepreciso.webp",
+        "img": "assets/cards/gen/lamaerrante_17.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -3939,7 +3939,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/lamasenzacasa.webp",
+        "img": "assets/cards/gen/lamaerrante_18.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -3985,7 +3985,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/foderoleggero.webp",
+        "img": "assets/cards/gen/lamaerrante_19.webp",
         "fx_list": [
           {
             "type": "fateSpend",
@@ -4020,7 +4020,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/colpodevastante.webp",
+        "img": "assets/cards/gen/titanodacciaio_1.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4063,7 +4063,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/titanoacciaio.webp",
+        "img": "assets/cards/gen/titanodacciaio_2.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -4112,7 +4112,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "img": "assets/cards/gen/titanodacciaio_3.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4148,7 +4148,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/piastrerubate.webp",
+        "img": "assets/cards/gen/titanodacciaio_4.webp",
         "fx_list": [
           {
             "type": "shield",
@@ -4190,7 +4190,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/colpodevastante.webp",
+        "img": "assets/cards/gen/titanodacciaio_5.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4232,7 +4232,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/titanoacciaio.webp",
+        "img": "assets/cards/gen/titanodacciaio_6.webp",
         "fx_list": [
           {
             "type": "taunt",
@@ -4266,7 +4266,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "img": "assets/cards/gen/titanodacciaio_7.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4302,7 +4302,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/piastrerubate.webp",
+        "img": "assets/cards/gen/titanodacciaio_8.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -4336,7 +4336,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/colpodevastante.webp",
+        "img": "assets/cards/gen/titanodacciaio_9.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4372,7 +4372,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/titanoacciaio.webp",
+        "img": "assets/cards/gen/titanodacciaio_10.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4415,7 +4415,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "img": "assets/cards/gen/titanodacciaio_11.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -4456,7 +4456,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/piastrerubate.webp",
+        "img": "assets/cards/gen/titanodacciaio_12.webp",
         "fx_list": [
           {
             "type": "resistance",
@@ -4491,7 +4491,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/colpodevastante.webp",
+        "img": "assets/cards/gen/titanodacciaio_13.webp",
         "fx_list": [
           {
             "type": "boostNextSacrifice",
@@ -4582,7 +4582,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "img": "assets/cards/gen/titanodacciaio_15.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -4623,7 +4623,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/piastrerubate.webp",
+        "img": "assets/cards/gen/titanodacciaio_16.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4673,7 +4673,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/colpodevastante.webp",
+        "img": "assets/cards/gen/titanodacciaio_17.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -4714,7 +4714,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/titanoacciaio.webp",
+        "img": "assets/cards/gen/titanodacciaio_18.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -4760,7 +4760,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sopravvissutoallafonderia.webp",
+        "img": "assets/cards/gen/titanodacciaio_19.webp",
         "fx_list": [
           {
             "type": "fateSpend",
@@ -4795,7 +4795,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/architettoombra.webp",
+        "img": "assets/cards/gen/architettoombra_1.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4831,7 +4831,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/barrieraolografica.webp",
+        "img": "assets/cards/gen/architettoombra_2.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -4865,7 +4865,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/generatoredisingolarita.webp",
+        "img": "assets/cards/gen/architettoombra_3.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4908,7 +4908,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/frequenzadisturbante.webp",
+        "img": "assets/cards/gen/architettoombra_4.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -4950,7 +4950,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/architettoombra.webp",
+        "img": "assets/cards/gen/architettoombra_5.webp",
         "fx_list": [
           {
             "type": "scry",
@@ -4984,7 +4984,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/barrieraolografica.webp",
+        "img": "assets/cards/gen/architettoombra_6.webp",
         "fx_list": [
           {
             "type": "weakenForza",
@@ -5019,7 +5019,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/generatoredisingolarita.webp",
+        "img": "assets/cards/gen/architettoombra_7.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -5053,7 +5053,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/frequenzadisturbante.webp",
+        "img": "assets/cards/gen/architettoombra_8.webp",
         "fx_list": [
           {
             "type": "revive",
@@ -5104,7 +5104,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/architettoombra.webp",
+        "img": "assets/cards/gen/architettoombra_9.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -5140,7 +5140,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/barrieraolografica.webp",
+        "img": "assets/cards/gen/architettoombra_10.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -5205,7 +5205,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/generatoredisingolarita.webp",
+        "img": "assets/cards/gen/architettoombra_11.webp",
         "fx_list": [
           {
             "type": "draw",
@@ -5246,7 +5246,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/frequenzadisturbante.webp",
+        "img": "assets/cards/gen/architettoombra_12.webp",
         "fx_list": [
           {
             "type": "resistance",
@@ -5281,7 +5281,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/architettoombra.webp",
+        "img": "assets/cards/gen/architettoombra_13.webp",
         "fx_list": [
           {
             "type": "boostNextSacrifice",
@@ -5316,7 +5316,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/barrieraolografica.webp",
+        "img": "assets/cards/gen/architettoombra_14.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -7179,76 +7179,76 @@ window.MONOMYTHOS_DATA = {
     "mantocorrotto": "assets/cards/mantocorrotto.webp",
     "tutta fotonica": "assets/cards/tuttafotonica.webp",
     "tuttafotonica": "assets/cards/tuttafotonica.webp",
-    "Analisi del Terreno": "assets/cards/analisidelterreno.webp",
-    "analisidelterreno": "assets/cards/analisidelterreno.webp",
-    "Barriera Olografica": "assets/cards/barrieraolografica.webp",
-    "barrieraolografica": "assets/cards/barrieraolografica.webp",
-    "Calcolo Balistico": "assets/cards/calcolobalistico.webp",
-    "calcolobalistico": "assets/cards/calcolobalistico.webp",
-    "Carica di Contenimento": "assets/cards/caricadicontenimento.webp",
-    "caricadicontenimento": "assets/cards/caricadicontenimento.webp",
+    "Analisi del Terreno": "assets/cards/gen/ironaegis_6.webp",
+    "analisidelterreno": "assets/cards/gen/ironaegis_6.webp",
+    "Barriera Olografica": "assets/cards/gen/ironaegis_5.webp",
+    "barrieraolografica": "assets/cards/gen/ironaegis_5.webp",
+    "Calcolo Balistico": "assets/cards/gen/ironaegis_13.webp",
+    "calcolobalistico": "assets/cards/gen/ironaegis_13.webp",
+    "Carica di Contenimento": "assets/cards/gen/ironaegis_9.webp",
+    "caricadicontenimento": "assets/cards/gen/ironaegis_9.webp",
     "CorazzaaSacrificale": "assets/cards/corazzaasacrificale.webp",
     "corazzaasacrificale": "assets/cards/corazzaasacrificale.webp",
     "Frequenza Disturbante": "assets/cards/frequenzadisturbante.webp",
     "frequenzadisturbante": "assets/cards/frequenzadisturbante.webp",
-    "Gancio Balistico": "assets/cards/ganciobalistico.webp",
-    "ganciobalistico": "assets/cards/ganciobalistico.webp",
+    "Gancio Balistico": "assets/cards/gen/ironaegis_7.webp",
+    "ganciobalistico": "assets/cards/gen/ironaegis_7.webp",
     "Generatore di Singolarità": "assets/cards/generatoredisingolarita.webp",
     "generatoredisingolarita": "assets/cards/generatoredisingolarita.webp",
-    "Giuramento del Geniere": "assets/cards/giuramentodelgeniere.webp",
-    "giuramentodelgeniere": "assets/cards/giuramentodelgeniere.webp",
-    "Granata a Frammentazione": "assets/cards/granataaframmentazione.webp",
-    "granataaframmentazione": "assets/cards/granataaframmentazione.webp",
-    "Impatto Devastante": "assets/cards/impattodevastante.webp",
-    "impattodevastante": "assets/cards/impattodevastante.webp",
-    "Kit di Riparazione": "assets/cards/kitdiriparazione.webp",
-    "kitdiriparazione": "assets/cards/kitdiriparazione.webp",
-    "Muro di Piastre": "assets/cards/murodipiastre.webp",
-    "murodipiastre": "assets/cards/murodipiastre.webp",
-    "Prezzo dell'Acciaio": "assets/cards/prezzodellacciaio.webp",
-    "prezzodellacciaio": "assets/cards/prezzodellacciaio.webp",
-    "Protocollo Defibrillazione": "assets/cards/protocollodefibrillazione.webp",
-    "protocollodefibrillazione": "assets/cards/protocollodefibrillazione.webp",
+    "Giuramento del Geniere": "assets/cards/gen/ironaegis_11.webp",
+    "giuramentodelgeniere": "assets/cards/gen/ironaegis_11.webp",
+    "Granata a Frammentazione": "assets/cards/gen/ironaegis_4.webp",
+    "granataaframmentazione": "assets/cards/gen/ironaegis_4.webp",
+    "Impatto Devastante": "assets/cards/gen/ironaegis_1.webp",
+    "impattodevastante": "assets/cards/gen/ironaegis_1.webp",
+    "Kit di Riparazione": "assets/cards/gen/ironaegis_3.webp",
+    "kitdiriparazione": "assets/cards/gen/ironaegis_3.webp",
+    "Muro di Piastre": "assets/cards/gen/ironaegis_12.webp",
+    "murodipiastre": "assets/cards/gen/ironaegis_12.webp",
+    "Prezzo dell'Acciaio": "assets/cards/gen/ironaegis_10.webp",
+    "prezzodellacciaio": "assets/cards/gen/ironaegis_10.webp",
+    "Protocollo Defibrillazione": "assets/cards/gen/ironaegis_8.webp",
+    "protocollodefibrillazione": "assets/cards/gen/ironaegis_8.webp",
     "Scudo infrangibie": "assets/cards/scudoinfrangibie.webp",
     "scudoinfrangibie": "assets/cards/scudoinfrangibie.webp",
-    "Sovraccarico del Core": "assets/cards/sovraccaricodelcore.webp",
-    "sovraccaricodelcore": "assets/cards/sovraccaricodelcore.webp",
-    "Ultimatum Cinetico": "assets/cards/ultimatumcinetico.webp",
-    "ultimatumcinetico": "assets/cards/ultimatumcinetico.webp",
-    "Assalto Fluido": "assets/cards/assaltofluido.webp",
-    "assaltofluido": "assets/cards/assaltofluido.webp",
-    "Calcolo dei Vettori": "assets/cards/calcolodeivettori.webp",
-    "calcolodeivettori": "assets/cards/calcolodeivettori.webp",
-    "Colpo di Slancio": "assets/cards/colpodislancio.webp",
-    "colpodislancio": "assets/cards/colpodislancio.webp",
-    "Distorsione Speculare": "assets/cards/distorsionespeculare.webp",
-    "distorsionespeculare": "assets/cards/distorsionespeculare.webp",
-    "Esecuzione dall'Ombra": "assets/cards/esecuzionedallombra.webp",
-    "esecuzionedallombra": "assets/cards/esecuzionedallombra.webp",
-    "Focus Mentale": "assets/cards/focusmentale.webp",
-    "focusmentale": "assets/cards/focusmentale.webp",
-    "Lacerazione Temporale": "assets/cards/lacerazionetemporale.webp",
-    "lacerazionetemporale": "assets/cards/lacerazionetemporale.webp",
-    "Lama Fotonica": "assets/cards/lamafotonica.webp",
-    "lamafotonica": "assets/cards/lamafotonica.webp",
-    "Lama senza Rimorso": "assets/cards/lamasenzarimorso.webp",
-    "lamasenzarimorso": "assets/cards/lamasenzarimorso.webp",
-    "Passo d'Ombra": "assets/cards/passodombra.webp",
-    "passodombra": "assets/cards/passodombra.webp",
+    "Sovraccarico del Core": "assets/cards/gen/ironaegis_15.webp",
+    "sovraccaricodelcore": "assets/cards/gen/ironaegis_15.webp",
+    "Ultimatum Cinetico": "assets/cards/gen/ironaegis_17.webp",
+    "ultimatumcinetico": "assets/cards/gen/ironaegis_17.webp",
+    "Assalto Fluido": "assets/cards/gen/neonphantom_9.webp",
+    "assaltofluido": "assets/cards/gen/neonphantom_9.webp",
+    "Calcolo dei Vettori": "assets/cards/gen/neonphantom_13.webp",
+    "calcolodeivettori": "assets/cards/gen/neonphantom_13.webp",
+    "Colpo di Slancio": "assets/cards/gen/neonphantom_7.webp",
+    "colpodislancio": "assets/cards/gen/neonphantom_7.webp",
+    "Distorsione Speculare": "assets/cards/gen/neonphantom_8.webp",
+    "distorsionespeculare": "assets/cards/gen/neonphantom_8.webp",
+    "Esecuzione dall'Ombra": "assets/cards/gen/neonphantom_15.webp",
+    "esecuzionedallombra": "assets/cards/gen/neonphantom_15.webp",
+    "Focus Mentale": "assets/cards/gen/neonphantom_4.webp",
+    "focusmentale": "assets/cards/gen/neonphantom_4.webp",
+    "Lacerazione Temporale": "assets/cards/gen/neonphantom_14.webp",
+    "lacerazionetemporale": "assets/cards/gen/neonphantom_14.webp",
+    "Lama Fotonica": "assets/cards/gen/neonphantom_1.webp",
+    "lamafotonica": "assets/cards/gen/neonphantom_1.webp",
+    "Lama senza Rimorso": "assets/cards/gen/neonphantom_16.webp",
+    "lamasenzarimorso": "assets/cards/gen/neonphantom_16.webp",
+    "Passo d'Ombra": "assets/cards/gen/neonphantom_2.webp",
+    "passodombra": "assets/cards/gen/neonphantom_2.webp",
     "prezzo della velocità": "assets/cards/prezzodellavelocita.webp",
-    "prezzodellavelocita": "assets/cards/prezzodellavelocita.webp",
+    "prezzodellavelocita": "assets/cards/gen/neonphantom_6.webp",
     "Pugnale Psichico": "assets/cards/pugnalepsichico.webp",
     "pugnalepsichico": "assets/cards/pugnalepsichico.webp",
-    "Rescissione": "assets/cards/rescissione.webp",
-    "rescissione": "assets/cards/rescissione.webp",
-    "Riflessi Accelerati": "assets/cards/riflessiaccelerati.webp",
-    "riflessiaccelerati": "assets/cards/riflessiaccelerati.webp",
-    "Riflesso allo Specchio": "assets/cards/riflessoallospecchio.webp",
-    "riflessoallospecchio": "assets/cards/riflessoallospecchio.webp",
-    "Scatto Cinetico": "assets/cards/scattocinetico.webp",
-    "scattocinetico": "assets/cards/scattocinetico.webp",
-    "Sovraccarico Neurale": "assets/cards/sovraccariconeurale.webp",
-    "sovraccariconeurale": "assets/cards/sovraccariconeurale.webp",
+    "Rescissione": "assets/cards/gen/neonphantom_17.webp",
+    "rescissione": "assets/cards/gen/neonphantom_17.webp",
+    "Riflessi Accelerati": "assets/cards/gen/neonphantom_5.webp",
+    "riflessiaccelerati": "assets/cards/gen/neonphantom_5.webp",
+    "Riflesso allo Specchio": "assets/cards/gen/neonphantom_11.webp",
+    "riflessoallospecchio": "assets/cards/gen/neonphantom_11.webp",
+    "Scatto Cinetico": "assets/cards/gen/neonphantom_12.webp",
+    "scattocinetico": "assets/cards/gen/neonphantom_12.webp",
+    "Sovraccarico Neurale": "assets/cards/gen/neonphantom_10.webp",
+    "sovraccariconeurale": "assets/cards/gen/neonphantom_10.webp",
     "Blackout Ostile": "assets/cards/blackoutostile.webp",
     "blackoutostile": "assets/cards/blackoutostile.webp",
     "CULTISTI DEL VELO": "assets/cards/cultistidelvelo.webp",
@@ -7287,155 +7287,155 @@ window.MONOMYTHOS_DATA = {
     "scattoquantistico": "assets/cards/scattoquantistico.webp",
     "Sovraccarico Cinetico": "assets/cards/sovraccaricocinetico.webp",
     "sovraccaricocinetico": "assets/cards/sovraccaricocinetico.webp",
-    "Scudo Infrangibile": "assets/cards/scudomodulare.webp",
-    "scudoinfrangibile": "assets/cards/scudomodulare.webp",
-    "Corazza Sacrificale": "assets/cards/murodipiastre.webp",
-    "corazzasacrificale": "assets/cards/murodipiastre.webp",
-    "Il Prezzo dell'Acciaio": "assets/cards/prezzodellacciaio.webp",
-    "ilprezzodellacciaio": "assets/cards/prezzodellacciaio.webp",
-    "Prezzo della Velocità": "assets/cards/prezzodellavelocita.webp",
-    "Respiro nel Neon": "assets/cards/scattocinetico.webp",
-    "respironelneon": "assets/cards/scattocinetico.webp",
-    "Debito Quantico": "assets/cards/sovraccaricocinetico.webp",
-    "debitoquantico": "assets/cards/sovraccaricocinetico.webp",
-    "Presa Salda": "assets/cards/baluardoreattivo.webp",
-    "presasalda": "assets/cards/baluardoreattivo.webp",
-    "Baluardo Reattivo": "assets/cards/baluardoreattivo.webp",
-    "baluardoreattivo": "assets/cards/baluardoreattivo.webp",
-    "Rete di Sicurezza": "assets/cards/sentinellaadattiva.webp",
-    "retedisicurezza": "assets/cards/sentinellaadattiva.webp",
-    "Manutenzione Preventiva": "assets/cards/guardianadiconfine.webp",
-    "manutenzionepreventiva": "assets/cards/guardianadiconfine.webp",
-    "Barriera a Strati": "assets/cards/baluardoreattivo.webp",
-    "barrieraastrati": "assets/cards/baluardoreattivo.webp",
-    "Osservazione Tattica": "assets/cards/sentinelladifrontiera.webp",
-    "osservazionetattica": "assets/cards/sentinelladifrontiera.webp",
-    "Colpo di Rimando": "assets/cards/sentinellaadattiva.webp",
-    "colpodirimando": "assets/cards/sentinellaadattiva.webp",
-    "Protocollo di Emergenza": "assets/cards/guardianadiconfine.webp",
-    "protocollodiemergenza": "assets/cards/guardianadiconfine.webp",
-    "Presa d'Angolo": "assets/cards/baluardoreattivo.webp",
-    "presadangolo": "assets/cards/baluardoreattivo.webp",
-    "Prezzo del Presidio": "assets/cards/sentinelladifrontiera.webp",
-    "prezzodelpresidio": "assets/cards/sentinelladifrontiera.webp",
-    "Veglia al Confine": "assets/cards/sentinelladifrontiera.webp",
-    "vegliaalconfine": "assets/cards/sentinelladifrontiera.webp",
-    "Corazza Rinforzata": "assets/cards/guardianadiconfine.webp",
-    "corazzarinforzata": "assets/cards/guardianadiconfine.webp",
-    "Calcolo del Rischio": "assets/cards/baluardoreattivo.webp",
-    "calcolodelrischio": "assets/cards/baluardoreattivo.webp",
-    "Muro Vivente": "assets/cards/sentinelladifrontiera.webp",
-    "murovivente": "assets/cards/sentinelladifrontiera.webp",
-    "Ultima Trincea": "assets/cards/sentinellaadattiva.webp",
-    "ultimatrincea": "assets/cards/sentinellaadattiva.webp",
-    "Fortezza Egoista": "assets/cards/guardianadiconfine.webp",
-    "fortezzaegoista": "assets/cards/guardianadiconfine.webp",
-    "Sacrificio Calcolato": "assets/cards/baluardoreattivo.webp",
-    "sacrificiocalcolato": "assets/cards/baluardoreattivo.webp",
-    "Pedaggio del Bastione": "assets/cards/sentinellaadattiva.webp",
-    "pedaggiodelbastione": "assets/cards/sentinellaadattiva.webp",
-    "Fendente Preciso": "assets/cards/fendentepreciso.webp",
-    "fendentepreciso": "assets/cards/fendentepreciso.webp",
-    "Parata Elegante": "assets/cards/lamasenzacasa.webp",
-    "parataelegante": "assets/cards/lamasenzacasa.webp",
-    "Doppio Taglio": "assets/cards/foderoleggero.webp",
-    "doppiotaglio": "assets/cards/foderoleggero.webp",
-    "Medicazione Rapida": "assets/cards/lamaerrante.webp",
-    "medicazionerapida": "assets/cards/lamaerrante.webp",
-    "Fendente ad Arco": "assets/cards/fendentepreciso.webp",
-    "fendenteadarco": "assets/cards/fendentepreciso.webp",
-    "Prezzo della Lama": "assets/cards/lamasenzacasa.webp",
-    "prezzodellalama": "assets/cards/lamasenzacasa.webp",
-    "Affondo di Apertura": "assets/cards/foderoleggero.webp",
-    "affondodiapertura": "assets/cards/foderoleggero.webp",
-    "Contrattacco Riflesso": "assets/cards/lamaerrante.webp",
-    "contrattaccoriflesso": "assets/cards/lamaerrante.webp",
-    "Scatto d'Anticipo": "assets/cards/fendentepreciso.webp",
-    "scattodanticipo": "assets/cards/fendentepreciso.webp",
-    "Studio dell'Avversario": "assets/cards/lamasenzacasa.webp",
-    "studiodellavversario": "assets/cards/lamasenzacasa.webp",
-    "Codice del Viandante": "assets/cards/lamasenzacasa.webp",
-    "codicedelviandante": "assets/cards/lamasenzacasa.webp",
-    "Guardia Alta": "assets/cards/lamaerrante.webp",
-    "guardiaalta": "assets/cards/lamaerrante.webp",
-    "Piano di Battaglia": "assets/cards/fendentepreciso.webp",
-    "pianodibattaglia": "assets/cards/fendentepreciso.webp",
-    "Lama Incandescente": "assets/cards/lamasenzacasa.webp",
-    "lamaincandescente": "assets/cards/lamasenzacasa.webp",
-    "Ultimo Duello": "assets/cards/foderoleggero.webp",
-    "ultimoduello": "assets/cards/foderoleggero.webp",
-    "Colpo alle Spalle": "assets/cards/lamaerrante.webp",
-    "colpoallespalle": "assets/cards/lamaerrante.webp",
-    "Gloria Personale": "assets/cards/fendentepreciso.webp",
-    "gloriapersonale": "assets/cards/fendentepreciso.webp",
-    "Taglia sull'Anima": "assets/cards/foderoleggero.webp",
-    "tagliasullanima": "assets/cards/foderoleggero.webp",
-    "Colpo Devastante": "assets/cards/colpodevastante.webp",
-    "colpodevastante": "assets/cards/colpodevastante.webp",
-    "Scudo Vivente": "assets/cards/titanoacciaio.webp",
-    "scudovivente": "assets/cards/titanoacciaio.webp",
-    "Pugno Risonante": "assets/cards/sopravvissutoallafonderia.webp",
-    "pugnorisonante": "assets/cards/sopravvissutoallafonderia.webp",
-    "Assorbimento Brutale": "assets/cards/piastrerubate.webp",
-    "assorbimentobrutale": "assets/cards/piastrerubate.webp",
-    "Presa Schiacciante": "assets/cards/colpodevastante.webp",
-    "presaschiacciante": "assets/cards/colpodevastante.webp",
-    "Intimidazione": "assets/cards/titanoacciaio.webp",
-    "intimidazione": "assets/cards/titanoacciaio.webp",
-    "Sventramento": "assets/cards/sopravvissutoallafonderia.webp",
-    "sventramento": "assets/cards/sopravvissutoallafonderia.webp",
-    "Corazza Improvvisata": "assets/cards/piastrerubate.webp",
-    "corazzaimprovvisata": "assets/cards/piastrerubate.webp",
-    "Colpo di Grazia": "assets/cards/colpodevastante.webp",
-    "colpodigrazia": "assets/cards/colpodevastante.webp",
-    "Prezzo della Furia": "assets/cards/titanoacciaio.webp",
-    "prezzodellafuria": "assets/cards/titanoacciaio.webp",
-    "Ricordo della Fonderia": "assets/cards/sopravvissutoallafonderia.webp",
-    "ricordodellafonderia": "assets/cards/sopravvissutoallafonderia.webp",
-    "Pelle di Ferro": "assets/cards/piastrerubate.webp",
-    "pellediferro": "assets/cards/piastrerubate.webp",
-    "Sopraffazione": "assets/cards/colpodevastante.webp",
-    "sopraffazione": "assets/cards/colpodevastante.webp",
+    "Scudo Infrangibile": "assets/cards/gen/ironaegis_2.webp",
+    "scudoinfrangibile": "assets/cards/gen/ironaegis_2.webp",
+    "Corazza Sacrificale": "assets/cards/gen/ironaegis_16.webp",
+    "corazzasacrificale": "assets/cards/gen/ironaegis_16.webp",
+    "Il Prezzo dell'Acciaio": "assets/cards/gen/ironaegis_19.webp",
+    "ilprezzodellacciaio": "assets/cards/gen/ironaegis_19.webp",
+    "Prezzo della Velocità": "assets/cards/gen/neonphantom_6.webp",
+    "Respiro nel Neon": "assets/cards/gen/neonphantom_18.webp",
+    "respironelneon": "assets/cards/gen/neonphantom_18.webp",
+    "Debito Quantico": "assets/cards/gen/neonphantom_19.webp",
+    "debitoquantico": "assets/cards/gen/neonphantom_19.webp",
+    "Presa Salda": "assets/cards/gen/guardianadiconfine_1.webp",
+    "presasalda": "assets/cards/gen/guardianadiconfine_1.webp",
+    "Baluardo Reattivo": "assets/cards/gen/guardianadiconfine_2.webp",
+    "baluardoreattivo": "assets/cards/gen/guardianadiconfine_2.webp",
+    "Rete di Sicurezza": "assets/cards/gen/guardianadiconfine_3.webp",
+    "retedisicurezza": "assets/cards/gen/guardianadiconfine_3.webp",
+    "Manutenzione Preventiva": "assets/cards/gen/guardianadiconfine_4.webp",
+    "manutenzionepreventiva": "assets/cards/gen/guardianadiconfine_4.webp",
+    "Barriera a Strati": "assets/cards/gen/guardianadiconfine_5.webp",
+    "barrieraastrati": "assets/cards/gen/guardianadiconfine_5.webp",
+    "Osservazione Tattica": "assets/cards/gen/guardianadiconfine_6.webp",
+    "osservazionetattica": "assets/cards/gen/guardianadiconfine_6.webp",
+    "Colpo di Rimando": "assets/cards/gen/guardianadiconfine_7.webp",
+    "colpodirimando": "assets/cards/gen/guardianadiconfine_7.webp",
+    "Protocollo di Emergenza": "assets/cards/gen/guardianadiconfine_8.webp",
+    "protocollodiemergenza": "assets/cards/gen/guardianadiconfine_8.webp",
+    "Presa d'Angolo": "assets/cards/gen/guardianadiconfine_9.webp",
+    "presadangolo": "assets/cards/gen/guardianadiconfine_9.webp",
+    "Prezzo del Presidio": "assets/cards/gen/guardianadiconfine_10.webp",
+    "prezzodelpresidio": "assets/cards/gen/guardianadiconfine_10.webp",
+    "Veglia al Confine": "assets/cards/gen/guardianadiconfine_11.webp",
+    "vegliaalconfine": "assets/cards/gen/guardianadiconfine_11.webp",
+    "Corazza Rinforzata": "assets/cards/gen/guardianadiconfine_12.webp",
+    "corazzarinforzata": "assets/cards/gen/guardianadiconfine_12.webp",
+    "Calcolo del Rischio": "assets/cards/gen/guardianadiconfine_13.webp",
+    "calcolodelrischio": "assets/cards/gen/guardianadiconfine_13.webp",
+    "Muro Vivente": "assets/cards/gen/guardianadiconfine_14.webp",
+    "murovivente": "assets/cards/gen/guardianadiconfine_14.webp",
+    "Ultima Trincea": "assets/cards/gen/guardianadiconfine_15.webp",
+    "ultimatrincea": "assets/cards/gen/guardianadiconfine_15.webp",
+    "Fortezza Egoista": "assets/cards/gen/guardianadiconfine_16.webp",
+    "fortezzaegoista": "assets/cards/gen/guardianadiconfine_16.webp",
+    "Sacrificio Calcolato": "assets/cards/gen/guardianadiconfine_17.webp",
+    "sacrificiocalcolato": "assets/cards/gen/guardianadiconfine_17.webp",
+    "Pedaggio del Bastione": "assets/cards/gen/guardianadiconfine_19.webp",
+    "pedaggiodelbastione": "assets/cards/gen/guardianadiconfine_19.webp",
+    "Fendente Preciso": "assets/cards/gen/lamaerrante_1.webp",
+    "fendentepreciso": "assets/cards/gen/lamaerrante_1.webp",
+    "Parata Elegante": "assets/cards/gen/lamaerrante_2.webp",
+    "parataelegante": "assets/cards/gen/lamaerrante_2.webp",
+    "Doppio Taglio": "assets/cards/gen/lamaerrante_3.webp",
+    "doppiotaglio": "assets/cards/gen/lamaerrante_3.webp",
+    "Medicazione Rapida": "assets/cards/gen/lamaerrante_4.webp",
+    "medicazionerapida": "assets/cards/gen/lamaerrante_4.webp",
+    "Fendente ad Arco": "assets/cards/gen/lamaerrante_5.webp",
+    "fendenteadarco": "assets/cards/gen/lamaerrante_5.webp",
+    "Prezzo della Lama": "assets/cards/gen/lamaerrante_6.webp",
+    "prezzodellalama": "assets/cards/gen/lamaerrante_6.webp",
+    "Affondo di Apertura": "assets/cards/gen/lamaerrante_7.webp",
+    "affondodiapertura": "assets/cards/gen/lamaerrante_7.webp",
+    "Contrattacco Riflesso": "assets/cards/gen/lamaerrante_8.webp",
+    "contrattaccoriflesso": "assets/cards/gen/lamaerrante_8.webp",
+    "Scatto d'Anticipo": "assets/cards/gen/lamaerrante_9.webp",
+    "scattodanticipo": "assets/cards/gen/lamaerrante_9.webp",
+    "Studio dell'Avversario": "assets/cards/gen/lamaerrante_10.webp",
+    "studiodellavversario": "assets/cards/gen/lamaerrante_10.webp",
+    "Codice del Viandante": "assets/cards/gen/lamaerrante_11.webp",
+    "codicedelviandante": "assets/cards/gen/lamaerrante_11.webp",
+    "Guardia Alta": "assets/cards/gen/lamaerrante_12.webp",
+    "guardiaalta": "assets/cards/gen/lamaerrante_12.webp",
+    "Piano di Battaglia": "assets/cards/gen/lamaerrante_13.webp",
+    "pianodibattaglia": "assets/cards/gen/lamaerrante_13.webp",
+    "Lama Incandescente": "assets/cards/gen/lamaerrante_14.webp",
+    "lamaincandescente": "assets/cards/gen/lamaerrante_14.webp",
+    "Ultimo Duello": "assets/cards/gen/lamaerrante_15.webp",
+    "ultimoduello": "assets/cards/gen/lamaerrante_15.webp",
+    "Colpo alle Spalle": "assets/cards/gen/lamaerrante_16.webp",
+    "colpoallespalle": "assets/cards/gen/lamaerrante_16.webp",
+    "Gloria Personale": "assets/cards/gen/lamaerrante_17.webp",
+    "gloriapersonale": "assets/cards/gen/lamaerrante_17.webp",
+    "Taglia sull'Anima": "assets/cards/gen/lamaerrante_19.webp",
+    "tagliasullanima": "assets/cards/gen/lamaerrante_19.webp",
+    "Colpo Devastante": "assets/cards/gen/titanodacciaio_1.webp",
+    "colpodevastante": "assets/cards/gen/titanodacciaio_1.webp",
+    "Scudo Vivente": "assets/cards/gen/titanodacciaio_2.webp",
+    "scudovivente": "assets/cards/gen/titanodacciaio_2.webp",
+    "Pugno Risonante": "assets/cards/gen/titanodacciaio_3.webp",
+    "pugnorisonante": "assets/cards/gen/titanodacciaio_3.webp",
+    "Assorbimento Brutale": "assets/cards/gen/titanodacciaio_4.webp",
+    "assorbimentobrutale": "assets/cards/gen/titanodacciaio_4.webp",
+    "Presa Schiacciante": "assets/cards/gen/titanodacciaio_5.webp",
+    "presaschiacciante": "assets/cards/gen/titanodacciaio_5.webp",
+    "Intimidazione": "assets/cards/gen/titanodacciaio_6.webp",
+    "intimidazione": "assets/cards/gen/titanodacciaio_6.webp",
+    "Sventramento": "assets/cards/gen/titanodacciaio_7.webp",
+    "sventramento": "assets/cards/gen/titanodacciaio_7.webp",
+    "Corazza Improvvisata": "assets/cards/gen/titanodacciaio_8.webp",
+    "corazzaimprovvisata": "assets/cards/gen/titanodacciaio_8.webp",
+    "Colpo di Grazia": "assets/cards/gen/titanodacciaio_9.webp",
+    "colpodigrazia": "assets/cards/gen/titanodacciaio_9.webp",
+    "Prezzo della Furia": "assets/cards/gen/titanodacciaio_10.webp",
+    "prezzodellafuria": "assets/cards/gen/titanodacciaio_10.webp",
+    "Ricordo della Fonderia": "assets/cards/gen/titanodacciaio_11.webp",
+    "ricordodellafonderia": "assets/cards/gen/titanodacciaio_11.webp",
+    "Pelle di Ferro": "assets/cards/gen/titanodacciaio_12.webp",
+    "pellediferro": "assets/cards/gen/titanodacciaio_12.webp",
+    "Sopraffazione": "assets/cards/gen/titanodacciaio_13.webp",
+    "sopraffazione": "assets/cards/gen/titanodacciaio_13.webp",
     "Furia Incontrollata": "assets/cards/titanoacciaio.webp",
     "furiaincontrollata": "assets/cards/titanoacciaio.webp",
-    "Trono di Ossa": "assets/cards/sopravvissutoallafonderia.webp",
-    "tronodiossa": "assets/cards/sopravvissutoallafonderia.webp",
-    "Macello Indiscriminato": "assets/cards/piastrerubate.webp",
-    "macelloindiscriminato": "assets/cards/piastrerubate.webp",
-    "Il Mio Trionfo": "assets/cards/colpodevastante.webp",
-    "ilmiotrionfo": "assets/cards/colpodevastante.webp",
-    "Memoria della Fonderia": "assets/cards/titanoacciaio.webp",
-    "memoriadellafonderia": "assets/cards/titanoacciaio.webp",
-    "Tributo di Ferro": "assets/cards/sopravvissutoallafonderia.webp",
-    "tributodiferro": "assets/cards/sopravvissutoallafonderia.webp",
-    "Colpo Calibrato": "assets/cards/architettoombra.webp",
-    "colpocalibrato": "assets/cards/architettoombra.webp",
-    "Scudo Energetico": "assets/cards/barrieraolografica.webp",
-    "scudoenergetico": "assets/cards/barrieraolografica.webp",
+    "Trono di Ossa": "assets/cards/gen/titanodacciaio_15.webp",
+    "tronodiossa": "assets/cards/gen/titanodacciaio_15.webp",
+    "Macello Indiscriminato": "assets/cards/gen/titanodacciaio_16.webp",
+    "macelloindiscriminato": "assets/cards/gen/titanodacciaio_16.webp",
+    "Il Mio Trionfo": "assets/cards/gen/titanodacciaio_17.webp",
+    "ilmiotrionfo": "assets/cards/gen/titanodacciaio_17.webp",
+    "Memoria della Fonderia": "assets/cards/gen/titanodacciaio_18.webp",
+    "memoriadellafonderia": "assets/cards/gen/titanodacciaio_18.webp",
+    "Tributo di Ferro": "assets/cards/gen/titanodacciaio_19.webp",
+    "tributodiferro": "assets/cards/gen/titanodacciaio_19.webp",
+    "Colpo Calibrato": "assets/cards/gen/architettoombra_1.webp",
+    "colpocalibrato": "assets/cards/gen/architettoombra_1.webp",
+    "Scudo Energetico": "assets/cards/gen/architettoombra_2.webp",
+    "scudoenergetico": "assets/cards/gen/architettoombra_2.webp",
     "Drone da Supporto": "assets/cards/generatoredisingolarita.webp",
     "dronedasupporto": "assets/cards/generatoredisingolarita.webp",
-    "Mina Adesiva": "assets/cards/frequenzadisturbante.webp",
-    "minaadesiva": "assets/cards/frequenzadisturbante.webp",
-    "Scanner Predittivo": "assets/cards/architettoombra.webp",
-    "scannerpredittivo": "assets/cards/architettoombra.webp",
-    "Impulso EM": "assets/cards/barrieraolografica.webp",
-    "impulsoem": "assets/cards/barrieraolografica.webp",
+    "Mina Adesiva": "assets/cards/gen/architettoombra_4.webp",
+    "minaadesiva": "assets/cards/gen/architettoombra_4.webp",
+    "Scanner Predittivo": "assets/cards/gen/architettoombra_5.webp",
+    "scannerpredittivo": "assets/cards/gen/architettoombra_5.webp",
+    "Impulso EM": "assets/cards/gen/architettoombra_6.webp",
+    "impulsoem": "assets/cards/gen/architettoombra_6.webp",
     "Kit di Emergenza": "assets/cards/generatoredisingolarita.webp",
     "kitdiemergenza": "assets/cards/generatoredisingolarita.webp",
-    "Backup su Cloud": "assets/cards/frequenzadisturbante.webp",
-    "backupsucloud": "assets/cards/frequenzadisturbante.webp",
-    "Turret Automatica": "assets/cards/architettoombra.webp",
-    "turretautomatica": "assets/cards/architettoombra.webp",
-    "Prezzo del Progresso": "assets/cards/barrieraolografica.webp",
-    "prezzodelprogresso": "assets/cards/barrieraolografica.webp",
+    "Backup su Cloud": "assets/cards/gen/architettoombra_8.webp",
+    "backupsucloud": "assets/cards/gen/architettoombra_8.webp",
+    "Turret Automatica": "assets/cards/gen/architettoombra_9.webp",
+    "turretautomatica": "assets/cards/gen/architettoombra_9.webp",
+    "Prezzo del Progresso": "assets/cards/gen/architettoombra_10.webp",
+    "prezzodelprogresso": "assets/cards/gen/architettoombra_10.webp",
     "Backup di Coscienza": "assets/cards/generatoredisingolarita.webp",
     "backupdicoscienza": "assets/cards/generatoredisingolarita.webp",
-    "Guscio Rinforzato": "assets/cards/frequenzadisturbante.webp",
-    "gusciorinforzato": "assets/cards/frequenzadisturbante.webp",
-    "Sovraccarico Calcolato": "assets/cards/architettoombra.webp",
-    "sovraccaricocalcolato": "assets/cards/architettoombra.webp",
-    "Protocollo Zero": "assets/cards/barrieraolografica.webp",
-    "protocollozero": "assets/cards/barrieraolografica.webp",
+    "Guscio Rinforzato": "assets/cards/gen/architettoombra_12.webp",
+    "gusciorinforzato": "assets/cards/gen/architettoombra_12.webp",
+    "Sovraccarico Calcolato": "assets/cards/gen/architettoombra_13.webp",
+    "sovraccaricocalcolato": "assets/cards/gen/architettoombra_13.webp",
+    "Protocollo Zero": "assets/cards/gen/architettoombra_14.webp",
+    "protocollozero": "assets/cards/gen/architettoombra_14.webp",
     "Singolarità Portatile": "assets/cards/generatoredisingolarita.webp",
     "singolaritaportatile": "assets/cards/generatoredisingolarita.webp",
     "Backdoor": "assets/cards/frequenzadisturbante.webp",
