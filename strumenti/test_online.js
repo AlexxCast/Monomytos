@@ -1,4 +1,4 @@
-// Prova del protocollo online con due giocatori e un Firestore finto: node strumenti/test_online.js .
+// Prova del protocollo online (partita casuale + partita intera) con due giocatori e un Firestore finto: node strumenti/test_online.js .
 const vm=require('vm'),fs=require('fs');const dir=process.argv[2];
 // ---- mock Firestore condiviso ----
 const store={}; const listeners=[]; let tsN=0;
@@ -17,6 +17,7 @@ function colRef(path){const q={path,
   doc:(id)=>docRef(path+'/'+id),
   add:async(d)=>{const id='a'+(++tsN);store[path+'/'+id]=fixTs(clone(d));notify(path+'/'+id);return docRef(path+'/'+id);},
   orderBy:()=>q,
+  where:(f,op,v)=>{const w=(q._w||[]).concat([[f,v]]);const q2={...q,_w:w};q2.where=(f2,o2,v2)=>{q2._w=q2._w.concat([[f2,v2]]);return q2;};q2.limit=()=>q2;q2.get=async()=>({docs:Object.keys(store).filter(k=>k.startsWith(path+'/')&&k.split('/').length===2&&q2._w.every(([a,b])=>store[k][a]===b)).map(k=>({id:k.split('/')[1],data:()=>clone(store[k])}))});return q2;},
   onSnapshot:(cb)=>{const seen=new Set();const l={match:p=>p.startsWith(path+'/')&&p.split('/').length===path.split('/').length+1,fire:()=>{const ch=Object.keys(store).filter(k=>l.match(k)&&!seen.has(k)).sort((a,b)=>store[a].ts-store[b].ts).map(k=>{seen.add(k);return{type:'added',doc:{data:()=>clone(store[k])}}});cb({docChanges:()=>ch});}};listeners.push(l);l.fire();return()=>{};}
 };return q;}
 const db={collection:colRef,runTransaction:async(fn)=>fn({get:r=>r.get(),update:(r,d)=>r.update(d)})};
@@ -36,11 +37,15 @@ function client(uid,name){
 }
 (async()=>{
   const H=client('host1','Ale'), G=client('guest1','Amico');
-  const code=await H.ctx.Online.creaStanza('Iron Aegis');
-  await G.ctx.Online.entra(code,'Neon Phantom');
-  await new Promise(r=>setTimeout(r,50));
+  H.ctx.Collezione={mazzoMinacce:()=>['Blackout Ostile','Torneo Clandestino','Cultisti del Velo']};
+  G.ctx.Collezione={mazzoMinacce:()=>["Il Colosso di Rovina","L'Eco Senza Nome"],registraMinaccia(){}};
+  await H.ctx.Online.cercaPartita('Iron Aegis');
+  const code=H.ctx.Online.code; console.log('host public room',code,store['rooms/'+code].public);
+  await G.ctx.Online.cercaPartita('Neon Phantom');
+  console.log('guest joined',G.ctx.Online.code===code);
+  await new Promise(r=>setTimeout(r,800));
+  console.log('status after autostart',store['rooms/'+code].status, 'acts', JSON.parse(store['rooms/'+code].stateJson||'{}').actThreats?.map(t=>t.livello+':'+t.nome));
   console.log('lobby players',store['rooms/'+code].players.map(p=>p.name+':'+p.hero));
-  await H.ctx.Online.avviaPartita();
   // giocatori "umani" automatici: quando è il proprio turno giocano come un bot
   const autoplay=(C,isGuest)=>setInterval(()=>{const E=C.ctx.GameEngine;const st=E.state;if(!st||st.phase!=='action')return;const me=st.players.find(p=>p.isLocal);const act=st.players[st.turnIndex];
     if(!me||!act||act.id!==me.id||C._busy===st.round+':'+st.turnIndex)return;C._busy=st.round+':'+st.turnIndex;
@@ -50,7 +55,7 @@ function client(uid,name){
   },15);
   autoplay(H,false);autoplay(G,true);
   const t0=Date.now();
-  while(Date.now()-t0<150000){await new Promise(r=>setTimeout(r,200)); if((Date.now()-t0)%10000<200){const s=H.ctx.GameEngine.state;console.log('t',Math.round((Date.now()-t0)/1000),'round',s.round,'act',s.actIndex,'turn',s.turnIndex,'phase',s.phase,'def',!!H.ctx.Online._defense,'pend',!!H.ctx.GameEngine.pendingDefense);}if(H.ctx.GameEngine.state.phase==='gameover')break;}
+  while(Date.now()-t0<(+process.env.DUR||20000)){await new Promise(r=>setTimeout(r,200)); if((Date.now()-t0)%10000<200){const s=H.ctx.GameEngine.state;console.log('t',Math.round((Date.now()-t0)/1000),'round',s.round,'act',s.actIndex,'turn',s.turnIndex,'phase',s.phase,'def',!!H.ctx.Online._defense,'pend',!!H.ctx.GameEngine.pendingDefense);}if(H.ctx.GameEngine.state.phase==='gameover')break;}
   await new Promise(r=>setTimeout(r,1500));
   const hs=H.ctx.GameEngine.state, gs=G.ctx.GameEngine.state;
   console.log('host phase',hs.phase,'winner',hs.winner,'round',hs.round,'act',hs.actIndex);

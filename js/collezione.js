@@ -9,6 +9,13 @@
     leggendaria: { nome: 'Leggendaria', colore: '#f5b82e', ordine: 4, doppione: 150 }
   };
 
+  // Minacce: ogni giocatore ha il suo mazzo; in partita si pesca a caso dal mazzo di tutti i giocatori
+  const RARITA_MINACCIA = { 1: 'comune', 2: 'noncomune', 3: 'rara', 4: 'rara', 5: 'epica', 6: 'leggendaria' };
+  const MINACCE_STARTER = ['Blackout Ostile', 'Torneo Clandestino', 'Incursione dei Droni Cinetici',
+    "L'Assedio dei Predoni delle Rovine", 'Imboscata sulla Falesia', 'Cultisti del Velo'];
+  const MAZZO_MINACCE = { min: 3, max: 8 };
+  const COSTO_BUSTA_MINACCE = 200;
+
   // Un mazzo starter da scegliere al primo accesso: uno per statistica principale
   const STARTER = [
     { eroe: 'Titano d\'Acciaio', mazzo: 'Colpo Pesante', stat: 'Potenza', testo: 'Danni enormi e pugni che spaccano gli scudi. Facile da giocare.' },
@@ -37,12 +44,12 @@
     capitoli: [
       { minacce: 1,  titolo: 'Il Risveglio',          testo: 'Un segnale dal vuoto: la prima Calamità si è mossa.', premio: { bustine: 1 } },
       { minacce: 3,  titolo: 'Un alleato inatteso',   testo: 'Qualcuno risponde alla chiamata.',                     premio: { eroe: 1 } },
-      { minacce: 6,  titolo: 'La città nella nebulosa', testo: 'Le strade brillano di energia strana.',             premio: { crediti: 300, bustine: 1 } },
+      { minacce: 6,  titolo: 'La città nella nebulosa', testo: 'Le strade brillano di energia strana.',             premio: { crediti: 300, bustine: 1, minaccia: 1 } },
       { minacce: 10, titolo: 'Il patto spezzato',     testo: 'Un eroe è stato visto passare al buio.',              premio: { eroe: 1 } },
-      { minacce: 15, titolo: 'Cuore oscuro',          testo: 'Il Trauma si diffonde: servono carte più forti.',     premio: { bustine: 2, epica: 1 } },
+      { minacce: 15, titolo: 'Cuore oscuro',          testo: 'Il Trauma si diffonde: servono carte più forti.',     premio: { bustine: 2, epica: 1, minaccia: 1 } },
       { minacce: 21, titolo: 'Fratture nel cielo',    testo: 'La galassia rossa si avvicina.',                      premio: { eroe: 1, crediti: 300 } },
-      { minacce: 28, titolo: 'L\'ultimo baluardo',    testo: 'Resta un ultimo varco da difendere.',                 premio: { eroe: 1, bustine: 2 } },
-      { minacce: 36, titolo: 'La Prima Calamità',     testo: 'Affronta la fonte di tutto. Fine della Stagione 1.',   premio: { eroe: 1, leggendaria: 1, crediti: 500 } }
+      { minacce: 28, titolo: 'L\'ultimo baluardo',    testo: 'Resta un ultimo varco da difendere.',                 premio: { eroe: 1, bustine: 2, minaccia: 1 } },
+      { minacce: 36, titolo: 'La Prima Calamità',     testo: 'Affronta la fonte di tutto. Fine della Stagione 1.',   premio: { eroe: 1, leggendaria: 1, crediti: 500, minaccia: 1 } }
     ]
   };
 
@@ -84,7 +91,83 @@
   }
 
   const Collezione = {
-    RARITA, STARTER, STAGIONE, EVENTI, COSTO_EROE,
+    RARITA, STARTER, STAGIONE, EVENTI, COSTO_EROE, MAZZO_MINACCE, COSTO_BUSTA_MINACCE,
+
+    // ---------- Minacce ----------
+    tutteMinacce() { return (window.MONOMYTHOS_DATA || {}).threats || []; },
+    rarMinaccia(t) { return RARITA_MINACCIA[t.livello] || 'comune'; },
+    minaccePossedute() { return (this.p && this.p.data.minacce) || []; },
+    mazzoMinacce() {
+      const d = this.p && this.p.data;
+      if (!d) return [];
+      const own = this.minaccePossedute();
+      let deck = (d.mazzoMinacce || own).filter(n => own.includes(n));
+      if (deck.length < MAZZO_MINACCE.min) deck = own.slice(0, MAZZO_MINACCE.max);
+      return deck;
+    },
+    toggleMinaccia(nome) {
+      const d = this.p.data;
+      let deck = this.mazzoMinacce().slice();
+      if (deck.includes(nome)) {
+        if (deck.length <= MAZZO_MINACCE.min) return window.UI.showToast(`Il mazzo Minacce deve avere almeno ${MAZZO_MINACCE.min} carte.`);
+        deck = deck.filter(n => n !== nome);
+      } else {
+        if (deck.length >= MAZZO_MINACCE.max) return window.UI.showToast(`Massimo ${MAZZO_MINACCE.max} Minacce nel mazzo.`);
+        deck.push(nome);
+      }
+      d.mazzoMinacce = deck;
+      this.p.save();
+      this.renderMinacce();
+    },
+    aggiungiMinaccia(nome) {
+      const d = this.p.data;
+      d.minacce = d.minacce || [];
+      if (d.minacce.includes(nome)) return false;
+      d.minacce.push(nome);
+      if (d.mazzoMinacce && d.mazzoMinacce.length < MAZZO_MINACCE.max) d.mazzoMinacce.push(nome);
+      return true;
+    },
+    // Una Minaccia nuova a caso, più facile trovare quelle comuni
+    pescaMinacciaNuova() {
+      const pesi = { comune: 40, noncomune: 30, rara: 18, epica: 9, leggendaria: 3 };
+      const nuove = this.tutteMinacce().filter(t => !this.minaccePossedute().includes(t.nome));
+      if (!nuove.length) return null;
+      const tot = nuove.reduce((a, t) => a + pesi[this.rarMinaccia(t)], 0);
+      let r = Math.random() * tot;
+      for (const t of nuove) { r -= pesi[this.rarMinaccia(t)]; if (r <= 0) return t; }
+      return nuove[0];
+    },
+    compraBustaMinacce() {
+      const d = this.p.data;
+      if (d.credits < COSTO_BUSTA_MINACCE) return window.UI.showToast('Crediti insufficienti per la Busta Minacce.');
+      const t = this.pescaMinacciaNuova();
+      if (!t) return window.UI.showToast('Hai già tutte le Minacce!');
+      d.credits -= COSTO_BUSTA_MINACCE;
+      this.aggiungiMinaccia(t.nome);
+      this.p.save();
+      document.querySelectorAll('.creditsDisplay').forEach(el => { el.textContent = d.credits; });
+      window.UI.showToast(`Nuova Minaccia ${RARITA[this.rarMinaccia(t)].nome}: ${t.nome}!`);
+      this.renderMinacce();
+      window.UI.renderShopView && window.UI.renderShopView();
+    },
+    apriMinacce() { this.renderMinacce(); window.UI.showModal('modalMinacce'); },
+    renderMinacce() {
+      const box = document.getElementById('minacceBody');
+      if (!box || !this.p) return;
+      const deck = this.mazzoMinacce(), own = this.minaccePossedute();
+      const list = this.tutteMinacce().slice().sort((a, b) => a.livello - b.livello);
+      box.innerHTML = `<p class="minacce-intro">Nel tuo mazzo: <b>${deck.length}</b> (da ${MAZZO_MINACCE.min} a ${MAZZO_MINACCE.max}). In partita le 3 Minacce si pescano a caso dai mazzi di tutti i giocatori, dalla più debole alla più forte.</p>
+        <div class="minacce-grid">${list.map(t => {
+          const has = own.includes(t.nome), on = deck.includes(t.nome), r = RARITA[this.rarMinaccia(t)];
+          return `<button class="minaccia-card ${has ? '' : 'locked'} ${on ? 'on' : ''}" data-nome="${t.nome.replace(/"/g, '&quot;')}" ${has ? '' : 'disabled'}>
+            <img src="${t.img || 'assets/icons/minaccia.webp'}" alt="" onerror="this.src='assets/icons/minaccia.webp'">
+            <span class="minaccia-info"><b>${t.nome}</b><span class="rarity-badge" style="--rar:${r.colore}">${r.nome} · Liv ${t.livello}</span>
+            <small>${has ? (on ? 'Nel mazzo' : 'Tocca per aggiungere') : '🔒 Da sbloccare'}</small></span>
+          </button>`;
+        }).join('')}</div>`;
+      box.querySelectorAll('.minaccia-card:not(.locked)').forEach(b => { b.onclick = () => this.toggleMinaccia(b.dataset.nome); });
+    },
+
 
     rarita(cardOrId) {
       const id = typeof cardOrId === 'string' ? cardOrId : cardOrId && cardOrId.id;
@@ -128,6 +211,8 @@
       const s = STARTER.find(x => x.eroe === nome);
       if (!s) return;
       this.sbloccaEroe(nome);
+      MINACCE_STARTER.forEach(m => this.aggiungiMinaccia(m));
+      this.p.data.mazzoMinacce = MINACCE_STARTER.slice();
       this.p.data.starter = nome;
       this.p.data.bustineGratis = (this.p.data.bustineGratis || 0) + 1;
       this.p.save();
@@ -217,6 +302,10 @@
         const h = this.prossimoEroeBloccato();
         if (h) { this.sbloccaEroe(h); voci.push(`nuovo eroe: ${h}`); } else { d.credits += 300; voci.push('300 crediti'); }
       }
+      if (pr.minaccia) {
+        const t = this.pescaMinacciaNuova();
+        if (t) { this.aggiungiMinaccia(t.nome); voci.push(`Minaccia: ${t.nome}`); } else { d.credits += 200; voci.push('200 crediti'); }
+      }
       ['epica', 'leggendaria'].forEach(r => {
         if (pr[r]) { const ris = []; this._aggiungi(this.pescaDiRarita(r), ris); voci.push(`carta ${RARITA[r].nome}: ${ris[0].card.nome}`); }
       });
@@ -287,6 +376,7 @@
             if (pr.crediti) voci.push(`${pr.crediti} CR`);
             if (pr.epica) voci.push('Carta Epica');
             if (pr.leggendaria) voci.push('Carta Leggendaria');
+            if (pr.minaccia) voci.push('Nuova Minaccia');
             return `<li class="${fatto ? 'done' : ''} ${attuale ? 'current' : ''}">
               <span class="cap-num">${fatto ? '✓' : i + 1}</span>
               <span class="cap-body"><b>${c.titolo}</b><small>${c.testo}</small>
@@ -295,6 +385,15 @@
           }).join('')}
         </ol>
         <p class="storia-note">Ogni Atto vinto conta come Minaccia sconfitta, anche se poi la missione va male.</p>`;
+    },
+
+    assicuraMinacce() {
+      const d = this.p && this.p.data;
+      if (d && d.starter && !(d.minacce && d.minacce.length)) {
+        MINACCE_STARTER.forEach(m => this.aggiungiMinaccia(m));
+        d.mazzoMinacce = MINACCE_STARTER.slice();
+        this.p.save(true);
+      }
     },
 
     aggiornaHome() {
@@ -323,6 +422,7 @@
         ui._collezioneGuard = true;
       }
       this.aggiornaHome();
+      this.assicuraMinacce();
       document.querySelectorAll('.creditsDisplay').forEach(el => { el.textContent = this.p.getCredits(); });
       if (!this.haStarter()) { this.renderStarter(); window.UI.showScreen('scr-lobby'); }
     }

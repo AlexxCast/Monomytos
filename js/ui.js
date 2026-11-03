@@ -546,7 +546,8 @@ class UIController {
       }
 
       window.GameEngine.startMatch({
-        heroes: heroesConfig
+        heroes: heroesConfig,
+        threatPool: window.Collezione ? window.Collezione.mazzoMinacce() : null
       });
       const threat = window.GameEngine.state.currentThreat;
       this.playMatchIntroLoading(threat, () => {
@@ -568,6 +569,8 @@ class UIController {
       }
       document.getElementById('createdRoomCode').textContent = '....';
       this.showScreen('scr-room-wait');
+      window.Online.setCerca('');
+      const bb = document.getElementById('btnPlayBots'); if (bb) bb.style.display = 'none';
       window.Online.creaStanza(this.selectedHero).then(code => {
         if (!code) return this.showScreen('scr-lobby');
         window.Online.renderLobby();

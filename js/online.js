@@ -103,12 +103,18 @@
       this._unsubs = [];
       clearTimeout(this._flushTimer);
       clearTimeout(this._defenseTimer);
+      clearTimeout(this._autoTimer);
+      this._nPlayers = 0;
       if (this._mirror) this.unmirror();
       this.code = null; this.room = null; this.isHost = false; this.lastSeq = -1;
       if (window.GameEngine) window.GameEngine.onRemoteDefense = null;
     },
 
-    async creaStanza(hero) {
+    mioPosto(hero) {
+      return { uid: this.me.uid, name: this.nick(), hero, minacce: window.Collezione ? window.Collezione.mazzoMinacce() : [] };
+    },
+
+    async creaStanza(hero, pubblica = false) {
       if (!this.ready()) return this.toast('Accedi al tuo account per giocare online.');
       this.stop();
       let code = '';
@@ -123,7 +129,8 @@
         await this.roomRef(code).set({
           host: this.me.uid,
           status: 'lobby',
-          players: [{ uid: this.me.uid, name: this.nick(), hero }],
+          players: [this.mioPosto(hero)],
+          public: !!pubblica,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
       } catch (e) { return this.erroreRegole(e); }
@@ -133,7 +140,7 @@
       return code;
     },
 
-    async entra(code, hero) {
+    async entra(code, hero, silenzioso = false) {
       code = String(code || '').toUpperCase().trim();
       if (!code) return;
       if (!this.ready()) { this._pendingJoin = { code, hero }; this.toast('Accedi per entrare nella stanza ' + code); return; }
@@ -148,16 +155,78 @@
           if (players.some(p => p.uid === this.me.uid)) return;
           if (r.status !== 'lobby') throw new Error('La partita in questa stanza è già iniziata.');
           if (players.length >= MAX_PLAYERS) throw new Error('La stanza è piena (massimo 4 eroi).');
-          tx.update(ref, { players: [...players, { uid: this.me.uid, name: this.nick(), hero }] });
+          tx.update(ref, { players: [...players, this.mioPosto(hero)] });
         });
       } catch (e) {
-        if (e && e.code) return this.erroreRegole(e);
-        return this.toast(e.message);
+        if (silenzioso) return false;
+        if (e && e.code) { this.erroreRegole(e); return false; }
+        this.toast(e.message); return false;
       }
       this.code = code; this.isHost = false;
       this.ascoltaStanza();
+      if (!silenzioso) this.setCerca('');
       window.UI.showScreen('scr-room-wait');
       this.renderLobby();
+      return true;
+    },
+
+    // ---------- PARTITA CASUALE ----------
+    async cercaPartita(hero) {
+      if (!this.ready()) return this.toast('Accedi al tuo account per giocare online.');
+      this.stop();
+      window.UI.showScreen('scr-room-wait');
+      this.setCerca('Cerco altri eroi...');
+      let candidati = [];
+      try {
+        const q = await this.db.collection('rooms').where('public', '==', true).where('status', '==', 'lobby').limit(15).get();
+        const ora = Date.now();
+        candidati = q.docs.map(d => ({ code: d.id, ...d.data() }))
+          .filter(r => (r.players || []).length < MAX_PLAYERS && r.host !== this.me.uid &&
+            (!r.createdAt || !r.createdAt.toMillis || ora - r.createdAt.toMillis() < 10 * 60 * 1000))
+          .sort((a, b) => (b.players || []).length - (a.players || []).length);
+      } catch (e) { this.erroreRegole(e); return window.UI.showScreen('scr-lobby'); }
+      for (const r of candidati) {
+        const ok = await this.entra(r.code, hero, true);
+        if (ok) { this.setCerca('Trovata una squadra! Si parte appena l\'host è pronto.'); return; }
+      }
+      const code = await this.creaStanza(hero, true);
+      if (!code) return window.UI.showScreen('scr-lobby');
+      this.renderLobby();
+      this.setCerca('Nessuna squadra libera: ho aperto una stanza. Aspetto altri giocatori...');
+      this._cercaDal = Date.now();
+    },
+
+    setCerca(t) {
+      const el = document.getElementById('roomSearchMsg');
+      if (el) { el.textContent = t || ''; el.style.display = t ? '' : 'none'; }
+    },
+
+    // Host di una stanza pubblica: parte da solo quando la squadra è pronta
+    autoAvvio() {
+      const r = this.room;
+      if (!this.isHost || !r || !r.public || r.status !== 'lobby') return;
+      const n = (r.players || []).length;
+      clearTimeout(this._autoTimer);
+      const bots = document.getElementById('btnPlayBots');
+      if (bots) bots.style.display = n < 2 ? '' : 'none';
+      if (n >= MAX_PLAYERS) return this.avviaPartita();
+      if (n >= 2) {
+        let sec = 15;
+        const tick = () => {
+          if (!this.room || this.room.status !== 'lobby') return;
+          this.setCerca(`Squadra di ${(this.room.players || []).length}: si parte tra ${sec} secondi (aspetto altri giocatori)`);
+          if (sec-- <= 0) return this.avviaPartita();
+          this._autoTimer = setTimeout(tick, 1000);
+        };
+        tick();
+      }
+    },
+
+    async giocaConBot() {
+      const hero = (window.UI && window.UI.selectedHero) || 'Iron Aegis';
+      await this.esci();
+      window.UI.squadSize = 3;
+      window.UI.startSoloGame(hero);
     },
 
     async esci() {
@@ -183,8 +252,13 @@
           window.UI.showScreen('scr-lobby');
           return;
         }
-        if (r.status === 'lobby') this.renderLobby();
-        if (!this.isHost && r.status === 'playing' && r.stateJson) this.applicaStato(r);
+        if (r.status === 'lobby') {
+          const prima = this._nPlayers;
+          this._nPlayers = (r.players || []).length;
+          this.renderLobby();
+          if (this.isHost && r.public && prima !== this._nPlayers) this.autoAvvio();
+        }
+        if (!this.isHost && (r.status === 'playing' || r.status === 'finished') && r.stateJson) this.applicaStato(r);
       }, e => this.erroreRegole(e));
       this._unsubs.push(unsub);
     },
@@ -220,7 +294,9 @@
       const players = this.room.players || [];
       if (players.length < 2) return this.toast('Serve almeno un altro giocatore nella stanza.');
       const E = window.GameEngine;
+      const pool = [...new Set(players.flatMap(p => p.minacce || []))];
       E.startMatch({
+        threatPool: pool.length >= 3 ? pool : null,
         heroes: players.map(p => ({
           name: p.hero, isBot: false, uid: p.uid, displayName: p.name,
           isLocal: p.uid === this.me.uid, remoteUid: p.uid === this.me.uid ? null : p.uid

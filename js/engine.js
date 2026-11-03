@@ -28,8 +28,12 @@ class MonomythosEngine {
     ];
 
     // Pick 3 random distinct threats for Act I, Act II, Act Finale
-    const shuffledThreats = [...data.threats].sort(() => Math.random() - 0.5);
-    const actThreats = shuffledThreats.slice(0, 3);
+    // Mazzi Minacce dei giocatori: si pesca a caso dall'insieme, poi dalla più debole alla più forte
+    const poolNames = Array.isArray(options.threatPool) ? new Set(options.threatPool) : null;
+    let pool = poolNames ? data.threats.filter(t => poolNames.has(t.nome)) : [...data.threats];
+    if (pool.length < 3) pool = [...data.threats];
+    const shuffledThreats = [...pool].sort(() => Math.random() - 0.5);
+    const actThreats = shuffledThreats.slice(0, 3).sort((a, b) => a.livello - b.livello);
 
     // Initialize players
     const players = heroConfigs.map((cfg, idx) => {
@@ -148,6 +152,7 @@ class MonomythosEngine {
     this.state = {
       actIndex: 0, // 0 = Act I, 1 = Act II, 2 = Act Finale
       actThreats: actThreats,
+      threatPool: pool.map(t => t.nome),
       currentThreat: null,
       round: 1,
       turnIndex: 0,
@@ -178,7 +183,9 @@ class MonomythosEngine {
     const BIL = window.MONOMYTHOS_BILANCIAMENTO || {};
     if (BIL.crisiComposita !== false && this.state.actIndex < 2 && raw.livello <= 3) {
       const used = new Set(this.state.actThreats.map(t => t.nome));
-      const pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !used.has(t.nome));
+      const allowed = this.state.threatPool ? new Set(this.state.threatPool) : null;
+      let pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !used.has(t.nome) && (!allowed || allowed.has(t.nome)));
+      if (pool.length === 0) pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !used.has(t.nome));
       if (pool.length > 0) secondary = pool[Math.floor(Math.random() * pool.length)];
     }
     const liv = raw.livello + (secondary ? secondary.livello : 0);

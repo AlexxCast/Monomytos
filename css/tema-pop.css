@@ -963,3 +963,24 @@ body.theme-villain .home-story { background: linear-gradient(120deg, #3c0b3e, #9
 .auth-caption, .starter-wrap .comic-caption { align-self: center; margin-top: -4px; font-size: 13px; }
 .auth-msg:empty { display: none; }
 .auth-panel { padding-bottom: 14px; }
+
+/* ===== Partita casuale e Mazzo Minacce ===== */
+.home-modes { grid-template-columns: repeat(2, 1fr) !important; }
+.home-mode.mode-random { background: #e08a1e !important; }
+.room-search-msg { background: var(--gold); color: #000; border: 2.5px solid #000; border-radius: 10px; padding: 8px 12px; font-weight: 800; text-align: center; box-shadow: 3px 3px 0 #000; margin: 0; }
+.btn-threat-deck { background: #6a1450 !important; color: #fff !important; }
+.minacce-body { overflow-y: auto; display: flex; flex-direction: column; gap: 10px; color: var(--ink); }
+.minacce-intro { margin: 0; font-size: 13px; }
+.minacce-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.minaccia-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; text-align: left; cursor: pointer; background: #fff; color: var(--ink); border: 2.5px solid #000; border-radius: 10px; box-shadow: 2px 2px 0 #000; }
+.minaccia-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-bottom: 2.5px solid #000; display: block; }
+.minaccia-card.on { outline: 4px solid var(--pop-red); outline-offset: -1px; background: #ffe9ec; }
+.minaccia-card.locked { cursor: default; opacity: .55; filter: grayscale(.9); }
+.minaccia-info { display: flex; flex-direction: column; gap: 3px; padding: 6px 8px 8px; font-size: 12.5px; }
+.minaccia-info small { font-size: 11px; font-weight: 700; color: #444; }
+@media (max-width: 899px) {
+  .home-modes { grid-template-columns: repeat(4, 1fr) !important; gap: 6px !important; }
+  .home-mode small { display: none; }
+  .home-mode b { font-size: 16px !important; line-height: 1.05; }
+  .home-mode { padding: 8px 6px !important; }
+}

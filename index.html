@@ -188,6 +188,10 @@
             <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8z"/></svg></span>
             <span class="home-mode-text"><b>Eroe Corrotto</b><small>Duello contro un boss</small></span>
           </button>
+          <button class="home-mode mode-random" onclick="Online.cercaPartita(UI.selectedHero)">
+            <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></span>
+            <span class="home-mode-text"><b>Casuale</b><small>Gioca con chiunque</small></span>
+          </button>
           <button class="home-mode mode-online" onclick="UI.openMultiplayerModal(true)">
             <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M10 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></span>
             <span class="home-mode-text"><b>Con gli amici</b><small>Crea una stanza</small></span>
@@ -264,8 +268,10 @@
         <h3 style="font-size: 15px;">Eroi al Tavolo</h3>
         <div id="roomPlayerList" class="room-player-list"></div>
       </div>
+      <p id="roomSearchMsg" class="room-search-msg" style="display:none"></p>
       <p id="roomGuestWait" class="room-guest-wait" style="display:none">Sei dentro! Aspetta che l'host faccia partire la missione.</p>
       <button class="btn btn-primary btn-block" id="btnStartOnline" onclick="UI.startMultiplayerMatch()">Inizia la Missione</button>
+      <button class="btn btn-subtle btn-block" id="btnPlayBots" style="display:none" onclick="Online.giocaConBot()">Nessuno? Gioca subito con i bot</button>
       <button class="btn btn-subtle btn-block" onclick="Online.esci(); UI.showScreen('scr-lobby')">Esci dalla stanza</button>
     </div>
   </section>
@@ -620,6 +626,17 @@
   <!-- ==========================================
        MODAL 6: OFFICIAL RULES VIEWER (V7.7)
        ========================================== -->
+  <div class="modal-overlay" id="modalMinacce" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet" style="max-height:90dvh;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <h3>Mazzo Minacce</h3>
+        <button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button>
+      </div>
+      <div id="minacceBody" class="minacce-body"></div>
+    </div>
+  </div>
+
   <div class="modal-overlay" id="modalStoria" onclick="if(event.target===this) UI.hideModals()">
     <div class="bottom-sheet" style="max-height:90dvh;">
       <div class="sheet-handle"></div>
@@ -678,6 +695,7 @@
         <span style="font-size:11px; color:var(--muto);">Componi Eroe & Mazzo da 60 Carte</span>
       </div>
       <div style="display:flex; gap:8px; align-items:center;">
+        <button class="btn btn-sm btn-threat-deck" onclick="Collezione.apriMinacce()">Minacce</button>
         <button class="btn btn-primary btn-sm" id="btnSaveDeck" onclick="UI.saveCurrentDeck()">Salva Mazzo</button>
         <button class="btn btn-top-back" onclick="UI.showScreen('scr-lobby')" title="Torna al Menu">
           <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -794,6 +812,22 @@
         <h4>Busta Tecno-Mistici</h4>
         <p>5 carte di Intelligenza e Oscure</p>
         <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">150 CR</button>
+      </div>
+    </div>
+
+    <div class="shop-section-title">Minacce</div>
+    <div class="shop-grid">
+      <div class="shop-item-card" onclick="Collezione.compraBustaMinacce()">
+        <div class="booster-thumb-icon"><img src="assets/cards/cartaminacciaretro.webp" alt="" style="width:40px; height:56px; border-radius:6px; object-fit:cover; margin:0 auto 8px; display:block;"></div>
+        <h4>Busta Minacce</h4>
+        <p>1 Minaccia nuova per il tuo mazzo Minacce</p>
+        <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;">200 CR</button>
+      </div>
+      <div class="shop-item-card" onclick="Collezione.apriMinacce()">
+        <div class="booster-thumb-icon"><img src="assets/icons/minaccia.webp" alt="" style="width:40px; height:40px; margin:0 auto 16px; display:block;"></div>
+        <h4>Il tuo mazzo Minacce</h4>
+        <p>Scegli quali Minacce porti in partita</p>
+        <button class="btn btn-subtle" style="padding:6px 12px; font-size:12px;">Apri</button>
       </div>
     </div>
 
