@@ -1206,7 +1206,7 @@ class UIController {
     const card = this.selectedCard;
     this.hideModals();
 
-    const targetInfo = window.GameEngine.getValidTargetsForCard('p_0', card);
+    const targetInfo = window.GameEngine.getValidTargetsForCard(this.idLocale(), card);
     const targets = targetInfo.candidates || targetInfo.targets || [];
     const validTargets = targets.filter(t => t.isValid);
 
@@ -1218,7 +1218,7 @@ class UIController {
     const defaultTargetId = validTargets.length === 1 ? validTargets[0].id : (targets[0]?.id || 'threat_boss');
 
     this.animateCardPlay(card, () => {
-      const res = window.GameEngine.playCardEffect('p_0', card.uid, defaultTargetId);
+      const res = window.GameEngine.playCardEffect(this.idLocale(), card.uid, defaultTargetId);
       if (!res.ok) {
         this.showToast(res.msg);
       }
@@ -1286,7 +1286,7 @@ class UIController {
     this.hideModals();
 
     this.animateCardPlay(card, () => {
-      const res = window.GameEngine.playCardEffect('p_0', card.uid, targetId);
+      const res = window.GameEngine.playCardEffect(this.idLocale(), card.uid, targetId);
       if (!res.ok) {
         this.showToast(res.msg);
       }
@@ -1496,7 +1496,7 @@ class UIController {
     const card = this.selectedCard;
     this.hideModals();
     this.animateCardPlay(card, () => {
-      const res = window.GameEngine.tacticalSacrifice('p_0', card.uid, track);
+      const res = window.GameEngine.tacticalSacrifice(this.idLocale(), card.uid, track);
       if (!res.ok) {
         this.showToast(res.msg);
       }
@@ -1513,7 +1513,7 @@ class UIController {
   }
 
   confirmBasePower(optIndex) {
-    const res = window.GameEngine.activateBasePower('p_0', optIndex);
+    const res = window.GameEngine.activateBasePower(this.idLocale(), optIndex);
     if (!res.ok) {
       this.showToast(res.msg);
     } else {
@@ -1521,9 +1521,16 @@ class UIController {
     }
   }
 
+  // Id del giocatore su questo dispositivo: online non è sempre p_0 (l'host è p_0, gli altri p_1, p_2...)
+  idLocale() {
+    const st = window.GameEngine && window.GameEngine.state;
+    const me = st && (st.players.find(p => p.isLocal) || st.players[0]);
+    return me ? me.id : 'p_0';
+  }
+
   changeDrawChoice(delta) {
     const engine = window.GameEngine;
-    const p = engine.state?.players.find(x => x.isLocal || x.id === 'p_0');
+    const p = engine.state?.players.find(x => x.isLocal) || engine.state?.players[0];
     if (!p) return;
     const maxDraw = engine.getMaxDraw(p);
     const current = p.drawChoice == null ? maxDraw : p.drawChoice;
@@ -1534,7 +1541,7 @@ class UIController {
 
   confirmEndTurn() {
     const engine = window.GameEngine;
-    const p = engine.state?.players.find(x => x.isLocal || x.id === 'p_0');
+    const p = engine.state?.players.find(x => x.isLocal) || engine.state?.players[0];
     // Penalità per Passività e Scarto di Sopravvivenza (§3)
     if (p && !p.isDead && !p.actedThisRound) {
       if (engine.hasLegalMove(p)) {

@@ -83,7 +83,7 @@
         <button class="icon-btn" id="btnAudioMixer" onclick="UI.openAudioMixer()" title="Mixer Audio">MIXER</button>
         <button class="icon-btn" onclick="UI.showModal('modalRules')" title="Regole">REGOLE</button>
         <button class="icon-btn btn-lingua" onclick="I18N.cambia()" title="Lingua / Language" data-no-i18n>ENGLISH</button>
-        <button class="icon-btn" id="accountMenuBtn" style="display:none" onclick="Account.user ? Account.logout() : Account.showAuth()" title="Account">ACCEDI</button>
+        <button class="icon-btn" id="accountMenuBtn" style="display:none" onclick="Account.menu()" title="Account">ACCEDI</button>
       </div>
     </div>
   </header>
@@ -138,6 +138,7 @@
           <div class="auth-msg" id="authMsg" role="status" aria-live="polite"></div>
         </form>
       </div>
+      <button type="button" class="btn btn-subtle auth-guest" id="authGuestBtn" onclick="Account.ospite()">GIOCA COME OSPITE</button>
       <p class="auth-note">L'account è gratuito. Usiamo la tua email solo per l'accesso.</p>
     </div>
   </section>
@@ -1250,6 +1251,7 @@
 <script src="js/online.js"></script>
 <script src="js/scambi.js"></script>
 <script src="js/storia.js"></script>
+<script src="js/tutorial.js"></script>
 <script src="js/particelle.js"></script>
 
 <script>

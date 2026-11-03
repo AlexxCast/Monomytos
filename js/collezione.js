@@ -456,8 +456,11 @@
       if (ui && !ui._collezioneGuard) {
         const orig = ui.showScreen.bind(ui);
         ui.showScreen = (id) => {
+          const T = window.Tutorial;
+          if (T && T.inPartita && id === 'scr-game') return orig(id);
           if (id !== 'scr-auth' && id !== 'scr-starter' && !this.haStarter()) {
             this.renderStarter();
+            if (T) setTimeout(() => T.dopoPartita(), 400);
             id = 'scr-starter';
           }
           return orig(id);
@@ -467,7 +470,12 @@
       this.aggiornaHome();
       this.assicuraMinacce();
       document.querySelectorAll('.creditsDisplay').forEach(el => { el.textContent = this.p.getCredits(); });
-      if (!this.haStarter()) { this.renderStarter(); window.UI.showScreen('scr-lobby'); }
+      if (!this.haStarter()) {
+        // Primo accesso senza account obbligatorio: parte subito la prima missione come tutorial
+        const A = window.Account;
+        if (window.Tutorial && window.Tutorial.serve() && !(A && A.required)) { setTimeout(() => window.Tutorial.avvia(), 300); return; }
+        this.renderStarter(); window.UI.showScreen('scr-lobby');
+      }
     }
   };
 
