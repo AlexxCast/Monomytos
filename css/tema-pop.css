@@ -870,3 +870,20 @@ html.theme-villain, body.theme-villain, html.theme-villain body {
 #scr-game, body.theme-villain #scr-game { background: transparent !important; }
 .home-showcase { background: #061b24; }
 body.theme-villain .home-showcase { background: #1d0618; }
+
+/* ===== Costruttore di mazzo: filtri interi, pulsanti +/- leggibili ===== */
+.deckbuilder-scroll-content > * { flex-shrink: 0; }
+.deck-category-tabs { flex-shrink: 0; min-height: 44px; padding: 6px 6px 10px 2px !important; overflow-y: visible; }
+.deck-filter-tab { box-shadow: 2px 2px 0 #000; padding: 7px 12px !important; font-size: 12px !important; }
+.deck-rule-validation-msg { background: #ffd9de !important; color: #9b0f25 !important; border: 2px solid #000 !important; box-shadow: 2px 2px 0 #000; font-size: 12px !important; }
+.deck-rule-validation-msg.valid { background: #d4f7e3 !important; color: #0d6b3a !important; }
+.stepper-btn {
+  width: 34px !important; height: 34px !important; border-radius: 8px !important;
+  background: var(--gold) !important; color: #000 !important; border: 2px solid #000 !important;
+  box-shadow: 2px 2px 0 #000; font: 900 22px/1 'Outfit', sans-serif !important;
+}
+.stepper-btn:first-child { background: #fff !important; }
+.stepper-btn:active { transform: translate(2px, 2px); box-shadow: none; }
+.stepper-val { color: var(--ink) !important; font-size: 16px !important; }
+.builder-tag-badge { color: #000 !important; border: 1.5px solid #000 !important; font-weight: 800 !important; }
+.builder-card-meta-line { color: #444 !important; }
