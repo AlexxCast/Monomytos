@@ -2482,7 +2482,17 @@ class UIController {
     const title = document.getElementById('gameOverTitle');
     const sub = document.getElementById('gameOverSubtitle');
     const currentCr = window.Progression ? window.Progression.getCredits() : 0;
-    if (winner === 'heroes') {
+    const st = window.GameEngine && window.GameEngine.state;
+    const me = st && st.players.find(p => p.isLocal);
+    if (winner === 'villain') {
+      const won = me && (st.villainWinners || []).includes(me.id);
+      title.textContent = won ? 'VITTORIA DEL VILLAIN!' : 'IL VILLAIN HA VINTO';
+      title.style.color = won ? '#d94cff' : '#ff4444';
+      const names = (st.players || []).filter(p => (st.villainWinners || []).includes(p.id)).map(p => p.name).join(' e ');
+      sub.innerHTML = won
+        ? `Tutti gli altri sono caduti: resti solo tu.<br><br><b style="font-size:16px;">+200 Crediti Cosmici!</b><br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`
+        : `${names} è rimasto l'unico in piedi e vince come Villain.<br><br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`;
+    } else if (winner === 'heroes') {
       title.textContent = 'VITTORIA COSMICA!';
       title.style.color = 'var(--oro-soft)';
       sub.innerHTML = `Avete trionfato sulla Calamità!<br><br><b style="color:var(--oro); font-size:16px;">+300 Crediti Cosmici Guadagnati!</b><br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span><br><br>Usa i tuoi crediti nel Negozio per sbloccare nuove carte e personalizzare il tuo mazzo!`;

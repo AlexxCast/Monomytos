@@ -484,6 +484,10 @@
       if (!P) return;
       if (ev.e === 'act_advanced') { P.addCredits(100, 'Minaccia risolta (online)'); C && C.registraMinaccia(); }
       if (ev.e === 'game_over' && ev.d && ev.d.winner === 'heroes') { P.addCredits(300, 'Vittoria online'); C && C.registraMinaccia(); }
+      if (ev.e === 'game_over' && ev.d && ev.d.winner === 'villain') {
+        const me = window.GameEngine.state.players.find(p => p.isLocal);
+        if (me && (ev.d.winners || []).includes(me.id)) P.addCredits(200, 'Vittoria da Villain (online)');
+      }
     },
 
     // Dopo l'accesso: entra nella stanza del link, se c'era

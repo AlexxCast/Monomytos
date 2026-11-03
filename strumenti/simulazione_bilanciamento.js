@@ -2,7 +2,7 @@
 // Override facoltativo delle manopole: BIL='{"scalaVita":0.5}' node strumenti/simulazione_bilanciamento.js . 200 3
 const vm=require('vm'),fs=require('fs');
 const dir=process.argv[2]; const N=+process.argv[3]||200; const SQ=+process.argv[4]||3;
-const res={heroes:0,threat:0,stuck:0}; let acts=[[],[],[]], firstVil=[], vilCount=0, games=0, turnsPerRound=[], finalRound=[], actReached=[0,0,0];
+const res={heroes:0,threat:0,villain:0,stuck:0}; let acts=[[],[],[]], firstVil=[], vilCount=0, games=0, turnsPerRound=[], finalRound=[], actReached=[0,0,0];
 for(let i=0;i<N;i++){
   const q=[]; const ctx={console:{log(){},warn(){},error:console.error},Math,JSON,Object,Array,String,Set,Map,parseInt,Date,setTimeout:(f)=>q.push(f)};
   ctx.window=ctx; ctx.MONOMYTHOS_BILANCIAMENTO=JSON.parse(process.env.BIL||'{}'); vm.createContext(ctx);

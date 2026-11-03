@@ -761,6 +761,7 @@ class MonomythosEngine {
       player.state = 'villain';
       this.addLog('threat', `[TRAUMA] PUNTO DI ROTTURA! ${player.name} ha accumulato 5 Trauma e si trasforma in VILLAIN!`);
       this.emit('player_corrupted', player);
+      this.checkVillainVictory();
     }
   }
 
@@ -1144,8 +1145,25 @@ class MonomythosEngine {
         this.addLog('threat', `[PERMADEATH] ${player.name} è caduto ed è estromesso dalla partita!`);
         this.recalculateMultiPathOnHeroDeath();
         this.emit('player_died', player);
+        this.checkVillainVictory();
       }
     }
+  }
+
+  // Il Villain vince quando tutti gli altri giocatori sono morti e restano in piedi solo Villain
+  checkVillainVictory() {
+    if (!this.state || this.isGameOver() || this.state.players.length < 2) return false;
+    const living = this.state.players.filter(p => !p.isDead);
+    const someoneDead = this.state.players.some(p => p.isDead);
+    if (!someoneDead || living.length === 0 || living.some(p => p.state !== 'villain')) return false;
+    this.state.phase = 'gameover';
+    this.state.winner = 'villain';
+    this.state.villainWinners = living.map(p => p.id);
+    const names = living.map(p => p.name).join(' e ');
+    this.addLog('threat', `[VITTORIA DEL VILLAIN] ${names} resta in piedi sulle rovine: vince il Villain!`);
+    if (window.Progression && living.some(p => !p.isBot && !p.remoteUid)) window.Progression.addCredits(200, 'Vittoria da Villain');
+    this.emit('game_over', { winner: 'villain', winners: living.map(p => p.id) });
+    return true;
   }
 
   recalculateMultiPathOnHeroDeath() {
@@ -1194,6 +1212,7 @@ class MonomythosEngine {
   }
 
   checkAllHeroesDead() {
+    if (this.checkVillainVictory()) return true;
     const living = this.state.players.filter(p => !p.isDead);
     if (living.length === 0) {
       this.state.phase = 'gameover';
