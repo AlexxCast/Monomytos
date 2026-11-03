@@ -235,7 +235,7 @@
     },
     {
       "id": "tre_motivi",
-      "formato": "Lista: 3 motivi in 15 secondi",
+      "formato": "Lista: 3 motivi in 10 secondi",
       "titolo": {
         "it": "3 motivi per provare Monomythos",
         "en": "3 reasons to try Monomythos"
@@ -982,8 +982,8 @@
           "durata": 0.9,
           "transizione": "scorri_sx",
           "testo": {
-            "it": "Il *tank*",
-            "en": "The *tank*"
+            "it": "Il *veloce*",
+            "en": "The *fast one*"
           }
         },
         {
@@ -992,8 +992,8 @@
           "durata": 0.9,
           "transizione": "scorri_sx",
           "testo": {
-            "it": "Il *veloce*",
-            "en": "The *fast one*"
+            "it": "Il *duellante*",
+            "en": "The *duelist*"
           }
         },
         {

@@ -22,7 +22,7 @@ video pronto da caricare a mano dal telefono.
 | File | A cosa serve |
 |---|---|
 | `scaletta.json` | Calendario: data → copione, piattaforme, lingua. Modificalo per spostare o saltare un giorno. |
-| `copioni.json` | I 14 copioni: scene, testi a schermo (italiano e inglese), didascalie, hashtag. |
+| `copioni.json` | I 14 copioni in stile pubblicità: riprese, inquadrature con tempi, zoom, transizioni, testi a schermo (italiano e inglese), didascalie, hashtag. |
 | `registra.js` | Registra le scene dal gioco con Playwright. |
 | `monta.js` | Monta il video finale con ffmpeg. |
 | `pubblica.js` | Pubblica con le API ufficiali. Salta le piattaforme senza chiavi. |
@@ -40,9 +40,9 @@ Sul PC (serve Node 20+, ffmpeg e `npm i playwright`):
 
 ```
 python3 -m http.server 8799 &
-node promo/registra.js coop_non_contro http://localhost:8799
-node promo/monta.js coop_non_contro
-# il video è in promo/uscita/coop_non_contro/coop_non_contro.mp4
+node promo/registra.js ultima_carta http://localhost:8799
+node promo/monta.js ultima_carta
+# il video è in promo/uscita/ultima_carta/ultima_carta.mp4
 ```
 
 Per i testi in inglese: `LINGUA=en node promo/registra.js ...` e `LINGUA_TESTI=en node promo/monta.js ...`,

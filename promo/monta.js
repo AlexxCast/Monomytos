@@ -99,6 +99,8 @@ function parole(testo, base, evid, ritardo, passo) {
     const forte = /^\*.*\*[.,!?…]*$/.test(w);
     const pulita = w.replace(/\*/g, '');
     const t0 = ms(ritardo + passo * k++);
+    // passo 0 = tutte le parole visibili subito (il gancio deve leggersi dal primo fotogramma)
+    if (!passo) return `{\\c${forte ? evid : base}}${pulita}`;
     return `{\\alpha&HFF&\\c${forte ? evid : base}\\t(${t0},${t0 + 70},\\alpha&H00&)}${pulita}`;
   }).join(' ')).join('\\N');
 }
@@ -111,7 +113,7 @@ function testoInquadratura(q, da, a, primo) {
     const [an, x, y] = POS[q.pos || (stile === 'grande' ? 'centro' : 'alto')];
     const n = testo.split(/\s+/).length;
     if (stile !== 'box') fascia(da, a, q.pos || (stile === 'grande' ? 'centro' : 'alto'), stile === 'grande');
-    const passo = primo ? 0.05 : Math.min(0.09, 0.45 / Math.max(1, n));
+    const passo = primo ? 0 : Math.min(0.09, 0.45 / Math.max(1, n));
     if (stile === 'grande' && primo) {
       // Gancio: già leggibile nel primo fotogramma, poi si assesta e spinge in avanti
       evento(da, a, 'Grande', `{\\an${an}\\pos(${x},${y})\\fscx116\\fscy116\\t(0,200,\\fscx100\\fscy100)\\t(200,${ms(durata)},\\fscx108\\fscy108)\\fad(0,90)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
