@@ -928,12 +928,66 @@ class UIController {
         wrapper.innerHTML = this.getCardDOM(c, false);
         const cardEl = wrapper.firstElementChild;
         cardEl.onclick = () => this.openCardActionSheet(c);
+        if (this._arriving && this._arriving.has(c.uid || c.id)) cardEl.classList.add('is-arriving');
         cardEl.style.setProperty('--d', (i - (n - 1) / 2).toFixed(2));
         cardEl.style.setProperty('--z', i + 1);
         cardEl.style.setProperty('--overlap', overlap.toFixed(1) + 'px');
         handBox.appendChild(cardEl);
       });
+      this.animaPesca(localPlayer, handBox);
     }
+    this.posizionaMazzi();
+  }
+
+  // Computer: i mazzi vanno nella colonna a sinistra; telefono: restano accanto al tavolo
+  posizionaMazzi() {
+    const flank = document.querySelector('.table-decks-flank');
+    const side = document.getElementById('sideDecks');
+    if (!flank || !side) return;
+    if (!this._flankHome) this._flankHome = flank.parentElement;
+    const desk = window.innerWidth >= 1000;
+    if (desk && flank.parentElement !== side) side.appendChild(flank);
+    else if (!desk && flank.parentElement !== this._flankHome) this._flankHome.appendChild(flank);
+  }
+
+  // Le carte nuove in mano arrivano dal mazzo: escono coperte, si girano e volano al loro posto
+  animaPesca(player, handBox) {
+    const uids = player.hand.map(c => c.uid || c.id);
+    const prev = this._handUids;
+    const st = window.GameEngine.state;
+    const key = (st.players || []).map(p => p.name).join('|') + '#' + (st.actThreats || []).map(t => t && t.nome).join('|') + '#' + (st.startedAt || '');
+    const sameMatch = this._handMatch === key;
+    this._handUids = new Set(uids);
+    this._handMatch = key;
+    this._arriving = this._arriving || new Set();
+    if (!prev || !sameMatch || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const nuove = uids.filter(u => !prev.has(u)).slice(0, 7);
+    if (!nuove.length || nuove.length === uids.length && uids.length > 7) return;
+    const deck = document.querySelector('#playerDeckStack .deck-card-1');
+    const dr = deck && deck.getBoundingClientRect();
+    const from = dr && dr.width ? dr : { left: window.innerWidth - 90, top: window.innerHeight - 260, width: 70, height: 103 };
+    nuove.forEach((uid, k) => {
+      const target = handBox.querySelector(`.monomyth-card[data-uid="${uid}"]`);
+      const card = player.hand.find(c => (c.uid || c.id) === uid);
+      if (!target || !card) return;
+      target.classList.add('is-arriving');
+      this._arriving.add(uid);
+      const qs = () => handBox.querySelector(`.monomyth-card[data-uid="${uid}"]`);
+      setTimeout(() => {
+        const tr = (qs() || target).getBoundingClientRect();
+        const fly = document.createElement('div');
+        fly.className = 'draw-fly';
+        Object.assign(fly.style, { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px' });
+        fly.innerHTML = `<div class="draw-fly-inner"><div class="draw-fly-back"><img src="assets/cards/retrocartamazzo.webp" alt=""></div><div class="draw-fly-front">${this.getCardDOM(card, false)}</div></div>`;
+        document.body.appendChild(fly);
+        try { window.AudioEngine?.playSfx('card_draw'); } catch (e) {}
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          fly.classList.add('is-flipped');
+          Object.assign(fly.style, { left: tr.left + 'px', top: tr.top + 'px', width: tr.width + 'px', height: tr.height + 'px' });
+        }));
+        setTimeout(() => { this._arriving.delete(uid); const el = qs(); if (el) el.classList.remove('is-arriving'); fly.remove(); }, 650);
+      }, k * 160);
+    });
   }
 
   // Deterministic Card Layout & Category Color System per User Rules:
@@ -2742,4 +2796,5 @@ class UIController {
 }
 
 window.UI = new UIController();
+window.addEventListener('resize', () => { try { window.UI.posizionaMazzi(); } catch (e) {} });
 
