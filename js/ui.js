@@ -2413,7 +2413,8 @@ class UIController {
     this.updateDeckBuilderCounts();
     if (!this._deckValid) return this.showToast('Il mazzo non è ancora valido: guarda il messaggio sopra i filtri.');
 
-    window.Progression.saveCustomDeck(name, hero, this.currentDeckBuilding.cards);
+    // Si salva anche la creazione dell'eroe (Origine, Archetipo, Costume, Potere): senza, in partita si perdeva
+    window.Progression.saveCustomDeck(name, hero, this.currentDeckBuilding.cards, this.currentDeckBuilding.creation);
     this.showToast(`Mazzo "${name}" salvato con successo!`);
     this.showScreen('scr-lobby');
   }

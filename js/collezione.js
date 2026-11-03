@@ -212,10 +212,54 @@
       });
     },
 
+    // Mazzo starter da 60 carte (30 carte diverse × 2 copie), tutte regalate: le carte dell'eroe
+    // (senza Epiche e Leggendarie) più carte Comuni/Non comuni di altri eroi con i Tag ammessi dall'Archetipo
+    creaMazzoStarter(nome) {
+      const D = window.MONOMYTHOS_DATA, d = this.p.data;
+      const s = STARTER.find(x => x.eroe === nome) || { mazzo: 'Mazzo di ' + nome };
+      const cc = D.creation_cards || [];
+      const pick = role => cc.find(c => c.role === role && c.char === nome) || {};
+      const o = pick('origine'), a = pick('archetipo'), co = pick('costume'), pb = pick('pb');
+      const m = (a.testo || '').match(/Tag\s*Autorizzati\s*:\s*([^.]+)/i);
+      const tags = ['Untagged', ...(m ? m[1].split(',').map(x => x.trim()).filter(Boolean) : ['Attacco Fisico', 'Abilità Tech', 'Gadget', 'Difesa', 'Burst'])];
+      const norm = t => String(t || 'Untagged').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const tagOk = c => { const t = norm(c.tag); return tags.map(norm).some(x => x === t || t.includes(x) || x.includes(t)); };
+      const base = r => ['comune', 'noncomune', 'rara'].includes(r);
+      const proprie = (D.action_cards[nome] || []).filter(c => base(this.rarita(c)) && tagOk(c));
+      const ordine = { comune: 0, noncomune: 1, rara: 2 };
+      const altre = Object.keys(D.action_cards).filter(h => h !== nome).flatMap(h => D.action_cards[h])
+        .filter(c => ['comune', 'noncomune'].includes(this.rarita(c)) && tagOk(c))
+        .sort((x, y) => ordine[this.rarita(x)] - ordine[this.rarita(y)] || x.num - y.num);
+      const scelte = [];
+      [...proprie, ...altre].forEach(c => { if (scelte.length < REGOLE_MAZZO.carteMin / REGOLE_MAZZO.copieMax && !scelte.includes(c)) scelte.push(c); });
+      const carte = {};
+      scelte.forEach(c => {
+        carte[c.id] = REGOLE_MAZZO.copieMax;
+        d.unlockedCards[c.id] = Math.max(d.unlockedCards[c.id] || 0, REGOLE_MAZZO.copieMax);
+      });
+      const str = Math.min(5, (o.str || 0) + (co.str || 0)), spd = Math.min(5, (o.spd || 0) + (co.spd || 0));
+      const tech = Math.min(5, (o.tech || 0) + (co.tech || 0)), end = Math.min(5, (o.end || 0) + (co.end || 0));
+      const creation = { origine: o.name, archetipo: a.name, costume: co.name, pb: pb.name, str, spd, tech, end, vita: o.vita || 25, allowedTags: tags, pb_desc: pb.testo || '' };
+      this.p.saveCustomDeck(s.mazzo, nome, carte, creation);
+      return Object.values(carte).reduce((x, y) => x + y, 0);
+    },
+
+    // Account creati prima di questa versione: se non hanno un mazzo da 60 valido, ricevono quello starter
+    assicuraMazzoStarter() {
+      const d = this.p && this.p.data;
+      if (!d || !d.starter || d.mazzoStarterV === 1) return;
+      d.mazzoStarterV = 1;
+      const valido = Object.values(d.customDecks || {}).some(k => Object.values(k.cards || {}).reduce((x, y) => x + y, 0) >= REGOLE_MAZZO.carteMin);
+      if (!valido) this.creaMazzoStarter(d.starter);
+      this.p.save(true);
+    },
+
     scegliStarter(nome) {
       const s = STARTER.find(x => x.eroe === nome);
       if (!s) return;
       this.sbloccaEroe(nome);
+      this.creaMazzoStarter(nome);
+      this.p.data.mazzoStarterV = 1;
       MINACCE_STARTER.forEach(m => this.aggiungiMinaccia(m));
       this.p.data.mazzoMinacce = MINACCE_STARTER.slice();
       this.p.data.starter = nome;
@@ -385,6 +429,7 @@
     },
 
     assicuraMinacce() {
+      this.assicuraMazzoStarter();
       const d = this.p && this.p.data;
       if (d && d.starter && !(d.minacce && d.minacce.length)) {
         MINACCE_STARTER.forEach(m => this.aggiungiMinaccia(m));
