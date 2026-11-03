@@ -37,6 +37,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install pillow
+      - run: which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
 
       - name: Prepara i file del gioco
         run: |
@@ -61,7 +62,8 @@ jobs:
           print(f'immagini: {prima//1024} KB -> {dopo//1024} KB')
           EOF
           for f in app/www/assets/audio/*.mp3; do
-            ffmpeg -loglevel error -y -i "$f" -codec:a libmp3lame -b:a 96k "$f.tmp.mp3" && mv "$f.tmp.mp3" "$f"
+            ffmpeg -loglevel error -y -i "$f" -codec:a libmp3lame -b:a 96k "$f.tmp.mp3"
+            mv "$f.tmp.mp3" "$f"
           done
           du -sh app/www
           cd app
