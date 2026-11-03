@@ -33,7 +33,12 @@ class MonomythosEngine {
     let pool = poolNames ? data.threats.filter(t => poolNames.has(t.nome)) : [...data.threats];
     if (pool.length < 3) pool = [...data.threats];
     const shuffledThreats = [...pool].sort(() => Math.random() - 0.5);
-    const actThreats = shuffledThreats.slice(0, 3).sort((a, b) => a.livello - b.livello);
+    let actThreats = shuffledThreats.slice(0, 3).sort((a, b) => a.livello - b.livello);
+    // Storia: le Minacce degli Atti sono fisse e nell'ordine del racconto
+    if (Array.isArray(options.actThreats) && options.actThreats.length === 3) {
+      const fixed = options.actThreats.map(n => data.threats.find(t => t.nome === n)).filter(Boolean);
+      if (fixed.length === 3) actThreats = fixed;
+    }
 
     // Initialize players
     const players = heroConfigs.map((cfg, idx) => {
@@ -154,6 +159,10 @@ class MonomythosEngine {
     this.state = {
       actIndex: 0, // 0 = Act I, 1 = Act II, 2 = Act Finale
       actThreats: actThreats,
+      // I crediti si guadagnano solo in Classificata (la Storia dà i suoi premi a fine missione)
+      ranked: !!options.ranked,
+      story: options.story || null,
+      noCrisi: !!options.story,
       threatPool: pool.map(t => t.nome),
       currentThreat: null,
       round: 1,
@@ -183,7 +192,7 @@ class MonomythosEngine {
     // §8.2 Crisi Composita: negli Atti I e II, una Minaccia di Livello ≤ 3 si fonde con una seconda dal pool
     let secondary = null;
     const BIL = window.MONOMYTHOS_BILANCIAMENTO || {};
-    if (BIL.crisiComposita !== false && this.state.actIndex < 2 && raw.livello <= 3) {
+    if (BIL.crisiComposita !== false && !this.state.noCrisi && this.state.actIndex < 2 && raw.livello <= 3) {
       const used = new Set(this.state.actThreats.map(t => t.nome));
       const allowed = this.state.threatPool ? new Set(this.state.threatPool) : null;
       let pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !used.has(t.nome) && (!allowed || allowed.has(t.nome)));
@@ -1161,7 +1170,7 @@ class MonomythosEngine {
     this.state.villainWinners = living.map(p => p.id);
     const names = living.map(p => p.name).join(' e ');
     this.addLog('threat', `[VITTORIA DEL VILLAIN] ${names} resta in piedi sulle rovine: vince il Villain!`);
-    if (window.Progression && living.some(p => !p.isBot && !p.remoteUid)) window.Progression.addCredits(200, 'Vittoria da Villain');
+    if (window.Progression && this.state.ranked && living.some(p => !p.isBot && !p.remoteUid)) window.Progression.addCredits(200, 'Vittoria da Villain');
     this.emit('game_over', { winner: 'villain', winners: living.map(p => p.id) });
     return true;
   }
@@ -1192,7 +1201,7 @@ class MonomythosEngine {
       if (this.state.actIndex < 2) {
         // Advance to next Act
         this.state.actIndex++;
-        if (window.Progression) window.Progression.addCredits(100, 'Minaccia risolta'); if (window.Collezione && !this.state.isOnlineGuest) window.Collezione.registraMinaccia();
+        if (window.Progression && this.state.ranked) window.Progression.addCredits(100, 'Minaccia risolta'); if (window.Collezione && !this.state.isOnlineGuest) window.Collezione.registraMinaccia();
         this.setupCurrentThreat();
         this.addLog('sys', `=== AVANZAMENTO: ATTO ${this.state.actIndex === 1 ? 'II' : 'FINALE'} — ${this.state.currentThreat.nome} ===`);
         this.emit('act_advanced', this.state);
@@ -1202,8 +1211,8 @@ class MonomythosEngine {
         // Final Victory!
         this.state.phase = 'gameover';
         this.state.winner = 'heroes';
-        if (window.Progression) window.Progression.addCredits(300, 'Vittoria Finale Cosmica'); if (window.Collezione && !this.state.isOnlineGuest) window.Collezione.registraMinaccia();
-        this.addLog('hero', `[VITTORIA] VITTORIA COSMICA! La Calamità è stata sventata! (+300 Crediti Cosmici)`);
+        if (window.Progression && this.state.ranked) window.Progression.addCredits(300, 'Vittoria Finale Cosmica'); if (window.Collezione && !this.state.isOnlineGuest) window.Collezione.registraMinaccia();
+        this.addLog('hero', `[VITTORIA] VITTORIA COSMICA! La Calamità è stata sventata!${this.state.ranked ? ' (+300 Crediti Cosmici)' : ''}`);
         this.emit('game_over', { winner: 'heroes' });
         return true;
       }

@@ -324,6 +324,7 @@ class UIController {
       } else {
         window.AudioEngine?.playSfx('fracture');
       }
+      if (state && state.story && window.Storia) return window.Storia.fine(data.winner);
       this.showGameOverModal(data.winner);
     });
   }
@@ -501,6 +502,7 @@ class UIController {
     if (loadingTitle) loadingTitle.textContent = 'ESTRAZIONE MINACCIA...';
     if (loadingSub) loadingSub.textContent = 'Il mazzo del Fato sta per rivelare il tuo destino...';
 
+    this._crInizio = window.Progression ? window.Progression.getCredits() : 0;
     // Reset flipper to 0deg (showing card back)
     flipper.classList.remove('is-flipped');
     overlay.classList.add('active');
@@ -1481,7 +1483,7 @@ class UIController {
       const el = document.getElementById(id);
       if (!el) return;
       el.innerHTML = '';
-      const cards = data.creation_cards.filter(c => c.role === role);
+      const cards = data.creation_cards.filter(c => c.role === role && this.creationCardOwned(c));
       cards.forEach(c => {
         const opt = document.createElement('option');
         opt.value = c.name;
@@ -1616,7 +1618,7 @@ class UIController {
       const el = document.getElementById(selectId);
       if (!el) return;
       el.innerHTML = '';
-      const cards = data.creation_cards.filter(c => c.role === role);
+      const cards = data.creation_cards.filter(c => c.role === role && this.creationCardOwned(c));
       cards.forEach(c => {
         const opt = document.createElement('option');
         opt.value = c.name;
@@ -1660,6 +1662,19 @@ class UIController {
           pb: 'Sovraccarico Cinetico'
         };
       }
+    }
+
+    // Le carte creazione devono essere di eroi che possiedi
+    {
+      const cc = (window.MONOMYTHOS_DATA.creation_cards || []);
+      const crd = this.currentDeckBuilding.creation;
+      ['origine', 'archetipo', 'costume', 'pb'].forEach(role => {
+        const cur = cc.find(c => c.role === role && c.name === crd[role]);
+        if (!cur || !this.creationCardOwned(cur)) {
+          const alt = cc.find(c => c.role === role && this.creationCardOwned(c));
+          if (alt) crd[role] = alt.name;
+        }
+      });
     }
 
     const cr = this.currentDeckBuilding.creation;
@@ -1801,6 +1816,11 @@ class UIController {
     return 'assets/cards/ironaegis.webp';
   }
 
+  creationCardOwned(card) {
+    const P = window.Progression;
+    return !P || !card.char || P.isHeroUnlocked(card.char);
+  }
+
   // Point 2: Render 4 Visual Creation Card Slots in Deck Builder
   renderDeckCreationSlots() {
     const container = document.getElementById('deckCreationCardSlots');
@@ -1863,7 +1883,7 @@ class UIController {
           </div>
         </div>
         <div class="creation-slot-btn">
-          <span>Tocca per cambiare (Sfoglia 8) ➔</span>
+          <span>Tocca per cambiare (${data.creation_cards.filter(c => c.role === cfg.key && this.creationCardOwned(c)).length} possedute) ➔</span>
         </div>
       `;
 
@@ -1876,7 +1896,8 @@ class UIController {
     const data = window.MONOMYTHOS_DATA;
     if (!data || !data.creation_cards) return;
 
-    const cards = data.creation_cards.filter(c => c.role === role);
+    // Solo le carte creazione degli eroi che possiedi
+    const cards = data.creation_cards.filter(c => c.role === role && this.creationCardOwned(c));
     const list = document.getElementById('creationPickerList');
     const titleEl = document.getElementById('creationPickerTitle');
     const subEl = document.getElementById('creationPickerSubtitle');
@@ -1892,7 +1913,7 @@ class UIController {
     };
 
     const metaInfo = roleTitles[role] || { title: 'Scegli Carta Creazione', sub: 'Tocca una carta per equipaggiarla' };
-    if (titleEl) titleEl.textContent = `${metaInfo.title} (8 Opzioni)`;
+    if (titleEl) titleEl.textContent = `${metaInfo.title} (${cards.length} ${cards.length === 1 ? 'opzione' : 'opzioni'})`;
     if (subEl) subEl.textContent = metaInfo.sub;
 
     const currentSelName = this.currentDeckBuilding?.creation ? this.currentDeckBuilding.creation[role] : '';
@@ -2484,22 +2505,24 @@ class UIController {
     const currentCr = window.Progression ? window.Progression.getCredits() : 0;
     const st = window.GameEngine && window.GameEngine.state;
     const me = st && st.players.find(p => p.isLocal);
+    const guadagno = Math.max(0, currentCr - (this._crInizio == null ? currentCr : this._crInizio));
+    const nota = st && st.ranked ? '' : '<br><span style="font-size:12px; opacity:0.85;">Le partite libere non danno crediti: si guadagnano in Classificata e nella Storia.</span>';
     if (winner === 'villain') {
       const won = me && (st.villainWinners || []).includes(me.id);
       title.textContent = won ? 'VITTORIA DEL VILLAIN!' : 'IL VILLAIN HA VINTO';
       title.style.color = won ? '#d94cff' : '#ff4444';
       const names = (st.players || []).filter(p => (st.villainWinners || []).includes(p.id)).map(p => p.name).join(' e ');
       sub.innerHTML = won
-        ? `Tutti gli altri sono caduti: resti solo tu.<br><br><b style="font-size:16px;">+200 Crediti Cosmici!</b><br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`
+        ? `Tutti gli altri sono caduti: resti solo tu.<br><br>${guadagno ? `<b style="font-size:16px;">+${guadagno} Crediti Cosmici!</b>` : ''}${nota}<br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`
         : `${names} è rimasto l'unico in piedi e vince come Villain.<br><br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`;
     } else if (winner === 'heroes') {
       title.textContent = 'VITTORIA COSMICA!';
       title.style.color = 'var(--oro-soft)';
-      sub.innerHTML = `Avete trionfato sulla Calamità!<br><br><b style="color:var(--oro); font-size:16px;">+300 Crediti Cosmici Guadagnati!</b><br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span><br><br>Usa i tuoi crediti nel Negozio per sbloccare nuove carte e personalizzare il tuo mazzo!`;
+      sub.innerHTML = `Avete trionfato sulla Calamità!<br><br>${guadagno ? `<b style="color:var(--oro); font-size:16px;">+${guadagno} Crediti Cosmici Guadagnati!</b>` : ''}${nota}<br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`;
     } else {
       title.textContent = 'SCONFITTA COSMICA!';
       title.style.color = '#ff4444';
-      sub.innerHTML = `Il Cosmo è caduto nel Caos e nel Trauma.<br><br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span><br><br>Potenzia il tuo mazzo nel Deckbuilder e riprova!`;
+      sub.innerHTML = `Il Cosmo è caduto nel Caos e nel Trauma.<br>${guadagno ? `<br><b>+${guadagno} Crediti</b>` : ''}<br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span><br><br>Potenzia il tuo mazzo nel Deckbuilder e riprova!`;
     }
     this.showModal('modalGameOver');
   }

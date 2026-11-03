@@ -173,7 +173,7 @@
         <!-- Azione principale -->
         <button class="btn-play" onclick="UI.startQuickMissionSelection()">
           <span class="btn-play-label">GIOCA</span>
-          <span class="btn-play-sub">Missione da 1 a 4 eroi</span>
+          <span class="btn-play-sub">Allenamento con i bot · senza crediti</span>
           <span class="comic-burst play-burst">VAI!</span>
         </button>
 
@@ -190,7 +190,7 @@
           </button>
           <button class="home-mode mode-random" onclick="Online.cercaPartita(UI.selectedHero)">
             <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></span>
-            <span class="home-mode-text"><b>Casuale</b><small>Gioca con chiunque</small></span>
+            <span class="home-mode-text"><b>Classificata</b><small>Online, dà crediti</small></span>
           </button>
           <button class="home-mode mode-online" onclick="UI.openMultiplayerModal(true)">
             <span class="home-mode-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M10 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></span>
@@ -648,6 +648,21 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="modalStoriaMissione" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet storia-sheet" style="max-height:92dvh;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header"><h3>Missione</h3><button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button></div>
+      <div id="storiaMissioneBody"></div>
+    </div>
+  </div>
+  <div class="modal-overlay" id="modalStoriaArchivio" onclick="if(event.target===this) UI.hideModals()">
+    <div class="bottom-sheet" style="max-height:90dvh;">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header"><h3>Archivio di Lumen</h3><button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button></div>
+      <div id="storiaArchivioBody" class="storia-archivio"></div>
+    </div>
+  </div>
+
   <div class="modal-overlay" id="modalStoria" onclick="if(event.target===this) UI.hideModals()">
     <div class="bottom-sheet" style="max-height:90dvh;">
       <div class="sheet-handle"></div>
@@ -694,6 +709,22 @@
       <button class="btn btn-subtle btn-block" style="margin-top:14px;" onclick="UI.hideModals()">Chiudi</button>
     </div>
   </div>
+
+  <!-- ==========================================
+       STORIA: percorso del capitolo
+       ========================================== -->
+  <section class="screen" id="scr-storia">
+    <header class="app-header storia-header" style="position:sticky; top:0;">
+      <div class="brand"><h2 style="font-size:18px;">Storia</h2></div>
+      <div class="header-actions">
+        <button class="btn btn-sm btn-archivio" onclick="Storia.apriArchivio()">Archivio</button>
+        <button class="btn btn-top-back" onclick="UI.showScreen('scr-lobby')"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg><span>Torna</span></button>
+      </div>
+    </header>
+    <div class="storia-page">
+      <div id="storiaPercorso" class="storia-percorso"></div>
+    </div>
+  </section>
 
   <!-- ==========================================
        SCREEN 5: DECK BUILDER
@@ -1212,6 +1243,7 @@
 <script src="js/collezione.js"></script>
 <script src="js/online.js"></script>
 <script src="js/scambi.js"></script>
+<script src="js/storia.js"></script>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {

@@ -282,21 +282,13 @@
     },
 
     // Chiamato dal motore a ogni Minaccia sconfitta
+    // Statistica: Minacce sconfitte in tutte le partite (i premi della Storia ora sono in storia.js)
     registraMinaccia() {
       if (!this.p) return;
       const d = this.p.data;
       d.storia = d.storia || { minacce: 0, capitoli: 0 };
       d.storia.minacce++;
-      const sbloccati = [];
-      while (d.storia.capitoli < STAGIONE.capitoli.length && d.storia.minacce >= STAGIONE.capitoli[d.storia.capitoli].minacce) {
-        const cap = STAGIONE.capitoli[d.storia.capitoli];
-        sbloccati.push(this._premia(cap));
-        d.storia.capitoli++;
-      }
       this.p.save();
-      this.aggiornaHome();
-      document.querySelectorAll('.creditsDisplay').forEach(el => { el.textContent = this.p.getCredits(); });
-      if (sbloccati.length) this._annunciaCapitoli(sbloccati);
     },
 
     _premia(cap) {
@@ -402,6 +394,7 @@
     },
 
     aggiornaHome() {
+      if (window.Storia) return window.Storia.aggiornaHome();
       const el = document.getElementById('homeStorySub');
       if (!el || !this.p) return;
       const st = this.p.data.storia || { minacce: 0, capitoli: 0 };
@@ -409,7 +402,7 @@
       el.textContent = cap ? `Capitolo ${st.capitoli + 1}: ${cap.titolo} · ${st.minacce}/${cap.minacce}` : 'Stagione 1 completata!';
     },
 
-    apriStoria() { this.renderStoria(); window.UI.showModal('modalStoria'); },
+    apriStoria() { if (window.Storia) return window.Storia.apri(); this.renderStoria(); window.UI.showModal('modalStoria'); },
 
     init() {
       if (!this.p) return;

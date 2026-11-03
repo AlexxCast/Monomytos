@@ -296,6 +296,7 @@
       const E = window.GameEngine;
       const pool = [...new Set(players.flatMap(p => p.minacce || []))];
       E.startMatch({
+        ranked: !!this.room.public,
         threatPool: pool.length >= 3 ? pool : null,
         heroes: players.map(p => ({
           name: p.hero, isBot: false, uid: p.uid, displayName: p.name,
@@ -481,7 +482,8 @@
     // Anche chi non è host guadagna crediti e avanza nella Storia
     premiOspite(ev) {
       const P = window.Progression, C = window.Collezione;
-      if (!P) return;
+      // Solo le partite Classificate (stanze pubbliche) danno crediti
+      if (!P || !(this.room && this.room.public)) return;
       if (ev.e === 'act_advanced') { P.addCredits(100, 'Minaccia risolta (online)'); C && C.registraMinaccia(); }
       if (ev.e === 'game_over' && ev.d && ev.d.winner === 'heroes') { P.addCredits(300, 'Vittoria online'); C && C.registraMinaccia(); }
       if (ev.e === 'game_over' && ev.d && ev.d.winner === 'villain') {
