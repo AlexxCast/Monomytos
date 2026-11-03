@@ -851,10 +851,10 @@ html, body {
   background-image:
     radial-gradient(rgba(255, 255, 255, 0.05) 1.2px, transparent 1.5px),
     radial-gradient(130% 90% at 50% 40%, transparent 45%, rgba(0, 0, 0, 0.5) 100%),
-    url("../assets/bg/cosmo_eroe.svg") !important;
-  background-size: 10px 10px, auto, cover !important;
-  background-repeat: repeat, no-repeat, no-repeat !important;
-  background-position: 0 0, center, center !important;
+    linear-gradient(rgba(3, 10, 20, 0.28), rgba(3, 10, 20, 0.28)), url("../assets/bg/cosmo_eroe.webp") !important;
+  background-size: 10px 10px, auto, auto, cover !important;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat !important;
+  background-position: 0 0, center, center, center !important;
   background-attachment: fixed !important;
 }
 html.theme-villain, body.theme-villain, html.theme-villain body {
@@ -862,10 +862,10 @@ html.theme-villain, body.theme-villain, html.theme-villain body {
   background-image:
     radial-gradient(rgba(255, 255, 255, 0.05) 1.2px, transparent 1.5px),
     radial-gradient(130% 90% at 50% 40%, transparent 45%, rgba(0, 0, 0, 0.55) 100%),
-    url("../assets/bg/cosmo_villain.svg") !important;
-  background-size: 10px 10px, auto, cover !important;
-  background-repeat: repeat, no-repeat, no-repeat !important;
-  background-position: 0 0, center, center !important;
+    linear-gradient(rgba(20, 3, 12, 0.28), rgba(20, 3, 12, 0.28)), url("../assets/bg/cosmo_villain.webp") !important;
+  background-size: 10px 10px, auto, auto, cover !important;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat !important;
+  background-position: 0 0, center, center, center !important;
 }
 #scr-game, body.theme-villain #scr-game { background: transparent !important; }
 .home-showcase { background: #061b24; }
