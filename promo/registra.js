@@ -55,6 +55,11 @@ async function preparaPagina(ctx) {
   // Niente account: il gioco parte in modalità locale come negli strumenti di diagnosi
   await p.route('**/js/firebase-config.js', r => r.fulfill({ body: 'window.MONOMYTHOS_FIREBASE=null;', contentType: 'application/javascript' }));
   await p.addInitScript(l => { try { localStorage.setItem('monomythos_lingua', l); } catch (e) {} }, lingua);
+  // Niente tutorial del primo accesso: le riprese partono dalla Home con un account già avviato
+  await p.addInitScript(() => {
+    let t;
+    Object.defineProperty(window, 'Tutorial', { configurable: true, get: () => t, set: v => { t = v; if (v) { v.serve = () => false; v.mostra = () => {}; } } });
+  });
   await p.goto(base + '/index.html');
   await attesa(p, 1500);
   await p.evaluate(() => { const s = document.getElementById('appLaunchSplashOverlay'); if (s) s.style.display = 'none'; });
@@ -188,8 +193,38 @@ const RIPRESE = {
       const ov = document.getElementById('threatEntryAnimOverlay'); if (ov) ov.classList.remove('active');
     }, [r.eroi || 3, r.eroe || null, r.intro !== false]);
     // Bot al comando, situazione preparata e zoom automatico sulle giocate
-    const avvia = () => p.evaluate(([mom, segui]) => {
+    const avvia = () => p.evaluate(([mom, segui, primoPiano]) => {
       const st = GameEngine.state;
+      // Primo piano della carta giocata: la carta appare grande per un attimo e poi vola sul tavolo,
+      // così nel video si capisce cosa è stato giocato senza togliere spazio alla Minaccia
+      let occupato = 0;
+      window.__primoPiano = (card, player) => {
+        if (Date.now() < occupato) return;
+        occupato = Date.now() + 1500;
+        const box = document.createElement('div');
+        box.className = 'promo-primo-piano';
+        const nome = player && (player.name || player.nome || player);
+        box.innerHTML = `<div class="ppp-carta">${UI.getCardDOM(card, false)}</div>${nome && typeof nome === 'string' ? `<div class="ppp-chi">${nome.replace(/ \(Bot\)/, '')}</div>` : ''}`;
+        document.body.appendChild(box);
+        setTimeout(() => box.classList.add('via'), 1150);
+        setTimeout(() => box.remove(), 1600);
+      };
+      if (!document.getElementById('promoPrimoPianoCss')) {
+        const css = document.createElement('style');
+        css.id = 'promoPrimoPianoCss';
+        css.textContent = `
+          .promo-primo-piano { position: fixed; left: 50%; top: 47%; z-index: 99999; pointer-events: none;
+            transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 8px;
+            animation: pppEntra .38s cubic-bezier(.2,.9,.3,1.15) both; }
+          .promo-primo-piano .ppp-carta { width: 168px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
+          .promo-primo-piano .ppp-carta > * { width: 100% !important; max-width: none !important; margin: 0 !important; }
+          .promo-primo-piano .ppp-chi { font-family: Bangers, var(--font-display, sans-serif); font-size: 20px; letter-spacing: .04em;
+            color: #fff; background: #111; border: 2px solid #fff; border-radius: 4px; padding: 1px 10px; }
+          .promo-primo-piano.via { animation: pppEsce .42s cubic-bezier(.5,0,.75,0) both; }
+          @keyframes pppEntra { from { opacity: 0; transform: translate(-50%, -30%) scale(.55); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+          @keyframes pppEsce { to { opacity: 0; transform: translate(-50%, 10%) scale(.42); } }`;
+        document.head.appendChild(css);
+      }
       st.players.forEach(pl => { pl.isBot = true; });
       if (mom && window.__MOMENTI[mom]) { window.__MOMENTI[mom](); UI.renderGameView(st); }
       if (window.__attoIniziale == null) window.__attoIniziale = st.actIndex;
@@ -198,6 +233,7 @@ const RIPRESE = {
       GameEngine.emit = (ev, d) => {
         if (['card_played', 'damage_taken', 'act_advanced', 'player_corrupted', 'game_over', 'round_started', 'defense_window_opened', 'player_died'].includes(ev)) window.__evento(ev);
         emit(ev, d);
+        if (primoPiano && ev === 'card_played' && d && d.card) window.__primoPiano(d.card, d.player);
         if (segui === 'sempre' && ev === 'card_played' && Date.now() - ultimo > 1600) {
           ultimo = Date.now();
           window.__camera('centro', 1.3, 0.35);
@@ -217,7 +253,7 @@ const RIPRESE = {
       };
       // I bot partono un attimo dopo l'inizio della registrazione
       if (st.phase === 'action') setTimeout(() => GameEngine.checkTurn(), 300);
-    }, [r.intro === false ? null : (r.momento || null), !!r.segui]);
+    }, [r.intro === false ? null : (r.momento || null), r.segui || false, r.primo_piano !== false]);
     if (r.intro === false) {
       await p.evaluate(() => { const st = GameEngine.state; st.players.forEach(pl => { pl.isBot = true; }); });
       await p.evaluate(m => { if (m && window.__MOMENTI[m]) { window.__MOMENTI[m](); UI.renderGameView(GameEngine.state); } }, r.momento || null);
