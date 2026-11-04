@@ -52,6 +52,10 @@ async function preparaPagina(ctx) {
   const p = await ctx.newPage();
   p.on('dialog', d => d.accept().catch(() => {}));
   p.on('pageerror', e => console.warn('  errore pagina:', e.message));
+  if (process.env.DEBUG) {
+    p.on('console', m => console.log('  [pagina]', m.text()));
+    await p.addInitScript(() => { window.__DEBUG_ON = true; });
+  }
   // Niente account: il gioco parte in modalità locale come negli strumenti di diagnosi
   await p.route('**/js/firebase-config.js', r => r.fulfill({ body: 'window.MONOMYTHOS_FIREBASE=null;', contentType: 'application/javascript' }));
   await p.addInitScript(l => { try { localStorage.setItem('monomythos_lingua', l); } catch (e) {} }, lingua);
@@ -135,6 +139,14 @@ const MOMENTI_JS = `window.__MOMENTI = {
     GameEngine.setupCurrentThreat();
     this.atto_quasi_vinto();
   },
+  // Il tuo eroe (quello inquadrato) è al limite del Trauma
+  trauma_alto_io() {
+    const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
+    const st = GameEngine.state, me = st.players[0];
+    me.trm = soglia - 2;
+    // La ripresa parte dal tuo turno, così si vede il tuo eroe giocare e poi attaccare da Villain
+    window.__turnoMio = true;
+  },
   // Un compagno è al limite del Trauma
   trauma_alto() {
     const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
@@ -149,7 +161,12 @@ const AZIONI_TEMPO = {
     const p = GameEngine.state.players.find((x, i) => i > 0 && x.state === 'hero' && !x.isDead);
     if (p) { p.stateFrozen = false; p.trm = soglia; GameEngine.checkBreakingPoint(p); }
   },
-  // Chiude l'atto in corso con un ultimo progresso
+  // Il tuo eroe raggiunge il Punto di Rottura: da qui il bot che lo guida attacca i compagni
+  villain_io: () => {
+    const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
+    const p = GameEngine.state.players[0];
+    if (p && p.state === 'hero' && !p.isDead) { p.stateFrozen = false; p.trm = soglia; GameEngine.checkBreakingPoint(p); window.__pausaBot = Date.now() + 2300; }
+  },
   // Se l'atto non si è ancora chiuso da solo, lo chiude con un ultimo progresso
   chiudi_atto: () => {
     const st = GameEngine.state;
@@ -193,18 +210,22 @@ const RIPRESE = {
       const ov = document.getElementById('threatEntryAnimOverlay'); if (ov) ov.classList.remove('active');
     }, [r.eroi || 3, r.eroe || null, r.intro !== false]);
     // Bot al comando, situazione preparata e zoom automatico sulle giocate
-    const avvia = () => p.evaluate(([mom, segui, primoPiano]) => {
+    const avvia = () => p.evaluate(([mom, segui, primoPiano, difesaNascosta]) => {
+      window.__DEBUG = !!window.__DEBUG_ON;
       const st = GameEngine.state;
       // Primo piano della carta giocata: la carta appare grande per un attimo e poi vola sul tavolo,
       // così nel video si capisce cosa è stato giocato senza togliere spazio alla Minaccia
       let occupato = 0;
-      window.__primoPiano = (card, player) => {
+      window.__primoPiano = (card, player, targetId) => {
         if (Date.now() < occupato) return;
         occupato = Date.now() + 1500;
         const box = document.createElement('div');
         box.className = 'promo-primo-piano';
         const nome = player && (player.name || player.nome || player);
-        box.innerHTML = `<div class="ppp-carta">${UI.getCardDOM(card, false)}</div>${nome && typeof nome === 'string' ? `<div class="ppp-chi">${nome.replace(/ \(Bot\)/, '')}</div>` : ''}`;
+        const contro = st.players.find(x => x.id === targetId && x !== player);
+        const villain = player && player.state === 'villain';
+        const etichetta = typeof nome === 'string' ? (contro ? `${nome} ⚔ ${contro.name}` : nome).replace(/ \(Bot\)/g, '') : '';
+        box.innerHTML = `<div class="ppp-carta">${UI.getCardDOM(card, false)}</div>${etichetta ? `<div class="ppp-chi${villain ? ' villain' : ''}">${etichetta}</div>` : ''}`;
         document.body.appendChild(box);
         setTimeout(() => box.classList.add('via'), 1150);
         setTimeout(() => box.remove(), 1600);
@@ -220,6 +241,7 @@ const RIPRESE = {
           .promo-primo-piano .ppp-carta > * { width: 100% !important; max-width: none !important; margin: 0 !important; }
           .promo-primo-piano .ppp-chi { font-family: Bangers, var(--font-display, sans-serif); font-size: 20px; letter-spacing: .04em;
             color: #fff; background: #111; border: 2px solid #fff; border-radius: 4px; padding: 1px 10px; }
+          .promo-primo-piano .ppp-chi.villain { background: #6d1fd1; }
           .promo-primo-piano.via { animation: pppEsce .42s cubic-bezier(.5,0,.75,0) both; }
           @keyframes pppEntra { from { opacity: 0; transform: translate(-50%, -30%) scale(.55); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
           @keyframes pppEsce { to { opacity: 0; transform: translate(-50%, 10%) scale(.42); } }`;
@@ -228,20 +250,52 @@ const RIPRESE = {
       st.players.forEach(pl => { pl.isBot = true; });
       if (mom && window.__MOMENTI[mom]) { window.__MOMENTI[mom](); UI.renderGameView(st); }
       if (window.__attoIniziale == null) window.__attoIniziale = st.actIndex;
+      // Ritmo da video: i bot giocano una carta alla volta (una ogni 1,6 s) invece di tutte insieme,
+      // e le pause del gioco (attacchi dei nemici, cambio turno) durano il 50% in più
+      if (!window.__ritmo) {
+        window.__ritmo = true;
+        const st0 = window.__setTimeoutVero = window.setTimeout;
+        window.setTimeout = (fn, ms, ...a) => st0(fn, (ms || 0) >= 300 ? ms * 1.5 : ms, ...a);
+        const GE = GameEngine, run = GE.runBotTurn.bind(GE), gioca = GE.playCardEffect.bind(GE);
+        let turno = null, giocate = 0;
+        GE.runBotTurn = bot => {
+          // Pausa chiesta da un'azione (per esempio dopo che il tuo eroe diventa Villain)
+          if (window.__pausaBot && Date.now() < window.__pausaBot) { st0(() => GE.runBotTurn(bot), window.__pausaBot - Date.now()); return; }
+          const chiave = bot.id + '#' + GE.state.round + '#' + GE.state.turnIndex;
+          if (turno !== chiave) { turno = chiave; giocate = 0; }
+          let fatta = false;
+          const ALT = {};
+          GE.playCardEffect = (...x) => {
+            if (giocate >= 4) return;
+            if (fatta) throw ALT;
+            fatta = true; giocate++;
+            return gioca(...x);
+          };
+          try { run(bot); } catch (e) {
+            GE.playCardEffect = gioca;
+            if (e !== ALT) throw e;
+            st0(() => GE.runBotTurn(bot), 1600);
+            return;
+          }
+          GE.playCardEffect = gioca;
+        };
+      }
       const emit = GameEngine.emit.bind(GameEngine);
       let ultimo = 0;
       GameEngine.emit = (ev, d) => {
         if (['card_played', 'damage_taken', 'act_advanced', 'player_corrupted', 'game_over', 'round_started', 'defense_window_opened', 'player_died'].includes(ev)) window.__evento(ev);
         emit(ev, d);
-        if (primoPiano && ev === 'card_played' && d && d.card) window.__primoPiano(d.card, d.player);
+        if (primoPiano && ev === 'card_played' && d && d.card) window.__primoPiano(d.card, d.player, d.targetId);
+        if (window.__DEBUG && (ev === 'card_played' || ev === 'player_corrupted')) console.log(ev, JSON.stringify({ chi: d && (d.player ? d.player.name : d.name), stato: d && (d.player ? d.player.state : d.state), bersaglio: d && d.targetId, turno: st.turnIndex, giocatori: st.players.map(x => x.name + (x.isLocal ? '*' : '') + ':' + x.state) }));
         if (segui === 'sempre' && ev === 'card_played' && Date.now() - ultimo > 1600) {
           ultimo = Date.now();
           window.__camera('centro', 1.3, 0.35);
           setTimeout(() => window.__camera(null, 1, 0.5), 900);
         }
         if (ev !== 'defense_window_opened') return;
-        // La finestra di difesa si vede per un attimo, poi difende l'IA
-        setTimeout(() => {
+        // La finestra di difesa si vede per un attimo, poi difende l'IA ("difesa": "nascosta" = non si vede)
+        if (difesaNascosta) document.querySelectorAll('.modal-overlay.active').forEach(m => { if (m.id !== 'modalGameOver') m.classList.remove('active'); });
+        (window.__setTimeoutVero || setTimeout)(() => {
           const pd = GameEngine.pendingDefense;
           if (!pd) return;
           pd.reactionCards = pd.reactionCards || (d && d.reactionCards) || [];
@@ -249,11 +303,18 @@ const RIPRESE = {
           clearInterval(UI._defenseCountdownInterval); UI._defenseCountdownInterval = null;
           document.querySelectorAll('.modal-overlay.active').forEach(m => { if (m.id !== 'modalGameOver') m.classList.remove('active'); });
           GameEngine.respondToDefense({ type: 'bot_fallback' });
-        }, 1400);
+        }, difesaNascosta ? 30 : 700);
       };
+      if (window.__DEBUG) console.log('avvio', !!window.__turnoMio, st.turnIndex, st.phase, Object.keys(window.__MOMENTI || {}).join());
+      if (window.__turnoMio) {
+        const me = st.players[0];
+        st.turnIndex = 0; st.phase = 'action'; me.actedThisRound = false; me.pbUsedThisTurn = false;
+        me.slots = { Potenza: me.str, Agilità: me.spd, Agilita: me.spd, Intelligenza: me.tech, Vigore: me.end, potenza: me.str, agilita: me.spd, intelligenza: me.tech, vigore: me.end };
+        UI.renderGameView(st);
+      }
       // I bot partono un attimo dopo l'inizio della registrazione
       if (st.phase === 'action') setTimeout(() => GameEngine.checkTurn(), 300);
-    }, [r.intro === false ? null : (r.momento || null), r.segui || false, r.primo_piano !== false]);
+    }, [r.intro === false ? null : (r.momento || null), r.segui || false, r.primo_piano !== false, r.difesa === 'nascosta']);
     if (r.intro === false) {
       await p.evaluate(() => { const st = GameEngine.state; st.players.forEach(pl => { pl.isBot = true; }); });
       await p.evaluate(m => { if (m && window.__MOMENTI[m]) { window.__MOMENTI[m](); UI.renderGameView(GameEngine.state); } }, r.momento || null);

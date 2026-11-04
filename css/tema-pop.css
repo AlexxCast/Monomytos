@@ -1285,3 +1285,15 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 /* Tavolo: le carte giocate non escono dal bordo e non finiscono sotto i mazzi */
 .table-play-zone { min-width: 0 !important; justify-content: safe center !important; overflow: hidden !important; }
 .table-play-zone .played-card-item { flex-shrink: 0; }
+/* Telefono: la mano copre la parte bassa del campo, quindi tavolo e mazzi diventano una striscia
+   compatta che resta visibile sopra la mano (carte giocate in miniatura, intere) */
+@media (max-width: 999px) {
+  .table-play-nexus { align-items: center !important; }
+  .table-play-zone { min-height: 48px !important; height: 48px; padding: 2px 6px !important; gap: 4px !important; }
+  .table-play-zone .played-card-item { flex: 0 0 auto !important; width: auto !important; height: auto !important; border: 0 !important; box-shadow: none !important; overflow: visible !important; }
+  .table-play-zone .played-card-item .monomyth-card { zoom: .4; }
+  .table-play-zone .played-card-tag { display: none !important; }
+  .table-play-zone .table-play-placeholder { font-size: 10px !important; }
+  .table-decks-flank .deck-stack-cards { width: 30px !important; height: 42px !important; }
+  .table-decks-flank .deck-stack-badge { display: none !important; }
+}

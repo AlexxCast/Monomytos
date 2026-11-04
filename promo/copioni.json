@@ -1,5 +1,5 @@
 {
-  "nota": "Copioni dei video verticali in stile pubblicità (TikTok, YouTube Shorts, Reels). 'riprese' = registrazioni continue del gioco (partita, bustina, storia, mazzo, eroi, carta, home) con movimenti di macchina ('camera'), zoom automatico sulle giocate ('segui': 'sempre', spento di base), situazioni preparate ('momento': atto_quasi_vinto, vittoria_vicina, trauma_alto, leggendaria) e azioni a tempo ('azioni': villain, chiudi_atto, apri_bustina, avanti_storia, scorri_eroi). 'inquadrature' = pezzi di 0,8-2 s presi dalle riprese: 'da' in secondi o legato a un evento del gioco ('game_over-1.2', 'card_played#2', 'player_corrupted', 'bustina+1.5', 'defense_window_opened'), 'velocita' (0.5 = rallentatore), 'transizione' in entrata (taglio, dissolvenza, scorri; flash e zoom diventano dissolvenze morbide), ogni inquadratura dura almeno 2 s, testo con 'stile' pop (parole in sequenza, *parola* in giallo), grande (parola che sbatte al centro) o box (didascalia gialla), 'pos' alto/centro/basso, 'tieni' (il testo resta sulle n inquadrature successive). Testi in italiano (it) e inglese (en). 'tema': 'villain' usa il cosmo viola nel cartello finale. 'nota_ai_video' compare in piccolo nel cartello finale, 'nota_ai' in fondo alle didascalie.",
+  "nota": "Copioni dei video verticali in stile pubblicità (TikTok, YouTube Shorts, Reels). 'riprese' = registrazioni continue del gioco (partita, bustina, storia, mazzo, eroi, carta, home) con movimenti di macchina ('camera'), zoom automatico sulle giocate ('segui': 'sempre', spento di base), situazioni preparate ('momento': atto_quasi_vinto, vittoria_vicina, trauma_alto, leggendaria) e azioni a tempo ('azioni': villain, chiudi_atto, apri_bustina, avanti_storia, scorri_eroi). 'inquadrature' = pezzi di 2-3 s presi dalle riprese: 'da' in secondi o legato a un evento del gioco ('game_over-1.2', 'card_played#2', 'player_corrupted', 'bustina+1.5', 'defense_window_opened'), 'velocita' (0.5 = rallentatore), 'transizione' in entrata (taglio, dissolvenza, scorri; flash e zoom diventano dissolvenze morbide), ogni inquadratura dura almeno 2 s, testo con 'stile' pop (parole in sequenza, *parola* in giallo), grande (parola che sbatte al centro) o box (didascalia gialla), 'pos' alto/centro/basso, 'tieni' (il testo resta sulle n inquadrature successive). Testi in italiano (it) e inglese (en). 'tema': 'villain' usa il cosmo viola nel cartello finale. 'nota_ai_video' compare in piccolo nel cartello finale, 'nota_ai' in fondo alle didascalie. 'primo_piano': false spegne la carta giocata in grande; 'difesa': 'nascosta' non mostra la finestra di difesa dei bot; i bot giocano una carta ogni 1,6 s.",
   "link": "https://alexxcast.github.io/Monomytos/",
   "hashtag_base": [
     "monomythos",
@@ -192,13 +192,13 @@
         },
         {
           "ripresa": "p",
-          "da": "defense_window_opened+0.1",
-          "riserva": 2,
+          "da": "card_played#1-0.3",
+          "riserva": 1.4,
           "durata": 1.4,
           "transizione": "zoom",
           "testo": {
-            "it": "Uno para i colpi…",
-            "en": "One blocks the hits…"
+            "it": "Uno gioca d'astuzia…",
+            "en": "One plays it smart…"
           }
         },
         {
@@ -576,100 +576,82 @@
     },
     {
       "id": "villain_twist",
-      "formato": "Colpo di scena: il compagno che tradisce",
+      "formato": "Colpo di scena: il tuo eroe diventa Villain e attacca la squadra",
       "titolo": {
-        "it": "Il mio compagno mi ha tradito",
-        "en": "My teammate betrayed me"
+        "it": "Sono diventato il Villain",
+        "en": "I became the Villain"
       },
       "riprese": {
         "p": {
           "tipo": "partita",
           "eroi": 3,
           "intro": false,
-          "segui": true,
-          "momento": "trauma_alto",
-          "durata": 11,
+          "momento": "trauma_alto_io",
+          "durata": 16,
           "azioni": [
             {
-              "t": 6.5,
-              "fai": "villain"
+              "t": 6.1,
+              "fai": "villain_io"
             }
           ],
-          "camera": [
-            {
-              "t": 0,
-              "su": "alleati",
-              "zoom": 1.7,
-              "dur": 0
-            },
-            {
-              "t": 1.5,
-              "zoom": 1,
-              "dur": 0.5
-            },
-            {
-              "t": 6.4,
-              "zoom": 1.25,
-              "dur": 0.2
-            },
-            {
-              "t": 7.4,
-              "zoom": 1,
-              "dur": 0.6
-            }
-          ]
+          "difesa": "nascosta"
         }
       },
       "inquadrature": [
         {
           "ripresa": "p",
-          "da": 0,
-          "durata": 1.5,
+          "da": "card_played#1-0.3",
+          "riserva": 1.4,
+          "durata": 2.6,
           "testo": {
-            "it": "Lui mi copre le spalle…",
-            "en": "He's got my back…"
+            "it": "Gioco in squadra…",
+            "en": "I play for the team…"
           }
         },
         {
           "ripresa": "p",
-          "da": "card_played#1-0.1",
-          "riserva": 2.5,
-          "durata": 1.4,
-          "transizione": "scorri",
+          "da": "card_played#3-0.3",
+          "riserva": 4.7,
+          "durata": 2.0,
+          "transizione": "dissolvenza",
           "testo": {
-            "it": "…mi difende…",
-            "en": "…he defends me…"
+            "it": "…proteggo tutti…",
+            "en": "…I protect everyone…"
           }
         },
         {
           "ripresa": "p",
-          "da": "player_corrupted+0.35",
-          "riserva": 6.9,
-          "durata": 1.6,
-          "transizione": "flash",
-          "scossa": true,
+          "da": "player_corrupted+0.05",
+          "riserva": 6.15,
+          "durata": 2.2,
+          "transizione": "dissolvenza",
           "testo": {
             "it": "…POI QUESTO.",
             "en": "…THEN THIS."
           },
           "stile": "grande",
-          "pos": "alto"
+          "pos": "alto",
+          "sotto": {
+            "it": "Troppo Trauma = Villain",
+            "en": "Too much Trauma = Villain"
+          }
         },
         {
           "ripresa": "p",
-          "da": "player_corrupted+2.0",
-          "riserva": 8.5,
-          "durata": 1.6,
+          "da": "card_played#4-0.1",
+          "riserva": 8.3,
+          "durata": 3.0,
+          "transizione": "dissolvenza",
           "testo": {
-            "it": "Troppo *Trauma* = Villain",
-            "en": "Too much *Trauma* = Villain"
+            "it": "Ora attacco *loro*.",
+            "en": "Now I attack *them*."
           }
         }
       ],
       "chiusura": {
         "sopra": {
-          "it": "Ti fidi dei tuoi amici?",
-          "en": "Do you trust your friends?"
+          "it": "Resisteresti al Trauma?",
+          "en": "Could you resist the Trauma?"
         },
         "invito": {
           "it": "GIOCA GRATIS",
@@ -677,8 +659,8 @@
         }
       },
       "didascalia": {
-        "it": "In Monomythos chi accumula troppo Trauma passa dalla parte del Villain. Cooperativo… finché dura.",
-        "en": "In Monomythos, too much Trauma turns you into the Villain. Co-op… while it lasts."
+        "it": "In Monomythos se accumuli troppo Trauma diventi il Villain e giochi contro la tua squadra. Cooperativo… finché dura.",
+        "en": "In Monomythos, too much Trauma turns you into the Villain and you play against your own team. Co-op… while it lasts."
       },
       "hashtag": [
         "traditore",
