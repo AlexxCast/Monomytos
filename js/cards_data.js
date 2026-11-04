@@ -90,7 +90,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Saccheggio: chi viene colpito scarta anche 1 carta a caso.",
       "cosmico": "Carestia: nei round pari non si pesca la carta di inizio turno.",
       "logica": "Tattico → bersaglia chi ha più carte in mano",
-      "img": "assets/cards/lassediodeipredonidellerovine.webp",
+      "img": "assets/cards/gen/t_lassediodeipredonidellerovine.webp",
       "layout_type": "red"
     },
     {
@@ -251,7 +251,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Erosione: a ogni Fase Nemici, Resistenza effettiva di tutti -1 (max -2).",
       "cosmico": "Rovina Totale: l'Erosione arriva fino a -3.",
       "logica": "Aggressivo → attacco pesante con Travolgere sul bersaglio con più Vita",
-      "img": "assets/cards/ilcolossodirovina.webp",
+      "img": "assets/cards/gen/t_ilcolossodirovina.webp",
       "layout_type": "red"
     },
     {
@@ -427,7 +427,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "State Freezing: puoi dichiarare il Draw Rate Extra massimo (4 carte) senza accumulare mai Trauma da inazione o sforzo.",
-      "img": "",
+      "img": "assets/cards/gen/c_tutafotonica.webp",
       "layout_type": "silver"
     },
     {
@@ -442,7 +442,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Azione gratuita 1/turno: Pesca 1 carta extra (senza rischiare Decking Out) OPPURE alloca 1 punto Agilità su una Minaccia.",
-      "img": "assets/cards/scattoquantistico.webp",
+      "img": "assets/cards/gen/c_scattoquantistico.webp",
       "layout_type": "silver"
     },
     {
@@ -457,7 +457,7 @@ window.MONOMYTHOS_DATA = {
       "end": 3,
       "vita": 28,
       "testo": "—",
-      "img": "",
+      "img": "assets/cards/gen/c_sentinelladifrontiera.webp",
       "layout_type": "silver"
     },
     {
@@ -472,7 +472,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Tag Autorizzati: Difesa, Abilità Tech, Attacco Fisico",
-      "img": "",
+      "img": "assets/cards/gen/c_sentinellaadattiva.webp",
       "layout_type": "silver"
     },
     {
@@ -487,7 +487,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "State Freezing: ogni carta Difesa scartata in Opzione B vale +1 Valore extra.",
-      "img": "",
+      "img": "assets/cards/gen/c_scudomodulare.webp",
       "layout_type": "silver"
     },
     {
@@ -502,7 +502,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Azione gratuita 1/turno: +1 Resistenza effettiva per il Travolgere questo turno OPPURE cura 1 HP a te stessa.",
-      "img": "",
+      "img": "assets/cards/gen/c_presidio.webp",
       "layout_type": "silver"
     },
     {
@@ -517,7 +517,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 24,
       "testo": "—",
-      "img": "assets/cards/lamasenzacasa.webp",
+      "img": "assets/cards/gen/c_lamasenzacasa.webp",
       "layout_type": "silver"
     },
     {
@@ -532,7 +532,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Tag Autorizzati: Attacco Fisico, Difesa, Untagged",
-      "img": "",
+      "img": "assets/cards/gen/c_duellanteitinerante.webp",
       "layout_type": "silver"
     },
     {
@@ -547,7 +547,7 @@ window.MONOMYTHOS_DATA = {
       "end": 2,
       "vita": 0,
       "testo": "State Freezing: il primo Attacco Fisico giocato ogni turno infligge +1 danno.",
-      "img": "assets/cards/foderoleggero.webp",
+      "img": "assets/cards/gen/c_foderoleggero.webp",
       "layout_type": "silver"
     },
     {
@@ -562,7 +562,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Azione gratuita 1/turno: Infliggi 1 danno OPPURE scambia 1 carta dalla mano con una dagli scarti.",
-      "img": "assets/cards/affondocalcolato.webp",
+      "img": "assets/cards/gen/c_affondocalcolato.webp",
       "layout_type": "silver"
     },
     {
@@ -577,7 +577,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 32,
       "testo": "—",
-      "img": "",
+      "img": "assets/cards/gen/c_sopravvissutoallafonderia.webp",
       "layout_type": "silver"
     },
     {
@@ -592,7 +592,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Tag Autorizzati: Attacco Fisico, Gadget, Difesa",
-      "img": "assets/cards/devastatore.webp",
+      "img": "assets/cards/gen/c_devastatore.webp",
       "layout_type": "silver"
     },
     {
@@ -607,7 +607,7 @@ window.MONOMYTHOS_DATA = {
       "end": 4,
       "vita": 0,
       "testo": "State Freezing: una volta in Stato Villain, ogni VP generato dà anche +1 danno permanente sul prossimo attacco.",
-      "img": "",
+      "img": "assets/cards/gen/c_piastrerubate.webp",
       "layout_type": "silver"
     },
     {
@@ -622,7 +622,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Azione gratuita 1/turno: Infliggi 1 danno fisico ad area OPPURE +1 punto Potenza su una Minaccia.",
-      "img": "",
+      "img": "assets/cards/gen/c_schiacciata.webp",
       "layout_type": "silver"
     },
     {
@@ -637,7 +637,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 24,
       "testo": "—",
-      "img": "",
+      "img": "assets/cards/gen/c_genioespulsodallaboratorio.webp",
       "layout_type": "silver"
     },
     {
@@ -652,7 +652,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Tag Autorizzati: Abilità Tech, Gadget, Untagged",
-      "img": "",
+      "img": "assets/cards/gen/c_ingegneretattico.webp",
       "layout_type": "silver"
     },
     {
@@ -820,7 +820,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Attacco Fisico, Abilità Tech, Gadget",
       "origine": "Ex-Geniere",
       "costume": "Armatura Exo-K",
-      "img": "assets/cards/ironaegis.webp"
+      "img": "assets/cards/gen/h_ironaegis.webp"
     },
     "Neon Phantom": {
       "name": "Neon Phantom",
@@ -835,7 +835,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Attacco Fisico, Abilità Poteri, Burst",
       "origine": "Cavia Alpha",
       "costume": "Tuta Fotonica",
-      "img": "assets/cards/neonphantom.webp"
+      "img": "assets/cards/gen/h_neonphantom.webp"
     },
     "Guardiana di Confine": {
       "name": "Guardiana di Confine",
@@ -880,7 +880,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Attacco Fisico, Gadget, Difesa",
       "origine": "Sopravvissuto alla Fonderia",
       "costume": "Piastre Rubate",
-      "img": "assets/cards/titanoacciaio.webp"
+      "img": "assets/cards/gen/h_titanodacciaio.webp"
     },
     "Architetto Ombra": {
       "name": "Architetto Ombra",
@@ -925,7 +925,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Attacco Fisico, Burst, Difesa",
       "origine": "Espulsa dalla Gilda",
       "costume": "Lama Spezzata",
-      "img": "assets/cards/duellantespezzato.webp"
+      "img": "assets/cards/gen/h_duellantespezzato.webp"
     }
   },
   "action_cards": {
@@ -7141,22 +7141,22 @@ window.MONOMYTHOS_DATA = {
     ]
   },
   "card_img_map": {
-    "ironaegis": "assets/cards/ironaegis.webp",
-    "Iron Aegis": "assets/cards/ironaegis.webp",
-    "neonphantom": "assets/cards/neonphantom.webp",
-    "Neon Phantom": "assets/cards/neonphantom.webp",
+    "ironaegis": "assets/cards/gen/h_ironaegis.webp",
+    "Iron Aegis": "assets/cards/gen/h_ironaegis.webp",
+    "neonphantom": "assets/cards/gen/h_neonphantom.webp",
+    "Neon Phantom": "assets/cards/gen/h_neonphantom.webp",
     "guardianadiconfine": "assets/cards/gen/h_guardianadiconfine.webp",
     "Guardiana di Confine": "assets/cards/gen/h_guardianadiconfine.webp",
     "lamaerrante": "assets/cards/gen/h_lamaerrante.webp",
     "Lama Errante": "assets/cards/gen/h_lamaerrante.webp",
-    "titanodacciaio": "assets/cards/titanoacciaio.webp",
-    "Titano d'Acciaio": "assets/cards/titanoacciaio.webp",
+    "titanodacciaio": "assets/cards/gen/h_titanodacciaio.webp",
+    "Titano d'Acciaio": "assets/cards/gen/h_titanodacciaio.webp",
     "architettoombra": "assets/cards/gen/h_architettoombra.webp",
     "Architetto Ombra": "assets/cards/gen/h_architettoombra.webp",
     "sussurrodellabisso": "assets/cards/gen/h_sussurrodellabisso.webp",
     "Sussurro dell'Abisso": "assets/cards/gen/h_sussurrodellabisso.webp",
-    "duellantespezzato": "assets/cards/duellantespezzato.webp",
-    "Duellante Spezzato": "assets/cards/duellantespezzato.webp",
+    "duellantespezzato": "assets/cards/gen/h_duellantespezzato.webp",
+    "Duellante Spezzato": "assets/cards/gen/h_duellantespezzato.webp",
     "carta minaccia retro": "assets/cards/cartaminacciaretro.webp",
     "cartaminacciaretro": "assets/cards/cartaminacciaretro.webp",
     "carta threat retro": "assets/cards/cartathreatretro.webp",
@@ -7255,8 +7255,8 @@ window.MONOMYTHOS_DATA = {
     "cultistidelvelo": "assets/cards/gen/t_cultistidelvelo.webp",
     "IL CAMPIONE IMBATTUTO": "assets/cards/ilcampioneimbattuto.webp",
     "ilcampioneimbattuto": "assets/cards/gen/t_ilcampioneimbattuto.webp",
-    "Il Colosso di Rovina": "assets/cards/ilcolossodirovina.webp",
-    "ilcolossodirovina": "assets/cards/ilcolossodirovina.webp",
+    "Il Colosso di Rovina": "assets/cards/gen/t_ilcolossodirovina.webp",
+    "ilcolossodirovina": "assets/cards/gen/t_ilcolossodirovina.webp",
     "Il Mietitore dell'Astro Oscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
     "ilmietitoredellastrooscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
     "IMBOSCATA SULLA FALESIA": "assets/cards/imboscatasullafalesia.webp",
@@ -7264,7 +7264,7 @@ window.MONOMYTHOS_DATA = {
     "Incursione dei Droni Cinetici": "assets/cards/gen/t_incursionedeidronicinetici.webp",
     "incursionedeidronicinetici": "assets/cards/gen/t_incursionedeidronicinetici.webp",
     "L'ASSEDIO DEI PREDONI DELLE ROVINE": "assets/cards/lassediodeipredonidellerovine.webp",
-    "lassediodeipredonidellerovine": "assets/cards/lassediodeipredonidellerovine.webp",
+    "lassediodeipredonidellerovine": "assets/cards/gen/t_lassediodeipredonidellerovine.webp",
     "L'Intelligenza Rogue": "assets/cards/gen/t_lintelligenzarogue.webp",
     "lintelligenzarogue": "assets/cards/gen/t_lintelligenzarogue.webp",
     "Rivolta della Fonderia": "assets/cards/gen/t_rivoltadellafonderia.webp",
@@ -7529,6 +7529,7 @@ window.MONOMYTHOS_DATA = {
     "Il Custode d'Acciaio": "assets/cards/gen/t_ilcustodedacciaio.webp",
     "ilcustodedacciaio": "assets/cards/gen/t_ilcustodedacciaio.webp",
     "L'Eco Senza Nome": "assets/cards/gen/t_lecosenzanome.webp",
-    "lecosenzanome": "assets/cards/gen/t_lecosenzanome.webp"
+    "lecosenzanome": "assets/cards/gen/t_lecosenzanome.webp",
+    "L'Assedio dei Predoni delle Rovine": "assets/cards/gen/t_lassediodeipredonidellerovine.webp"
   }
 };
