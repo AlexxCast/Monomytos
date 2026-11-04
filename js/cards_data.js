@@ -21,7 +21,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Interferenza: i sacrifici sul Primario valgono 1 in meno (min 1).",
       "cosmico": "Zona Morta Digitale: a fine round 1 danno diretto a tutti, bypassa la Parata.",
       "logica": "Tattico → bersaglia chi ha speso più carte",
-      "img": "assets/cards/blackoutostile.webp",
+      "img": "assets/cards/gen/t_blackoutostile.webp",
       "layout_type": "red"
     },
     {
@@ -7249,8 +7249,8 @@ window.MONOMYTHOS_DATA = {
     "scattocinetico": "assets/cards/gen/neonphantom_12.webp",
     "Sovraccarico Neurale": "assets/cards/gen/neonphantom_10.webp",
     "sovraccariconeurale": "assets/cards/gen/neonphantom_10.webp",
-    "Blackout Ostile": "assets/cards/blackoutostile.webp",
-    "blackoutostile": "assets/cards/blackoutostile.webp",
+    "Blackout Ostile": "assets/cards/gen/t_blackoutostile.webp",
+    "blackoutostile": "assets/cards/gen/t_blackoutostile.webp",
     "CULTISTI DEL VELO": "assets/cards/cultistidelvelo.webp",
     "cultistidelvelo": "assets/cards/cultistidelvelo.webp",
     "IL CAMPIONE IMBATTUTO": "assets/cards/ilcampioneimbattuto.webp",
