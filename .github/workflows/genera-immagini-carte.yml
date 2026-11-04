@@ -9,8 +9,9 @@ on:
       modello:
         description: 'Modello Cloudflare (vuoto = FLUX.2 klein)'
         default: ''
-  schedule:
-    - cron: '15 0 * * *'   # subito dopo il rinnovo della quota Cloudflare (00:00 UTC)
+  # Turno notturno spento il 2026-11-04: le illustrazioni ora si fanno con Gemini (vedi strumenti/originali_gemini)
+  # schedule:
+  #   - cron: '15 0 * * *'   # subito dopo il rinnovo della quota Cloudflare (00:00 UTC)
 
 permissions:
   contents: write
