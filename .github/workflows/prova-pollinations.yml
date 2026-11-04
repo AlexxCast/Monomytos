@@ -1,5 +1,7 @@
 name: Prova Pollinations
 on: workflow_dispatch
+permissions:
+  contents: write
 jobs:
   prova:
     runs-on: ubuntu-latest
@@ -9,5 +11,12 @@ jobs:
         with: { python-version: '3.12' }
       - run: pip install pillow
       - run: python strumenti/prova_pollinations.py
-      - uses: actions/upload-artifact@v4
-        with: { name: prova, path: prova/ }
+      - name: Salva le prove nel ramo prova-immagini
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan prova-immagini
+          git rm -rq --cached .
+          git add prova/
+          git commit -qm "Prove Pollinations"
+          git push -f origin prova-immagini
