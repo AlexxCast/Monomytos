@@ -31,6 +31,16 @@
 
     avvia() {
       if (this.attivo || !window.Storia) return false;
+      // prima si sceglie la lingua, così il tutorial si legge subito nella propria lingua
+      const L = window.I18N;
+      if (L && !L.scelta && !navigator.webdriver && document.getElementById('sceltaLingua')) {
+        if (!this._attesaLingua) this._attesaLingua = setInterval(() => {
+          if (!L.scelta) return;
+          clearInterval(this._attesaLingua); this._attesaLingua = null;
+          if (document.getElementById('sceltaLingua')) setTimeout(() => this.avvia(), 300); else this.avvia();
+        }, 200);
+        return true;
+      }
       this.attivo = true;
       this.inPartita = true;
       this.visti = {};
