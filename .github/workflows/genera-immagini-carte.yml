@@ -6,6 +6,9 @@ on:
       max:
         description: 'Immagini massime in questa esecuzione'
         default: '150'
+      modello:
+        description: 'Modello Cloudflare (vuoto = FLUX.2 klein)'
+        default: ''
   schedule:
     - cron: '15 0 * * *'   # subito dopo il rinnovo della quota Cloudflare (00:00 UTC)
 
@@ -29,6 +32,7 @@ jobs:
         env:
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_MODEL: ${{ github.event.inputs.modello || '@cf/black-forest-labs/flux-2-klein-4b' }}
         run: python strumenti/genera_immagini_carte.py --max "${{ github.event.inputs.max || '150' }}"
       - name: Salva nel repo
         if: always()
