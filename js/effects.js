@@ -322,9 +322,10 @@ class EffectRegistryClass {
     // 20. REVIVE (PROTOCOLLO DEFIBRILLAZIONE)
     this.register('revive', (engine, ctx, fx) => {
       const { source } = ctx;
-      let targetPlayer = ctx.targetEntity?.entity;
-      if (!targetPlayer) {
-        targetPlayer = engine.state.players.find(p => p.isDead || p.vita <= 0);
+      // Si rianima solo un giocatore (mai un nemico o la Minaccia), di preferenza quello caduto
+      let targetPlayer = ctx.targetEntity?.type === 'player' ? ctx.targetEntity.entity : null;
+      if (!targetPlayer || !(targetPlayer.isDead || targetPlayer.vita <= 0)) {
+        targetPlayer = engine.state.players.find(p => p.isDead || p.vita <= 0) || null;
       }
       if (targetPlayer) {
         targetPlayer.isDead = false;
