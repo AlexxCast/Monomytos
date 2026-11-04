@@ -1421,3 +1421,11 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .threat-silver-frame-wrap .threat-vignette-bubble { width: 70% !important; padding: 2px 4px !important; }
 .threat-silver-frame-wrap .threat-card-title { padding: 0 4%; box-sizing: border-box; }
 .threat-silver-frame-wrap:not(.is-printed) .threat-card-title { color: #111116 !important; text-shadow: none !important; }
+
+/* Barra di scorrimento su PC: sottile e in tema (sul telefono non si vede) */
+* { scrollbar-width: thin; scrollbar-color: rgba(255,214,90,.55) transparent; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,214,90,.5); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,214,90,.85); background-clip: padding-box; }
+::-webkit-scrollbar-button { display: none; height: 0; width: 0; }

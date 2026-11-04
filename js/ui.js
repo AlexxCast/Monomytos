@@ -1538,11 +1538,29 @@ class UIController {
   }
 
   openBasePowerSheet() {
-    const localPlayer = window.GameEngine.state.players[0];
+    const st = window.GameEngine.state;
+    const localPlayer = st.players.find(p => p.id === this.idLocale()) || st.players[0];
     if (localPlayer.pbUsedThisTurn) return this.showToast('Potere Base già utilizzato in questo turno!');
 
     document.getElementById('pbSheetTitle').textContent = localPlayer.pbName || 'Potere Base';
-    document.getElementById('pbSheetDesc').textContent = localPlayer.pbDesc || 'Attiva un effetto speciale';
+    document.getElementById('pbSheetDesc').textContent = 'Gratis, una volta per turno. Scegli uno dei due effetti:';
+    const box = document.getElementById('pbSheetOptions');
+    if (box) {
+      const colori = ['background:var(--oro); color:#120e05;', 'background:var(--ciano); color:#051317;'];
+      box.innerHTML = '';
+      window.GameEngine.getBasePowerOptions(localPlayer).forEach((o, i) => {
+        const usabile = !o.ok || o.ok(localPlayer);
+        const el = document.createElement('div');
+        el.className = 'action-opt-card' + (usabile ? '' : ' disabled');
+        if (!usabile) el.style.opacity = '.45';
+        el.innerHTML = `<div><h4></h4><p></p></div><div class="cost-badge" style="${colori[i % 2]}"></div>`;
+        el.querySelector('h4').textContent = o.titolo;
+        el.querySelector('p').textContent = o.desc + (usabile ? '' : ' (ora non disponibile)');
+        el.querySelector('.cost-badge').textContent = o.badge;
+        el.onclick = () => this.confirmBasePower(i);
+        box.appendChild(el);
+      });
+    }
     this.showModal('modalBasePowerSheet');
   }
 
