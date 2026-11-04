@@ -297,7 +297,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Falce Cosmica: il primo colpo di ogni round ha +1 Forza.",
       "cosmico": "Mutazione del Tabellone: la Parata Dinamica converte a 2:1 (ogni carta assorbe metà Valore, min 1).",
       "logica": "Aggressivo → doppio colpo ad area con Travolgere",
-      "img": "assets/cards/ilmietitoredellastrooscuro.webp",
+      "img": "assets/cards/gen/t_ilmietitoredellastrooscuro.webp",
       "layout_type": "red"
     },
     {
@@ -7257,8 +7257,8 @@ window.MONOMYTHOS_DATA = {
     "ilcampioneimbattuto": "assets/cards/gen/t_ilcampioneimbattuto.webp",
     "Il Colosso di Rovina": "assets/cards/gen/t_ilcolossodirovina.webp",
     "ilcolossodirovina": "assets/cards/gen/t_ilcolossodirovina.webp",
-    "Il Mietitore dell'Astro Oscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
-    "ilmietitoredellastrooscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
+    "Il Mietitore dell'Astro Oscuro": "assets/cards/gen/t_ilmietitoredellastrooscuro.webp",
+    "ilmietitoredellastrooscuro": "assets/cards/gen/t_ilmietitoredellastrooscuro.webp",
     "IMBOSCATA SULLA FALESIA": "assets/cards/imboscatasullafalesia.webp",
     "imboscatasullafalesia": "assets/cards/gen/t_imboscatasullafalesia.webp",
     "Incursione dei Droni Cinetici": "assets/cards/gen/t_incursionedeidronicinetici.webp",
