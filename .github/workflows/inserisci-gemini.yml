@@ -25,13 +25,13 @@ jobs:
           python-version: '3.12'
       - run: pip install pillow
       - run: python strumenti/gemini/inserisci.py
-      - name: Aggiorna la cache dell'app e salva
+      # il service worker prende prima la rete: non serve cambiare la cache per vedere le immagini nuove
+      - name: Salva
         run: |
-          n=$(grep -o "monomythos-v[0-9]*" sw.js | head -1 | tr -dc 0-9); sed -i "s/monomythos-v$n/monomythos-v$((n+1))/" sw.js
           git config user.name "monomythos-bot"
           git config user.email "monomythos-bot@users.noreply.github.com"
-          git add -A assets/cards/gen js/cards_data.js js/cards_data.json strumenti sw.js
+          git add -A assets/cards/gen js/cards_data.js js/cards_data.json strumenti
           if git diff --cached --quiet; then echo "Niente di nuovo"; exit 0; fi
           git commit -m "Illustrazioni Gemini inserite nel gioco"
-          for i in 1 2 3 4 5; do git pull --rebase origin main && git push origin HEAD:main && exit 0; sleep $((i * 10)); done
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0; sleep $((i * 10)); done
           exit 1
