@@ -278,6 +278,8 @@ def call_cloudflare(prompt, seed, ref_path=None):
             msg = e.read().decode(errors='replace')[:300]
             if e.code == 429 or 'neuron' in msg.lower() or 'daily free allocation' in msg.lower():
                 raise QuotaExceeded(msg)
+            if 'flagged' in msg.lower():
+                raise Segnalata(msg)
             if 400 <= e.code < 500:
                 # Errore nella richiesta o nelle credenziali: riprovare non serve
                 raise RuntimeError(f'HTTP {e.code}: {msg}')
@@ -290,6 +292,11 @@ def call_cloudflare(prompt, seed, ref_path=None):
 
 
 class QuotaExceeded(Exception):
+    pass
+
+
+class Segnalata(RuntimeError):
+    # il filtro di Cloudflare ha scartato l'immagine (falso allarme frequente): si riprova con un altro seme
     pass
 
 
@@ -381,7 +388,20 @@ def main():
             continue
         try:
             ref = os.path.join(REF_DIR, f"{c['ref']}.png") if is_extra else style_ref_for(c)
-            img = call_cloudflare(prompt, seed_for(c['id']), ref if ref and os.path.exists(ref) else None)
+            ref = ref if ref and os.path.exists(ref) else None
+            img = None
+            for tentativo in range(3):
+                try:
+                    # al terzo tentativo senza immagine di riferimento, che a volte fa scattare il filtro
+                    img = call_cloudflare(prompt, seed_for(c['id']) + tentativo * 7919, ref if tentativo < 2 else None)
+                    break
+                except Segnalata as e:
+                    print(f"Segnalata dal filtro {c['id']} (tentativo {tentativo + 1}/3)")
+                    if tentativo == 2:
+                        raise
+        except Segnalata as e:
+            print(f"Saltata {c['id']}: il filtro di Cloudflare la rifiuta, va cambiata la scena")
+            continue
         except QuotaExceeded as e:
             print(f'Quota gratuita di oggi esaurita, riprendo domani. ({e})')
             break
