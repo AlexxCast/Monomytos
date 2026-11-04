@@ -18,4 +18,4 @@ jobs:
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add strumenti/prova_immagini
           git commit -qm "Prove immagini Pollinations"
-          git pull -q --rebase && git push -q
+          for i in 1 2 3 4 5; do git pull -q --rebase && git push -q && break; sleep $((i*20)); done
