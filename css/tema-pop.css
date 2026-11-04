@@ -1368,7 +1368,7 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .played-card-item .monomyth-card .card-vignette-tag { display: none; }
 
 /* Carta Minaccia disegnata (immagine senza testi): il livello sta nel cerchio in basso a sinistra
-   della cornice e si ripete in quello a destra; il nome va a capo */
+   della cornice, in quello a destra il teschio del retro Minaccia; il nome va a capo */
 .threat-silver-frame-wrap { container-type: inline-size; }
 .threat-silver-frame-wrap .threat-card-lvl-circle {
   left: 11.73%; top: 91.89%; right: auto; bottom: auto; transform: translate(-50%, -50%);
@@ -1377,9 +1377,8 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 }
 .threat-silver-frame-wrap:not(.is-printed)::after {
   content: ''; position: absolute; left: 88%; top: 91.89%; transform: translate(-50%, -50%);
-  width: 12.8%; height: 8.6%; z-index: 4; pointer-events: none;
-  content: attr(data-liv); display: flex; align-items: center; justify-content: center;
-  font-family: 'JetBrains Mono', 'Cinzel', monospace; font-weight: 900; font-size: clamp(8px, 10.5cqi, 20px); color: #111116;
+  width: 12.6%; aspect-ratio: 1; z-index: 4; pointer-events: none; border-radius: 50%;
+  background: url('../assets/icons/teschio_minaccia.webp') center / cover no-repeat;
 }
 .threat-silver-frame-wrap .threat-card-title {
   white-space: normal; text-overflow: clip; line-height: 1.1;
@@ -1420,3 +1419,4 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .monomyth-card .card-vignette-title, .monomyth-card .card-vignette-tag { padding: 0 4%; box-sizing: border-box; }
 .threat-silver-frame-wrap .threat-vignette-bubble { width: 70% !important; padding: 2px 4px !important; }
 .threat-silver-frame-wrap .threat-card-title { padding: 0 4%; box-sizing: border-box; }
+.threat-silver-frame-wrap:not(.is-printed) .threat-card-title { color: #111116 !important; text-shadow: none !important; }
