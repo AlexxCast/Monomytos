@@ -653,6 +653,9 @@ class UIController {
     if (thLvlBadge) thLvlBadge.textContent = `Liv. ${th.livello || 1}`;
     const thCircle = document.getElementById('threatLvlCircle');
     if (thCircle) thCircle.textContent = th.livello || 1;
+    // il livello si ripete anche nel cerchio in basso a destra della cornice
+    const thCardLiv = document.getElementById('threatCentralCard');
+    if (thCardLiv) thCardLiv.dataset.liv = th.livello || 1;
     const thEffTitle = document.getElementById('threatEffectTitle');
     if (thEffTitle) thEffTitle.textContent = th.isBoss ? 'Tratto Boss Corrotto' : 'Tratto Calamità';
     const thEffText = document.getElementById('threatEffectText');
