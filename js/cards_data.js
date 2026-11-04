@@ -367,7 +367,7 @@ window.MONOMYTHOS_DATA = {
       "end": 2,
       "vita": 0,
       "testo": "State Freezing: +2 slot Forza temporanei ogni turno; i danni fisici ignorano le resistenze dei nemici.",
-      "img": "assets/cards/armaturaexok.webp",
+      "img": "assets/cards/gen/c_armaturaexok.webp",
       "layout_type": "silver"
     },
     {
