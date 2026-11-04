@@ -113,7 +113,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Terreno sfavorevole: gli scudi valgono la metà (per difetto).",
       "cosmico": "Buio Totale: gli scudi non superano mai 2.",
       "logica": "Tattico → bersaglia chi ha meno carte in mano",
-      "img": "assets/cards/imboscatasullafalesia.webp",
+      "img": "assets/cards/gen/t_imboscatasullafalesia.webp",
       "layout_type": "red"
     },
     {
@@ -7260,7 +7260,7 @@ window.MONOMYTHOS_DATA = {
     "Il Mietitore dell'Astro Oscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
     "ilmietitoredellastrooscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
     "IMBOSCATA SULLA FALESIA": "assets/cards/imboscatasullafalesia.webp",
-    "imboscatasullafalesia": "assets/cards/imboscatasullafalesia.webp",
+    "imboscatasullafalesia": "assets/cards/gen/t_imboscatasullafalesia.webp",
     "Incursione dei Droni Cinetici": "assets/cards/gen/t_incursionedeidronicinetici.webp",
     "incursionedeidronicinetici": "assets/cards/gen/t_incursionedeidronicinetici.webp",
     "L'ASSEDIO DEI PREDONI DELLE ROVINE": "assets/cards/lassediodeipredonidellerovine.webp",
@@ -7530,6 +7530,7 @@ window.MONOMYTHOS_DATA = {
     "ilcustodedacciaio": "assets/cards/gen/t_ilcustodedacciaio.webp",
     "L'Eco Senza Nome": "assets/cards/gen/t_lecosenzanome.webp",
     "lecosenzanome": "assets/cards/gen/t_lecosenzanome.webp",
-    "L'Assedio dei Predoni delle Rovine": "assets/cards/gen/t_lassediodeipredonidellerovine.webp"
+    "L'Assedio dei Predoni delle Rovine": "assets/cards/gen/t_lassediodeipredonidellerovine.webp",
+    "Imboscata sulla Falesia": "assets/cards/gen/t_imboscatasullafalesia.webp"
   }
 };
