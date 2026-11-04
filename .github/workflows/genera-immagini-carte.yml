@@ -5,7 +5,7 @@ on:
     inputs:
       max:
         description: 'Immagini massime in questa esecuzione'
-        default: '50'
+        default: '45'
       modello:
         description: 'Modello Cloudflare (vuoto = FLUX.2 klein)'
         default: ''
@@ -43,7 +43,8 @@ jobs:
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_MODEL: ${{ github.event.inputs.modello || '@cf/black-forest-labs/flux-2-klein-4b' }}
-        run: python strumenti/genera_immagini_carte.py --max "${{ github.event.inputs.max || '50' }}"
+        # 3 versioni per carta (circa 15 carte a notte): nessuna va in gioco finché non viene scelta la migliore
+        run: python strumenti/genera_immagini_carte.py --varianti 3 --max "${{ github.event.inputs.max || '45' }}"
       - name: Salva nel repo
         if: always()
         run: |
@@ -51,7 +52,7 @@ jobs:
           git config user.email "monomythos-bot@users.noreply.github.com"
           git add assets/cards/gen js/cards_data.js js/cards_data.json strumenti/anteprima_sfondi.html strumenti/sfondi_versioni.json || true
           if git diff --cached --quiet; then echo "Niente di nuovo"; exit 0; fi
-          git commit -m "Nuovi sfondi carte generati"
+          git commit -m "Nuove versioni delle immagini carte da scegliere"
           # Nel frattempo qualcuno può aver aggiornato main: riallinea e riprova
           for i in 1 2 3 4; do
             git pull --rebase -X theirs origin main && git push origin HEAD:main && exit 0

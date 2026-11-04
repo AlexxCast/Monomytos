@@ -356,13 +356,90 @@ def write_preview(data):
     open(os.path.join(ROOT, 'strumenti', 'anteprima_sfondi.html'), 'w', encoding='utf-8').write(html)
 
 
+VAR_DIR = os.path.join(OUT_DIR, 'varianti')
+APPROVATE_PATH = os.path.join(ROOT, 'strumenti', 'immagini_approvate.json')
+
+
+def load_json(path, default):
+    if os.path.exists(path):
+        return json.load(open(path, encoding='utf-8'))
+    return default
+
+
+def tutte_le_carte(data):
+    # prima Minacce, eroi e carte creazione (le più in vista), poi le carte Azione
+    out = extra_items(data)
+    for hero, cards in data['action_cards'].items():
+        out.extend(cards)
+    return out
+
+
+def genera_immagine(c, seed):
+    is_extra = 'kind' in c
+    prompt = build_prompt_extra(c) if is_extra else build_prompt(c)
+    ref = os.path.join(REF_DIR, f"{c['ref']}.png") if is_extra else style_ref_for(c)
+    ref = ref if ref and os.path.exists(ref) else None
+    for tentativo in range(3):
+        try:
+            return call_cloudflare(prompt, seed + tentativo * 104729, ref if tentativo < 2 else None)
+        except Segnalata:
+            print(f"Segnalata dal filtro {c['id']} (tentativo {tentativo + 1}/3)")
+            if tentativo == 2:
+                raise
+
+
+def main_varianti(args):
+    """Per ogni carta non ancora approvata crea N versioni da confrontare: nessuna va in gioco da sola."""
+    _, data, _ = load_data()
+    os.makedirs(VAR_DIR, exist_ok=True)
+    approvate = set(load_json(APPROVATE_PATH, []))
+    in_attesa = {f.split('_v')[0] for f in os.listdir(VAR_DIR) if f.endswith('.webp')}
+    todo = [c for c in tutte_le_carte(data)
+            if c['id'] not in approvate and c['id'] not in in_attesa and (not args.solo or c['id'] in args.solo)]
+    n_carte = max(1, args.max // args.varianti)
+    print(f'Da approvare: {len(todo)} carte. Stanotte: {min(n_carte, len(todo))} carte x {args.varianti} versioni')
+    fatte = 0
+    errori = 0
+    for c in todo[:n_carte]:
+        nome = c.get('nome')
+        salvate = 0
+        for v in range(1, args.varianti + 1):
+            try:
+                img = genera_immagine(c, seed_for(c['id']) + v * 7919)
+            except Segnalata:
+                print(f"Saltata versione {v} di {c['id']}: rifiutata dal filtro")
+                continue
+            except QuotaExceeded as e:
+                print(f'Quota gratuita di oggi esaurita, riprendo domani. ({e})')
+                print(f'Fatto: {fatte} versioni nuove.')
+                return
+            except RuntimeError as e:
+                print(f"Errore su {c['id']}: {e}")
+                errori += 1
+                if errori >= 3:
+                    print('Tre errori: mi fermo.')
+                    print(f'Fatto: {fatte} versioni nuove.')
+                    sys.exit(1)
+                continue
+            to_card_webp(img, os.path.join(VAR_DIR, f"{c['id']}_v{v}.webp"))
+            salvate += 1
+            fatte += 1
+        print(f"OK {c['id']} {nome}: {salvate} versioni")
+    print(f'Fatto: {fatte} versioni nuove.')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--max', type=int, default=150, help='immagini massime per esecuzione (quota gratuita ~150/giorno)')
     ap.add_argument('--solo', nargs='*', help='id delle carte da generare (es. ironaegis_1)')
     ap.add_argument('--rifai', action='store_true', help='rigenera anche le carte già fatte')
     ap.add_argument('--prova', action='store_true', help='mostra i prompt senza chiamare il generatore')
+    ap.add_argument('--varianti', type=int, default=0,
+                    help='crea N versioni per carta in assets/cards/gen/varianti/ senza metterle in gioco: '
+                         'poi si sceglie la migliore con strumenti/scegli_variante.py')
     args = ap.parse_args()
+    if args.varianti:
+        return main_varianti(args)
 
     prefix, data, suffix = load_data()
     os.makedirs(OUT_DIR, exist_ok=True)
