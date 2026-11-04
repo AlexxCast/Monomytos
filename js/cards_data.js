@@ -44,7 +44,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Regole d'Onore: massimo 1 Sacrificio Tattico per eroe per round.",
       "cosmico": "Arena Assoluta: in Parata Dinamica si possono scartare al massimo 2 carte per colpo.",
       "logica": "Tattico → bersaglia chi ha meno % Vita",
-      "img": "assets/cards/torneoclandestino.webp",
+      "img": "assets/cards/gen/t_torneoclandestino.webp",
       "layout_type": "red"
     },
     {
@@ -67,7 +67,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Sciame: finché tutti i droni sono vivi, +1 Forza ai loro colpi.",
       "cosmico": "Zona Morta Radioattiva: 1 danno diretto a tutti a fine round (bypassa Parata) e Resistenza effettiva -1.",
       "logica": "Tattico → bersaglia chi ha meno carte in mano",
-      "img": "assets/cards/incursionedeidronicinetici.webp",
+      "img": "assets/cards/gen/t_incursionedeidronicinetici.webp",
       "layout_type": "red"
     },
     {
@@ -136,7 +136,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Tentazione: ogni Carta Oscura giocata cura tutti i Cultisti di 2.",
       "cosmico": "Velo Squarciato: i Malus TRM delle Carte Oscure aumentano di 1.",
       "logica": "Tattico → bersaglia chi ha più VP",
-      "img": "assets/cards/cultistidelvelo.webp",
+      "img": "assets/cards/gen/t_cultistidelvelo.webp",
       "layout_type": "red"
     },
     {
@@ -159,7 +159,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Fiamme libere: la detonazione del Timer infligge 4 danni invece di 3.",
       "cosmico": "Nucleo in Fusione: la detonazione del Timer infligge 5 danni.",
       "logica": "Tattico → bersaglia chi ha meno carte in mano",
-      "img": "assets/cards/rivoltadellafonderia.webp",
+      "img": "assets/cards/gen/t_rivoltadellafonderia.webp",
       "layout_type": "red"
     },
     {
@@ -182,7 +182,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Interferenza sistemica: i sacrifici di carte Abilità/Gadget valgono la metà.",
       "cosmico": "Controllo Totale: tutti i sacrifici valgono 1 in meno (min 1).",
       "logica": "Tattico → copia l'ultimo Gadget e lo usa contro la squadra",
-      "img": "assets/cards/lintelligenzarogue.webp",
+      "img": "assets/cards/gen/t_lintelligenzarogue.webp",
       "layout_type": "red"
     },
     {
@@ -205,7 +205,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Regole d'Onore: massimo 1 Sacrificio Tattico per eroe per round.",
       "cosmico": "Duello Finale: gli attacchi degli eroi infliggono 1 danno in meno (min 1).",
       "logica": "Aggressivo → doppio attacco sul bersaglio con più Vita",
-      "img": "assets/cards/ilcampioneimbattuto.webp",
+      "img": "assets/cards/gen/t_ilcampioneimbattuto.webp",
       "layout_type": "red"
     },
     {
@@ -228,7 +228,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Specchio Infranto: ogni VP generato da un Villain → 2 danni diretti a quell'eroe.",
       "cosmico": "Specchio Assoluto: ogni VP generato da chiunque → 2 danni diretti a quell'eroe.",
       "logica": "Aggressivo → copia l'ultima Leva Villain contro la squadra",
-      "img": "",
+      "img": "assets/cards/gen/t_ilrivaletraditore.webp",
       "layout_type": "red"
     },
     {
@@ -274,7 +274,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Fonderia in Fusione: ogni VP generato dà al Custode +1 Forza fino a fine round.",
       "cosmico": "Fusione Totale: ogni 2 round il Custode guadagna +1 Forza permanente.",
       "logica": "Aggressivo → doppio colpo ad area con Travolgere",
-      "img": "",
+      "img": "assets/cards/gen/t_ilcustodedacciaio.webp",
       "layout_type": "red"
     },
     {
@@ -320,7 +320,7 @@ window.MONOMYTHOS_DATA = {
       "pericoloso": "Risonanza: quando un eroe pesca più di 1 carta in un turno, l'Eco si cura di 1.",
       "cosmico": "Simbiosi Oscura: ogni VP generato cura l'Eco di 2.",
       "logica": "Aggressivo → doppio colpo ad area con Travolgere",
-      "img": "",
+      "img": "assets/cards/gen/t_lecosenzanome.webp",
       "layout_type": "red"
     }
   ],
@@ -337,7 +337,7 @@ window.MONOMYTHOS_DATA = {
       "end": 2,
       "vita": 30,
       "testo": "—",
-      "img": "assets/cards/exgeniere.webp",
+      "img": "assets/cards/gen/c_exgeniere.webp",
       "layout_type": "silver"
     },
     {
@@ -352,7 +352,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Tag Autorizzati: Attacco Fisico, Abilità Tech, Gadget",
-      "img": "assets/cards/avanguardiapesante.webp",
+      "img": "assets/cards/gen/c_avanguardiapesante.webp",
       "layout_type": "silver"
     },
     {
@@ -382,7 +382,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Azione gratuita 1/turno: Infliggi 1 danno fisico OPPURE alloca 1 punto Potenza su una Minaccia senza consumare carte.",
-      "img": "assets/cards/sovraccaricocinetico.webp",
+      "img": "assets/cards/gen/c_sovraccaricocinetico.webp",
       "layout_type": "silver"
     },
     {
@@ -397,7 +397,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 25,
       "testo": "—",
-      "img": "assets/cards/caviaalpha.webp",
+      "img": "assets/cards/gen/c_caviaalpha.webp",
       "layout_type": "silver"
     },
     {
@@ -412,7 +412,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Tag Autorizzati: Attacco Fisico, Abilità Poteri, Burst",
-      "img": "assets/cards/spettrocinetico.webp",
+      "img": "assets/cards/gen/c_spettrocinetico.webp",
       "layout_type": "silver"
     },
     {
@@ -850,7 +850,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Difesa, Abilità Tech, Attacco Fisico",
       "origine": "Sentinella di Frontiera",
       "costume": "Scudo Modulare",
-      "img": "assets/cards/guardianadiconfine.webp"
+      "img": "assets/cards/gen/h_guardianadiconfine.webp"
     },
     "Lama Errante": {
       "name": "Lama Errante",
@@ -865,7 +865,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Attacco Fisico, Difesa, Untagged",
       "origine": "Lama senza Casa",
       "costume": "Fodero Leggero",
-      "img": "assets/cards/lamaerrante.webp"
+      "img": "assets/cards/gen/h_lamaerrante.webp"
     },
     "Titano d'Acciaio": {
       "name": "Titano d'Acciaio",
@@ -895,7 +895,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Abilità Tech, Gadget, Untagged",
       "origine": "Genio Espulso dal Laboratorio",
       "costume": "Esoscheletro Leggero",
-      "img": "assets/cards/architettoombra.webp"
+      "img": "assets/cards/gen/h_architettoombra.webp"
     },
     "Sussurro dell'Abisso": {
       "name": "Sussurro dell'Abisso",
@@ -910,7 +910,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Abilità Poteri, Untagged, Burst",
       "origine": "Toccata dal Velo",
       "costume": "Manto Corrotto",
-      "img": "assets/cards/sussurrodellabisso.webp"
+      "img": "assets/cards/gen/h_sussurrodellabisso.webp"
     },
     "Duellante Spezzato": {
       "name": "Duellante Spezzato",
@@ -7145,16 +7145,16 @@ window.MONOMYTHOS_DATA = {
     "Iron Aegis": "assets/cards/ironaegis.webp",
     "neonphantom": "assets/cards/neonphantom.webp",
     "Neon Phantom": "assets/cards/neonphantom.webp",
-    "guardianadiconfine": "assets/cards/guardianadiconfine.webp",
-    "Guardiana di Confine": "assets/cards/guardianadiconfine.webp",
-    "lamaerrante": "assets/cards/lamaerrante.webp",
-    "Lama Errante": "assets/cards/lamaerrante.webp",
+    "guardianadiconfine": "assets/cards/gen/h_guardianadiconfine.webp",
+    "Guardiana di Confine": "assets/cards/gen/h_guardianadiconfine.webp",
+    "lamaerrante": "assets/cards/gen/h_lamaerrante.webp",
+    "Lama Errante": "assets/cards/gen/h_lamaerrante.webp",
     "titanodacciaio": "assets/cards/titanoacciaio.webp",
     "Titano d'Acciaio": "assets/cards/titanoacciaio.webp",
-    "architettoombra": "assets/cards/architettoombra.webp",
-    "Architetto Ombra": "assets/cards/architettoombra.webp",
-    "sussurrodellabisso": "assets/cards/sussurrodellabisso.webp",
-    "Sussurro dell'Abisso": "assets/cards/sussurrodellabisso.webp",
+    "architettoombra": "assets/cards/gen/h_architettoombra.webp",
+    "Architetto Ombra": "assets/cards/gen/h_architettoombra.webp",
+    "sussurrodellabisso": "assets/cards/gen/h_sussurrodellabisso.webp",
+    "Sussurro dell'Abisso": "assets/cards/gen/h_sussurrodellabisso.webp",
     "duellantespezzato": "assets/cards/duellantespezzato.webp",
     "Duellante Spezzato": "assets/cards/duellantespezzato.webp",
     "carta minaccia retro": "assets/cards/cartaminacciaretro.webp",
@@ -7252,25 +7252,25 @@ window.MONOMYTHOS_DATA = {
     "Blackout Ostile": "assets/cards/gen/t_blackoutostile.webp",
     "blackoutostile": "assets/cards/gen/t_blackoutostile.webp",
     "CULTISTI DEL VELO": "assets/cards/cultistidelvelo.webp",
-    "cultistidelvelo": "assets/cards/cultistidelvelo.webp",
+    "cultistidelvelo": "assets/cards/gen/t_cultistidelvelo.webp",
     "IL CAMPIONE IMBATTUTO": "assets/cards/ilcampioneimbattuto.webp",
-    "ilcampioneimbattuto": "assets/cards/ilcampioneimbattuto.webp",
+    "ilcampioneimbattuto": "assets/cards/gen/t_ilcampioneimbattuto.webp",
     "Il Colosso di Rovina": "assets/cards/ilcolossodirovina.webp",
     "ilcolossodirovina": "assets/cards/ilcolossodirovina.webp",
     "Il Mietitore dell'Astro Oscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
     "ilmietitoredellastrooscuro": "assets/cards/ilmietitoredellastrooscuro.webp",
     "IMBOSCATA SULLA FALESIA": "assets/cards/imboscatasullafalesia.webp",
     "imboscatasullafalesia": "assets/cards/imboscatasullafalesia.webp",
-    "Incursione dei Droni Cinetici": "assets/cards/incursionedeidronicinetici.webp",
-    "incursionedeidronicinetici": "assets/cards/incursionedeidronicinetici.webp",
+    "Incursione dei Droni Cinetici": "assets/cards/gen/t_incursionedeidronicinetici.webp",
+    "incursionedeidronicinetici": "assets/cards/gen/t_incursionedeidronicinetici.webp",
     "L'ASSEDIO DEI PREDONI DELLE ROVINE": "assets/cards/lassediodeipredonidellerovine.webp",
     "lassediodeipredonidellerovine": "assets/cards/lassediodeipredonidellerovine.webp",
-    "L'Intelligenza Rogue": "assets/cards/lintelligenzarogue.webp",
-    "lintelligenzarogue": "assets/cards/lintelligenzarogue.webp",
-    "Rivolta della Fonderia": "assets/cards/rivoltadellafonderia.webp",
-    "rivoltadellafonderia": "assets/cards/rivoltadellafonderia.webp",
-    "Torneo Clandestino": "assets/cards/torneoclandestino.webp",
-    "torneoclandestino": "assets/cards/torneoclandestino.webp",
+    "L'Intelligenza Rogue": "assets/cards/gen/t_lintelligenzarogue.webp",
+    "lintelligenzarogue": "assets/cards/gen/t_lintelligenzarogue.webp",
+    "Rivolta della Fonderia": "assets/cards/gen/t_rivoltadellafonderia.webp",
+    "rivoltadellafonderia": "assets/cards/gen/t_rivoltadellafonderia.webp",
+    "Torneo Clandestino": "assets/cards/gen/t_torneoclandestino.webp",
+    "torneoclandestino": "assets/cards/gen/t_torneoclandestino.webp",
     "Cavia Alpha": "assets/cards/caviaalpha.webp",
     "caviaalpha": "assets/cards/caviaalpha.webp",
     "Ex-Geniere": "assets/cards/exgeniere.webp",
@@ -7521,6 +7521,14 @@ window.MONOMYTHOS_DATA = {
     "Onore Infranto": "assets/cards/duellanteitinerante.webp",
     "onoreinfranto": "assets/cards/duellanteitinerante.webp",
     "Riscatto della Lama": "assets/cards/assaltofluido.webp",
-    "riscattodellalama": "assets/cards/assaltofluido.webp"
+    "riscattodellalama": "assets/cards/assaltofluido.webp",
+    "Cultisti del Velo": "assets/cards/gen/t_cultistidelvelo.webp",
+    "Il Campione Imbattuto": "assets/cards/gen/t_ilcampioneimbattuto.webp",
+    "Il Rivale Traditore": "assets/cards/gen/t_ilrivaletraditore.webp",
+    "ilrivaletraditore": "assets/cards/gen/t_ilrivaletraditore.webp",
+    "Il Custode d'Acciaio": "assets/cards/gen/t_ilcustodedacciaio.webp",
+    "ilcustodedacciaio": "assets/cards/gen/t_ilcustodedacciaio.webp",
+    "L'Eco Senza Nome": "assets/cards/gen/t_lecosenzanome.webp",
+    "lecosenzanome": "assets/cards/gen/t_lecosenzanome.webp"
   }
 };
