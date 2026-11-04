@@ -1450,3 +1450,14 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
   background-size: 250% 100% !important; animation: play-shine-in 4s ease-in-out infinite !important;
 }
 @keyframes play-shine-in { 0%, 60% { background-position: 120% 0; } 100% { background-position: -20% 0; } }
+
+/* L'illustrazione sta tutta nella finestra della cornice (tra la nuvoletta del titolo e il riquadro del testo):
+   nessuna parte del soggetto finisce sotto il layout. La finestra è circa 16:9. */
+.monomyth-card .card-bg-art,
+.hero-silver-frame-wrap .hero-bg-img,
+.threat-silver-frame-wrap:not(.is-printed) .threat-bg-img,
+.intro-threat-frame-wrap:not(.is-printed) .intro-threat-art {
+  top: 20.5% !important; height: 41% !important; bottom: auto !important;
+  left: 0 !important; width: 100% !important; inset: auto 0 auto 0;
+  object-fit: cover !important; object-position: center 40% !important;
+}

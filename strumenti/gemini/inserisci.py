@@ -41,9 +41,14 @@ def main():
         im = Image.open(f).convert('RGB')
         im.save(os.path.join(ORIG, f'{cid}.webp'), 'WEBP', quality=90)
         w, h = im.size
-        im = im.crop((int(w * .03), int(h * .02), int(w * .97), int(h * .96)))
-        b = io.BytesIO(); im.save(b, 'PNG')
-        g.to_card_webp(b.getvalue(), os.path.join(g.OUT_DIR, f'{cid}.webp'))
+        im = im.crop((int(w * .02), int(h * .02), int(w * .98), int(h * .95)))
+        if im.width > im.height:
+            # orizzontale (16:9): va così com'è nella finestra della carta
+            im.thumbnail((1024, 1024), Image.LANCZOS)
+            im.save(os.path.join(g.OUT_DIR, f'{cid}.webp'), 'WEBP', quality=82, method=6)
+        else:
+            b = io.BytesIO(); im.save(b, 'PNG')
+            g.to_card_webp(b.getvalue(), os.path.join(g.OUT_DIR, f'{cid}.webp'))
         c = carte[cid]; rel = f'{g.REL_DIR}/{cid}.webp'
         (g.update_extra_refs if 'kind' in c else g.update_card_refs)(data, c, rel)
         vers[cid] = g.PROMPT_VERSION; appr.add(cid)
