@@ -1361,3 +1361,55 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 /* Mano: nel tuo turno le carte che puoi giocare adesso risaltano, le altre si spengono un po' */
 #playerHandCarousel .monomyth-card.giocabile { box-shadow: 0 0 0 3px #ffd54a, 3px 3px 0 var(--ink), 0 0 14px 2px rgba(255, 213, 74, .55) !important; }
 #playerHandCarousel .monomyth-card.non-giocabile { filter: saturate(.55) brightness(.82); }
+
+/* Testi adattati (js/adatta.js): una parola troppo lunga va a capo invece di uscire dal bordo */
+.adatta-spezza { overflow-wrap: anywhere; word-break: break-word; hyphens: auto; }
+.monomyth-card .card-vignette-title { hyphens: manual; overflow-wrap: normal; }
+.played-card-item .monomyth-card .card-vignette-tag { display: none; }
+
+/* Carta Minaccia disegnata (immagine senza testi): il livello sta nel cerchio in basso a sinistra
+   della cornice e l'icona Minaccia in quello a destra, come nelle carte azione; il nome va a capo */
+.threat-silver-frame-wrap { container-type: inline-size; }
+.threat-silver-frame-wrap .threat-card-lvl-circle {
+  left: 11.73%; top: 91.89%; right: auto; bottom: auto; transform: translate(-50%, -50%);
+  width: 12.8%; height: 8.6%; background: none; border: 0; border-radius: 50%;
+  font-family: 'JetBrains Mono', 'Cinzel', monospace; font-size: clamp(8px, 10.5cqi, 20px); color: #111116;
+}
+.threat-silver-frame-wrap:not(.is-printed)::after {
+  content: ''; position: absolute; left: 88%; top: 91.89%; transform: translate(-50%, -50%);
+  width: 9%; aspect-ratio: 1; z-index: 4; pointer-events: none;
+  background: url('../assets/icons/minaccia.webp') center / contain no-repeat;
+}
+.threat-silver-frame-wrap .threat-card-title {
+  white-space: normal; text-overflow: clip; line-height: 1.1;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  font-size: clamp(7px, 8cqi, 16px);
+}
+.threat-silver-frame-wrap .threat-card-tag { font-size: clamp(6px, 6.2cqi, 12px); }
+.threat-silver-frame-wrap .threat-card-effect-title { font-size: clamp(7px, 7cqi, 14px); }
+.threat-silver-frame-wrap .threat-card-effect-text { font-size: clamp(6.5px, 6.6cqi, 13px); }
+/* i dati della Minaccia non finiscono sotto il bordo della carta inclinata */
+.threat-tactical-data { padding-left: 8px; }
+.threat-title-row { flex-wrap: wrap; row-gap: 2px; min-width: 0; }
+.threat-title-row .timer-box { flex-shrink: 1; min-width: 0; margin-left: auto; }
+
+/* Mazzo: il nome della carta ha tutta la riga (prima era tagliato dopo 5 lettere da "Possedute") */
+.builder-card-details-top { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 1px !important; }
+.builder-card-details-top h4 { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; line-height: 1.15; overflow-wrap: break-word; max-width: 100%; }
+.builder-card-details { min-width: 0; }
+/* Negozio: il pulsante della bustina in regalo resta dentro lo schermo */
+.btn-free-pack { max-width: 100%; box-sizing: border-box; white-space: normal; }
+/* Compagni sul tavolo: il nome va a capo e si rimpicciolisce invece di diventare "Neo..." */
+.companion-name-txt { white-space: normal !important; text-overflow: clip !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.1; min-width: 0; }
+.companion-title-box { min-width: 0; }
+@container (max-width: 130px) { .threat-silver-frame-wrap .threat-card-tag { display: none; } }
+/* con 3 compagni il riquadro è stretto: il nome prende tutta la riga sopra i punti vita */
+.companion-header-bar { flex-wrap: wrap; row-gap: 2px; }
+.companion-title-box { flex: 1 1 100%; }
+.companion-battlefield-card { container-type: inline-size; }
+@container (max-width: 130px) {
+  .companion-avatar-mini { display: none; }
+  .companion-header-bar { padding-right: 30px !important; }
+}
+.threat-central-card-wrap .track-lbl { white-space: nowrap; width: auto !important; min-width: 62px !important; max-width: 62%; overflow: hidden; }
+.threat-central-card-wrap .progress-track { min-width: 28px; }

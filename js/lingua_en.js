@@ -1613,7 +1613,8 @@ Object.assign(window.MONOMYTHOS_EN, {
   "— Travolgere!": "— Trample!",
   "Danno +{n}": "Damage +{n}",
   "Scudo +{n}": "Shield +{n}",
-  "Non è il tuo turno": "It's not your turn"
+  "Non è il tuo turno": "It's not your turn",
+  "Bloccato": "Locked"
 });
 // Le regole più specifiche vanno prima di quelle generiche già presenti (es. "X attiva ...")
 (function () {
@@ -1640,6 +1641,7 @@ Object.assign(window.MONOMYTHOS_EN, {
     ['^Scegli il mazzo "(.+)" con (.+)\\? (.+)$', 'Choose the deck "$1" with $2? $3'],
     ['^(.+): non è un doppione: ti resterà una copia in meno\\. Accetti lo stesso\\?$', '$1: is not a duplicate, you will have one copy less. Accept anyway?'],
     ['^Ti servono (\\d+) slot (.+): ne hai (\\d+)\\. Puoi usarla come Sacrificio Tattico\\.$', 'You need $1 $2 slots: you have $3. You can use it as a Tactical Sacrifice.'],
+    ['^(.+) \\(Bot\\)$', '$1 (Bot)'],
     ['^Inizia la sfida contro (.+) Corrotto!$', 'The challenge against Corrupted $1 begins!'],
     // registro di battaglia
     ['^' + N + ' attiva \\[(.+?)\\]: (.+)$', '$1 activates [$2]: $3'],
