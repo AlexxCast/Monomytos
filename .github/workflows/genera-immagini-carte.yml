@@ -28,6 +28,16 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install pillow
+      - name: Controlla account e token Cloudflare
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          ATTESO=627282a64bf34298b4fa1f9db65fcd0b
+          ID=$(echo -n "$CF_ACCOUNT_ID" | tr -d '[:space:]')
+          if [ "$ID" = "$ATTESO" ]; then echo "CF_ACCOUNT_ID: corrisponde all'account di Alessio"; else echo "CF_ACCOUNT_ID: NON corrisponde (lunghezza ${#ID}, finisce con ${ID: -4})"; fi
+          echo "Token:"; curl -s https://api.cloudflare.com/client/v4/user/tokens/verify -H "Authorization: Bearer $CF_API_TOKEN" | jq -c '{success, stato: .result.status}'
+          echo "Account raggiungibili dal token:"; curl -s https://api.cloudflare.com/client/v4/accounts -H "Authorization: Bearer $CF_API_TOKEN" | jq -c '[.result[]? | {id, name}]'
       - name: Genera gli sfondi mancanti
         env:
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
