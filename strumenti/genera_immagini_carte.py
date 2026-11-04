@@ -300,9 +300,29 @@ class Segnalata(RuntimeError):
     pass
 
 
+def togli_bordi(im):
+    # Il modello a volte disegna una cornice bianca o nera: si tagliano i bordi di colore uniforme
+    from PIL import ImageStat
+    w, h = im.size
+    g = im.convert('L')
+    def uniforme(box):
+        st = ImageStat.Stat(g.crop(box))
+        return (st.stddev[0] < 10 and st.mean[0] > 225) or (st.stddev[0] < 3 and st.mean[0] < 8)
+    l, t, r, b = 0, 0, w, h
+    passo = max(2, w // 200)
+    while l < w * 0.15 and uniforme((l, t, l + passo, b)): l += passo
+    while r > w * 0.85 and uniforme((r - passo, t, r, b)): r -= passo
+    while t < h * 0.15 and uniforme((l, t, r, t + passo)): t += passo
+    while b > h * 0.85 and uniforme((l, b - passo, r, b)): b -= passo
+    if (l, t, r, b) != (0, 0, w, h):
+        m = passo  # un margine in più per togliere anche la riga di contorno
+        im = im.crop((min(l + m, w // 4), min(t + m, h // 4), max(r - m, w * 3 // 4), max(b - m, h * 3 // 4)))
+    return im
+
+
 def to_card_webp(jpeg_bytes, path):
     from PIL import Image
-    im = Image.open(io.BytesIO(jpeg_bytes)).convert('RGB')
+    im = togli_bordi(Image.open(io.BytesIO(jpeg_bytes)).convert('RGB'))
     # Ritaglio verticale 2:3 centrato: la scena centrale cade nella finestra della cornice
     w, h = im.size
     tw = min(w, int(h * 2 / 3))
