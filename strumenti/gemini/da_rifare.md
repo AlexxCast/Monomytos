@@ -2,11 +2,6 @@
 
 Aggiornato a ogni controllo. Rifai queste con il prompt indicato (stesso nome file .png) nella cartella strumenti/gemini/nuove/ del repo. NON allegare più immagini di riferimento: Gemini copiava lo sfondo. Quando una va bene la tolgo dalla lista.
 
-## h_ironaegis.png (Personaggi: Iron Aegis)
-
-Problema: Anatomia sbagliata: l'elmo è girato, il busto è frontale e le braccia sono girate in un altro verso. In più lo sfondo (città in basso, auto volanti, sole nero) è copiato dall'immagine di riferimento.
-
-Vertical 2:3 illustration. New scene: an original armored hero in heavy blue and silver exo-armor seen from behind, standing guard with a hexagonal energy shield, helmet covering the head. Bold cartoon comic-book illustration, thick black ink outlines, cel shading, halftone dots, dynamic speed lines, dramatic close-up of the action, vivid glowing energy effects, sparks and debris, futuristic city with cosmic energy in the background, high contrast, saturated colors, vertical composition with the main action in the center of the image and simple background at top and bottom. dominant emerald green palette, shields and protective barriers. One original costumed hero of our own design, full figure, heroic pose, seen from behind or in dramatic backlight: the face is never visible (helmet, visor, hood or deep shadow). Not a known superhero, no logos. The image must contain no writing of any kind: no title, no caption, no speech bubble, no sound effect words, no signature, no watermark, no frame. One single full-bleed illustration: no comic panels, no inset boxes, no split frames. Hands and weapons drawn correctly, every weapon held with a natural grip. Original composition made only for this card: do not reuse a standard layout with a city skyline at the bottom, flying cars or a black eclipse sun; invent a background that fits this scene. Correct anatomy: the whole body seen from behind, helmet, torso, arms and legs all facing the same direction, shield on the left arm.
 
 ## h_lamaerrante.png (Personaggi: Lama Errante)
 
