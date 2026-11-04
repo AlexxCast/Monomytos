@@ -1,5 +1,5 @@
 // Monomythos Service Worker - Fast offline cache
-const CACHE_NAME = 'monomythos-v29';
+const CACHE_NAME = 'monomythos-v41';
 const ASSETS = [
   './',
   './index.html',
@@ -21,6 +21,7 @@ const ASSETS = [
   './js/online.js',
   './js/scambi.js',
   './js/storia.js',
+  './js/tutorial.js',
   './js/particelle.js',
   './assets/icons/logo_titolo.webp',
   './assets/bg/cosmo_eroe.webp',
@@ -63,6 +64,6 @@ self.addEventListener('fetch', (e) => {
         caches.open(CACHE_NAME).then((c) => c.put(e.request, copy));
       }
       return res;
-    }).catch(() => caches.match(e.request))
+    }).catch(() => caches.match(e.request, { ignoreSearch: true }))
   );
 });

@@ -38,7 +38,16 @@
         await loadScript(SDK + 'firebase-auth-compat.js');
         await loadScript(SDK + 'firebase-firestore-compat.js');
       } catch (e) {
-        this.setMsg('Non riesco a raggiungere il server degli account. Controlla la connessione e ricarica.', true);
+        // Senza internet si gioca lo stesso con i dati salvati sul telefono;
+        // al prossimo accesso online le partite fatte offline vengono tenute
+        this.offline = true;
+        this.ospiteLocale = true;
+        document.body.classList.remove('needs-auth');
+        this.updateBadge();
+        if (window.Collezione) window.Collezione.migra();
+        if (window.Tutorial && window.Tutorial.serve()) window.Tutorial.avvia();
+        else window.UI.showScreen('scr-lobby');
+        window.UI.showToast('Sei offline: giochi con i dati di questo telefono.');
         return;
       }
       firebase.initializeApp(cfg);
@@ -50,12 +59,33 @@
     },
 
     // Finché non c'è un utente, qualsiasi schermata rimanda all'accesso
+    isGuest() { return !!(this.user && this.user.isAnonymous) || !!this.ospiteLocale; },
+
+    // Gioca subito senza email. Con Firebase "Anonimo" attivo i progressi restano nell'account ospite
+    // (e si può giocare online); altrimenti si gioca con i dati salvati su questo dispositivo.
+    async ospite() {
+      if (this.isGuest()) { document.body.classList.remove('needs-auth'); window.UI.showScreen('scr-lobby'); return; }
+      if (!this.ready) { this.setMsg('Un momento, sto collegando il server...'); return; }
+      this.setMsg('Accesso come ospite...');
+      try {
+        await this.auth.signInAnonymously();
+      } catch (e) {
+        console.warn('Ospite senza account:', e && e.code);
+        this.ospiteLocale = true;
+        document.body.classList.remove('needs-auth');
+        this.updateBadge();
+        if (window.Collezione) { window.Collezione.migra(); }
+        if (window.Tutorial && window.Tutorial.serve()) window.Tutorial.avvia();
+        else window.UI.showScreen('scr-lobby');
+      }
+    },
+
     guardScreens() {
       const ui = window.UI;
       if (!ui || ui._accountGuard) return;
       const orig = ui.showScreen.bind(ui);
       ui.showScreen = (id) => {
-        if (this.required && !this.user && id !== 'scr-auth') id = 'scr-auth';
+        if (this.required && !this.user && !this.ospiteLocale && id !== 'scr-auth') id = 'scr-auth';
         return orig(id);
       };
       ui._accountGuard = true;
@@ -63,7 +93,18 @@
 
     showAuth() {
       document.body.classList.add('needs-auth');
+      const g = document.getElementById('authGuestBtn');
+      if (g) g.textContent = this.isGuest() ? 'TORNA AL GIOCO' : 'GIOCA COME OSPITE';
       window.UI && window.UI.showScreen('scr-auth');
+    },
+
+    // Pulsante account nel menu: l'ospite può creare un account senza perdere i progressi
+    menu() {
+      if (this.isGuest()) {
+        this.showAuth(); this.setTab('register');
+        this.setMsg('Crea un account gratuito: i progressi da ospite restano tuoi.');
+      } else if (this.user) this.logout();
+      else this.showAuth();
     },
 
     async onUser(u) {
@@ -76,15 +117,23 @@
         if (snap.exists && snap.data().progression) {
           const data = snap.data();
           this.profile = data;
-          // Il profilo sul server vince su quello del dispositivo
-          window.Progression.data = { ...window.Progression.getDefaultData(), ...data.progression };
+          // Il profilo sul server vince su quello del dispositivo, tranne se sul telefono ci sono
+          // progressi più recenti dello stesso account (partite fatte offline)
+          const loc = window.Progression.data || {};
+          const piuRecenteQui = loc._uid === u.uid && (loc._modificato || 0) > (data.progression._modificato || 0);
+          if (piuRecenteQui) this.queueSave();
+          else window.Progression.data = { ...window.Progression.getDefaultData(), ...data.progression };
+          window.Progression.data._uid = u.uid;
           window.Progression.save(true);
         } else {
-          // Account nuovo: profilo pulito (niente dati rimasti sul dispositivo da altri account)
-          window.Progression.data = window.Progression.getDefaultData();
+          // Account nuovo: profilo pulito (niente dati rimasti sul dispositivo da altri account),
+          // tranne quando un ospite senza account si registra: tiene i suoi progressi
+          window.Progression.data = this._portaDati ? { ...window.Progression.getDefaultData(), ...this._portaDati } : window.Progression.getDefaultData();
+          this._portaDati = null; this.ospiteLocale = false;
+          window.Progression.data._uid = u.uid;
           if (window.Collezione) window.Collezione.migra();
           this.profile = {
-            nickname: (snap.exists && snap.data().nickname) || this._pendingNick || (u.email || 'Eroe').split('@')[0],
+            nickname: (snap.exists && snap.data().nickname) || this._pendingNick || (u.isAnonymous ? 'Ospite' : (u.email || 'Eroe').split('@')[0]),
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           };
           await ref.set({ ...this.profile, progression: window.Progression.data }, { merge: true });
@@ -98,8 +147,13 @@
       this.updateBadge();
       try { window.UI.updateCreditsDisplay && window.UI.updateCreditsDisplay(); } catch (e) {}
       document.querySelectorAll('.creditsDisplay').forEach(el => { el.textContent = window.Progression.getCredits(); });
-      window.UI.showScreen('scr-lobby');
-      window.UI.showToast(`Bentornato, ${this.nickname()}!`);
+      if (window.Tutorial && window.Tutorial.serve()) {
+        // Primo accesso: si parte subito con la prima missione della Storia, che fa da tutorial
+        window.Tutorial.avvia();
+      } else {
+        window.UI.showScreen('scr-lobby');
+        window.UI.showToast(`Bentornato, ${this.nickname()}!`);
+      }
       if (window.Online && window.Collezione && window.Collezione.haStarter()) window.Online.dopoAccesso();
       if (window.Scambi) window.Scambi.avvia();
     },
@@ -147,6 +201,19 @@
           if (nick.length < 3) { this.setMsg('Il nome eroe deve avere almeno 3 caratteri.', true); return false; }
           this._pendingNick = nick.slice(0, 20);
           this.setMsg('Creo il tuo account...');
+          if (this.user && this.user.isAnonymous) {
+            // L'ospite diventa un account vero e tiene tutti i progressi
+            const cred = firebase.auth.EmailAuthProvider.credential(email, pass);
+            await this.user.linkWithCredential(cred);
+            this.profile = { ...(this.profile || {}), nickname: this._pendingNick };
+            await this.db.collection('users').doc(this.user.uid).set({ nickname: this._pendingNick, progression: window.Progression.data }, { merge: true });
+            document.body.classList.remove('needs-auth');
+            this.updateBadge();
+            window.UI.showScreen('scr-lobby');
+            window.UI.showToast('Account creato: i tuoi progressi sono salvi.');
+            return false;
+          }
+          if (this.ospiteLocale) this._portaDati = JSON.parse(JSON.stringify(window.Progression.data));
           await this.auth.createUserWithEmailAndPassword(email, pass);
         } else {
           this.setMsg('Accesso in corso...');
@@ -191,7 +258,7 @@
       if (!el) return;
       if (!this.required) { el.style.display = 'none'; return; }
       el.style.display = '';
-      el.textContent = this.user ? `ESCI (${this.nickname()})` : 'ACCEDI';
+      el.textContent = this.isGuest() ? 'SALVA PROGRESSI' : (this.user ? `ESCI (${this.nickname()})` : 'ACCEDI');
     }
   };
 

@@ -108,6 +108,7 @@
       clearTimeout(this._defenseTimer);
       clearTimeout(this._autoTimer);
       clearTimeout(this._watchTimer);
+      clearTimeout(this._lobbyTimer);
       this._nPlayers = 0;
       this._segnale = 0; this._firma = null; this._subentrando = false; this._turnoKey = null;
       if (this._mirror) this.unmirror();
@@ -136,6 +137,7 @@
           status: 'lobby',
           players: [this.mioPosto(hero)],
           public: !!pubblica,
+          lobbyPing: Date.now(),
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
       } catch (e) { return this.erroreRegole(e); }
@@ -176,20 +178,25 @@
     },
 
     // ---------- PARTITA CASUALE ----------
+    // Stanze pubbliche in attesa con l'host ancora collegato (segnale negli ultimi 30 secondi)
+    async stanzeLibere() {
+      const q = await this.db.collection('rooms').where('public', '==', true).where('status', '==', 'lobby').limit(25).get();
+      const ora = Date.now();
+      return q.docs.map(d => ({ code: d.id, ...d.data() }))
+        .filter(r => (r.players || []).length < MAX_PLAYERS && r.host !== this.me.uid &&
+          !(r.players || []).some(p => p.uid === this.me.uid) &&
+          ora - (r.lobbyPing || (r.createdAt && r.createdAt.toMillis ? r.createdAt.toMillis() : 0)) < 30000)
+        .sort((a, b) => (b.players || []).length - (a.players || []).length || (a.code < b.code ? -1 : 1));
+    },
+
     async cercaPartita(hero) {
       if (!this.ready()) return this.toast('Accedi al tuo account per giocare online.');
-      this.stop();
+      // chiude per bene un'eventuale stanza precedente, così nessuno entra in una stanza vuota
+      await this.esci();
       window.UI.showScreen('scr-room-wait');
       this.setCerca('Cerco altri eroi...');
       let candidati = [];
-      try {
-        const q = await this.db.collection('rooms').where('public', '==', true).where('status', '==', 'lobby').limit(15).get();
-        const ora = Date.now();
-        candidati = q.docs.map(d => ({ code: d.id, ...d.data() }))
-          .filter(r => (r.players || []).length < MAX_PLAYERS && r.host !== this.me.uid &&
-            (!r.createdAt || !r.createdAt.toMillis || ora - r.createdAt.toMillis() < 10 * 60 * 1000))
-          .sort((a, b) => (b.players || []).length - (a.players || []).length);
-      } catch (e) { this.erroreRegole(e); return window.UI.showScreen('scr-lobby'); }
+      try { candidati = await this.stanzeLibere(); } catch (e) { this.erroreRegole(e); return window.UI.showScreen('scr-lobby'); }
       for (const r of candidati) {
         const ok = await this.entra(r.code, hero, true);
         if (ok) { this.setCerca('Trovata una squadra! Si parte appena l\'host è pronto.'); return; }
@@ -199,6 +206,30 @@
       this.renderLobby();
       this.setCerca('Nessuna squadra libera: ho aperto una stanza. Aspetto altri giocatori...');
       this._cercaDal = Date.now();
+      this._eroeCerca = hero;
+      this.attesaPubblica();
+    },
+
+    // Mentre aspetto da solo nella mia stanza pubblica: segnalo che ci sono e continuo a cercare.
+    // Se due giocatori aprono una stanza nello stesso momento, chi ha il codice "più grande" passa nell'altra.
+    attesaPubblica() {
+      clearTimeout(this._lobbyTimer);
+      const r = this.room;
+      if (!this.code || !this.isHost || (r && (!r.public || r.status !== 'lobby'))) return;
+      this.roomRef().update({ lobbyPing: Date.now() }).catch(() => {});
+      const soloIo = !r || (r.players || []).length < 2;
+      const mio = this.code;
+      (soloIo ? this.stanzeLibere() : Promise.resolve([])).then(async (lista) => {
+        const altra = lista.find(x => x.code < mio || (x.players || []).length >= 2);
+        if (altra && this.code === mio && this.isHost && (!this.room || (this.room.players || []).length < 2)) {
+          const hero = this._eroeCerca;
+          await this.esci();
+          const ok = await this.entra(altra.code, hero, true);
+          if (ok) { this.setCerca('Trovata una squadra! Si parte appena l\'host è pronto.'); return; }
+          return this.cercaPartita(hero);
+        }
+        this._lobbyTimer = setTimeout(() => this.attesaPubblica(), 5000);
+      }).catch(() => { this._lobbyTimer = setTimeout(() => this.attesaPubblica(), 5000); });
     },
 
     setCerca(t) {

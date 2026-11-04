@@ -89,6 +89,70 @@ if os.path.exists(_scenes_path):
     SCENES_EN = json.load(open(_scenes_path, encoding='utf-8'))
 
 
+_extra_path = os.path.join(ROOT, 'strumenti', 'scene_extra_en.json')
+SCENES_EXTRA = json.load(open(_extra_path, encoding='utf-8')) if os.path.exists(_extra_path) else {}
+
+THREAT_PALETTE = 'menacing villain mood, dominant crimson red and deep purple palette, red glow against a dark night sky'
+HERO_RULES = (
+    'One original costumed hero of our own design, full figure, heroic pose, seen from behind or in dramatic backlight: '
+    'the face is never visible (helmet, visor, hood or deep shadow). Not a known superhero, no logos'
+)
+
+
+def jslug(name):
+    # Stesso slug che usa il gioco (card_img_map): minuscole, solo lettere e cifre senza accenti
+    return re.sub(r'[^a-z0-9]', '', (name or '').lower())
+
+
+def primary_stat_key(m):
+    vals = {'potenza': m.get('str', 0), 'agilita': m.get('spd', 0), 'intelligenza': m.get('tech', 0), 'vigore': m.get('end', 0)}
+    return max(vals, key=vals.get)
+
+
+def extra_items(data):
+    """Minacce, eroi e carte creazione: stesse regole delle carte Azione, così tutte le carte sono uniformi."""
+    meta = data.get('chars_meta', {})
+    items = []
+    for t in data.get('threats', []):
+        items.append({'id': 't_' + jslug(t['nome']), 'kind': 'threat', 'obj': t, 'nome': t['nome'],
+                      'palette': THREAT_PALETTE, 'ref': 'oscura'})
+    for name, m in meta.items():
+        if name == 'Custom Hero':
+            continue
+        k = 'oscura' if 'Abisso' in name else primary_stat_key(m)
+        items.append({'id': 'h_' + jslug(name), 'kind': 'hero', 'obj': m, 'nome': name,
+                      'palette': DARK if k == 'oscura' else PALETTE[k], 'ref': k})
+    for c in data.get('creation_cards', []):
+        m = meta.get(c.get('char'), {})
+        k = 'oscura' if 'Abisso' in (c.get('char') or '') else primary_stat_key(m)
+        items.append({'id': 'c_' + jslug(c['name']), 'kind': 'creation', 'obj': c, 'nome': c['name'],
+                      'palette': DARK if k == 'oscura' else PALETTE[k], 'ref': k})
+    return items
+
+
+def build_prompt_extra(it):
+    scene = SCENES_EXTRA.get(it['id'], it['nome'])
+    parts = [
+        'Create a brand-new illustration drawn in exactly the same art style as image 0: '
+        'same line work, ink thickness, cel shading, halftone texture and color treatment. '
+        'Do not copy the subject or the composition of image 0',
+        f'New scene: {scene}', STYLE, it['palette'],
+        HERO_RULES if it['kind'] == 'hero' else RULES,
+        'The image must contain no writing of any kind: no title, no caption, no speech bubble, '
+        'no sound effect words, no signature, no watermark, no frame',
+    ]
+    return '. '.join(p.rstrip('.') for p in parts) + '.'
+
+
+def update_extra_refs(data, it, rel):
+    o = it['obj']
+    o['img'] = rel
+    if it['kind'] in ('threat', 'hero'):
+        m = data.setdefault('card_img_map', {})
+        m[it['nome']] = rel
+        m[jslug(it['nome'])] = rel
+
+
 def build_prompt(card):
     # Scena in inglese (il modello capisce meglio); se manca, usa la descrizione italiana dei dati
     scene = SCENES_EN.get(card.get('id')) or (card.get('illus') or '').strip().rstrip('.')
@@ -214,6 +278,8 @@ def call_cloudflare(prompt, seed, ref_path=None):
             msg = e.read().decode(errors='replace')[:300]
             if e.code == 429 or 'neuron' in msg.lower() or 'daily free allocation' in msg.lower():
                 raise QuotaExceeded(msg)
+            if 'flagged' in msg.lower():
+                raise Segnalata(msg)
             if 400 <= e.code < 500:
                 # Errore nella richiesta o nelle credenziali: riprovare non serve
                 raise RuntimeError(f'HTTP {e.code}: {msg}')
@@ -229,9 +295,34 @@ class QuotaExceeded(Exception):
     pass
 
 
+class Segnalata(RuntimeError):
+    # il filtro di Cloudflare ha scartato l'immagine (falso allarme frequente): si riprova con un altro seme
+    pass
+
+
+def togli_bordi(im):
+    # Il modello a volte disegna una cornice bianca o nera: si tagliano i bordi di colore uniforme
+    from PIL import ImageStat
+    w, h = im.size
+    g = im.convert('L')
+    def uniforme(box):
+        st = ImageStat.Stat(g.crop(box))
+        return (st.stddev[0] < 10 and st.mean[0] > 225) or (st.stddev[0] < 3 and st.mean[0] < 8)
+    l, t, r, b = 0, 0, w, h
+    passo = max(2, w // 200)
+    while l < w * 0.15 and uniforme((l, t, l + passo, b)): l += passo
+    while r > w * 0.85 and uniforme((r - passo, t, r, b)): r -= passo
+    while t < h * 0.15 and uniforme((l, t, r, t + passo)): t += passo
+    while b > h * 0.85 and uniforme((l, b - passo, r, b)): b -= passo
+    if (l, t, r, b) != (0, 0, w, h):
+        m = passo  # un margine in più per togliere anche la riga di contorno
+        im = im.crop((min(l + m, w // 4), min(t + m, h // 4), max(r - m, w * 3 // 4), max(b - m, h * 3 // 4)))
+    return im
+
+
 def to_card_webp(jpeg_bytes, path):
     from PIL import Image
-    im = Image.open(io.BytesIO(jpeg_bytes)).convert('RGB')
+    im = togli_bordi(Image.open(io.BytesIO(jpeg_bytes)).convert('RGB'))
     # Ritaglio verticale 2:3 centrato: la scena centrale cade nella finestra della cornice
     w, h = im.size
     tw = min(w, int(h * 2 / 3))
@@ -256,10 +347,85 @@ def write_preview(data):
         for c in cards:
             if str(c.get('img', '')).startswith(REL_DIR):
                 rows.append(f'<figure><img src="../{c["img"]}" loading="lazy"><figcaption>{hero}<br><b>{c["nome"]}</b></figcaption></figure>')
+    for it in extra_items(data):
+        if str(it['obj'].get('img', '')).startswith(REL_DIR):
+            rows.append(f'<figure><img src="../{it["obj"]["img"]}" loading="lazy"><figcaption>{it["kind"]}<br><b>{it["nome"]}</b></figcaption></figure>')
     html = ('<!doctype html><meta charset="utf-8"><title>Anteprima sfondi carte</title>'
             '<style>body{background:#111;color:#eee;font:13px sans-serif;display:flex;flex-wrap:wrap;gap:12px;padding:16px}'
             'figure{margin:0;width:180px}img{width:180px;border-radius:8px}</style>' + ''.join(rows))
     open(os.path.join(ROOT, 'strumenti', 'anteprima_sfondi.html'), 'w', encoding='utf-8').write(html)
+
+
+VAR_DIR = os.path.join(OUT_DIR, 'varianti')
+APPROVATE_PATH = os.path.join(ROOT, 'strumenti', 'immagini_approvate.json')
+
+
+def load_json(path, default):
+    if os.path.exists(path):
+        return json.load(open(path, encoding='utf-8'))
+    return default
+
+
+def tutte_le_carte(data):
+    # prima Minacce, eroi e carte creazione (le più in vista), poi le carte Azione
+    out = extra_items(data)
+    for hero, cards in data['action_cards'].items():
+        out.extend(cards)
+    return out
+
+
+def genera_immagine(c, seed):
+    is_extra = 'kind' in c
+    prompt = build_prompt_extra(c) if is_extra else build_prompt(c)
+    ref = os.path.join(REF_DIR, f"{c['ref']}.png") if is_extra else style_ref_for(c)
+    ref = ref if ref and os.path.exists(ref) else None
+    for tentativo in range(3):
+        try:
+            return call_cloudflare(prompt, seed + tentativo * 104729, ref if tentativo < 2 else None)
+        except Segnalata:
+            print(f"Segnalata dal filtro {c['id']} (tentativo {tentativo + 1}/3)")
+            if tentativo == 2:
+                raise
+
+
+def main_varianti(args):
+    """Per ogni carta non ancora approvata crea N versioni da confrontare: nessuna va in gioco da sola."""
+    _, data, _ = load_data()
+    os.makedirs(VAR_DIR, exist_ok=True)
+    approvate = set(load_json(APPROVATE_PATH, []))
+    in_attesa = {f.split('_v')[0] for f in os.listdir(VAR_DIR) if f.endswith('.webp')}
+    todo = [c for c in tutte_le_carte(data)
+            if c['id'] not in approvate and c['id'] not in in_attesa and (not args.solo or c['id'] in args.solo)]
+    n_carte = max(1, args.max // args.varianti)
+    print(f'Da approvare: {len(todo)} carte. Stanotte: {min(n_carte, len(todo))} carte x {args.varianti} versioni')
+    fatte = 0
+    errori = 0
+    for c in todo[:n_carte]:
+        nome = c.get('nome')
+        salvate = 0
+        for v in range(1, args.varianti + 1):
+            try:
+                img = genera_immagine(c, seed_for(c['id']) + v * 7919)
+            except Segnalata:
+                print(f"Saltata versione {v} di {c['id']}: rifiutata dal filtro")
+                continue
+            except QuotaExceeded as e:
+                print(f'Quota gratuita di oggi esaurita, riprendo domani. ({e})')
+                print(f'Fatto: {fatte} versioni nuove.')
+                return
+            except RuntimeError as e:
+                print(f"Errore su {c['id']}: {e}")
+                errori += 1
+                if errori >= 3:
+                    print('Tre errori: mi fermo.')
+                    print(f'Fatto: {fatte} versioni nuove.')
+                    sys.exit(1)
+                continue
+            to_card_webp(img, os.path.join(VAR_DIR, f"{c['id']}_v{v}.webp"))
+            salvate += 1
+            fatte += 1
+        print(f"OK {c['id']} {nome}: {salvate} versioni")
+    print(f'Fatto: {fatte} versioni nuove.')
 
 
 def main():
@@ -268,7 +434,12 @@ def main():
     ap.add_argument('--solo', nargs='*', help='id delle carte da generare (es. ironaegis_1)')
     ap.add_argument('--rifai', action='store_true', help='rigenera anche le carte già fatte')
     ap.add_argument('--prova', action='store_true', help='mostra i prompt senza chiamare il generatore')
+    ap.add_argument('--varianti', type=int, default=0,
+                    help='crea N versioni per carta in assets/cards/gen/varianti/ senza metterle in gioco: '
+                         'poi si sceglie la migliore con strumenti/scegli_variante.py')
     args = ap.parse_args()
+    if args.varianti:
+        return main_varianti(args)
 
     prefix, data, suffix = load_data()
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -287,19 +458,47 @@ def main():
                     outdated.append(c)
                 continue
             todo.append(c)
-    print(f'Mancanti: {len(todo)}, da rifare con il prompt nuovo: {len(outdated)}')
-    todo += outdated
+    # Minacce, eroi e carte creazione (dopo le carte Azione mancanti, prima di quelle da rifare)
+    extra = []
+    for it in extra_items(data):
+        if args.solo and it['id'] not in args.solo:
+            continue
+        path = os.path.join(OUT_DIR, f"{it['id']}.webp")
+        if os.path.exists(path) and not args.rifai:
+            rel = f"{REL_DIR}/{it['id']}.webp"
+            if it['obj'].get('img') != rel:
+                update_extra_refs(data, it, rel)
+            continue
+        extra.append(it)
+    print(f'Mancanti: {len(todo)} carte Azione e {len(extra)} tra Minacce, eroi e carte creazione; da rifare con il prompt nuovo: {len(outdated)}')
+    # prima Minacce ed eroi (le più in vista), poi le carte Azione mancanti, poi quelle da rifare
+    todo = extra + todo + outdated
 
     print(f'Carte da generare: {len(todo)} (limite di questa esecuzione: {args.max})')
     done = 0
     errors_in_a_row = 0
     for c in todo[:args.max]:
-        prompt = build_prompt(c)
+        is_extra = 'kind' in c
+        prompt = build_prompt_extra(c) if is_extra else build_prompt(c)
         if args.prova:
             print(f"\n[{c['id']}] {c['nome']}\n{prompt}")
             continue
         try:
-            img = call_cloudflare(prompt, seed_for(c['id']), style_ref_for(c))
+            ref = os.path.join(REF_DIR, f"{c['ref']}.png") if is_extra else style_ref_for(c)
+            ref = ref if ref and os.path.exists(ref) else None
+            img = None
+            for tentativo in range(3):
+                try:
+                    # al terzo tentativo senza immagine di riferimento, che a volte fa scattare il filtro
+                    img = call_cloudflare(prompt, seed_for(c['id']) + tentativo * 7919, ref if tentativo < 2 else None)
+                    break
+                except Segnalata as e:
+                    print(f"Segnalata dal filtro {c['id']} (tentativo {tentativo + 1}/3)")
+                    if tentativo == 2:
+                        raise
+        except Segnalata as e:
+            print(f"Saltata {c['id']}: il filtro di Cloudflare la rifiuta, va cambiata la scena")
+            continue
         except QuotaExceeded as e:
             print(f'Quota gratuita di oggi esaurita, riprendo domani. ({e})')
             break
@@ -313,7 +512,10 @@ def main():
         errors_in_a_row = 0
         path = os.path.join(OUT_DIR, f"{c['id']}.webp")
         to_card_webp(img, path)
-        update_card_refs(data, c, f"{REL_DIR}/{c['id']}.webp")
+        if is_extra:
+            update_extra_refs(data, c, f"{REL_DIR}/{c['id']}.webp")
+        else:
+            update_card_refs(data, c, f"{REL_DIR}/{c['id']}.webp")
         versions[c['id']] = PROMPT_VERSION
         done += 1
         print(f"OK {done}: {c['id']} {c['nome']}")

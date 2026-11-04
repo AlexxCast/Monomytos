@@ -106,7 +106,7 @@ def fg_threat(a, hv, logo=(56, 212, 430, 100), text_box=(170, 612, 375, 660)):
     return m
 
 if __name__ == '__main__':
-    componi('originale_retrocartamazzo.webp', D + 'nebulosa_eroi.jpg', (22, 49, 520, 769), frame_gold, fg_hero, 'assets/cards/retrocartamazzo.webp')
-    componi('originale_cartaminacciaretro.webp', D + 'nebulosa_villain.jpg', (24, 50, 517, 763), frame_silver, fg_threat, 'assets/cards/cartaminacciaretro.webp')
-    componi('originale_cartathreatretro.webp', D + 'nebulosa_villain.jpg', (24, 50, 517, 764), frame_silver, fg_threat, 'assets/cards/cartathreatretro.webp')
+    componi('originale_retrocartamazzo.webp', D + 'nebulosa_eroi.jpg', (22, 37, 520, 769), frame_gold, fg_hero, 'assets/cards/retrocartamazzo.webp')
+    componi('originale_cartaminacciaretro.webp', D + 'nebulosa_villain.jpg', (24, 38, 517, 763), frame_silver, fg_threat, 'assets/cards/cartaminacciaretro.webp')
+    componi('originale_cartathreatretro.webp', D + 'nebulosa_villain.jpg', (24, 38, 517, 764), frame_silver, fg_threat, 'assets/cards/cartathreatretro.webp')
     print('ok')
