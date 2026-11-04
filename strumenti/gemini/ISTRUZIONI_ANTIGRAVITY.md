@@ -12,3 +12,9 @@ A ogni giro:
    Se git non è disponibile o il push non riesce, lascia le immagini nella cartella e avvisa: Alessio farà commit e "Push origin" da GitHub Desktop.
 
 Un'azione automatica su GitHub mette le immagini nel gioco e toglie le carte dalle liste. Non modificare altri file del repo.
+
+## Modalità continua
+- Fai commit e push dopo OGNI immagine salvata, così non si perde nulla.
+- Se ricevi `429 RESOURCE_EXHAUSTED`, leggi l'orario di ripristino nel messaggio, aspetta fino a quell'ora + 2 minuti (comando di attesa nel terminale) e riprendi dalla carta successiva.
+- Prima di ogni nuovo gruppo fai `git pull`: Claude aggiorna le liste.
+- Continua finché `da_rifare.md` e `prompt_da_fare.md` non hanno più carte.
