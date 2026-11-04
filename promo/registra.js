@@ -45,6 +45,8 @@ const BERSAGLI = {
   carta: '.full-card-inspect-wrap',
   eroi: '#heroCarousel',
   squadra: '.squad-pills-row',
+  trauma: '#playerDockTrauma',
+  mazzi: '.table-decks-flank',
   storia: '#storiaScena'
 };
 
@@ -234,10 +236,10 @@ const RIPRESE = {
         const css = document.createElement('style');
         css.id = 'promoPrimoPianoCss';
         css.textContent = `
-          .promo-primo-piano { position: fixed; left: 50%; top: 47%; z-index: 99999; pointer-events: none;
+          .promo-primo-piano { position: fixed; left: 50%; top: 52%; z-index: 99999; pointer-events: none;
             transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 8px;
             animation: pppEntra .38s cubic-bezier(.2,.9,.3,1.15) both; }
-          .promo-primo-piano .ppp-carta { width: 168px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
+          .promo-primo-piano .ppp-carta { width: 150px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.6)); }
           .promo-primo-piano .ppp-carta > * { width: 100% !important; max-width: none !important; margin: 0 !important; }
           .promo-primo-piano .ppp-chi { font-family: Bangers, var(--font-display, sans-serif); font-size: 20px; letter-spacing: .04em;
             color: #fff; background: #111; border: 2px solid #fff; border-radius: 4px; padding: 1px 10px; }
@@ -403,6 +405,17 @@ function durataRipresa(nome) {
     // L'inquadratura iniziale (t = 0) è già pronta nel primo fotogramma
     for (const c of (r.camera || []).filter(c => c.t === 0)) await p.evaluate(([a, z]) => window.__camera(a, z, 0), [c.su || null, c.zoom || 1]);
     await attesa(p, 300);
+    // Dove si trovano gli elementi del gioco (in pixel del video), per le etichette del montaggio
+    const zone = await p.evaluate(([B, k]) => {
+      const out = {};
+      for (const [nome, sel] of Object.entries(B)) {
+        const el = [...document.querySelectorAll(sel)].find(e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0; });
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        out[nome] = [r.left, r.top, r.width, r.height].map(v => Math.round(v * k));
+      }
+      return out;
+    }, [BERSAGLI, 1080 / VIEW.width]);
     // Cattura lo schermo con il protocollo DevTools: arriva un fotogramma JPEG a ogni cambiamento
     const cdp = await ctx.newCDPSession(p);
     const fotogrammi = [];
@@ -440,7 +453,7 @@ function durataRipresa(nome) {
     if (validi.length) lista += `file '${validi[validi.length - 1].file}'\n`;
     fs.writeFileSync(path.join(dir, 'fotogrammi.txt'), lista);
     const eventi = eventiGrezzi.filter(e => e.t >= t0 && e.t <= t1).map(e => ({ nome: e.nome, t: +(e.t - t0).toFixed(2) }));
-    riprese[nome] = { cartella: path.basename(dir), fotogrammi: validi.length, durata: +(t1 - t0).toFixed(2), eventi };
+    riprese[nome] = { cartella: path.basename(dir), fotogrammi: validi.length, durata: +(t1 - t0).toFixed(2), eventi, zone };
     console.log(`ripresa ${nome} (${r.tipo}): ${validi.length} fotogrammi in ${(t1 - t0).toFixed(1)} s` + (eventi.length ? ' · eventi: ' + eventi.map(e => e.nome + '@' + e.t).join(', ') : ''));
   }
   await browser.close();

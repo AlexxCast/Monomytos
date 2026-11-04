@@ -71,7 +71,7 @@ const totale = FINE ? inizioFine + FINE : t;
 // ---------- Testi animati (ASS) ----------
 const tempo = s => { s = Math.max(0, s); const h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = (s % 60).toFixed(2).padStart(5, '0'); return `${h}:${String(m).padStart(2, '0')}:${x}`; };
 const GIALLO = '&H0033E0FF&', BIANCO = '&H00FFFFFF&', NERO = '&H00111111&';
-const POS = { alto: [8, 540, 300], centro: [5, 540, 930], basso: [2, 540, 1460] };
+const POS = { alto: [8, 540, 110], centro: [5, 540, 930], basso: [2, 540, 1460] };
 let ass = `[Script Info]
 ScriptType: v4.00+
 PlayResX: 1080
@@ -85,9 +85,11 @@ Style: Fascia,Arial,20,&H00000000,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,1
 Style: Pop,Bangers,112,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,2,0,1,9,4,8,80,80,300,1
 Style: Grande,Bangers,200,&H0033E0FF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,3,0,1,13,6,5,60,60,0,1
 Style: Box,Bangers,88,&H00111111,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,2,0,3,16,0,8,110,110,300,1
-Style: Sotto,Bangers,64,&H00FFFFFF,&H000000FF,&H28000000,&H00000000,0,0,0,0,100,100,1,0,3,14,0,2,120,120,560,1
+Style: Sotto,Bangers,56,&H00FFFFFF,&H000000FF,&H40000000,&H00000000,0,0,0,0,100,100,1,0,3,12,0,8,70,70,0,1
 Style: Cta,Bangers,118,&H00111111,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,3,0,3,22,0,5,80,80,0,1
 Style: NotaAI,Bangers,40,&H30FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,1,0,1,3,2,2,90,90,70,1
+Style: Etichetta,Bangers,66,&H00111111,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,1,0,3,10,0,5,0,0,0,1
+Style: Cornice,Arial,20,&HFF000000,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,0,0,1,6,0,7,0,0,0,1
 Style: CtaSotto,Bangers,78,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,2,0,1,6,3,5,80,80,0,1
 
 [Events]
@@ -96,7 +98,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 const evento = (da, a, stile, testo) => { ass += `Dialogue: 1,${tempo(da)},${tempo(a)},${stile},,0,0,0,,${testo}\n`; };
 const ms = s => Math.round(s * 1000);
 // Fascia scura sfumata dietro i testi, così restano leggibili sopra qualsiasi schermata del gioco
-const FASCE = { alto: [200, 640], centro: [720, 1140], basso: [1250, 1580] };
+const FASCE = { alto: [70, 430], centro: [720, 1140], basso: [1250, 1580] };
 function fascia(da, a, pos, forte) {
   const [y0, y1] = FASCE[pos] || FASCE.alto;
   ass += `Dialogue: 0,${tempo(da)},${tempo(a)},Fascia,,0,0,0,,{\\an7\\pos(0,${y0})\\bord0\\shad0\\blur45\\1c&H000000&\\1a&H${forte ? '30' : '48'}&\\fad(120,120)\\p1}m -60 0 l 1140 0 1140 ${y1 - y0} -60 ${y1 - y0}{\\p0}\n`;
@@ -138,12 +140,44 @@ function testoInquadratura(q, da, a, primo) {
       evento(da, a, 'Pop', `{\\an${an}\\pos(${x},${y})\\fscx${primo ? 100 : 78}\\fscy${primo ? 100 : 78}\\t(0,130,\\fscx106\\fscy106)\\t(130,230,\\fscx100\\fscy100)\\t(230,${ms(durata)},\\fscx104\\fscy104)\\fad(0,90)}` + parole(testo, BIANCO, GIALLO, primo ? 0 : 0.04, passo));
     }
   }
+  // Riga di contesto subito sotto il testo principale (spiega cosa si sta guardando)
   const sotto = T(q.sotto);
-  if (sotto) evento(da + 0.25, a, 'Sotto', `{\\fad(120,90)}${sotto.replace(/[{}*]/g, '')}`);
+  if (sotto) {
+    const stile = q.stile || 'pop';
+    const pos = q.pos || (stile === 'grande' ? 'centro' : 'alto');
+    const [, , y0] = POS[pos];
+    const righe = testo ? Math.max(String(testo).split(/\\N|\n/).length, Math.ceil(String(testo).replace(/\*/g, '').length / 22)) : 0;
+    const altezza = !testo ? 0 : stile === 'grande' ? (pos === 'centro' ? 120 : 200) : righe * 118;
+    const y = pos === 'basso' ? y0 + 60 : y0 + altezza + 14;
+    evento(da + 0.25, a, 'Sotto', `{\\an8\\pos(540,${y})\\fad(160,90)}${sotto.replace(/[{}*]/g, '')}`);
+  }
+}
+
+// Etichette che spiegano lo schermo: una cornice gialla attorno a un elemento del gioco
+// (posizione registrata nella ripresa) e una targhetta con il suo nome, es. "La Minaccia"
+function etichetteSchermo(q, da, a) {
+  const zone = (reg.riprese[q.ripresa] || {}).zone || {};
+  (q.etichette || []).forEach((e, k) => {
+    const z = zone[e.su];
+    if (!z) { console.warn(`  etichetta: elemento "${e.su}" non trovato nella ripresa`); return; }
+    const [x, y, w, h] = z.map(Number);
+    const t0 = da + 0.25 + k * 0.35;
+    if (t0 >= a - 0.4) return;
+    ass += `Dialogue: 2,${tempo(t0)},${tempo(a)},Cornice,,0,0,0,,{\\an7\\pos(${x + 6},${y + 6})\\fad(180,120)\\p1}m 0 0 l ${w - 12} 0 ${w - 12} ${h - 12} 0 ${h - 12}{\\p0}\n`;
+    const sotto = e.dove ? e.dove === 'sotto' : y + h < 1500;
+    const ly = sotto ? Math.min(1860, y + h + 44) : Math.max(60, y - 44);
+    const lx = Math.max(200, Math.min(880, x + w / 2));
+    evento(t0, a, 'Etichetta', `{\\an5\\pos(${Math.round(lx)},${Math.round(ly)})\\fscx70\\fscy70\\alpha&HFF&\\t(0,180,\\fscx100\\fscy100\\alpha&H00&)\\fad(0,120)}${T(e.testo).replace(/[{}*]/g, '')}`);
+  });
 }
 
 // Un testo può durare più inquadrature: "tieni": n lo prolunga sulle n successive
 Q.forEach((q, i) => {
+  if (q.etichette) {
+    const inizio = inizi[i] + (i > 0 && TRANS[q.transizione || 'taglio'] ? TRANS[q.transizione].d / 2 : 0);
+    const fine = inizi[i] + q.durata - (i + 1 < Q.length && TRANS[Q[i + 1].transizione || 'taglio'] ? TRANS[Q[i + 1].transizione].d / 2 : 0);
+    etichetteSchermo(q, inizio, Math.min(fine, FINE ? inizioFine + 0.05 : totale));
+  }
   if (!T(q.testo) && !T(q.sotto)) return;
   const j = Math.min(Q.length - 1, i + (q.tieni || 0));
   const fine = inizi[j] + Q[j].durata - (j + 1 < Q.length && TRANS[Q[j + 1].transizione || 'taglio'] ? TRANS[Q[j + 1].transizione].d / 2 : 0);
