@@ -55,8 +55,8 @@
           "stile": "grande",
           "pos": "alto",
           "sotto": {
-            "it": "Card game cooperativo: tu e la tua squadra contro la Minaccia",
-            "en": "Co-op card game: you and your team vs the Threat"
+            "it": "Si vince solo insieme",
+            "en": "You only win together"
           },
           "etichette": [
             {
@@ -133,8 +133,8 @@
       ],
       "chiusura": {
         "sopra": {
-          "it": "Card game cooperativo",
-          "en": "Co-op card game"
+          "it": "Fai squadra. Non diventare il Villain.",
+          "en": "Team up. Don't become the Villain."
         },
         "invito": {
           "it": "GIOCA GRATIS",
@@ -201,8 +201,8 @@
           },
           "stile": "box",
           "sotto": {
-            "it": "Card game cooperativo da 1 a 4 giocatori",
-            "en": "Co-op card game for 1 to 4 players"
+            "it": "Fino a 4 amici, una Minaccia",
+            "en": "Up to 4 friends, one Threat"
           }
         },
         {
@@ -257,8 +257,8 @@
             "en": "…and one turns *VILLAIN*"
           },
           "sotto": {
-            "it": "Chi accumula troppo Trauma passa dalla parte del nemico",
-            "en": "Too much Trauma and you switch sides"
+            "it": "Troppo Trauma e cambi squadra",
+            "en": "Too much Trauma, you switch sides"
           }
         }
       ],
@@ -344,8 +344,8 @@
           },
           "stile": "grande",
           "sotto": {
-            "it": "per provare Monomythos, card game cooperativo",
-            "en": "to try Monomythos, a co-op card game"
+            "it": "Per giocarci stasera",
+            "en": "To play it tonight"
           }
         },
         {
@@ -665,8 +665,8 @@
             "en": "I play for the team…"
           },
           "sotto": {
-            "it": "Card game cooperativo: tu e la tua squadra contro la Minaccia",
-            "en": "Co-op card game: you and your team vs the Threat"
+            "it": "Finché il Trauma non ti spezza",
+            "en": "Until the Trauma breaks you"
           },
           "etichette": [
             {
@@ -718,8 +718,8 @@
           "stile": "grande",
           "pos": "alto",
           "sotto": {
-            "it": "Troppo Trauma: diventi il Villain",
-            "en": "Too much Trauma: you become the Villain"
+            "it": "Il Trauma ti ha spezzato",
+            "en": "The Trauma broke you"
           }
         },
         {
@@ -1548,8 +1548,8 @@
       ],
       "chiusura": {
         "sopra": {
-          "it": "Card game cooperativo",
-          "en": "Co-op card game"
+          "it": "Fai squadra. Non diventare il Villain.",
+          "en": "Team up. Don't become the Villain."
         },
         "invito": {
           "it": "GIOCA GRATIS",

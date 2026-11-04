@@ -1,5 +1,5 @@
 // Monomythos Service Worker - Fast offline cache
-const CACHE_NAME = 'monomythos-v41';
+const CACHE_NAME = 'monomythos-v42';
 const ASSETS = [
   './',
   './index.html',

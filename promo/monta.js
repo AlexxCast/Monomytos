@@ -85,12 +85,12 @@ Style: Fascia,Arial,20,&H00000000,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,1
 Style: Pop,Bangers,112,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,2,0,1,9,4,8,80,80,300,1
 Style: Grande,Bangers,200,&H0033E0FF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,3,0,1,13,6,5,60,60,0,1
 Style: Box,Bangers,88,&H00111111,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,2,0,3,16,0,8,110,110,300,1
-Style: Sotto,Bangers,56,&H00FFFFFF,&H000000FF,&H40000000,&H00000000,0,0,0,0,100,100,1,0,3,12,0,8,70,70,0,1
+Style: Sotto,Luckiest Guy,52,&H0033E0FF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,1,0,3,16,0,8,60,60,0,1
 Style: Cta,Bangers,118,&H00111111,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,3,0,3,22,0,5,80,80,0,1
 Style: NotaAI,Bangers,40,&H30FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,1,0,1,3,2,2,90,90,70,1
 Style: Etichetta,Bangers,66,&H00111111,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,1,0,3,10,0,5,0,0,0,1
 Style: Cornice,Arial,20,&HFF000000,&H000000FF,&H0033E0FF,&H00000000,0,0,0,0,100,100,0,0,1,6,0,7,0,0,0,1
-Style: CtaSotto,Bangers,78,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,0,0,0,0,100,100,2,0,1,6,3,5,80,80,0,1
+Style: CtaSotto,Luckiest Guy,62,&H00FFFFFF,&H000000FF,&H00000000,&H90000000,0,0,0,0,100,100,1,0,1,8,4,5,70,70,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -147,9 +147,9 @@ function testoInquadratura(q, da, a, primo) {
     const pos = q.pos || (stile === 'grande' ? 'centro' : 'alto');
     const [, , y0] = POS[pos];
     const righe = testo ? Math.max(String(testo).split(/\\N|\n/).length, Math.ceil(String(testo).replace(/\*/g, '').length / 22)) : 0;
-    const altezza = !testo ? 0 : stile === 'grande' ? (pos === 'centro' ? 120 : 200) : righe * 118;
+    const altezza = !testo ? 0 : stile === 'grande' ? (pos === 'centro' ? 120 : 180) : righe * 118;
     const y = pos === 'basso' ? y0 + 60 : y0 + altezza + 14;
-    evento(da + 0.25, a, 'Sotto', `{\\an8\\pos(540,${y})\\fad(160,90)}${sotto.replace(/[{}*]/g, '')}`);
+    evento(da + 0.25, a, 'Sotto', `{\\an8\\pos(540,${y})\\fad(160,90)}${sotto.replace(/[{}*]/g, '').toLocaleUpperCase(lingua)}`);
   }
 }
 
@@ -190,11 +190,11 @@ if (FINE) {
   const sottoCta = T(c.sotto) || (lingua === 'it' ? 'Android · Browser' : 'Android · Browser');
   const a = inizioFine + 0.35;
   evento(a, totale, 'Cta', `{\\an5\\pos(540,1290)\\fscx40\\fscy40\\alpha&HFF&\\t(0,160,\\fscx110\\fscy110\\alpha&H00&)\\t(160,260,\\fscx100\\fscy100)\\t(900,1100,\\fscx106\\fscy106)\\t(1100,1300,\\fscx100\\fscy100)}${cta.replace(/[{}*]/g, '')}`);
-  evento(a + 0.35, totale, 'CtaSotto', `{\\an5\\pos(540,1450)\\fad(200,0)}${sottoCta.replace(/[{}*]/g, '')}`);
+  evento(a + 0.35, totale, 'CtaSotto', `{\\an5\\pos(540,1450)\\fad(200,0)}${sottoCta.replace(/[{}*]/g, '').toLocaleUpperCase(lingua)}`);
   // Dicitura sulle immagini AI: piccola ma leggibile, in fondo al cartello finale
   const notaAI = T(dati.nota_ai_video);
   if (notaAI) evento(inizioFine + 0.5, totale, 'NotaAI', `{\\fad(250,0)}${notaAI.replace(/[{}*]/g, '')}`);
-  if (T(c.sopra)) evento(inizioFine + 0.1, totale, 'CtaSotto', `{\\an5\\pos(540,500)\\fad(200,0)}${T(c.sopra).replace(/[{}*]/g, '')}`);
+  if (T(c.sopra)) evento(inizioFine + 0.1, totale, 'CtaSotto', `{\\an5\\pos(540,500)\\fad(200,0)}${T(c.sopra).replace(/[{}*]/g, '').toLocaleUpperCase(lingua)}`);
 }
 const fileAss = path.join(dir, 'testi.ass');
 fs.writeFileSync(fileAss, ass);
