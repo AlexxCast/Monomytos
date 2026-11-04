@@ -1442,14 +1442,16 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .intro-threat-frame-wrap .intro-threat-lvl-badge { left: 11.73%; }
 .intro-threat-frame-wrap:not(.is-printed)::after { content: attr(data-liv); left: 88%; }
 
-/* Pulsante GIOCA: il riflesso è sottile e scorre solo dentro il pulsante (la stella "VAI!" può restare fuori) */
+/* Pulsante GIOCA: il riflesso scorre dentro il pulsante, grande quanto il pulsante (la stella "VAI!" resta fuori) */
 .btn-play::after {
-  top: 0 !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: auto !important;
+  content: '' !important; position: absolute !important; z-index: 0;
+  top: 0 !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: auto !important; height: auto !important;
   border-radius: inherit; pointer-events: none;
-  background: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.3) 50%, transparent 60% 100%) no-repeat !important;
-  background-size: 250% 100% !important; animation: play-shine-in 4s ease-in-out infinite !important;
+  background: linear-gradient(100deg, transparent 0 38%, rgba(255,255,255,.5) 50%, transparent 62% 100%) no-repeat;
+  background-size: 250% 100%; animation: play-shine-in 3.2s ease-in-out infinite !important;
 }
-@keyframes play-shine-in { 0%, 60% { background-position: 120% 0; } 100% { background-position: -20% 0; } }
+@keyframes play-shine-in { 0%, 50% { background-position: 120% 0; } 100% { background-position: -20% 0; } }
+/* le regole !important bloccherebbero l'animazione: qui niente !important sullo sfondo */
 
 /* L'illustrazione sta tutta nella finestra della cornice (tra la nuvoletta del titolo e il riquadro del testo):
    nessuna parte del soggetto finisce sotto il layout. La finestra è circa 16:9. */
@@ -1461,3 +1463,16 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
   left: 0 !important; width: 100% !important; inset: auto 0 auto 0;
   object-fit: cover !important; object-position: center 40% !important;
 }
+
+/* Finestra "Guarda le carte": carte intere con i loro effetti, scartabili */
+.peek-sheet { max-height: 92vh; overflow-y: auto; }
+.peek-help { font-size: 13px; color: var(--ink, #1a1a1a); margin: 0 0 10px; text-align: center; }
+.peek-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 12px; }
+.peek-item { display: flex; flex-direction: column; align-items: center; gap: 6px; width: min(200px, 44vw); transition: opacity .2s, filter .2s; }
+.peek-item .threat-silver-frame-wrap { width: 100%; aspect-ratio: 695 / 1024; position: relative; border-radius: 10px; overflow: hidden; }
+.peek-item .peek-card .monomyth-card { width: min(200px, 44vw) !important; }
+.peek-item .peek-info { font-size: 12px; line-height: 1.3; text-align: center; min-height: 1em; }
+.peek-item.scartata { opacity: .4; filter: grayscale(1); }
+.peek-item.scartata .peek-scarta { opacity: 1; filter: none; background: var(--pop-red, #e63946); color: #fff; }
+.peek-scarta { width: 100%; }
+.peek-scarta { margin-top: auto; }

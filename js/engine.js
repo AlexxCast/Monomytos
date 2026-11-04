@@ -706,6 +706,38 @@ class MonomythosEngine {
     return { ok: true, contribution };
   }
 
+  // Carte "Guarda": scartare una Minaccia futura (viene sostituita da un'altra di livello simile) o carte dalla cima del proprio mazzo
+  discardFutureThreat(playerId, nome) {
+    const st = this.state;
+    if (!st || st.story) return { ok: false, msg: 'Nella Storia le Minacce sono fisse' };
+    const i = st.actThreats.findIndex((t, k) => k > st.actIndex && t.nome === nome);
+    if (i < 0) return { ok: false, msg: 'Minaccia non trovata' };
+    const vecchia = st.actThreats[i];
+    const usate = new Set(st.actThreats.map(t => t.nome));
+    const allowed = st.threatPool ? new Set(st.threatPool) : null;
+    let pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !usate.has(t.nome) && (!allowed || allowed.has(t.nome)));
+    if (!pool.length) pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !usate.has(t.nome));
+    if (!pool.length) return { ok: false, msg: 'Nessuna Minaccia con cui sostituirla' };
+    pool.sort((a, b) => Math.abs(a.livello - vecchia.livello) - Math.abs(b.livello - vecchia.livello));
+    const vicine = pool.filter(t => Math.abs(t.livello - vecchia.livello) === Math.abs(pool[0].livello - vecchia.livello));
+    const nuova = vicine[Math.floor(Math.random() * vicine.length)];
+    st.actThreats[i] = nuova;
+    const p = st.players.find(x => x.id === playerId);
+    this.addLog('hero', `${p ? p.name : 'Un eroe'} scarta la Minaccia futura ${vecchia.nome}: al suo posto arriverà ${nuova.nome}`);
+    this.emit('threat_replaced', { vecchia, nuova });
+    return { ok: true, nuova };
+  }
+
+  discardFromDeckTop(playerId, uids) {
+    const p = this.state.players.find(x => x.id === playerId);
+    if (!p || !Array.isArray(uids)) return { ok: false };
+    const via = p.deck.filter(c => uids.includes(c.uid));
+    p.deck = p.deck.filter(c => !uids.includes(c.uid));
+    p.discard.push(...via);
+    if (via.length) this.addLog('hero', `${p.name} scarta dalla cima del mazzo: ${via.map(c => c.nome).join(', ')}`);
+    return { ok: true };
+  }
+
   // Potere Base: due opzioni per eroe, con testo e effetto reali (dal manuale, semplificati per il digitale)
   getBasePowerOptions(player) {
     const dmg = (titolo) => ({ titolo, desc: 'Infliggi 1 danno alla Minaccia.', badge: '1 danno', run: (e, p) => e._pbDanno(p, 'threat_boss') });
@@ -724,7 +756,7 @@ class MonomythosEngine {
         { titolo: 'Schianto ad area', desc: 'Infliggi 1 danno a ogni sgherro (alla Minaccia se non ce ne sono).', badge: '1 danno a tutti', run: (e, p) => { const vivi = ((e.state.currentThreat.mooks) || []).filter(m => !m.isDead); if (vivi.length) vivi.forEach(m => e._pbDanno(p, m.id)); else e._pbDanno(p, 'threat_boss'); return '1 danno a tutti i nemici'; } },
         slot('Potenza')],
       'Architetto Ombra': [slot('Intelligenza'),
-        { titolo: 'Analisi', desc: 'Guarda le prime 2 carte del tuo mazzo.', badge: 'Guarda 2', ok: p => p.deck.length > 0, run: (e, p) => { const top = p.deck.slice(-2).reverse().map(c => c.nome || c.name); e.emit('base_power_peek', { player: p, carte: top }); return `guarda le prime carte: ${top.join(', ')}`; } }],
+        { titolo: 'Analisi', desc: 'Guarda le prime 2 carte del tuo mazzo e scegli se scartarle.', badge: 'Guarda 2', ok: p => p.deck.length > 0, run: (e, p) => { const top = p.deck.slice(-2).reverse(); e.emit('base_power_peek', { player: p, carte: top }); return 'guarda le prime 2 carte del suo mazzo'; } }],
       "Sussurro dell'Abisso": [dmg('Impeto oscuro'),
         { titolo: 'Patto oscuro', desc: 'Solo se sei Villain: ottieni 1 Punto Vittoria e subisci 1 Trauma.', badge: '+1 PV', ok: p => p.state === 'villain', run: (e, p) => { p.vp += 1; p.trm += 1; return '+1 Punto Vittoria e +1 Trauma'; } }],
       'Duellante Spezzato': [dmg('Colpo sleale'),

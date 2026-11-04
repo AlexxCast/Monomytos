@@ -276,9 +276,13 @@ class UIController {
     window.GameEngine.on('scry_performed', (ev, data) => {
       if (!data || !data.source || !data.source.isLocal) return;
       const st = window.GameEngine.state;
-      const next = (st.actThreats || []).slice(st.actIndex + 1).map(t => t.nome);
-      this.fxBanner('ANALISI', next.length ? 'Prossime Minacce: ' + next.join(' → ') : 'Questa è l\'ultima Minaccia', 'gold');
-      this.showToast(next.length ? `Prossime Minacce: ${next.join(' → ')}` : 'Nessuna altra Minaccia dopo questa.');
+      const next = (st.actThreats || []).slice(st.actIndex + 1);
+      if (!next.length) return this.showToast('Questa è l\'ultima Minaccia: non ce ne sono altre da guardare.');
+      this.openPeek({ tipo: 'minacce', titolo: 'Prossime Minacce', carte: next, player: data.source, puoScartare: !st.story });
+    });
+    window.GameEngine.on('base_power_peek', (ev, data) => {
+      if (!data || !data.player || !data.player.isLocal) return;
+      this.openPeek({ tipo: 'mazzo', titolo: 'Cima del tuo mazzo', carte: data.carte || [], player: data.player, puoScartare: true });
     });
     window.GameEngine.on('match_started', (ev, data, state) => {
       this.renderGameView(state);
@@ -1606,6 +1610,73 @@ class UIController {
       }
     }
     engine.endTurn();
+  }
+
+  // Carte "Guarda": mostra le carte intere con i loro effetti e permette di scartarle
+  threatPeekDOM(th) {
+    const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const data = window.MONOMYTHOS_DATA || {};
+    const slug = (th.nome || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const img = th.img || (data.card_img_map && data.card_img_map[slug]) || 'assets/icons/minaccia.webp';
+    const printed = /^assets\/cards\/[^/]+\.webp$/.test(img);
+    return `<div class="threat-silver-frame-wrap peek-threat${printed ? ' is-printed' : ''}" data-liv="${esc(th.livello || 1)}">
+      <img class="threat-bg-img" src="${esc(img)}" alt="">
+      <img class="threat-frame-img" src="assets/layouts/layout_red.webp" alt="">
+      <div class="threat-vignette-bubble"><div class="threat-card-title">${esc(th.nome)}</div><div class="threat-card-tag">Liv. ${esc(th.livello || 1)}</div></div>
+      <div class="threat-card-desc-box"><div class="threat-card-effect-title">Tratto Calamità</div><div class="threat-card-effect-text">${esc(th.pericoloso || th.cosmico || th.logica || '')}</div></div>
+      <div class="threat-card-lvl-circle">${esc(th.livello || 1)}</div>
+    </div>
+    <div class="peek-info">${esc(th.pericoloso || th.cosmico || '')}${th.nemici ? '<br><b>Nemici:</b> ' + esc(th.nemici) : ''}</div>`;
+  }
+
+  openPeek(opt) {
+    let m = document.getElementById('modalPeek');
+    if (!m) {
+      m = document.createElement('div');
+      m.className = 'modal-overlay'; m.id = 'modalPeek';
+      m.innerHTML = `<div class="bottom-sheet peek-sheet"><div class="sheet-handle"></div>
+        <div class="sheet-header"><h3 class="sheet-title" id="peekTitle"></h3></div>
+        <p class="peek-help" id="peekHelp"></p><div class="peek-row" id="peekRow"></div>
+        <button class="btn btn-primary btn-block" id="peekOk">Fatto</button></div>`;
+      document.body.appendChild(m);
+    }
+    const E = window.GameEngine;
+    const scelte = new Set();
+    m.querySelector('#peekTitle').textContent = opt.titolo;
+    m.querySelector('#peekHelp').textContent = opt.puoScartare
+      ? (opt.tipo === 'minacce' ? 'Tocca "Scarta" sotto una Minaccia per toglierla: al suo posto ne arriverà un\'altra di livello simile.' : 'Tocca "Scarta" sotto le carte che non vuoi pescare: finiscono negli scarti.')
+      : 'Nella Storia le Minacce sono fisse: puoi solo guardarle.';
+    const row = m.querySelector('#peekRow');
+    row.innerHTML = '';
+    opt.carte.forEach((c, i) => {
+      const key = opt.tipo === 'minacce' ? c.nome : c.uid;
+      const box = document.createElement('div');
+      box.className = 'peek-item';
+      box.innerHTML = (opt.tipo === 'minacce' ? this.threatPeekDOM(c) : `<div class="peek-card">${this.getCardDOM(c, true)}</div><div class="peek-info"></div>`);
+      if (opt.tipo !== 'minacce') box.querySelector('.peek-info').textContent = c.effetto || '';
+      if (opt.puoScartare) {
+        const b = document.createElement('button');
+        b.className = 'btn btn-subtle peek-scarta';
+        b.textContent = 'Scarta';
+        b.onclick = () => {
+          if (scelte.has(key)) { scelte.delete(key); box.classList.remove('scartata'); b.textContent = 'Scarta'; }
+          else { scelte.add(key); box.classList.add('scartata'); b.textContent = 'Tieni'; }
+        };
+        box.appendChild(b);
+      }
+      row.appendChild(box);
+    });
+    m.querySelector('#peekOk').onclick = () => {
+      if (scelte.size) {
+        if (opt.tipo === 'minacce') scelte.forEach(n => E.discardFutureThreat(opt.player.id, n));
+        else E.discardFromDeckTop(opt.player.id, [...scelte]);
+        this.showToast(opt.tipo === 'minacce' ? `Scartate ${scelte.size} Minacce: ne arriveranno altre` : `Scartate ${scelte.size} carte dal mazzo`);
+        if (E.state) this.renderGameView(E.state);
+      }
+      this.hideModals();
+    };
+    m.onclick = (ev) => { if (ev.target === m) m.querySelector('#peekOk').click(); };
+    this.showModal('modalPeek');
   }
 
   inspectCard(card) {
