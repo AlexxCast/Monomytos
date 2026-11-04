@@ -509,7 +509,7 @@ class UIController {
     if (actEl) actEl.textContent = th.isBoss ? 'BOSS FINALE' : (th.isRogueHero ? 'BOSS CORROTTO' : 'ATTO I');
     if (effTitleEl) effTitleEl.textContent = th.eff_nome || (th.pericoloso ? 'Tratto Pericoloso' : 'Calamità Cosmica');
     if (effTextEl) effTextEl.textContent = th.pericoloso || th.eff_desc || th.cosmico || 'Affronta la Calamità con la tua squadra!';
-    if (lvlEl) lvlEl.textContent = `Liv. ${th.livello || 1}`;
+    if (lvlEl) { lvlEl.textContent = `${th.livello || 1}`; const w = lvlEl.closest('.intro-threat-frame-wrap'); if (w) w.dataset.liv = `${th.livello || 1}`; }
     if (stageBadge) stageBadge.textContent = th.isRogueHero ? 'DUELLO BOSS CORROTTO' : (th.isBoss ? 'BOSS FINALE' : 'ESTRAZIONE MINACCIA');
     if (loadingTitle) loadingTitle.textContent = 'ESTRAZIONE MINACCIA...';
     if (loadingSub) loadingSub.textContent = 'Il mazzo del Fato sta per rivelare il tuo destino...';

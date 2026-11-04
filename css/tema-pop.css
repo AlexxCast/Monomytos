@@ -1429,3 +1429,24 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 ::-webkit-scrollbar-thumb { background: rgba(255,214,90,.5); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,214,90,.85); background-clip: padding-box; }
 ::-webkit-scrollbar-button { display: none; height: 0; width: 0; }
+
+/* Presentazione Minaccia: il livello nei due cerchi della cornice, come sulla carta in gioco */
+.intro-threat-frame-wrap { container-type: inline-size; }
+.intro-threat-frame-wrap .intro-threat-lvl-badge,
+.intro-threat-frame-wrap:not(.is-printed)::after {
+  position: absolute; top: 91.89%; transform: translate(-50%, -50%); bottom: auto; right: auto;
+  width: 12.8%; height: 8.6%; background: none; border: 0; border-radius: 50%; box-shadow: none;
+  display: flex; align-items: center; justify-content: center; z-index: 5; pointer-events: none;
+  font-family: 'JetBrains Mono', 'Cinzel', monospace; font-weight: 900; font-size: clamp(9px, 10.5cqi, 24px); color: #111116;
+}
+.intro-threat-frame-wrap .intro-threat-lvl-badge { left: 11.73%; }
+.intro-threat-frame-wrap:not(.is-printed)::after { content: attr(data-liv); left: 88%; }
+
+/* Pulsante GIOCA: il riflesso è sottile e scorre solo dentro il pulsante (la stella "VAI!" può restare fuori) */
+.btn-play::after {
+  top: 0 !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: auto !important;
+  border-radius: inherit; pointer-events: none;
+  background: linear-gradient(100deg, transparent 0 40%, rgba(255,255,255,.3) 50%, transparent 60% 100%) no-repeat !important;
+  background-size: 250% 100% !important; animation: play-shine-in 4s ease-in-out infinite !important;
+}
+@keyframes play-shine-in { 0%, 60% { background-position: 120% 0; } 100% { background-position: -20% 0; } }
