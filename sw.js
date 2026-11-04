@@ -1,5 +1,5 @@
 // Monomythos Service Worker - Fast offline cache
-const CACHE_NAME = 'monomythos-v44';
+const CACHE_NAME = 'monomythos-v45';
 const ASSETS = [
   './',
   './index.html',
@@ -31,8 +31,7 @@ const ASSETS = [
   './assets/icons/logo.png',
   './assets/icons/azione.webp',
   './assets/icons/minaccia.webp',
-  './assets/icons/peronaggio.webp',
-  './assets/icons/teschio_minaccia.webp'
+  './assets/icons/peronaggio.webp'
 ];
 
 self.addEventListener('install', (e) => {
