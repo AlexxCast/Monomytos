@@ -413,7 +413,7 @@
           </div>
           <div class="player-vital-bars">
             <div class="vital-label">
-              <span id="playerDockName">Iron Aegis</span>
+              <span id="playerDockName" data-adatta="0.6">Iron Aegis</span>
               <span class="hp-text mono" id="playerDockHp">30/30</span>
             </div>
             <div class="vital-bar-out">
@@ -425,6 +425,7 @@
         <!-- Local Active Effects & Trauma -->
         <div class="player-dock-right-status">
           <div class="player-local-effects" id="playerLocalEffects"></div>
+          <div class="morale-chip is-pe" id="playerDockMorale" onclick="UI.spiegaMorale && UI.spiegaMorale()"><b>0</b> PE</div>
           <div class="trauma-box">
             <span style="font-size:9px; color:var(--muto); text-transform:uppercase;">Trauma</span>
             <div class="trauma-container" id="playerDockTrauma"></div>
@@ -1230,6 +1231,8 @@
 <script src="js/adatta.js"></script>
 <script src="js/glossario.js"></script>
 <script src="js/cards_data.js"></script>
+<script src="js/morale.js"></script>
+<script src="js/minacce_effetti.js"></script>
 <script src="js/effects.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/progression.js"></script>

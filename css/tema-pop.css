@@ -1530,3 +1530,12 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
   .threat-silver-frame-wrap { width: 92px !important; }
   .threat-central-card-wrap { padding-top: 8px !important; padding-bottom: 8px !important; }
 }
+
+/* Punti Eroe / VP accanto al Trauma */
+.morale-chip { display: inline-flex; align-items: baseline; gap: 3px; padding: 2px 8px; border: 2px solid #111116; border-radius: 999px; box-shadow: 2px 2px 0 #111116; font-weight: 900; font-size: 12px; line-height: 1.2; white-space: nowrap; cursor: help; }
+.morale-chip b { font-size: 16px; }
+.morale-chip.is-pe { background: #ffd34d; color: #111116; }
+.morale-chip.is-vp { background: #7b2fbf; color: #fff; }
+.morale-chip.mini { font-size: 10px; padding: 0 6px; box-shadow: 1px 1px 0 #111116; }
+.morale-chip.mini b { font-size: 12px; }
+.player-dock-right-status { display: flex; align-items: center; gap: 8px; }
