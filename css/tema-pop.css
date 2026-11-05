@@ -1489,17 +1489,17 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .builder-card-row.non-giocabile .stepper-btn[disabled] { opacity: .35; cursor: not-allowed; }
 
 /* ===== Telefono: zona del giocatore più chiara e compatta (feedback Franz 2026-11-05) =====
-   Era semitrasparente (il campo si vedeva sotto e sembrava sovrapposto) e alta più di metà schermo
+   Era trasparente al 50% (il campo si vedeva troppo e sembrava sovrapposto): ora 80% e alta più di metà schermo
    sui telefoni bassi, coprendo i nemici. Ora è opaca, separata da un bordo netto, e più bassa. */
 @media (max-width: 999px) {
   #scr-game > .player-command-deck,
   body.theme-villain #scr-game > .player-command-deck {
-    background: #f3ead6 !important; background-color: #f3ead6 !important;
+    background: rgba(243, 234, 214, 0.8) !important; background-color: rgba(243, 234, 214, 0.8) !important;
     border-top: 3px solid #111116 !important;
     box-shadow: 0 -5px 0 rgba(17, 17, 22, .35) !important;
     gap: 6px !important; padding-top: 8px !important;
   }
-  body.theme-villain #scr-game > .player-command-deck { background: #e5d4ff !important; background-color: #e5d4ff !important; }
+  body.theme-villain #scr-game > .player-command-deck { background: rgba(229, 212, 255, 0.8) !important; background-color: rgba(229, 212, 255, 0.8) !important; }
   #scr-game > .player-command-deck .vital-label { text-shadow: none; }
   .player-dock-top { gap: 10px !important; }
   .player-main-info { flex: 1 1 auto; min-width: 0; gap: 8px !important; }
