@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-05T15:41:23.465Z",
+ "aggiornato": "2026-11-05T18:01:57.076Z",
  "piattaforme": {
   "youtube": {
    "stato": "non collegata",
@@ -18,8 +18,19 @@
    "nota": "mancano i Secrets: BSKY_HANDLE"
   },
   "telegram": {
-   "stato": "non collegata",
-   "nota": "mancano i Secrets: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID"
+   "stato": "ok",
+   "account": {
+    "nome": "Monomythosgame",
+    "follower": 2,
+    "link": "https://t.me/Monomythosgame"
+   },
+   "video": [],
+   "totali": {
+    "views": 0,
+    "likes": 0,
+    "commenti": 0,
+    "condivisioni": 0
+   }
   }
  }
 }
