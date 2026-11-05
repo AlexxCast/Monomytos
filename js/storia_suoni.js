@@ -142,7 +142,7 @@
       out.gain.setValueAtTime(0, ctx.currentTime);
       out.connect(this._bus(ctx));
       const nodi = [], timers = [];
-      const target = { pioggia: .14, vento: .35, folla: .38, fuoco: .45, statico: .16, energia: .25 }[tipo] ?? .6;
+      const target = { pioggia: .14, vento: .12, folla: .38, fuoco: .45, statico: .16, energia: .25 }[tipo] ?? .6;
       out.gain.linearRampToValueAtTime(v * target, ctx.currentTime + 1.2);
       const loopRumore = (filtroTipo, freq, q) => {
         const src = ctx.createBufferSource();
