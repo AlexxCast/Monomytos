@@ -183,6 +183,7 @@ window.MONOMYTHOS_EN = {"\" con":"\" with",
 "Carte Personaggio":"Character Cards",
 "Carte Sbloccate!":"Cards Unlocked!",
 "Carte da pescare al prossimo round (da {n} a Velocità + {n}, max {n})":"Cards to draw next round (from {n} to Speed + {n}, max {n})",
+"Carte da pescare al prossimo round (da {n} ad Agilità + {n}, max {n})":"Cards to draw next round (from {n} to Agility + {n}, max {n})",
 "Carte nel Mazzo:":"Cards in Deck:",
 "Categoria • Valore":"Category • Value",
 "Cavia Alpha":"Subject Alpha",
@@ -1787,3 +1788,9 @@ Object.assign(window.MONOMYTHOS_EN, {
   'Mazzo Minaccia': 'Threat Deck',
   'Le Minacce dei prossimi Atti: guardarle ti dice cosa arriverà.': 'The Threats of the next Acts: looking at them tells you what is coming.'
 });
+// Carte non giocabili nel deck builder
+window.MONOMYTHOS_EN_REGOLE.unshift(
+  ['^Non giocabile: costa (\\d+) (.+), hai (\\d+) slot$', 'Not playable: costs $1 $2, you have $3 slots'],
+  ['^Con questo eroe non potresti mai giocarla: costa (\\d+) (.+), hai (\\d+) slot\\.$', 'This hero could never play it: costs $1 $2, you have $3 slots.'],
+  ['^Nel mazzo ci sono (\\d+) carte che questo eroe non può giocare \\(costano più slot di quelli che ha\\)\\. Toglile\\.$', 'Your deck has $1 cards this hero cannot play (they cost more slots than it has). Remove them.']
+);
