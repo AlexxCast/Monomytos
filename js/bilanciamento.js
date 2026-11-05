@@ -2,8 +2,8 @@
 //   node strumenti/simulazione_bilanciamento.js . 200 3
 // Valori scelti il 2026-11-03 per Atti più corti (circa 4-7 round) e meno Villain.
 window.MONOMYTHOS_BILANCIAMENTO = Object.assign({
-  scalaVita: 0.6,       // moltiplica la Vita dei nemici (1 = formula del manuale)
-  scalaSoglie: 0.3,     // moltiplica le soglie di Disinnesco Primario e Bruto
+  scalaVita: 0.5,       // moltiplica la Vita dei nemici (1 = formula del manuale)
+  scalaSoglie: 0.45,    // moltiplica le soglie di Disinnesco Primario e Bruto
   pesoEroi: 2,          // quanto conta ogni eroe in più nella formula (Livello + Eroi × peso)
   pesoEroiOltre2: 2,    // peso in più per ogni eroe oltre il secondo: squadre da 3-4 meno facili (2026-11-03)
   forzaPerEroe: 0.7,    // Forza in più dei nemici per ogni eroe oltre il primo (arrotondato per difetto)
