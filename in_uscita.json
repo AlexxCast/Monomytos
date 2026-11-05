@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:42103264722",
+  "titolo": "storia_eclissi",
+  "piattaforme": [
+   "bluesky"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-05_storia_eclissi.mp4",
+  "creato": "2026-11-05T20:28:22.342Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-05T20:28:22.342Z"
+ },
+ {
   "id": "video:42095885065",
   "titolo": "storia_eclissi",
   "piattaforme": [
