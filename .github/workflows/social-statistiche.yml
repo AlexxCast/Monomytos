@@ -1,0 +1,51 @@
+name: Statistiche social
+
+# Ogni 6 ore legge follower, visualizzazioni e like di tutti i social (API ufficiali gratuite)
+# e li salva nel ramo "hub-dati", da cui li legge il Centro social (hub/index.html).
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hub-statistiche
+  cancel-in-progress: false
+
+jobs:
+  statistiche:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Prepara il ramo dei dati
+        run: bash promo/hub_dati.sh prepara
+      - name: Leggi le statistiche
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_API_VERSION: ${{ vars.IG_API_VERSION }}
+          BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node promo/statistiche.js ../hub-dati
+      - name: Salva i dati
+        run: bash promo/hub_dati.sh salva "Statistiche $(date -u +%Y-%m-%dT%H:%M)"
+      # I token rinnovati (TikTok) vanno nei Secrets: serve PAT_SEGRETI come per i video
+      - name: Salva i token rinnovati
+        env:
+          GH_TOKEN: ${{ secrets.PAT_SEGRETI }}
+        run: |
+          [ -n "$GH_TOKEN" ] && [ -d ../nuovi_segreti ] || exit 0
+          for f in ../nuovi_segreti/*.txt; do gh secret set "$(basename "$f" .txt)" < "$f"; echo "rinnovato $(basename "$f" .txt)"; done
