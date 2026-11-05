@@ -1,1 +1,21 @@
-[]
+[
+ {
+  "id": "storia_eclissi",
+  "lingua": "it",
+  "data": "2026-11-05T18:49:29.135Z",
+  "prova": false,
+  "didascalia_instagram": "Ad Ataca le luci si spengono e nel cielo compare la Stella della Follia. Chi la fissa troppo cambia lato. Tu da che parte stai? Modalità Storia, Capitolo 1: L'Eclissi Sintetica.\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev #storymode #fumetti #lore #villain",
+  "piattaforme": {
+   "instagram": {
+    "esito": "manuale",
+    "nota": "da pubblicare a mano dall'app"
+   },
+   "tiktok": {
+    "esito": "manuale",
+    "nota": "da pubblicare a mano dall'app"
+   }
+  },
+  "titolo": "L'Eclissi Sintetica (primo video)",
+  "video": "https://raw.githubusercontent.com/AlexxCast/Monomytos/hub-dati/caricati/storia_eclissi_1.mp4"
+ }
+]
