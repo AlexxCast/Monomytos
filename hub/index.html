@@ -490,7 +490,7 @@ $('#btnInvia').onclick = async () => {
     await dispatch('promo-video.yml', inputs);
     msg.className = 'msg ok'; msg.innerHTML = `Partito${prova ? ' (prova, non pubblica)' : ''}. Lo vedi in <a href="#attivita">Attività</a> tra qualche secondo.`;
     setTimeout(attivita, 6000);
-  } catch (e) { msg.className = 'msg err'; msg.textContent = 'Non partito: ' + e.message; }
+  } catch (e) { msg.className = 'msg err'; msg.textContent = e.status === 404 ? 'L\'invio dei video non è ancora attivo: arriva quando unisci le modifiche dei video promozionali.' : 'Non partito: ' + e.message; }
   btn.disabled = false;
 };
 $('#btnAggiorna').onclick = async () => {
@@ -532,7 +532,7 @@ async function calendario() {
     const prossimi = sc.giorni.filter(g => g.data >= oggi).slice(0, 14);
     $('#cal').innerHTML = prossimi.length ? prossimi.map(g => `<div class="g ${g.data === oggi ? 'oggi' : ''}"><b>${new Date(g.data + 'T12:00').toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'short' })}${g.data === oggi ? ' · oggi' : ''}</b>${esc(tit(g.copione))}${g.manuale ? `<div class="man">✋ ${esc(g.manuale)}</div>` : ''}</div>`).join('')
       : '<div class="vuoto">Nessun video in scaletta nei prossimi giorni.</div>';
-  } catch (e) { $('#cal').innerHTML = '<div class="vuoto">Calendario non leggibile.</div>'; }
+  } catch (e) { $('#cal').innerHTML = '<div class="vuoto">Il calendario compare quando unisci le modifiche dei video promozionali (scaletta).</div>'; }
 }
 
 // ---------- Impostazioni ----------
