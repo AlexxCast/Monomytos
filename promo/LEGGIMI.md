@@ -145,6 +145,10 @@ Da qui prende:
 - l'**invio**: fa partire questo workflow con un copione, oppure con un video già pronto (`video_caricato`, `titolo`, `didascalia`):
   il file va nella release `promo-caricati` o nel ramo `hub-dati/caricati/`. Ogni pubblicazione finisce in `hub-dati/pubblicazioni.json`;
 - l'**analisi AI**: la issue con etichetta `analisi-ai`, riscritta ogni sera da Claude.
+- l'**uscita controllata**: ogni giorno il video viene preparato alle 16:00 (ora italiana d'inverno), arriva una notifica all'app
+  ed esce da solo dopo `RITARDO_VIDEO_MIN` minuti (60, variabile del repository). Dall'app puoi annullarlo o farlo uscire subito
+  (`promo/attesa.js`, `hub-dati/in_uscita.json` e `decisioni.json`). I video fatti partire a mano dall'app escono senza attesa.
+- le **notifiche**: `promo/notifica.js` (Firebase Cloud Messaging, Secret `FCM_SERVICE_ACCOUNT`).
 
 ## Cose da sapere
 
