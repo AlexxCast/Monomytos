@@ -1211,6 +1211,8 @@ window.MONOMYTHOS_EN = {"\" con":"\" with",
 "Vita Base risultante:":"Resulting Base Life:",
 "Vita Base:":"Base Life:",
 "Vita Boss":"Boss Life",
+"Vita Minaccia":"Threat Life",
+"Somma della Vita degli sgherri":"Sum of the henchmen's Life",
 "Vita Totale = VitaUnitaria × (Livello + NumEroi).":"Total Life = UnitLife × (Level + NumHeroes).",
 "Vittoria da Villain":"Villain victory",
 "Vittoria da Villain (online)":"Villain victory (online)",
@@ -1528,6 +1530,7 @@ Object.assign(window.MONOMYTHOS_EN, {
   "Guarda le prime 2 carte del tuo mazzo e scegli se scartarle.": "Look at the top 2 cards of your deck and choose whether to discard them.",
   "Gratis, una volta per turno. Scegli uno dei due effetti:": "Free, once per turn. Choose one of the two effects:",
   "Infliggi 1 danno alla Minaccia.": "Deal 1 damage to the Threat.",
+  "Infliggi 1 danno allo sgherro più ferito.": "Deal 1 damage to the most wounded henchman.",
   "1 danno": "1 damage",
   "+1 Slot Potenza": "+1 Power Slot",
   "+1 Slot Agilità": "+1 Agility Slot",
@@ -1793,4 +1796,57 @@ window.MONOMYTHOS_EN_REGOLE.unshift(
   ['^Non giocabile: costa (\\d+) (.+), hai (\\d+) slot$', 'Not playable: costs $1 $2, you have $3 slots'],
   ['^Con questo eroe non potresti mai giocarla: costa (\\d+) (.+), hai (\\d+) slot\\.$', 'This hero could never play it: costs $1 $2, you have $3 slots.'],
   ['^Nel mazzo ci sono (\\d+) carte che questo eroe non può giocare \\(costano più slot di quelli che ha\\)\\. Toglile\\.$', 'Your deck has $1 cards this hero cannot play (they cost more slots than it has). Remove them.']
+);
+window.MONOMYTHOS_EN_REGOLE.unshift(
+  ['^\\[BOTTINO\\] Disinnesco completato: ogni eroe \\+(\\d+) Vita, -(\\d+) Trauma, \\+(\\d+) PE e pesca (\\d+) carta \\(\\+(\\d+) Crediti Cosmici\\)$', '[LOOT] Disarm complete: every hero +$1 Life, -$2 Trauma, +$3 HP and draws $4 card (+$5 Cosmic Credits)'],
+  ['^\\[BOTTINO\\] Disinnesco completato: ogni eroe \\+(\\d+) Vita, -(\\d+) Trauma, \\+(\\d+) PE e pesca (\\d+) carta$', '[LOOT] Disarm complete: every hero +$1 Life, -$2 Trauma, +$3 HP and draws $4 card'],
+  ['^ \\(\\+(\\d+) Crediti Cosmici\\)$', ' (+$1 Cosmic Credits)']
+);
+Object.assign(window.MONOMYTHOS_EN, {
+  'Disinnesco (binari)': 'Disarm (tracks)',
+  'Completare un binario risolve la Minaccia: è più difficile che abbattere gli sgherri, ma dà un bottino a ogni eroe (+3 Vita, -1 Trauma, +1 PE, 1 carta).': 'Completing a track resolves the Threat: it is harder than defeating the henchmen, but gives every hero loot (+3 Life, -1 Trauma, +1 HP, 1 card).',
+  'Minaccia': 'Threat',
+  'La sua Vita è la somma della Vita dei suoi sgherri: per abbatterla colpisci gli sgherri.': 'Its Life is the sum of its henchmen\'s Life: to bring it down, hit the henchmen.'
+});
+window.MONOMYTHOS_EN_REGOLE.unshift(['^Bottino del Disinnesco! Ogni eroe \\+(\\d+) Vita, -(\\d+) Trauma, \\+(\\d+) PE e 1 carta$', 'Disarm loot! Every hero +$1 Life, -$2 Trauma, +$3 HP and 1 card']);
+Object.assign(window.MONOMYTHOS_EN, {
+  'Si guadagnano con le azioni altruiste e completando un binario. Si spendono sulle carte con [Costo: HP] o per usare il Potere Base una seconda volta nel turno (3 PE); a fine partita ognuno vale 5 crediti. Non sono la Vita.': 'Earned through selfless actions and by completing a track. Spent on cards with [Cost: HP] or to use your Base Power a second time in a turn (3 HP); at the end of the match each is worth 5 credits. They are not your Life.',
+  'Punti del Villain: si guadagnano con le azioni egoiste. Si spendono sulle carte con [Costo: VP] o per usare il Potere Base una seconda volta nel turno (3 VP); a fine partita ognuno vale 5 crediti.': 'Villain points: earned through selfish actions. Spent on cards with [Cost: VP] or to use your Base Power a second time in a turn (3 VP); at the end of the match each is worth 5 credits.',
+  'Villain Points (VP): li guadagni con le azioni egoiste delle carte [Villain]. Li spendi sulle carte con [Costo: VP] e con la Spesa del Fato.': 'Villain Points (VP): you earn them with the selfish actions of [Villain] cards. You spend them on cards with [Cost: VP] and with Fate Spending.',
+  'Punti Eroe (PE): li guadagni con le azioni altruiste delle carte [Eroe] e completando un binario. Li spendi sulle carte con [Costo: HP] e con la Spesa del Fato. Non sono la tua Vita.': 'Hero Points (HP): you earn them with the selfless actions of [Hero] cards and by completing a track. You spend them on cards with [Cost: HP] and with Fate Spending. They are not your Life.',
+  'Punti Eroe: si guadagnano con le azioni altruiste e si spendono sulle carte con [Costo: HP]': 'Hero Points: earned through selfless actions and spent on cards with [Cost: HP]',
+  'Villain Points: si guadagnano con le azioni egoiste e si spendono sulle carte con [Costo: VP]': 'Villain Points: earned through selfish actions and spent on cards with [Cost: VP]'
+});
+window.MONOMYTHOS_EN_REGOLE.unshift(
+  ['^Servono (\\d+) Punti Eroe \\(ne hai (\\d+)\\)$', 'You need $1 Hero Points (you have $2)'],
+  ['^Servono (\\d+) VP \\(ne hai (\\d+)\\)$', 'You need $1 VP (you have $2)'],
+  ['^Servono (\\d+) Punti Eroe \\(ne hai (\\d+)\\)\\. Puoi usarla come Sacrificio Tattico\\.$', 'You need $1 Hero Points (you have $2). You can use it as a Tactical Sacrifice.'],
+  ['^Servono (\\d+) VP \\(ne hai (\\d+)\\)\\. Puoi usarla come Sacrificio Tattico\\.$', 'You need $1 VP (you have $2). You can use it as a Tactical Sacrifice.'],
+  ['^Potere Base già usato: per usarlo di nuovo servono (\\d+) Punti Eroe \\(ne hai (\\d+)\\)$', 'Base Power already used: to use it again you need $1 Hero Points (you have $2)'],
+  ['^Potere Base già usato: per usarlo di nuovo servono (\\d+) VP \\(ne hai (\\d+)\\)$', 'Base Power already used: to use it again you need $1 VP (you have $2)'],
+  ['^Potere Base già usato due volte in questo turno$', 'Base Power already used twice this turn'],
+  ['^Seconda volta in questo turno: costa (\\d+) Punti Eroe\\. Scegli uno dei due effetti:$', 'Second time this turn: costs $1 Hero Points. Choose one of the two effects:'],
+  ['^Seconda volta in questo turno: costa (\\d+) VP\\. Scegli uno dei due effetti:$', 'Second time this turn: costs $1 VP. Choose one of the two effects:'],
+  ['^Regole d\'Onore: massimo 1 Sacrificio Tattico per round$', 'Rules of Honor: at most 1 Tactical Sacrifice per round'],
+  ['^(\\d+) PE$', '$1 HP']
+);
+Object.assign(window.MONOMYTHOS_EN, { 'PE': 'HP' });
+window.MONOMYTHOS_EN_REGOLE.unshift(
+  ['^\\[SPESA MORALE\\] (.+) spende (\\d+) Punti Eroe \\(rimasti: (\\d+)\\)$', '[MORAL SPENDING] $1 spends $2 Hero Points (left: $3)'],
+  ['^\\[SPESA MORALE\\] (.+) spende (\\d+) VP \\(rimasti: (\\d+)\\)$', '[MORAL SPENDING] $1 spends $2 VP (left: $3)'],
+  ['^\\[POTERE EXTRA\\] (.+) spende (\\d+) Punti Eroe per usare di nuovo (.+)$', '[EXTRA POWER] $1 spends $2 Hero Points to use $3 again'],
+  ['^\\[POTERE EXTRA\\] (.+) spende (\\d+) VP per usare di nuovo (.+)$', '[EXTRA POWER] $1 spends $2 VP to use $3 again'],
+  ['^\\[BONUS\\] (\\d+) Punti Eroe rimasti: \\+(\\d+) Crediti Cosmici$', '[BONUS] $1 Hero Points left: +$2 Cosmic Credits'],
+  ['^\\[BONUS\\] (\\d+) VP rimasti: \\+(\\d+) Crediti Cosmici$', '[BONUS] $1 VP left: +$2 Cosmic Credits'],
+  ['^\\[CARESTIA\\] Round pari: nessuno pesca a inizio turno$', '[FAMINE] Even round: nobody draws at the start of the turn'],
+  ['^\\[MINACCIA\\] Il sacrificio vale (\\d+) invece di (\\d+)$', '[THREAT] The sacrifice is worth $1 instead of $2'],
+  ['^\\[(ZONA MORTA DIGITALE|ZONA MORTA RADIOATTIVA|SPECCHIO INFRANTO|SPECCHIO ASSOLUTO)\\] (.+) subisce (\\d+) danni diretti \\(Vita: (\\d+)/(\\d+)\\)$', '[$1] $2 takes $3 direct damage (Life: $4/$5)'],
+  ['^\\[SACCHEGGIO\\] (.+) perde \\[(.+)\\]$', '[PLUNDER] $1 loses [$2]'],
+  ['^\\[(TENTAZIONE|RISONANZA|SIMBIOSI OSCURA)\\] I nemici recuperano (\\d+) Vita$', '[$1] The enemies recover $2 Life'],
+  ['^\\[EROSIONE\\] Resistenza di tutti -(\\d+)$', '[EROSION] Everyone\'s Resistance -$1'],
+  ['^\\[ROVINA TOTALE\\] Resistenza di tutti -(\\d+)$', '[TOTAL RUIN] Everyone\'s Resistance -$1'],
+  ['^\\[FONDERIA IN FUSIONE\\] Il Custode guadagna \\+1 Forza per questo round$', '[MELTING FOUNDRY] The Warden gains +1 Strength this round'],
+  ['^\\[FUSIONE TOTALE\\] Il Custode guadagna \\+1 Forza permanente \\((\\d+)\\)$', '[TOTAL MELTDOWN] The Warden gains +1 permanent Strength ($1)'],
+  ['^\\[ARENA ASSOLUTA\\] Si possono scartare al massimo (\\d+) carte per colpo$', '[ABSOLUTE ARENA] At most $1 cards can be discarded per hit'],
+  ['^\\[DETONAZIONE\\] Esplosione del Timer! (\\d+) danni diretti e \\+1 TRM a tutti gli eroi!$', '[DETONATION] The Timer explodes! $1 direct damage and +1 TRM to all heroes!']
 );

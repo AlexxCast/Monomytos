@@ -10,11 +10,27 @@ class MonomythosEngine {
   }
 
   emit(event, data) {
+    if (event === 'game_over') this.bonusMoraleFinale();
     this.listeners.forEach(l => {
       if (l.event === event || l.event === '*') {
         l.cb(event, data, this.state);
       }
     });
+  }
+
+  // A fine partita (Classificata e Storia) ogni Punto Eroe/VP rimasto vale 5 crediti — scelta di Alessio 2026-11-05
+  bonusMoraleFinale() {
+    const st = this.state;
+    if (!st || st._bonusMorale || !(st.ranked || st.story) || !window.Progression) return;
+    st._bonusMorale = true;
+    const me = st.players.find(p => p.isLocal);
+    if (!me) return;
+    const punti = me.state === 'villain' ? (me.vp || 0) : (me.pe || 0);
+    const cr = punti * ((window.MONOMYTHOS_BILANCIAMENTO || {}).creditiPerPunto || 5);
+    if (cr > 0) {
+      window.Progression.addCredits(cr, me.state === 'villain' ? 'VP rimasti' : 'Punti Eroe rimasti');
+      this.addLog('sys', `[BONUS] ${punti} ${me.state === 'villain' ? 'VP' : 'Punti Eroe'} rimasti: +${cr} Crediti Cosmici`);
+    }
   }
 
   // Initialize a new match
@@ -257,6 +273,9 @@ class MonomythosEngine {
       brutoMax: brutMax,
       isBoss: this.state.actIndex === 2
     };
+    // La Vita della Minaccia è esattamente la somma degli sgherri
+    this.syncThreatHp();
+    this.state.currentThreat.maxHp = this.state.currentThreat.hp;
 
     if (this.state.isRogueHeroBoss) {
       this.setupRogueHeroBoss(this.state.bossHeroName || "Titano d'Acciaio");
@@ -326,6 +345,7 @@ class MonomythosEngine {
       p.shield = 0;
       p.sacrificesThisRound = 0;
       p.pbUsedThisTurn = false;
+      p.pbExtraUsed = false;
       p.actedThisRound = false;
       p.retentionUsedThisRound = false;
       p.slots = {
@@ -351,7 +371,9 @@ class MonomythosEngine {
       }
 
       // Dal Round 2: pescaggio a scelta da 1 a min(5, Velocità + 1) (§8.5). Al Round 1 vale la mano iniziale.
-      if (this.state.round > 1) {
+      if (this.state.round > 1 && this.mx('saltaPescata', false)) {
+        if (p === this.state.players.find(x => !x.isDead)) this.addLog('threat', `[CARESTIA] Round pari: nessuno pesca a inizio turno`);
+      } else if (this.state.round > 1) {
         const maxDraw = this.getMaxDraw(p);
         const wanted = p.drawChoice == null ? this.getBotDrawChoice(p, maxDraw) : p.drawChoice;
         const drawCount = Math.max(1, Math.min(maxDraw, wanted));
@@ -428,11 +450,34 @@ class MonomythosEngine {
     return this.state.players[this.state.turnIndex];
   }
 
+  // Effetti Pericolosi/Cosmici della Minaccia in gioco (js/minacce_effetti.js)
+  mx(gancio, valore, info) {
+    return window.EffettiMinaccia ? window.EffettiMinaccia.mod(this, gancio, valore, info) : valore;
+  }
+
+  // La Minaccia è la somma dei suoi sgherri (scelta di Alessio 2026-11-05): non si attacca direttamente.
+  // Un colpo "alla Minaccia" va allo sgherro vivo più ferito.
+  sgherroBersaglio() {
+    const th = this.state && this.state.currentThreat;
+    const vivi = ((th && th.mooks) || []).filter(m => !m.isDead && m.hp > 0);
+    if (!vivi.length) return null;
+    return vivi.reduce((a, b) => (b.hp < a.hp ? b : a));
+  }
+
+  // Vita della Minaccia = somma della Vita degli sgherri vivi
+  syncThreatHp() {
+    const th = this.state && this.state.currentThreat;
+    if (!th || !th.mooks || !th.mooks.length) return;
+    th.hp = th.mooks.reduce((t, m) => t + (m.isDead ? 0 : Math.max(0, m.hp)), 0);
+  }
+
   // Target resolver helper (Point 7)
   resolveTarget(targetId) {
     if (!this.state || !this.state.currentThreat) return null;
     const th = this.state.currentThreat;
     if (!targetId || targetId === 'threat_boss' || targetId === 'boss') {
+      const m = this.sgherroBersaglio();
+      if (m) return { id: m.id, type: 'mook', name: m.name, entity: m };
       return { id: 'threat_boss', type: 'boss', name: th.nome, entity: th };
     }
     if (th.mooks) {
@@ -456,8 +501,8 @@ class MonomythosEngine {
     const hasHealOrBuff = fxList.some(f => f.type === 'heal' || f.type === 'shield' || f.type === 'draw' || f.type === 'revive');
     const hasDamage = fxList.some(f => f.type === 'damage' || f.type === 'stun' || f.type === 'weaken' || f.type === 'weakenForza');
 
-    // 1. Threat Boss
-    candidates.push({
+    // 1. Threat Boss: solo se non restano sgherri (la Minaccia è la somma degli sgherri)
+    if (!this.sgherroBersaglio()) candidates.push({
       id: 'threat_boss',
       type: 'boss',
       name: th.nome,
@@ -574,6 +619,13 @@ class MonomythosEngine {
       targetId = 'threat_boss';
     }
 
+    // Spesa Morale (§4.3): le carte con [Costo] spendono Punti Eroe (o VP da Villain)
+    if (window.Morale && !window.Morale.puoPagare(card, player)) {
+      return { ok: false, msg: window.Morale.motivo(card, player) };
+    }
+    const pagato = window.Morale ? window.Morale.paga(card, player) : null;
+    if (pagato) this.addLog(pagato.tipo === 'pe' ? 'hero' : 'threat', `[SPESA MORALE] ${player.name} spende ${pagato.n} ${pagato.tipo === 'pe' ? 'Punti Eroe' : 'VP'} (rimasti: ${player[pagato.tipo]})`);
+
     // Deduct slots
     this.deductPlayerSlot(player, cat, cost);
     player.hand.splice(cardIdx, 1);
@@ -590,6 +642,8 @@ class MonomythosEngine {
       this.checkPlayerDeath(player);
       if (player.isDead) return { ok: true };
     }
+
+    if (card.osc) this.mx('cartaOscura', null, { player, card });
 
     // Disciplina d'Assalto (N) (§3.3.3): +1 danno se dopo la giocata restano almeno N carte in mano
     const text = String(card.effetto || '');
@@ -622,8 +676,8 @@ class MonomythosEngine {
         // If played actively in-turn, reaction cards provide active defensive shield/prep
         if (fx.timing && fx.timing !== 'play') {
           if (fx.type === 'shield' || fx.type === 'parry' || fx.type === 'damageReduction') {
-            const shieldAmt = fx.amount || card.valore || 2;
-            player.shield = (player.shield || 0) + shieldAmt;
+            const shieldAmt = this.mx('scudo', fx.amount || card.valore || 2, { source: player });
+            player.shield = Math.min(this.mx('scudoMax', Infinity, { source: player }), (player.shield || 0) + shieldAmt);
             this.addLog('hero', `[ASSETTO DIFENSIVO] ${player.name} prepara ${card.nome}: +${shieldAmt} Scudo attivo.`);
             return;
           } else if (fx.type === 'damage') {
@@ -666,8 +720,9 @@ class MonomythosEngine {
     const player = this.state.players.find(p => p.id === playerId);
     if (!player || player.isDead) return { ok: false, msg: 'Giocatore non attivo' };
 
-    if (player.sacrificesThisRound >= 2) {
-      return { ok: false, msg: 'Massimo 2 sacrifici tattici per round consentiti' };
+    const maxSac = this.mx('maxSacrifici', 2);
+    if (player.sacrificesThisRound >= maxSac) {
+      return { ok: false, msg: maxSac === 1 ? 'Regole d\'Onore: massimo 1 Sacrificio Tattico per round' : 'Massimo 2 sacrifici tattici per round consentiti' };
     }
 
     const cardIdx = player.hand.findIndex(c => c.uid === cardUid);
@@ -688,6 +743,10 @@ class MonomythosEngine {
       this.addLog('hero', `[POTENZIAMENTO] Sacrificio raddoppiato: ${card.valore} → ${contribution}`);
       delete player.boostedSacrifice;
     }
+
+    const contribPrima = contribution;
+    contribution = this.mx('valoreSacrificio', contribution, { card, track: trackChoice, player });
+    if (contribution !== contribPrima) this.addLog('threat', `[MINACCIA] Il sacrificio vale ${contribution} invece di ${contribPrima}`);
 
     if (trackChoice === 'primario') {
       th.primarioProgress = Math.min(th.primarioMax, th.primarioProgress + contribution);
@@ -741,7 +800,7 @@ class MonomythosEngine {
 
   // Potere Base: due opzioni per eroe, con testo e effetto reali (dal manuale, semplificati per il digitale)
   getBasePowerOptions(player) {
-    const dmg = (titolo) => ({ titolo, desc: 'Infliggi 1 danno alla Minaccia.', badge: '1 danno', run: (e, p) => e._pbDanno(p, 'threat_boss') });
+    const dmg = (titolo) => ({ titolo, desc: 'Infliggi 1 danno allo sgherro più ferito.', badge: '1 danno', run: (e, p) => e._pbDanno(p, 'threat_boss') });
     const slot = (cat) => ({ titolo: `+1 Slot ${cat}`, desc: `Ottieni 1 Slot ${cat} in più da spendere per giocare carte in questo turno.`, badge: `+1 ${cat}`, run: (e, p) => { p.slots[cat] = (p.slots[cat] || 0) + 1; const k = cat.toLowerCase().replace('à', 'a'); p.slots[k] = (p.slots[k] || 0) + 1; if (cat === 'Agilità') p.slots.Agilita = p.slots.Agilità; return `+1 Slot ${cat}`; } });
     const T = {
       'Iron Aegis': [dmg('Colpo cinetico'), slot('Potenza')],
@@ -759,7 +818,7 @@ class MonomythosEngine {
       'Architetto Ombra': [slot('Intelligenza'),
         { titolo: 'Analisi', desc: 'Guarda le prime 2 carte del tuo mazzo e scegli se scartarle.', badge: 'Guarda 2', ok: p => p.deck.length > 0, run: (e, p) => { const top = p.deck.slice(-2).reverse(); e.emit('base_power_peek', { player: p, carte: top }); return 'guarda le prime 2 carte del suo mazzo'; } }],
       "Sussurro dell'Abisso": [dmg('Impeto oscuro'),
-        { titolo: 'Patto oscuro', desc: 'Solo se sei Villain: ottieni 1 Punto Vittoria e subisci 1 Trauma.', badge: '+1 PV', ok: p => p.state === 'villain', run: (e, p) => { p.vp += 1; p.trm += 1; return '+1 Punto Vittoria e +1 Trauma'; } }],
+        { titolo: 'Patto oscuro', desc: 'Solo se sei Villain: ottieni 1 Punto Vittoria e subisci 1 Trauma.', badge: '+1 PV', ok: p => p.state === 'villain', run: (e, p) => { p.vp += 1; p.trm += 1; e.mx('vpGenerati', 1, { player: p }); return '+1 Punto Vittoria e +1 Trauma'; } }],
       'Duellante Spezzato': [dmg('Colpo sleale'),
         { titolo: 'Preparazione', desc: 'Il tuo prossimo attacco infligge 1 danno in più.', badge: '+1 al prossimo', run: (e, p) => { p.boostedAttack = (p.boostedAttack || 0) + 1; return '+1 danno al prossimo attacco'; } }]
     };
@@ -777,9 +836,20 @@ class MonomythosEngine {
   activateBasePower(playerId, optionIndex = 0) {
     const player = this.state.players.find(p => p.id === playerId);
     if (!player || player.isDead) return { ok: false, msg: 'Giocatore non attivo' };
-    if (player.pbUsedThisTurn) return { ok: false, msg: 'Potere Base già usato questo turno' };
+    // Seconda attivazione nel turno pagando 3 Punti Eroe (3 VP da Villain) — scelta di Alessio 2026-11-05
+    const extra = player.pbUsedThisTurn;
+    if (extra) {
+      const k = this.costoPbExtra(player);
+      if (!k.ok) return { ok: false, msg: k.msg };
+    }
     const opz = this.getBasePowerOptions(player)[optionIndex] || this.getBasePowerOptions(player)[0];
     if (opz.ok && !opz.ok(player)) return { ok: false, msg: 'Questa opzione ora non si può usare' };
+    if (extra) {
+      const k = this.costoPbExtra(player);
+      player[k.tipo] -= k.n;
+      player.pbExtraUsed = true;
+      this.addLog(k.tipo === 'pe' ? 'hero' : 'threat', `[POTERE EXTRA] ${player.name} spende ${k.n} ${k.tipo === 'pe' ? 'Punti Eroe' : 'VP'} per usare di nuovo ${player.pbName}`);
+    }
 
     player.pbUsedThisTurn = true;
     player.actedThisRound = true;
@@ -789,6 +859,16 @@ class MonomythosEngine {
     this.emit('base_power_used', { player, optionIndex });
     this.checkThreatDefeated();
     return { ok: true };
+  }
+
+  // Costo della seconda attivazione del Potere Base nello stesso turno
+  costoPbExtra(player) {
+    const n = (window.MONOMYTHOS_BILANCIAMENTO || {}).costoPotereExtra || 3;
+    const tipo = player.state === 'villain' ? 'vp' : 'pe';
+    const nome = tipo === 'pe' ? 'Punti Eroe' : 'VP';
+    if (player.pbExtraUsed) return { ok: false, tipo, n, msg: 'Potere Base già usato due volte in questo turno' };
+    if ((player[tipo] || 0) < n) return { ok: false, tipo, n, msg: `Potere Base già usato: per usarlo di nuovo servono ${n} ${nome} (ne hai ${player[tipo] || 0})` };
+    return { ok: true, tipo, n, msg: '' };
   }
 
   // Esiste almeno una mossa legale? (carta giocabile con gli slot, sacrificio su un binario compatibile o Potere Base)
@@ -914,12 +994,15 @@ class MonomythosEngine {
     th.timer--;
     this.addLog('threat', `Timer Operativo: ${th.timer}/${th.timerMax}`);
 
+    this.mx('faseNemici', null);
+
     // Check Detonation
     if (th.timer <= 0) {
-      this.addLog('threat', `[DETONAZIONE] Esplosione del Timer! 3 danni diretti e +1 TRM a tutti gli eroi!`);
+      const danniDet = this.mx('danniDetonazione', 3);
+      this.addLog('threat', `[DETONAZIONE] Esplosione del Timer! ${danniDet} danni diretti e +1 TRM a tutti gli eroi!`);
       this.state.players.forEach(p => {
         if (p.isDead) return;
-        p.vita = Math.max(0, p.vita - 3);
+        p.vita = Math.max(0, p.vita - danniDet);
         p.trm = Math.min(5, p.trm + 1);
         this.checkBreakingPoint(p);
         this.checkPlayerDeath(p);
@@ -941,6 +1024,8 @@ class MonomythosEngine {
       if (this.isGameOver() || this.checkThreatDefeated() || this.checkAllHeroesDead()) return;
 
       if (enemyIndex >= enemies.length) {
+        this.mx('fineRound', null);
+        if (this.isGameOver() || this.checkAllHeroesDead()) return;
         // La riduzione di Forza vale un round
         if (th._forzaBase != null) { th.forza = th._forzaBase; delete th._forzaBase; }
         // Proceed to next round
@@ -951,6 +1036,7 @@ class MonomythosEngine {
         return;
       }
 
+      const indiceAttacco = enemyIndex;
       const enemy = enemies[enemyIndex++];
       const livingPlayers = this.state.players.filter(p => !p.isDead);
       if (livingPlayers.length === 0) return;
@@ -964,7 +1050,8 @@ class MonomythosEngine {
       delete th.forcedTarget;
 
       const forzaExtra = Math.floor((livingPlayers.length - 1) * ((window.MONOMYTHOS_BILANCIAMENTO || {}).forzaPerEroe || 0));
-      this.resolveEnemyAttack(enemy, target, Math.max(0, th.forza + forzaExtra - (sfiancato ? 1 : 0)), () => {
+      const forzaColpo = this.mx('forzaAttacco', th.forza + forzaExtra, { enemy, indice: indiceAttacco });
+      this.resolveEnemyAttack(enemy, target, Math.max(0, forzaColpo - (sfiancato ? 1 : 0)), () => {
         setTimeout(processNextAttack, 400);
       });
     };
@@ -982,7 +1069,7 @@ class MonomythosEngine {
     }
 
     // §3.3 Travolgere: solo la parte di danno oltre la Resistenza (minimo 1, §3.3.2) è imparabile
-    const effectiveEnd = Math.max(1, target.end + (target.tempResistance || 0));
+    const effectiveEnd = Math.max(1, this.mx('resistenza', target.end + (target.tempResistance || 0), { target }));
     const isTrample = (effectiveDmg > effectiveEnd);
     const excess = Math.max(0, effectiveDmg - effectiveEnd);
     const mitigable = effectiveDmg - excess;
@@ -1019,6 +1106,7 @@ class MonomythosEngine {
         this.addLog('hero', `[COLPO AMMORTIZZATO] Danno completamente assorbito dalla Parata Dinamica!`);
       }
       this.checkPlayerDeath(target);
+      if (!target.isDead) this.mx('colpito', null, { target, danni: penetrated });
       this.emit('damage_taken', { target, dmg: penetrated, parried: absorbed, reflected, trample: isTrample });
       if (onComplete) onComplete();
     };
@@ -1121,7 +1209,9 @@ class MonomythosEngine {
       const rate = this.getParryRate();
       let valueSum = 0;
       target.hand.sort((a, b) => (a.valore || 0) - (b.valore || 0));
-      while (target.hand.length > 1 && Math.floor(valueSum / rate) < effectiveDmg) {
+      const maxParata = this.mx('maxCarteParata', Infinity);
+      let scartate = 0;
+      while (target.hand.length > 1 && scartate++ < maxParata && Math.floor(valueSum / rate) < effectiveDmg) {
         const pCard = target.hand.pop();
         target.discard.push(pCard);
         valueSum += (pCard.valore || 0);
@@ -1166,7 +1256,9 @@ class MonomythosEngine {
         applyRemainingDamage(0, false, 0);
       }
     } else if (choice.type === 'parry' || choice.type === 'parry_cards' || choice.type === 'parry_card' || choice.type === 'parry_multi') {
-      const uids = choice.cardUids || (choice.cardUid ? [choice.cardUid] : []);
+      let uids = choice.cardUids || (choice.cardUid ? [choice.cardUid] : []);
+      const maxParata = this.mx('maxCarteParata', Infinity);
+      if (uids.length > maxParata) { uids = uids.slice(0, maxParata); this.addLog('threat', `[ARENA ASSOLUTA] Si possono scartare al massimo ${maxParata} carte per colpo`); }
       let valueSum = 0;
       uids.forEach(uid => {
         const playerWithCard = this.state.players.find(p => p.hand.some(c => c.uid === uid));
@@ -1260,6 +1352,8 @@ class MonomythosEngine {
     if (disarmedPrimario || disarmedBruto || bossKilled) {
       const reason = disarmedPrimario ? 'Disinnesco Primario completato' : (disarmedBruto ? 'Disinnesco Bruto completato' : 'Tutti i nemici abbattuti');
       this.addLog('hero', `[VITTORIA] MINACCIA RISOLTA! (${reason})`);
+      // Il binario è la via più difficile: chi lo completa ottiene un bottino (scelta di Alessio 2026-11-05)
+      if ((disarmedPrimario || disarmedBruto) && !bossKilled) this.bottinoDisinnesco();
 
       if (this.state.actIndex < 2) {
         // Advance to next Act
@@ -1281,6 +1375,21 @@ class MonomythosEngine {
       }
     }
     return false;
+  }
+
+  // Bottino del Disinnesco: ogni eroe vivo (non Villain) +3 Vita, -1 Trauma, +1 Punto Eroe e pesca 1 carta;
+  // in Classificata e Storia anche +50 Crediti.
+  bottinoDisinnesco() {
+    const B = (window.MONOMYTHOS_BILANCIAMENTO || {}).bottinoDisinnesco || { vita: 3, trauma: 1, pe: 1, carte: 1, crediti: 50 };
+    this.state.players.filter(p => !p.isDead && p.state !== 'villain').forEach(p => {
+      p.vita = Math.min(p.vitaMax, p.vita + (B.vita || 0));
+      p.trm = Math.max(0, (p.trm || 0) - (B.trauma || 0));
+      p.pe = (p.pe || 0) + (B.pe || 0);
+      for (let i = 0; i < (B.carte || 0); i++) if (p.hand.length < p.maxHand) this.drawOne(p);
+    });
+    if (window.Progression && (this.state.ranked || this.state.story) && B.crediti) window.Progression.addCredits(B.crediti, 'Bottino del Disinnesco');
+    this.addLog('hero', `[BOTTINO] Disinnesco completato: ogni eroe +${B.vita} Vita, -${B.trauma} Trauma, +${B.pe} PE e pesca ${B.carte} carta${(this.state.ranked || this.state.story) && B.crediti ? ` (+${B.crediti} Crediti Cosmici)` : ''}`);
+    this.emit('bottino_disinnesco', B);
   }
 
   checkAllHeroesDead() {
@@ -1317,7 +1426,7 @@ class MonomythosEngine {
     // Carte giocabili: il bot evita le carte che danno Trauma quando è vicino al Punto di Rottura
     const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
     const traumaOf = c => (c.fx_list || []).reduce((t, f) => t + (f.type === 'trauma' && f.amount > 0 ? f.amount : 0), 0);
-    const getPlayable = () => bot.hand.filter(c => this.getPlayerSlot(bot, c.cat) >= c.valore && bot.trm + traumaOf(c) < soglia - 1)
+    const getPlayable = () => bot.hand.filter(c => this.getPlayerSlot(bot, c.cat) >= c.valore && bot.trm + traumaOf(c) < soglia - 1 && (!window.Morale || window.Morale.puoPagare(c, bot)))
       .sort((a, b) => traumaOf(a) - traumaOf(b));
     let playableCards = getPlayable();
     let plays = 0;
