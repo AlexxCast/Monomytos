@@ -66,7 +66,8 @@
       this._audio = a;
       const p = a.play();
       if (p) p.catch(() => {});
-      this._sfuma(a, this.volMusica() * 0.85, 1200);
+      // musica di sottofondo: bassa, sotto voci ed effetti
+      this._sfuma(a, this.volMusica() * 0.4, 1200);
     },
     _sfuma(el, verso, ms, poi) {
       clearInterval(el._sfumaT);
@@ -179,7 +180,7 @@
           o.connect(f); f.connect(g); g.connect(out); o.start(); nodi.push(o, f, g);
           loopRumore('bandpass', 2400, 1.5).connect(out); break;
         }
-        case 'battito': { const tick = () => { this.colpo('battito', .55); timers.push(setTimeout(tick, 1700)); }; tick(); break; }
+        case 'battito': { const tick = () => { this.colpo('battito', .35); timers.push(setTimeout(tick, 1700)); }; tick(); break; }
         case 'laser': { const z = () => { this.colpo('laser', .7); timers.push(setTimeout(z, 500 + Math.random() * 900)); }; timers.push(setTimeout(z, 300)); break; }
         case 'lampi': { const z = () => { this.colpo('scarica', .8); timers.push(setTimeout(z, 1800 + Math.random() * 2400)); }; timers.push(setTimeout(z, 250)); break; }
         case 'scintille': { const z = () => { this.colpo('scintilla', .5); timers.push(setTimeout(z, 300 + Math.random() * 1200)); }; z(); break; }
@@ -236,6 +237,10 @@
       const ctx = this.ctx, v = this.volSfx() * forza;
       if (!ctx || v <= 0 || !this._attivo) return;
       const t = ctx.currentTime;
+      // lo stesso colpo due volte nello stesso istante (vignetta che trema + scritta KRRRAK) si sente una volta sola
+      this._ultimi = this._ultimi || {};
+      if (this._ultimi[tipo] != null && Math.abs(t - this._ultimi[tipo]) < 0.25) return;
+      this._ultimi[tipo] = t;
       const fine = [];
       const osc = (tipoOnda, f0, f1, durata, vol, dopo = 0) => {
         const o = ctx.createOscillator(), g = ctx.createGain();
@@ -260,17 +265,37 @@
         s.start(t + dopo); s.stop(t + dopo + durata + 0.05);
         fine.push(s, f, g);
       };
+      // rumore "sporco" da fumetto: filtro che scende e distorsione (KA-BOOM, CRASH)
+      const sporco = (f0, f1, durata, vol, dopo = 0, quanto = 30) => {
+        const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), w = ctx.createWaveShaper(), g = ctx.createGain();
+        s.buffer = this._rumore(ctx, durata + 0.05);
+        f.type = 'lowpass'; f.Q.value = 4;
+        f.frequency.setValueAtTime(f0, t + dopo); f.frequency.exponentialRampToValueAtTime(f1, t + dopo + durata);
+        const c = new Float32Array(1024); for (let i = 0; i < 1024; i++) { const x = i / 511.5 - 1; c[i] = Math.tanh(x * quanto) * 0.8; }
+        w.curve = c;
+        g.gain.setValueAtTime(vol, t + dopo); g.gain.setValueAtTime(vol, t + dopo + durata * 0.15);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + dopo + durata);
+        s.connect(f); f.connect(w); w.connect(g); g.connect(this._bus(ctx));
+        s.start(t + dopo); s.stop(t + dopo + durata + 0.05);
+        fine.push(s, f, w, g);
+      };
       switch (tipo) {
         case 'battito': osc('sine', 85, 40, 0.28, v * .7); osc('triangle', 190, 90, 0.16, v * .5); rum('lowpass', 900, 0.05, v * .5); osc('sine', 75, 38, 0.22, v * .4, 0.3); osc('triangle', 170, 85, 0.13, v * .35, 0.3); break;
-        case 'laser': osc('sawtooth', 1800 + Math.random() * 600, 160, 0.22, v * .3); osc('square', 900, 90, 0.18, v * .14); rum('bandpass', 2500, 0.12, v * .5, 0.16, 2); break;
-        case 'esplosione': rum('lowpass', 2500, 1.1, v * 1.2, 0, .7, 120); rum('bandpass', 900, 0.4, v * .9, 0, .8); osc('sine', 90, 30, 0.7, v * .8); osc('triangle', 220, 70, 0.4, v * .5); break;
-        case 'impatto': rum('lowpass', 3500, 0.35, v * 1.0, 0, .8, 300); osc('triangle', 240, 80, 0.25, v * .6); break;
-        case 'spegnimento': osc('sawtooth', 440, 60, 1.4, v * .35); rum('lowpass', 3000, 0.25, v * .4, 1.3, .8); osc('sine', 60, 30, 0.5, v * .5, 1.3); break;
-        case 'scarica': rum('highpass', 1800, 0.06, v * .8); rum('bandpass', 3000, 0.09, v * .6, 0.08, 1.2); rum('highpass', 1500, 0.05, v * .7, 0.2); rum('lowpass', 600, 0.9, v * .3, 0.05, .7, 80); break;
+        // PEW! (sparo laser da cartone: fischio che scende di colpo)
+        case 'laser': { const f = 1500 + Math.random() * 500; osc('square', f, 180, 0.17, v * .3); osc('triangle', f * 2, 300, 0.12, v * .14); break; }
+        // KA-BOOM! (schiocco, poi boato sporco che si spegne)
+        case 'esplosione': rum('highpass', 2500, 0.05, v * 1.1); osc('square', 420, 120, 0.06, v * .3);
+          sporco(5000, 70, 1.3, v * .7, 0.05); osc('square', 150, 32, 0.9, v * .32, 0.05); osc('sine', 80, 28, 1.0, v * .9, 0.05); break;
+        // POW! / BAM!
+        case 'impatto': osc('square', 560, 90, 0.16, v * .38); sporco(6000, 300, 0.28, v * .6); osc('sine', 150, 45, 0.3, v * .8); break;
+        case 'spegnimento': osc('square', 620, 38, 1.3, v * .28); rum('lowpass', 3000, 0.25, v * .4, 1.3, .8); osc('sine', 60, 30, 0.5, v * .5, 1.3); break;
+        // ZZZAP! (ronzio elettrico che crepita)
+        case 'scarica': osc('sawtooth', 110, 95, 0.35, v * .35); osc('square', 2600, 400, 0.3, v * .12); rum('highpass', 1800, 0.06, v * .8); rum('bandpass', 3000, 0.09, v * .6, 0.12, 1.2); sporco(3000, 400, 0.4, v * .35, 0.02, 60); break;
         case 'scintilla': rum('highpass', 4000, 0.03 + Math.random() * 0.04, v * .7); break;
         case 'crepitio': rum('bandpass', 1500 + Math.random() * 2500, 0.015 + Math.random() * 0.03, v * .9, 0, 3); break;
         case 'bip': osc('square', 1320, 0, 0.09, v * .2); osc('square', 1320, 0, 0.09, v * .2, 0.16); break;
-        case 'motore': osc('sawtooth', 110, 260, 0.9, v * .25); rum('bandpass', 500, 0.9, v * .6, 0, 2, 1400); break;
+        // VRRRM!
+        case 'motore': osc('sawtooth', 90, 300, 0.9, v * .3); osc('square', 45, 150, 0.9, v * .15); sporco(700, 2500, 0.9, v * .3, 0, 40); break;
         case 'soffio': rum('bandpass', 600, 0.8, v * 1.0, 0, 1.2, 3500); break;
         case 'eco': [0, .25, .5, .75].forEach((d, i) => osc('triangle', 660, 330, 0.5, v * .4 / (i + 1), d)); break;
       }
