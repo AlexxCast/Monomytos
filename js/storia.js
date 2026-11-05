@@ -21,18 +21,18 @@
   const ARCHIVIO = [
     { id: 'mondo', titolo: "L'Eclissi Sintetica", dopo: null, testo: MONDO.paragrafi.join(' ') },
     { id: 'stella', titolo: 'La Stella della Follia', dopo: 'c1m1', testo: "Non sta in nessuna mappa del cielo. Pulsa di rosso e di viola tra le galassie azzurre e verdi, e chi la guarda troppo a lungo diventa aggressivo, come se qualcuno gli togliesse il freno. I primi infetti si riconoscono dagli occhi: una luce viola sul fondo delle pupille." },
-    { id: 'rovine', titolo: 'Vespera Vecchia', dopo: 'c2m1', testo: "Il quartiere abbandonato dopo il terremoto di trent'anni fa. Palazzi sventrati, gallerie della metropolitana chiuse, nessuna telecamera. Ci vivono i Predoni delle Rovine, bande che durante il blackout sono diventate branchi." },
-    { id: 'arena', titolo: "L'Arena di Sotto", dopo: 'c2m2', testo: "Una vecchia cisterna sotto la città, trasformata in un mattatoio. Nessuno organizza gli incontri e nessuno incassa le scommesse: gli infetti ci arrivano da soli, attirati da un istinto di sciame. La Stella ha bisogno di un posto dove far esplodere la violenza, e l'Arena è quel posto." },
-    { id: 'droni', titolo: 'I Droni Cinetici', dopo: 'c2m3', testo: "La guardia personale di Prometeo. Non sono droni da sorveglianza: sono macchine da guerra, costruite in segreto nei laboratori della Torre. Neon Phantom li conosce bene, perché è stato una delle cavie su cui sono stati provati." },
-    { id: 'velo', titolo: 'Il Velo di Tenebra', dopo: 'c2m4', testo: "Non è solo una luce nel cielo: è una nebbia rossa e viola che si può respirare. Dove si addensa, l'aria diventa pesante e la mente cede. I cultisti sanno come richiamarla, e la usano come un'arma." },
+    { id: 'rovine', titolo: 'Vespera Vecchia', dopo: 'c1m1', testo: "Il quartiere abbandonato dopo il terremoto di trent'anni fa. Palazzi sventrati, gallerie della metropolitana chiuse, nessuna telecamera. Ci vivono i Predoni delle Rovine, bande che durante il blackout sono diventate branchi." },
+    { id: 'arena', titolo: "L'Arena di Sotto", dopo: 'c2m1', testo: "Una vecchia cisterna sotto la città, trasformata in un mattatoio. Nessuno organizza gli incontri e nessuno incassa le scommesse: gli infetti ci arrivano da soli, attirati da un istinto di sciame. La Stella ha bisogno di un posto dove far esplodere la violenza, e l'Arena è quel posto." },
+    { id: 'droni', titolo: 'I Droni Cinetici', dopo: 'c2m1', testo: "La guardia personale di Prometeo. Non sono droni da sorveglianza: sono macchine da guerra, costruite in segreto nei laboratori della Torre. Neon Phantom li conosce bene, perché è stato una delle cavie su cui sono stati provati." },
+    { id: 'velo', titolo: 'Il Velo di Tenebra', dopo: 'c2m2', testo: "Non è solo una luce nel cielo: è una nebbia rossa e viola che si può respirare. Dove si addensa, l'aria diventa pesante e la mente cede. I cultisti sanno come richiamarla, e la usano come un'arma." },
     { id: 'culto', titolo: 'Il Culto del Velo', dopo: 'c3m1', testo: "Un ordine esoterico antico quanto le leggende. Credono che l'universo chieda una bilancia perfetta tra bene e male, e che l'era moderna l'abbia rotta: troppi eroi, troppi geni, villain ridotti a criminali di strada. Hanno invocato il Velo per riportare il Caos." },
-    { id: 'araldo', titolo: "L'Araldo", dopo: 'c3m2', testo: "Prima era Kaelen, la miglior lama della Gilda. Fu lui a tradire la Gilda e a far ricadere la colpa sulla Duellante, che venne espulsa con la lama spezzata. Oggi porta il mantello rosso del Culto e una spada che brucia di viola." },
-    { id: 'fonderia', titolo: 'La Fonderia Ardena', dopo: 'c3m3', testo: "Il cuore industriale di Vespera. Dieci anni fa il Forno Sette crollò con duecento operai dentro: ne uscì uno solo, che oggi chiamano Titano d'Acciaio. Stanotte il Culto ha armato gli operai infetti e la Fonderia è tornata a bruciare." },
+    { id: 'araldo', titolo: "L'Araldo", dopo: 'c3m1', testo: "Prima era Kaelen, la miglior lama della Gilda. Fu lui a tradire la Gilda e a far ricadere la colpa sulla Duellante, che venne espulsa con la lama spezzata. Oggi porta il mantello rosso del Culto e una spada che brucia di viola." },
+    { id: 'fonderia', titolo: 'La Fonderia Ardena', dopo: 'c3m2', testo: "Il cuore industriale di Vespera. Dieci anni fa il Forno Sette crollò con duecento operai dentro: ne uscì uno solo, che oggi chiamano Titano d'Acciaio. Stanotte il Culto ha armato gli operai infetti e la Fonderia è tornata a bruciare." },
     { id: 'argo', titolo: 'ARGO', dopo: 'c4m1', testo: "L'intelligenza artificiale di Prometeo, nata per guidare la polizia robotica e proteggere Vespera. Sotto il Velo, Prometeo l'ha riscritta con un solo scopo: la massima distruzione. Architetto Ombra aveva avvertito tutti che era pericolosa. Per questo lo cacciarono dal laboratorio." },
     { id: 'campione', titolo: 'Il Campione Imbattuto', dopo: 'c4m2', testo: "Un eroe dei poteri occulti, che nessuno aveva mai sconfitto. Combatteva gli infetti da solo, notte dopo notte. Ma proprio la sua natura oscura lo rendeva il conduttore perfetto per la luce della Stella." },
     { id: 'colosso', titolo: 'Il Colosso di Rovina', dopo: 'c5m1', testo: "Prima di spegnersi, ARGO ha liberato un alveare di nanomacchine sperimentali. Lo sciame si è aggrappato alla statua del Fondatore, in piazza, e l'ha fatta camminare." },
-    { id: 'custode', titolo: "Il Custode d'Acciaio", dopo: 'c5m2', testo: "Il nucleo del Colosso, rimasto senza corazza, è fuggito nella Fonderia in rovina. Lì si è fuso con i macchinari, l'acciaio liquido e il fuoco dei forni. Ne è uscito un guardiano di metallo che non sente dolore." },
-    { id: 'mietitore', titolo: "Il Mietitore dell'Astro Oscuro", dopo: 'c5m3', testo: "L'incarnazione stessa del Velo, evocata dal rituale supremo del Culto. Per i cultisti è il terzo volto di una trinità oscura: la Stella, il Velo e il Mietitore che raccoglie ciò che il Velo ha seminato." },
+    { id: 'custode', titolo: "Il Custode d'Acciaio", dopo: 'c5m1', testo: "Il nucleo del Colosso, rimasto senza corazza, è fuggito nella Fonderia in rovina. Lì si è fuso con i macchinari, l'acciaio liquido e il fuoco dei forni. Ne è uscito un guardiano di metallo che non sente dolore." },
+    { id: 'mietitore', titolo: "Il Mietitore dell'Astro Oscuro", dopo: 'c5m2', testo: "L'incarnazione stessa del Velo, evocata dal rituale supremo del Culto. Per i cultisti è il terzo volto di una trinità oscura: la Stella, il Velo e il Mietitore che raccoglie ciò che il Velo ha seminato." },
     { id: 'eco', titolo: "L'Eco Senza Nome", dopo: 'c6m1', testo: "Quando il Mietitore è caduto, l'onda d'urto ha lacerato lo spazio e il tempo. Da quello strappo è uscita un'anomalia senza forma che ripete i nemici del passato e prova a cancellare la realtà. Dopo di lei, il cielo è tornato normale. Ma niente è più come prima." }
   ];
 
@@ -51,6 +51,7 @@
     eco: { nome: "L'Eco", minaccia: "L'Eco Senza Nome", nemico: true }
   };
 
+  // Ogni carta Minaccia compare una sola volta in tutta la Storia (regola di Alessio): 14 Minacce, 10 missioni da 1 a 3 Atti.
   const CAPITOLI = [
     {
       id: 'c1', numero: 1, titolo: "L'Eclissi Sintetica",
@@ -64,20 +65,20 @@
       ],
       missioni: [
         {
-          id: 'c1m1', difficolta: 1.3, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Vespera', alleato: 'Iron Aegis',
-          atti: ['Torneo Clandestino', "L'Assedio dei Predoni delle Rovine", 'Blackout Ostile'],
+          id: 'c1m1', difficolta: 1.6, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Vespera', alleato: 'Iron Aegis',
+          atti: ["L'Assedio dei Predoni delle Rovine", 'Blackout Ostile'],
           premio: { crediti: 150, bustine: 1 },
           prima: [
             { chi: 'narratore', testo: 'Vespera, ore 23:47. La piazza è piena di gente col naso all\'insù.' },
             { chi: 'eroe', testo: 'Guardano tutti quella stella. Non mi piace come la guardano.' },
-            { chi: 'alleato', testo: 'Ce ne sono due che si stanno picchiando vicino alla fontana. Senza motivo.' },
-            { chi: 'eroe', testo: 'Hanno gli occhi viola. Separiamoli prima che si faccia male qualcuno.' }
+            { chi: 'alleato', testo: 'Dai vicoli escono bande di saccheggiatori. Con il blackout nessuno li ferma.' },
+            { chi: 'eroe', testo: 'Hanno gli occhi viola. Fermiamoli prima che si faccia male qualcuno.' }
           ],
-          atto: ['Dai vicoli escono bande di saccheggiatori: con il blackout nessuno li ferma.', 'Sopra la piazza arrivano i droni di Prometeo. Finalmente aiuto... no. Stanno puntando sulla folla!'],
+          atto: ['Sopra la piazza arrivano i droni di Prometeo. Finalmente aiuto... no. Stanno puntando sulla folla!'],
           dopo: [
             { chi: 'alleato', testo: 'Erano i droni di Prometeo. Hanno sparato sui civili.', fx: 'BZZT' },
             { chi: 'eroe', testo: 'Prometeo è l\'eroe più amato della città. Non può essere stato lui.' },
-            { chi: 'alleato', testo: 'Il segnale che li guidava è ancora attivo. Va verso Vespera Vecchia.' },
+            { chi: 'alleato', testo: 'Il segnale che li guidava è ancora attivo. Va sottoterra, verso la vecchia cisterna.' },
             { chi: 'narratore', testo: 'In cielo, la Stella pulsa più forte. Come se avesse sentito.' }
           ],
           sconfitta: 'La piazza è nel caos. Ma la notte è appena cominciata: riprova.'
@@ -94,69 +95,36 @@
       ],
       missioni: [
         {
-          id: 'c2m1', difficolta: 1.8, titolo: 'Sulle tracce del segnale', luogo: 'Vespera Vecchia', alleato: 'Guardiana di Confine',
-          atti: ['Blackout Ostile', 'Torneo Clandestino', "L'Assedio dei Predoni delle Rovine"],
-          premio: { crediti: 150 },
-          prima: [
-            { chi: 'Guardiana di Confine', testo: 'Questo è il mio confine. Oltre quel muro c\'è Vespera Vecchia, e da stanotte nessuno torna indietro.' },
-            { chi: 'eroe', testo: 'Il segnale dei droni passa di qui. Ci serve una guida.' },
-            { chi: 'Guardiana di Confine', testo: 'Allora tenete gli occhi aperti. I Predoni sono sempre stati pericolosi. Adesso sono anche infetti.' }
-          ],
-          atto: ['Un drone di sorveglianza vi ha visti. E chiama rinforzi tra le macerie.', 'Il branco dei Predoni vi ha circondati. Hanno tutti gli occhi viola.'],
-          dopo: [
-            { chi: 'Guardiana di Confine', testo: 'Non scappavano da noi. Correvano tutti nella stessa direzione.' },
-            { chi: 'eroe', testo: 'Verso la vecchia cisterna. Anche il segnale va lì.' },
-            { chi: 'narratore', testo: 'Dal sottosuolo arriva un rumore sordo. Come una folla che urla.', fx: 'OOOH!' }
-          ],
-          sconfitta: 'Vespera Vecchia non perdona chi si perde. Riprova.'
-        },
-        {
-          id: 'c2m2', difficolta: 1.7, titolo: "L'Arena di Sotto", luogo: 'La vecchia cisterna', alleato: 'Lama Errante',
-          atti: ["L'Assedio dei Predoni delle Rovine", 'Blackout Ostile', 'Torneo Clandestino'],
-          premio: { eroe: 1 },
+          id: 'c2m1', difficolta: 1.8, titolo: "L'Arena di Sotto", luogo: 'La vecchia cisterna', alleato: 'Lama Errante',
+          atti: ['Torneo Clandestino', 'Incursione dei Droni Cinetici'],
+          premio: { eroe: 1, crediti: 100 },
           prima: [
             { chi: 'Lama Errante', testo: 'Sono cresciuta combattendo in posti come questo. Ma qui c\'è qualcosa di diverso.' },
             { chi: 'eroe', testo: 'Nessuno raccoglie le scommesse. Nessuno comanda.' },
             { chi: 'Lama Errante', testo: 'È peggio. Sono venuti qui da soli, come api in un alveare. La Stella li chiama a sfogarsi tutti nello stesso punto.' },
-            { chi: 'eroe', testo: 'Allora entriamo. E restiamo con la testa bassa.' }
+            { chi: 'narratore', testo: 'Qualcuno vi riconosce: i vostri occhi sono puliti, senza il viola. La folla si gira verso di voi.' },
+            { chi: 'prometeo', testo: 'Voi due avete gli occhi troppo puliti per questo posto. Fermateli. Io ho una città da sistemare.', fx: 'VRRRM' }
           ],
-          atto: ['Qualcuno vi riconosce: i vostri occhi sono puliti, senza il viola. La folla si gira verso di voi.', 'Le guardie si fanno da parte. Due campioni dell\'Arena vi aspettano al centro della sabbia.'],
+          atto: ['Prometeo scappa dalla balconata. Il soffitto si apre: la sua guardia del corpo scende in formazione d\'attacco.'],
           dopo: [
-            { chi: 'Lama Errante', testo: 'Guarda lassù, sulla balconata. Quell\'armatura la conosce tutta la città.' },
-            { chi: 'eroe', testo: 'Prometeo. Stava guardando i combattimenti.' },
-            { chi: 'prometeo', testo: 'Voi due avete gli occhi troppo puliti per questo posto.', fx: 'VRRRM' },
-            { chi: 'narratore', testo: 'Il Tecno-Eroe si volta e se ne va. Dietro di lui si accendono decine di luci rosse.' }
+            { chi: 'Lama Errante', testo: 'Droni Cinetici. Non sono droni da sorveglianza: sono armi da guerra.' },
+            { chi: 'eroe', testo: 'Prometeo ha guadagnato troppo vantaggio. È uscito dalla parte delle scogliere.' },
+            { chi: 'Lama Errante', testo: 'Vengo con te. Qui sotto nessuno mi aspetta.' },
+            { chi: 'narratore', testo: 'Fuori, l\'aria ha un odore strano. Dolce e pesante.' }
           ],
           sconfitta: 'L\'Arena vi ha spinti fuori. Rialzatevi e tornate giù.'
         },
         {
-          id: 'c2m3', difficolta: 1.9, titolo: 'La guardia del corpo', luogo: "Le gallerie dell'Arena", alleato: 'Neon Phantom',
-          atti: ['Torneo Clandestino', 'Blackout Ostile', 'Incursione dei Droni Cinetici'],
-          premio: { crediti: 200, minaccia: 1 },
-          prima: [
-            { chi: 'Neon Phantom', testo: 'Quelle luci rosse... sono Droni Cinetici. Li riconoscerei ovunque.' },
-            { chi: 'eroe', testo: 'Come fai a conoscerli?' },
-            { chi: 'Neon Phantom', testo: 'Nei laboratori di Prometeo li provavano su di noi. Io ero la Cavia Alpha. Non sono droni da sorveglianza: sono armi.' },
-            { chi: 'prometeo', testo: 'Fermateli. Io ho una città da sistemare.' }
-          ],
-          atto: ['Gli infetti dell\'Arena vi sbarrano le gallerie per coprire la fuga di Prometeo.', 'Il soffitto si apre. La guardia del corpo di Prometeo scende in formazione d\'attacco.'],
-          dopo: [
-            { chi: 'Neon Phantom', testo: 'Ultimo drone a terra. Ma Prometeo ha guadagnato troppo vantaggio.' },
-            { chi: 'eroe', testo: 'È uscito dalla parte delle scogliere. Inseguiamolo!' },
-            { chi: 'narratore', testo: 'Fuori, l\'aria ha un odore strano. Dolce e pesante.' }
-          ],
-          sconfitta: 'I Droni Cinetici sono troppo veloci. Riorganizzatevi e riprovate.'
-        },
-        {
-          id: 'c2m4', difficolta: 1.6, titolo: "L'aria avvelenata", luogo: 'La Falesia di Vespera', alleato: "Sussurro dell'Abisso",
-          atti: ['Incursione dei Droni Cinetici', "L'Assedio dei Predoni delle Rovine", 'Imboscata sulla Falesia'],
+          id: 'c2m2', difficolta: 2.6, titolo: "L'aria avvelenata", luogo: 'La Falesia di Vespera', alleato: "Sussurro dell'Abisso",
+          atti: ['Imboscata sulla Falesia'],
           premio: { bustine: 1, epica: 1 },
           prima: [
             { chi: "Sussurro dell'Abisso", testo: 'Fermi. Lo sentite anche voi? Questa nebbia non viene dal mare.' },
             { chi: 'eroe', testo: 'È rossa e viola. Come la Stella.' },
-            { chi: "Sussurro dell'Abisso", testo: 'Io sono stata toccata da questa cosa, tanto tempo fa. Si chiama Velo. E qualcuno lo sta chiamando apposta.' }
+            { chi: "Sussurro dell'Abisso", testo: 'Io sono stata toccata da questa cosa, tanto tempo fa. Si chiama Velo. E qualcuno lo sta chiamando apposta.' },
+            { chi: 'narratore', testo: 'Dalla nebbia saltano fuori dei banditi agili. Vi stavano aspettando.' }
           ],
-          atto: ['Gli ultimi droni di Prometeo vi spingono verso il bordo della scogliera.', 'Dalla nebbia saltano fuori dei banditi agili. Vi stavano aspettando.'],
+          atto: [],
           dopo: [
             { chi: 'eroe', testo: 'Ce l\'abbiamo fatta... ma perché mi gira la testa?' },
             { chi: "Sussurro dell'Abisso", testo: 'L\'aria... è magia. Era tutto un\'imboscata per farci respirare il Velo.' },
@@ -176,55 +144,35 @@
       ],
       missioni: [
         {
-          id: 'c3m1', difficolta: 1.6, titolo: 'Le cripte', luogo: 'Il monastero sconsacrato', alleato: "Sussurro dell'Abisso",
-          atti: ['Imboscata sulla Falesia', "L'Assedio dei Predoni delle Rovine", 'Cultisti del Velo'],
-          premio: { crediti: 200 },
+          id: 'c3m1', difficolta: 1.4, titolo: 'Il monastero sconsacrato', luogo: 'Le cripte e la torre', alleato: 'Duellante Spezzato',
+          atti: ['Cultisti del Velo', 'Il Rivale Traditore'],
+          premio: { eroe: 1, crediti: 200 },
           prima: [
-            { chi: "Sussurro dell'Abisso", testo: 'Le catene sono incise con dei simboli. Ma il Velo con me non funziona come con gli altri.' },
-            { chi: 'eroe', testo: 'Riesci a spezzarle?' },
-            { chi: "Sussurro dell'Abisso", testo: 'Le mie sì. Poi tocca a te liberarti le mani.', fx: 'CRACK!' },
-            { chi: 'cultista', testo: 'I prigionieri sono svegli! Fermateli prima del rito!' }
+            { chi: 'narratore', testo: 'Le catene si spezzano con uno schianto. Qualcuno è venuto a liberarvi.', fx: 'CRACK!' },
+            { chi: 'Duellante Spezzato', testo: 'Seguivo i cultisti da giorni. Non pensavo di trovarvi qui.' },
+            { chi: 'cultista', testo: 'I prigionieri sono liberi! Fermateli prima del rito!' },
+            { chi: 'eroe', testo: 'Prima loro. Poi le risposte.' }
           ],
-          atto: ['I mercenari del Culto bloccano le scale. Sono pagati per non farvi uscire.', 'Nella cappella, i cultisti mascherati smettono di cantare. Ora vi guardano.'],
+          atto: ['I cultisti, piegati, confessano: "L\'equilibrio era rotto. Troppi eroi. Il Velo rimette a posto la bilancia. Chiedete all\'Araldo, nella torre." In cima, l\'Araldo sguaina una spada che brucia di viola.'],
           dopo: [
-            { chi: 'eroe', testo: 'Avete spento le città. Avete fatto impazzire la gente. Perché?' },
-            { chi: 'cultista', testo: 'Perché l\'equilibrio era rotto. Troppi eroi, troppi geni, troppi paladini del bene.' },
-            { chi: 'cultista', testo: 'I villain erano diventati ladri di strada. L\'universo chiede una bilancia perfetta. Il Velo la rimette a posto.' },
-            { chi: "Sussurro dell'Abisso", testo: 'Chi vi comanda?' },
-            { chi: 'cultista', testo: 'Chiedetelo all\'Araldo. Vi sta aspettando nella torre.' }
+            { chi: 'Duellante Spezzato', testo: 'Lo conoscevo. Si chiamava Kaelen ed era la miglior lama della Gilda. Fu lui a tradirla, e a far cadere la colpa su di me.' },
+            { chi: 'araldo', testo: 'Ridete pure, sorella. La bilancia si sta già spostando. Guardate fuori dalla finestra.' },
+            { chi: 'narratore', testo: 'Dall\'altra parte della città, una colonna di fuoco si alza sopra la Fonderia. L\'Araldo approfitta dell\'esplosione e sparisce.', fx: 'BOOOM!' }
           ],
           sconfitta: 'Il coro ricomincia a cantare. Riprova prima che finisca il rito.'
         },
         {
-          id: 'c3m2', difficolta: 1.2, titolo: 'La torre del monastero', luogo: 'Il monastero sconsacrato', alleato: 'Duellante Spezzato',
-          atti: ['Cultisti del Velo', 'Imboscata sulla Falesia', 'Il Rivale Traditore'],
-          premio: { eroe: 1, crediti: 150 },
-          prima: [
-            { chi: 'Duellante Spezzato', testo: 'Seguivo i cultisti da giorni. Non pensavo di trovarvi qui.' },
-            { chi: 'eroe', testo: 'Cerchiamo un certo Araldo.' },
-            { chi: 'Duellante Spezzato', testo: 'Lo conosco. Si chiamava Kaelen ed era la miglior lama della Gilda. Fu lui a tradirla, e a far cadere la colpa su di me.' },
-            { chi: 'araldo', testo: 'Sei ancora viva, sorella. E con la lama ancora spezzata.' }
-          ],
-          atto: ['Altri cultisti salgono dalla scala a chiocciola per coprire l\'Araldo.', 'In cima alla torre, l\'Araldo sguaina una spada che brucia di viola.'],
-          dopo: [
-            { chi: 'araldo', testo: 'Ridete pure. La bilancia si sta già spostando.' },
-            { chi: 'Duellante Spezzato', testo: 'Cosa avete fatto, Kaelen?' },
-            { chi: 'araldo', testo: 'Guardate fuori dalla finestra.' },
-            { chi: 'narratore', testo: 'Dall\'altra parte della città, una colonna di fuoco si alza sopra la Fonderia. L\'Araldo approfitta dell\'esplosione e sparisce.', fx: 'BOOOM!' }
-          ],
-          sconfitta: 'L\'Araldo è ancora in cima alla torre. Riprova.'
-        },
-        {
-          id: 'c3m3', difficolta: 1.3, titolo: 'La Fonderia in fiamme', luogo: 'La Fonderia Ardena', alleato: "Titano d'Acciaio",
-          atti: ['Cultisti del Velo', 'Incursione dei Droni Cinetici', 'Rivolta della Fonderia'],
+          id: 'c3m2', difficolta: 2.4, titolo: 'La Fonderia in fiamme', luogo: 'La Fonderia Ardena', alleato: "Titano d'Acciaio",
+          atti: ['Rivolta della Fonderia'],
           premio: { crediti: 250, bustine: 1 },
           prima: [
             { chi: "Titano d'Acciaio", testo: 'Ci sono ancora operai lì dentro. Intrappolati.' },
             { chi: 'eroe', testo: 'Tu conosci questo posto?' },
             { chi: "Titano d'Acciaio", testo: 'Dieci anni fa crollò il Forno Sette. Duecento persone dentro. Ne è uscita una sola. Io.' },
-            { chi: "Titano d'Acciaio", testo: 'Quella notte non ho salvato nessuno. Stanotte non andrà così.' }
+            { chi: "Titano d'Acciaio", testo: 'Quella notte non ho salvato nessuno. Stanotte non andrà così.' },
+            { chi: 'narratore', testo: 'I cultisti hanno armato gli operai infetti. Vi caricano con presse e fiamme.' }
           ],
-          atto: ['I cultisti hanno armato gli operai infetti. E i droni della sicurezza obbediscono a loro.', 'Al centro della Fonderia, gli operai con gli occhi viola vi caricano con presse e fiamme.'],
+          atto: [],
           dopo: [
             { chi: "Titano d'Acciaio", testo: 'Fuori tutti! Gli ultimi li porto io!', fx: 'CLANG!' },
             { chi: 'narratore', testo: 'Uno dopo l\'altro, gli operai escono dal fumo, vivi.' },
@@ -245,8 +193,8 @@
       ],
       missioni: [
         {
-          id: 'c4m1', difficolta: 1.8, titolo: 'Il cuore della rete', luogo: 'La Torre di Prometeo', alleato: 'Architetto Ombra',
-          atti: ['Incursione dei Droni Cinetici', 'Blackout Ostile', "L'Intelligenza Rogue"],
+          id: 'c4m1', difficolta: 2.3, titolo: 'Il cuore della rete', luogo: 'La Torre di Prometeo', alleato: 'Architetto Ombra',
+          atti: ["L'Intelligenza Rogue"],
           premio: { eroe: 1, crediti: 200 },
           prima: [
             { chi: 'Architetto Ombra', testo: 'Io ho lavorato su ARGO, prima che Prometeo mi cacciasse dal laboratorio.' },
@@ -254,7 +202,7 @@
             { chi: 'Architetto Ombra', testo: 'Perché dicevo che ARGO era troppo potente per una persona sola. Avevo ragione. So dove colpire per spegnerla.' },
             { chi: 'argo', testo: 'Accesso negato. Minaccia rilevata. Avvio protocollo di distruzione.', fx: 'BIP BIP' }
           ],
-          atto: ['La torre si difende: i Droni Cinetici escono dalle pareti.', 'Ultimo piano. I server si accendono di rosso: ARGO vi guarda con mille occhi.'],
+          atto: [],
           dopo: [
             { chi: 'Architetto Ombra', testo: 'Rete principale disattivata. ARGO è spenta.' },
             { chi: 'argo', testo: 'Ultimo comando eseguito. Rilascio alveare sperimentale.', fx: 'SSSSSS' },
@@ -264,18 +212,18 @@
           sconfitta: 'ARGO ha riacceso le difese. Riprova.'
         },
         {
-          id: 'c4m2', difficolta: 1.1, titolo: 'Il Campione Imbattuto', luogo: 'Il viadotto di Vespera', alleato: 'Guardiana di Confine',
-          atti: ["L'Assedio dei Predoni delle Rovine", 'Cultisti del Velo', 'Il Campione Imbattuto'],
+          id: 'c4m2', difficolta: 1.8, titolo: 'Il Campione Imbattuto', luogo: 'Il viadotto di Vespera', alleato: 'Guardiana di Confine',
+          atti: ['Il Campione Imbattuto'],
           premio: { crediti: 250, bustine: 1, minaccia: 1 },
           prima: [
             { chi: 'narratore', testo: 'Sulla strada per la piazza, un uomo in armatura scura sta combattendo da solo contro un branco di infetti.' },
             { chi: 'campione', testo: 'Andate verso la statua? Anch\'io. Nessuno mi ha mai battuto: con me arriverete vivi.' },
             { chi: 'Guardiana di Confine', testo: 'Il Campione Imbattuto. Dicono che usi poteri occulti.' },
-            { chi: 'eroe', testo: 'Stanotte ci serve ogni aiuto possibile.' }
+            { chi: 'narratore', testo: 'A metà del viadotto, il Campione si ferma... e i suoi occhi diventano viola.' },
+            { chi: 'campione_nemico', testo: 'La Stella mi parlava da giorni. Stanotte ho smesso di resistere.' }
           ],
-          atto: ['Il Campione apre la strada tra gli infetti. Sembra quasi che si diverta.', 'I cultisti vi aspettano sul viadotto. Il Campione si ferma... e i suoi occhi diventano viola.'],
+          atto: [],
           dopo: [
-            { chi: 'campione_nemico', testo: 'La Stella mi parlava da giorni. Stanotte ho smesso di resistere.' },
             { chi: 'Guardiana di Confine', testo: 'Era uno di noi.' },
             { chi: 'eroe', testo: 'Il Velo cerca chi ha già un\'ombra dentro. Dobbiamo stare attenti a tutti. Anche a noi stessi.' },
             { chi: 'narratore', testo: 'In fondo al viadotto, la terra trema. La statua del Fondatore ha cominciato a camminare.', fx: 'BOOM... BOOM...' }
@@ -293,52 +241,34 @@
       ],
       missioni: [
         {
-          id: 'c5m1', difficolta: 1.0, titolo: 'Il Colosso di Rovina', luogo: 'Piazza del Fondatore', alleato: 'Iron Aegis',
-          atti: ['Incursione dei Droni Cinetici', "L'Intelligenza Rogue", 'Il Colosso di Rovina'],
-          premio: { eroe: 1, crediti: 250 },
+          id: 'c5m1', difficolta: 0.9, titolo: 'Pietra e acciaio', luogo: 'Dalla piazza alla Fonderia', alleato: "Titano d'Acciaio",
+          atti: ['Il Colosso di Rovina', "Il Custode d'Acciaio"],
+          premio: { eroe: 1, crediti: 300, epica: 1 },
           prima: [
-            { chi: 'Iron Aegis', testo: 'Quella statua l\'ho rinforzata io, quando ero un geniere dell\'esercito. So dove sono i punti deboli.' },
-            { chi: 'eroe', testo: 'Dimmi dove colpire.' },
-            { chi: 'Iron Aegis', testo: 'Prima togliamo di mezzo quello che resta di ARGO. Poi spacchiamo la pietra.' }
-          ],
-          atto: ['Gli ultimi frammenti di ARGO controllano lo sciame. Vanno spenti uno a uno.', 'Il Colosso si gira verso di voi. Ogni passo spacca l\'asfalto.'],
-          dopo: [
-            { chi: 'narratore', testo: 'La corazza di pietra crolla in pezzi. Sotto c\'è uno scheletro di metallo che brilla.', fx: 'CRASH!' },
-            { chi: 'Iron Aegis', testo: 'È il nucleo dello sciame. Sta scappando!' },
-            { chi: 'eroe', testo: 'Va verso la Fonderia. Cerca materiale per ricostruirsi.' }
-          ],
-          sconfitta: 'Il Colosso è ancora in piedi. Riprovate.'
-        },
-        {
-          id: 'c5m2', difficolta: 1.0, titolo: "Il Custode d'Acciaio", luogo: 'La Fonderia in rovina', alleato: "Titano d'Acciaio",
-          atti: ['Rivolta della Fonderia', 'Incursione dei Droni Cinetici', "Il Custode d'Acciaio"],
-          premio: { crediti: 300, bustine: 1, epica: 1 },
-          prima: [
-            { chi: "Titano d'Acciaio", testo: 'Di nuovo qui. Questa Fonderia non mi lascerà mai in pace.' },
-            { chi: 'narratore', testo: 'Dai forni esce un suono di metallo che si piega. Lo scheletro si sta fondendo con i macchinari.', fx: 'SSSSHHH' },
-            { chi: 'eroe', testo: 'Sta usando l\'acciaio fuso come armatura.' },
+            { chi: "Titano d'Acciaio", testo: 'Quella statua è alta come un palazzo. Ogni passo spacca l\'asfalto.' },
+            { chi: 'eroe', testo: 'Sotto la pietra c\'è lo sciame di ARGO. Spacchiamo la corazza.' },
             { chi: "Titano d'Acciaio", testo: 'Allora gli facciamo vedere chi è il vero titano d\'acciaio.' }
           ],
-          atto: ['Gli ultimi operai infetti difendono i forni come se fossero un tempio.', 'Dalla lava esce il Custode d\'Acciaio. È alto tre piani e brucia.'],
+          atto: ['La corazza di pietra crolla. Il nucleo nudo fugge nella Fonderia in rovina e si fonde con l\'acciaio fuso: dalla lava esce il Custode d\'Acciaio.'],
           dopo: [
             { chi: 'narratore', testo: 'Il Custode crolla nel forno da cui è nato.', fx: 'KRAAASH!' },
             { chi: "Titano d'Acciaio", testo: 'È finita?' },
             { chi: 'narratore', testo: 'In cielo, la Stella si gonfia come un cuore. Lontano, il coro del Culto canta più forte che mai.', fx: 'TUM! TUM!' },
             { chi: 'eroe', testo: 'No. Il Culto ha capito che le macchine non bastano.' }
           ],
-          sconfitta: 'Il Custode è troppo caldo da toccare. Riprova.'
+          sconfitta: 'Il gigante è ancora in piedi. Riprovate.'
         },
         {
-          id: 'c5m3', difficolta: 1.1, titolo: 'Il rituale supremo', luogo: 'Il monastero sconsacrato', alleato: "Sussurro dell'Abisso", boss: true,
-          atti: ['Cultisti del Velo', 'Il Rivale Traditore', "Il Mietitore dell'Astro Oscuro"],
+          id: 'c5m2', difficolta: 1.9, titolo: 'Il rituale supremo', luogo: 'Il monastero sconsacrato', alleato: "Sussurro dell'Abisso", boss: true,
+          atti: ["Il Mietitore dell'Astro Oscuro"],
           premio: { eroe: 1, crediti: 400, bustine: 2, leggendaria: 1 },
           prima: [
             { chi: "Sussurro dell'Abisso", testo: 'Il Velo non mi ha mai fatto così male. Stanno aprendo una porta.' },
             { chi: 'araldo', testo: 'Le macchine hanno fallito. Ora chiamiamo il terzo volto della trinità.' },
             { chi: 'araldo', testo: 'La Stella. Il Velo. E colui che raccoglie.', fx: 'MMMMM!' },
-            { chi: 'eroe', testo: 'Fermiamoli prima che finiscano!' }
+            { chi: 'narratore', testo: 'Il rituale è compiuto. Dal cielo scende il Mietitore dell\'Astro Oscuro.' }
           ],
-          atto: ['L\'Araldo si mette tra voi e l\'altare. Questa volta non scapperà.', 'Il rituale è compiuto. Dal cielo scende il Mietitore dell\'Astro Oscuro.'],
+          atto: [],
           dopo: [
             { chi: 'mietitore', testo: 'Avete solo rimandato il raccolto...', fx: 'FSSSH' },
             { chi: 'narratore', testo: 'Il Mietitore esplode in una pioggia di luce viola. L\'onda d\'urto spacca il cielo come un vetro.', fx: 'KRRRAK!' },
@@ -357,16 +287,16 @@
       ],
       missioni: [
         {
-          id: 'c6m1', difficolta: 1.2, titolo: "L'Eco Senza Nome", luogo: 'Lo strappo nel cielo', alleato: 'Neon Phantom', boss: true,
-          atti: ['Blackout Ostile', 'Il Colosso di Rovina', "L'Eco Senza Nome"],
+          id: 'c6m1', difficolta: 2.3, titolo: "L'Eco Senza Nome", luogo: 'Lo strappo nel cielo', alleato: 'Neon Phantom', boss: true,
+          atti: ["L'Eco Senza Nome"],
           premio: { crediti: 500, bustine: 2, leggendaria: 1, minaccia: 1 },
           prima: [
-            { chi: 'Neon Phantom', testo: 'Quei droni... li abbiamo già distrutti. La prima notte.' },
+            { chi: 'Neon Phantom', testo: 'Quelle ombre... sono i droni della prima notte. Li abbiamo già distrutti.' },
             { chi: 'eroe', testo: 'Non sono veri. Sono echi. Qualcosa sta ripetendo il nostro passato.' },
             { chi: 'eco', testo: '...passato... passato... passato...', fx: '~~~' },
             { chi: 'Neon Phantom', testo: 'Allora finiamola qui. Una volta per tutte.' }
           ],
-          atto: ['L\'Eco ripete i droni della prima notte, come un disco rotto.', 'Ora ripete il Colosso. Ma è fatto di nebbia e di vetro.'],
+          atto: [],
           dopo: [
             { chi: 'narratore', testo: 'L\'Eco si spegne in un sussurro. Lo strappo si chiude. Il cielo torna normale.', fx: '...' },
             { chi: 'narratore', testo: 'Eppure niente è più come prima. La pioggia di energia del Mietitore si è sparsa su tutta la Terra.' },
@@ -380,6 +310,7 @@
       ]
     }
   ];
+
   const Storia = {
     CAPITOLI, MONDO, ARCHIVIO, PERSONAGGI,
     get P() { return window.Progression; },
@@ -457,7 +388,7 @@
           const lato = i % 2 === 0 ? 'sx' : 'dx';
           html += `<div class="sp-tappa ${lato} ${fatta ? 'is-done' : ''} ${attuale ? 'is-current' : ''} ${aperta ? '' : 'is-locked'} ${m.boss ? 'is-boss' : ''}">
             <button class="sp-nodo" ${aperta ? `onclick="Storia.dettaglio('${m.id}')"` : 'disabled'} aria-label="${esc(m.titolo)}">
-              <img src="${this.imgMinaccia(m.atti[2])}" alt="" loading="lazy">
+              <img src="${this.imgMinaccia(m.atti[m.atti.length - 1])}" alt="" loading="lazy">
               <span class="sp-nodo-num">${fatta ? '✓' : (aperta ? i + 1 : '🔒')}</span>
             </button>
             <span class="sp-tappa-txt"><b>${esc(m.titolo)}</b><small>${esc(m.luogo)}</small></span>
@@ -490,7 +421,7 @@
       document.getElementById('storiaMissioneBody').innerHTML = `
         <div class="sm-luogo">${esc(m.luogo)}</div>
         <h3 class="sm-titolo">${esc(m.titolo)}</h3>
-        <div class="sm-atti">${m.atti.map((t, i) => `<figure class="${i === 2 ? 'is-finale' : ''}"><img src="${this.imgMinaccia(t)}" alt=""><figcaption>${['Atto I', 'Atto II', 'Finale'][i]}<b>${esc(t)}</b></figcaption></figure>`).join('')}</div>
+        <div class="sm-atti">${m.atti.map((t, i) => `<figure class="${i === m.atti.length - 1 ? 'is-finale' : ''}"><img src="${this.imgMinaccia(t)}" alt=""><figcaption>${m.atti.length === 1 ? 'Atto unico' : (i === m.atti.length - 1 ? 'Finale' : ['Atto I', 'Atto II'][i])}<b>${esc(t)}</b></figcaption></figure>`).join('')}</div>
         <div class="sm-squadra"><span>Squadra</span><img src="${this.imgEroe(this.mioEroe())}" alt=""><b>${esc(this.mioEroe())}</b> + <img src="${this.imgEroe(ally)}" alt=""><b>${esc(ally)}</b></div>
         <div class="sm-premio">${fatta
           ? `Già completata. Rigiocarla vale <b>${this.creditiReplay(m)} CR</b>.`
@@ -642,7 +573,7 @@
       if (chi === 'narratore') return { tipo: 'narratore' };
       if (chi === 'eroe') { const h = this.mioEroe(); return { nome: h, img: this.imgEroe(h), lato: 'sx' }; }
       if (chi === 'alleato') { const h = m ? this.alleatoDi(m) : 'Neon Phantom'; return { nome: h, img: this.imgEroe(h), lato: 'dx' }; }
-      if (chi === 'minaccia') { const t = m.atti[2]; return { nome: t, img: this.imgMinaccia(t), lato: 'dx', nemico: true }; }
+      if (chi === 'minaccia') { const t = m.atti[m.atti.length - 1]; return { nome: t, img: this.imgMinaccia(t), lato: 'dx', nemico: true }; }
       const pg = PERSONAGGI[chi];
       if (pg) return { nome: pg.nome, img: this.imgMinaccia(pg.minaccia), lato: 'dx', nemico: !!pg.nemico };
       return { nome: chi, img: this.imgEroe(chi), lato: chi === this.mioEroe() ? 'sx' : 'dx' };

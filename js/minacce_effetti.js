@@ -87,7 +87,7 @@
     if (!r) return [];
     const out = [];
     if (r.P) out.push(r.P);
-    if (r.C && st.actIndex === 2) out.push(r.C);
+    if (r.C && st.actIndex === (st.actThreats || [0, 0, 0]).length - 1) out.push(r.C);
     return out;
   }
 

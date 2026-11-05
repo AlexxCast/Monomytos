@@ -233,3 +233,32 @@ Object.assign(window.MONOMYTHOS_EN = window.MONOMYTHOS_EN || {}, {
 "Cultista": "Cultist",
 "Il Campione Imbattuto": "The Undefeated Champion"
 });
+// Missioni riorganizzate (ogni Minaccia una sola volta nella Storia)
+Object.assign(window.MONOMYTHOS_EN, {
+"Dai vicoli escono bande di saccheggiatori. Con il blackout nessuno li ferma.": "Gangs of looters pour out of the alleys. With the blackout, nobody stops them.",
+"Hanno gli occhi viola. Fermiamoli prima che si faccia male qualcuno.": "Their eyes are purple. Let's stop them before someone gets hurt.",
+"Il segnale che li guidava è ancora attivo. Va sottoterra, verso la vecchia cisterna.": "The signal that guided them is still active. It goes underground, toward the old cistern.",
+"Prometeo scappa dalla balconata. Il soffitto si apre: la sua guardia del corpo scende in formazione d'attacco.": "Prometheus flees from the balcony. The ceiling opens: his bodyguard drops down in attack formation.",
+"Voi due avete gli occhi troppo puliti per questo posto. Fermateli. Io ho una città da sistemare.": "You two have eyes far too clean for this place. Stop them. I have a city to fix.",
+"Droni Cinetici. Non sono droni da sorveglianza: sono armi da guerra.": "Kinetic Drones. They aren't surveillance drones: they're weapons of war.",
+"Prometeo ha guadagnato troppo vantaggio. È uscito dalla parte delle scogliere.": "Prometheus got too far ahead. He went out by the cliffs.",
+"Le cripte e la torre": "The crypts and the tower",
+"I cultisti, piegati, confessano: \"L'equilibrio era rotto. Troppi eroi. Il Velo rimette a posto la bilancia. Chiedete all'Araldo, nella torre.\" In cima, l'Araldo sguaina una spada che brucia di viola.": "The beaten cultists confess: \"The balance was broken. Too many heroes. The Veil sets the scales right. Ask the Herald, in the tower.\" At the top, the Herald draws a sword that burns purple.",
+"Le catene si spezzano con uno schianto. Qualcuno è venuto a liberarvi.": "The chains snap with a crash. Someone has come to free you.",
+"I prigionieri sono liberi! Fermateli prima del rito!": "The prisoners are free! Stop them before the rite!",
+"Prima loro. Poi le risposte.": "Them first. Then the answers.",
+"Lo conoscevo. Si chiamava Kaelen ed era la miglior lama della Gilda. Fu lui a tradirla, e a far cadere la colpa su di me.": "I knew him. His name was Kaelen and he was the Guild's finest blade. He betrayed it, and made the blame fall on me.",
+"Ridete pure, sorella. La bilancia si sta già spostando. Guardate fuori dalla finestra.": "Laugh all you want, sister. The balance is already shifting. Look out the window.",
+"I cultisti hanno armato gli operai infetti. Vi caricano con presse e fiamme.": "The cultists armed the infected workers. They charge you with presses and flames.",
+"A metà del viadotto, il Campione si ferma... e i suoi occhi diventano viola.": "Halfway across the viaduct, the Champion stops... and his eyes turn purple.",
+"Pietra e acciaio": "Stone and steel",
+"Dalla piazza alla Fonderia": "From the square to the Foundry",
+"Il gigante è ancora in piedi. Riprovate.": "The giant is still standing. Try again.",
+"La corazza di pietra crolla. Il nucleo nudo fugge nella Fonderia in rovina e si fonde con l'acciaio fuso: dalla lava esce il Custode d'Acciaio.": "The stone armor crumbles. The bare core flees to the ruined Foundry and fuses with the molten steel: the Steel Guardian rises from the lava.",
+"Quella statua è alta come un palazzo. Ogni passo spacca l'asfalto.": "That statue is as tall as a building. Every step cracks the asphalt.",
+"Sotto la pietra c'è lo sciame di ARGO. Spacchiamo la corazza.": "ARGO's swarm is under the stone. Let's crack the armor.",
+"Quelle ombre... sono i droni della prima notte. Li abbiamo già distrutti.": "Those shadows... they're the drones from the first night. We already destroyed them.",
+"Atto unico": "Single act",
+"ATTO UNICO": "SINGLE ACT",
+"Atto {n} / {n}": "Act {n} / {n}"
+});

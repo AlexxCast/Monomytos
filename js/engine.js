@@ -51,9 +51,10 @@ class MonomythosEngine {
     const shuffledThreats = [...pool].sort(() => Math.random() - 0.5);
     let actThreats = shuffledThreats.slice(0, 3).sort((a, b) => a.livello - b.livello);
     // Storia: le Minacce degli Atti sono fisse e nell'ordine del racconto
-    if (Array.isArray(options.actThreats) && options.actThreats.length === 3) {
+    // (da 1 a 3 Atti: nella Storia ogni carta Minaccia compare una sola volta, quindi una missione può averne meno di 3)
+    if (Array.isArray(options.actThreats) && options.actThreats.length >= 1 && options.actThreats.length <= 3) {
       const fixed = options.actThreats.map(n => data.threats.find(t => t.nome === n)).filter(Boolean);
-      if (fixed.length === 3) actThreats = fixed;
+      if (fixed.length === options.actThreats.length) actThreats = fixed;
     }
 
     // Initialize players
@@ -203,6 +204,9 @@ class MonomythosEngine {
     return this.state;
   }
 
+  // Indice dell'Atto Finale (2 di solito; meno nelle missioni della Storia con 1 o 2 Minacce)
+  ultimoAtto() { return Math.max(0, ((this.state && this.state.actThreats) || [0, 0, 0]).length - 1); }
+
   setupCurrentThreat() {
     const raw = this.state.actThreats[this.state.actIndex];
     const numHeroes = this.state.players.filter(p => !p.isDead).length || 2;
@@ -210,7 +214,7 @@ class MonomythosEngine {
     // §8.2 Crisi Composita: negli Atti I e II, una Minaccia di Livello ≤ 3 si fonde con una seconda dal pool
     let secondary = null;
     const BIL = window.MONOMYTHOS_BILANCIAMENTO || {};
-    if (BIL.crisiComposita !== false && !this.state.noCrisi && this.state.actIndex < 2 && raw.livello <= 3) {
+    if (BIL.crisiComposita !== false && !this.state.noCrisi && this.state.actIndex < this.ultimoAtto() && raw.livello <= 3) {
       const used = new Set(this.state.actThreats.map(t => t.nome));
       const allowed = this.state.threatPool ? new Set(this.state.threatPool) : null;
       let pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !used.has(t.nome) && (!allowed || allowed.has(t.nome)));
@@ -271,7 +275,7 @@ class MonomythosEngine {
       primarioMax: primMax,
       brutoProgress: 0,
       brutoMax: brutMax,
-      isBoss: this.state.actIndex === 2
+      isBoss: this.state.actIndex === this.ultimoAtto()
     };
     // La Vita della Minaccia è esattamente la somma degli sgherri
     this.syncThreatHp();
@@ -282,7 +286,7 @@ class MonomythosEngine {
       return;
     }
 
-    if (this.state.actIndex === 2) {
+    if (this.state.actIndex === this.ultimoAtto()) {
       // Act Finale State Freezing
       this.state.players.forEach(p => {
         p.stateFrozen = true;
@@ -1355,12 +1359,12 @@ class MonomythosEngine {
       // Il binario è la via più difficile: chi lo completa ottiene un bottino (scelta di Alessio 2026-11-05)
       if ((disarmedPrimario || disarmedBruto) && !bossKilled) this.bottinoDisinnesco();
 
-      if (this.state.actIndex < 2) {
+      if (this.state.actIndex < this.ultimoAtto()) {
         // Advance to next Act
         this.state.actIndex++;
         if (window.Progression && this.state.ranked) window.Progression.addCredits(100, 'Minaccia risolta'); if (window.Collezione && !this.state.isOnlineGuest) window.Collezione.registraMinaccia();
         this.setupCurrentThreat();
-        this.addLog('sys', `=== AVANZAMENTO: ATTO ${this.state.actIndex === 1 ? 'II' : 'FINALE'} — ${this.state.currentThreat.nome} ===`);
+        this.addLog('sys', `=== AVANZAMENTO: ATTO ${this.state.actIndex === this.ultimoAtto() ? 'FINALE' : 'II'} — ${this.state.currentThreat.nome} ===`);
         this.emit('act_advanced', this.state);
         this.startRound();
         return true;
