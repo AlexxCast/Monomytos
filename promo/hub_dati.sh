@@ -8,6 +8,8 @@ git config --global user.name "github-actions[bot]"
 git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 case "$1" in
   prepara)
+    # già preparato in questo job: aggiorno soltanto
+    if [ -e "$D/.git" ]; then git -C "$D" pull -q --rebase origin hub-dati 2>/dev/null || true; exit 0; fi
     if git fetch -q --depth 1 origin hub-dati 2>/dev/null; then git worktree add -q -B hub-dati "$D" origin/hub-dati
     else git worktree add -q --orphan -b hub-dati "$D"; fi ;;
   salva)
