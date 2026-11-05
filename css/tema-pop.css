@@ -1539,3 +1539,65 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .morale-chip.mini { font-size: 10px; padding: 0 6px; box-shadow: 1px 1px 0 #111116; }
 .morale-chip.mini b { font-size: 12px; }
 .player-dock-right-status { display: flex; align-items: center; gap: 8px; }
+
+/* ---------- Storia: vignette animate (fumetto animato) ---------- */
+.ss-vignetta { position: absolute; inset: 0; overflow: hidden; }
+.ssv { position: absolute; inset: 0; opacity: 0; transition: opacity .9s ease; }
+.ssv.on { opacity: 1; }
+.ssv img { position: absolute; inset: -8%; width: 116%; height: 116%; object-fit: cover; animation: vZoom 16s ease-out forwards; }
+.ssv::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(rgba(0, 0, 0, .22) 1px, transparent 1.4px) 0 0 / 6px 6px,
+    linear-gradient(to bottom, rgba(3, 6, 20, .55) 0%, rgba(3, 6, 20, .05) 22%, rgba(3, 6, 20, .1) 48%, rgba(3, 6, 20, .78) 74%, rgba(3, 6, 20, .94) 100%); }
+.ssv-zoom img { animation-name: vZoom; }
+.ssv-zoomOut img { animation-name: vZoomOut; }
+.ssv-panSx img { animation-name: vPanSx; }
+.ssv-panDx img { animation-name: vPanDx; }
+.ssv-panSu img { animation-name: vPanSu; }
+.ssv-panGiu img { animation-name: vPanGiu; }
+@keyframes vZoom { from { transform: scale(1); } to { transform: scale(1.16); } }
+@keyframes vZoomOut { from { transform: scale(1.2); } to { transform: scale(1); } }
+@keyframes vPanSx { from { transform: scale(1.1) translateX(4%); } to { transform: scale(1.1) translateX(-4%); } }
+@keyframes vPanDx { from { transform: scale(1.1) translateX(-4%); } to { transform: scale(1.1) translateX(4%); } }
+@keyframes vPanSu { from { transform: scale(1.12) translateY(5%); } to { transform: scale(1.12) translateY(-5%); } }
+@keyframes vPanGiu { from { transform: scale(1.12) translateY(-5%); } to { transform: scale(1.12) translateY(5%); } }
+
+.st { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+/* la Stella della Follia che pulsa */
+.st-stella { inset: auto; top: 9%; right: 12%; width: 34vmin; height: 34vmin; border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 5%, #ff7ab6 10%, #b04bff 26%, rgba(150, 50, 255, .35) 42%, rgba(150, 50, 255, 0) 66%);
+  animation: stPulsa 1.7s ease-in-out infinite; mix-blend-mode: screen; }
+.st-stella::before { content: ''; position: absolute; inset: -40%; border-radius: 50%;
+  background: repeating-conic-gradient(rgba(255, 90, 170, .32) 0 4deg, transparent 4deg 22deg);
+  -webkit-mask: radial-gradient(circle, #000 18%, transparent 62%); mask: radial-gradient(circle, #000 18%, transparent 62%);
+  animation: stRuota 22s linear infinite; }
+@keyframes stPulsa { 0%, 100% { transform: scale(.86); opacity: .85; } 50% { transform: scale(1.14); opacity: 1; } }
+@keyframes stRuota { to { transform: rotate(360deg); } }
+/* nebbia del Velo */
+.st-nebbia { top: 35%; background: radial-gradient(60% 40% at 20% 70%, rgba(170, 60, 255, .5), transparent 70%),
+  radial-gradient(55% 45% at 80% 80%, rgba(255, 50, 120, .38), transparent 70%), radial-gradient(70% 35% at 50% 95%, rgba(120, 40, 220, .55), transparent 75%);
+  filter: blur(14px); animation: stNebbia 9s ease-in-out infinite alternate; }
+@keyframes stNebbia { from { transform: translateX(-6%) scale(1); opacity: .75; } to { transform: translateX(6%) scale(1.08); opacity: 1; } }
+/* scintille che salgono */
+.st-scintille { background-image: radial-gradient(circle, #ffd36b 0 1.5px, transparent 2.5px), radial-gradient(circle, #ff7a3c 0 2px, transparent 3px);
+  background-size: 90px 130px, 140px 190px; background-position: 0 0, 40px 60px; animation: stScintille 3.2s linear infinite; opacity: .85;
+  -webkit-mask: linear-gradient(to top, #000 30%, transparent 85%); mask: linear-gradient(to top, #000 30%, transparent 85%); }
+@keyframes stScintille { to { background-position: 10px -130px, 30px -130px; } }
+/* le luci della città si spengono */
+.st-blackout { background: #02030a; animation: stBlackout 3.2s ease-out forwards; }
+@keyframes stBlackout { 0% { opacity: 0; } 12% { opacity: .7; } 16% { opacity: .1; } 24% { opacity: .8; } 30% { opacity: .2; } 48% { opacity: .85; } 100% { opacity: .72; } }
+.st-buio { background: #000; animation: stBuio 4s ease-in forwards; }
+@keyframes stBuio { from { opacity: 0; } to { opacity: .62; } }
+/* pioggia di energia viola */
+.st-pioggia { background: repeating-linear-gradient(100deg, transparent 0 26px, rgba(210, 130, 255, .55) 26px 28px); background-size: 220px 220px;
+  animation: stPioggia .7s linear infinite; opacity: .55; mix-blend-mode: screen; }
+@keyframes stPioggia { to { background-position: -40px 220px; } }
+/* disturbo digitale (ARGO, l'Eco) */
+.st-glitch { background: repeating-linear-gradient(to bottom, rgba(255, 40, 90, .12) 0 2px, transparent 2px 5px); animation: stGlitch 2.4s steps(1) infinite; mix-blend-mode: screen; }
+@keyframes stGlitch { 0%, 100% { transform: none; opacity: .5; } 8% { transform: translateX(-6px); opacity: 1; } 10% { transform: translateX(5px); } 12% { transform: none; opacity: .4; } 61% { transform: translateY(3px); opacity: .9; } 63% { transform: none; opacity: .5; } }
+/* l'alba dell'epilogo */
+.st-alba { background: linear-gradient(to top, rgba(255, 160, 70, .55), rgba(255, 90, 140, .25) 40%, transparent 70%); animation: stAlba 6s ease-out forwards; mix-blend-mode: screen; }
+@keyframes stAlba { from { opacity: 0; } to { opacity: 1; } }
+/* scossa (esplosioni, effetti sonori) */
+.ss-scuoti .ss-vignetta, .ss-scuoti .ss-stage { animation: ssScuoti .5s cubic-bezier(.36, .07, .19, .97); }
+@keyframes ssScuoti { 10%, 90% { transform: translate(-2px, 1px); } 20%, 80% { transform: translate(4px, -2px); } 30%, 50%, 70% { transform: translate(-6px, 2px); } 40%, 60% { transform: translate(6px, -1px); } }
+@media (prefers-reduced-motion: reduce) { .ssv img, .st, .st::before { animation: none !important; } .ss-scuoti .ss-vignetta, .ss-scuoti .ss-stage { animation: none; } }
