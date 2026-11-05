@@ -1,0 +1,51 @@
+name: Risposte ai commenti
+
+# Ogni 2 ore: legge i commenti nuovi (YouTube, Instagram, Bluesky), fa scrivere all'AI una bozza
+# di risposta e manda una notifica all'app Centro social. Le bozze non controllate partono da sole
+# dopo RITARDO_RISPOSTE_ORE (3); quelle approvate dall'app partono al giro dopo, o subito con "Run workflow".
+on:
+  schedule:
+    - cron: '47 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      prova:
+        description: 'Prova: scrive le bozze ma non pubblica le risposte'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hub-commenti
+  cancel-in-progress: false
+
+jobs:
+  commenti:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Prepara il ramo dei dati
+        run: bash promo/hub_dati.sh prepara
+      - name: Leggi i commenti e rispondi
+        env:
+          PROVA: ${{ inputs.prova && '1' || '0' }}
+          RITARDO_RISPOSTE_ORE: ${{ vars.RITARDO_RISPOSTE_ORE }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          FCM_SERVICE_ACCOUNT: ${{ secrets.FCM_SERVICE_ACCOUNT }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_API_VERSION: ${{ vars.IG_API_VERSION }}
+          BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
+          BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
+        run: node promo/commenti.js ../hub-dati
+      - name: Salva
+        run: bash promo/hub_dati.sh salva "Commenti $(date -u +%Y-%m-%dT%H:%M)"
