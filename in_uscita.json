@@ -7,8 +7,14 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-05_storia_eclissi.mp4",
   "creato": "2026-11-05T20:28:22.342Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-05T20:28:22.342Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-05T20:28:22.342Z",
+  "esito": {
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzlpfqkgdb2y"
+   }
+  }
  },
  {
   "id": "video:42095885065",
