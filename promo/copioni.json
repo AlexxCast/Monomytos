@@ -1141,17 +1141,17 @@
       "riprese": {
         "s": {
           "tipo": "storia",
-          "durata": 6,
+          "durata": 12,
           "camera": [
             {
               "t": 0,
-              "zoom": 1.12,
+              "zoom": 1.06,
               "dur": 0
             },
             {
               "t": 0.1,
               "zoom": 1,
-              "dur": 5.5
+              "dur": 11
             }
           ]
         },
@@ -1174,8 +1174,8 @@
       "inquadrature": [
         {
           "ripresa": "s",
-          "da": 0.2,
-          "durata": 2.2,
+          "da": 0.3,
+          "durata": 5.4,
           "testo": {
             "it": "Una notte le città si *spengono*",
             "en": "One night the cities go *dark*"
@@ -1183,8 +1183,8 @@
         },
         {
           "ripresa": "s",
-          "da": 3,
-          "durata": 2,
+          "da": 5.9,
+          "durata": 5.6,
           "transizione": "dissolvenza",
           "testo": {
             "it": "E compare la Stella della *Follia*",
@@ -1195,7 +1195,7 @@
           "ripresa": "p",
           "da": "card_played#1-0.2",
           "riserva": 2,
-          "durata": 2.6,
+          "durata": 3,
           "transizione": "flash",
           "testo": {
             "it": "Resisti al Velo",
@@ -1207,7 +1207,7 @@
           "ripresa": "p",
           "da": "act_advanced-0.2",
           "riserva": 5,
-          "durata": 2.4,
+          "durata": 2.6,
           "transizione": "scorri",
           "scossa": true,
           "testo": {

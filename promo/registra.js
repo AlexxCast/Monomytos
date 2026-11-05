@@ -347,7 +347,7 @@ const RIPRESE = {
     return async durata => {
       const fine = Date.now() + durata;
       while (Date.now() < fine) {
-        await attesa(p, Math.min(2600, Math.max(0, fine - Date.now())));
+        await attesa(p, Math.min(r.passo_testo || 5500, Math.max(0, fine - Date.now()))); // tempo per leggere ogni fumetto
         if (Date.now() < fine) await p.evaluate(() => { const sc = document.getElementById('storiaScena'); if (sc) sc.click(); });
       }
     };
