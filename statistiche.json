@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-05T18:05:39.206Z",
+ "aggiornato": "2026-11-05T18:10:35.663Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -27,8 +27,20 @@
    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
   },
   "bluesky": {
-   "stato": "non collegata",
-   "nota": "mancano i Secrets: BSKY_HANDLE"
+   "stato": "ok",
+   "account": {
+    "nome": "monomythos.bsky.social",
+    "follower": 0,
+    "video": 0,
+    "link": "https://bsky.app/profile/monomythos.bsky.social"
+   },
+   "video": [],
+   "totali": {
+    "views": 0,
+    "likes": 0,
+    "commenti": 0,
+    "condivisioni": 0
+   }
   },
   "telegram": {
    "stato": "ok",
