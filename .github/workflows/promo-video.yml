@@ -6,8 +6,10 @@ name: Video promozionali
 # arriva una issue con il video, le didascalie pronte e l'esito di ogni piattaforma.
 # Gratis: GitHub Actions è illimitato per i repository pubblici.
 on:
-  schedule:
-    - cron: '0 15 * * *'   # prepara alle 16:00 ora italiana d'inverno; esce un'ora dopo (RITARDO_VIDEO_MIN)
+  # Uscita giornaliera SPENTA (Alessio, 5/11): prima la lore, i video di gameplay quando le carte sono pronte.
+  # Per riaccenderla togli il # dalle due righe qui sotto.
+  # schedule:
+  #   - cron: '0 15 * * *'   # prepara alle 16:00 ora italiana d'inverno; esce un'ora dopo (RITARDO_VIDEO_MIN)
   workflow_dispatch:
     inputs:
       copione:
