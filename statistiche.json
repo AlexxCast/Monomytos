@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-05T18:10:35.663Z",
+ "aggiornato": "2026-11-05T23:38:24.345Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -10,10 +10,21 @@
     "video": 0,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
-   "video": [],
+   "video": [
+    {
+     "id": "N71Wh4FGnts",
+     "titolo": "L'Eclissi Sintetica #Shorts",
+     "data": "2026-11-05T19:41:32Z",
+     "link": "https://youtube.com/shorts/N71Wh4FGnts",
+     "privato": false,
+     "views": 12,
+     "likes": 2,
+     "commenti": 0
+    }
+   ],
    "totali": {
-    "views": 0,
-    "likes": 0,
+    "views": 12,
+    "likes": 2,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -31,15 +42,26 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 0,
-    "video": 0,
+    "video": 1,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
-   "video": [],
+   "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mzlpfqkgdb2y",
+     "titolo": "Ad Ataca le luci si spengono e nel cielo compare la Stella della Follia. Chi la fissa trop",
+     "data": "2026-11-05T20:28:42.871Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzlpfqkgdb2y",
+     "views": 0,
+     "likes": 3,
+     "commenti": 0,
+     "condivisioni": 1
+    }
+   ],
    "totali": {
     "views": 0,
-    "likes": 0,
+    "likes": 3,
     "commenti": 0,
-    "condivisioni": 0
+    "condivisioni": 1
    }
   },
   "telegram": {
