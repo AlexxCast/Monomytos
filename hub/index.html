@@ -218,7 +218,7 @@ footer { margin-top: 40px; color: var(--tenue); font-size: 12px; text-align: cen
   <section id="impostazioni">
     <div class="riga-titolo"><h2>Impostazioni</h2></div>
     <div class="carta">
-      <p class="piccolo">Per vedere i dati non serve niente. Per <b>inviare</b>, <b>aggiornare</b> e <b>scrivere all'AI</b> serve una chiave GitHub personale. Resta solo in questo browser, non viene mai salvata nel sito.</p>
+      <p class="piccolo">Il Centro è solo tuo: si apre solo con la tua chiave GitHub personale, che funziona solo per il tuo account. Resta in questo browser e non viene mai salvata nel sito.</p>
       <label class="campo" for="pat">Chiave GitHub (fine-grained token)</label>
       <input id="pat" type="password" autocomplete="off" placeholder="github_pat_…">
       <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button id="btnSalvaPat">Salva e prova</button><button class="secondario" id="btnTogliPat">Togli dal browser</button></div>
@@ -546,19 +546,27 @@ $('#btnSalvaPat').onclick = async () => {
     const r = await api(`/repos/${REPO}`);
     if (!r.permissions || !r.permissions.push) throw new Error('la chiave non ha i permessi di scrittura su Monomytos');
     try { localStorage.setItem('hub_pat', v); } catch (e) {}
-    m.className = 'msg ok'; m.textContent = 'Chiave valida e salvata in questo browser.'; $('#pat').value = '••••••••'; carica();
+    m.className = 'msg ok'; m.textContent = 'Chiave valida e salvata in questo browser.'; $('#pat').value = '••••••••'; avvia();
   } catch (e) { token = ''; m.className = 'msg err'; m.textContent = 'Chiave non valida: ' + e.message; }
 };
-$('#btnTogliPat').onclick = () => { token = ''; try { localStorage.removeItem('hub_pat'); } catch (e) {} $('#pat').value = ''; $('#patMsg').className = 'msg'; $('#patMsg').textContent = 'Chiave tolta.'; };
+$('#btnTogliPat').onclick = () => { token = ''; try { localStorage.removeItem('hub_pat'); } catch (e) {} $('#pat').value = ''; $('#patMsg').className = 'msg'; $('#patMsg').textContent = 'Chiave tolta.'; blocca(true); };
 
 // ---------- Avvio ----------
+// Senza la chiave di Alessio la pagina mostra solo l'accesso
+function blocca(si) {
+  document.querySelectorAll('section:not(#impostazioni), nav.menu, #btnAggiorna').forEach(e => e.hidden = si);
+  if (si) $('#aggiornato').textContent = 'Accesso riservato: inserisci la tua chiave GitHub.';
+}
 async function carica() {
+  if (!token && !DATI) return blocca(true);
+  blocca(false);
   [STAT, STORICO] = await Promise.all([dato('statistiche.json', null), dato('storico.json', [])]);
   $('#aggiornato').textContent = STAT ? `Statistiche aggiornate ${quando(STAT.aggiornato)} · si aggiornano da sole ogni 6 ore` : 'Statistiche non ancora raccolte: partono da sole dopo l\'unione delle modifiche, oppure premi Aggiorna.';
   riepilogo(); piattaforme(); grafico(); videoMigliori();
 }
-carica(); analisi(); attivita(); calendario();
-setInterval(() => { carica(); attivita(); }, 5 * 60 * 1000);
+function avvia() { carica(); if (token || DATI) { analisi(); attivita(); calendario(); } }
+avvia();
+setInterval(() => { if (token || DATI) { carica(); attivita(); } }, 5 * 60 * 1000);
 </script>
 </body>
 </html>
