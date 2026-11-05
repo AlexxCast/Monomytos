@@ -46,12 +46,12 @@ class EffectRegistryClass {
       if (targetEntity.type === 'mook') {
         const mook = targetEntity.entity;
         mook.hp -= amt;
-        th.hp = Math.max(0, th.hp - amt);
         engine.addLog('hero', `${source.name} infligge ${amt} danni a ${mook.name} (${Math.max(0, mook.hp)} HP rimasti)`);
         if (mook.hp <= 0) {
           mook.isDead = true;
           engine.addLog('hero', `[ELIMINATO] ${mook.name} è stato sconfitto!`);
         }
+        engine.syncThreatHp();
       } else if (targetEntity.type === 'player') {
         const pTarget = targetEntity.entity;
         const cardEffectText = (card?.effetto || fx.desc || '').toLowerCase();
@@ -78,7 +78,6 @@ class EffectRegistryClass {
         th.mooks.forEach(m => {
           if (!m.isDead && (!targetEntity.entity || m.id !== targetEntity.entity.id)) {
             m.hp -= fx.splash;
-            th.hp = Math.max(0, th.hp - fx.splash);
             engine.addLog('hero', `[EFFETTO COLLATERALE] ${m.name} subisce ${fx.splash} danno collaterale!`);
             if (m.hp <= 0) {
               m.isDead = true;
@@ -88,6 +87,7 @@ class EffectRegistryClass {
         });
       }
 
+      engine.syncThreatHp();
       return { ok: true, amount: amt };
     });
 
@@ -395,7 +395,12 @@ class EffectRegistryClass {
       const attacker = ctx.incomingAttack?.enemy;
       if (attacker) {
         const th = engine.state.currentThreat;
-        th.hp = Math.max(0, th.hp - amt);
+        const colpito = (th.mooks || []).find(m => m === attacker || m.id === attacker.id) || engine.sgherroBersaglio();
+        if (colpito && !colpito.isDead) {
+          colpito.hp -= amt;
+          if (colpito.hp <= 0) { colpito.isDead = true; engine.addLog('hero', `[ELIMINATO] ${colpito.name} è stato sconfitto!`); }
+          engine.syncThreatHp();
+        } else th.hp = Math.max(0, th.hp - amt);
         engine.addLog('hero', `[RIFLESSO] ${source.name} riflette ${amt} danni contro ${attacker.name}!`);
         engine.checkThreatDefeated();
       }

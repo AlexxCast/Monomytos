@@ -1211,6 +1211,8 @@ window.MONOMYTHOS_EN = {"\" con":"\" with",
 "Vita Base risultante:":"Resulting Base Life:",
 "Vita Base:":"Base Life:",
 "Vita Boss":"Boss Life",
+"Vita Minaccia":"Threat Life",
+"Somma della Vita degli sgherri":"Sum of the henchmen's Life",
 "Vita Totale = VitaUnitaria × (Livello + NumEroi).":"Total Life = UnitLife × (Level + NumHeroes).",
 "Vittoria da Villain":"Villain victory",
 "Vittoria da Villain (online)":"Villain victory (online)",
@@ -1528,6 +1530,7 @@ Object.assign(window.MONOMYTHOS_EN, {
   "Guarda le prime 2 carte del tuo mazzo e scegli se scartarle.": "Look at the top 2 cards of your deck and choose whether to discard them.",
   "Gratis, una volta per turno. Scegli uno dei due effetti:": "Free, once per turn. Choose one of the two effects:",
   "Infliggi 1 danno alla Minaccia.": "Deal 1 damage to the Threat.",
+  "Infliggi 1 danno allo sgherro più ferito.": "Deal 1 damage to the most wounded henchman.",
   "1 danno": "1 damage",
   "+1 Slot Potenza": "+1 Power Slot",
   "+1 Slot Agilità": "+1 Agility Slot",
@@ -1794,3 +1797,15 @@ window.MONOMYTHOS_EN_REGOLE.unshift(
   ['^Con questo eroe non potresti mai giocarla: costa (\\d+) (.+), hai (\\d+) slot\\.$', 'This hero could never play it: costs $1 $2, you have $3 slots.'],
   ['^Nel mazzo ci sono (\\d+) carte che questo eroe non può giocare \\(costano più slot di quelli che ha\\)\\. Toglile\\.$', 'Your deck has $1 cards this hero cannot play (they cost more slots than it has). Remove them.']
 );
+window.MONOMYTHOS_EN_REGOLE.unshift(
+  ['^\\[BOTTINO\\] Disinnesco completato: ogni eroe \\+(\\d+) Vita, -(\\d+) Trauma, \\+(\\d+) PE e pesca (\\d+) carta \\(\\+(\\d+) Crediti Cosmici\\)$', '[LOOT] Disarm complete: every hero +$1 Life, -$2 Trauma, +$3 HP and draws $4 card (+$5 Cosmic Credits)'],
+  ['^\\[BOTTINO\\] Disinnesco completato: ogni eroe \\+(\\d+) Vita, -(\\d+) Trauma, \\+(\\d+) PE e pesca (\\d+) carta$', '[LOOT] Disarm complete: every hero +$1 Life, -$2 Trauma, +$3 HP and draws $4 card'],
+  ['^ \\(\\+(\\d+) Crediti Cosmici\\)$', ' (+$1 Cosmic Credits)']
+);
+Object.assign(window.MONOMYTHOS_EN, {
+  'Disinnesco (binari)': 'Disarm (tracks)',
+  'Completare un binario risolve la Minaccia: è più difficile che abbattere gli sgherri, ma dà un bottino a ogni eroe (+3 Vita, -1 Trauma, +1 PE, 1 carta).': 'Completing a track resolves the Threat: it is harder than defeating the henchmen, but gives every hero loot (+3 Life, -1 Trauma, +1 HP, 1 card).',
+  'Minaccia': 'Threat',
+  'La sua Vita è la somma della Vita dei suoi sgherri: per abbatterla colpisci gli sgherri.': 'Its Life is the sum of its henchmen\'s Life: to bring it down, hit the henchmen.'
+});
+window.MONOMYTHOS_EN_REGOLE.unshift(['^Bottino del Disinnesco! Ogni eroe \\+(\\d+) Vita, -(\\d+) Trauma, \\+(\\d+) PE e 1 carta$', 'Disarm loot! Every hero +$1 Life, -$2 Trauma, +$3 HP and 1 card']);

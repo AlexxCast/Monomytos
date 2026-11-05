@@ -257,6 +257,9 @@ class MonomythosEngine {
       brutoMax: brutMax,
       isBoss: this.state.actIndex === 2
     };
+    // La Vita della Minaccia è esattamente la somma degli sgherri
+    this.syncThreatHp();
+    this.state.currentThreat.maxHp = this.state.currentThreat.hp;
 
     if (this.state.isRogueHeroBoss) {
       this.setupRogueHeroBoss(this.state.bossHeroName || "Titano d'Acciaio");
@@ -428,11 +431,29 @@ class MonomythosEngine {
     return this.state.players[this.state.turnIndex];
   }
 
+  // La Minaccia è la somma dei suoi sgherri (scelta di Alessio 2026-11-05): non si attacca direttamente.
+  // Un colpo "alla Minaccia" va allo sgherro vivo più ferito.
+  sgherroBersaglio() {
+    const th = this.state && this.state.currentThreat;
+    const vivi = ((th && th.mooks) || []).filter(m => !m.isDead && m.hp > 0);
+    if (!vivi.length) return null;
+    return vivi.reduce((a, b) => (b.hp < a.hp ? b : a));
+  }
+
+  // Vita della Minaccia = somma della Vita degli sgherri vivi
+  syncThreatHp() {
+    const th = this.state && this.state.currentThreat;
+    if (!th || !th.mooks || !th.mooks.length) return;
+    th.hp = th.mooks.reduce((t, m) => t + (m.isDead ? 0 : Math.max(0, m.hp)), 0);
+  }
+
   // Target resolver helper (Point 7)
   resolveTarget(targetId) {
     if (!this.state || !this.state.currentThreat) return null;
     const th = this.state.currentThreat;
     if (!targetId || targetId === 'threat_boss' || targetId === 'boss') {
+      const m = this.sgherroBersaglio();
+      if (m) return { id: m.id, type: 'mook', name: m.name, entity: m };
       return { id: 'threat_boss', type: 'boss', name: th.nome, entity: th };
     }
     if (th.mooks) {
@@ -456,8 +477,8 @@ class MonomythosEngine {
     const hasHealOrBuff = fxList.some(f => f.type === 'heal' || f.type === 'shield' || f.type === 'draw' || f.type === 'revive');
     const hasDamage = fxList.some(f => f.type === 'damage' || f.type === 'stun' || f.type === 'weaken' || f.type === 'weakenForza');
 
-    // 1. Threat Boss
-    candidates.push({
+    // 1. Threat Boss: solo se non restano sgherri (la Minaccia è la somma degli sgherri)
+    if (!this.sgherroBersaglio()) candidates.push({
       id: 'threat_boss',
       type: 'boss',
       name: th.nome,
@@ -741,7 +762,7 @@ class MonomythosEngine {
 
   // Potere Base: due opzioni per eroe, con testo e effetto reali (dal manuale, semplificati per il digitale)
   getBasePowerOptions(player) {
-    const dmg = (titolo) => ({ titolo, desc: 'Infliggi 1 danno alla Minaccia.', badge: '1 danno', run: (e, p) => e._pbDanno(p, 'threat_boss') });
+    const dmg = (titolo) => ({ titolo, desc: 'Infliggi 1 danno allo sgherro più ferito.', badge: '1 danno', run: (e, p) => e._pbDanno(p, 'threat_boss') });
     const slot = (cat) => ({ titolo: `+1 Slot ${cat}`, desc: `Ottieni 1 Slot ${cat} in più da spendere per giocare carte in questo turno.`, badge: `+1 ${cat}`, run: (e, p) => { p.slots[cat] = (p.slots[cat] || 0) + 1; const k = cat.toLowerCase().replace('à', 'a'); p.slots[k] = (p.slots[k] || 0) + 1; if (cat === 'Agilità') p.slots.Agilita = p.slots.Agilità; return `+1 Slot ${cat}`; } });
     const T = {
       'Iron Aegis': [dmg('Colpo cinetico'), slot('Potenza')],
@@ -1260,6 +1281,8 @@ class MonomythosEngine {
     if (disarmedPrimario || disarmedBruto || bossKilled) {
       const reason = disarmedPrimario ? 'Disinnesco Primario completato' : (disarmedBruto ? 'Disinnesco Bruto completato' : 'Tutti i nemici abbattuti');
       this.addLog('hero', `[VITTORIA] MINACCIA RISOLTA! (${reason})`);
+      // Il binario è la via più difficile: chi lo completa ottiene un bottino (scelta di Alessio 2026-11-05)
+      if ((disarmedPrimario || disarmedBruto) && !bossKilled) this.bottinoDisinnesco();
 
       if (this.state.actIndex < 2) {
         // Advance to next Act
@@ -1281,6 +1304,21 @@ class MonomythosEngine {
       }
     }
     return false;
+  }
+
+  // Bottino del Disinnesco: ogni eroe vivo (non Villain) +3 Vita, -1 Trauma, +1 Punto Eroe e pesca 1 carta;
+  // in Classificata e Storia anche +50 Crediti.
+  bottinoDisinnesco() {
+    const B = (window.MONOMYTHOS_BILANCIAMENTO || {}).bottinoDisinnesco || { vita: 3, trauma: 1, pe: 1, carte: 1, crediti: 50 };
+    this.state.players.filter(p => !p.isDead && p.state !== 'villain').forEach(p => {
+      p.vita = Math.min(p.vitaMax, p.vita + (B.vita || 0));
+      p.trm = Math.max(0, (p.trm || 0) - (B.trauma || 0));
+      p.pe = (p.pe || 0) + (B.pe || 0);
+      for (let i = 0; i < (B.carte || 0); i++) if (p.hand.length < p.maxHand) this.drawOne(p);
+    });
+    if (window.Progression && this.state.ranked && B.crediti) window.Progression.addCredits(B.crediti, 'Bottino del Disinnesco');
+    this.addLog('hero', `[BOTTINO] Disinnesco completato: ogni eroe +${B.vita} Vita, -${B.trauma} Trauma, +${B.pe} PE e pesca ${B.carte} carta${this.state.ranked && B.crediti ? ` (+${B.crediti} Crediti Cosmici)` : ''}`);
+    this.emit('bottino_disinnesco', B);
   }
 
   checkAllHeroesDead() {

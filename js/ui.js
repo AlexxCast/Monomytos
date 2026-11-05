@@ -325,6 +325,9 @@ class UIController {
       this.fxBanner('VILLAIN', `${player.name} cede al Trauma`, 'violet');
       this.renderGameView(state);
     });
+    window.GameEngine.on('bottino_disinnesco', (ev, b) => {
+      if (b) this.showToast(`Bottino del Disinnesco! Ogni eroe +${b.vita} Vita, -${b.trauma} Trauma, +${b.pe} PE e 1 carta`);
+    });
     window.GameEngine.on('act_advanced', (ev, data, state) => {
       window.AudioEngine?.playSfx('victory');
       this.fxBanner(`ATTO ${['I', 'II', 'III'][state.actIndex] || state.actIndex + 1}`, 'Minaccia sconfitta: si avanza', 'gold');
