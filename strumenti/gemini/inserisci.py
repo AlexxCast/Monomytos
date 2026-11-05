@@ -12,13 +12,14 @@ from PIL import Image
 
 QUI = os.path.dirname(os.path.abspath(__file__))
 ORIG = os.path.join(g.ROOT, 'strumenti', 'originali_gemini')
+STORIA = os.path.join(g.ROOT, 'assets', 'storia')
 
 
 def togli_sezione(path, cid):
     if not os.path.exists(path):
         return
     s = open(path, encoding='utf-8').read()
-    s2 = re.sub(r'## ' + re.escape(cid) + r'\.png .*?(?=\n## |\Z)', '', s, flags=re.S)
+    s2 = re.sub(r'## ' + re.escape(cid) + r'\.png .*?(?=\n#{1,2} |\Z)', '', s, flags=re.S)
     if s2 != s:
         open(path, 'w', encoding='utf-8').write(s2.rstrip() + '\n')
 
@@ -36,6 +37,18 @@ def main():
     fatte, ignote = [], []
     for f in files:
         cid = os.path.splitext(os.path.basename(f))[0].strip().lower()
+        # Vignette (s_<nome>) e ritratti dei personaggi (n_<nome>) della Storia: vanno in assets/storia/, senza cornice della carta
+        if cid.startswith(('s_', 'n_')):
+            im = Image.open(f).convert('RGB')
+            im.save(os.path.join(ORIG, f'{cid}.webp'), 'WEBP', quality=90)
+            w, h = im.size
+            im = im.crop((int(w * .015), int(h * .015), int(w * .985), int(h * .985)))
+            larg = 640 if cid.startswith('n_') else 1080
+            if im.width > larg: im = im.resize((larg, round(im.height * larg / im.width)), Image.LANCZOS)
+            os.makedirs(STORIA, exist_ok=True)
+            im.save(os.path.join(STORIA, f'{cid}.webp'), 'WEBP', quality=80, method=6)
+            togli_sezione(os.path.join(QUI, 'prompt_storia.md'), cid)
+            os.remove(f); fatte.append(cid); continue
         if cid not in carte:
             ignote.append(os.path.basename(f)); continue
         im = Image.open(f).convert('RGB')

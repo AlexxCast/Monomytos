@@ -29,6 +29,7 @@ class EffectRegistryClass {
     this.register('damage', (engine, ctx, fx) => {
       const { source, target, card } = ctx;
       let amt = fx.amount || 1;
+      // (amt può essere ridotto dagli effetti della Minaccia sotto)
 
       // Apply source attack boosts
       if (source.boostedAttack) {
@@ -45,13 +46,14 @@ class EffectRegistryClass {
 
       if (targetEntity.type === 'mook') {
         const mook = targetEntity.entity;
+        if (source.state !== 'villain') amt = engine.mx('dannoEroe', amt, { source });
         mook.hp -= amt;
-        th.hp = Math.max(0, th.hp - amt);
         engine.addLog('hero', `${source.name} infligge ${amt} danni a ${mook.name} (${Math.max(0, mook.hp)} HP rimasti)`);
         if (mook.hp <= 0) {
           mook.isDead = true;
           engine.addLog('hero', `[ELIMINATO] ${mook.name} è stato sconfitto!`);
         }
+        engine.syncThreatHp();
       } else if (targetEntity.type === 'player') {
         const pTarget = targetEntity.entity;
         const cardEffectText = (card?.effetto || fx.desc || '').toLowerCase();
@@ -78,7 +80,6 @@ class EffectRegistryClass {
         th.mooks.forEach(m => {
           if (!m.isDead && (!targetEntity.entity || m.id !== targetEntity.entity.id)) {
             m.hp -= fx.splash;
-            th.hp = Math.max(0, th.hp - fx.splash);
             engine.addLog('hero', `[EFFETTO COLLATERALE] ${m.name} subisce ${fx.splash} danno collaterale!`);
             if (m.hp <= 0) {
               m.isDead = true;
@@ -88,6 +89,7 @@ class EffectRegistryClass {
         });
       }
 
+      engine.syncThreatHp();
       return { ok: true, amount: amt };
     });
 
@@ -109,8 +111,8 @@ class EffectRegistryClass {
     // 3. SHIELD
     this.register('shield', (engine, ctx, fx) => {
       const { source } = ctx;
-      const amt = fx.amount || 1;
-      source.shield = (source.shield || 0) + amt;
+      const amt = engine.mx('scudo', fx.amount || 1, { source });
+      source.shield = Math.min(engine.mx('scudoMax', Infinity, { source }), (source.shield || 0) + amt);
       engine.addLog('hero', `${source.name} ottiene Scudo +${amt} (Totale Scudo: ${source.shield})`);
       return { ok: true, amount: amt };
     });
@@ -136,6 +138,7 @@ class EffectRegistryClass {
         }
       }
       engine.addLog('hero', `${source.name} pesca ${drawn} carte dal mazzo`);
+      if (drawn > 1) engine.mx('pescaMultipla', null, { source, drawn });
       return { ok: true, drawn };
     });
 
@@ -162,7 +165,8 @@ class EffectRegistryClass {
     // 6. TRAUMA
     this.register('trauma', (engine, ctx, fx) => {
       const { source } = ctx;
-      const amt = fx.amount || 1;
+      let amt = fx.amount || 1;
+      if (amt > 0 && ctx.card && ctx.card.osc) amt = engine.mx('traumaOscuro', amt, { source });
       source.trm = Math.max(0, Math.min(5, source.trm + amt));
       if (amt > 0) {
         engine.addLog('threat', `[TRAUMA] ${source.name} accumula +${amt} TRM (${source.trm}/5)`);
@@ -190,6 +194,7 @@ class EffectRegistryClass {
         const vpGain = fx.vp || (fx.pe || 1);
         source.vp = (source.vp || 0) + vpGain;
         engine.addLog('threat', `[VILLAIN] ${source.name} guadagna +${vpGain} VP (Totale VP: ${source.vp})`);
+        engine.mx('vpGenerati', vpGain, { player: source });
       }
       return { ok: true };
     });
@@ -395,7 +400,12 @@ class EffectRegistryClass {
       const attacker = ctx.incomingAttack?.enemy;
       if (attacker) {
         const th = engine.state.currentThreat;
-        th.hp = Math.max(0, th.hp - amt);
+        const colpito = (th.mooks || []).find(m => m === attacker || m.id === attacker.id) || engine.sgherroBersaglio();
+        if (colpito && !colpito.isDead) {
+          colpito.hp -= amt;
+          if (colpito.hp <= 0) { colpito.isDead = true; engine.addLog('hero', `[ELIMINATO] ${colpito.name} è stato sconfitto!`); }
+          engine.syncThreatHp();
+        } else th.hp = Math.max(0, th.hp - amt);
         engine.addLog('hero', `[RIFLESSO] ${source.name} riflette ${amt} danni contro ${attacker.name}!`);
         engine.checkThreatDefeated();
       }

@@ -325,6 +325,9 @@ class UIController {
       this.fxBanner('VILLAIN', `${player.name} cede al Trauma`, 'violet');
       this.renderGameView(state);
     });
+    window.GameEngine.on('bottino_disinnesco', (ev, b) => {
+      if (b) this.showToast(`Bottino del Disinnesco! Ogni eroe +${b.vita} Vita, -${b.trauma} Trauma, +${b.pe} PE e 1 carta`);
+    });
     window.GameEngine.on('act_advanced', (ev, data, state) => {
       window.AudioEngine?.playSfx('victory');
       this.fxBanner(`ATTO ${['I', 'II', 'III'][state.actIndex] || state.actIndex + 1}`, 'Minaccia sconfitta: si avanza', 'gold');
@@ -644,10 +647,13 @@ class UIController {
     }
 
     // 1. Mission / Act Progress
-    document.getElementById('missionActLabel').textContent = `ATTO ${state.actIndex === 0 ? 'I' : (state.actIndex === 1 ? 'II' : 'FINALE')}`;
+    const nAtti = (state.actThreats || [0, 0, 0]).length;
+    const nomeAtto = state.actIndex === nAtti - 1 ? (nAtti === 1 ? 'UNICO' : 'FINALE') : (state.actIndex === 0 ? 'I' : 'II');
+    document.getElementById('missionActLabel').textContent = `ATTO ${nomeAtto}`;
     const pips = document.querySelectorAll('.act-pip');
     pips.forEach((p, idx) => {
       p.className = 'act-pip' + (idx === state.actIndex ? ' active' : (idx < state.actIndex ? ' done' : ''));
+      p.style.display = idx < nAtti ? '' : 'none';
     })    // 2. Threat Card & Metrics (Point 7: Central Threat in Battlefield Nexus)
     const thNameEl = document.getElementById('threatName');
     if (thNameEl) thNameEl.textContent = th.nome;
@@ -808,6 +814,7 @@ class UIController {
           </div>
           <div class="companion-trauma-row">
             <span class="companion-trauma-lbl">Trauma ${p.trm}/5</span>
+            <span class="morale-chip mini ${p.state === 'villain' ? 'is-vp' : 'is-pe'}"><b>${p.state === 'villain' ? (p.vp || 0) : (p.pe || 0)}</b> ${p.state === 'villain' ? 'VP' : 'PE'}</span>
             <div class="companion-trauma-pips">${trmPipsHtml}</div>
           </div>
         `;
@@ -818,7 +825,8 @@ class UIController {
     // 4. Table center zone (Recently played cards) & Decks counters
     const threatDeckCount = document.getElementById('threatDeckCount');
     if (threatDeckCount) {
-      threatDeckCount.textContent = `Atto ${state.actIndex === 0 ? 'I' : (state.actIndex === 1 ? 'II' : 'FINALE')} / III`;
+      const nA = (state.actThreats || [0, 0, 0]).length;
+      threatDeckCount.textContent = `Atto ${state.actIndex + 1} / ${nA}`;
     }
     const playerDeckCount = document.getElementById('playerDeckCount');
     if (playerDeckCount && localPlayer) {
@@ -880,6 +888,15 @@ class UIController {
         fillBar.classList.toggle('critical', myHpRatio < 0.3);
       }
 
+      // Punti Eroe / VP (§4): si vedono sempre accanto al Trauma
+      const moraleBox = document.getElementById('playerDockMorale');
+      if (moraleBox) {
+        const isVil = localPlayer.state === 'villain';
+        moraleBox.className = `morale-chip ${isVil ? 'is-vp' : 'is-pe'}`;
+        moraleBox.innerHTML = `<b>${isVil ? (localPlayer.vp || 0) : (localPlayer.pe || 0)}</b> ${isVil ? 'VP' : 'PE'}`;
+        moraleBox.title = isVil ? 'Villain Points: si guadagnano con le azioni egoiste e si spendono sulle carte con [Costo: VP]' : 'Punti Eroe: si guadagnano con le azioni altruiste e si spendono sulle carte con [Costo: HP]';
+      }
+
       // Trauma Track
       const trmBox = document.getElementById('playerDockTrauma');
       if (trmBox) {
@@ -912,7 +929,7 @@ class UIController {
 
       // Base Power button status
       const btnPb = document.getElementById('btnPbDock');
-      btnPb.disabled = localPlayer.pbUsedThisTurn || localPlayer.isDead;
+      btnPb.disabled = (localPlayer.pbUsedThisTurn && !window.GameEngine.costoPbExtra(localPlayer).ok) || localPlayer.isDead;
       btnPb.textContent = localPlayer.pbName || 'Potere Base';
 
       // End Turn button status
@@ -950,7 +967,7 @@ class UIController {
         // Nel tuo turno si vede subito quali carte puoi giocare adesso (hai abbastanza slot della loro Categoria)
         if (spread || (state.turnIndex === 0 && state.phase === 'action' && !localPlayer.isDead)) {
           const slot = window.GameEngine.getPlayerSlot ? window.GameEngine.getPlayerSlot(localPlayer, c.cat) : ((localPlayer.slots && localPlayer.slots[c.cat]) || 0);
-          cardEl.classList.add(slot >= (c.valore || 0) ? 'giocabile' : 'non-giocabile');
+          cardEl.classList.add(slot >= (c.valore || 0) && (!window.Morale || window.Morale.puoPagare(c, localPlayer)) ? 'giocabile' : 'non-giocabile');
         }
         if (this._arriving && this._arriving.has(c.uid || c.id)) cardEl.classList.add('is-arriving');
         cardEl.style.setProperty('--d', (i - (n - 1) / 2).toFixed(2));
@@ -1208,7 +1225,8 @@ class UIController {
     // Check Opzione A Slot Cost (using resilient normalized slot checker)
     const availableSlots = window.GameEngine.getPlayerSlot ? window.GameEngine.getPlayerSlot(localPlayer, card.cat) : ((localPlayer.slots && localPlayer.slots[card.cat]) || 0);
     const isReactionCard = (card.effetto && card.effetto.toLowerCase().includes('reazione')) || (card.fx_list && card.fx_list.some(f => f.timing === 'reaction'));
-    const canPlay = availableSlots >= card.valore && (window.GameEngine.state.turnIndex === 0 || isReactionCard);
+    const motivoMorale = window.Morale ? window.Morale.motivo(card, localPlayer) : '';
+    const canPlay = availableSlots >= card.valore && (window.GameEngine.state.turnIndex === 0 || isReactionCard) && !motivoMorale;
     const optA = document.getElementById('btnOptionPlayEffect');
     optA.style.opacity = canPlay ? '1' : '0.5';
     optA.querySelector('.cost-badge').textContent = `${card.valore} ${card.cat}`;
@@ -1218,6 +1236,7 @@ class UIController {
       if (!optAp.dataset.base) optAp.dataset.base = optAp.textContent;
       optAp.textContent = canPlay ? optAp.dataset.base
         : (window.GameEngine.state.turnIndex !== 0 && !isReactionCard ? 'Non è il tuo turno'
+          : motivoMorale && availableSlots >= card.valore ? `${motivoMorale}. Puoi usarla come Sacrificio Tattico.`
           : `Ti servono ${card.valore} slot ${card.cat}: ne hai ${availableSlots}. Puoi usarla come Sacrificio Tattico.`);
     }
 
@@ -1563,10 +1582,15 @@ class UIController {
   openBasePowerSheet() {
     const st = window.GameEngine.state;
     const localPlayer = st.players.find(p => p.id === this.idLocale()) || st.players[0];
-    if (localPlayer.pbUsedThisTurn) return this.showToast('Potere Base già utilizzato in questo turno!');
+    let descPb = 'Gratis, una volta per turno. Scegli uno dei due effetti:';
+    if (localPlayer.pbUsedThisTurn) {
+      const k = window.GameEngine.costoPbExtra(localPlayer);
+      if (!k.ok) return this.showToast(k.msg);
+      descPb = `Seconda volta in questo turno: costa ${k.n} ${k.tipo === 'pe' ? 'Punti Eroe' : 'VP'}. Scegli uno dei due effetti:`;
+    }
 
     document.getElementById('pbSheetTitle').textContent = localPlayer.pbName || 'Potere Base';
-    document.getElementById('pbSheetDesc').textContent = 'Gratis, una volta per turno. Scegli uno dei due effetti:';
+    document.getElementById('pbSheetDesc').textContent = descPb;
     const box = document.getElementById('pbSheetOptions');
     if (box) {
       const colori = ['background:var(--oro); color:#120e05;', 'background:var(--ciano); color:#051317;'];
@@ -1792,7 +1816,9 @@ class UIController {
       img: 'assets/icons/peronaggio.webp'
     };
 
-    data.action_cards[customKey] = data.action_cards['Iron Aegis']; // Preset deck
+    // Preset deck: solo le carte che questo eroe può davvero giocare con le sue statistiche
+    const meta = data.chars_meta[customKey];
+    data.action_cards[customKey] = data.action_cards['Iron Aegis'].filter(c => !window.Collezione || window.Collezione.giocabile(c, meta));
 
     this.hideModals();
     this.startSoloGame(customKey);
@@ -1833,6 +1859,15 @@ class UIController {
     b.innerHTML = `<div class="fx-banner-band"><b>${title}</b>${sub ? `<small>${sub}</small>` : ''}</div>`;
     document.body.appendChild(b);
     setTimeout(() => b.remove(), 1700);
+  }
+
+  spiegaMorale() {
+    const p = window.GameEngine && window.GameEngine.state && window.GameEngine.state.players.find(x => x.isLocal);
+    const vil = p && p.state === 'villain';
+    const testo = vil
+      ? 'Villain Points (VP): li guadagni con le azioni egoiste delle carte [Villain]. Li spendi sulle carte con [Costo: VP] e con la Spesa del Fato.'
+      : 'Punti Eroe (PE): li guadagni con le azioni altruiste delle carte [Eroe] e completando un binario. Li spendi sulle carte con [Costo: HP] e con la Spesa del Fato. Non sono la tua Vita.';
+    if (window.Dialogo) window.Dialogo.avviso(testo); else this.showToast(testo);
   }
 
   showToast(msg) {
@@ -2340,13 +2375,16 @@ class UIController {
       // Build tag badges
       let tagHtml = (window.Collezione ? window.Collezione.badge(c) : '') + `<span class="builder-tag-badge tag-${layout.type}">${c.tag || c.cat}</span>`;
       if (c.osc) tagHtml += `<span class="builder-tag-badge tag-purple">Oscura</span>`;
+      const creaz = this.currentDeckBuilding.creation;
+      const giocabile = !window.Collezione || !creaz || window.Collezione.giocabile(c, creaz);
+      if (!giocabile) tagHtml += `<span class="builder-tag-badge tag-ingiocabile">Non giocabile: costa ${c.valore} ${c.cat}, hai ${window.Collezione.slotMax(creaz, c.cat)} slot</span>`;
       if (c.deus || c.nome?.includes('Defibrillazione')) tagHtml += `<span class="builder-tag-badge tag-blue">Deus Ex</span>`;
       if (c.fx?.dmg) tagHtml += `<span class="builder-tag-badge tag-red">Danno +${c.fx.dmg}</span>`;
       if (c.fx?.shield) tagHtml += `<span class="builder-tag-badge tag-gold">Scudo +${c.fx.shield}</span>`;
       if (c.fx?.heal) tagHtml += `<span class="builder-tag-badge tag-green">Cura +${c.fx.heal}</span>`;
 
       const row = document.createElement('div');
-      row.className = `builder-card-row ${c.osc ? 'osc' : ''}`;
+      row.className = `builder-card-row ${c.osc ? 'osc' : ''} ${giocabile ? '' : 'non-giocabile'}`;
       row.innerHTML = `
         <div class="builder-card-thumb-wrap" onclick="UI.inspectCardById('${c.id}')" title="Visualizza carta">
           <img class="b-art" src="${bgArt}" alt="${c.nome}" onerror="this.src='assets/cards/retrocartamazzo.webp'">
@@ -2365,7 +2403,7 @@ class UIController {
         <div class="stepper-ctrl">
           <button class="stepper-btn" onclick="UI.changeCardDeckCount('${c.id}', -1)">-</button>
           <span class="stepper-val" id="cnt_${c.id}">${inDeck}</span>
-          <button class="stepper-btn" onclick="UI.changeCardDeckCount('${c.id}', 1)">+</button>
+          <button class="stepper-btn" onclick="UI.changeCardDeckCount('${c.id}', 1)"${giocabile ? '' : ' disabled'}>+</button>
         </div>
       `;
       container.appendChild(row);
@@ -2508,6 +2546,11 @@ class UIController {
 
     let next = current + delta;
     if (next < 0) next = 0;
+    const cardDef = delta > 0 && Object.values(window.MONOMYTHOS_DATA.action_cards).flat().find(c => c.id === cardId);
+    const creaz = this.currentDeckBuilding.creation;
+    if (cardDef && creaz && window.Collezione && !window.Collezione.giocabile(cardDef, creaz)) {
+      return this.showToast(`Con questo eroe non potresti mai giocarla: costa ${cardDef.valore} ${cardDef.cat}, hai ${window.Collezione.slotMax(creaz, cardDef.cat)} slot.`);
+    }
     if (next > maxAllowed) {
       return this.showToast(owned < R.copieMax ? `Ne possiedi solo ${owned}: non puoi metterne di più.` : `Massimo ${R.copieMax} copie per carta nel mazzo.`);
     }
@@ -2530,10 +2573,13 @@ class UIController {
     const allCards = data ? Object.values(data.action_cards).flat() : [];
     let total = 0;
     let dark = 0;
+    let ingiocabili = 0;
+    const creaz = this.currentDeckBuilding.creation;
     Object.entries(this.currentDeckBuilding.cards).forEach(([cid, count]) => {
       total += count;
       const card = allCards.find(c => c.id === cid);
       if (card && card.osc) dark += count;
+      if (card && creaz && window.Collezione && !window.Collezione.giocabile(card, creaz)) ingiocabili += count;
     });
 
     const totEl = document.getElementById('deckTotalCount');
@@ -2545,13 +2591,15 @@ class UIController {
     const sizeLbl = R.carteMin === R.carteMax ? `${R.carteMin}` : `${R.carteMin}-${R.carteMax}`;
     document.querySelectorAll('.deckSizeLabel').forEach(el => { el.textContent = sizeLbl; });
     document.querySelectorAll('.deckDarkMaxLabel').forEach(el => { el.textContent = R.oscureMax; });
-    this._deckValid = total >= R.carteMin && total <= R.carteMax && dark <= R.oscureMax;
+    this._deckValid = total >= R.carteMin && total <= R.carteMax && dark <= R.oscureMax && ingiocabili === 0;
     if (statusEl) {
       statusEl.classList.toggle('valid', this._deckValid);
       if (this._deckValid) {
         statusEl.textContent = `Mazzo valido (${total} carte)! Pronto per il salvataggio.`;
       } else if (total > R.carteMax) {
         statusEl.textContent = `Troppe carte nel mazzo (${total}/${sizeLbl}). Rimuovi ${total - R.carteMax} carte.`;
+      } else if (ingiocabili > 0) {
+        statusEl.textContent = `Nel mazzo ci sono ${ingiocabili} carte che questo eroe non può giocare (costano più slot di quelli che ha). Toglile.`;
       } else if (dark > R.oscureMax) {
         statusEl.textContent = `Troppe Carte Oscure (${dark}/${R.oscureMax} max). Riduci le carte oscure.`;
       } else {

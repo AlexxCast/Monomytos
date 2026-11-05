@@ -335,7 +335,7 @@
 
           <!-- Boss HP bar -->
           <div class="track-row">
-            <span class="track-lbl">Vita Boss</span>
+            <span class="track-lbl" title="Somma della Vita degli sgherri">Vita Minaccia</span>
             <div class="progress-track"><div class="progress-fill fill-boss" id="fillThreatHp" style="width:100%"></div></div>
             <span class="track-num mono" id="valThreatHp">--/--</span>
           </div>
@@ -413,7 +413,7 @@
           </div>
           <div class="player-vital-bars">
             <div class="vital-label">
-              <span id="playerDockName">Iron Aegis</span>
+              <span id="playerDockName" data-adatta="0.6">Iron Aegis</span>
               <span class="hp-text mono" id="playerDockHp">30/30</span>
             </div>
             <div class="vital-bar-out">
@@ -425,6 +425,7 @@
         <!-- Local Active Effects & Trauma -->
         <div class="player-dock-right-status">
           <div class="player-local-effects" id="playerLocalEffects"></div>
+          <div class="morale-chip is-pe" id="playerDockMorale" onclick="UI.spiegaMorale && UI.spiegaMorale()"><b>0</b> PE</div>
           <div class="trauma-box">
             <span style="font-size:9px; color:var(--muto); text-transform:uppercase;">Trauma</span>
             <div class="trauma-container" id="playerDockTrauma"></div>
@@ -454,7 +455,7 @@
         </div>
         <div class="action-toolbar">
           <button class="btn btn-pb" id="btnPbDock" onclick="UI.openBasePowerSheet()">Potere Base</button>
-          <div class="draw-stepper" title="Carte da pescare al prossimo round (da 1 a Velocità + 1, max 5)">
+          <div class="draw-stepper" title="Carte da pescare al prossimo round (da 1 ad Agilità + 1, max 4)">
             <button class="btn" onclick="UI.changeDrawChoice(-1)" aria-label="Pesca meno">−</button>
             <span id="drawChoiceLabel" class="mono">Pesca 2</span>
             <button class="btn" onclick="UI.changeDrawChoice(1)" aria-label="Pesca di più">+</button>
@@ -652,7 +653,7 @@
   <div class="modal-overlay" id="modalStoriaArchivio" onclick="if(event.target===this) UI.hideModals()">
     <div class="bottom-sheet" style="max-height:90dvh;">
       <div class="sheet-handle"></div>
-      <div class="sheet-header"><h3>Archivio di Lumen</h3><button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button></div>
+      <div class="sheet-header"><h3>Archivio di Vespera</h3><button class="sheet-close-btn" onclick="UI.hideModals()">&times;</button></div>
       <div id="storiaArchivioBody" class="storia-archivio"></div>
     </div>
   </div>
@@ -1225,11 +1226,14 @@
 
 <!-- Core Scripts -->
 <script src="js/lingua_en.js"></script>
+<script src="js/storia_en.js"></script>
 <script src="js/lingua.js"></script>
 <script src="js/dialogo.js"></script>
 <script src="js/adatta.js"></script>
 <script src="js/glossario.js"></script>
 <script src="js/cards_data.js"></script>
+<script src="js/morale.js"></script>
+<script src="js/minacce_effetti.js"></script>
 <script src="js/effects.js"></script>
 <script src="js/audio.js"></script>
 <script src="js/progression.js"></script>

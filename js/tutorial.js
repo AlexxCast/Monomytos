@@ -16,7 +16,7 @@
     nemici: { testo: 'Le etichette sopra i nemici ti dicono chi attaccheranno e con quanta Forza. Usale per decidere se difenderti o attaccare.', dove: '#mooksContainer' },
     trauma: { testo: 'Questo è il tuo Trauma. A 5 Trauma l\'eroe diventa Villain e gioca contro la squadra: tienilo basso!', dove: '#playerDockTrauma' },
     atto: { testo: 'Atto superato! Ogni missione ha 3 Minacce sempre più forti. Continua così.', dove: '#threatCentralCard' },
-    fineTutorial: { testo: 'Tutorial completato! Adesso scegli il tuo mazzo starter: da lì comincia la tua collezione.', dove: null }
+    fineTutorial: { testo: 'Tutorial completato! Continua la Storia per scoprire cosa succede ad Ataca, oppure gioca con gli amici dalla Home.', dove: null }
   };
 
   const Tutorial = {
@@ -26,7 +26,8 @@
 
     serve() {
       const d = P() && P().data;
-      return !!d && !d.tutorialFatto && !(window.Collezione && window.Collezione.haStarter());
+      // primo accesso (niente starter), oppure starter appena scelto e tutorial non ancora finito
+      return !!d && !d.tutorialFatto && (!(window.Collezione && window.Collezione.haStarter()) || !!d.starterPrimaDelTutorial);
     },
 
     avvia() {
@@ -41,6 +42,15 @@
         }, 200);
         return true;
       }
+      // La Storia ha come protagonista l'eroe dello starter: prima si sceglie lo starter, poi parte la missione
+      const C = window.Collezione;
+      if (C && !C.haStarter()) {
+        this._attesaStarter = true;
+        C.renderStarter();
+        window.UI.showScreen('scr-starter');
+        return true;
+      }
+      this._attesaStarter = false;
       this.attivo = true;
       this.inPartita = true;
       this.visti = {};
