@@ -316,3 +316,6 @@ Object.assign(window.MONOMYTHOS_EN, {
 "Sono echi. Qualcosa sta ripetendo il nostro passato.": "They're echoes. Something is repeating our past.",
 "All'alba, i Portatori che si erano separati in quella lunga notte si ritrovano nella piazza del Fondatore. Questa volta, insieme.": "At dawn, the Bearers who had split up during that long night meet again in Founder's Square. This time, together."
 });
+Object.assign(window.MONOMYTHOS_EN, {
+"Tutorial completato! Continua la Storia per scoprire cosa succede ad Ataca, oppure gioca con gli amici dalla Home.": "Tutorial complete! Continue the Story to find out what happens to Ataca, or play with friends from the Home screen."
+});

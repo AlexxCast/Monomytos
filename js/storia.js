@@ -626,6 +626,8 @@
         </div>`;
       window.UI.showModal('modalStoriaMissione');
       if (vinto && window.Premio) window.Premio.anima(document.getElementById('storiaMissioneBody'));
+      // fine del tutorial: ultimo consiglio
+      if (window.Tutorial && window.Tutorial._dopo) setTimeout(() => window.Tutorial.dopoPartita(), 1200);
     },
 
     // Somma dei crediti tra i premi ("150 crediti", "300 crediti"...)

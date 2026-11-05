@@ -72,6 +72,11 @@
       } catch (e) {
         console.warn('Ospite senza account:', e && e.code);
         this.ospiteLocale = true;
+        // Se sul dispositivo sono rimasti i dati di un account, l'ospite parte da zero (starter e tutorial)
+        if (window.Progression.data && window.Progression.data._uid) {
+          window.Progression.data = window.Progression.getDefaultData();
+          window.Progression.save(true);
+        }
         document.body.classList.remove('needs-auth');
         this.updateBadge();
         if (window.Collezione) { window.Collezione.migra(); }
