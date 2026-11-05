@@ -647,10 +647,13 @@ class UIController {
     }
 
     // 1. Mission / Act Progress
-    document.getElementById('missionActLabel').textContent = `ATTO ${state.actIndex === 0 ? 'I' : (state.actIndex === 1 ? 'II' : 'FINALE')}`;
+    const nAtti = (state.actThreats || [0, 0, 0]).length;
+    const nomeAtto = state.actIndex === nAtti - 1 ? (nAtti === 1 ? 'UNICO' : 'FINALE') : (state.actIndex === 0 ? 'I' : 'II');
+    document.getElementById('missionActLabel').textContent = `ATTO ${nomeAtto}`;
     const pips = document.querySelectorAll('.act-pip');
     pips.forEach((p, idx) => {
       p.className = 'act-pip' + (idx === state.actIndex ? ' active' : (idx < state.actIndex ? ' done' : ''));
+      p.style.display = idx < nAtti ? '' : 'none';
     })    // 2. Threat Card & Metrics (Point 7: Central Threat in Battlefield Nexus)
     const thNameEl = document.getElementById('threatName');
     if (thNameEl) thNameEl.textContent = th.nome;
@@ -822,7 +825,8 @@ class UIController {
     // 4. Table center zone (Recently played cards) & Decks counters
     const threatDeckCount = document.getElementById('threatDeckCount');
     if (threatDeckCount) {
-      threatDeckCount.textContent = `Atto ${state.actIndex === 0 ? 'I' : (state.actIndex === 1 ? 'II' : 'FINALE')} / III`;
+      const nA = (state.actThreats || [0, 0, 0]).length;
+      threatDeckCount.textContent = `Atto ${state.actIndex + 1} / ${nA}`;
     }
     const playerDeckCount = document.getElementById('playerDeckCount');
     if (playerDeckCount && localPlayer) {
