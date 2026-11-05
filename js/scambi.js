@@ -85,7 +85,7 @@
       const s = this.ricevuti.find(x => x.id === id);
       if (!s) return;
       if (accetta && !(this.P.getCardOwnedCount(s.vuoi) > 0)) return this.toast(`Non possiedi ${this.nome(s.vuoi)}.`);
-      if (accetta && window.Collezione.doppioni(s.vuoi) < 1 && !confirm(`${this.nome(s.vuoi)} non è un doppione: ti resterà una copia in meno. Accetti lo stesso?`)) return;
+      if (accetta && window.Collezione.doppioni(s.vuoi) < 1 && !(await window.Dialogo.conferma(`${this.nome(s.vuoi)}: ${(window.I18N ? window.I18N.t : (x => x))('non è un doppione: ti resterà una copia in meno. Accetti lo stesso?')}`, { ok: 'Accetta' }))) return;
       const ref = this.db.collection('scambi').doc(id);
       try {
         const ok = await this.db.runTransaction(async tx => {

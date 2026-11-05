@@ -140,6 +140,7 @@
       </div>
       <button type="button" class="btn btn-subtle auth-guest" id="authGuestBtn" onclick="Account.ospite()">GIOCA COME OSPITE</button>
       <p class="auth-note">L'account è gratuito. Usiamo la tua email solo per l'accesso.</p>
+      <button type="button" class="auth-link auth-lingua btn-lingua" onclick="I18N.cambia()" data-no-i18n>ENGLISH</button>
       <p class="nota-ai">Le illustrazioni di questa prima versione sono generate con l'AI: Monomythos è un progetto indipendente nato da una sola persona. Col tempo saranno ridisegnate a mano.</p>
     </div>
   </section>
@@ -488,6 +489,7 @@
           <button class="btn btn-subtle" style="padding:4px 0; font-size:11px;" onclick="UI.inspectCard()">Dettagli Carta</button>
         </div>
       </div>
+      <div id="sheetGlossario"></div>
 
       <div class="sheet-action-options">
         <!-- Option A: Play for Effect -->
@@ -532,22 +534,7 @@
       </div>
       <p id="pbSheetDesc" style="font-size:13px; color:var(--muto); margin-bottom:8px;"></p>
       
-      <div class="sheet-action-options">
-        <div class="action-opt-card" onclick="UI.confirmBasePower(0)">
-          <div>
-            <h4>Ramo 1: Azione Immediata</h4>
-            <p>Applica l'effetto primario gratuito (es. Danno o Pescaggio)</p>
-          </div>
-          <div class="cost-badge" style="background:var(--oro); color:#120e05;">Gratis</div>
-        </div>
-        <div class="action-opt-card" onclick="UI.confirmBasePower(1)">
-          <div>
-            <h4>Ramo 2: Allocazione Slot</h4>
-            <p>Ottieni 1 punto di risorsa temporaneo per questo round</p>
-          </div>
-          <div class="cost-badge" style="background:var(--ciano); color:#051317;">+1 Slot</div>
-        </div>
-      </div>
+      <div class="sheet-action-options" id="pbSheetOptions"></div>
     </div>
   </div>
 
@@ -1088,7 +1075,7 @@
       <div class="parry-dynamic-section">
         <div class="parry-section-title">
           <span>PARATA DINAMICA: Scarta carte per assorbire danni</span>
-          <span class="parry-sub-tip">1 carta = 1 danno assorbito</span>
+          <span class="parry-sub-tip">Il Valore delle carte scartate assorbe i danni</span>
         </div>
         <div class="parry-cards-grid" id="parryCardsSelectionGrid">
           <!-- Populated with player hand cards that can be discarded for parry -->
@@ -1239,6 +1226,9 @@
 <!-- Core Scripts -->
 <script src="js/lingua_en.js"></script>
 <script src="js/lingua.js"></script>
+<script src="js/dialogo.js"></script>
+<script src="js/adatta.js"></script>
+<script src="js/glossario.js"></script>
 <script src="js/cards_data.js"></script>
 <script src="js/effects.js"></script>
 <script src="js/audio.js"></script>

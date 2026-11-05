@@ -370,7 +370,8 @@
       document.getElementById('storiaMissioneBody').innerHTML = vinto ? `
         <div class="sm-esito is-win"><span class="sm-burst">VITTORIA!</span></div>
         <h3 class="sm-titolo">${esc(m.titolo)}</h3>
-        <ul class="sm-premi">${voci.map((v, i) => `<li style="animation-delay:${0.25 + i * 0.18}s">${esc(v)}</li>`).join('')}</ul>
+        ${window.Premio ? window.Premio.html(this.creditiDaVoci(voci), this.P.getCredits()) : ''}
+        <ul class="sm-premi">${voci.filter(v => !(window.Premio && /^\d+ (crediti|CR)$/.test(String(v)))).map((v, i) => `<li style="animation-delay:${0.25 + i * 0.18}s">${esc(v)}</li>`).join('')}</ul>
         ${prima && nuova ? `<p class="sm-archivio">Nuova voce nell'Archivio: <b>${esc(nuova.titolo)}</b></p>` : ''}
         <div class="sm-btns">
           ${prossima ? `<button class="btn btn-primary btn-block" onclick="Storia.dettaglio('${prossima.id}')">Prossima missione: ${esc(prossima.titolo)}</button>` : ''}
@@ -384,6 +385,12 @@
           <button class="btn btn-subtle btn-block" onclick="UI.hideModals()">Torna al percorso</button>
         </div>`;
       window.UI.showModal('modalStoriaMissione');
+      if (vinto && window.Premio) window.Premio.anima(document.getElementById('storiaMissioneBody'));
+    },
+
+    // Somma dei crediti tra i premi ("150 crediti", "300 crediti"...)
+    creditiDaVoci(voci) {
+      return (voci || []).reduce((s, v) => { const x = String(v).match(/^(\d+) (crediti|CR)$/); return s + (x ? +x[1] : 0); }, 0);
     },
 
     // ---------- Archivio (lore) ----------

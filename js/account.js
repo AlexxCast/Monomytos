@@ -240,7 +240,7 @@
 
     async logout() {
       if (!this.auth) return;
-      if (!confirm('Vuoi uscire dal tuo account?')) return;
+      if (!(await window.Dialogo.conferma('Vuoi uscire dal tuo account?', { ok: 'Esci' }))) return;
       clearTimeout(this._saveTimer);
       try {
         await this.db.collection('users').doc(this.user.uid)

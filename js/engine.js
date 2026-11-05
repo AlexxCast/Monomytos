@@ -706,39 +706,84 @@ class MonomythosEngine {
     return { ok: true, contribution };
   }
 
+  // Carte "Guarda": scartare una Minaccia futura (viene sostituita da un'altra di livello simile) o carte dalla cima del proprio mazzo
+  discardFutureThreat(playerId, nome) {
+    const st = this.state;
+    if (!st || st.story) return { ok: false, msg: 'Nella Storia le Minacce sono fisse' };
+    const i = st.actThreats.findIndex((t, k) => k > st.actIndex && t.nome === nome);
+    if (i < 0) return { ok: false, msg: 'Minaccia non trovata' };
+    const vecchia = st.actThreats[i];
+    const usate = new Set(st.actThreats.map(t => t.nome));
+    const allowed = st.threatPool ? new Set(st.threatPool) : null;
+    let pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !usate.has(t.nome) && (!allowed || allowed.has(t.nome)));
+    if (!pool.length) pool = (window.MONOMYTHOS_DATA.threats || []).filter(t => !usate.has(t.nome));
+    if (!pool.length) return { ok: false, msg: 'Nessuna Minaccia con cui sostituirla' };
+    pool.sort((a, b) => Math.abs(a.livello - vecchia.livello) - Math.abs(b.livello - vecchia.livello));
+    const vicine = pool.filter(t => Math.abs(t.livello - vecchia.livello) === Math.abs(pool[0].livello - vecchia.livello));
+    const nuova = vicine[Math.floor(Math.random() * vicine.length)];
+    st.actThreats[i] = nuova;
+    const p = st.players.find(x => x.id === playerId);
+    this.addLog('hero', `${p ? p.name : 'Un eroe'} scarta la Minaccia futura ${vecchia.nome}: al suo posto arriverà ${nuova.nome}`);
+    this.emit('threat_replaced', { vecchia, nuova });
+    return { ok: true, nuova };
+  }
+
+  discardFromDeckTop(playerId, uids) {
+    const p = this.state.players.find(x => x.id === playerId);
+    if (!p || !Array.isArray(uids)) return { ok: false };
+    const via = p.deck.filter(c => uids.includes(c.uid));
+    p.deck = p.deck.filter(c => !uids.includes(c.uid));
+    p.discard.push(...via);
+    if (via.length) this.addLog('hero', `${p.name} scarta dalla cima del mazzo: ${via.map(c => c.nome).join(', ')}`);
+    return { ok: true };
+  }
+
+  // Potere Base: due opzioni per eroe, con testo e effetto reali (dal manuale, semplificati per il digitale)
+  getBasePowerOptions(player) {
+    const dmg = (titolo) => ({ titolo, desc: 'Infliggi 1 danno alla Minaccia.', badge: '1 danno', run: (e, p) => e._pbDanno(p, 'threat_boss') });
+    const slot = (cat) => ({ titolo: `+1 Slot ${cat}`, desc: `Ottieni 1 Slot ${cat} in più da spendere per giocare carte in questo turno.`, badge: `+1 ${cat}`, run: (e, p) => { p.slots[cat] = (p.slots[cat] || 0) + 1; const k = cat.toLowerCase().replace('à', 'a'); p.slots[k] = (p.slots[k] || 0) + 1; if (cat === 'Agilità') p.slots.Agilita = p.slots.Agilità; return `+1 Slot ${cat}`; } });
+    const T = {
+      'Iron Aegis': [dmg('Colpo cinetico'), slot('Potenza')],
+      'Neon Phantom': [
+        { titolo: 'Scatto', desc: 'Pesca 1 carta extra (senza rischio se il mazzo è vuoto).', badge: '+1 carta', ok: p => p.deck.length > 0 && p.hand.length < p.maxHand, run: (e, p) => { p.hand.push(p.deck.pop()); return 'pesca 1 carta extra'; } },
+        slot('Agilità')],
+      'Guardiana di Confine': [
+        { titolo: 'Barriera', desc: 'Ottieni 1 Scudo: assorbe 1 danno del prossimo attacco.', badge: '+1 Scudo', run: (e, p) => { p.shield += 1; return '+1 Scudo'; } },
+        { titolo: 'Cura', desc: 'Recuperi 1 Vita.', badge: '+1 Vita', ok: p => p.vita < p.vitaMax, run: (e, p) => { p.vita = Math.min(p.vitaMax, p.vita + 1); return 'recupera 1 Vita'; } }],
+      'Lama Errante': [dmg('Affondo'),
+        { titolo: 'Recupero', desc: "Riprendi in mano l'ultima carta che hai scartato.", badge: '+1 carta', ok: p => p.discard.length > 0 && p.hand.length < p.maxHand, run: (e, p) => { const c = p.discard.pop(); p.hand.push(c); return `riprende in mano ${c.nome || c.name || 'una carta'}`; } }],
+      "Titano d'Acciaio": [
+        { titolo: 'Schianto ad area', desc: 'Infliggi 1 danno a ogni sgherro (alla Minaccia se non ce ne sono).', badge: '1 danno a tutti', run: (e, p) => { const vivi = ((e.state.currentThreat.mooks) || []).filter(m => !m.isDead); if (vivi.length) vivi.forEach(m => e._pbDanno(p, m.id)); else e._pbDanno(p, 'threat_boss'); return '1 danno a tutti i nemici'; } },
+        slot('Potenza')],
+      'Architetto Ombra': [slot('Intelligenza'),
+        { titolo: 'Analisi', desc: 'Guarda le prime 2 carte del tuo mazzo e scegli se scartarle.', badge: 'Guarda 2', ok: p => p.deck.length > 0, run: (e, p) => { const top = p.deck.slice(-2).reverse(); e.emit('base_power_peek', { player: p, carte: top }); return 'guarda le prime 2 carte del suo mazzo'; } }],
+      "Sussurro dell'Abisso": [dmg('Impeto oscuro'),
+        { titolo: 'Patto oscuro', desc: 'Solo se sei Villain: ottieni 1 Punto Vittoria e subisci 1 Trauma.', badge: '+1 PV', ok: p => p.state === 'villain', run: (e, p) => { p.vp += 1; p.trm += 1; return '+1 Punto Vittoria e +1 Trauma'; } }],
+      'Duellante Spezzato': [dmg('Colpo sleale'),
+        { titolo: 'Preparazione', desc: 'Il tuo prossimo attacco infligge 1 danno in più.', badge: '+1 al prossimo', run: (e, p) => { p.boostedAttack = (p.boostedAttack || 0) + 1; return '+1 danno al prossimo attacco'; } }]
+    };
+    return T[player.name] || [
+      { titolo: 'Protezione', desc: 'Ottieni 1 Scudo: assorbe 1 danno del prossimo attacco.', badge: '+1 Scudo', run: (e, p) => { p.shield += 1; return '+1 Scudo'; } },
+      dmg('Colpo')];
+  }
+
+  _pbDanno(player, targetId) {
+    window.EffectRegistry.execute('damage', this, { source: player, card: { cat: 'Potere Base' }, targetId, targetEntity: this.resolveTarget(targetId) }, { type: 'damage', amount: 1 });
+    return '1 danno';
+  }
+
   // Base Power activation
   activateBasePower(playerId, optionIndex = 0) {
     const player = this.state.players.find(p => p.id === playerId);
     if (!player || player.isDead) return { ok: false, msg: 'Giocatore non attivo' };
     if (player.pbUsedThisTurn) return { ok: false, msg: 'Potere Base già usato questo turno' };
+    const opz = this.getBasePowerOptions(player)[optionIndex] || this.getBasePowerOptions(player)[0];
+    if (opz.ok && !opz.ok(player)) return { ok: false, msg: 'Questa opzione ora non si può usare' };
 
     player.pbUsedThisTurn = true;
     player.actedThisRound = true;
-    const th = this.state.currentThreat;
-
-    if (player.name === 'Iron Aegis') {
-      if (optionIndex === 0) {
-        th.hp = Math.max(0, th.hp - 1);
-        this.addLog('hero', `${player.name} attiva [Sovraccarico Cinetico]: 1 danno gratuito alla Minaccia`);
-      } else {
-        player.slots.Potenza = (player.slots.Potenza || 0) + 1;
-        this.addLog('hero', `${player.name} attiva [Sovraccarico Cinetico]: +1 Slot Potenza temporaneo`);
-      }
-    } else if (player.name === 'Neon Phantom') {
-      if (optionIndex === 0) {
-        if (player.deck.length > 0 && player.hand.length < player.maxHand) {
-          player.hand.push(player.deck.pop());
-          this.addLog('hero', `${player.name} attiva [Scatto Quantistico]: pesca 1 carta extra`);
-        }
-      } else {
-        player.slots.Agilità = (player.slots.Agilità || 0) + 1;
-        this.addLog('hero', `${player.name} attiva [Scatto Quantistico]: +1 Slot Agilità temporaneo`);
-      }
-    } else {
-      // Generic base power
-      player.shield += 1;
-      this.addLog('hero', `${player.name} attiva ${player.pbName}`);
-    }
+    const esito = opz.run(this, player);
+    if (esito && esito !== '1 danno') this.addLog('hero', `${player.name} usa ${player.pbName} (${opz.titolo}): ${esito}`);
 
     this.emit('base_power_used', { player, optionIndex });
     this.checkThreatDefeated();

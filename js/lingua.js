@@ -3,10 +3,11 @@
 // frase per frase, usando il dizionario di js/lingua_en.js. I numeri dentro le frasi sono scritti come {n}.
 (function () {
   const CHIAVE = 'monomythos_lingua';
-  let lang = 'it';
+  let lang = 'it', scelta = false;
   try {
+    scelta = !!localStorage.getItem(CHIAVE);
     lang = localStorage.getItem(CHIAVE) || ((navigator.language || 'it').toLowerCase().startsWith('it') ? 'it' : 'en');
-  } catch (e) {}
+  } catch (e) { scelta = true; }
 
   const SPLIT = /(?<=[.!?;])\s+(?=[\[A-ZÀ-Ù0-9+«"(])/;
   const dict = () => window.MONOMYTHOS_EN || {};
@@ -67,6 +68,8 @@
     if (!core || !/[A-Za-zÀ-ÿ]/.test(core)) return s;
     const spezzabile = SPLIT.test(core);
     let r = una(core, spezzabile);
+    // una frase con nomi variabili può contenere un "!" o un "." nel mezzo: prima prova le regole sull'intera frase
+    if (r == null && spezzabile) r = regole(core);
     if (r == null && spezzabile) {
       const parti = core.split(SPLIT);
       let cambiato = false;
@@ -102,9 +105,35 @@
     }
   }
 
+  // Al primissimo avvio si sceglie la lingua, prima dell'accesso e del tutorial
+  function mostraScelta() {
+    if (scelta || navigator.webdriver || document.getElementById('sceltaLingua')) return;
+    const el = document.createElement('div');
+    el.id = 'sceltaLingua';
+    el.className = 'scelta-lingua';
+    el.setAttribute('data-no-i18n', '');
+    el.innerHTML = `<div class="scelta-lingua-box">
+        <img src="assets/icons/logo_titolo.webp" alt="Monomythos" class="scelta-lingua-logo">
+        <div class="scelta-lingua-titolo">Scegli la lingua<br><small>Choose your language</small></div>
+        <button type="button" class="btn btn-primary" data-l="it">ITALIANO</button>
+        <button type="button" class="btn btn-primary" data-l="en">ENGLISH</button>
+        <div class="scelta-lingua-nota">Puoi cambiarla quando vuoi dal menu · You can change it anytime from the menu</div>
+      </div>`;
+    el.querySelectorAll('button').forEach(b => b.onclick = () => {
+      const l = b.dataset.l;
+      try { localStorage.setItem(CHIAVE, l); } catch (e) {}
+      scelta = true;
+      if (l !== lang) { location.reload(); return; }
+      el.classList.add('via');
+      setTimeout(() => el.remove(), 250);
+    });
+    document.body.appendChild(el);
+  }
+
   function avvia() {
     document.documentElement.lang = lang;
     aggiornaPulsante();
+    mostraScelta();
     if (lang !== 'en') return;
     document.title = t(document.title);
     traduciNodo(document.body);
@@ -128,6 +157,7 @@
 
   window.I18N = {
     get lang() { return lang; },
+    get scelta() { return scelta; },
     t,
     imposta(l) {
       lang = l === 'en' ? 'en' : 'it';

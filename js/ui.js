@@ -251,9 +251,9 @@ class UIController {
   }
 
   promptExitGame() {
-    if (confirm('Vuoi abbandonare la missione e tornare al Menu Principale?')) {
-      this.showScreen('scr-lobby');
-    }
+    window.Dialogo.conferma('Vuoi abbandonare la missione e tornare al Menu Principale?', { ok: 'Esci', pericolo: true }).then(si => {
+      if (si) this.showScreen('scr-lobby');
+    });
   }
 
   startQuickMissionSelection() {
@@ -276,9 +276,13 @@ class UIController {
     window.GameEngine.on('scry_performed', (ev, data) => {
       if (!data || !data.source || !data.source.isLocal) return;
       const st = window.GameEngine.state;
-      const next = (st.actThreats || []).slice(st.actIndex + 1).map(t => t.nome);
-      this.fxBanner('ANALISI', next.length ? 'Prossime Minacce: ' + next.join(' → ') : 'Questa è l\'ultima Minaccia', 'gold');
-      this.showToast(next.length ? `Prossime Minacce: ${next.join(' → ')}` : 'Nessuna altra Minaccia dopo questa.');
+      const next = (st.actThreats || []).slice(st.actIndex + 1);
+      if (!next.length) return this.showToast('Questa è l\'ultima Minaccia: non ce ne sono altre da guardare.');
+      this.openPeek({ tipo: 'minacce', titolo: 'Prossime Minacce', carte: next, player: data.source, puoScartare: !st.story });
+    });
+    window.GameEngine.on('base_power_peek', (ev, data) => {
+      if (!data || !data.player || !data.player.isLocal) return;
+      this.openPeek({ tipo: 'mazzo', titolo: 'Cima del tuo mazzo', carte: data.carte || [], player: data.player, puoScartare: true });
     });
     window.GameEngine.on('match_started', (ev, data, state) => {
       this.renderGameView(state);
@@ -509,7 +513,7 @@ class UIController {
     if (actEl) actEl.textContent = th.isBoss ? 'BOSS FINALE' : (th.isRogueHero ? 'BOSS CORROTTO' : 'ATTO I');
     if (effTitleEl) effTitleEl.textContent = th.eff_nome || (th.pericoloso ? 'Tratto Pericoloso' : 'Calamità Cosmica');
     if (effTextEl) effTextEl.textContent = th.pericoloso || th.eff_desc || th.cosmico || 'Affronta la Calamità con la tua squadra!';
-    if (lvlEl) lvlEl.textContent = `Liv. ${th.livello || 1}`;
+    if (lvlEl) { lvlEl.textContent = `${th.livello || 1}`; const w = lvlEl.closest('.intro-threat-frame-wrap'); if (w) w.dataset.liv = `${th.livello || 1}`; }
     if (stageBadge) stageBadge.textContent = th.isRogueHero ? 'DUELLO BOSS CORROTTO' : (th.isBoss ? 'BOSS FINALE' : 'ESTRAZIONE MINACCIA');
     if (loadingTitle) loadingTitle.textContent = 'ESTRAZIONE MINACCIA...';
     if (loadingSub) loadingSub.textContent = 'Il mazzo del Fato sta per rivelare il tuo destino...';
@@ -653,6 +657,9 @@ class UIController {
     if (thLvlBadge) thLvlBadge.textContent = `Liv. ${th.livello || 1}`;
     const thCircle = document.getElementById('threatLvlCircle');
     if (thCircle) thCircle.textContent = th.livello || 1;
+    // lo stesso livello si ripete nel cerchio in basso a destra della cornice
+    const thCardLiv = document.getElementById('threatCentralCard');
+    if (thCardLiv) thCardLiv.dataset.liv = th.livello || 1;
     const thEffTitle = document.getElementById('threatEffectTitle');
     if (thEffTitle) thEffTitle.textContent = th.isBoss ? 'Tratto Boss Corrotto' : 'Tratto Calamità';
     const thEffText = document.getElementById('threatEffectText');
@@ -940,6 +947,11 @@ class UIController {
         wrapper.innerHTML = this.getCardDOM(c, false);
         const cardEl = wrapper.firstElementChild;
         cardEl.onclick = () => this.openCardActionSheet(c);
+        // Nel tuo turno si vede subito quali carte puoi giocare adesso (hai abbastanza slot della loro Categoria)
+        if (spread || (state.turnIndex === 0 && state.phase === 'action' && !localPlayer.isDead)) {
+          const slot = window.GameEngine.getPlayerSlot ? window.GameEngine.getPlayerSlot(localPlayer, c.cat) : ((localPlayer.slots && localPlayer.slots[c.cat]) || 0);
+          cardEl.classList.add(slot >= (c.valore || 0) ? 'giocabile' : 'non-giocabile');
+        }
         if (this._arriving && this._arriving.has(c.uid || c.id)) cardEl.classList.add('is-arriving');
         cardEl.style.setProperty('--d', (i - (n - 1) / 2).toFixed(2));
         cardEl.style.setProperty('--z', i + 1);
@@ -1190,6 +1202,8 @@ class UIController {
     document.getElementById('sheetCardName').textContent = card.nome;
     document.getElementById('sheetCardCategory').textContent = `${card.cat} • Valore ${card.valore}`;
     document.getElementById('sheetCardEffect').textContent = card.effetto;
+    const sheetGloss = document.getElementById('sheetGlossario');
+    if (sheetGloss) sheetGloss.innerHTML = window.Glossario ? window.Glossario.html(card.effetto) : '';
 
     // Check Opzione A Slot Cost (using resilient normalized slot checker)
     const availableSlots = window.GameEngine.getPlayerSlot ? window.GameEngine.getPlayerSlot(localPlayer, card.cat) : ((localPlayer.slots && localPlayer.slots[card.cat]) || 0);
@@ -1198,6 +1212,14 @@ class UIController {
     const optA = document.getElementById('btnOptionPlayEffect');
     optA.style.opacity = canPlay ? '1' : '0.5';
     optA.querySelector('.cost-badge').textContent = `${card.valore} ${card.cat}`;
+    // se non si può giocare, si spiega perché
+    const optAp = optA.querySelector('p');
+    if (optAp) {
+      if (!optAp.dataset.base) optAp.dataset.base = optAp.textContent;
+      optAp.textContent = canPlay ? optAp.dataset.base
+        : (window.GameEngine.state.turnIndex !== 0 && !isReactionCard ? 'Non è il tuo turno'
+          : `Ti servono ${card.valore} slot ${card.cat}: ne hai ${availableSlots}. Puoi usarla come Sacrificio Tattico.`);
+    }
 
     // Opzione B Tactical Sacrifice contribution calculation
     const canSacrifice = localPlayer.sacrificesThisRound < 2 && window.GameEngine.state.turnIndex === 0;
@@ -1412,10 +1434,25 @@ class UIController {
     let secondsLeft = 8;
     const timerSecEl = document.getElementById('defenseTimerSeconds');
     const timerFillEl = document.getElementById('defenseTimerFill');
+    const timerWrap = document.querySelector('#modalDefenseWindow .defense-timer-wrap');
     if (timerSecEl) timerSecEl.textContent = `${secondsLeft}s`;
     if (timerFillEl) timerFillEl.style.width = '100%';
+    // Nel tutorial non c'è fretta: niente conto alla rovescia, si legge con calma e si sceglie
+    const T = window.Tutorial;
+    const inTutorial = !!(T && T.inPartita);
+    if (timerWrap) timerWrap.classList.toggle('senza-limite', inTutorial);
+    if (inTutorial) {
+      if (timerSecEl) timerSecEl.textContent = window.I18N ? window.I18N.t('Nessun limite') : 'Nessun limite';
+      this.showModal('modalDefenseWindow');
+      return;
+    }
+    // Un secondo e mezzo di respiro prima che il tempo cominci a scendere
+    let respiro = 1.5;
 
     this._defenseCountdownInterval = setInterval(() => {
+      // il tempo si ferma mentre è aperto un consiglio del tutorial o una finestra di conferma
+      if (document.querySelector('.tutorial-bolla, .dlg-overlay') || document.hidden) return;
+      if (respiro > 0) { respiro -= 0.1; return; }
       secondsLeft -= 0.1;
       const pct = Math.max(0, (secondsLeft / 8) * 100);
       if (timerFillEl) timerFillEl.style.width = `${pct}%`;
@@ -1524,11 +1561,29 @@ class UIController {
   }
 
   openBasePowerSheet() {
-    const localPlayer = window.GameEngine.state.players[0];
+    const st = window.GameEngine.state;
+    const localPlayer = st.players.find(p => p.id === this.idLocale()) || st.players[0];
     if (localPlayer.pbUsedThisTurn) return this.showToast('Potere Base già utilizzato in questo turno!');
 
     document.getElementById('pbSheetTitle').textContent = localPlayer.pbName || 'Potere Base';
-    document.getElementById('pbSheetDesc').textContent = localPlayer.pbDesc || 'Attiva un effetto speciale';
+    document.getElementById('pbSheetDesc').textContent = 'Gratis, una volta per turno. Scegli uno dei due effetti:';
+    const box = document.getElementById('pbSheetOptions');
+    if (box) {
+      const colori = ['background:var(--oro); color:#120e05;', 'background:var(--ciano); color:#051317;'];
+      box.innerHTML = '';
+      window.GameEngine.getBasePowerOptions(localPlayer).forEach((o, i) => {
+        const usabile = !o.ok || o.ok(localPlayer);
+        const el = document.createElement('div');
+        el.className = 'action-opt-card' + (usabile ? '' : ' disabled');
+        if (!usabile) el.style.opacity = '.45';
+        el.innerHTML = `<div><h4></h4><p></p></div><div class="cost-badge" style="${colori[i % 2]}"></div>`;
+        el.querySelector('h4').textContent = o.titolo;
+        el.querySelector('p').textContent = o.desc + (usabile ? '' : ' (ora non disponibile)');
+        el.querySelector('.cost-badge').textContent = o.badge;
+        el.onclick = () => this.confirmBasePower(i);
+        box.appendChild(el);
+      });
+    }
     this.showModal('modalBasePowerSheet');
   }
 
@@ -1565,13 +1620,82 @@ class UIController {
     // Penalità per Passività e Scarto di Sopravvivenza (§3)
     if (p && !p.isDead && !p.actedThisRound) {
       if (engine.hasLegalMove(p)) {
-        if (!confirm('Non hai fatto nessuna azione: a fine round subirai 1 Punto Trauma. Terminare comunque il turno?')) return;
+        window.Dialogo.conferma('Non hai fatto nessuna azione: a fine round subirai 1 Punto Trauma. Terminare comunque il turno?', { ok: 'Termina turno', annulla: 'Continua a giocare' })
+          .then(si => { if (si && engine.state && engine.state.phase === 'action' && engine.state.players[engine.state.turnIndex] === p) engine.endTurn(); });
+        return;
       } else if (p.hand.length > 0) {
         engine.survivalDiscard(p.id);
         this.showToast('Nessuna mossa possibile: Scarto di Sopravvivenza della carta di valore più basso');
       }
     }
     engine.endTurn();
+  }
+
+  // Carte "Guarda": mostra le carte intere con i loro effetti e permette di scartarle
+  threatPeekDOM(th) {
+    const esc = t => String(t == null ? '' : t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const data = window.MONOMYTHOS_DATA || {};
+    const slug = (th.nome || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const img = th.img || (data.card_img_map && data.card_img_map[slug]) || 'assets/icons/minaccia.webp';
+    const printed = /^assets\/cards\/[^/]+\.webp$/.test(img);
+    return `<div class="threat-silver-frame-wrap peek-threat${printed ? ' is-printed' : ''}" data-liv="${esc(th.livello || 1)}">
+      <img class="threat-bg-img" src="${esc(img)}" alt="">
+      <img class="threat-frame-img" src="assets/layouts/layout_red.webp" alt="">
+      <div class="threat-vignette-bubble"><div class="threat-card-title">${esc(th.nome)}</div><div class="threat-card-tag">Liv. ${esc(th.livello || 1)}</div></div>
+      <div class="threat-card-desc-box"><div class="threat-card-effect-title">Tratto Calamità</div><div class="threat-card-effect-text">${esc(th.pericoloso || th.cosmico || th.logica || '')}</div></div>
+      <div class="threat-card-lvl-circle">${esc(th.livello || 1)}</div>
+    </div>
+    <div class="peek-info">${esc(th.pericoloso || th.cosmico || '')}${th.nemici ? '<br><b>Nemici:</b> ' + esc(th.nemici) : ''}</div>`;
+  }
+
+  openPeek(opt) {
+    let m = document.getElementById('modalPeek');
+    if (!m) {
+      m = document.createElement('div');
+      m.className = 'modal-overlay'; m.id = 'modalPeek';
+      m.innerHTML = `<div class="bottom-sheet peek-sheet"><div class="sheet-handle"></div>
+        <div class="sheet-header"><h3 class="sheet-title" id="peekTitle"></h3></div>
+        <p class="peek-help" id="peekHelp"></p><div class="peek-row" id="peekRow"></div>
+        <button class="btn btn-primary btn-block" id="peekOk">Fatto</button></div>`;
+      document.body.appendChild(m);
+    }
+    const E = window.GameEngine;
+    const scelte = new Set();
+    m.querySelector('#peekTitle').textContent = opt.titolo;
+    m.querySelector('#peekHelp').textContent = opt.puoScartare
+      ? (opt.tipo === 'minacce' ? 'Tocca "Scarta" sotto una Minaccia per toglierla: al suo posto ne arriverà un\'altra di livello simile.' : 'Tocca "Scarta" sotto le carte che non vuoi pescare: finiscono negli scarti.')
+      : 'Nella Storia le Minacce sono fisse: puoi solo guardarle.';
+    const row = m.querySelector('#peekRow');
+    row.innerHTML = '';
+    opt.carte.forEach((c, i) => {
+      const key = opt.tipo === 'minacce' ? c.nome : c.uid;
+      const box = document.createElement('div');
+      box.className = 'peek-item';
+      box.innerHTML = (opt.tipo === 'minacce' ? this.threatPeekDOM(c) : `<div class="peek-card">${this.getCardDOM(c, true)}</div><div class="peek-info"></div>`);
+      if (opt.tipo !== 'minacce') box.querySelector('.peek-info').textContent = c.effetto || '';
+      if (opt.puoScartare) {
+        const b = document.createElement('button');
+        b.className = 'btn btn-subtle peek-scarta';
+        b.textContent = 'Scarta';
+        b.onclick = () => {
+          if (scelte.has(key)) { scelte.delete(key); box.classList.remove('scartata'); b.textContent = 'Scarta'; }
+          else { scelte.add(key); box.classList.add('scartata'); b.textContent = 'Tieni'; }
+        };
+        box.appendChild(b);
+      }
+      row.appendChild(box);
+    });
+    m.querySelector('#peekOk').onclick = () => {
+      if (scelte.size) {
+        if (opt.tipo === 'minacce') scelte.forEach(n => E.discardFutureThreat(opt.player.id, n));
+        else E.discardFromDeckTop(opt.player.id, [...scelte]);
+        this.showToast(opt.tipo === 'minacce' ? `Scartate ${scelte.size} Minacce: ne arriveranno altre` : `Scartate ${scelte.size} carte dal mazzo`);
+        if (E.state) this.renderGameView(E.state);
+      }
+      this.hideModals();
+    };
+    m.onclick = (ev) => { if (ev.target === m) m.querySelector('#peekOk').click(); };
+    this.showModal('modalPeek');
   }
 
   inspectCard(card) {
@@ -1978,7 +2102,7 @@ class UIController {
         statInfo = `<span style="color:#00cec9; font-weight:700;">${card.vita || 25} HP</span> • Str ${card.str || 0} Spd ${card.spd || 0} Tech ${card.tech || 0} End ${card.end || 0}`;
       } else if (cfg.key === 'archetipo') {
         const tMatch = (card.testo || '').match(/Tag\s*Autorizzati\s*:\s*([^.]+)/i);
-        statInfo = tMatch ? `Tag: ${tMatch[1]}` : (card.testo || 'Tutti i tag');
+        statInfo = tMatch ? `Tag: ${tMatch[1].split(/,\s*/).map(x => (window.I18N ? window.I18N.t(x) : x)).join(', ')}` : (card.testo || 'Tutti i tag');
       } else if (cfg.key === 'costume') {
         statInfo = `Str +${card.str || 0} Spd +${card.spd || 0} Tech +${card.tech || 0} End +${card.end || 0} • Passiva`;
       } else if (cfg.key === 'pb') {
@@ -2629,6 +2753,9 @@ class UIController {
     const st = window.GameEngine && window.GameEngine.state;
     const me = st && st.players.find(p => p.isLocal);
     const guadagno = Math.max(0, currentCr - (this._crInizio == null ? currentCr : this._crInizio));
+    // crediti guadagnati: riquadro grande e animato; senza guadagno resta solo il saldo
+    const premio = guadagno && window.Premio ? window.Premio.html(guadagno, currentCr) : '<br>';
+    const totale = guadagno ? '' : `<br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`;
     const nota = st && st.ranked ? '' : '<br><span style="font-size:12px; opacity:0.85;">Le partite libere non danno crediti: si guadagnano in Classificata e nella Storia.</span>';
     if (winner === 'villain') {
       const won = me && (st.villainWinners || []).includes(me.id);
@@ -2636,18 +2763,19 @@ class UIController {
       title.style.color = won ? '#d94cff' : '#ff4444';
       const names = (st.players || []).filter(p => (st.villainWinners || []).includes(p.id)).map(p => p.name).join(' e ');
       sub.innerHTML = won
-        ? `Tutti gli altri sono caduti: resti solo tu.<br><br>${guadagno ? `<b style="font-size:16px;">+${guadagno} Crediti Cosmici!</b>` : ''}${nota}<br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`
+        ? `Tutti gli altri sono caduti: resti solo tu.${premio}${nota}${totale}`
         : `${names} è rimasto l'unico in piedi e vince come Villain.<br><br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`;
     } else if (winner === 'heroes') {
       title.textContent = 'VITTORIA COSMICA!';
       title.style.color = 'var(--oro-soft)';
-      sub.innerHTML = `Avete trionfato sulla Calamità!<br><br>${guadagno ? `<b style="color:var(--oro); font-size:16px;">+${guadagno} Crediti Cosmici Guadagnati!</b>` : ''}${nota}<br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span>`;
+      sub.innerHTML = `Avete trionfato sulla Calamità!${premio}${nota}${totale}`;
     } else {
       title.textContent = 'SCONFITTA COSMICA!';
       title.style.color = '#ff4444';
-      sub.innerHTML = `Il Cosmo è caduto nel Caos e nel Trauma.<br>${guadagno ? `<br><b>+${guadagno} Crediti</b>` : ''}<br><span style="font-size:12px; opacity:0.8;">Crediti Totali: ${currentCr} CR</span><br><br>Potenzia il tuo mazzo nel Deckbuilder e riprova!`;
+      sub.innerHTML = `Il Cosmo è caduto nel Caos e nel Trauma.${premio}${totale}<br><br>Potenzia il tuo mazzo nel Deckbuilder e riprova!`;
     }
     this.showModal('modalGameOver');
+    if (window.Premio) window.Premio.anima(sub);
   }
 
   showModal(modalId) {

@@ -458,6 +458,12 @@
           case 'survivalDiscard':
             if (mioTurno && args[0] === player.id) E.survivalDiscard(player.id, args[1]);
             break;
+          case 'discardFutureThreat':
+            if (args[0] === player.id) E.discardFutureThreat(player.id, args[1]);
+            break;
+          case 'discardFromDeckTop':
+            if (args[0] === player.id) E.discardFromDeckTop(player.id, args[1]);
+            break;
           case 'setDrawChoice':
             if (args[0] === player.id) E.setDrawChoice(player.id, args[1]);
             break;
@@ -556,7 +562,7 @@
       const E = window.GameEngine;
       this._orig = {};
       const manda = (type) => (...args) => { this.mandaAzione(type, args); return { ok: true, pending: true }; };
-      ['playCardEffect', 'tacticalSacrifice', 'activateBasePower', 'survivalDiscard', 'setDrawChoice', 'endTurn'].forEach(m => {
+      ['playCardEffect', 'tacticalSacrifice', 'activateBasePower', 'survivalDiscard', 'setDrawChoice', 'endTurn', 'discardFutureThreat', 'discardFromDeckTop'].forEach(m => {
         this._orig[m] = E[m]; E[m] = manda(m);
       });
       this._orig.respondToDefense = E.respondToDefense;

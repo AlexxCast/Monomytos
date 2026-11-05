@@ -388,7 +388,9 @@
         b.onclick = () => {
           const h = b.dataset.hero;
           const s = STARTER.find(x => x.eroe === h);
-          if (confirm(`Scegli "${s.mazzo}" con ${h}? Gli altri eroi li sblocchi giocando la Storia.`)) this.scegliStarter(h);
+          const T = window.I18N ? window.I18N.t : (x => x);
+          const msg = `${T('Scegli il mazzo')} "${T(s.mazzo)}" ${T('con')} ${T(h)}? ${T('Gli altri eroi li sblocchi giocando la Storia.')}`;
+          window.Dialogo.conferma(msg, { ok: 'Scegli' }).then(si => { if (si) this.scegliStarter(h); });
         };
       });
     },

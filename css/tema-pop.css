@@ -1297,3 +1297,203 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
   .table-decks-flank .deck-stack-cards { width: 30px !important; height: 42px !important; }
   .table-decks-flank .deck-stack-badge { display: none !important; }
 }
+
+/* ===== Correzioni dal primo beta test (4/11) ===== */
+/* Accesso: i pulsanti non si schiacciano più quando lo schermo è basso, e la nota AI
+   sta in fondo alla pagina invece di galleggiare sopra "Gioca come ospite" */
+.auth-wrap > * { flex-shrink: 0; }
+.auth-wrap { padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)); flex-shrink: 0; justify-content: safe center; }
+#scr-auth .nota-ai { position: static; margin: 4px auto 0; }
+.auth-guest { height: auto; min-height: 44px; white-space: normal; line-height: 1.2; }
+
+/* Pulsanti e testi: niente più scritte tagliate, vanno a capo */
+.btn, .action-opt-card h4, .action-opt-card p { overflow-wrap: break-word; }
+.action-opt-card .cost-badge { white-space: nowrap; flex-shrink: 0; }
+.action-opt-card > div:first-child { min-width: 0; }
+
+/* Scheda della carta: la carta intera, centrata, con solo il testo breve
+   (il testo completo è già nel riquadro accanto, non si ripete due volte) */
+.sheet-card-art { width: auto !important; height: auto !important; overflow: visible !important; border: 0 !important; box-shadow: none !important; }
+.sheet-card-art .monomyth-card, .sheet-card-art .monomyth-card.card-large { width: 104px; border-radius: 10px; box-shadow: 3px 3px 0 var(--ink, #000); }
+.sheet-card-art .monomyth-card .card-desc-text, .sheet-card-art .monomyth-card .card-vignette-tag { display: none; }
+.sheet-card-art .monomyth-card .card-desc-box { display: flex; align-items: center; justify-content: center; }
+.sheet-card-art .monomyth-card .card-desc-short {
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: clamp(8px, 9cqi, 13px);
+  line-height: 1.2; color: #fff; text-align: center; text-shadow: 0 1px 2px #000;
+}
+.sheet-card-art .monomyth-card .card-vignette-title { font-size: clamp(8px, 9.5cqi, 16px); -webkit-line-clamp: 2; }
+.sheet-card-effect { overflow-wrap: anywhere; }
+/* la scheda scorre fino in fondo: l'ultima opzione non resta tagliata */
+#modalCardActionSheet .bottom-sheet { max-height: 92dvh; padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
+#modalCardActionSheet .action-opt-card { padding-top: 10px; padding-bottom: 10px; }
+
+/* Finestre di conferma/avviso del gioco (al posto dei popup di sistema) */
+.dlg-overlay { position: fixed; inset: 0; z-index: 100000; display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box;
+  background: rgba(5, 8, 20, .62); backdrop-filter: blur(2px); animation: dlgFondo .16s ease both; }
+.dlg-overlay.via { opacity: 0; transition: opacity .15s ease; }
+.dlg-box { width: 100%; max-width: 380px; background: var(--cream, #f3ead6); color: var(--ink, #111); border: 3px solid var(--ink, #111); border-radius: 14px;
+  box-shadow: 6px 6px 0 var(--ink, #111); padding: 18px 16px 14px; box-sizing: border-box; animation: dlgEntra .22s cubic-bezier(.2, 1.4, .4, 1) both; }
+.dlg-titolo { font-family: 'Bangers', var(--font-display, sans-serif); font-size: 24px; letter-spacing: .04em; margin: 0 0 6px; color: var(--pop-red, #e63946); -webkit-text-stroke: .5px #000; }
+.dlg-testo { font: 600 16px/1.4 'Outfit', sans-serif; margin: 0 0 16px; overflow-wrap: anywhere; white-space: pre-line; }
+.dlg-azioni { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+.dlg-azioni .btn { flex: 1 1 120px; min-height: 44px; padding: 10px 12px; font-size: 15px; white-space: normal; line-height: 1.15; }
+.dlg-azioni .btn-subtle { background: #fff !important; color: var(--ink, #111) !important; }
+.dlg-pericolo { background: var(--pop-red, #e63946) !important; }
+@keyframes dlgFondo { from { opacity: 0; } }
+@keyframes dlgEntra { from { opacity: 0; transform: translateY(12px) scale(.94); } }
+
+/* Crediti guadagnati a fine partita */
+.premio-cr { margin: 14px auto 8px; max-width: 280px; background: var(--gold, #ffc93c); color: var(--ink, #111); border: 3px solid var(--ink, #111); border-radius: 14px;
+  box-shadow: 4px 4px 0 var(--ink, #111); padding: 10px 12px 8px; text-align: center; animation: smPop .45s cubic-bezier(.2, 1.6, .4, 1) .15s both; }
+.premio-cr-riga { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.premio-cr-moneta { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #fff3c4;
+  border: 3px solid var(--ink, #111); font: 900 13px 'Outfit', sans-serif; box-shadow: 2px 2px 0 var(--ink, #111); }
+.premio-cr-num { font-family: 'Bangers', var(--font-display, sans-serif); font-size: 46px; line-height: 1; letter-spacing: .03em; color: #fff; -webkit-text-stroke: 2px #000; text-shadow: 3px 3px 0 var(--pop-red, #e63946); font-variant-numeric: tabular-nums; }
+.premio-cr-label { font: 800 13px 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+.premio-cr-saldo { font: 600 12px 'Outfit', sans-serif; opacity: .85; margin-top: 2px; }
+.premio-cr.fatto .premio-cr-num { animation: premioBatti .35s ease; }
+@keyframes premioBatti { 50% { transform: scale(1.18); } }
+.sm-premi + .premio-cr, .premio-cr + .sm-premi { margin-top: 8px; }
+
+/* Finestra di difesa nel tutorial: nessun conto alla rovescia */
+.defense-timer-wrap.senza-limite .defense-timer-bar { display: none; }
+.defense-timer-wrap.senza-limite .defense-timer-sec { font-size: 12px; }
+
+/* Scelta della lingua al primo avvio */
+.scelta-lingua { position: fixed; inset: 0; z-index: 100001; display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box;
+  background: #0b1026 url('../assets/bg/cosmo_eroe.webp') center / cover no-repeat; transition: opacity .25s ease; }
+.scelta-lingua.via { opacity: 0; }
+.scelta-lingua-box { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 12px; align-items: stretch; text-align: center;
+  background: var(--cream, #f3ead6); color: var(--ink, #111); border: 3px solid var(--ink, #111); border-radius: 16px; box-shadow: 6px 6px 0 var(--ink, #111); padding: 18px 16px; }
+.scelta-lingua-logo { width: 82%; margin: -60px auto 0; filter: drop-shadow(3px 3px 0 #000); }
+.scelta-lingua-titolo { font-family: 'Bangers', var(--font-display, sans-serif); font-size: 28px; letter-spacing: .04em; line-height: 1.05; }
+.scelta-lingua-titolo small { font-size: 18px; opacity: .7; }
+.scelta-lingua .btn { min-height: 52px; font-family: 'Bangers', var(--font-display, sans-serif) !important; font-size: 24px !important; letter-spacing: .08em; }
+.scelta-lingua .btn[data-l="en"] { background: var(--blue, #2d5bd7) !important; }
+.scelta-lingua-nota { font: 600 12px/1.35 'Outfit', sans-serif; opacity: .75; }
+.auth-lingua { color: #fff !important; text-shadow: 1px 1px 0 #000; font-size: 13px; letter-spacing: .06em; }
+
+/* Mano: nel tuo turno le carte che puoi giocare adesso risaltano, le altre si spengono un po' */
+#playerHandCarousel .monomyth-card.giocabile { box-shadow: 0 0 0 3px #ffd54a, 3px 3px 0 var(--ink), 0 0 14px 2px rgba(255, 213, 74, .55) !important; }
+#playerHandCarousel .monomyth-card.non-giocabile { filter: saturate(.55) brightness(.82); }
+
+/* Testi adattati (js/adatta.js): una parola troppo lunga va a capo invece di uscire dal bordo */
+.adatta-spezza { overflow-wrap: anywhere; word-break: break-word; hyphens: auto; }
+.monomyth-card .card-vignette-title { hyphens: manual; overflow-wrap: normal; }
+.played-card-item .monomyth-card .card-vignette-tag { display: none; }
+
+/* Carta Minaccia disegnata (immagine senza testi): il livello sta nel cerchio in basso a sinistra
+   della cornice e si ripete uguale in quello a destra; il nome va a capo */
+.threat-silver-frame-wrap { container-type: inline-size; }
+.threat-silver-frame-wrap .threat-card-lvl-circle {
+  left: 11.73%; top: 91.89%; right: auto; bottom: auto; transform: translate(-50%, -50%);
+  width: 12.8%; height: 8.6%; background: none; border: 0; border-radius: 50%;
+  font-family: 'JetBrains Mono', 'Cinzel', monospace; font-size: clamp(8px, 10.5cqi, 20px); color: #111116;
+}
+.threat-silver-frame-wrap:not(.is-printed)::after {
+  content: ''; position: absolute; left: 88%; top: 91.89%; transform: translate(-50%, -50%);
+  width: 12.8%; height: 8.6%; z-index: 4; pointer-events: none;
+  content: attr(data-liv); display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', 'Cinzel', monospace; font-weight: 900; font-size: clamp(8px, 10.5cqi, 20px); color: #111116;
+}
+.threat-silver-frame-wrap .threat-card-title {
+  white-space: normal; text-overflow: clip; line-height: 1.1;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  font-size: clamp(7px, 8cqi, 16px);
+}
+.threat-silver-frame-wrap .threat-card-tag { font-size: clamp(6px, 6.2cqi, 12px); }
+.threat-silver-frame-wrap .threat-card-effect-title { font-size: clamp(7px, 7cqi, 14px); }
+.threat-silver-frame-wrap .threat-card-effect-text { font-size: clamp(6.5px, 6.6cqi, 13px); }
+/* i dati della Minaccia non finiscono sotto il bordo della carta inclinata */
+.threat-tactical-data { padding-left: 8px; }
+.threat-title-row { flex-wrap: wrap; row-gap: 2px; min-width: 0; }
+.threat-title-row .timer-box { flex-shrink: 1; min-width: 0; margin-left: auto; }
+
+/* Mazzo: il nome della carta ha tutta la riga (prima era tagliato dopo 5 lettere da "Possedute") */
+.builder-card-details-top { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 1px !important; }
+.builder-card-details-top h4 { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; line-height: 1.15; overflow-wrap: break-word; max-width: 100%; }
+.builder-card-details { min-width: 0; }
+/* Negozio: il pulsante della bustina in regalo resta dentro lo schermo */
+.btn-free-pack { max-width: 100%; box-sizing: border-box; white-space: normal; }
+/* Compagni sul tavolo: il nome va a capo e si rimpicciolisce invece di diventare "Neo..." */
+.companion-name-txt { white-space: normal !important; text-overflow: clip !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.1; min-width: 0; }
+.companion-title-box { min-width: 0; }
+@container (max-width: 130px) { .threat-silver-frame-wrap .threat-card-tag { display: none; } }
+/* con 3 compagni il riquadro è stretto: il nome prende tutta la riga sopra i punti vita */
+.companion-header-bar { flex-wrap: wrap; row-gap: 2px; }
+.companion-title-box { flex: 1 1 100%; }
+.companion-battlefield-card { container-type: inline-size; }
+@container (max-width: 130px) {
+  .companion-avatar-mini { display: none; }
+  .companion-header-bar { padding-right: 30px !important; }
+}
+.threat-central-card-wrap .track-lbl { white-space: nowrap; width: auto !important; min-width: 62px !important; max-width: 62%; overflow: hidden; }
+.threat-central-card-wrap .progress-track { min-width: 28px; }
+
+/* Titoli e nomi: sempre un po' di margine dai bordi della nuvoletta, non devono toccarli */
+.monomyth-card .card-vignette-bubble { width: 72% !important; height: 15% !important; padding: 1.5% 3% !important; box-sizing: border-box; }
+.monomyth-card .card-vignette-title, .monomyth-card .card-vignette-tag { padding: 0 4%; box-sizing: border-box; }
+.threat-silver-frame-wrap .threat-vignette-bubble { width: 70% !important; padding: 2px 4px !important; }
+.threat-silver-frame-wrap .threat-card-title { padding: 0 4%; box-sizing: border-box; }
+.threat-silver-frame-wrap:not(.is-printed) .threat-card-title { color: #111116 !important; text-shadow: none !important; }
+
+/* Barra di scorrimento su PC: sottile e in tema (sul telefono non si vede) */
+* { scrollbar-width: thin; scrollbar-color: rgba(255,214,90,.55) transparent; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,214,90,.5); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,214,90,.85); background-clip: padding-box; }
+::-webkit-scrollbar-button { display: none; height: 0; width: 0; }
+
+/* Presentazione Minaccia: il livello nei due cerchi della cornice, come sulla carta in gioco */
+.intro-threat-frame-wrap { container-type: inline-size; }
+.intro-threat-frame-wrap .intro-threat-lvl-badge,
+.intro-threat-frame-wrap:not(.is-printed)::after {
+  position: absolute; top: 91.89%; transform: translate(-50%, -50%); bottom: auto; right: auto;
+  width: 12.8%; height: 8.6%; background: none; border: 0; border-radius: 50%; box-shadow: none;
+  display: flex; align-items: center; justify-content: center; z-index: 5; pointer-events: none;
+  font-family: 'JetBrains Mono', 'Cinzel', monospace; font-weight: 900; font-size: clamp(9px, 10.5cqi, 24px); color: #111116;
+}
+.intro-threat-frame-wrap .intro-threat-lvl-badge { left: 11.73%; }
+.intro-threat-frame-wrap:not(.is-printed)::after { content: attr(data-liv); left: 88%; }
+
+/* Pulsante GIOCA: il riflesso scorre dentro il pulsante, grande quanto il pulsante (la stella "VAI!" resta fuori) */
+.btn-play::after {
+  content: '' !important; position: absolute !important; z-index: 0;
+  top: 0 !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: auto !important; height: auto !important;
+  border-radius: inherit; pointer-events: none;
+  background: linear-gradient(100deg, transparent 0 38%, rgba(255,255,255,.5) 50%, transparent 62% 100%) no-repeat;
+  background-size: 250% 100%; animation: play-shine-in 3.2s ease-in-out infinite !important;
+}
+@keyframes play-shine-in { 0%, 50% { background-position: 120% 0; } 100% { background-position: -20% 0; } }
+/* le regole !important bloccherebbero l'animazione: qui niente !important sullo sfondo */
+
+/* Illustrazione su tutta la carta (regole base in style.css); il soggetto va composto nella fascia libera 22%-60% dell'altezza. */
+
+/* Finestra "Guarda le carte": carte intere con i loro effetti, scartabili */
+.peek-sheet { max-height: 92vh; overflow-y: auto; }
+.peek-help { font-size: 13px; color: var(--ink, #1a1a1a); margin: 0 0 10px; text-align: center; }
+.peek-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 12px; }
+.peek-item { display: flex; flex-direction: column; align-items: center; gap: 6px; width: min(200px, 44vw); transition: opacity .2s, filter .2s; }
+.peek-item .threat-silver-frame-wrap { width: 100%; aspect-ratio: 695 / 1024; position: relative; border-radius: 10px; overflow: hidden; }
+.peek-item .peek-card .monomyth-card { width: min(200px, 44vw) !important; }
+.peek-item .peek-info { font-size: 12px; line-height: 1.3; text-align: center; min-height: 1em; }
+.peek-item.scartata { opacity: .4; filter: grayscale(1); }
+.peek-item.scartata .peek-scarta { opacity: 1; filter: none; background: var(--pop-red, #e63946); color: #fff; }
+.peek-scarta { width: 100%; }
+.peek-scarta { margin-top: auto; }
+
+/* Glossario parole chiave nella scheda carta (feedback Franz 2026-11-05) */
+#sheetGlossario:empty { display: none; }
+.glossario {
+  margin: 8px 0 4px; padding: 8px 10px;
+  background: #fff8e6; color: #1a1a22;
+  border: 2px solid #111116; border-radius: 10px;
+  box-shadow: 3px 3px 0 #111116;
+  font-size: 12px; line-height: 1.35;
+  max-height: 30vh; overflow-y: auto;
+}
+.glossario-titolo { font-weight: 900; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; margin-bottom: 4px; }
+.glossario-voce { margin: 3px 0; overflow-wrap: anywhere; }
+.glossario-voce b { color: #b3261e; }

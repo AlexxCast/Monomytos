@@ -5,10 +5,11 @@ Lavori nel repo Monomythos (https://github.com/AlexxCast/Monomytos, ramo main).
 A ogni giro:
 1. `git pull` per avere le liste aggiornate (se git non c'è, Alessio fa "Fetch/Pull origin" da GitHub Desktop prima di iniziare).
 2. Prima rifai TUTTE le carte di `strumenti/gemini/da_rifare.md`, poi continua con le prime 20 di `strumenti/gemini/prompt_da_fare.md`.
-3. Per ogni carta genera UNA immagine verticale 2:3 con il tuo strumento di generazione immagini, usando esattamente il prompt scritto sotto il titolo. Non allegare immagini di riferimento.
+3. Per ogni carta genera UNA immagine VERTICALE 2:3 (es. 848×1264) con il tuo strumento di generazione immagini, usando esattamente il prompt scritto sotto il titolo. Non allegare immagini di riferimento. L'illustrazione copre tutta la carta: il titolo copre il 22% in alto e il testo copre il 40% in basso.
 4. Salva l'immagine come `strumenti/gemini/nuove/<id>.png`, dove <id> è il nome nel titolo (es. `## t_torneoclandestino.png` → `strumenti/gemini/nuove/t_torneoclandestino.png`).
-5. Prima di salvarla guardala: se ha scritte, vignette separate, mani o armi deformi, o lo stesso sfondo di un'altra carta, rigenerala (massimo 3 tentativi).
-6. `git add strumenti/gemini/nuove && git commit -m "Immagini Gemini: <elenco id>" && git push`.
+5. Controlla la posizione del soggetto: testa, mani, armi e azione principale devono stare TUTTI nella fascia centrale, tra il 22% e il 60% dell'altezza. In alto e in basso solo sfondo (cielo, terreno, fumo, luce). Se il soggetto sconfina sotto il titolo o nel riquadro del testo, rigenerala.
+6. Prima di salvarla guardala: se ha scritte, vignette separate, mani o armi deformi, o lo stesso sfondo di un'altra carta, rigenerala (massimo 3 tentativi).
+7. `git add strumenti/gemini/nuove && git commit -m "Immagini Gemini: <elenco id>" && git push`.
    Se git non è disponibile o il push non riesce, lascia le immagini nella cartella e avvisa: Alessio farà commit e "Push origin" da GitHub Desktop.
 
 Un'azione automatica su GitHub mette le immagini nel gioco e toglie le carte dalle liste. Non modificare altri file del repo.
