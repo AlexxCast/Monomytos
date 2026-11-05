@@ -2,6 +2,31 @@
  {
   "id": "storia_eclissi",
   "lingua": "it",
+  "data": "2026-11-05T19:41:03.887Z",
+  "prova": false,
+  "didascalia_instagram": "Ad Ataca le luci si spengono e nel cielo compare la Stella della Follia. Chi la fissa troppo cambia lato. Tu da che parte stai? Modalità Storia, Capitolo 1: L'Eclissi Sintetica.\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev #storymode #fumetti #lore #villain",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/N71Wh4FGnts",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "errore",
+    "nota": "caricamento video Bluesky: HTTP 401 {\"jobStatus\":{\"did\":\"\",\"error\":\"unconfirmed_email\",\"jobId\":\"\",\"state\":\"\"}}"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 3
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-05_storia_eclissi.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/42095885065"
+ },
+ {
+  "id": "storia_eclissi",
+  "lingua": "it",
   "data": "2026-11-05T18:49:29.135Z",
   "prova": false,
   "didascalia_instagram": "Ad Ataca le luci si spengono e nel cielo compare la Stella della Follia. Chi la fissa troppo cambia lato. Tu da che parte stai? Modalità Storia, Capitolo 1: L'Eclissi Sintetica.\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
