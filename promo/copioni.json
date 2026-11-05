@@ -1161,13 +1161,14 @@
           "intro": false,
           "segui": true,
           "momento": "atto_quasi_vinto",
-          "durata": 10,
+          "durata": 14,
           "azioni": [
             {
-              "t": 4.5,
+              "t": 8,
               "fai": "chiudi_atto"
             }
-          ]
+          ],
+          "primo_piano": false
         }
       },
       "inquadrature": [
@@ -1194,7 +1195,7 @@
           "ripresa": "p",
           "da": "card_played#1-0.2",
           "riserva": 2,
-          "durata": 1.5,
+          "durata": 2.6,
           "transizione": "flash",
           "testo": {
             "it": "Resisti al Velo",
@@ -1206,7 +1207,7 @@
           "ripresa": "p",
           "da": "act_advanced-0.2",
           "riserva": 5,
-          "durata": 1.6,
+          "durata": 2.4,
           "transizione": "scorri",
           "scossa": true,
           "testo": {

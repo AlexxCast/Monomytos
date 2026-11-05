@@ -212,7 +212,9 @@ const RIPRESE = {
       const ov = document.getElementById('threatEntryAnimOverlay'); if (ov) ov.classList.remove('active');
     }, [r.eroi || 3, r.eroe || null, r.intro !== false]);
     // Bot al comando, situazione preparata e zoom automatico sulle giocate
-    const avvia = () => p.evaluate(([mom, segui, primoPiano, difesaNascosta]) => {
+    const avvia = () => p.evaluate(([mom, segui, primoPiano, difesaNascosta, ritmo]) => {
+      // ritmo: passo = ms tra una giocata e l'altra del bot, max = giocate per turno, lento = moltiplicatore delle pause
+      const PASSO = ritmo.passo || 2800, MAXG = ritmo.max || 2, LENTO = ritmo.lento || 2;
       window.__DEBUG = !!window.__DEBUG_ON;
       const st = GameEngine.state;
       // Primo piano della carta giocata: la carta appare grande per un attimo e poi vola sul tavolo,
@@ -220,7 +222,7 @@ const RIPRESE = {
       let occupato = 0;
       window.__primoPiano = (card, player, targetId) => {
         if (Date.now() < occupato) return;
-        occupato = Date.now() + 1500;
+        occupato = Date.now() + 2300;
         const box = document.createElement('div');
         box.className = 'promo-primo-piano';
         const nome = player && (player.name || player.nome || player);
@@ -229,8 +231,8 @@ const RIPRESE = {
         const etichetta = typeof nome === 'string' ? (contro ? `${nome} ⚔ ${contro.name}` : nome).replace(/ \(Bot\)/g, '') : '';
         box.innerHTML = `<div class="ppp-carta">${UI.getCardDOM(card, false)}</div>${etichetta ? `<div class="ppp-chi${villain ? ' villain' : ''}">${etichetta}</div>` : ''}`;
         document.body.appendChild(box);
-        setTimeout(() => box.classList.add('via'), 1150);
-        setTimeout(() => box.remove(), 1600);
+        (window.__setTimeoutVero || setTimeout)(() => box.classList.add('via'), 1800);
+        (window.__setTimeoutVero || setTimeout)(() => box.remove(), 2250);
       };
       if (!document.getElementById('promoPrimoPianoCss')) {
         const css = document.createElement('style');
@@ -252,12 +254,12 @@ const RIPRESE = {
       st.players.forEach(pl => { pl.isBot = true; });
       if (mom && window.__MOMENTI[mom]) { window.__MOMENTI[mom](); UI.renderGameView(st); }
       if (window.__attoIniziale == null) window.__attoIniziale = st.actIndex;
-      // Ritmo da video: i bot giocano una carta alla volta (una ogni 1,6 s) invece di tutte insieme,
-      // e le pause del gioco (attacchi dei nemici, cambio turno) durano il 50% in più
+      // Ritmo da video: i bot giocano una carta alla volta (una ogni 2,8 s, max 2 per turno) invece di tutte insieme,
+      // e le pause del gioco (attacchi dei nemici, cambio turno) durano il doppio
       if (!window.__ritmo) {
         window.__ritmo = true;
         const st0 = window.__setTimeoutVero = window.setTimeout;
-        window.setTimeout = (fn, ms, ...a) => st0(fn, (ms || 0) >= 300 ? ms * 1.5 : ms, ...a);
+        window.setTimeout = (fn, ms, ...a) => st0(fn, (ms || 0) >= 300 ? ms * LENTO : ms, ...a);
         const GE = GameEngine, run = GE.runBotTurn.bind(GE), gioca = GE.playCardEffect.bind(GE);
         let turno = null, giocate = 0;
         GE.runBotTurn = bot => {
@@ -268,7 +270,7 @@ const RIPRESE = {
           let fatta = false;
           const ALT = {};
           GE.playCardEffect = (...x) => {
-            if (giocate >= 4) return;
+            if (giocate >= MAXG) return;
             if (fatta) throw ALT;
             fatta = true; giocate++;
             return gioca(...x);
@@ -276,7 +278,7 @@ const RIPRESE = {
           try { run(bot); } catch (e) {
             GE.playCardEffect = gioca;
             if (e !== ALT) throw e;
-            st0(() => GE.runBotTurn(bot), 1600);
+            st0(() => GE.runBotTurn(bot), PASSO);
             return;
           }
           GE.playCardEffect = gioca;
@@ -316,7 +318,7 @@ const RIPRESE = {
       }
       // I bot partono un attimo dopo l'inizio della registrazione
       if (st.phase === 'action') setTimeout(() => GameEngine.checkTurn(), 300);
-    }, [r.intro === false ? null : (r.momento || null), r.segui || false, r.primo_piano !== false, r.difesa === 'nascosta']);
+    }, [r.intro === false ? null : (r.momento || null), r.segui || false, r.primo_piano !== false, r.difesa === 'nascosta', { passo: r.passo_bot, max: r.max_giocate, lento: r.lento }]);
     if (r.intro === false) {
       await p.evaluate(() => { const st = GameEngine.state; st.players.forEach(pl => { pl.isBot = true; }); });
       await p.evaluate(m => { if (m && window.__MOMENTI[m]) { window.__MOMENTI[m](); UI.renderGameView(GameEngine.state); } }, r.momento || null);
