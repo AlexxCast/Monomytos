@@ -1130,11 +1130,11 @@
       ]
     },
     {
-      "id": "storia_lumen",
+      "id": "storia_eclissi",
       "formato": "Mini trailer narrativo",
       "titolo": {
-        "it": "La città di Lumen è al buio",
-        "en": "The city of Lumen has gone dark"
+        "it": "L'Eclissi Sintetica",
+        "en": "The Synthetic Eclipse"
       },
       "musica": "m1_selezione.mp3",
       "musica_da": 60,
@@ -1176,8 +1176,8 @@
           "da": 0.2,
           "durata": 2.2,
           "testo": {
-            "it": "Il Grande Faro si è *spento*",
-            "en": "The Great Lighthouse went *dark*"
+            "it": "Una notte le città si *spengono*",
+            "en": "One night the cities go *dark*"
           }
         },
         {
@@ -1186,8 +1186,8 @@
           "durata": 2,
           "transizione": "dissolvenza",
           "testo": {
-            "it": "Lumen ha bisogno di *eroi*",
-            "en": "Lumen needs *heroes*"
+            "it": "E compare la Stella della *Follia*",
+            "en": "And the Star of *Madness* appears"
           }
         },
         {
@@ -1197,8 +1197,8 @@
           "durata": 1.5,
           "transizione": "flash",
           "testo": {
-            "it": "Riaccendilo",
-            "en": "Light it up"
+            "it": "Resisti al Velo",
+            "en": "Resist the Veil"
           },
           "stile": "grande"
         },
@@ -1226,14 +1226,16 @@
         }
       },
       "didascalia": {
-        "it": "La modalità Storia di Monomythos: 6 missioni nel primo capitolo e dialoghi a fumetto.",
-        "en": "Monomythos story mode: 6 missions in chapter one and comic-book dialogues."
+        "it": "Ad Ataca le luci si spengono e nel cielo compare la Stella della Follia. Chi la fissa troppo cambia lato. Tu da che parte stai? Modalità Storia, Capitolo 1: L'Eclissi Sintetica.",
+        "en": "In Ataca the lights go out and the Star of Madness rises. Stare too long and you switch sides. Whose side are you on? Story mode, Chapter 1: The Synthetic Eclipse."
       },
       "hashtag": [
         "storymode",
         "fumetti",
-        "lore"
-      ]
+        "lore",
+        "villain"
+      ],
+      "tema": "villain"
     },
     {
       "id": "mazzo_60",
