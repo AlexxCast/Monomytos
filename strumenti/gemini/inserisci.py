@@ -43,7 +43,7 @@ def main():
         w, h = im.size
         im = im.crop((int(w * .02), int(h * .02), int(w * .98), int(h * .95)))
         if im.width > im.height:
-            # orizzontale (16:9): va così com'è nella finestra della carta
+            # orizzontale: va così com'è (nella carta viene ritagliata al centro)
             im.thumbnail((1024, 1024), Image.LANCZOS)
             im.save(os.path.join(g.OUT_DIR, f'{cid}.webp'), 'WEBP', quality=82, method=6)
         else:
