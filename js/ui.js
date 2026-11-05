@@ -849,6 +849,7 @@ class UIController {
           el.appendChild(tagEl);
           tableZone.appendChild(el);
         });
+        this.adattaTavolo(tableZone);
       }
     }
 
@@ -977,6 +978,22 @@ class UIController {
       this.animaPesca(localPlayer, handBox);
     }
     this.posizionaMazzi();
+  }
+
+  // Carte giocate sul tavolo: se non ci stanno si sovrappongono (come la mano), così restano tutte visibili
+  // senza uscire dal bordo o finire sotto i mazzi
+  adattaTavolo(zone) {
+    const items = [...zone.querySelectorAll('.played-card-item')];
+    items.forEach(el => { el.style.marginLeft = ''; });
+    if (items.length < 2) return;
+    const cs = getComputedStyle(zone);
+    const gap = parseFloat(cs.columnGap) || 0;
+    const avail = zone.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
+    const w = items[0].offsetWidth;
+    const need = items.length * w + (items.length - 1) * gap;
+    if (!avail || need <= avail) return;
+    const m = (need - avail) / (items.length - 1) + 1;
+    items.slice(1).forEach(el => { el.style.marginLeft = `${-m}px`; });
   }
 
   // Computer: i mazzi vanno nella colonna a sinistra; telefono: restano accanto al tavolo

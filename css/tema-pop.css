@@ -1282,6 +1282,22 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 /* in Home la nota è un piccolo credito dentro la vetrina dell'eroe: non sposta nulla */
 .home-credito-ai { position: absolute; left: 10px; right: 96px; top: 7px; z-index: 3; text-align: left; font-size: 9px; line-height: 1.25; font-style: italic; color: rgba(255,255,255,.72); text-shadow: 0 1px 2px #000, 0 0 4px #000; pointer-events: none; }
 
+/* Tavolo: le carte giocate non escono dal bordo e non finiscono sotto i mazzi */
+.table-play-zone { min-width: 0 !important; justify-content: safe center !important; overflow: hidden !important; }
+.table-play-zone .played-card-item { flex-shrink: 0; }
+/* Telefono: la mano copre la parte bassa del campo, quindi tavolo e mazzi diventano una striscia
+   compatta che resta visibile sopra la mano (carte giocate in miniatura, intere) */
+@media (max-width: 999px) {
+  .table-play-nexus { align-items: center !important; }
+  .table-play-zone { min-height: 48px !important; height: 48px; padding: 2px 6px !important; gap: 4px !important; }
+  .table-play-zone .played-card-item { flex: 0 0 auto !important; width: auto !important; height: auto !important; border: 0 !important; box-shadow: none !important; overflow: visible !important; }
+  .table-play-zone .played-card-item .monomyth-card { zoom: .4; }
+  .table-play-zone .played-card-tag { display: none !important; }
+  .table-play-zone .table-play-placeholder { font-size: 10px !important; }
+  .table-decks-flank .deck-stack-cards { width: 30px !important; height: 42px !important; }
+  .table-decks-flank .deck-stack-badge { display: none !important; }
+}
+
 /* ===== Correzioni dal primo beta test (4/11) ===== */
 /* Accesso: i pulsanti non si schiacciano più quando lo schermo è basso, e la nota AI
    sta in fondo alla pagina invece di galleggiare sopra "Gioca come ospite" */

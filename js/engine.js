@@ -1430,9 +1430,11 @@ class MonomythosEngine {
 
     // Carte giocabili: il bot evita le carte che danno Trauma quando è vicino al Punto di Rottura
     const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
+    // Da Villain il bot gioca prima le carte che fanno danni, per colpire gli eroi
+    const attacca = c => ((c.fx_list || []).some(f => f.type === 'damage') ? 1 : 0);
     const traumaOf = c => (c.fx_list || []).reduce((t, f) => t + (f.type === 'trauma' && f.amount > 0 ? f.amount : 0), 0);
-    const getPlayable = () => bot.hand.filter(c => this.getPlayerSlot(bot, c.cat) >= c.valore && bot.trm + traumaOf(c) < soglia - 1 && (!window.Morale || window.Morale.puoPagare(c, bot)))
-      .sort((a, b) => traumaOf(a) - traumaOf(b));
+    const getPlayable = () => bot.hand.filter(c => this.getPlayerSlot(bot, c.cat) >= c.valore && (bot.state === 'villain' || bot.trm + traumaOf(c) < soglia - 1) && (!window.Morale || window.Morale.puoPagare(c, bot)))
+      .sort((a, b) => traumaOf(a) - traumaOf(b) || (bot.state === 'villain' ? attacca(b) - attacca(a) : 0));
     let playableCards = getPlayable();
     let plays = 0;
 
@@ -1444,7 +1446,11 @@ class MonomythosEngine {
         const valids = targetInfo.candidates.filter(can => can.isValid);
         // Prioritize wounded mooks, then boss
         const validMook = valids.find(can => can.type === 'mook');
-        if (validMook) {
+        // Un bot diventato Villain attacca gli eroi (il più ferito), non più gli sgherri
+        const eroeBersaglio = bot.state === 'villain' && valids.filter(can => can.type === 'player' && !can.isSelf).sort((a, b) => a.hp - b.hp)[0];
+        if (eroeBersaglio) {
+          chosenTargetId = eroeBersaglio.id;
+        } else if (validMook) {
           chosenTargetId = validMook.id;
         } else if (valids.length > 0) {
           chosenTargetId = valids[0].id;
