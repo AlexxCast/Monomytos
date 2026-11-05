@@ -61,14 +61,14 @@
   // finché non c'è si usa l'immagine 'fb' già presente nel gioco.
   const G = 'assets/cards/gen/';
   const VIGNETTE = {
-    s_metropoli: { fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: [] },
-    s_blackout: { fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['blackout'] },
-    s_stella: { fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stella'] },
-    s_piazza: { fb: G + 't_lassediodeipredonidellerovine.webp', moto: 'panDx', strati: ['stella'] },
-    s_droni_folla: { fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'scuoti'] },
-    s_schermi: { fb: G + 't_incursionedeidronicinetici.webp', moto: 'zoomOut', strati: ['glitch'] },
-    s_infetti: { fb: G + 't_torneoclandestino.webp', moto: 'panSx', strati: ['nebbia'] },
-    s_cisterna: { fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: [] },
+    s_metropoli: { fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: ['stelle'] },
+    s_blackout: { fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'lampi', 'scintille'], pos: { stella: [70, 15], lampi: [35, 44] } },
+    s_stella: { fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stelle', 'stella'], pos: { stella: [50, 28] } },
+    s_piazza: { fb: G + 't_lassediodeipredonidellerovine.webp', moto: 'zoom', strati: ['stella', 'occhi'], pos: { stella: [68, 17], occhi: 62 } },
+    s_droni_folla: { fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'laser', 'scintille', 'scuoti'], pos: { stella: [24, 8] } },
+    s_schermi: { fb: G + 't_incursionedeidronicinetici.webp', moto: 'zoomOut', strati: ['tv', 'acqua'], pos: { tv: [48, 26, 50, 31] } },
+    s_infetti: { fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: ['stella', 'nebbia', 'occhi'], pos: { stella: [62, 19], occhi: 48 } },
+    s_cisterna: { fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: ['torce', 'occhi'], pos: { occhi: 47 } },
     s_droni_cinetici: { fb: G + 't_incursionedeidronicinetici.webp', moto: 'panGiu', strati: ['scintille'] },
     s_falesia: { fb: G + 't_imboscatasullafalesia.webp', moto: 'panSx', strati: ['nebbia'] },
     s_incappucciati: { fb: G + 't_cultistidelvelo.webp', moto: 'zoom', strati: ['nebbia', 'buio'] },
@@ -903,8 +903,17 @@
         const src = id.startsWith('minaccia:') ? def.fb : `assets/storia/${id}.webp`;
         const v = document.createElement('div');
         v.className = `ssv ssv-${def.moto || 'zoom'}`;
-        v.innerHTML = `<img src="${src}" alt="" onerror="this.onerror=null;this.src='${def.fb}'">`
-          + (def.strati || []).filter(x => x !== 'scuoti').map(x => `<i class="st st-${x}"></i>`).join('');
+        // gli effetti stanno nel quadro dell'illustrazione: 'pos' li mette sul punto giusto del disegno (in % dell'immagine)
+        const pos = def.pos || {};
+        const stile = x => {
+          if (x === 'stella') { const [sx, sy] = pos.stella || [80, 14]; return `left:calc(${sx}% - 15%);top:calc(${sy}% - 8.4%);right:auto`; }
+          if (x === 'tv' && pos.tv) { const [l, tp, w, h] = pos.tv; return `left:${l}%;top:${tp}%;width:${w}%;height:${h}%;right:auto;bottom:auto`; }
+          if (x === 'lampi' && pos.lampi) return `--lx:${pos.lampi[0]}%;--ly:${pos.lampi[1]}%`;
+          if (x === 'occhi' && pos.occhi) return `--oy:${pos.occhi}%`;
+          return '';
+        };
+        v.innerHTML = `<div class="ssv-q"><img src="${src}" alt="" onerror="this.onerror=null;this.src='${def.fb}'">`
+          + (def.strati || []).filter(x => x !== 'scuoti').map(x => `<i class="st st-${x}" style="${stile(x)}"></i>`).join('') + '</div>';
         vbox.querySelectorAll('.ssv').forEach(o => { o.classList.remove('on'); setTimeout(() => o.remove(), 1000); });
         vbox.appendChild(v);
         requestAnimationFrame(() => requestAnimationFrame(() => v.classList.add('on')));
