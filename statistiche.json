@@ -1,0 +1,25 @@
+{
+ "aggiornato": "2026-11-05T15:41:23.465Z",
+ "piattaforme": {
+  "youtube": {
+   "stato": "non collegata",
+   "nota": "mancano i Secrets: YT_CLIENT_ID, YT_CLIENT_SECRET"
+  },
+  "tiktok": {
+   "stato": "non collegata",
+   "nota": "mancano i Secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN"
+  },
+  "instagram": {
+   "stato": "non collegata",
+   "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+  },
+  "bluesky": {
+   "stato": "non collegata",
+   "nota": "mancano i Secrets: BSKY_HANDLE"
+  },
+  "telegram": {
+   "stato": "non collegata",
+   "nota": "mancano i Secrets: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID"
+  }
+ }
+}
