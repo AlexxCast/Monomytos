@@ -182,7 +182,7 @@ jobs:
             l.unshift(e);fs.writeFileSync(f,JSON.stringify(l.slice(0,300),null,1));
             const u='../hub-dati/in_uscita.json';try{const q=JSON.parse(fs.readFileSync(u,'utf8'));const v=q.find(x=>x.id==='video:${{ github.run_id }}');if(v){v.stato=e.prova?'prova':'pubblicato';v.esito=e.piattaforme;fs.writeFileSync(u,JSON.stringify(q,null,1))}}catch(x){}
             const ok=Object.entries(e.piattaforme).filter(([k,v])=>v.esito==='ok').map(([k])=>k),ko=Object.entries(e.piattaforme).filter(([k,v])=>v.esito==='errore').map(([k])=>k);
-            if(!e.prova)require('./promo/notifica')(ok.length?'✅ Video pubblicato':'⚠️ Video non pubblicato',(ok.length?'Uscito su '+ok.join(', ')+'. ':'')+(ko.length?'Errore su '+ko.join(', ')+'.':''),{sezione:'attivita'});"
+            if(!e.prova)require('./promo/notifica')(ok.length?'✅ Video pubblicato':'⚠️ Video non pubblicato',(ok.length?'Uscito su '+ok.join(', ')+'. ':'')+(ko.length?'Errore su '+ko.join(', ')+'. ':'')+((e.piattaforme.instagram||{}).esito==='ok'?'':'Instagram: pronto da pubblicare dall\'app.'),{sezione:'controlla'});"
           bash promo/hub_dati.sh salva "Pubblicazione ${{ steps.oggi.outputs.data }}" || true
 
       - name: Avviso con video e didascalie

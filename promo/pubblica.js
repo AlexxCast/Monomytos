@@ -32,6 +32,8 @@ const titolo = T(copione.titolo);
 const didascalia = T(copione.didascalia);
 const notaAI = T(dati.nota_ai);
 const testo = notaAI ? `${didascalia}\n\n${notaAI}` : didascalia;
+// Didascalia Instagram: usata dall'API e, finché l'API non è attiva, mostrata nell'app per pubblicare a mano
+const caption = `${testo}\n\nLink in bio 👆\n\n${tag.slice(0, 25).join(' ')}`.slice(0, 2200);
 const linkTxt = lingua === 'it' ? 'Gioca gratis' : 'Play free';
 
 const attendi = ms => new Promise(r => setTimeout(r, ms));
@@ -138,7 +140,6 @@ const instagram = {
       const r = await json(await fetch(`https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${encodeURIComponent(token)}`), 'rinnovo token Instagram');
       if (r.access_token) { token = r.access_token; if (token !== E.IG_ACCESS_TOKEN) salvaSegreto('IG_ACCESS_TOKEN', token); }
     } catch (e) { console.warn('  ' + e.message); }
-    const caption = `${testo}\n\n${lingua === 'it' ? 'Link in bio' : 'Link in bio'} 👆\n\n${tag.slice(0, 25).join(' ')}`.slice(0, 2200);
     const c = await json(await fetch(`${base}/${E.IG_USER_ID}/media`, {
       method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ media_type: 'REELS', video_url: VIDEO_URL, caption, share_to_feed: 'true', access_token: token })
@@ -247,7 +248,7 @@ const discord = {
 const PIATTAFORME = { youtube, tiktok, instagram, bluesky, telegram, discord };
 
 (async () => {
-  const esito = { id, lingua, data: new Date().toISOString(), prova: PROVA, piattaforme: {} };
+  const esito = { id, lingua, data: new Date().toISOString(), prova: PROVA, didascalia_instagram: caption, piattaforme: {} };
   const scelte = listaPiattaforme.split(',').map(s => s.trim()).filter(Boolean);
   for (const nome of scelte) {
     const pf = PIATTAFORME[nome];
