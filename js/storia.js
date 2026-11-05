@@ -953,9 +953,12 @@
         let k = 0;
         scrivendo = true;
         clearInterval(timer);
+        let sill = 0;
         timer = setInterval(() => {
           k += 2;
           out.textContent = testo.slice(0, k);
+          // voce: qualche sillaba borbottata all'inizio della battuta (dà l'idea che parlino, senza coprire la musica)
+          if (window.StoriaSuoni && k % 8 === 0 && sill < 14 && /[A-Za-zÀ-ÿ]/.test(testo[k - 1] || '')) { sill++; window.StoriaSuoni.sillaba(p); }
           if (k >= testo.length) {
             clearInterval(timer); scrivendo = false;
             // modalità automatica (video della Storia): passa da sola alla battuta dopo
