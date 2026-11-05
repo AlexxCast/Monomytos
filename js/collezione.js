@@ -288,9 +288,13 @@
       this.p.data.mazzoMinacce = MINACCE_STARTER.slice();
       this.p.data.starter = nome;
       this.p.data.bustineGratis = (this.p.data.bustineGratis || 0) + 1;
+      const T = window.Tutorial;
+      if (T && T._attesaStarter) this.p.data.starterPrimaDelTutorial = true;
       this.p.save();
       window.UI.selectedHero = nome;
       this.aggiornaHome();
+      // Primo accesso: scelto lo starter, parte subito la prima missione della Storia come tutorial
+      if (T && T._attesaStarter) { T.avvia(); return; }
       window.UI.showScreen('scr-lobby');
       window.UI.showToast(`Mazzo "${s.mazzo}" pronto! Hai anche 1 bustina in regalo nel Negozio.`);
       if (window.Online) window.Online.dopoAccesso();
