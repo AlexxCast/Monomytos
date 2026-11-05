@@ -1490,3 +1490,9 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .glossario-titolo { font-weight: 900; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; margin-bottom: 4px; }
 .glossario-voce { margin: 3px 0; overflow-wrap: anywhere; }
 .glossario-voce b { color: #b3261e; }
+
+/* Deck builder: carte che l'eroe non potrà mai giocare (costo > slot massimi) */
+.builder-card-row.non-giocabile .builder-card-thumb-wrap,
+.builder-card-row.non-giocabile .builder-card-effect-text { opacity: .45; filter: grayscale(.7); }
+.builder-tag-badge.tag-ingiocabile { background: #b3261e; color: #fff; white-space: normal; }
+.builder-card-row.non-giocabile .stepper-btn[disabled] { opacity: .35; cursor: not-allowed; }

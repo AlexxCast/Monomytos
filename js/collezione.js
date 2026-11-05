@@ -94,7 +94,18 @@
     return _rar;
   }
 
+  // Slot massimi di una categoria con le statistiche della creazione (§8.5: 1 + modificatori, max 5).
+  // Una carta con Valore più alto non si potrà mai giocare per effetto.
+  const STAT_CAT = { potenza: 'str', agilita: 'spd', intelligenza: 'tech', vigore: 'end' };
+  function slotMax(creation, cat) {
+    const k = STAT_CAT[String(cat || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')];
+    if (!k) return 5;
+    return Math.max(1, Math.min(5, 1 + ((creation && creation[k]) || 0)));
+  }
+  const giocabile = (c, creation) => (c.valore || 0) <= slotMax(creation, c.cat);
+
   const Collezione = {
+    slotMax, giocabile,
     RARITA, STARTER, STAGIONE, EVENTI, COSTO_EROE, MAZZO_MINACCE, COSTO_BUSTA_MINACCE, REGOLE_MAZZO, COPIE_MAX_COLLEZIONE,
     doppioni(id) { return Math.max(0, ((this.p && this.p.data.unlockedCards[id]) || 0) - REGOLE_MAZZO.copieMax); },
 
@@ -224,11 +235,18 @@
       const tags = ['Untagged', ...(m ? m[1].split(',').map(x => x.trim()).filter(Boolean) : ['Attacco Fisico', 'Abilità Tech', 'Gadget', 'Difesa', 'Burst'])];
       const norm = t => String(t || 'Untagged').toLowerCase().replace(/[^a-z0-9]/g, '');
       const tagOk = c => { const t = norm(c.tag); return tags.map(norm).some(x => x === t || t.includes(x) || x.includes(t)); };
+      const str = Math.min(5, (o.str || 0) + (co.str || 0)), spd = Math.min(5, (o.spd || 0) + (co.spd || 0));
+      const tech = Math.min(5, (o.tech || 0) + (co.tech || 0)), end = Math.min(5, (o.end || 0) + (co.end || 0));
+      const stats = { str, spd, tech, end };
+      // Niente carte che l'eroe non potrà mai giocare (es. costo 2 Intelligenza con 1 solo slot)
+      const ok = c => tagOk(c) && giocabile(c, stats);
       const base = r => ['comune', 'noncomune', 'rara'].includes(r);
-      const proprie = (D.action_cards[nome] || []).filter(c => base(this.rarita(c)) && tagOk(c));
+      // Le Carte Oscure dell'eroe entrano nello starter: senza, nessuno poteva tentare la via del Villain
+      const oscure = (D.action_cards[nome] || []).filter(c => c.osc && ok(c));
+      const proprie = [...oscure, ...(D.action_cards[nome] || []).filter(c => base(this.rarita(c)) && ok(c))];
       const ordine = { comune: 0, noncomune: 1, rara: 2 };
       const altre = Object.keys(D.action_cards).filter(h => h !== nome).flatMap(h => D.action_cards[h])
-        .filter(c => ['comune', 'noncomune'].includes(this.rarita(c)) && tagOk(c))
+        .filter(c => ['comune', 'noncomune'].includes(this.rarita(c)) && ok(c))
         .sort((x, y) => ordine[this.rarita(x)] - ordine[this.rarita(y)] || x.num - y.num);
       const scelte = [];
       [...proprie, ...altre].forEach(c => { if (scelte.length < REGOLE_MAZZO.carteMin / REGOLE_MAZZO.copieMax && !scelte.includes(c)) scelte.push(c); });
@@ -237,8 +255,6 @@
         carte[c.id] = REGOLE_MAZZO.copieMax;
         d.unlockedCards[c.id] = Math.max(d.unlockedCards[c.id] || 0, REGOLE_MAZZO.copieMax);
       });
-      const str = Math.min(5, (o.str || 0) + (co.str || 0)), spd = Math.min(5, (o.spd || 0) + (co.spd || 0));
-      const tech = Math.min(5, (o.tech || 0) + (co.tech || 0)), end = Math.min(5, (o.end || 0) + (co.end || 0));
       const creation = { origine: o.name, archetipo: a.name, costume: co.name, pb: pb.name, str, spd, tech, end, vita: o.vita || 25, allowedTags: tags, pb_desc: pb.testo || '' };
       this.p.saveCustomDeck(s.mazzo, nome, carte, creation);
       return Object.values(carte).reduce((x, y) => x + y, 0);
@@ -247,8 +263,16 @@
     // Account creati prima di questa versione: se non hanno un mazzo da 60 valido, ricevono quello starter
     assicuraMazzoStarter() {
       const d = this.p && this.p.data;
-      if (!d || !d.starter || d.mazzoStarterV === 1) return;
-      d.mazzoStarterV = 1;
+      if (!d || !d.starter || d.mazzoStarterV >= 2) return;
+      // v2 (2026-11-05): lo starter non conteneva Carte Oscure e aveva carte ingiocabili; si rifà
+      if (d.mazzoStarterV === 1) {
+        d.mazzoStarterV = 2;
+        const s = STARTER.find(x => x.eroe === d.starter);
+        if (s && d.customDecks && d.customDecks[s.mazzo]) this.creaMazzoStarter(d.starter);
+        this.p.save(true);
+        return;
+      }
+      d.mazzoStarterV = 2;
       const valido = Object.values(d.customDecks || {}).some(k => Object.values(k.cards || {}).reduce((x, y) => x + y, 0) >= REGOLE_MAZZO.carteMin);
       if (!valido) this.creaMazzoStarter(d.starter);
       this.p.save(true);
@@ -259,7 +283,7 @@
       if (!s) return;
       this.sbloccaEroe(nome);
       this.creaMazzoStarter(nome);
-      this.p.data.mazzoStarterV = 1;
+      this.p.data.mazzoStarterV = 2;
       MINACCE_STARTER.forEach(m => this.aggiungiMinaccia(m));
       this.p.data.mazzoMinacce = MINACCE_STARTER.slice();
       this.p.data.starter = nome;
