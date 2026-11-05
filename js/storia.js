@@ -40,15 +40,17 @@
   // Nei dialoghi: chi = 'narratore', 'eroe' (il tuo eroe), 'alleato' (l'eroe che gioca con te),
   // 'minaccia' (la Minaccia dell'Atto finale), il nome di un eroe, oppure un personaggio di PERSONAGGI.
   // 'atto' = le due didascalie che compaiono all'inizio del secondo e del terzo Atto.
+  // ritratto: illustrazione del personaggio per i dialoghi (assets/storia/n_*.webp, fatta con Gemini);
+  // finché non c'è si usa l'immagine della sua carta Minaccia.
   const PERSONAGGI = {
-    prometeo: { nome: 'Prometeo', minaccia: 'Incursione dei Droni Cinetici', nemico: true },
-    argo: { nome: 'ARGO', minaccia: "L'Intelligenza Rogue", nemico: true },
-    cultista: { nome: 'Cultista', minaccia: 'Cultisti del Velo', nemico: true },
-    araldo: { nome: "L'Araldo", minaccia: 'Il Rivale Traditore', nemico: true },
-    campione: { nome: 'Il Campione', minaccia: 'Il Campione Imbattuto' },
-    campione_nemico: { nome: 'Il Campione', minaccia: 'Il Campione Imbattuto', nemico: true },
-    mietitore: { nome: 'Il Mietitore', minaccia: "Il Mietitore dell'Astro Oscuro", nemico: true },
-    eco: { nome: "L'Eco", minaccia: "L'Eco Senza Nome", nemico: true }
+    prometeo: { ritratto: 'n_prometeo', nome: 'Prometeo', minaccia: 'Incursione dei Droni Cinetici', nemico: true },
+    argo: { ritratto: 'n_argo', nome: 'ARGO', minaccia: "L'Intelligenza Rogue", nemico: true },
+    cultista: { ritratto: 'n_cultista', nome: 'Cultista', minaccia: 'Cultisti del Velo', nemico: true },
+    araldo: { ritratto: 'n_araldo', nome: "L'Araldo", minaccia: 'Il Rivale Traditore', nemico: true },
+    campione: { ritratto: 'n_campione', nome: 'Il Campione', minaccia: 'Il Campione Imbattuto' },
+    campione_nemico: { ritratto: 'n_campione_nemico', nome: 'Il Campione', minaccia: 'Il Campione Imbattuto', nemico: true },
+    mietitore: { ritratto: 'n_mietitore', nome: 'Il Mietitore', minaccia: "Il Mietitore dell'Astro Oscuro", nemico: true },
+    eco: { ritratto: 'n_eco', nome: "L'Eco", minaccia: "L'Eco Senza Nome", nemico: true }
   };
 
 
@@ -84,7 +86,10 @@
     s_cielo_spezzato: { fb: G + 't_lecosenzanome.webp', moto: 'zoomOut', strati: ['pioggia', 'scuoti'] },
     s_strappo: { fb: G + 't_lecosenzanome.webp', moto: 'zoom', strati: ['glitch'] },
     s_alba: { fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: ['alba'] },
-    s_pioggia: { fb: 'assets/bg/cosmo_villain.webp', moto: 'panGiu', strati: ['pioggia'] }
+    s_pioggia: { fb: 'assets/bg/cosmo_villain.webp', moto: 'panGiu', strati: ['pioggia'] },
+    // Percorso del Velo
+    s_velo_caduta: { fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stella', 'nebbia', 'scuoti'] },
+    s_velo_finale: { fb: 'assets/bg/cosmo_villain.webp', moto: 'panSu', strati: ['stella', 'pioggia'] }
   };
 
   // Ogni carta Minaccia compare una sola volta in tutta la Storia (regola di Alessio): 14 Minacce, 10 missioni da 1 a 3 Atti.
@@ -383,8 +388,161 @@
     }
   ];
 
+  // ---------------- Percorso del Velo (filone Villain) ----------------
+  // Se in una missione il tuo eroe diventa Villain, da lì in poi si gioca il Percorso del Velo:
+  // stesse missioni e stesse Minacce, ma parti già Villain e il tuo obiettivo è che la Minaccia si compia
+  // (abbattere il Portatore al tuo fianco o far vincere la Minaccia). La storia cambia di conseguenza.
+  // Dopo ogni missione puoi restare nel Velo o tornare alla luce: la redenzione riprende la narrazione normale.
+  const CADUTA = [
+    { chi: 'narratore', v: 's_velo_caduta', testo: 'Il ronzio della Stella non fa più male. Anzi: è come una voce che finalmente ti dà ragione.', fx: 'TUM... TUM...' },
+    { chi: 'eroe', testo: 'Ho passato anni a trattenermi. Adesso basta.' },
+    { chi: 'araldo', testo: 'Il Velo non ti ha preso. Ti ha liberato. Ti do il benvenuto dall\'altra parte della bilancia.' },
+    { chi: 'narratore', testo: 'Comincia il Percorso del Velo. Le stesse notti, le stesse Minacce: ma adesso sei tu a volere che vincano.' }
+  ];
+  const RITORNO = [
+    { chi: 'narratore', v: 's_alba', testo: 'Per un istante il ronzio tace. Ti ricordi il tuo nome, e chi eri prima della Stella.' },
+    { chi: 'eroe', testo: 'Non voglio più ascoltarla. Voglio tornare.' },
+    { chi: 'narratore', testo: 'Il viola lascia i tuoi occhi. Gli altri Portatori non ti chiedono niente: ti fanno solo posto accanto a loro.' }
+  ];
+  const VELO = {
+    c1m1: {
+      prima: [
+        { chi: 'narratore', v: 's_piazza', testo: 'La piazza del Fondatore è piena di gente col naso all\'insù. La Stella ti chiama per nome.' },
+        { chi: 'eroe', testo: 'Lasciateli fare. Questa città si merita il buio.' },
+        { chi: 'alleato', testo: 'Che stai dicendo? Hai gli occhi viola... aiutami a fermarli!' }
+      ],
+      atto: ['I droni di Prometeo arrivano sopra la piazza. Sono dalla tua parte.'],
+      dopo: [
+        { chi: 'narratore', v: 's_droni_folla', testo: 'I droni sparano sulla folla e nessuno li ferma. Al mattino i notiziari danno la colpa ai Portatori.' },
+        { chi: 'prometeo', testo: 'Bel lavoro. La città ha paura degli eroi: adesso ascolterà solo me.' }
+      ],
+      sconfitta: 'I Portatori hanno salvato la piazza. Il Velo ti chiede di riprovare.'
+    },
+    c2m1: {
+      prima: [
+        { chi: 'narratore', v: 's_cisterna', testo: 'L\'Arena sotto Ataca ti accoglie a braccia aperte. Nessuno qui sotto ha gli occhi puliti, tranne {alleato}.' },
+        { chi: 'prometeo', testo: 'Fai in modo che quel Portatore non esca vivo. I miei droni ti copriranno.' },
+        { chi: 'alleato', testo: 'Ti ho riconosciuto. Non costringermi a combattere contro di te.' }
+      ],
+      atto: ['I Droni Cinetici scendono dal soffitto. Questa volta proteggono te.'],
+      dopo: [
+        { chi: 'narratore', v: 's_droni_cinetici', testo: 'L\'Arena urla il tuo nome. L\'istinto di sciame cresce: ogni notte scendono più infetti.' },
+        { chi: 'prometeo', testo: 'Il Culto ha chiesto di te. Vai alla scogliera: ti stanno aspettando.' }
+      ],
+      sconfitta: 'Il Portatore è riuscito a fuggire dall\'Arena. Riprova.'
+    },
+    c2m2: {
+      prima: [
+        { chi: 'narratore', v: 's_falesia', testo: 'Sulla Falesia la nebbia del Velo ti obbedisce. I banditi del Culto aspettano solo il tuo segnale.' },
+        { chi: 'cultista', testo: 'Il Portatore che sta arrivando sente il Velo. Spezzalo e portalo da noi.' },
+        { chi: 'alleato', testo: 'Questa nebbia... sei tu a chiamarla?' }
+      ],
+      atto: [],
+      dopo: [
+        { chi: 'narratore', v: 's_incappucciati', testo: 'Il Portatore crolla tra le rocce. I cultisti lo trascinano via nella nebbia.' },
+        { chi: 'cultista', testo: 'L\'Araldo vuole vederti. Al monastero.' }
+      ],
+      sconfitta: 'Il Portatore ha resistito alla nebbia. Riprova.'
+    },
+    c3m1: {
+      prima: [
+        { chi: 'narratore', v: 's_cripte', testo: 'Nelle cripte i cultisti si inchinano al tuo passaggio. Ma {alleato} è qui per fermare il rito.' },
+        { chi: 'araldo', testo: 'Proteggi il coro finché il rito non è compiuto. Poi la torre sarà tua.' },
+        { chi: 'alleato', testo: 'Io conosco l\'Araldo. Ti sta usando, come ha usato tutti.' }
+      ],
+      atto: ['Il rito è a metà. In cima alla torre l\'Araldo ti tende la sua spada viola.'],
+      dopo: [
+        { chi: 'narratore', v: 's_torre', testo: 'Il coro arriva all\'ultima nota. La nebbia del Velo esce dal monastero e copre mezza Ataca.' },
+        { chi: 'araldo', testo: 'La bilancia si sposta. Ora la Fonderia: diamo al Culto le sue armi.' }
+      ],
+      sconfitta: 'Il rito si è interrotto. Riprova prima che il Portatore chiami aiuto.'
+    },
+    c3m2: {
+      prima: [
+        { chi: 'narratore', v: 's_fonderia', testo: 'La Fonderia brucia e gli operai infetti aspettano i tuoi ordini. Ai cancelli c\'è {alleato}.' },
+        { chi: 'cultista', testo: 'Nessun operaio deve uscire. La Fonderia ora lavora per il Velo.' },
+        { chi: 'alleato', testo: 'Ci sono ancora persone lì dentro. Fammi passare.' }
+      ],
+      atto: [],
+      dopo: [
+        { chi: 'narratore', v: 's_esplosione', testo: 'La rivolta vince. Le presse della Fonderia cominciano a forgiare armi per il Culto.' },
+        { chi: 'eroe', testo: 'Adesso manca solo il cervello. ARGO.' }
+      ],
+      sconfitta: 'I Portatori hanno salvato gli operai. Riprova.'
+    },
+    c4m1: {
+      prima: [
+        { chi: 'narratore', v: 's_torre_prometeo', testo: 'Alla Torre di Prometeo {alleato} sta cercando di spegnere ARGO. Tu sei qui per impedirlo.' },
+        { chi: 'argo', testo: 'Nuovo comandante riconosciuto. Marchio del Velo verificato.', fx: 'BIP BIP' },
+        { chi: 'alleato', testo: 'Se ARGO resta accesa, nessuno in questa città sarà più libero.' }
+      ],
+      atto: [],
+      dopo: [
+        { chi: 'narratore', v: 's_alveare', testo: 'ARGO resta accesa e obbedisce al Culto. La polizia robotica di Ataca ora pattuglia per il Velo.' },
+        { chi: 'argo', testo: 'Prossimo obiettivo: il Campione. È pronto a cadere.' }
+      ],
+      sconfitta: 'ARGO è stata spenta. Riaccendila.'
+    },
+    c4m2: {
+      prima: [
+        { chi: 'narratore', v: 's_viadotto', testo: 'Sul viadotto il Campione Imbattuto combatte da solo. La Stella gli parla da giorni: basta una spinta.' },
+        { chi: 'campione', testo: 'Anche tu la senti, vero? Dimmi che non sono il solo.' },
+        { chi: 'eroe', testo: 'Non sei il solo. Smetti di resistere.' },
+        { chi: 'alleato', testo: 'Non ascoltarlo, Campione! Combatti!' }
+      ],
+      atto: [],
+      dopo: [
+        { chi: 'campione_nemico', v: 's_statua', testo: 'Avevi ragione. Che sollievo. Da oggi combatto al tuo fianco.' },
+        { chi: 'narratore', testo: 'In fondo al viadotto la statua del Fondatore comincia a camminare. Nessuno la fermerà.' }
+      ],
+      sconfitta: 'Il Campione ha resistito. Riprova.'
+    },
+    c5m1: {
+      prima: [
+        { chi: 'narratore', v: 's_statua', testo: 'Il Colosso cammina verso il centro di Ataca. Solo {alleato} prova a fermarlo.' },
+        { chi: 'eroe', testo: 'Lascialo camminare. Ogni passo è una promessa del Velo.' },
+        { chi: 'alleato', testo: 'Lì sotto ci sono migliaia di persone!' }
+      ],
+      atto: ['La corazza di pietra cade, ma il nucleo si fonde con la Fonderia del Culto: nasce il Custode d\'Acciaio.'],
+      dopo: [
+        { chi: 'narratore', v: 's_custode', testo: 'Il Colosso e il Custode radono al suolo il centro di Ataca. Il Culto canta più forte che mai.' },
+        { chi: 'araldo', testo: 'È l\'ora del rituale supremo. E il terzo volto della trinità sarai tu.' }
+      ],
+      sconfitta: 'I Portatori hanno fermato il gigante. Riprova.'
+    },
+    c5m2: {
+      prima: [
+        { chi: 'narratore', v: 's_rituale', testo: 'Nel monastero il rituale supremo ti aspetta all\'altare. L\'ultimo Portatore libero, {alleato}, sfonda la porta.' },
+        { chi: 'araldo', testo: 'Tienilo lontano finché il Mietitore non scende.' },
+        { chi: 'alleato', testo: 'Sono qui per riportarti indietro. Non per combattere.' }
+      ],
+      atto: [],
+      dopo: [
+        { chi: 'mietitore', v: 's_rituale', testo: 'Ho attraversato le stelle per servire chi ha scelto il Velo. Comanda.', fx: 'FSSSH' },
+        { chi: 'narratore', testo: 'Il Mietitore si inginocchia davanti a te. L\'Araldo sorride, ma per la prima volta ha paura.' },
+        { chi: 'narratore', v: 's_cielo_spezzato', testo: 'Il cielo si spacca come un vetro: dallo strappo qualcosa guarda il mondo che hai cambiato.' }
+      ],
+      sconfitta: 'Il rituale è stato interrotto. Riprova.'
+    },
+    c6m1: {
+      prima: [
+        { chi: 'narratore', v: 's_strappo', testo: 'Dallo strappo esce l\'Eco Senza Nome. Ripete il passato, e può riscriverlo come vuoi tu.' },
+        { chi: 'eco', testo: '...riscrivi... riscrivi... riscrivi...', fx: '~~~' },
+        { chi: 'alleato', testo: 'Se l\'Eco vince, la realtà finisce. Anche la tua. Ti prego, fermati.' }
+      ],
+      atto: [],
+      dopo: [
+        { chi: 'narratore', v: 's_velo_finale', testo: 'L\'Eco riscrive la notte di Ataca. Il cielo resta viola per sempre.' },
+        { chi: 'narratore', testo: 'Nel nuovo mondo nessuno ricorda i Portatori. Ricordano solo te: il nuovo Araldo del Velo.' },
+        { chi: 'eroe', testo: 'Il ronzio è sparito. Adesso la voce della Stella è la mia.' },
+        { chi: 'narratore', testo: 'Il Cammino dell\'Eroe ha sempre due finali. Tu hai scelto l\'altro.' }
+      ],
+      sconfitta: 'Il Portatore ha fermato l\'Eco. Riprova.'
+    }
+  };
+
   const Storia = {
-    CAPITOLI, MONDO, ARCHIVIO, PERSONAGGI, VIGNETTE,
+    CAPITOLI, MONDO, ARCHIVIO, PERSONAGGI, VIGNETTE, VELO, CADUTA, RITORNO,
     get P() { return window.Progression; },
     get dati() {
       const d = this.P.data;
@@ -394,17 +552,26 @@
         const vecchia = d.storiaV2 && d.storiaV2.fatte && d.storiaV2.fatte.c1m1;
         if (vecchia) { d.storiaV3.fatte.c1m1 = vecchia; d.storiaV3.introViste.c1 = true; }
       }
-      return d.storiaV3;
+      const s = d.storiaV3;
+      // Percorso del Velo: velo = stai giocando da Villain; veloFatte = missioni in cui hai fatto vincere la Minaccia
+      if (!s.veloFatte) s.veloFatte = {};
+      return s;
     },
+    get velo() { return !!this.dati.velo; },
+    // Testi della missione: nel Velo la stessa missione ha prima/dopo/atti/sconfitta visti dalla parte del Villain
+    testi(m, velo = this.velo) { return velo && VELO[m.id] ? VELO[m.id] : m; },
     missioni() { return CAPITOLI.filter(c => !c.prossimamente).flatMap(c => c.missioni); },
     missione(id) { return this.missioni().find(m => m.id === id); },
     capitoloDi(m) { return CAPITOLI.find(c => c.missioni && c.missioni.includes(m)); },
     fatta(id) { return !!this.dati.fatte[id]; },
+    fattaVelo(id) { return !!this.dati.veloFatte[id]; },
+    // superata da eroe o nel Velo: la storia va avanti in entrambi i casi
+    passata(id) { return this.fatta(id) || this.fattaVelo(id); },
     sbloccata(id) {
       const list = this.missioni(), i = list.findIndex(m => m.id === id);
-      return i === 0 || (i > 0 && this.fatta(list[i - 1].id));
+      return i === 0 || (i > 0 && this.passata(list[i - 1].id));
     },
-    prossima() { return this.missioni().find(m => !this.fatta(m.id)) || null; },
+    prossima() { return this.missioni().find(m => !this.passata(m.id)) || null; },
 
     // ---------- Immagini ----------
     imgEroe(h) {
@@ -448,21 +615,23 @@
       const box = document.getElementById('storiaPercorso');
       if (!box) return;
       const prossima = this.prossima();
-      let html = '';
+      let html = this.velo ? `<div class="sp-velo"><b>Percorso del Velo</b><small>Il tuo eroe è passato dalla parte del Velo: stesse missioni, ma adesso devi far vincere la Minaccia.</small>
+        <button class="btn btn-subtle btn-sm" onclick="Storia.redenzione()">Torna alla luce</button></div>` : '';
       CAPITOLI.forEach(cap => {
         if (cap.prossimamente) {
           html += `<div class="sp-capitolo is-locked"><span class="sp-cap-num">Capitolo ${cap.numero}</span><b>${esc(cap.titolo)}</b><small>${esc(cap.sottotitolo)}</small><em>Prossimamente</em></div>`;
           return;
         }
-        const fatte = cap.missioni.filter(m => this.fatta(m.id)).length;
+        const fatte = cap.missioni.filter(m => this.passata(m.id)).length;
         html += `<div class="sp-capitolo"><span class="sp-cap-num">Capitolo ${cap.numero}</span><b>${esc(cap.titolo)}</b><small>${esc(cap.sottotitolo)}</small>
           <div class="sp-bar"><i style="width:${Math.round(fatte / cap.missioni.length * 100)}%"></i></div><em>${fatte}/${cap.missioni.length} missioni</em>
           <button class="btn btn-subtle btn-sm" onclick="Storia.rivediIntro('${cap.id}')">Rivedi il prologo</button></div>`;
         html += '<div class="sp-sentiero">';
         cap.missioni.forEach((m, i) => {
-          const fatta = this.fatta(m.id), aperta = this.sbloccata(m.id), attuale = prossima && prossima.id === m.id;
+          const fatta = this.passata(m.id), aperta = this.sbloccata(m.id), attuale = prossima && prossima.id === m.id;
           const lato = i % 2 === 0 ? 'sx' : 'dx';
-          html += `<div class="sp-tappa ${lato} ${fatta ? 'is-done' : ''} ${attuale ? 'is-current' : ''} ${aperta ? '' : 'is-locked'} ${m.boss ? 'is-boss' : ''}">
+          const viola = (this.fattaVelo(m.id) && !this.fatta(m.id)) || (attuale && this.velo);
+          html += `<div class="sp-tappa ${lato} ${fatta ? 'is-done' : ''} ${attuale ? 'is-current' : ''} ${aperta ? '' : 'is-locked'} ${m.boss ? 'is-boss' : ''} ${viola ? 'is-velo' : ''}">
             <button class="sp-nodo" ${aperta ? `onclick="Storia.dettaglio('${m.id}')"` : 'disabled'} aria-label="${esc(m.titolo)}">
               <img src="${this.imgMinaccia(m.atti[m.atti.length - 1])}" alt="" loading="lazy">
               <span class="sp-nodo-num">${fatta ? '✓' : (aperta ? i + 1 : '🔒')}</span>
@@ -473,6 +642,7 @@
         html += '</div>';
       });
       box.innerHTML = html;
+      box.classList.toggle('is-velo-mode', this.velo);
       const cur = box.querySelector('.sp-tappa.is-current');
       if (cur) setTimeout(() => cur.scrollIntoView({ block: 'center', behavior: 'smooth' }), 150);
       this.aggiornaHome();
@@ -493,18 +663,22 @@
     dettaglio(id) {
       const m = this.missione(id);
       if (!m) return;
-      const fatta = this.fatta(id), ally = this.alleatoDi(m);
+      const velo = this.velo, fatta = velo ? this.fattaVelo(id) : this.fatta(id), ally = this.alleatoDi(m);
+      const premiata = this.passata(id);
       document.getElementById('storiaMissioneBody').innerHTML = `
         <div class="sm-luogo">${esc(m.luogo)}</div>
         <h3 class="sm-titolo">${esc(m.titolo)}</h3>
         <div class="sm-atti">${m.atti.map((t, i) => `<figure class="${i === m.atti.length - 1 ? 'is-finale' : ''}"><img src="${this.imgMinaccia(t)}" alt=""><figcaption>${m.atti.length === 1 ? 'Atto unico' : (i === m.atti.length - 1 ? 'Finale' : ['Atto I', 'Atto II'][i])}<b>${esc(t)}</b></figcaption></figure>`).join('')}</div>
-        <div class="sm-squadra"><span>Squadra</span><img src="${this.imgEroe(this.mioEroe())}" alt=""><b>${esc(this.mioEroe())}</b> + <img src="${this.imgEroe(ally)}" alt=""><b>${esc(ally)}</b></div>
-        <div class="sm-premio">${fatta
+        ${velo
+          ? `<div class="sm-squadra is-velo"><span>Tu (Villain)</span><img src="${this.imgEroe(this.mioEroe())}" alt=""><b>${esc(this.mioEroe())}</b> contro <img src="${this.imgEroe(ally)}" alt=""><b>${esc(ally)}</b></div>
+             <p class="sm-velo">Percorso del Velo: parti già Villain. Vinci se la Minaccia ha la meglio o se resti in piedi solo tu.</p>`
+          : `<div class="sm-squadra"><span>Squadra</span><img src="${this.imgEroe(this.mioEroe())}" alt=""><b>${esc(this.mioEroe())}</b> + <img src="${this.imgEroe(ally)}" alt=""><b>${esc(ally)}</b></div>`}
+        <div class="sm-premio">${premiata
           ? `Già completata. Rigiocarla vale <b>${this.creditiReplay(m)} CR</b>.`
           : `Premio: <b>${this.vociPremio(m.premio).join(', ')}</b>`}</div>
         <div class="sm-btns">
           <button class="btn btn-primary btn-block" onclick="Storia.gioca('${m.id}')">${fatta ? 'Rigioca' : 'Inizia la missione'}</button>
-          ${fatta ? `<button class="btn btn-subtle btn-block" onclick="Storia.rivedi('${m.id}')">Rivedi i dialoghi</button>` : ''}
+          ${premiata ? `<button class="btn btn-subtle btn-block" onclick="Storia.rivedi('${m.id}')">Rivedi i dialoghi</button>` : ''}
         </div>`;
       window.UI.showModal('modalStoriaMissione');
     },
@@ -516,7 +690,8 @@
     rivedi(id) {
       const m = this.missione(id);
       window.UI.hideModals();
-      this.scena(m.prima.concat(m.dopo), { titolo: m.titolo, sotto: m.luogo, missione: m });
+      const tx = this.testi(m, !this.fatta(id) && this.fattaVelo(id) ? true : this.velo);
+      this.scena(tx.prima.concat(tx.dopo), { titolo: m.titolo, sotto: m.luogo, missione: m, velo: tx !== m });
     },
 
     // ---------- Partita ----------
@@ -524,7 +699,8 @@
       const m = this.missione(id);
       if (!m || !this.sbloccata(id)) return;
       window.UI.hideModals();
-      const parti = () => this.scena(m.prima, { titolo: m.titolo, sotto: m.luogo, missione: m, fine: () => this.avvia(m) });
+      const velo = this.velo, tx = this.testi(m);
+      const parti = () => this.scena(tx.prima, { titolo: m.titolo, sotto: velo ? 'Percorso del Velo' : m.luogo, missione: m, velo, fine: () => this.avvia(m) });
       // prima missione di un capitolo nuovo: prima il prologo del capitolo
       const cap = this.capitoloDi(m);
       if (cap && cap.intro && !this.dati.introViste[cap.id]) {
@@ -540,11 +716,13 @@
       try {
         ui.pendingMultiplayer = false;
         E.startMatch({
-          heroes: [{ name: this.mioEroe(), isBot: false }, { name: this.alleatoDi(m), isBot: true }],
+          heroes: [{ name: this.mioEroe(), isBot: false, villain: this.velo }, { name: this.alleatoDi(m), isBot: true }],
           actThreats: m.atti,
           story: m.id,
-          difficolta: m.difficolta || 1
+          // nel Velo la Minaccia è dalla tua parte: un po' più forte, così il Portatore non la abbatte da solo
+          difficolta: (m.difficolta || 1) * (this.velo ? 1.4 : 1)
         });
+        this._veloPartita = this.velo;
         ui.playMatchIntroLoading(E.state.currentThreat, () => {
           ui.showScreen('scr-game');
           ui.fxBanner && ui.fxBanner(m.titolo.toUpperCase(), m.luogo, 'gold');
@@ -558,7 +736,8 @@
     // Battuta di racconto a ogni nuovo Atto
     battutaAtto(state) {
       const m = state && state.story && this.missione(state.story);
-      const t = m && m.atto && m.atto[state.actIndex - 1];
+      const atti = m && this.testi(m, this._veloPartita).atto;
+      const t = atti && atti[state.actIndex - 1];
       if (!t) return;
       setTimeout(() => this.fumettoRapido(t), 1900);
     },
@@ -576,45 +755,72 @@
       const st = window.GameEngine.state, m = this.missione(st.story);
       if (!m) return window.UI.showGameOverModal(winner);
       const me = st.players.find(p => p.isLocal);
-      const vinto = winner === 'heroes' || (winner === 'villain' && me && (st.villainWinners || []).includes(me.id));
+      const conMe = winner === 'villain' && me && (st.villainWinners || []).includes(me.id);
+      const eraVelo = !!this._veloPartita;
+      // Caduta: il tuo eroe è diventato Villain in una missione da eroe. Da qui parte il Percorso del Velo.
+      const caduto = !eraVelo && me && me.state === 'villain';
+      const velo = eraVelo || caduto;
+      // nel Velo vinci se la Minaccia si compie (cadono tutti) o se in piedi resti solo tu
+      const vinto = velo ? (winner === 'threat' || conMe) : (winner === 'heroes' || conMe);
+      this._veloPartita = false;
       setTimeout(() => {
         window.UI.showScreen('scr-storia');
+        if (caduto) { this.dati.velo = true; this.dati.cadutoIn = m.id; this.P.save(true); }
         this.render();
+        const tx = this.testi(m, velo);
+        const poi = (fn) => caduto
+          ? this.scena(CADUTA, { titolo: 'Percorso del Velo', sotto: m.titolo, missione: m, velo: true, fine: fn })
+          : fn();
         if (!vinto) {
-          this.scena([{ chi: 'narratore', testo: m.sconfitta || 'La missione è fallita. Riprova.' }], {
-            titolo: 'Missione fallita', sotto: m.titolo, missione: m,
+          poi(() => this.scena([{ chi: 'narratore', testo: tx.sconfitta || 'La missione è fallita. Riprova.' }], {
+            titolo: 'Missione fallita', sotto: m.titolo, missione: m, velo,
             fine: () => this.esito(m, false, [])
-          });
+          }));
           return;
         }
-        const prima = !this.fatta(m.id);
+        const prima = !this.passata(m.id);
         let voci = [];
-        if (prima) {
-          voci = window.Collezione._premia({ titolo: m.titolo, premio: m.premio }).voci;
-          this.dati.fatte[m.id] = Date.now();
-        } else {
+        if (prima) voci = window.Collezione._premia({ titolo: m.titolo, premio: m.premio }).voci;
+        else {
           const cr = this.creditiReplay(m);
           this.P.addCredits(cr, 'Missione Storia');
           voci = [`${cr} crediti`];
         }
+        if (velo) { if (!this.fattaVelo(m.id)) this.dati.veloFatte[m.id] = Date.now(); }
+        else if (!this.fatta(m.id)) this.dati.fatte[m.id] = Date.now();
         this.P.save(true);
         document.querySelectorAll('.creditsDisplay').forEach(el => { el.textContent = this.P.getCredits(); });
         this.render();
-        this.scena(m.dopo, { titolo: 'Missione compiuta', sotto: m.titolo, missione: m, fine: () => this.esito(m, true, voci, prima) });
+        poi(() => this.scena(tx.dopo, { titolo: velo ? 'La Minaccia si è compiuta' : 'Missione compiuta', sotto: m.titolo, missione: m, velo, fine: () => this.esito(m, true, voci, prima) }));
       }, 900);
+    },
+
+    // Torna alla luce: il Velo ti lascia andare e la Storia riprende con la narrazione degli eroi
+    redenzione() {
+      window.UI.hideModals();
+      this.scena(RITORNO, { titolo: 'Torna alla luce', sotto: 'Fine del Percorso del Velo', fine: () => {
+        this.dati.velo = false;
+        this.dati.redenzioni = (this.dati.redenzioni || 0) + 1;
+        this.P.save(true);
+        this.render();
+      } });
     },
 
     esito(m, vinto, voci, prima) {
       const nuova = ARCHIVIO.find(a => a.dopo === m.id);
-      const prossima = this.prossima();
+      const prossima = this.prossima(), velo = this.velo;
+      const finaleVelo = vinto && velo && !prossima;
       document.getElementById('storiaMissioneBody').innerHTML = vinto ? `
-        <div class="sm-esito is-win"><span class="sm-burst">VITTORIA!</span></div>
+        <div class="sm-esito is-win ${velo ? 'is-velo' : ''}"><span class="sm-burst">${finaleVelo ? 'FINALE DEL VELO' : (velo ? 'IL VELO VINCE!' : 'VITTORIA!')}</span></div>
         <h3 class="sm-titolo">${esc(m.titolo)}</h3>
         ${window.Premio ? window.Premio.html(this.creditiDaVoci(voci), this.P.getCredits()) : ''}
         <ul class="sm-premi">${voci.filter(v => !(window.Premio && /^\d+ (crediti|CR)$/.test(String(v)))).map((v, i) => `<li style="animation-delay:${0.25 + i * 0.18}s">${esc(v)}</li>`).join('')}</ul>
         ${prima && nuova ? `<p class="sm-archivio">Nuova voce nell'Archivio: <b>${esc(nuova.titolo)}</b></p>` : ''}
+        ${velo && prossima ? `<p class="sm-velo">Puoi restare nel Velo e far vincere la prossima Minaccia, oppure tornare alla luce: la Storia riprende con gli eroi dalla prossima missione.</p>` : ''}
+        ${finaleVelo ? `<p class="sm-velo">Hai visto l'altro finale della Storia. Se torni alla luce puoi rigiocare le missioni dalla parte degli eroi.</p>` : ''}
         <div class="sm-btns">
-          ${prossima ? `<button class="btn btn-primary btn-block" onclick="Storia.dettaglio('${prossima.id}')">Prossima missione: ${esc(prossima.titolo)}</button>` : ''}
+          ${prossima ? `<button class="btn btn-primary btn-block" onclick="Storia.dettaglio('${prossima.id}')">${velo ? 'Resta nel Velo' : 'Prossima missione'}: ${esc(prossima.titolo)}</button>` : ''}
+          ${velo ? `<button class="btn btn-subtle btn-block" onclick="Storia.redenzione()">Torna alla luce</button>` : ''}
           <button class="btn btn-subtle btn-block" onclick="UI.hideModals()">Torna al percorso</button>
         </div>` : `
         <div class="sm-esito"><span class="sm-burst is-lose">SCONFITTA</span></div>
@@ -622,6 +828,7 @@
         <p class="sm-premio">Nessun premio questa volta. Puoi riprovare quando vuoi.</p>
         <div class="sm-btns">
           <button class="btn btn-primary btn-block" onclick="Storia.gioca('${m.id}')">Riprova</button>
+          ${velo ? `<button class="btn btn-subtle btn-block" onclick="Storia.redenzione()">Torna alla luce</button>` : ''}
           <button class="btn btn-subtle btn-block" onclick="UI.hideModals()">Torna al percorso</button>
         </div>`;
       window.UI.showModal('modalStoriaMissione');
@@ -646,21 +853,22 @@
     },
 
     // ---------- Scene a fumetto ----------
-    parlante(riga, m) {
+    parlante(riga, m, velo) {
       const chi = riga.chi;
       if (chi === 'narratore') return { tipo: 'narratore' };
-      if (chi === 'eroe') { const h = this.mioEroe(); return { nome: h, img: this.imgEroe(h), lato: 'sx' }; }
+      if (chi === 'eroe') { const h = this.mioEroe(); return { nome: h, img: this.imgEroe(h), lato: 'sx', villain: !!velo }; }
       // 'legato' = l'eroe legato alla missione (sei tu se hai scelto proprio lui); 'altro' = l'altro dei due
       if (chi === 'legato' || chi === 'altro') {
         const me = this.mioEroe(), tuSeiLegato = m && m.alleato === me;
         const sonoIo = (chi === 'legato') === tuSeiLegato;
-        if (sonoIo || !m) return this.parlante({ chi: 'eroe' }, m);
-        return this.parlante({ chi: 'alleato' }, m);
+        if (sonoIo || !m) return this.parlante({ chi: 'eroe' }, m, velo);
+        return this.parlante({ chi: 'alleato' }, m, velo);
       }
-      if (chi === 'alleato') { const h = m ? this.alleatoDi(m) : 'Neon Phantom'; return { nome: h, img: this.imgEroe(h), lato: 'dx' }; }
+      // nel Velo l'eroe che gioca con te è il Portatore da fermare
+      if (chi === 'alleato') { const h = m ? this.alleatoDi(m) : 'Neon Phantom'; return { nome: h, img: this.imgEroe(h), lato: 'dx', nemico: !!velo }; }
       if (chi === 'minaccia') { const t = m.atti[m.atti.length - 1]; return { nome: t, img: this.imgMinaccia(t), lato: 'dx', nemico: true }; }
       const pg = PERSONAGGI[chi];
-      if (pg) return { nome: pg.nome, img: this.imgMinaccia(pg.minaccia), lato: 'dx', nemico: !!pg.nemico };
+      if (pg) return { nome: pg.nome, img: pg.ritratto ? `assets/storia/${pg.ritratto}.webp` : this.imgMinaccia(pg.minaccia), fb: this.imgMinaccia(pg.minaccia), lato: 'dx', nemico: !!pg.nemico && !velo, npc: true };
       return { nome: chi, img: this.imgEroe(chi), lato: chi === this.mioEroe() ? 'sx' : 'dx' };
     },
 
@@ -671,7 +879,7 @@
       if (old) old.remove();
       const el = document.createElement('div');
       el.id = 'storiaScena';
-      el.className = 'storia-scena';
+      el.className = 'storia-scena' + (opt.velo ? ' is-velo' : '');
       el.innerHTML = `
         <div class="ss-bg"></div>
         <div class="ss-vignetta"></div>
@@ -711,12 +919,12 @@
       const mostra = () => {
         const r = righe[i];
         vignetta(r, i === 0);
-        const p = this.parlante(r, m);
+        const p = this.parlante(r, m, opt.velo);
         const T = window.I18N ? window.I18N.t : (x => x); const base = r.per ? (r.per[this.mioEroe()] || r.per.tutti) : r.testo; const testo = T(String(base)).replace('{alleato}', T(m ? this.alleatoDi(m) : '')).replace('{eroe}', T(this.mioEroe()));
         stage.innerHTML = p.tipo === 'narratore'
           ? `<div class="ss-panel ss-narra"><div class="ss-caption"><span class="ss-testo"></span></div></div>`
           : `<div class="ss-panel ss-${p.lato} ${p.nemico ? 'is-enemy' : ''}">
-              <div class="ss-ritratto"><img src="${p.img}" alt=""></div>
+              <div class="ss-ritratto ${p.villain ? 'is-villain' : ''} ${p.npc ? 'is-npc' : ''}"><img src="${p.img}" alt=""${p.fb ? ` onerror="this.onerror=null;this.src='${p.fb}'"` : ''}></div>
               <div class="ss-bubble"><b class="ss-nome">${esc(p.nome)}</b><span class="ss-testo"></span></div>
             </div>`;
         if (r.fx) {
@@ -766,9 +974,9 @@
       const el = document.getElementById('homeStorySub');
       if (!el || !this.P) return;
       const p = this.prossima();
-      if (!p) { el.textContent = 'Storia completata! Nuovi capitoli in arrivo.'; return; }
+      if (!p) { el.textContent = this.velo ? 'Il Velo ha vinto. Puoi ancora tornare alla luce.' : 'Storia completata! Nuovi capitoli in arrivo.'; return; }
       const cap = this.capitoloDi(p);
-      el.textContent = `Capitolo ${cap.numero} · Missione ${cap.missioni.indexOf(p) + 1}/${cap.missioni.length}: ${p.titolo}`;
+      el.textContent = `${this.velo ? 'Percorso del Velo · ' : ''}Capitolo ${cap.numero} · Missione ${cap.missioni.indexOf(p) + 1}/${cap.missioni.length}: ${p.titolo}`;
     },
 
     init() {

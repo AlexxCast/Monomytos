@@ -141,10 +141,11 @@ class MonomythosEngine {
         vitaMax: meta.vita,
         vita: meta.vita,
         shield: 0,
-        trm: 0,
+        // Percorso del Velo (Storia): l'eroe parte già Villain
+        trm: cfg.villain ? ((window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5) : 0,
         pe: 0,
         vp: 0,
-        state: 'hero', // 'hero' or 'villain'
+        state: cfg.villain ? 'villain' : 'hero', // 'hero' or 'villain'
         isDead: false,
         pbName: meta.pb_name,
         pbDesc: meta.pb_desc,
