@@ -1,9 +1,22 @@
 {
- "aggiornato": "2026-11-05T18:01:57.076Z",
+ "aggiornato": "2026-11-05T18:05:39.206Z",
  "piattaforme": {
   "youtube": {
-   "stato": "non collegata",
-   "nota": "mancano i Secrets: YT_CLIENT_ID, YT_CLIENT_SECRET"
+   "stato": "ok",
+   "account": {
+    "nome": "Monomythos Card Game",
+    "follower": 0,
+    "views": 0,
+    "video": 0,
+    "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
+   },
+   "video": [],
+   "totali": {
+    "views": 0,
+    "likes": 0,
+    "commenti": 0,
+    "condivisioni": 0
+   }
   },
   "tiktok": {
    "stato": "non collegata",
