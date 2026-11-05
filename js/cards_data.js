@@ -2165,7 +2165,7 @@ window.MONOMYTHOS_DATA = {
         "copie": "x2",
         "tag": "Burst",
         "cat": "Agilità",
-        "valore": 1,
+        "valore": 2,
         "effetto": "Paga 1 punto Vita Base. Pesca immediatamente 2 carte dal tuo mazzo.",
         "hero_txt": "",
         "villain_txt": "",
