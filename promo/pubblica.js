@@ -12,7 +12,10 @@ const [id, listaPiattaforme = '', outRootArg] = process.argv.slice(2);
 const outRoot = outRootArg || path.join(__dirname, 'uscita');
 const dir = path.join(outRoot, id);
 const dati = JSON.parse(fs.readFileSync(path.join(__dirname, 'copioni.json'), 'utf8'));
-const copione = dati.copioni.find(c => c.id === id);
+// "caricato": video caricato a mano dal Centro social, titolo e didascalia arrivano da TITOLO e DIDASCALIA
+const copione = id === 'caricato'
+  ? { id, titolo: process.env.TITOLO || 'Monomythos', didascalia: process.env.DIDASCALIA || process.env.TITOLO || '', hashtag: [] }
+  : dati.copioni.find(c => c.id === id);
 if (!copione) { console.error('Copione non trovato: ' + id); process.exit(1); }
 const E = process.env;
 const lingua = E.LINGUA_TESTI || copione.lingua_testi || 'it';

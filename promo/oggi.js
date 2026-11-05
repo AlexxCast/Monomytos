@@ -7,6 +7,8 @@ const fs = require('fs');
 const path = require('path');
 const s = JSON.parse(fs.readFileSync(path.join(__dirname, 'scaletta.json'), 'utf8'));
 const copioni = JSON.parse(fs.readFileSync(path.join(__dirname, 'copioni.json'), 'utf8')).copioni.map(c => c.id);
+// "caricato" = video caricato a mano dal Centro social (hub/), non va registrato
+copioni.push('caricato');
 const oggi = process.env.DATA || new Intl.DateTimeFormat('sv-SE', { timeZone: s.fuso_orario || 'Europe/Rome' }).format(new Date());
 let riga = s.giorni.find(g => g.data === oggi);
 if (process.env.COPIONE) riga = { ...(riga || {}), data: oggi, copione: process.env.COPIONE };

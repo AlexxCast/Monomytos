@@ -1,0 +1,10 @@
+{
+ "name": "Monomythos · Centro social",
+ "short_name": "Centro social",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#0b0f24",
+ "theme_color": "#0b0f24",
+ "icons": [{ "src": "../assets/icons/app_icon_512.png", "sizes": "512x512", "type": "image/png" }]
+}

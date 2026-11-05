@@ -136,6 +136,23 @@ repository Monomytos → permesso **Secrets: Read and write**. Mettilo nel Secre
 - **X, Threads, Facebook**: le didascalie della issue vanno bene anche lì; si possono
   automatizzare più avanti se servono.
 
+## Centro social (hub/)
+
+Una pagina sola con tutti i social insieme: https://alexxcast.github.io/Monomytos/hub/ (non indicizzata).
+Puoi aggiungerla alla schermata Home del telefono: si apre come un'app.
+
+- **Statistiche**: il workflow `social-statistiche.yml` ogni 6 ore legge follower, visualizzazioni, like e commenti
+  (script `statistiche.js`) e li salva nel ramo `hub-dati` (`statistiche.json`, `storico.json`). Usa gli stessi Secrets dei video.
+  Servono permessi in più: YouTube `youtube.readonly` (rifai `token_youtube.js`), TikTok `user.info.stats` e `video.list`
+  (rifai `token_tiktok.js`), Instagram `instagram_business_manage_insights`. Bluesky non dà le visualizzazioni, Telegram solo gli iscritti.
+- **Invia**: dalla pagina fai partire il workflow dei video, con un copione oppure con un **video tuo** già pronto
+  (va nella release `promo-caricati`, o nel ramo `hub-dati` se il browser non riesce) con titolo e didascalia scelti da te.
+  Ogni pubblicazione viene registrata in `hub-dati/pubblicazioni.json`.
+- **Analisi AI**: un'attività programmata di Claude ogni sera legge i dati e riscrive la issue con etichetta `analisi-ai`,
+  che la pagina mostra. Dalla pagina puoi scrivere all'AI: il messaggio diventa un commento della issue e riceve risposta al giro dopo.
+- **Chiave**: per inviare serve un token GitHub fine-grained (solo Monomytos; Actions, Contents e Issues in lettura e scrittura),
+  incollato nelle Impostazioni della pagina. Resta solo nel browser.
+
 ## Cose da sapere
 
 - GitHub sospende i workflow programmati dopo 60 giorni senza commit nel repository: basta

@@ -22,6 +22,18 @@ on:
         description: 'Prova: crea il video ma non pubblica sui social'
         type: boolean
         default: true
+      video_caricato:
+        description: 'Video tuo già pronto: nome del file nella release promo-caricati (lo carica il Centro social)'
+        required: false
+        default: ''
+      titolo:
+        description: 'Titolo del video caricato'
+        required: false
+        default: ''
+      didascalia:
+        description: 'Didascalia del video caricato'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -45,19 +57,35 @@ jobs:
       - name: Video di oggi
         id: oggi
         env:
-          COPIONE: ${{ inputs.copione }}
+          COPIONE: ${{ inputs.video_caricato != '' && 'caricato' || inputs.copione }}
           PIATTAFORME: ${{ inputs.piattaforme }}
         run: node promo/oggi.js
 
+      # Video caricato dal Centro social: niente registrazione, si scarica il file e si fa la copertina
+      - name: Prendi il video caricato
+        if: inputs.video_caricato != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FILE: ${{ inputs.video_caricato }}
+        run: |
+          mkdir -p promo/uscita/caricato
+          # Il Centro social lo mette nella release promo-caricati, oppure (se il browser non può) nel ramo hub-dati
+          case "$FILE" in
+            caricati/*) curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/hub-dati/$FILE" -o promo/uscita/caricato/caricato.mp4 ;;
+            *) gh release download promo-caricati --pattern "$FILE" --output promo/uscita/caricato/caricato.mp4 --clobber ;;
+          esac
+          which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+          ffmpeg -y -loglevel error -ss 1 -i promo/uscita/caricato/caricato.mp4 -frames:v 1 -q:v 3 promo/uscita/caricato/copertina.jpg
+
       - name: Strumenti (browser e ffmpeg)
-        if: steps.oggi.outputs.copione != ''
+        if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
         run: |
           npm install --no-save --no-audit --no-fund playwright@1.48.2
           npx playwright install --with-deps chromium
           which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
 
       - name: Registra il gameplay
-        if: steps.oggi.outputs.copione != ''
+        if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
         env:
           LINGUA: ${{ steps.oggi.outputs.lingua }}
         run: |
@@ -66,7 +94,7 @@ jobs:
           node promo/registra.js "${{ steps.oggi.outputs.copione }}" http://localhost:8799 promo/uscita
 
       - name: Monta il video
-        if: steps.oggi.outputs.copione != ''
+        if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
         env:
           LINGUA_TESTI: ${{ steps.oggi.outputs.lingua }}
         run: node promo/monta.js "${{ steps.oggi.outputs.copione }}" promo/uscita
@@ -92,6 +120,8 @@ jobs:
           PROVA: ${{ github.event_name == 'workflow_dispatch' && inputs.prova && '1' || '0' }}
           VIDEO_URL: ${{ steps.file.outputs.url }}
           LINGUA_TESTI: ${{ steps.oggi.outputs.lingua }}
+          TITOLO: ${{ inputs.titolo }}
+          DIDASCALIA: ${{ inputs.didascalia }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
@@ -121,6 +151,21 @@ jobs:
           D="promo/uscita/${{ steps.oggi.outputs.copione }}/nuovi_segreti"
           [ -d "$D" ] || exit 0
           for f in "$D"/*.txt; do gh secret set "$(basename "$f" .txt)" < "$f"; echo "rinnovato $(basename "$f" .txt)"; done
+
+      # Il Centro social (hub/) legge da qui lo storico delle pubblicazioni
+      - name: Registra la pubblicazione nel Centro social
+        if: steps.oggi.outputs.copione != ''
+        run: |
+          bash promo/hub_dati.sh prepara
+          node -e "
+            const fs=require('fs'),f='../hub-dati/pubblicazioni.json';
+            let l=[];try{l=JSON.parse(fs.readFileSync(f,'utf8'))}catch(e){}
+            const e=require('./promo/uscita/${{ steps.oggi.outputs.copione }}/esito.json');
+            e.video='${{ steps.file.outputs.url }}';e.titolo=process.env.TITOLO||'';e.run='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
+            l.unshift(e);fs.writeFileSync(f,JSON.stringify(l.slice(0,300),null,1));"
+          bash promo/hub_dati.sh salva "Pubblicazione ${{ steps.oggi.outputs.data }}" || true
+        env:
+          TITOLO: ${{ inputs.titolo }}
 
       - name: Avviso con video e didascalie
         if: steps.oggi.outputs.copione != ''

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b0f24">
+<title>Centro social</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="../assets/icons/app_icon_512.png">
+<link rel="apple-touch-icon" href="../assets/icons/app_icon_512.png">
+<style>
+@font-face { font-family: 'Bangers'; src: url('../promo/font/Bangers-Regular.ttf'); font-display: swap; }
+@font-face { font-family: 'Luckiest'; src: url('../promo/font/LuckiestGuy-Regular.ttf'); font-display: swap; }
+:root {
+  --sfondo: #0b0f24; --carta: #141a3a; --carta2: #1b2250; --bordo: #2c3570;
+  --testo: #f3f1ea; --testo2: #b9bfdc; --tenue: #7f87b3;
+  --giallo: #ffd23f; --rosso: #ff5d5d; --verde: #4fd18b; --viola: #a78bfa;
+  /* colori delle piattaforme: identità, ordine fisso (validati per daltonismo) */
+  --youtube: #f05656; --tiktok: #18a89c; --instagram: #d65bcf; --bluesky: #4a8ff0; --telegram: #b8820c; --discord: #7c83f2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--sfondo); color: var(--testo); font: 15px/1.45 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+body { background: linear-gradient(180deg, rgba(11,15,36,.84), rgba(11,15,36,.97) 520px), url('../assets/bg/cosmo_eroe.webp') center top / 100% auto no-repeat, var(--sfondo); }
+a { color: #8fc2ff; }
+h1, h2, h3 { font-family: 'Bangers', Impact, sans-serif; letter-spacing: .04em; font-weight: 400; margin: 0; }
+h2 { font-size: 26px; color: var(--giallo); text-shadow: 2px 2px 0 #000; }
+h3 { font-size: 19px; }
+.pagina { max-width: 1180px; margin: 0 auto; padding: 0 16px 80px; }
+header.testa { display: flex; align-items: center; gap: 14px; padding: 18px 0 10px; flex-wrap: wrap; }
+header.testa img { height: 54px; filter: drop-shadow(2px 3px 0 #000); }
+header.testa .titolo { font-family: 'Luckiest', 'Bangers', sans-serif; font-size: 24px; letter-spacing: .03em; text-shadow: 2px 2px 0 #000; }
+header.testa .agg { color: var(--testo2); font-size: 13px; }
+header.testa .spazio { flex: 1; }
+nav.menu { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; overflow-x: auto; padding: 8px 0; background: rgba(11,15,36,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--bordo); scrollbar-width: none; }
+nav.menu a { flex: none; text-decoration: none; color: var(--testo); font-family: 'Bangers', sans-serif; letter-spacing: .05em; font-size: 16px; padding: 6px 12px; border-radius: 999px; background: var(--carta); border: 1px solid var(--bordo); }
+nav.menu a:hover { background: var(--carta2); }
+section { margin-top: 26px; scroll-margin-top: 60px; }
+.riga-titolo { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.riga-titolo .nota { color: var(--tenue); font-size: 13px; }
+.carta { background: rgba(20,26,58,.92); border: 2px solid #000; box-shadow: 4px 4px 0 #000; border-radius: 14px; padding: 16px; }
+.griglia { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+#tiles { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+@media (max-width: 500px) { .tile .num { font-size: 28px; } .tile { padding: 12px; } }
+.due { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .due { grid-template-columns: 1.15fr 1fr; } }
+.tile .etich { color: var(--testo2); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+.tile .num { font-family: 'Luckiest', sans-serif; font-size: 34px; line-height: 1.1; margin-top: 4px; }
+.tile .delta { font-size: 13px; color: var(--testo2); margin-top: 2px; }
+.su { color: var(--verde); } .giu { color: var(--rosso); }
+.pf { position: relative; padding-top: 18px; }
+.pf::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 6px; border-radius: 12px 12px 0 0; background: var(--c); }
+.pf .nome { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.pf .pallino { width: 12px; height: 12px; border-radius: 50%; background: var(--c); flex: none; }
+.pf .stato { margin-left: auto; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: #0008; color: var(--testo2); }
+.pf .stato.ok { color: var(--verde); } .pf .stato.errore { color: var(--rosso); }
+.pf dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 10px 0 0; font-size: 14px; }
+.pf dt { color: var(--testo2); } .pf dd { white-space: nowrap; margin: 0; text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.pf .avviso { font-size: 12.5px; color: var(--testo2); margin-top: 8px; }
+button, .bottone { font: inherit; font-family: 'Bangers', sans-serif; letter-spacing: .06em; font-size: 17px; cursor: pointer; border: 2px solid #000; border-radius: 10px; padding: 8px 16px; background: var(--giallo); color: #111; box-shadow: 3px 3px 0 #000; text-decoration: none; display: inline-block; }
+button.secondario { background: var(--carta2); color: var(--testo); }
+button:disabled { opacity: .55; cursor: wait; }
+button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
+input, select, textarea { font: inherit; width: 100%; background: #0b0f24; color: var(--testo); border: 1px solid var(--bordo); border-radius: 8px; padding: 9px 10px; }
+textarea { min-height: 84px; resize: vertical; }
+label.campo { display: block; margin: 10px 0 4px; color: var(--testo2); font-size: 13px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.chips label { display: inline-flex; align-items: center; gap: 6px; background: #0b0f24; border: 1px solid var(--bordo); border-radius: 999px; padding: 5px 11px; cursor: pointer; font-size: 14px; }
+.chips input { width: auto; accent-color: var(--giallo); }
+.schede { display: flex; gap: 6px; margin-bottom: 12px; }
+.schede button { flex: 1; font-size: 15px; padding: 7px 8px; background: #0b0f24; color: var(--testo2); box-shadow: none; border-color: var(--bordo); }
+.schede button.attiva { background: var(--giallo); color: #111; border-color: #000; }
+.msg { margin-top: 10px; font-size: 14px; min-height: 1em; }
+.msg.err { color: var(--rosso); } .msg.ok { color: var(--verde); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; color: var(--testo2); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; padding: 6px 8px; border-bottom: 1px solid var(--bordo); }
+td { padding: 7px 8px; border-bottom: 1px solid #ffffff12; vertical-align: top; }
+@media (max-width: 600px) { table .solo-largo { display: none; } }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scorri { overflow-x: auto; }
+.badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; white-space: nowrap; color: var(--testo2); }
+.badge i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); display: inline-block; }
+.ai { border-color: #000; background: linear-gradient(160deg, rgba(60,40,120,.92), rgba(20,26,58,.95)); }
+.ai .corpo h1, .ai .corpo h2, .ai .corpo h3 { font-size: 20px; color: var(--giallo); margin: 14px 0 4px; text-shadow: none; }
+.ai .corpo p { margin: 6px 0; } .ai .corpo ul { margin: 6px 0; padding-left: 20px; } .ai .corpo li { margin: 3px 0; }
+.ai .commento { border-left: 3px solid var(--viola); padding: 4px 10px; margin: 8px 0; font-size: 14px; }
+.ai .commento .chi { color: var(--testo2); font-size: 12px; }
+.vuoto { color: var(--tenue); font-size: 14px; }
+.grafico-box { position: relative; }
+.grafico-box svg { width: 100%; height: 260px; display: block; overflow: visible; }
+.legenda { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 0; font-size: 13px; color: var(--testo2); }
+.tooltip { position: absolute; pointer-events: none; background: #05071a; border: 1px solid var(--bordo); border-radius: 8px; padding: 8px 10px; font-size: 13px; display: none; z-index: 3; min-width: 150px; box-shadow: 3px 3px 0 #000; }
+.tooltip .r { display: flex; gap: 8px; align-items: center; } .tooltip .r b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.attivita li { list-style: none; display: flex; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid #ffffff12; font-size: 14px; flex-wrap: wrap; }
+.attivita ul { margin: 0; padding: 0; }
+.esito { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: #0008; white-space: nowrap; }
+.esito.ok, .esito.success { color: var(--verde); } .esito.errore, .esito.failure { color: var(--rosso); } .esito.in_progress, .esito.queued { color: var(--giallo); }
+.cal { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.cal .g { background: #0b0f24; border: 1px solid var(--bordo); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
+.cal .g.oggi { border-color: var(--giallo); box-shadow: 0 0 0 1px var(--giallo); }
+.cal .g b { display: block; font-size: 12px; color: var(--testo2); font-weight: 600; }
+.cal .g .man { color: var(--viola); font-size: 12px; margin-top: 4px; }
+.piccolo { font-size: 13px; color: var(--testo2); }
+details summary { cursor: pointer; color: var(--testo2); }
+ol.passi li { margin: 4px 0; }
+.chiave-ok { color: var(--verde); }
+footer { margin-top: 40px; color: var(--tenue); font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="pagina">
+  <header class="testa">
+    <img src="../assets/icons/logo_titolo.webp" alt="Monomythos">
+    <div>
+      <div class="titolo">Centro social</div>
+      <div class="agg" id="aggiornato">Carico i dati…</div>
+    </div>
+    <div class="spazio"></div>
+    <button class="secondario" id="btnAggiorna" title="Fa partire subito la lettura delle statistiche">Aggiorna statistiche</button>
+  </header>
+
+  <nav class="menu">
+    <a href="#riepilogo">Riepilogo</a><a href="#analisi">Analisi AI</a><a href="#social">Social</a>
+    <a href="#andamento">Andamento</a><a href="#video">Video migliori</a><a href="#invia">Invia</a>
+    <a href="#attivita">Attività</a><a href="#calendario">Calendario</a><a href="#impostazioni">Impostazioni</a>
+  </nav>
+
+  <section id="riepilogo">
+    <div class="riga-titolo"><h2>Riepilogo</h2><span class="nota">tutti i social insieme · confronto con 24 ore e 7 giorni fa</span></div>
+    <div class="griglia" id="tiles"></div>
+  </section>
+
+  <section id="analisi">
+    <div class="riga-titolo"><h2>Analisi AI</h2><span class="nota" id="aiData"></span></div>
+    <div class="carta ai">
+      <div class="corpo" id="aiCorpo"><p class="vuoto">Ancora nessuna analisi.</p></div>
+      <div id="aiCommenti"></div>
+      <label class="campo" for="aiDomanda">Scrivi all'AI (una domanda o un'istruzione: la legge al prossimo giro)</label>
+      <textarea id="aiDomanda" placeholder="Es.: domani pubblica il video del Villain solo su TikTok e YouTube"></textarea>
+      <div style="margin-top:8px"><button id="btnAi">Invia all'AI</button></div>
+      <div class="msg" id="aiMsg"></div>
+    </div>
+  </section>
+
+  <section id="social">
+    <div class="riga-titolo"><h2>Social</h2><span class="nota">numeri degli ultimi post letti dalle API ufficiali</span></div>
+    <div class="griglia" id="piattaforme"></div>
+  </section>
+
+  <section id="andamento">
+    <div class="riga-titolo"><h2>Andamento</h2>
+      <div class="schede" id="metriche" style="margin:0;min-width:260px">
+        <button data-m="follower" class="attiva">Follower</button><button data-m="views">Visualizzazioni</button><button data-m="likes">Like</button>
+      </div>
+    </div>
+    <div class="carta grafico-box">
+      <svg id="grafico" role="img" aria-label="Andamento nel tempo per piattaforma"></svg>
+      <div class="tooltip" id="tip"></div>
+      <div class="legenda" id="legenda"></div>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="riga-titolo"><h2>Video migliori</h2><span class="nota">ordinati per visualizzazioni · coinvolgimento = (like + commenti + condivisioni) / visualizzazioni</span></div>
+    <div class="carta scorri"><table><thead><tr><th>Post</th><th>Social</th><th class="solo-largo">Data</th><th class="n">Visual.</th><th class="n">Like</th><th class="n solo-largo">Comm.</th><th class="n">Coinv.</th></tr></thead><tbody id="tabVideo"></tbody></table></div>
+  </section>
+
+  <section id="invia">
+    <div class="riga-titolo"><h2>Invia</h2><span class="nota">parte il workflow che pubblica su tutti i social scelti</span></div>
+    <div class="due">
+      <div class="carta">
+        <div class="schede" id="schedeInvio"><button data-s="scaletta" class="attiva">Video del gioco</button><button data-s="mio">Video tuo</button></div>
+        <div id="invioScaletta">
+          <label class="campo" for="selCopione">Quale video registro e monto</label>
+          <select id="selCopione"><option value="">Quello della scaletta di oggi</option></select>
+        </div>
+        <div id="invioMio" hidden>
+          <label class="campo" for="fileVideo">File video verticale (mp4, meglio sotto i 100 MB)</label>
+          <input type="file" id="fileVideo" accept="video/mp4,video/quicktime,video/*">
+          <label class="campo" for="titoloMio">Titolo</label>
+          <input id="titoloMio" maxlength="95" placeholder="Es.: Ho perso all'ultimo turno">
+          <label class="campo" for="didMio">Didascalia</label>
+          <textarea id="didMio" placeholder="Testo del post. La dicitura sulle immagini AI viene aggiunta da sola."></textarea>
+        </div>
+        <label class="campo">Dove pubblicare</label>
+        <div class="chips" id="chipsPf"></div>
+        <div class="chips" style="margin-top:12px"><label><input type="checkbox" id="prova" checked> Prova (crea il video ma non pubblica)</label></div>
+        <div style="margin-top:14px"><button id="btnInvia">Fai partire</button></div>
+        <div class="msg" id="invioMsg"></div>
+      </div>
+      <div class="carta">
+        <h3>Come funziona</h3>
+        <ul class="piccolo">
+          <li><b>Video del gioco</b>: GitHub registra una partita, monta il video con testi e musica e lo pubblica. Ci mette 5-10 minuti.</li>
+          <li><b>Video tuo</b>: carichi un file pronto e viene pubblicato così com'è, con il titolo e la didascalia che scrivi.</li>
+          <li><b>TikTok</b>: finché l'app TikTok non passa la verifica gratuita, il video arriva nelle bozze (o privato). Lo apri da TikTok e premi Pubblica.</li>
+          <li>Con <b>Prova</b> acceso non esce niente sui social: controlli il video nella sezione Attività.</li>
+          <li>Ogni giorno alle 17:00 parte comunque il video della scaletta, senza fare niente.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="attivita">
+    <div class="riga-titolo"><h2>Attività</h2><span class="nota">ultimi lavori automatici e pubblicazioni</span></div>
+    <div class="due">
+      <div class="carta attivita"><h3>Lavori in corso e recenti</h3><ul id="listaRun"><li class="vuoto">Carico…</li></ul></div>
+      <div class="carta attivita"><h3>Pubblicazioni</h3><ul id="listaPub"><li class="vuoto">Ancora nessuna pubblicazione registrata.</li></ul></div>
+    </div>
+  </section>
+
+  <section id="calendario">
+    <div class="riga-titolo"><h2>Calendario</h2><span class="nota">prossimi video della scaletta (promo/scaletta.json)</span></div>
+    <div class="carta"><div class="cal" id="cal"></div></div>
+  </section>
+
+  <section id="impostazioni">
+    <div class="riga-titolo"><h2>Impostazioni</h2></div>
+    <div class="carta">
+      <p class="piccolo">Per vedere i dati non serve niente. Per <b>inviare</b>, <b>aggiornare</b> e <b>scrivere all'AI</b> serve una chiave GitHub personale. Resta solo in questo browser, non viene mai salvata nel sito.</p>
+      <label class="campo" for="pat">Chiave GitHub (fine-grained token)</label>
+      <input id="pat" type="password" autocomplete="off" placeholder="github_pat_…">
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button id="btnSalvaPat">Salva e prova</button><button class="secondario" id="btnTogliPat">Togli dal browser</button></div>
+      <div class="msg" id="patMsg"></div>
+      <details style="margin-top:12px"><summary>Come creare la chiave (2 minuti)</summary>
+        <ol class="passi piccolo">
+          <li>Apri <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → Settings → Fine-grained tokens → Generate new token</a>.</li>
+          <li>Nome: <i>Centro social</i>. Scadenza: 1 anno.</li>
+          <li>Repository access: <b>Only select repositories</b> → solo <b>Monomytos</b>.</li>
+          <li>Permissions → Repository: <b>Actions</b> Read and write, <b>Contents</b> Read and write, <b>Issues</b> Read and write.</li>
+          <li>Generate token, copialo e incollalo qui sopra. Fallo su ogni telefono o PC da cui usi il Centro.</li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
+  <footer>Monomythos · progetto indipendente · i dati si aggiornano ogni 6 ore · pagina privata (non indicizzata)</footer>
+</div>
+
+<script>
+'use strict';
+const REPO = 'AlexxCast/Monomytos';
+const Q = new URLSearchParams(location.search);
+const DATI = Q.get('dati'); // solo per prove in locale
+const PF = {
+  youtube: { nome: 'YouTube', c: 'var(--youtube)', hex: '#f05656' },
+  tiktok: { nome: 'TikTok', c: 'var(--tiktok)', hex: '#18a89c' },
+  instagram: { nome: 'Instagram', c: 'var(--instagram)', hex: '#d65bcf' },
+  bluesky: { nome: 'Bluesky', c: 'var(--bluesky)', hex: '#4a8ff0' },
+  telegram: { nome: 'Telegram', c: 'var(--telegram)', hex: '#b8820c' },
+  discord: { nome: 'Discord', c: 'var(--discord)', hex: '#7c83f2' }
+};
+const PF_STAT = ['youtube', 'tiktok', 'instagram', 'bluesky', 'telegram'];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const nf = new Intl.NumberFormat('it-IT');
+const num = n => n == null ? '–' : (n >= 10000 ? new Intl.NumberFormat('it-IT', { notation: 'compact', maximumFractionDigits: 1 }).format(n) : nf.format(n));
+const quando = d => { if (!d) return ''; const s = (Date.now() - new Date(d)) / 1000; if (s < 90) return 'adesso'; if (s < 3600) return Math.round(s / 60) + ' min fa'; if (s < 86400) return Math.round(s / 3600) + ' ore fa'; return new Date(d).toLocaleDateString('it-IT', { day: 'numeric', month: 'short' }); };
+let token = ''; try { token = localStorage.getItem('hub_pat') || ''; } catch (e) {}
+
+async function api(p, opt = {}) {
+  const h = { Accept: 'application/vnd.github+json', ...(opt.headers || {}) };
+  if (token) h.Authorization = 'Bearer ' + token;
+  const r = await fetch(p.startsWith('http') ? p : 'https://api.github.com' + p, { ...opt, headers: h });
+  if (!r.ok) { let m = ''; try { m = (await r.json()).message; } catch (e) {} const err = new Error(`GitHub ${r.status}${m ? ': ' + m : ''}`); err.status = r.status; throw err; }
+  return r.status === 204 ? null : r.json();
+}
+// I dati vivono nel ramo hub-dati: con la chiave li leggo dall'API (sempre freschi), senza dalla copia pubblica
+async function dato(file, def) {
+  try {
+    if (DATI) return await (await fetch(`${DATI}/${file}?t=${Date.now()}`)).json();
+    if (token) return await api(`/repos/${REPO}/contents/${file}?ref=hub-dati`, { headers: { Accept: 'application/vnd.github.raw+json' } });
+    const r = await fetch(`https://raw.githubusercontent.com/${REPO}/hub-dati/${file}?t=${Date.now()}`);
+    return r.ok ? await r.json() : def;
+  } catch (e) { return def; }
+}
+function serveChiave(msgEl) {
+  if (token) return false;
+  msgEl.className = 'msg err'; msgEl.innerHTML = 'Serve la chiave GitHub: <a href="#impostazioni">mettila nelle Impostazioni</a>.';
+  return true;
+}
+
+let STAT = null, STORICO = [], METRICA = 'follower';
+
+// ---------- Riepilogo ----------
+function valoreA(storico, ms, nome, campo) {
+  const lim = Date.now() - ms;
+  for (let i = storico.length - 1; i >= 0; i--) if (new Date(storico[i].t) <= lim && storico[i][nome]) return storico[i][nome][campo];
+  return null;
+}
+function delta(attuale, prima) {
+  if (prima == null || attuale == null) return '';
+  const d = attuale - prima;
+  return d === 0 ? '<span>=</span>' : `<span class="${d > 0 ? 'su' : 'giu'}">${d > 0 ? '▲ +' : '▼ '}${num(d)}</span>`;
+}
+function riepilogo() {
+  const ps = Object.entries(STAT?.piattaforme || {}).filter(([, p]) => p.stato === 'ok');
+  const tot = (f) => ps.reduce((t, [, p]) => t + (f(p) || 0), 0);
+  const prima = (ms, campo) => { let t = 0, ok = false; for (const [n] of ps) { const v = valoreA(STORICO, ms, n, campo); if (v != null) { t += v; ok = true; } } return ok ? t : null; };
+  const voci = [
+    ['Follower totali', tot(p => p.account.follower), 'follower'],
+    ['Visualizzazioni', tot(p => p.totali.views), 'views'],
+    ['Like', tot(p => p.totali.likes), 'likes'],
+    ['Commenti', tot(p => p.totali.commenti), 'commenti']
+  ];
+  $('#tiles').innerHTML = voci.map(([e, v, c]) => `<div class="carta tile"><div class="etich">${e}</div><div class="num">${num(v)}</div>
+    <div class="delta">24 h ${delta(v, prima(864e5, c)) || '–'} · 7 g ${delta(v, prima(6048e5, c)) || '–'}</div></div>`).join('')
+    + `<div class="carta tile"><div class="etich">Social collegati</div><div class="num">${ps.length}/${PF_STAT.length}</div><div class="delta">${ps.length < PF_STAT.length ? 'gli altri sono da collegare' : 'tutti attivi'}</div></div>`;
+}
+
+// ---------- Piattaforme ----------
+const AIUTO = {
+  'non collegata': 'Mancano le chiavi nei Secrets di GitHub (vedi la guida in promo/LEGGIMI.md).',
+  errore: 'Le chiavi ci sono ma la lettura non è andata: spesso serve rifare il token con i nuovi permessi.'
+};
+function piattaforme() {
+  $('#piattaforme').innerHTML = PF_STAT.map(n => {
+    const p = STAT?.piattaforme?.[n] || { stato: 'non collegata' };
+    const info = PF[n];
+    let corpo;
+    if (p.stato === 'ok') {
+      const a = p.account, t = p.totali;
+      corpo = `<dl><dt>Follower</dt><dd>${num(a.follower)} ${delta(a.follower, valoreA(STORICO, 864e5, n, 'follower'))}</dd>
+        ${n === 'telegram' ? '' : `<dt>Visualizzazioni</dt><dd>${n === 'bluesky' ? '<span class="piccolo">non fornite</span>' : num(t.views)}</dd><dt>Like</dt><dd>${num(t.likes)}</dd><dt>Commenti</dt><dd>${num(t.commenti)}</dd><dt>Post letti</dt><dd>${p.video.length}</dd>`}</dl>
+        ${n === 'telegram' ? '<div class="avviso">Telegram dà solo il numero di iscritti.</div>' : ''}
+        ${a.link ? `<div class="avviso"><a href="${esc(a.link)}" target="_blank" rel="noopener">Apri ${esc(a.nome || info.nome)}</a></div>` : ''}`;
+    } else {
+      corpo = `<div class="avviso">${esc(AIUTO[p.stato] || '')}</div>${p.nota ? `<details class="avviso"><summary>Dettaglio</summary>${esc(p.nota)}</details>` : ''}`;
+    }
+    return `<div class="carta pf" style="--c:${info.c}"><div class="nome"><span class="pallino"></span>${info.nome}<span class="stato ${p.stato === 'ok' ? 'ok' : p.stato === 'errore' ? 'errore' : ''}">${p.stato === 'ok' ? 'attivo' : esc(p.stato)}</span></div>${corpo}</div>`;
+  }).join('');
+}
+
+// ---------- Grafico ----------
+function grafico() {
+  const svg = $('#grafico'), W = svg.clientWidth || 800, H = 260, m = { l: 46, r: 84, t: 12, b: 26 };
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const serie = PF_STAT.map(n => ({ n, punti: STORICO.filter(r => r[n] && r[n][METRICA] != null).map(r => ({ t: +new Date(r.t), v: r[n][METRICA] })) }))
+    .filter(s => s.punti.length && !(METRICA !== 'follower' && (s.n === 'telegram' || (s.n === 'bluesky' && METRICA === 'views'))));
+  const leg = $('#legenda');
+  if (!serie.length || STORICO.length < 2) { svg.innerHTML = `<text x="${W / 2}" y="${H / 2}" fill="#7f87b3" text-anchor="middle" font-size="14">Il grafico compare dopo i primi giri di statistiche (ogni 6 ore).</text>`; leg.innerHTML = ''; return; }
+  const ts = serie.flatMap(s => s.punti.map(p => p.t)), vs = serie.flatMap(s => s.punti.map(p => p.v));
+  const t0 = Math.min(...ts), t1 = Math.max(...ts) || t0 + 1, vmax = Math.max(1, ...vs);
+  const passo = Math.pow(10, Math.floor(Math.log10(vmax))), top = Math.ceil(vmax / passo) * passo;
+  const x = t => m.l + (t1 === t0 ? 0.5 : (t - t0) / (t1 - t0)) * (W - m.l - m.r);
+  const y = v => H - m.b - v / top * (H - m.t - m.b);
+  let g = '';
+  for (let i = 0; i <= 4; i++) { const v = top * i / 4, yy = y(v); g += `<line x1="${m.l}" x2="${W - m.r}" y1="${yy}" y2="${yy}" stroke="#ffffff14"/><text x="${m.l - 8}" y="${yy + 4}" fill="#7f87b3" font-size="11" text-anchor="end">${num(v)}</text>`; }
+  const giorni = (t1 - t0) / 864e5, nEt = Math.min(6, Math.max(2, Math.round(W / 140)));
+  for (let i = 0; i < nEt; i++) { const t = t0 + (t1 - t0) * i / (nEt - 1); g += `<text x="${x(t)}" y="${H - 6}" fill="#7f87b3" font-size="11" text-anchor="middle">${new Date(t).toLocaleString('it-IT', giorni > 2 ? { day: 'numeric', month: 'short' } : { hour: '2-digit', minute: '2-digit' })}</text>`; }
+  // etichette dirette alla fine di ogni linea, spostate se si sovrappongono
+  const fine = serie.map(s => ({ s, yy: y(s.punti.at(-1).v) })).sort((a, b) => a.yy - b.yy);
+  for (let i = 1; i < fine.length; i++) if (fine[i].yy - fine[i - 1].yy < 14) fine[i].yy = fine[i - 1].yy + 14;
+  for (const s of serie) {
+    const c = PF[s.n].hex, d = s.punti.map((p, i) => `${i ? 'L' : 'M'}${x(p.t).toFixed(1)},${y(p.v).toFixed(1)}`).join('');
+    g += `<path d="${d}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const u = s.punti.at(-1); g += `<circle cx="${x(u.t)}" cy="${y(u.v)}" r="4" fill="${c}" stroke="#141a3a" stroke-width="2"/>`;
+  }
+  for (const f of fine) g += `<text x="${W - m.r + 8}" y="${f.yy + 4}" fill="#b9bfdc" font-size="12">${PF[f.s.n].nome}</text>`;
+  g += `<line id="croce" y1="${m.t}" y2="${H - m.b}" stroke="#ffffff55" stroke-dasharray="3 3" visibility="hidden"/><rect x="${m.l}" y="${m.t}" width="${W - m.l - m.r}" height="${H - m.t - m.b}" fill="transparent" id="area"/>`;
+  svg.innerHTML = g;
+  leg.innerHTML = serie.map(s => `<span class="badge" style="--c:${PF[s.n].c}"><i></i>${PF[s.n].nome}</span>`).join('');
+  const tip = $('#tip'), croce = svg.querySelector('#croce'), tutteT = [...new Set(ts)].sort((a, b) => a - b);
+  const muovi = ev => {
+    const r = svg.getBoundingClientRect(), px = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left, sx = px * W / r.width;
+    let best = tutteT[0]; for (const t of tutteT) if (Math.abs(x(t) - sx) < Math.abs(x(best) - sx)) best = t;
+    croce.setAttribute('x1', x(best)); croce.setAttribute('x2', x(best)); croce.setAttribute('visibility', 'visible');
+    const righe = serie.map(s => ({ s, p: s.punti.find(p => p.t === best) })).filter(o => o.p).sort((a, b) => b.p.v - a.p.v);
+    tip.innerHTML = `<div class="piccolo">${new Date(best).toLocaleString('it-IT', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</div>` + righe.map(o => `<div class="r"><span class="badge" style="--c:${PF[o.s.n].c}"><i></i>${PF[o.s.n].nome}</span><b>${nf.format(o.p.v)}</b></div>`).join('');
+    tip.style.display = 'block';
+    const left = x(best) * r.width / W; tip.style.left = Math.min(Math.max(0, left + 12), r.width - tip.offsetWidth) + 'px'; tip.style.top = '10px';
+  };
+  const via = () => { tip.style.display = 'none'; croce.setAttribute('visibility', 'hidden'); };
+  const area = svg.querySelector('#area');
+  area.addEventListener('pointermove', muovi); area.addEventListener('pointerleave', via); area.addEventListener('touchstart', muovi, { passive: true });
+}
+$('#metriche').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; METRICA = b.dataset.m; [...$('#metriche').children].forEach(x => x.classList.toggle('attiva', x === b)); grafico(); });
+addEventListener('resize', () => { clearTimeout(grafico.t); grafico.t = setTimeout(grafico, 150); });
+
+// ---------- Video migliori ----------
+function videoMigliori() {
+  const tutti = [];
+  for (const [n, p] of Object.entries(STAT?.piattaforme || {})) if (p.stato === 'ok') for (const v of p.video) tutti.push({ ...v, n });
+  tutti.sort((a, b) => (b.views - a.views) || (b.likes - a.likes));
+  $('#tabVideo').innerHTML = tutti.length ? tutti.slice(0, 15).map(v => {
+    const inter = (v.likes || 0) + (v.commenti || 0) + (v.condivisioni || 0);
+    const coinv = v.views ? (inter / v.views * 100).toLocaleString('it-IT', { maximumFractionDigits: 1 }) + '%' : '–';
+    return `<tr><td><a href="${esc(v.link)}" target="_blank" rel="noopener">${esc(v.titolo || '(senza titolo)')}</a>${v.privato ? ' <span class="piccolo">(privato)</span>' : ''}</td>
+      <td><span class="badge" style="--c:${PF[v.n].c}"><i></i>${PF[v.n].nome}</span></td><td class="piccolo solo-largo" style="white-space:nowrap">${quando(v.data)}</td>
+      <td class="n">${v.n === 'bluesky' ? '–' : num(v.views)}</td><td class="n">${num(v.likes)}</td><td class="n solo-largo">${num(v.commenti)}</td><td class="n">${coinv}</td></tr>`;
+  }).join('') : '<tr><td colspan="7" class="vuoto">Nessun post letto finora.</td></tr>';
+}
+
+// ---------- Analisi AI (issue con etichetta analisi-ai) ----------
+function md(t) {
+  const righe = esc(t).replace(/<!--[\s\S]*?-->/g, '').replace(/&lt;!--[\s\S]*?--&gt;/g, '').split('\n');
+  let h = '', lista = false;
+  const inl = s => s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/(^|[^*])\*([^*]+)\*/g, '$1<i>$2</i>').replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  for (const r of righe) {
+    const li = r.match(/^\s*(?:[-*]|\d+\.)\s+(.*)/);
+    if (li) { if (!lista) { h += '<ul>'; lista = true; } h += `<li>${inl(li[1])}</li>`; continue; }
+    if (lista) { h += '</ul>'; lista = false; }
+    const tit = r.match(/^(#{1,4})\s+(.*)/);
+    if (tit) h += `<h3>${inl(tit[2])}</h3>`; else if (r.trim() === '---') h += '<hr style="border:0;border-top:1px solid #ffffff22">'; else if (r.trim()) h += `<p>${inl(r)}</p>`;
+  }
+  return h + (lista ? '</ul>' : '');
+}
+let ISSUE_AI = null;
+async function analisi() {
+  try {
+    const l = DATI ? await dato('analisi_finta.json', []) : await api(`/repos/${REPO}/issues?labels=analisi-ai&state=open&sort=updated&per_page=1`);
+    ISSUE_AI = l[0] || null;
+    if (!ISSUE_AI) return;
+    $('#aiData').textContent = 'aggiornata ' + quando(ISSUE_AI.updated_at);
+    $('#aiCorpo').innerHTML = md(ISSUE_AI.body || '');
+    if (ISSUE_AI.comments && !DATI) {
+      const c = await api(`/repos/${REPO}/issues/${ISSUE_AI.number}/comments?per_page=100`);
+      $('#aiCommenti').innerHTML = '<h3 style="margin-top:14px">Conversazione</h3>' + c.slice(-8).map(x => `<div class="commento"><div class="chi">${/Generated by \[Claude Code\]/.test(x.body) ? 'AI' : 'Tu'} · ${quando(x.created_at)}</div>${md(x.body.replace(/\n---\n_Generated by[\s\S]*$/, ''))}</div>`).join('');
+    }
+  } catch (e) { $('#aiCorpo').innerHTML = `<p class="vuoto">Analisi non leggibile ora (${esc(e.message)}).</p>`; }
+}
+$('#btnAi').onclick = async () => {
+  const msg = $('#aiMsg'), testo = $('#aiDomanda').value.trim();
+  if (!testo || serveChiave(msg)) return;
+  $('#btnAi').disabled = true;
+  try {
+    if (!ISSUE_AI) ISSUE_AI = await api(`/repos/${REPO}/issues`, { method: 'POST', body: JSON.stringify({ title: '🤖 Analisi AI dei social', labels: ['analisi-ai'], body: 'Qui l\'AI scrive l\'analisi delle statistiche dei social.' }) });
+    await api(`/repos/${REPO}/issues/${ISSUE_AI.number}/comments`, { method: 'POST', body: JSON.stringify({ body: testo }) });
+    msg.className = 'msg ok'; msg.textContent = 'Inviato. L\'AI risponde al prossimo giro di analisi.'; $('#aiDomanda').value = ''; analisi();
+  } catch (e) { msg.className = 'msg err'; msg.textContent = 'Non inviato: ' + e.message; }
+  $('#btnAi').disabled = false;
+};
+
+// ---------- Invia ----------
+let SCHEDA = 'scaletta';
+$('#schedeInvio').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return; SCHEDA = b.dataset.s;
+  [...$('#schedeInvio').children].forEach(x => x.classList.toggle('attiva', x === b));
+  $('#invioScaletta').hidden = SCHEDA !== 'scaletta'; $('#invioMio').hidden = SCHEDA !== 'mio';
+});
+$('#chipsPf').innerHTML = Object.entries(PF).map(([n, p]) => `<label><input type="checkbox" value="${n}" checked> <span class="badge" style="--c:${p.c}"><i></i></span>${p.nome}</label>`).join('');
+async function dispatch(workflow, inputs) {
+  const repo = await api(`/repos/${REPO}`);
+  await api(`/repos/${REPO}/actions/workflows/${workflow}/dispatches`, { method: 'POST', body: JSON.stringify({ ref: repo.default_branch, inputs }) });
+}
+async function caricaVideo(file, stato) {
+  const nome = new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-') + '_' + file.name.replace(/[^\w.-]+/g, '_').slice(-60);
+  let rel;
+  try { rel = await api(`/repos/${REPO}/releases/tags/promo-caricati`); }
+  catch (e) {
+    if (e.status !== 404) throw e;
+    rel = await api(`/repos/${REPO}/releases`, { method: 'POST', body: JSON.stringify({ tag_name: 'promo-caricati', name: 'Video caricati dal Centro social', prerelease: true, body: 'Video caricati a mano dal Centro social (hub/) e pubblicati dal workflow Video promozionali.' }) });
+  }
+  stato('Carico il video su GitHub…');
+  try {
+    await api(`https://uploads.github.com/repos/${REPO}/releases/${rel.id}/assets?name=${encodeURIComponent(nome)}`, { method: 'POST', headers: { 'Content-Type': file.type || 'video/mp4' }, body: file });
+    return nome;
+  } catch (e) {
+    if (e.status) throw e;
+    // Il browser non può caricare nella release: lo metto nel ramo dei dati (max ~50 MB)
+    if (file.size > 50e6) throw new Error('il browser non riesce a caricare file così grandi: riducilo sotto i 50 MB');
+    stato('Carico il video (via alternativa)…');
+    const b64 = await new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(r.result.split(',')[1]); r.onerror = ko; r.readAsDataURL(file); });
+    const percorso = 'caricati/' + nome;
+    await api(`/repos/${REPO}/contents/${percorso}`, { method: 'PUT', body: JSON.stringify({ message: 'Video caricato dal Centro social', content: b64, branch: 'hub-dati' }) });
+    return percorso;
+  }
+}
+$('#btnInvia').onclick = async () => {
+  const msg = $('#invioMsg'), btn = $('#btnInvia');
+  if (serveChiave(msg)) return;
+  const pfs = [...$('#chipsPf').querySelectorAll('input:checked')].map(i => i.value);
+  if (!pfs.length) { msg.className = 'msg err'; msg.textContent = 'Scegli almeno un social.'; return; }
+  const prova = $('#prova').checked;
+  if (!prova && !confirm(`Pubblico davvero su: ${pfs.map(n => PF[n].nome).join(', ')}?`)) return;
+  const stato = t => { msg.className = 'msg'; msg.textContent = t; };
+  btn.disabled = true;
+  try {
+    const inputs = { piattaforme: pfs.join(','), prova: String(prova) };
+    if (SCHEDA === 'mio') {
+      const f = $('#fileVideo').files[0], tit = $('#titoloMio').value.trim();
+      if (!f) throw new Error('scegli il file video');
+      if (!tit) throw new Error('scrivi un titolo');
+      inputs.video_caricato = await caricaVideo(f, stato);
+      inputs.titolo = tit; inputs.didascalia = $('#didMio').value.trim() || tit;
+    } else inputs.copione = $('#selCopione').value;
+    stato('Faccio partire il workflow…');
+    await dispatch('promo-video.yml', inputs);
+    msg.className = 'msg ok'; msg.innerHTML = `Partito${prova ? ' (prova, non pubblica)' : ''}. Lo vedi in <a href="#attivita">Attività</a> tra qualche secondo.`;
+    setTimeout(attivita, 6000);
+  } catch (e) { msg.className = 'msg err'; msg.textContent = 'Non partito: ' + e.message; }
+  btn.disabled = false;
+};
+$('#btnAggiorna').onclick = async () => {
+  const b = $('#btnAggiorna'), m = $('#aggiornato');
+  if (!token) { location.hash = '#impostazioni'; $('#patMsg').className = 'msg err'; $('#patMsg').textContent = 'Per aggiornare a comando serve la chiave.'; return; }
+  b.disabled = true;
+  try { await dispatch('social-statistiche.yml', {}); m.textContent = 'Lettura partita: i numeri nuovi arrivano tra 1-2 minuti.'; setTimeout(carica, 100000); }
+  catch (e) { m.textContent = 'Non partito: ' + e.message; }
+  b.disabled = false;
+};
+
+// ---------- Attività ----------
+const NOMI_WF = { 'promo-video.yml': 'Video', 'social-statistiche.yml': 'Statistiche', 'inserisci-gemini.yml': 'Immagini carte', 'apk-android.yml': 'APK Android' };
+async function attivita() {
+  try {
+    const r = DATI ? { workflow_runs: [] } : await api(`/repos/${REPO}/actions/runs?per_page=20`);
+    const runs = r.workflow_runs.filter(x => /promo-video|social-statistiche/.test(x.path)).slice(0, 8);
+    $('#listaRun').innerHTML = runs.length ? runs.map(x => {
+      const s = x.status === 'completed' ? x.conclusion : x.status;
+      const it = { success: 'fatto', failure: 'errore', cancelled: 'annullato', in_progress: 'in corso', queued: 'in coda', skipped: 'saltato' }[s] || s;
+      return `<li><span class="esito ${esc(s)}">${esc(it)}</span><b>${esc(NOMI_WF[x.path.split('/').pop()] || x.name)}</b><span class="piccolo">${x.event === 'schedule' ? 'automatico' : 'a mano'} · ${quando(x.run_started_at || x.created_at)}</span><a style="margin-left:auto" href="${esc(x.html_url)}" target="_blank" rel="noopener">apri</a></li>`;
+    }).join('') : '<li class="vuoto">Nessun lavoro recente.</li>';
+  } catch (e) { $('#listaRun').innerHTML = `<li class="vuoto">Non leggibile ora (${esc(e.message)}).</li>`; }
+  const pub = await dato('pubblicazioni.json', []);
+  if (pub.length) $('#listaPub').innerHTML = pub.slice(0, 8).map(p => {
+    const es = Object.entries(p.piattaforme || {});
+    return `<li style="display:block"><b>${esc(p.titolo || p.id)}</b> <span class="piccolo">· ${quando(p.data)}${p.prova ? ' · prova' : ''}</span>${p.video ? ` · <a href="${esc(p.video)}" target="_blank" rel="noopener">video</a>` : ''}
+      <div class="chips" style="margin-top:4px">${es.map(([n, v]) => `<span class="esito ${esc(v.esito)}" title="${esc(v.nota || '')}">${esc(PF[n]?.nome || n)}: ${esc(v.esito)}${v.link ? ` <a href="${esc(v.link)}" target="_blank" rel="noopener">↗</a>` : ''}</span>`).join('')}</div></li>`;
+  }).join('');
+}
+
+// ---------- Calendario e copioni ----------
+async function calendario() {
+  try {
+    const [cop, sc] = await Promise.all([fetch('../promo/copioni.json').then(r => r.json()), fetch('../promo/scaletta.json').then(r => r.json())]);
+    const tit = id => { const c = cop.copioni.find(c => c.id === id); return c ? (c.titolo.it || c.titolo) : id; };
+    $('#selCopione').innerHTML = '<option value="">Quello della scaletta di oggi</option>' + cop.copioni.map(c => `<option value="${esc(c.id)}">${esc(c.titolo.it || c.titolo)}</option>`).join('');
+    const oggi = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Rome' }).format(new Date());
+    const prossimi = sc.giorni.filter(g => g.data >= oggi).slice(0, 14);
+    $('#cal').innerHTML = prossimi.length ? prossimi.map(g => `<div class="g ${g.data === oggi ? 'oggi' : ''}"><b>${new Date(g.data + 'T12:00').toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'short' })}${g.data === oggi ? ' · oggi' : ''}</b>${esc(tit(g.copione))}${g.manuale ? `<div class="man">✋ ${esc(g.manuale)}</div>` : ''}</div>`).join('')
+      : '<div class="vuoto">Nessun video in scaletta nei prossimi giorni.</div>';
+  } catch (e) { $('#cal').innerHTML = '<div class="vuoto">Calendario non leggibile.</div>'; }
+}
+
+// ---------- Impostazioni ----------
+$('#pat').value = token ? '••••••••' : '';
+if (token) { $('#patMsg').className = 'msg ok'; $('#patMsg').textContent = 'Chiave salvata in questo browser.'; }
+$('#btnSalvaPat').onclick = async () => {
+  const v = $('#pat').value.trim(), m = $('#patMsg');
+  if (!v || v.startsWith('•')) return;
+  token = v;
+  try {
+    const r = await api(`/repos/${REPO}`);
+    if (!r.permissions || !r.permissions.push) throw new Error('la chiave non ha i permessi di scrittura su Monomytos');
+    try { localStorage.setItem('hub_pat', v); } catch (e) {}
+    m.className = 'msg ok'; m.textContent = 'Chiave valida e salvata in questo browser.'; $('#pat').value = '••••••••'; carica();
+  } catch (e) { token = ''; m.className = 'msg err'; m.textContent = 'Chiave non valida: ' + e.message; }
+};
+$('#btnTogliPat').onclick = () => { token = ''; try { localStorage.removeItem('hub_pat'); } catch (e) {} $('#pat').value = ''; $('#patMsg').className = 'msg'; $('#patMsg').textContent = 'Chiave tolta.'; };
+
+// ---------- Avvio ----------
+async function carica() {
+  [STAT, STORICO] = await Promise.all([dato('statistiche.json', null), dato('storico.json', [])]);
+  $('#aggiornato').textContent = STAT ? `Statistiche aggiornate ${quando(STAT.aggiornato)} · si aggiornano da sole ogni 6 ore` : 'Statistiche non ancora raccolte: partono da sole dopo l\'unione delle modifiche, oppure premi Aggiorna.';
+  riepilogo(); piattaforme(); grafico(); videoMigliori();
+}
+carica(); analisi(); attivita(); calendario();
+setInterval(() => { carica(); attivita(); }, 5 * 60 * 1000);
+</script>
+</body>
+</html>

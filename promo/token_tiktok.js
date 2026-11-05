@@ -10,7 +10,7 @@ if (!key || !secret) { console.log('Uso: node promo/token_tiktok.js <CLIENT_KEY>
 const redirect = process.env.REDIRECT_URI || 'https://alexxcast.github.io/Monomytos/promo/callback.html';
 const url = 'https://www.tiktok.com/v2/auth/authorize/?' + new URLSearchParams({
   client_key: key, response_type: 'code', redirect_uri: redirect, state: String(Date.now()),
-  scope: process.env.SCOPE || 'user.info.basic,video.upload,video.publish'
+  scope: process.env.SCOPE || 'user.info.basic,user.info.stats,video.list,video.upload,video.publish'
 });
 console.log('\nApri questo indirizzo nel browser:\n\n' + url + '\n');
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });

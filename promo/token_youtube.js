@@ -9,7 +9,8 @@ const PORTA = 8765;
 const redirect = `http://127.0.0.1:${PORTA}`;
 const url = 'https://accounts.google.com/o/oauth2/v2/auth?' + new URLSearchParams({
   client_id: clientId, redirect_uri: redirect, response_type: 'code', access_type: 'offline', prompt: 'consent',
-  scope: 'https://www.googleapis.com/auth/youtube.upload'
+  // upload = pubblicare; readonly = leggere le statistiche per il Centro social
+  scope: 'https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly'
 });
 console.log('\nApri questo indirizzo nel browser:\n\n' + url + '\n');
 http.createServer(async (req, res) => {
