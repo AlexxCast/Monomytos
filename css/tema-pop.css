@@ -1476,3 +1476,17 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .peek-item.scartata .peek-scarta { opacity: 1; filter: none; background: var(--pop-red, #e63946); color: #fff; }
 .peek-scarta { width: 100%; }
 .peek-scarta { margin-top: auto; }
+
+/* Glossario parole chiave nella scheda carta (feedback Franz 2026-11-05) */
+#sheetGlossario:empty { display: none; }
+.glossario {
+  margin: 8px 0 4px; padding: 8px 10px;
+  background: #fff8e6; color: #1a1a22;
+  border: 2px solid #111116; border-radius: 10px;
+  box-shadow: 3px 3px 0 #111116;
+  font-size: 12px; line-height: 1.35;
+  max-height: 30vh; overflow-y: auto;
+}
+.glossario-titolo { font-weight: 900; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; margin-bottom: 4px; }
+.glossario-voce { margin: 3px 0; overflow-wrap: anywhere; }
+.glossario-voce b { color: #b3261e; }

@@ -1185,6 +1185,8 @@ class UIController {
     document.getElementById('sheetCardName').textContent = card.nome;
     document.getElementById('sheetCardCategory').textContent = `${card.cat} • Valore ${card.valore}`;
     document.getElementById('sheetCardEffect').textContent = card.effetto;
+    const sheetGloss = document.getElementById('sheetGlossario');
+    if (sheetGloss) sheetGloss.innerHTML = window.Glossario ? window.Glossario.html(card.effetto) : '';
 
     // Check Opzione A Slot Cost (using resilient normalized slot checker)
     const availableSlots = window.GameEngine.getPlayerSlot ? window.GameEngine.getPlayerSlot(localPlayer, card.cat) : ((localPlayer.slots && localPlayer.slots[card.cat]) || 0);
