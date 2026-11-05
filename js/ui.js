@@ -1185,6 +1185,8 @@ class UIController {
     document.getElementById('sheetCardName').textContent = card.nome;
     document.getElementById('sheetCardCategory').textContent = `${card.cat} • Valore ${card.valore}`;
     document.getElementById('sheetCardEffect').textContent = card.effetto;
+    const sheetGloss = document.getElementById('sheetGlossario');
+    if (sheetGloss) sheetGloss.innerHTML = window.Glossario ? window.Glossario.html(card.effetto) : '';
 
     // Check Opzione A Slot Cost (using resilient normalized slot checker)
     const availableSlots = window.GameEngine.getPlayerSlot ? window.GameEngine.getPlayerSlot(localPlayer, card.cat) : ((localPlayer.slots && localPlayer.slots[card.cat]) || 0);
@@ -1773,7 +1775,9 @@ class UIController {
       img: 'assets/icons/peronaggio.webp'
     };
 
-    data.action_cards[customKey] = data.action_cards['Iron Aegis']; // Preset deck
+    // Preset deck: solo le carte che questo eroe può davvero giocare con le sue statistiche
+    const meta = data.chars_meta[customKey];
+    data.action_cards[customKey] = data.action_cards['Iron Aegis'].filter(c => !window.Collezione || window.Collezione.giocabile(c, meta));
 
     this.hideModals();
     this.startSoloGame(customKey);
@@ -2321,13 +2325,16 @@ class UIController {
       // Build tag badges
       let tagHtml = (window.Collezione ? window.Collezione.badge(c) : '') + `<span class="builder-tag-badge tag-${layout.type}">${c.tag || c.cat}</span>`;
       if (c.osc) tagHtml += `<span class="builder-tag-badge tag-purple">Oscura</span>`;
+      const creaz = this.currentDeckBuilding.creation;
+      const giocabile = !window.Collezione || !creaz || window.Collezione.giocabile(c, creaz);
+      if (!giocabile) tagHtml += `<span class="builder-tag-badge tag-ingiocabile">Non giocabile: costa ${c.valore} ${c.cat}, hai ${window.Collezione.slotMax(creaz, c.cat)} slot</span>`;
       if (c.deus || c.nome?.includes('Defibrillazione')) tagHtml += `<span class="builder-tag-badge tag-blue">Deus Ex</span>`;
       if (c.fx?.dmg) tagHtml += `<span class="builder-tag-badge tag-red">Danno +${c.fx.dmg}</span>`;
       if (c.fx?.shield) tagHtml += `<span class="builder-tag-badge tag-gold">Scudo +${c.fx.shield}</span>`;
       if (c.fx?.heal) tagHtml += `<span class="builder-tag-badge tag-green">Cura +${c.fx.heal}</span>`;
 
       const row = document.createElement('div');
-      row.className = `builder-card-row ${c.osc ? 'osc' : ''}`;
+      row.className = `builder-card-row ${c.osc ? 'osc' : ''} ${giocabile ? '' : 'non-giocabile'}`;
       row.innerHTML = `
         <div class="builder-card-thumb-wrap" onclick="UI.inspectCardById('${c.id}')" title="Visualizza carta">
           <img class="b-art" src="${bgArt}" alt="${c.nome}" onerror="this.src='assets/cards/retrocartamazzo.webp'">
@@ -2346,7 +2353,7 @@ class UIController {
         <div class="stepper-ctrl">
           <button class="stepper-btn" onclick="UI.changeCardDeckCount('${c.id}', -1)">-</button>
           <span class="stepper-val" id="cnt_${c.id}">${inDeck}</span>
-          <button class="stepper-btn" onclick="UI.changeCardDeckCount('${c.id}', 1)">+</button>
+          <button class="stepper-btn" onclick="UI.changeCardDeckCount('${c.id}', 1)"${giocabile ? '' : ' disabled'}>+</button>
         </div>
       `;
       container.appendChild(row);
@@ -2489,6 +2496,11 @@ class UIController {
 
     let next = current + delta;
     if (next < 0) next = 0;
+    const cardDef = delta > 0 && Object.values(window.MONOMYTHOS_DATA.action_cards).flat().find(c => c.id === cardId);
+    const creaz = this.currentDeckBuilding.creation;
+    if (cardDef && creaz && window.Collezione && !window.Collezione.giocabile(cardDef, creaz)) {
+      return this.showToast(`Con questo eroe non potresti mai giocarla: costa ${cardDef.valore} ${cardDef.cat}, hai ${window.Collezione.slotMax(creaz, cardDef.cat)} slot.`);
+    }
     if (next > maxAllowed) {
       return this.showToast(owned < R.copieMax ? `Ne possiedi solo ${owned}: non puoi metterne di più.` : `Massimo ${R.copieMax} copie per carta nel mazzo.`);
     }
@@ -2511,10 +2523,13 @@ class UIController {
     const allCards = data ? Object.values(data.action_cards).flat() : [];
     let total = 0;
     let dark = 0;
+    let ingiocabili = 0;
+    const creaz = this.currentDeckBuilding.creation;
     Object.entries(this.currentDeckBuilding.cards).forEach(([cid, count]) => {
       total += count;
       const card = allCards.find(c => c.id === cid);
       if (card && card.osc) dark += count;
+      if (card && creaz && window.Collezione && !window.Collezione.giocabile(card, creaz)) ingiocabili += count;
     });
 
     const totEl = document.getElementById('deckTotalCount');
@@ -2526,13 +2541,15 @@ class UIController {
     const sizeLbl = R.carteMin === R.carteMax ? `${R.carteMin}` : `${R.carteMin}-${R.carteMax}`;
     document.querySelectorAll('.deckSizeLabel').forEach(el => { el.textContent = sizeLbl; });
     document.querySelectorAll('.deckDarkMaxLabel').forEach(el => { el.textContent = R.oscureMax; });
-    this._deckValid = total >= R.carteMin && total <= R.carteMax && dark <= R.oscureMax;
+    this._deckValid = total >= R.carteMin && total <= R.carteMax && dark <= R.oscureMax && ingiocabili === 0;
     if (statusEl) {
       statusEl.classList.toggle('valid', this._deckValid);
       if (this._deckValid) {
         statusEl.textContent = `Mazzo valido (${total} carte)! Pronto per il salvataggio.`;
       } else if (total > R.carteMax) {
         statusEl.textContent = `Troppe carte nel mazzo (${total}/${sizeLbl}). Rimuovi ${total - R.carteMax} carte.`;
+      } else if (ingiocabili > 0) {
+        statusEl.textContent = `Nel mazzo ci sono ${ingiocabili} carte che questo eroe non può giocare (costano più slot di quelli che ha). Toglile.`;
       } else if (dark > R.oscureMax) {
         statusEl.textContent = `Troppe Carte Oscure (${dark}/${R.oscureMax} max). Riduci le carte oscure.`;
       } else {

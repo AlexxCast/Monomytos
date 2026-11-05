@@ -454,7 +454,7 @@
         </div>
         <div class="action-toolbar">
           <button class="btn btn-pb" id="btnPbDock" onclick="UI.openBasePowerSheet()">Potere Base</button>
-          <div class="draw-stepper" title="Carte da pescare al prossimo round (da 1 a Velocità + 1, max 5)">
+          <div class="draw-stepper" title="Carte da pescare al prossimo round (da 1 ad Agilità + 1, max 4)">
             <button class="btn" onclick="UI.changeDrawChoice(-1)" aria-label="Pesca meno">−</button>
             <span id="drawChoiceLabel" class="mono">Pesca 2</span>
             <button class="btn" onclick="UI.changeDrawChoice(1)" aria-label="Pesca di più">+</button>
@@ -489,6 +489,7 @@
           <button class="btn btn-subtle" style="padding:4px 0; font-size:11px;" onclick="UI.inspectCard()">Dettagli Carta</button>
         </div>
       </div>
+      <div id="sheetGlossario"></div>
 
       <div class="sheet-action-options">
         <!-- Option A: Play for Effect -->
@@ -1227,6 +1228,7 @@
 <script src="js/lingua.js"></script>
 <script src="js/dialogo.js"></script>
 <script src="js/adatta.js"></script>
+<script src="js/glossario.js"></script>
 <script src="js/cards_data.js"></script>
 <script src="js/effects.js"></script>
 <script src="js/audio.js"></script>

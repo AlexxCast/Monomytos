@@ -374,7 +374,8 @@ class MonomythosEngine {
   // Pescaggio massimo: min(5, Velocità + 1); Sfiancato blocca le carte extra (§3.4, §8.5)
   getMaxDraw(p) {
     if (p.weakened && !p.logoramento) return 1;
-    return Math.min(5, (p.spd || 1) + 1) + (p.drawBonus || 0);
+    const max = (window.MONOMYTHOS_BILANCIAMENTO || {}).pescaMax || 5;
+    return Math.min(max, (p.spd || 1) + 1) + (p.drawBonus || 0);
   }
 
   // Scelta del bot: pesca al massimo, ma si ferma se il mazzo sta per finire (Push Your Luck)

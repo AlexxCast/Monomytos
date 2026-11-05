@@ -1453,16 +1453,7 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 @keyframes play-shine-in { 0%, 50% { background-position: 120% 0; } 100% { background-position: -20% 0; } }
 /* le regole !important bloccherebbero l'animazione: qui niente !important sullo sfondo */
 
-/* L'illustrazione sta tutta nella finestra della cornice (tra la nuvoletta del titolo e il riquadro del testo):
-   nessuna parte del soggetto finisce sotto il layout. La finestra è circa 16:9. */
-.monomyth-card .card-bg-art,
-.hero-silver-frame-wrap .hero-bg-img,
-.threat-silver-frame-wrap:not(.is-printed) .threat-bg-img,
-.intro-threat-frame-wrap:not(.is-printed) .intro-threat-art {
-  top: 20.5% !important; height: 41% !important; bottom: auto !important;
-  left: 0 !important; width: 100% !important; inset: auto 0 auto 0;
-  object-fit: cover !important; object-position: center 40% !important;
-}
+/* Illustrazione su tutta la carta (regole base in style.css); il soggetto va composto nella fascia libera 22%-60% dell'altezza. */
 
 /* Finestra "Guarda le carte": carte intere con i loro effetti, scartabili */
 .peek-sheet { max-height: 92vh; overflow-y: auto; }
@@ -1476,3 +1467,66 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .peek-item.scartata .peek-scarta { opacity: 1; filter: none; background: var(--pop-red, #e63946); color: #fff; }
 .peek-scarta { width: 100%; }
 .peek-scarta { margin-top: auto; }
+
+/* Glossario parole chiave nella scheda carta (feedback Franz 2026-11-05) */
+#sheetGlossario:empty { display: none; }
+.glossario {
+  margin: 8px 0 4px; padding: 8px 10px;
+  background: #fff8e6; color: #1a1a22;
+  border: 2px solid #111116; border-radius: 10px;
+  box-shadow: 3px 3px 0 #111116;
+  font-size: 12px; line-height: 1.35;
+  max-height: 30vh; overflow-y: auto;
+}
+.glossario-titolo { font-weight: 900; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; margin-bottom: 4px; }
+.glossario-voce { margin: 3px 0; overflow-wrap: anywhere; }
+.glossario-voce b { color: #b3261e; }
+
+/* Deck builder: carte che l'eroe non potrà mai giocare (costo > slot massimi) */
+.builder-card-row.non-giocabile .builder-card-thumb-wrap,
+.builder-card-row.non-giocabile .builder-card-effect-text { opacity: .45; filter: grayscale(.7); }
+.builder-tag-badge.tag-ingiocabile { background: #b3261e; color: #fff; white-space: normal; }
+.builder-card-row.non-giocabile .stepper-btn[disabled] { opacity: .35; cursor: not-allowed; }
+
+/* ===== Telefono: zona del giocatore più chiara e compatta (feedback Franz 2026-11-05) =====
+   Era trasparente al 50% (il campo si vedeva troppo e sembrava sovrapposto): ora 80% e alta più di metà schermo
+   sui telefoni bassi, coprendo i nemici. Ora è opaca, separata da un bordo netto, e più bassa. */
+@media (max-width: 999px) {
+  #scr-game > .player-command-deck,
+  body.theme-villain #scr-game > .player-command-deck {
+    background: rgba(243, 234, 214, 0.8) !important; background-color: rgba(243, 234, 214, 0.8) !important;
+    border-top: 3px solid #111116 !important;
+    box-shadow: 0 -5px 0 rgba(17, 17, 22, .35) !important;
+    gap: 6px !important; padding-top: 8px !important;
+  }
+  body.theme-villain #scr-game > .player-command-deck { background: rgba(229, 212, 255, 0.8) !important; background-color: rgba(229, 212, 255, 0.8) !important; }
+  #scr-game > .player-command-deck .vital-label { text-shadow: none; }
+  .player-dock-top { gap: 10px !important; }
+  .player-main-info { flex: 1 1 auto; min-width: 0; gap: 8px !important; }
+  .player-avatar { width: 40px !important; height: 40px !important; flex: 0 0 40px !important; }
+  .player-vital-bars { flex: 1 1 auto; min-width: 0; }
+  .player-vital-bars .vital-label { display: flex !important; align-items: baseline; justify-content: space-between; gap: 8px; }
+  #playerDockName { font-size: 18px !important; font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  #playerDockHp { font-size: 16px !important; font-weight: 900; color: #b3261e !important; flex: 0 0 auto; }
+  .player-vital-bars .vital-bar-out { height: 10px !important; width: 100% !important; }
+  .player-dock-right-status { flex: 0 0 auto; }
+  /* Slot: 4 caselle in fila sulla stessa riga dei pulsanti più piccole */
+  .slots-and-actions-bar { display: flex !important; flex-direction: column !important; gap: 6px !important; }
+  .slots-dock { display: grid !important; grid-template-columns: repeat(4, 1fr); gap: 6px !important; width: 100%; }
+  .slots-dock .slot-token { height: 34px !important; min-width: 0 !important; width: auto !important; justify-content: center; gap: 6px; padding: 0 4px !important; }
+  .slots-dock .slot-stat-icon { width: 20px !important; height: 20px !important; }
+  .slots-dock .slot-token span { font-size: 18px !important; }
+  .action-toolbar { display: grid !important; grid-template-columns: 1fr auto 1fr; gap: 6px !important; width: 100%; align-items: stretch; }
+  .action-toolbar > * { min-height: 42px; margin: 0 !important; }
+  .action-toolbar .btn-pb { font-size: 13px !important; padding: 4px 6px !important; line-height: 1.1; }
+  .action-toolbar .btn-endturn { font-size: 20px !important; padding: 4px 8px !important; line-height: 1; }
+  .action-toolbar .draw-stepper { align-self: center; }
+  /* Mano: le carte si adattano all'altezza dello schermo */
+  #playerHandCarousel.hand-spread, #playerHandCarousel { --hand-card-w: clamp(84px, 15vh, 126px) !important; }
+  #playerHandCarousel.hand-spread { padding-top: 6px !important; padding-bottom: 6px !important; }
+}
+/* Telefoni bassi: Minaccia più piccola, così i nemici restano visibili sopra la tua zona */
+@media (max-width: 999px) and (max-height: 760px) {
+  .threat-silver-frame-wrap { width: 92px !important; }
+  .threat-central-card-wrap { padding-top: 8px !important; padding-bottom: 8px !important; }
+}
