@@ -80,7 +80,7 @@ class AudioManager {
         this.ctx.resume().catch(() => {});
       }
       const audio = this.getAudioElement();
-      if (audio && (this._wasPlayingBeforeBackground || this.pendingTrack)) {
+      if (audio && !this.musicaSospesa && (this._wasPlayingBeforeBackground || this.pendingTrack)) {
         this._wasPlayingBeforeBackground = false;
         audio.volume = this.getEffectiveMusicVolume();
         const p = audio.play();
@@ -133,6 +133,8 @@ class AudioManager {
     try {
       if (!trackName) return;
       this.currentTrackName = trackName;
+      // durante una scena della Storia suona la sua musica (js/storia_suoni.js): questa riparte alla chiusura
+      if (this.musicaSospesa) return;
       this.pendingTrack = trackName;
       const vol = this.getEffectiveMusicVolume();
       const path = `assets/audio/${trackName}`;
