@@ -8,4 +8,4 @@ Pagina unica con tutti i social di Monomythos: https://alexxcast.github.io/Monom
   Instagram `instagram_business_manage_insights`. Bluesky non dà le visualizzazioni, Telegram solo gli iscritti.
 - Analisi AI: ogni sera un'attività programmata di Claude riscrive la issue con etichetta `analisi-ai`; dalla pagina puoi scriverle.
 - Invio dei video: funziona quando sono unite anche le modifiche dei video promozionali (workflow `promo-video.yml`).
-- Chiave: token GitHub fine-grained solo su Monomytos con Actions, Contents e Issues in lettura e scrittura, incollato nelle Impostazioni. Resta nel browser.
+- Accesso solo tuo: senza chiave la pagina non mostra niente. Chiave: token GitHub fine-grained solo su Monomytos con Actions, Contents e Issues in lettura e scrittura, incollato nelle Impostazioni. Resta nel browser.
