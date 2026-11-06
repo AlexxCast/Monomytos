@@ -1,5 +1,33 @@
 [
  {
+  "id": "aggancio_stella",
+  "lingua": "it",
+  "data": "2026-11-06T17:59:05.763Z",
+  "prova": true,
+  "didascalia_instagram": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "tiktok": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "bluesky": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "telegram": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-06_aggancio_stella.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/42266353338"
+ },
+ {
   "id": "storia_eclissi",
   "lingua": "it",
   "data": "2026-11-05T20:28:23.630Z",
