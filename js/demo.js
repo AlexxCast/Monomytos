@@ -170,6 +170,21 @@
 
   // Nella demo niente registrazione né accesso: si gioca subito come ospite, con i dati salvati su questo dispositivo.
   // Va fatto adesso (prima di DOMContentLoaded), perché account.js avvia l'accesso appena la pagina è pronta.
+  // I dati della demo sono separati da quelli dell'account e durano solo finché la scheda resta aperta:
+  // ogni nuova visita riparte da zero, con la scelta dello starter e il tutorial (richiesta di Alessio).
+  if (Demo.attiva && window.Progression) {
+    const P = window.Progression;
+    P.storageKey = 'monomythos_demo_sessione';
+    P.save = function (localOnly = false) {
+      if (!localOnly) this.data._modificato = Date.now();
+      try { sessionStorage.setItem(this.storageKey, JSON.stringify(this.data)); } catch (e) {}
+    };
+    let salvati = null;
+    try { salvati = JSON.parse(sessionStorage.getItem(P.storageKey) || 'null'); } catch (e) {}
+    // load() legge una chiave che in localStorage non esiste, quindi dà i dati di partenza
+    P.data = salvati ? { ...P.getDefaultData(), ...salvati } : P.load();
+  }
+
   if (Demo.attiva && window.Account) {
     const A = window.Account;
     A.init = function () {
