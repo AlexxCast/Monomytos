@@ -2,7 +2,7 @@ name: Genera immagini Gemini (API)
 
 # Genera le illustrazioni con l'API ufficiale di Gemini (Vertex AI, credito di prova Google Cloud):
 # un prompt = una richiesta separata, poi le mette nel gioco con inserisci.py.
-# Serve il segreto GCP_SA_KEY (chiave JSON del service account con ruolo "Vertex AI User").
+# Serve il segreto GCP_SA_KEY (chiave JSON del service account con ruolo "Agent Platform User" (ex Vertex AI User)).
 on:
   workflow_dispatch:
     inputs:
