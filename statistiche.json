@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-05T23:38:24.345Z",
+ "aggiornato": "2026-11-06T06:43:08.191Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -7,7 +7,7 @@
     "nome": "Monomythos Card Game",
     "follower": 0,
     "views": 0,
-    "video": 0,
+    "video": 1,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
@@ -17,13 +17,13 @@
      "data": "2026-11-05T19:41:32Z",
      "link": "https://youtube.com/shorts/N71Wh4FGnts",
      "privato": false,
-     "views": 12,
+     "views": 16,
      "likes": 2,
      "commenti": 0
     }
    ],
    "totali": {
-    "views": 12,
+    "views": 16,
     "likes": 2,
     "commenti": 0,
     "condivisioni": 0
@@ -52,14 +52,14 @@
      "data": "2026-11-05T20:28:42.871Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzlpfqkgdb2y",
      "views": 0,
-     "likes": 3,
+     "likes": 4,
      "commenti": 0,
      "condivisioni": 1
     }
    ],
    "totali": {
     "views": 0,
-    "likes": 3,
+    "likes": 4,
     "commenti": 0,
     "condivisioni": 1
    }
