@@ -391,6 +391,23 @@ function durataRipresa(nome) {
   const riprese = {};
   for (const nome of Object.keys(copione.riprese)) {
     const r = copione.riprese[nome];
+    // "immagine": un'illustrazione (es. assets/storia/s_stella.webp) con zoom lento, senza browser
+    if (r.tipo === 'immagine') {
+      const durata = durataRipresa(nome), n = Math.ceil(durata * 30);
+      const dir = path.join(outDir, 'ripresa_' + nome);
+      fs.rmSync(dir, { recursive: true, force: true });
+      fs.mkdirSync(dir, { recursive: true });
+      const z = r.zoom == null ? 0.15 : r.zoom, cy = r.centro_y == null ? 0.35 : r.centro_y;
+      require('child_process').execFileSync('ffmpeg', ['-v', 'error', '-loop', '1', '-i', path.join(__dirname, '..', r.file),
+        '-vf', `scale=2160:3840:force_original_aspect_ratio=increase,crop=2160:3840,zoompan=z='1+${z}*on/${n}':x='iw/2-(iw/zoom/2)':y='max(0,min(ih-ih/zoom,ih*${cy}-ih/zoom/2))':d=1:s=1080x1920:fps=30`,
+        '-frames:v', String(n), '-q:v', '3', path.join(dir, '%05d.jpg')]);
+      let lista = 'ffconcat version 1.0\n';
+      for (let k = 1; k <= n; k++) lista += `file '${String(k).padStart(5, '0')}.jpg'\nduration 0.0333\n`;
+      fs.writeFileSync(path.join(dir, 'fotogrammi.txt'), lista);
+      riprese[nome] = { cartella: path.basename(dir), fotogrammi: n, durata: +(n / 30).toFixed(2), eventi: [], zone: {} };
+      console.log(`ripresa ${nome} (immagine ${r.file}): ${n} fotogrammi`);
+      continue;
+    }
     const prepara = RIPRESE[r.tipo];
     if (!prepara) { console.error(`Ripresa ${nome}: tipo sconosciuto "${r.tipo}"`); process.exit(1); }
     const durata = durataRipresa(nome);

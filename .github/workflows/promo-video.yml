@@ -6,10 +6,9 @@ name: Video promozionali
 # arriva una issue con il video, le didascalie pronte e l'esito di ogni piattaforma.
 # Gratis: GitHub Actions è illimitato per i repository pubblici.
 on:
-  # Uscita giornaliera SPENTA (Alessio, 5/11): prima la lore, i video di gameplay quando le carte sono pronte.
-  # Per riaccenderla togli il # dalle due righe qui sotto.
-  # schedule:
-  #   - cron: '0 15 * * *'   # prepara alle 16:00 ora italiana d'inverno; esce un'ora dopo (RITARDO_VIDEO_MIN)
+  # Settimana di prova dal 6/11 (Alessio): un video di lore al giorno dalla scaletta.
+  schedule:
+    - cron: '50 16 * * *'   # prepara alle 17:50 ora italiana d'inverno; esce un'ora dopo (~19:00, RITARDO_VIDEO_MIN)
   workflow_dispatch:
     inputs:
       copione:
@@ -83,7 +82,8 @@ jobs:
         if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
         run: |
           npm install --no-save --no-audit --no-fund playwright@1.48.2
-          npx playwright install --with-deps chromium
+          # a volte l'installazione si blocca: dopo 5 minuti riprova una volta
+          timeout 300 npx playwright install --with-deps chromium || timeout 420 npx playwright install --with-deps chromium
           which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
 
       - name: Registra il gameplay
