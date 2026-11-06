@@ -415,3 +415,6 @@ window.MONOMYTHOS_EN_REGOLE.unshift(
   ['^Resta nel Velo: (.+)$', 'Stay in the Veil: $1'],
   ['^Percorso del Velo · Capitolo (\\d+) · Missione (\\d+)/(\\d+): (.+)$', 'Path of the Veil · Chapter $1 · Mission $2/$3: $4']
 );
+// Un campione per missione (mazzo in prova)
+Object.assign(window.MONOMYTHOS_EN, { "Il tuo campione": "Your champion" });
+window.MONOMYTHOS_EN_REGOLE.unshift(['^Giochi con il mazzo di (.+) in prova: la tua collezione non cambia\\.$', 'You play with $1\'s deck on trial: your collection does not change.']);

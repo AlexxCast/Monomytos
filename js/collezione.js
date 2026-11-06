@@ -226,8 +226,16 @@
     // Mazzo starter da 60 carte (30 carte diverse × 2 copie), tutte regalate: le carte dell'eroe
     // (senza Epiche e Leggendarie) più carte Comuni/Non comuni di altri eroi con i Tag ammessi dall'Archetipo
     creaMazzoStarter(nome) {
-      const D = window.MONOMYTHOS_DATA, d = this.p.data;
-      const s = STARTER.find(x => x.eroe === nome) || { mazzo: 'Mazzo di ' + nome };
+      const d = this.p.data, s = STARTER.find(x => x.eroe === nome) || { mazzo: 'Mazzo di ' + nome };
+      const { carte, creation } = this.mazzoStarterDati(nome);
+      Object.keys(carte).forEach(id => { d.unlockedCards[id] = Math.max(d.unlockedCards[id] || 0, carte[id]); });
+      this.p.saveCustomDeck(s.mazzo, nome, carte, creation);
+      return Object.values(carte).reduce((x, y) => x + y, 0);
+    },
+
+    // Il mazzo starter di un eroe, senza regalarlo: lo usa anche la Storia come "mazzo in prova" del campione della missione
+    mazzoStarterDati(nome) {
+      const D = window.MONOMYTHOS_DATA;
       const cc = D.creation_cards || [];
       const pick = role => cc.find(c => c.role === role && c.char === nome) || {};
       const o = pick('origine'), a = pick('archetipo'), co = pick('costume'), pb = pick('pb');
@@ -251,13 +259,9 @@
       const scelte = [];
       [...proprie, ...altre].forEach(c => { if (scelte.length < REGOLE_MAZZO.carteMin / REGOLE_MAZZO.copieMax && !scelte.includes(c)) scelte.push(c); });
       const carte = {};
-      scelte.forEach(c => {
-        carte[c.id] = REGOLE_MAZZO.copieMax;
-        d.unlockedCards[c.id] = Math.max(d.unlockedCards[c.id] || 0, REGOLE_MAZZO.copieMax);
-      });
+      scelte.forEach(c => { carte[c.id] = REGOLE_MAZZO.copieMax; });
       const creation = { origine: o.name, archetipo: a.name, costume: co.name, pb: pb.name, str, spd, tech, end, vita: o.vita || 25, allowedTags: tags, pb_desc: pb.testo || '' };
-      this.p.saveCustomDeck(s.mazzo, nome, carte, creation);
-      return Object.values(carte).reduce((x, y) => x + y, 0);
+      return { carte, creation };
     },
 
     // Account creati prima di questa versione: se non hanno un mazzo da 60 valido, ricevono quello starter
