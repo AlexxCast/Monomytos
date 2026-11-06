@@ -1,0 +1,43 @@
+name: Collega TikTok
+
+# Ultimo passo per collegare TikTok, senza PC: dopo aver dato il permesso a TikTok,
+# la pagina promo/callback.html mostra un codice. Incollalo qui (Run workflow) entro pochi minuti:
+# il lavoro lo scambia con il "refresh token" e lo salva da solo nel Secret TIKTOK_REFRESH_TOKEN.
+# Servono i Secrets TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET e PAT_SEGRETI (chiave con permesso Secrets).
+on:
+  workflow_dispatch:
+    inputs:
+      codice:
+        description: 'Codice mostrato dalla pagina dopo il permesso TikTok'
+        required: true
+
+jobs:
+  collega:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Scambia il codice e salva il token
+        env:
+          CODICE: ${{ inputs.codice }}
+          KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          GH_TOKEN: ${{ secrets.PAT_SEGRETI }}
+        run: |
+          [ -n "$KEY" ] && [ -n "$SECRET" ] || { echo "::error::Mancano i Secrets TIKTOK_CLIENT_KEY / TIKTOK_CLIENT_SECRET"; exit 1; }
+          [ -n "$GH_TOKEN" ] || { echo "::error::Manca il Secret PAT_SEGRETI: senza non posso salvare il token"; exit 1; }
+          node -e '
+            (async () => {
+              const r = await fetch("https://open.tiktokapis.com/v2/oauth/token/", { method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({ client_key: process.env.KEY, client_secret: process.env.SECRET,
+                  code: decodeURIComponent(process.env.CODICE.trim()), grant_type: "authorization_code",
+                  redirect_uri: "https://alexxcast.github.io/Monomytos/promo/callback.html" }) });
+              const j = await r.json();
+              if (!j.refresh_token) { console.log("::error::TikTok ha risposto: " + JSON.stringify(j).slice(0, 300)); process.exit(1); }
+              console.log("::add-mask::" + j.refresh_token);
+              require("fs").writeFileSync("rt.txt", j.refresh_token);
+              console.log("Permessi concessi: " + j.scope + " · il token vale " + Math.round((j.refresh_expires_in || 0) / 86400) + " giorni");
+            })();'
+          gh secret set TIKTOK_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < rt.txt
+          rm rt.txt
+          echo "✅ TikTok collegato: Secret TIKTOK_REFRESH_TOKEN salvato." >> "$GITHUB_STEP_SUMMARY"
