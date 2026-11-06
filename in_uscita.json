@@ -1,5 +1,19 @@
 [
  {
+  "id": "video:42266702179",
+  "titolo": "aggancio_stella",
+  "piattaforme": [
+   "youtube",
+   "tiktok",
+   "bluesky",
+   "telegram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-06_aggancio_stella.mp4",
+  "creato": "2026-11-06T18:02:41.113Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-06T18:02:41.112Z"
+ },
+ {
   "id": "video:42103264722",
   "titolo": "storia_eclissi",
   "piattaforme": [
