@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-06T06:43:08.191Z",
+ "aggiornato": "2026-11-06T11:04:15.666Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -30,8 +30,32 @@
    }
   },
   "tiktok": {
-   "stato": "non collegata",
-   "nota": "mancano i Secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN"
+   "stato": "ok",
+   "account": {
+    "nome": "Monomythos",
+    "follower": 2,
+    "likes": 5,
+    "video": 1,
+    "link": "https://vm.tiktok.com/ZN8fB26nh/"
+   },
+   "video": [
+    {
+     "id": "7704768058522438944",
+     "titolo": "Ad Ataca le luci si spengono e nel cielo compare la Stella della Follia. Chi la fissa troppo cambia lato. Tu da che parte stai? Modalità Storia, Capitolo 1: L'Eclissi Sintetica. 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
+     "data": "2026-11-05T19:15:11.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7704768058522438944?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 594,
+     "likes": 5,
+     "commenti": 0,
+     "condivisioni": 0
+    }
+   ],
+   "totali": {
+    "views": 594,
+    "likes": 5,
+    "commenti": 0,
+    "condivisioni": 0
+   }
   },
   "instagram": {
    "stato": "non collegata",
