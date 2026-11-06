@@ -1583,15 +1583,18 @@
       },
       "musica": "m1_selezione.mp3",
       "musica_da": 60,
-      "nota_riprese": "x e y sono illustrazioni della Storia (assets/storia/s_stella, s_infetti) con zoom lento, montate a mano: registra.js non le gira ancora",
       "riprese": {
         "x": {
           "tipo": "immagine",
-          "file": "assets/storia/s_stella.webp"
+          "file": "assets/storia/s_stella.webp",
+          "zoom": 0.35,
+          "centro_y": 0.25
         },
         "y": {
           "tipo": "immagine",
-          "file": "assets/storia/s_infetti.webp"
+          "file": "assets/storia/s_infetti.webp",
+          "zoom": 0.12,
+          "centro_y": 0.35
         },
         "p": {
           "tipo": "partita",
@@ -1662,6 +1665,533 @@
         "lore",
         "villain",
         "storymode"
+      ]
+    },
+    {
+      "id": "mistero_prometeo",
+      "formato": "Mistero / domanda",
+      "tema": "villain",
+      "titolo": {
+        "it": "Cosa è successo in piazza?",
+        "en": "Cosa è successo in piazza?"
+      },
+      "musica": "m1_selezione.mp3",
+      "musica_da": 60,
+      "riprese": {
+        "a": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_metropoli.webp",
+          "zoom": 0.18,
+          "centro_y": 0.4
+        },
+        "b": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_droni_folla.webp",
+          "zoom": 0.15,
+          "centro_y": 0.35
+        },
+        "c": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_schermi.webp",
+          "zoom": 0.12,
+          "centro_y": 0.4
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "L'eroe più amato di *Ataca*…",
+            "en": "L'eroe più amato di *Ataca*…"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "…ha fatto sparare sulla *folla*?",
+            "en": "…ha fatto sparare sulla *folla*?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Scopri chi c'è *dietro*",
+            "en": "Scopri chi c'è *dietro*"
+          },
+          "transizione": "dissolvenza",
+          "stile": "grande"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Modalità Storia",
+          "en": "Story mode"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2.2,
+      "didascalia": {
+        "it": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché? 🤖",
+        "en": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché? 🤖"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "storymode"
+      ]
+    },
+    {
+      "id": "pov_occhi",
+      "formato": "POV",
+      "tema": "villain",
+      "titolo": {
+        "it": "POV: sei l'ultimo con gli occhi puliti",
+        "en": "POV: sei l'ultimo con gli occhi puliti"
+      },
+      "musica": "m1_selezione.mp3",
+      "musica_da": 60,
+      "riprese": {
+        "a": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_piazza.webp",
+          "zoom": 0.15,
+          "centro_y": 0.4
+        },
+        "b": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_infetti.webp",
+          "zoom": 0.12,
+          "centro_y": 0.4
+        },
+        "c": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_blackout.webp",
+          "zoom": 0.15,
+          "centro_y": 0.35
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "POV: sei l'ultimo con gli occhi *puliti*",
+            "en": "POV: sei l'ultimo con gli occhi *puliti*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Tutti intorno a te hanno gli occhi *viola*",
+            "en": "Tutti intorno a te hanno gli occhi *viola*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Di chi ti *fidi*?",
+            "en": "Di chi ti *fidi*?"
+          },
+          "transizione": "dissolvenza",
+          "stile": "grande"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Modalità Storia",
+          "en": "Story mode"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2.2,
+      "didascalia": {
+        "it": "Ad Ataca chi guarda la Stella cambia lato. Tu sei ancora pulito… per ora. 👁️",
+        "en": "Ad Ataca chi guarda la Stella cambia lato. Tu sei ancora pulito… per ora. 👁️"
+      },
+      "hashtag": [
+        "pov",
+        "lore",
+        "villain"
+      ]
+    },
+    {
+      "id": "eroe_o_villain",
+      "formato": "Domanda ai commenti",
+      "tema": "villain",
+      "titolo": {
+        "it": "Eroe o Villain?",
+        "en": "Eroe o Villain?"
+      },
+      "musica": "m1_selezione.mp3",
+      "musica_da": 60,
+      "riprese": {
+        "a": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_stella.webp",
+          "zoom": 0.3,
+          "centro_y": 0.25
+        },
+        "b": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_schermi.webp",
+          "zoom": 0.12,
+          "centro_y": 0.4
+        },
+        "c": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_infetti.webp",
+          "zoom": 0.1,
+          "centro_y": 0.4
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Eroe o *Villain*?",
+            "en": "Eroe o *Villain*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Il Velo si nutre della tua *paura*",
+            "en": "Il Velo si nutre della tua *paura*"
+          },
+          "transizione": "flash",
+          "stile": "grande"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Scrivi nei commenti da che parte *stai* 👇",
+            "en": "Scrivi nei commenti da che parte *stai* 👇"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Modalità Storia",
+          "en": "Story mode"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2.2,
+      "didascalia": {
+        "it": "In Monomythos ogni eroe può diventare il Villain. Tu resisteresti al Velo? Scrivilo qui sotto 👇",
+        "en": "In Monomythos ogni eroe può diventare il Villain. Tu resisteresti al Velo? Scrivilo qui sotto 👇"
+      },
+      "hashtag": [
+        "villain",
+        "lore",
+        "boardgame"
+      ]
+    },
+    {
+      "id": "archivio_arena",
+      "formato": "Archivio segreto (lore)",
+      "tema": "villain",
+      "titolo": {
+        "it": "Archivio segreto: l'Arena di Sotto",
+        "en": "Archivio segreto: l'Arena di Sotto"
+      },
+      "musica": "m1_selezione.mp3",
+      "musica_da": 60,
+      "riprese": {
+        "a": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_cisterna.webp",
+          "zoom": 0.15,
+          "centro_y": 0.4
+        },
+        "b": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_cisterna.webp",
+          "zoom": 0.08,
+          "centro_y": 0.5
+        },
+        "c": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_infetti.webp",
+          "zoom": 0.12,
+          "centro_y": 0.4
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Archivio segreto *#1*",
+            "en": "Archivio segreto *#1*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Sotto Ataca c'è un'arena. Nessuno organizza gli *incontri*",
+            "en": "Sotto Ataca c'è un'arena. Nessuno organizza gli *incontri*"
+          },
+          "transizione": "flash",
+          "stile": "grande"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Gli infetti ci arrivano da *soli*",
+            "en": "Gli infetti ci arrivano da *soli*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Modalità Storia",
+          "en": "Story mode"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2.2,
+      "didascalia": {
+        "it": "Archivio segreto #1 — L'Arena di Sotto. Una vecchia cisterna sotto la città, trasformata in un mattatoio. Gli infetti ci arrivano da soli, attirati da un istinto di sciame. 🩸",
+        "en": "Archivio segreto #1 — L'Arena di Sotto. Una vecchia cisterna sotto la città, trasformata in un mattatoio. Gli infetti ci arrivano da soli, attirati da un istinto di sciame. 🩸"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "storymode"
+      ]
+    },
+    {
+      "id": "ore_2347",
+      "formato": "Mini trailer cinematico",
+      "tema": "villain",
+      "titolo": {
+        "it": "Ataca, ore 23:47",
+        "en": "Ataca, ore 23:47"
+      },
+      "musica": "m1_selezione.mp3",
+      "musica_da": 60,
+      "riprese": {
+        "a": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_piazza.webp",
+          "zoom": 0.12,
+          "centro_y": 0.4
+        },
+        "b": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_blackout.webp",
+          "zoom": 0.15,
+          "centro_y": 0.35
+        },
+        "c": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_stella.webp",
+          "zoom": 0.35,
+          "centro_y": 0.25
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Ataca, ore *23:47*",
+            "en": "Ataca, ore *23:47*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "Tutte le luci si *spengono*",
+            "en": "Tutte le luci si *spengono*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 2.7,
+          "testo": {
+            "it": "E nel cielo compare *lei*",
+            "en": "E nel cielo compare *lei*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Modalità Storia",
+          "en": "Story mode"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2.2,
+      "didascalia": {
+        "it": "La notte in cui tutto è cambiato. Capitolo 1: L'Eclissi Sintetica. 🌑",
+        "en": "La notte in cui tutto è cambiato. Capitolo 1: L'Eclissi Sintetica. 🌑"
+      },
+      "hashtag": [
+        "trailer",
+        "lore",
+        "storymode"
+      ]
+    },
+    {
+      "id": "tre_segreti",
+      "formato": "Lista (3 cose)",
+      "tema": "villain",
+      "titolo": {
+        "it": "3 cose che non sai su Ataca",
+        "en": "3 cose che non sai su Ataca"
+      },
+      "musica": "m1_selezione.mp3",
+      "musica_da": 60,
+      "riprese": {
+        "a": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_metropoli.webp",
+          "zoom": 0.15,
+          "centro_y": 0.4
+        },
+        "b": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_cisterna.webp",
+          "zoom": 0.1,
+          "centro_y": 0.5
+        },
+        "c": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_stella.webp",
+          "zoom": 0.3,
+          "centro_y": 0.25
+        },
+        "d": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_droni_folla.webp",
+          "zoom": 0.15,
+          "centro_y": 0.35
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 2.3,
+          "testo": {
+            "it": "3 cose che non sai su *Ataca*",
+            "en": "3 cose che non sai su *Ataca*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 2.3,
+          "testo": {
+            "it": "1. Sotto la città c'è un'arena *segreta*",
+            "en": "1. Sotto la città c'è un'arena *segreta*"
+          },
+          "transizione": "flash",
+          "stile": "grande"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 2.3,
+          "testo": {
+            "it": "2. La Stella non è su nessuna *mappa*",
+            "en": "2. La Stella non è su nessuna *mappa*"
+          },
+          "transizione": "dissolvenza",
+          "stile": "grande"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 2.3,
+          "testo": {
+            "it": "3. I droni non erano per *sorvegliare*",
+            "en": "3. I droni non erano per *sorvegliare*"
+          },
+          "transizione": "dissolvenza",
+          "stile": "grande"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Modalità Storia",
+          "en": "Story mode"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2.2,
+      "didascalia": {
+        "it": "3 segreti della città di Ataca, il mondo di Monomythos. Qual è il più inquietante? 🤔",
+        "en": "3 segreti della città di Ataca, il mondo di Monomythos. Qual è il più inquietante? 🤔"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "curiosità"
       ]
     }
   ]
