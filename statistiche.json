@@ -1,16 +1,26 @@
 {
- "aggiornato": "2026-11-06T17:48:03.900Z",
+ "aggiornato": "2026-11-06T19:24:01.377Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 0,
-    "views": 0,
-    "video": 1,
+    "views": 16,
+    "video": 2,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "eLC5EshF6PA",
+     "titolo": "Se la guardi, diventi il Villain #Shorts",
+     "data": "2026-11-06T18:03:00Z",
+     "link": "https://youtube.com/shorts/eLC5EshF6PA",
+     "privato": false,
+     "views": 0,
+     "likes": 0,
+     "commenti": 0
+    },
     {
      "id": "N71Wh4FGnts",
      "titolo": "L'Eclissi Sintetica #Shorts",
@@ -34,11 +44,21 @@
    "account": {
     "nome": "Monomythos",
     "follower": 2,
-    "likes": 5,
-    "video": 1,
-    "link": "https://vm.tiktok.com/ZN8fyVcCF/"
+    "likes": 7,
+    "video": 2,
+    "link": "https://vm.tiktok.com/ZN8fPa92S/"
    },
    "video": [
+    {
+     "id": "7705123584242371873",
+     "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️ 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
+     "data": "2026-11-06T18:14:47.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7705123584242371873?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 247,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7704768058522438944",
      "titolo": "Ad Ataca le luci si spengono e nel cielo compare la Stella della Follia. Chi la fissa troppo cambia lato. Tu da che parte stai? Modalità Storia, Capitolo 1: L'Eclissi Sintetica. 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
@@ -51,8 +71,8 @@
     }
    ],
    "totali": {
-    "views": 594,
-    "likes": 5,
+    "views": 841,
+    "likes": 7,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -66,10 +86,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 0,
-    "video": 1,
+    "video": 2,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mznxtqwa6x24",
+     "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️",
+     "data": "2026-11-06T18:05:02.289Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mznxtqwa6x24",
+     "views": 0,
+     "likes": 1,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mzlpfqkgdb2y",
      "titolo": "Ad Ataca le luci si spengono e nel cielo compare la Stella della Follia. Chi la fissa trop",
@@ -83,9 +113,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 4,
+    "likes": 5,
     "commenti": 0,
-    "condivisioni": 1
+    "condivisioni": 2
    }
   },
   "telegram": {
