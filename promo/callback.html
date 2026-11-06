@@ -18,7 +18,7 @@
 <body>
 <main>
   <h1>Codice di accesso per i video automatici</h1>
-  <p id="msg">Copia questo codice e incollalo nel terminale dove hai avviato lo script <code>promo/token_tiktok.js</code>. Il codice vale pochi minuti.</p>
+  <p id="msg">Copia questo codice. Poi su GitHub apri Actions → <b>Collega TikTok</b> → Run workflow e incollalo lì (oppure nel terminale dello script <code>promo/token_tiktok.js</code>). Il codice vale pochi minuti.</p>
   <textarea id="code" readonly></textarea>
   <button onclick="navigator.clipboard.writeText(document.getElementById('code').value).then(()=>this.textContent='Copiato!')">Copia</button>
 </main>

@@ -33,7 +33,7 @@ const didascalia = T(copione.didascalia);
 const notaAI = T(dati.nota_ai);
 const testo = notaAI ? `${didascalia}\n\n${notaAI}` : didascalia;
 // Didascalia Instagram: usata dall'API e, finché l'API non è attiva, mostrata nell'app per pubblicare a mano
-const caption = `${testo}\n\nLink in bio 👆\n\n${tag.slice(0, 25).join(' ')}`.slice(0, 2200);
+const caption = `${testo}\n\nLink in bio 👆\n\n${tag.slice(0, 5).join(' ')}`.slice(0, 2200); // Instagram: massimo 5 hashtag
 const linkTxt = lingua === 'it' ? 'Gioca gratis' : 'Play free';
 
 const attendi = ms => new Promise(r => setTimeout(r, ms));

@@ -1572,6 +1572,97 @@
         "launch",
         "newgame"
       ]
+    },
+    {
+      "id": "aggancio_stella",
+      "formato": "Aggancio narrativo (8-10 s)",
+      "tema": "villain",
+      "titolo": {
+        "it": "Se la guardi, diventi il Villain",
+        "en": "Look at it and you become the Villain"
+      },
+      "musica": "m1_selezione.mp3",
+      "musica_da": 60,
+      "nota_riprese": "x e y sono illustrazioni della Storia (assets/storia/s_stella, s_infetti) con zoom lento, montate a mano: registra.js non le gira ancora",
+      "riprese": {
+        "x": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_stella.webp"
+        },
+        "y": {
+          "tipo": "immagine",
+          "file": "assets/storia/s_infetti.webp"
+        },
+        "p": {
+          "tipo": "partita",
+          "eroi": 3,
+          "intro": false,
+          "segui": true,
+          "momento": "atto_quasi_vinto",
+          "durata": 14,
+          "azioni": [
+            {
+              "t": 8,
+              "fai": "chiudi_atto"
+            }
+          ],
+          "primo_piano": false
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "x",
+          "da": 0,
+          "durata": 2.4,
+          "testo": {
+            "it": "Se la guardi…",
+            "en": "If you look at it…"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "y",
+          "da": 0.3,
+          "durata": 2.4,
+          "transizione": "flash",
+          "testo": {
+            "it": "…diventi il *Villain*",
+            "en": "…you become the *Villain*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "p",
+          "da": "card_played#1-0.2",
+          "riserva": 2,
+          "durata": 2.4,
+          "transizione": "scorri",
+          "testo": {
+            "it": "Resisti al *Velo*",
+            "en": "Resist the *Veil*"
+          }
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Modalità Storia",
+          "en": "Story mode"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2.2,
+      "didascalia": {
+        "it": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️",
+        "en": "The Star of Madness has risen over Ataca. Stare at it and you switch sides. Can you resist? 👁️"
+      },
+      "hashtag": [
+        "lore",
+        "villain",
+        "storymode"
+      ]
     }
   ]
 }
