@@ -162,10 +162,33 @@
     'Lo scambio di carte': 'Card trading',
     'Il mazzo delle Minacce': 'The Threat deck',
     'Il resto della Storia': 'The rest of the Story',
+    'Creare un account e salvare i progressi online': 'Creating an account and saving progress online',
     'Fine della demo': 'End of the demo',
     'I capitoli successivi sono nel gioco completo su Google Play, in uscita a': 'The next chapters are in the full game on Google Play, coming in',
     'dicembre 2026': 'December 2026'
   });
+
+  // Nella demo niente registrazione né accesso: si gioca subito come ospite, con i dati salvati su questo dispositivo.
+  // Va fatto adesso (prima di DOMContentLoaded), perché account.js avvia l'accesso appena la pagina è pronta.
+  if (Demo.attiva && window.Account) {
+    const A = window.Account;
+    A.init = function () {
+      this.required = false;
+      this.ospiteLocale = true;
+      document.body.classList.remove('needs-auth');
+      this.updateBadge();
+      // dopo UI.init: starter e tutorial come per un nuovo ospite
+      setTimeout(() => {
+        try {
+          if (window.Collezione) window.Collezione.migra();
+          if (window.Tutorial && window.Tutorial.serve()) window.Tutorial.avvia();
+          else window.UI.showScreen('scr-lobby');
+        } catch (e) { console.error('Demo ospite:', e); }
+      }, 0);
+    };
+    A.showAuth = function () { Demo.blocca('Creare un account e salvare i progressi online'); };
+    A.menu = A.showAuth;
+  }
 
   window.Demo = Demo;
   // Si attiva dopo UI.init (che parte a DOMContentLoaded)
