@@ -1581,8 +1581,8 @@
         "it": "Se la guardi, diventi il Villain",
         "en": "Look at it and you become the Villain"
       },
-      "musica": "m1_selezione.mp3",
-      "musica_da": 60,
+      "musica": "storia_stella.mp3",
+      "musica_da": 0,
       "riprese": {
         "x": {
           "tipo": "immagine",
@@ -1665,7 +1665,8 @@
         "lore",
         "villain",
         "storymode"
-      ]
+      ],
+      "aggancio": "colpo"
     },
     {
       "id": "mistero_prometeo",
@@ -1675,8 +1676,8 @@
         "it": "Cosa è successo in piazza?",
         "en": "Cosa è successo in piazza?"
       },
-      "musica": "m1_selezione.mp3",
-      "musica_da": 60,
+      "musica": "storia_tensione.mp3",
+      "musica_da": 0,
       "riprese": {
         "a": {
           "tipo": "immagine",
@@ -1750,7 +1751,8 @@
         "lore",
         "mistero",
         "storymode"
-      ]
+      ],
+      "aggancio": "glitch"
     },
     {
       "id": "pov_occhi",
@@ -1760,8 +1762,8 @@
         "it": "POV: sei l'ultimo con gli occhi puliti",
         "en": "POV: sei l'ultimo con gli occhi puliti"
       },
-      "musica": "m1_selezione.mp3",
-      "musica_da": 60,
+      "musica": "storia_velo.mp3",
+      "musica_da": 0,
       "riprese": {
         "a": {
           "tipo": "immagine",
@@ -1809,8 +1811,8 @@
           "da": 0,
           "durata": 2.7,
           "testo": {
-            "it": "Di chi ti *fidi*?",
-            "en": "Di chi ti *fidi*?"
+            "it": "E la Stella sta guardando *te*",
+            "en": "And the Star is watching *you*"
           },
           "transizione": "dissolvenza",
           "stile": "grande"
@@ -1835,18 +1837,19 @@
         "pov",
         "lore",
         "villain"
-      ]
+      ],
+      "aggancio": "risucchio"
     },
     {
       "id": "eroe_o_villain",
-      "formato": "Domanda ai commenti",
+      "formato": "Regola della lore (con contesto)",
       "tema": "villain",
       "titolo": {
-        "it": "Eroe o Villain?",
-        "en": "Eroe o Villain?"
+        "it": "Perché gli eroi di Ataca diventano Villain",
+        "en": "Why Ataca heroes become Villains"
       },
-      "musica": "m1_selezione.mp3",
-      "musica_da": 60,
+      "musica": "storia_velo.mp3",
+      "musica_da": 20,
       "riprese": {
         "a": {
           "tipo": "immagine",
@@ -1873,8 +1876,8 @@
           "da": 0,
           "durata": 2.7,
           "testo": {
-            "it": "Eroe o *Villain*?",
-            "en": "Eroe o *Villain*?"
+            "it": "Ad Ataca nessun eroe è al *sicuro*",
+            "en": "In Ataca no hero is *safe*"
           },
           "stile": "grande"
         },
@@ -1883,8 +1886,8 @@
           "da": 0,
           "durata": 2.7,
           "testo": {
-            "it": "Il Velo si nutre della tua *paura*",
-            "en": "Il Velo si nutre della tua *paura*"
+            "it": "Ogni paura nutre il *Velo*",
+            "en": "Every fear feeds the *Veil*"
           },
           "transizione": "flash",
           "stile": "grande"
@@ -1894,8 +1897,8 @@
           "da": 0,
           "durata": 2.7,
           "testo": {
-            "it": "Scrivi nei commenti da che parte *stai* 👇",
-            "en": "Scrivi nei commenti da che parte *stai* 👇"
+            "it": "Chi ne assorbe troppa diventa *Villain*",
+            "en": "Absorb too much and you become the *Villain*"
           },
           "stile": "grande",
           "transizione": "dissolvenza"
@@ -1913,14 +1916,15 @@
       },
       "durata_fine": 2.2,
       "didascalia": {
-        "it": "In Monomythos ogni eroe può diventare il Villain. Tu resisteresti al Velo? Scrivilo qui sotto 👇",
-        "en": "In Monomythos ogni eroe può diventare il Villain. Tu resisteresti al Velo? Scrivilo qui sotto 👇"
+        "it": "In Monomythos il Velo di Tenebra si nutre della paura. Un eroe che ne assorbe troppa cambia lato, e da quel momento gioca contro i suoi compagni. 🌑",
+        "en": "In Monomythos the Veil of Darkness feeds on fear. A hero who absorbs too much switches sides and plays against their own team. 🌑"
       },
       "hashtag": [
         "villain",
         "lore",
         "boardgame"
-      ]
+      ],
+      "aggancio": "colpo"
     },
     {
       "id": "archivio_arena",
@@ -1930,8 +1934,8 @@
         "it": "Archivio segreto: l'Arena di Sotto",
         "en": "Archivio segreto: l'Arena di Sotto"
       },
-      "musica": "m1_selezione.mp3",
-      "musica_da": 60,
+      "musica": "storia_azione.mp3",
+      "musica_da": 0,
       "riprese": {
         "a": {
           "tipo": "immagine",
@@ -2005,7 +2009,8 @@
         "lore",
         "worldbuilding",
         "storymode"
-      ]
+      ],
+      "aggancio": "risucchio"
     },
     {
       "id": "ore_2347",
@@ -2015,8 +2020,8 @@
         "it": "Ataca, ore 23:47",
         "en": "Ataca, ore 23:47"
       },
-      "musica": "m1_selezione.mp3",
-      "musica_da": 60,
+      "musica": "storia_calma.mp3",
+      "musica_da": 0,
       "riprese": {
         "a": {
           "tipo": "immagine",
@@ -2090,7 +2095,8 @@
         "trailer",
         "lore",
         "storymode"
-      ]
+      ],
+      "aggancio": "glitch"
     },
     {
       "id": "tre_segreti",
@@ -2100,8 +2106,8 @@
         "it": "3 cose che non sai su Ataca",
         "en": "3 cose che non sai su Ataca"
       },
-      "musica": "m1_selezione.mp3",
-      "musica_da": 60,
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
       "riprese": {
         "a": {
           "tipo": "immagine",
@@ -2185,14 +2191,15 @@
       },
       "durata_fine": 2.2,
       "didascalia": {
-        "it": "3 segreti della città di Ataca, il mondo di Monomythos. Qual è il più inquietante? 🤔",
+        "it": "3 segreti della città di Ataca, il mondo di Monomythos. 🌑",
         "en": "3 segreti della città di Ataca, il mondo di Monomythos. Qual è il più inquietante? 🤔"
       },
       "hashtag": [
         "lore",
         "worldbuilding",
         "curiosità"
-      ]
+      ],
+      "aggancio": "colpo"
     }
   ]
 }

@@ -129,10 +129,10 @@ function testoInquadratura(q, da, a, primo) {
     const passo = primo ? 0 : Math.min(0.09, 0.45 / Math.max(1, n));
     if (stile === 'grande' && primo) {
       // Gancio: già leggibile nel primo fotogramma, poi si assesta e spinge in avanti
-      evento(da, a, 'Grande', `{\\an${an}\\pos(${x},${y})\\fscx116\\fscy116\\t(0,200,\\fscx100\\fscy100)\\t(200,${ms(durata)},\\fscx108\\fscy108)\\fad(0,90)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
+      evento(da, a, 'Grande', `{\\an${an}\\pos(${x},${y})\\fad(0,180)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
     } else if (stile === 'grande') {
       // Parola o numero che "sbatte" sullo schermo
-      evento(da, a, 'Grande', `{\\an${an}\\pos(${x},${y})\\fscx135\\fscy135\\alpha&HFF&\\t(0,260,\\fscx100\\fscy100\\alpha&H00&)\\t(260,${ms(durata)},\\fscx106\\fscy106)\\fad(0,150)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
+      evento(da, a, 'Grande', `{\\an${an}\\pos(${x},${y})\\fad(220,180)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
     } else if (stile === 'box') {
       evento(da, a, 'Box', `{\\an${an}\\pos(${x},${y})\\fscx80\\fscy80\\t(0,120,\\fscx106\\fscy106)\\t(120,220,\\fscx100\\fscy100)\\fad(60,90)}` + String(testo).replace(/\*/g, '').replace(/[{}]/g, ''));
     } else {
@@ -202,9 +202,14 @@ fs.writeFileSync(fileAss, ass);
 // ---------- Effetti sonori generati (nessun file esterno, nessuna licenza) ----------
 const SUONI = {
   whoosh: ['-f', 'lavfi', '-i', 'anoisesrc=d=0.5:c=pink:a=0.7:r=44100,highpass=f=350,lowpass=f=4500,afade=t=in:d=0.28:curve=exp,afade=t=out:st=0.28:d=0.22,volume=0.55,aformat=channel_layouts=stereo'],
+  // aggancio iniziale: colpo basso + crepitio, diverso da video a video (copione.aggancio)
+  colpo: ['-f', 'lavfi', '-i', "aevalsrc='1.0*sin(2*PI*(70-45*t)*t)*exp(-3.5*t)+0.5*(random(0)-0.5)*exp(-25*t)':d=1.2:s=44100,aformat=channel_layouts=stereo"],
+  risucchio: ['-f', 'lavfi', '-i', "aevalsrc='0.7*sin(2*PI*(60+400*t*t)*t)*min(1,t*3)*exp(-1.2*t)+0.3*(random(0)-0.5)*t':d=0.9:s=44100,afade=t=out:st=0.75:d=0.15,aformat=channel_layouts=stereo"],
+  glitch: ['-f', 'lavfi', '-i', "aevalsrc='0.6*sgn(sin(2*PI*180*t))*(mod(floor(t*30),2))*exp(-3*t)+0.4*(random(0)-0.5)*exp(-8*t)':d=0.7:s=44100,lowpass=f=5000,aformat=channel_layouts=stereo"],
   impatto: ['-f', 'lavfi', '-i', "aevalsrc='0.9*sin(2*PI*(95-60*t)*t)*exp(-5*t)+0.25*(random(0)-0.5)*exp(-40*t)':d=0.8:s=44100,aformat=channel_layouts=stereo"]
 };
 const suoni = [];
+if (copione.aggancio !== false) suoni.push({ s: copione.aggancio || 'colpo', t: 0 });
 Q.forEach((q, i) => { const tr = i > 0 && TRANS[q.transizione || 'taglio']; if (tr && tr.suono) suoni.push({ s: tr.suono, t: Math.max(0, inizi[i] - (tr.suono === 'whoosh' ? 0.2 : 0)) }); if (q.stile === 'grande') suoni.push({ s: 'impatto', t: inizi[i] }); });
 if (FINE && trFine && trFine.suono) suoni.push({ s: trFine.suono, t: inizioFine });
 
@@ -268,7 +273,7 @@ if (musica) {
 suoni.forEach((s, k) => {
   args.push(...SUONI[s.s]);
   const ritardo = Math.round(s.t * 1000);
-  filtri.push(`[${n}:a]adelay=${ritardo}|${ritardo},volume=${s.s === 'impatto' ? 0.7 : 0.45}[sfx${k}]`);
+  filtri.push(`[${n}:a]adelay=${ritardo}|${ritardo},volume=${s.s === 'impatto' ? 0.7 : ['colpo', 'risucchio', 'glitch'].includes(s.s) ? 0.9 : 0.45}[sfx${k}]`);
   audio.push(`[sfx${k}]`);
   n++;
 });
