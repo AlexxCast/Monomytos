@@ -59,37 +59,39 @@
   // (stella che pulsa, nebbia del Velo, scintille, blackout, pioggia di energia, disturbo digitale).
   // L'illustrazione dedicata è assets/storia/<id>.webp (fatta con Gemini: strumenti/gemini/prompt_storia.md);
   // finché non c'è si usa l'immagine 'fb' già presente nel gioco.
+  // Suono (js/storia_suoni.js): 'musica' = brano assets/audio/storia_<musica>.mp3; i suoni d'ambiente vengono dagli effetti
+  // (stella = battito, torce = fuoco, tv = disturbo...) oppure da 'suoni'; 'colpi' = suoni brevi all'arrivo della vignetta.
   const G = 'assets/cards/gen/';
   const VIGNETTE = {
-    s_metropoli: { fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: ['stelle'] },
-    s_blackout: { fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'lampi', 'scintille'], pos: { stella: [70, 15], lampi: [35, 44] } },
-    s_stella: { fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stelle', 'stella'], pos: { stella: [50, 28] } },
-    s_piazza: { fb: G + 't_lassediodeipredonidellerovine.webp', moto: 'zoom', strati: ['stella', 'occhi'], pos: { stella: [68, 17], occhi: 62 } },
-    s_droni_folla: { fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'laser', 'scintille', 'scuoti'], pos: { stella: [24, 8] } },
-    s_schermi: { fb: G + 't_incursionedeidronicinetici.webp', moto: 'zoomOut', strati: ['tv', 'acqua'], pos: { tv: [48, 26, 50, 31] } },
-    s_infetti: { fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: ['stella', 'nebbia', 'occhi'], pos: { stella: [62, 19], occhi: 48 } },
-    s_cisterna: { fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: ['torce', 'occhi'], pos: { occhi: 47 } },
-    s_droni_cinetici: { fb: G + 't_incursionedeidronicinetici.webp', moto: 'panGiu', strati: ['scintille'] },
-    s_falesia: { fb: G + 't_imboscatasullafalesia.webp', moto: 'panSx', strati: ['nebbia'] },
-    s_incappucciati: { fb: G + 't_cultistidelvelo.webp', moto: 'zoom', strati: ['nebbia', 'buio'] },
-    s_cripte: { fb: G + 't_cultistidelvelo.webp', moto: 'zoomOut', strati: ['nebbia'] },
-    s_torre: { fb: G + 't_ilrivaletraditore.webp', moto: 'panSu', strati: ['nebbia'] },
-    s_esplosione: { fb: G + 't_rivoltadellafonderia.webp', moto: 'zoom', strati: ['scintille', 'scuoti'] },
-    s_fonderia: { fb: G + 't_rivoltadellafonderia.webp', moto: 'panDx', strati: ['scintille'] },
-    s_quartier_generale: { fb: G + 't_lintelligenzarogue.webp', moto: 'zoomOut', strati: [] },
-    s_torre_prometeo: { fb: G + 't_lintelligenzarogue.webp', moto: 'panSu', strati: ['glitch'] },
-    s_alveare: { fb: G + 't_ilcolossodirovina.webp', moto: 'zoomOut', strati: ['scintille'] },
-    s_viadotto: { fb: G + 't_ilcampioneimbattuto.webp', moto: 'panDx', strati: [] },
-    s_statua: { fb: G + 't_ilcolossodirovina.webp', moto: 'panSu', strati: ['scuoti'] },
-    s_custode: { fb: G + 't_ilcustodedacciaio.webp', moto: 'zoom', strati: ['scintille'] },
-    s_rituale: { fb: G + 't_ilmietitoredellastrooscuro.webp', moto: 'zoom', strati: ['stella', 'nebbia'] },
-    s_cielo_spezzato: { fb: G + 't_lecosenzanome.webp', moto: 'zoomOut', strati: ['pioggia', 'scuoti'] },
-    s_strappo: { fb: G + 't_lecosenzanome.webp', moto: 'zoom', strati: ['glitch'] },
-    s_alba: { fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: ['alba'] },
-    s_pioggia: { fb: 'assets/bg/cosmo_villain.webp', moto: 'panGiu', strati: ['pioggia'] },
+    s_metropoli: { musica: 'calma', suoni: ['vento'], fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: ['stelle'] },
+    s_blackout: { musica: 'tensione', colpi: ['spegnimento'], fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'lampi', 'scintille'], pos: { stella: [70, 15], lampi: [35, 44] } },
+    s_stella: { musica: 'stella', suoni: ['battito', 'folla'], fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stelle', 'stella'], pos: { stella: [50, 28] } },
+    s_piazza: { musica: 'stella', suoni: ['folla', 'battito'], fb: G + 't_lassediodeipredonidellerovine.webp', moto: 'zoom', strati: ['stella', 'occhi'], pos: { stella: [68, 17], occhi: 62 } },
+    s_droni_folla: { musica: 'azione', suoni: ['laser', 'scintille', 'folla'], fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'laser', 'scintille', 'scuoti'], pos: { stella: [24, 8] } },
+    s_schermi: { musica: 'tensione', fb: G + 't_incursionedeidronicinetici.webp', moto: 'zoomOut', strati: ['tv', 'acqua'], pos: { tv: [48, 26, 50, 31] } },
+    s_infetti: { musica: 'stella', fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: ['stella', 'nebbia', 'occhi'], pos: { stella: [62, 19], occhi: 48 } },
+    s_cisterna: { musica: 'tensione', suoni: ['fuoco', 'folla'], fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: ['torce', 'occhi'], pos: { occhi: 47 } },
+    s_droni_cinetici: { musica: 'azione', fb: G + 't_incursionedeidronicinetici.webp', moto: 'panGiu', strati: ['scintille'] },
+    s_falesia: { musica: 'tensione', fb: G + 't_imboscatasullafalesia.webp', moto: 'panSx', strati: ['nebbia'] },
+    s_incappucciati: { musica: 'stella', fb: G + 't_cultistidelvelo.webp', moto: 'zoom', strati: ['nebbia', 'buio'] },
+    s_cripte: { musica: 'stella', fb: G + 't_cultistidelvelo.webp', moto: 'zoomOut', strati: ['nebbia'] },
+    s_torre: { musica: 'stella', fb: G + 't_ilrivaletraditore.webp', moto: 'panSu', strati: ['nebbia'] },
+    s_esplosione: { musica: 'azione', fb: G + 't_rivoltadellafonderia.webp', moto: 'zoom', strati: ['scintille', 'scuoti'] },
+    s_fonderia: { musica: 'azione', fb: G + 't_rivoltadellafonderia.webp', moto: 'panDx', strati: ['scintille'] },
+    s_quartier_generale: { musica: 'calma', fb: G + 't_lintelligenzarogue.webp', moto: 'zoomOut', strati: [] },
+    s_torre_prometeo: { musica: 'tensione', fb: G + 't_lintelligenzarogue.webp', moto: 'panSu', strati: ['glitch'] },
+    s_alveare: { musica: 'tensione', fb: G + 't_ilcolossodirovina.webp', moto: 'zoomOut', strati: ['scintille'] },
+    s_viadotto: { musica: 'tensione', fb: G + 't_ilcampioneimbattuto.webp', moto: 'panDx', strati: [] },
+    s_statua: { musica: 'azione', fb: G + 't_ilcolossodirovina.webp', moto: 'panSu', strati: ['scuoti'] },
+    s_custode: { musica: 'azione', fb: G + 't_ilcustodedacciaio.webp', moto: 'zoom', strati: ['scintille'] },
+    s_rituale: { musica: 'stella', fb: G + 't_ilmietitoredellastrooscuro.webp', moto: 'zoom', strati: ['stella', 'nebbia'] },
+    s_cielo_spezzato: { musica: 'azione', fb: G + 't_lecosenzanome.webp', moto: 'zoomOut', strati: ['pioggia', 'scuoti'] },
+    s_strappo: { musica: 'tensione', fb: G + 't_lecosenzanome.webp', moto: 'zoom', strati: ['glitch'] },
+    s_alba: { musica: 'alba', suoni: [], fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: ['alba'] },
+    s_pioggia: { musica: 'stella', fb: 'assets/bg/cosmo_villain.webp', moto: 'panGiu', strati: ['pioggia'] },
     // Percorso del Velo
-    s_velo_caduta: { fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stella', 'nebbia', 'scuoti'] },
-    s_velo_finale: { fb: 'assets/bg/cosmo_villain.webp', moto: 'panSu', strati: ['stella', 'pioggia'] }
+    s_velo_caduta: { musica: 'velo', fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stella', 'nebbia', 'scuoti'] },
+    s_velo_finale: { musica: 'velo', fb: 'assets/bg/cosmo_villain.webp', moto: 'panSu', strati: ['stella', 'pioggia'] }
   };
 
   // Ogni carta Minaccia compare una sola volta in tutta la Storia (regola di Alessio): 14 Minacce, 10 missioni da 1 a 3 Atti.
@@ -888,6 +890,7 @@
         <div class="ss-stage"></div>
         <div class="ss-hint">Tocca per continuare</div>`;
       document.body.appendChild(el);
+      if (window.StoriaSuoni) window.StoriaSuoni.apri();
       const stage = el.querySelector('.ss-stage');
       const vbox = el.querySelector('.ss-vignetta');
       let vAttuale = null, autoT = null;
@@ -918,10 +921,12 @@
         vbox.appendChild(v);
         requestAnimationFrame(() => requestAnimationFrame(() => v.classList.add('on')));
         if ((def.strati || []).includes('scuoti')) scuoti();
+        if (window.StoriaSuoni) window.StoriaSuoni.vignetta(def, { velo: opt.velo });
       };
       const scuoti = () => { el.classList.remove('ss-scuoti'); void el.offsetWidth; el.classList.add('ss-scuoti'); };
       const chiudi = () => {
         clearInterval(timer); clearTimeout(autoT);
+        if (window.StoriaSuoni) window.StoriaSuoni.chiudi();
         el.classList.add('out');
         setTimeout(() => { el.remove(); if (typeof opt.fine === 'function') opt.fine(); }, 350);
       };
@@ -942,14 +947,18 @@
           fx.textContent = r.fx;
           stage.appendChild(fx);
           scuoti();
+          if (window.StoriaSuoni) window.StoriaSuoni.fx(r.fx);
         }
         const out = stage.querySelector('.ss-testo');
         let k = 0;
         scrivendo = true;
         clearInterval(timer);
+        let sill = 0;
         timer = setInterval(() => {
           k += 2;
           out.textContent = testo.slice(0, k);
+          // voce: qualche sillaba borbottata all'inizio della battuta (dà l'idea che parlino, senza coprire la musica)
+          if (window.StoriaSuoni && k % 8 === 0 && sill < 14 && /[A-Za-zÀ-ÿ]/.test(testo[k - 1] || '')) { sill++; window.StoriaSuoni.sillaba(p); }
           if (k >= testo.length) {
             clearInterval(timer); scrivendo = false;
             // modalità automatica (video della Storia): passa da sola alla battuta dopo
