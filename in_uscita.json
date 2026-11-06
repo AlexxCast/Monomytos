@@ -10,8 +10,27 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-06_aggancio_stella.mp4",
   "creato": "2026-11-06T21:52:30.985Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-06T22:52:30.985Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-06T22:52:30.985Z",
+  "esito": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/qycFa8ul4-M",
+    "stato": "public"
+   },
+   "tiktok": {
+    "esito": "ok",
+    "stato": "PROCESSING_UPLOAD (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzoi3ebi2a2n"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 5
+   }
+  }
  },
  {
   "id": "video:42266702179",
