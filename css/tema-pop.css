@@ -1672,3 +1672,4 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
   animation: stAcqua .5s linear infinite; mix-blend-mode: screen; opacity: .7; }
 @keyframes stAcqua { to { background-position: -14px 160px; } }
 @media (prefers-reduced-motion: reduce) { .st-stelle::before { animation: none !important; } }
+.sm-prova { margin: 6px 0; padding: 6px 10px; border-left: 4px solid var(--gold, #f5b82e); background: rgba(245, 184, 46, .14); font-size: 13px; line-height: 1.35; }

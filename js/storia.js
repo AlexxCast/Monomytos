@@ -179,7 +179,7 @@
           sconfitta: 'L\'Arena vi ha spinti fuori. Rialzatevi e tornate giù.'
         },
         {
-          id: 'c2m2', difficolta: 2.6, titolo: "L'aria avvelenata", luogo: 'La Falesia di Ataca', alleato: "Sussurro dell'Abisso", riserva: 'Iron Aegis',
+          id: 'c2m2', difficolta: 2.6, titolo: "L'aria avvelenata", luogo: 'La Falesia di Ataca', alleato: "Sussurro dell'Abisso", riserva: 'Guardiana di Confine',
           atti: ['Imboscata sulla Falesia'],
           premio: { bustine: 1, epica: 1 },
           prima: [
@@ -262,7 +262,7 @@
       ],
       missioni: [
         {
-          id: 'c4m1', difficolta: 2.3, titolo: 'Il cuore della rete', luogo: 'La Torre di Prometeo', alleato: 'Architetto Ombra', riserva: 'Lama Errante',
+          id: 'c4m1', difficolta: 2.3, titolo: 'Il cuore della rete', luogo: 'La Torre di Prometeo', alleato: 'Architetto Ombra', riserva: 'Neon Phantom',
           atti: ["L'Intelligenza Rogue"],
           premio: { eroe: 1, crediti: 200 },
           prima: [
@@ -283,7 +283,7 @@
           sconfitta: 'ARGO ha riacceso le difese. Riprova.'
         },
         {
-          id: 'c4m2', difficolta: 1.8, titolo: 'Il Campione Imbattuto', luogo: 'Il viadotto di Ataca', alleato: 'Guardiana di Confine', riserva: 'Iron Aegis',
+          id: 'c4m2', difficolta: 1.8, titolo: 'Il Campione Imbattuto', luogo: 'Il viadotto di Ataca', alleato: 'Guardiana di Confine', riserva: "Titano d'Acciaio",
           atti: ['Il Campione Imbattuto'],
           premio: { crediti: 250, bustine: 1, minaccia: 1 },
           prima: [
@@ -314,7 +314,7 @@
       ],
       missioni: [
         {
-          id: 'c5m1', difficolta: 0.9, titolo: 'Pietra e acciaio', luogo: 'Dalla piazza alla Fonderia', alleato: "Titano d'Acciaio", riserva: 'Iron Aegis',
+          id: 'c5m1', difficolta: 0.9, titolo: 'Pietra e acciaio', luogo: 'Dalla piazza alla Fonderia', alleato: "Titano d'Acciaio", riserva: 'Architetto Ombra',
           atti: ['Il Colosso di Rovina', "Il Custode d'Acciaio"],
           premio: { eroe: 1, crediti: 300, epica: 1 },
           prima: [
@@ -334,7 +334,7 @@
           sconfitta: 'Il gigante è ancora in piedi. Riprovate.'
         },
         {
-          id: 'c5m2', difficolta: 1.9, titolo: 'Il rituale supremo', luogo: 'Il monastero sconsacrato', alleato: "Sussurro dell'Abisso", riserva: 'Iron Aegis', boss: true,
+          id: 'c5m2', difficolta: 1.9, titolo: 'Il rituale supremo', luogo: 'Il monastero sconsacrato', alleato: "Sussurro dell'Abisso", riserva: 'Duellante Spezzato', boss: true,
           atti: ["Il Mietitore dell'Astro Oscuro"],
           premio: { eroe: 1, crediti: 400, bustine: 2, leggendaria: 1 },
           prima: [
@@ -364,7 +364,7 @@
       ],
       missioni: [
         {
-          id: 'c6m1', difficolta: 2.3, titolo: "L'Eco Senza Nome", luogo: 'Lo strappo nel cielo', alleato: 'Neon Phantom', riserva: 'Duellante Spezzato', boss: true,
+          id: 'c6m1', difficolta: 2.3, titolo: "L'Eco Senza Nome", luogo: 'Lo strappo nel cielo', alleato: 'Neon Phantom', riserva: 'Iron Aegis', boss: true,
           atti: ["L'Eco Senza Nome"],
           premio: { crediti: 500, bustine: 2, leggendaria: 1, minaccia: 1 },
           prima: [
@@ -584,9 +584,17 @@
       const D = window.MONOMYTHOS_DATA, t = D.threats.find(x => x.nome === nome);
       return (D.card_img_map || {})[slug(nome)] || (t && t.img) || 'assets/icons/minaccia.webp';
     },
-    mioEroe() {
+    // Il campione che giochi (scelta di Alessio, 6/11/2026: un campione per missione, per provare mazzi diversi):
+    // - nella prima missione (tutorial) l'eroe dello starter;
+    // - poi il protagonista della missione (m.alleato, l'eroe con la storia legata a quella missione), con il suo mazzo in prova;
+    // - nel Percorso del Velo l'eroe che è caduto, finché non torna alla luce.
+    mioEroe(m = this._m) {
+      if (this.velo && this.dati.veloEroe) return this.dati.veloEroe;
+      if (m && m.id !== 'c1m1' && m.alleato) return m.alleato;
+      return this.eroeStarter();
+    },
+    eroeStarter() {
       const P = this.P, ui = window.UI;
-      // Il protagonista della Storia è l'eroe dello starter scelto (richiesta di Alessio): i dialoghi cambiano con lui
       const st = P && P.data && P.data.starter;
       if (st && P.isHeroUnlocked(st)) return st;
       let h = ui && ui.selectedHero;
@@ -594,10 +602,21 @@
       return h;
     },
     alleatoDi(m) {
-      const me = this.mioEroe();
+      const me = this.mioEroe(m);
       if (m.alleato !== me) return m.alleato;
       if (m.riserva && m.riserva !== me) return m.riserva;
       return me === 'Neon Phantom' ? 'Iron Aegis' : 'Neon Phantom';
+    },
+
+    // Mazzo del campione: il tuo, se ne hai uno completo per quell'eroe; altrimenti il suo mazzo starter in prova (non viene regalato)
+    mazzoPer(eroe) {
+      const P = this.P, mio = P && P.getActiveDeckForHero && P.getActiveDeckForHero(eroe);
+      const tot = mio && mio.cards ? Object.values(mio.cards).reduce((a, b) => a + b, 0) : 0;
+      if (mio && tot >= 60) return { mazzo: mio, prova: false };
+      const C = window.Collezione;
+      if (!C || !C.mazzoStarterDati) return { mazzo: null, prova: false };
+      const { carte, creation } = C.mazzoStarterDati(eroe);
+      return { mazzo: { hero: eroe, cards: carte, creation }, prova: true };
     },
 
     // ---------- Pagina percorso ----------
@@ -665,16 +684,18 @@
     dettaglio(id) {
       const m = this.missione(id);
       if (!m) return;
-      const velo = this.velo, fatta = velo ? this.fattaVelo(id) : this.fatta(id), ally = this.alleatoDi(m);
+      const velo = this.velo, fatta = velo ? this.fattaVelo(id) : this.fatta(id), ally = this.alleatoDi(m), io = this.mioEroe(m);
+      const prova = this.mazzoPer(io).prova;
       const premiata = this.passata(id);
       document.getElementById('storiaMissioneBody').innerHTML = `
         <div class="sm-luogo">${esc(m.luogo)}</div>
         <h3 class="sm-titolo">${esc(m.titolo)}</h3>
         <div class="sm-atti">${m.atti.map((t, i) => `<figure class="${i === m.atti.length - 1 ? 'is-finale' : ''}"><img src="${this.imgMinaccia(t)}" alt=""><figcaption>${m.atti.length === 1 ? 'Atto unico' : (i === m.atti.length - 1 ? 'Finale' : ['Atto I', 'Atto II'][i])}<b>${esc(t)}</b></figcaption></figure>`).join('')}</div>
         ${velo
-          ? `<div class="sm-squadra is-velo"><span>Tu (Villain)</span><img src="${this.imgEroe(this.mioEroe())}" alt=""><b>${esc(this.mioEroe())}</b> contro <img src="${this.imgEroe(ally)}" alt=""><b>${esc(ally)}</b></div>
+          ? `<div class="sm-squadra is-velo"><span>Tu (Villain)</span><img src="${this.imgEroe(io)}" alt=""><b>${esc(io)}</b> contro <img src="${this.imgEroe(ally)}" alt=""><b>${esc(ally)}</b></div>
              <p class="sm-velo">Percorso del Velo: parti già Villain. Vinci se la Minaccia ha la meglio o se resti in piedi solo tu.</p>`
-          : `<div class="sm-squadra"><span>Squadra</span><img src="${this.imgEroe(this.mioEroe())}" alt=""><b>${esc(this.mioEroe())}</b> + <img src="${this.imgEroe(ally)}" alt=""><b>${esc(ally)}</b></div>`}
+          : `<div class="sm-squadra"><span>Il tuo campione</span><img src="${this.imgEroe(io)}" alt=""><b>${esc(io)}</b> + <img src="${this.imgEroe(ally)}" alt=""><b>${esc(ally)}</b></div>`}
+        ${prova ? `<p class="sm-prova">Giochi con il mazzo di ${esc(io)} in prova: la tua collezione non cambia.</p>` : ''}
         <div class="sm-premio">${premiata
           ? `Già completata. Rigiocarla vale <b>${this.creditiReplay(m)} CR</b>.`
           : `Premio: <b>${this.vociPremio(m.premio).join(', ')}</b>`}</div>
@@ -718,7 +739,7 @@
       try {
         ui.pendingMultiplayer = false;
         E.startMatch({
-          heroes: [{ name: this.mioEroe(), isBot: false, villain: this.velo }, { name: this.alleatoDi(m), isBot: true }],
+          heroes: [{ name: this.mioEroe(m), isBot: false, villain: this.velo, customDeck: this.mazzoPer(this.mioEroe(m)).mazzo || undefined }, { name: this.alleatoDi(m), isBot: true }],
           actThreats: m.atti,
           story: m.id,
           // nel Velo la Minaccia è dalla tua parte: un po' più forte, così il Portatore non la abbatte da solo
@@ -767,7 +788,7 @@
       this._veloPartita = false;
       setTimeout(() => {
         window.UI.showScreen('scr-storia');
-        if (caduto) { this.dati.velo = true; this.dati.cadutoIn = m.id; this.P.save(true); }
+        if (caduto) { this.dati.velo = true; this.dati.cadutoIn = m.id; this.dati.veloEroe = me.name; this.P.save(true); }
         this.render();
         const tx = this.testi(m, velo);
         const poi = (fn) => caduto
@@ -802,6 +823,7 @@
       window.UI.hideModals();
       this.scena(RITORNO, { titolo: 'Torna alla luce', sotto: 'Fine del Percorso del Velo', fine: () => {
         this.dati.velo = false;
+        delete this.dati.veloEroe;
         this.dati.redenzioni = (this.dati.redenzioni || 0) + 1;
         this.P.save(true);
         this.render();
@@ -876,6 +898,7 @@
 
     scena(righe, opt = {}) {
       const m = opt.missione || null;
+      this._m = m;
       let i = 0, timer = null, scrivendo = false;
       const old = document.getElementById('storiaScena');
       if (old) old.remove();
