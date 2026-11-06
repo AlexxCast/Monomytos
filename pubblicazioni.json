@@ -2,6 +2,35 @@
  {
   "id": "aggancio_stella",
   "lingua": "it",
+  "data": "2026-11-06T18:02:42.728Z",
+  "prova": false,
+  "didascalia_instagram": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/eLC5EshF6PA",
+    "stato": "public"
+   },
+   "tiktok": {
+    "esito": "ok",
+    "stato": "PROCESSING_UPLOAD (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mznxtqwa6x24"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 4
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-06_aggancio_stella.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/42266702179"
+ },
+ {
+  "id": "aggancio_stella",
+  "lingua": "it",
   "data": "2026-11-06T17:59:05.763Z",
   "prova": true,
   "didascalia_instagram": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
