@@ -168,47 +168,47 @@
   0.88
  ],
  "architettoombra_1": [
-  -0.07,
+  -0.15,
   1.0
  ],
  "architettoombra_10": [
-  -0.07,
+  -0.14,
   1.0
  ],
  "architettoombra_11": [
-  -0.07,
+  -0.14,
   1.0
  ],
  "architettoombra_19": [
-  -0.07,
+  -0.14,
   1.0
  ],
  "guardianadiconfine_2": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "guardianadiconfine_4": [
-  -0.07,
+  -0.15,
   1.0
  ],
  "ironaegis_8": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "ironaegis_10": [
-  -0.07,
+  -0.13,
   1.0
  ],
  "ironaegis_15": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "ironaegis_17": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "lamaerrante_10": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "titanodacciaio_4": [
@@ -216,11 +216,11 @@
   1.0
  ],
  "titanodacciaio_5": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "titanodacciaio_6": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "titanodacciaio_7": [
@@ -228,7 +228,7 @@
   1.0
  ],
  "titanodacciaio_12": [
-  -0.07,
+  -0.15,
   1.0
  ],
  "titanodacciaio_18": [
@@ -236,23 +236,23 @@
   1.0
  ],
  "sussurrodellabisso_5": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "sussurrodellabisso_6": [
-  -0.07,
+  -0.15,
   1.0
  ],
  "sussurrodellabisso_7": [
-  -0.07,
+  -0.15,
   1.0
  ],
  "sussurrodellabisso_8": [
-  -0.07,
+  -0.14,
   1.0
  ],
  "sussurrodellabisso_10": [
-  -0.07,
+  -0.14,
   1.0
  ],
  "duellantespezzato_3": [
@@ -260,7 +260,7 @@
   1.0
  ],
  "duellantespezzato_19": [
-  -0.07,
+  -0.12,
   1.0
  ],
  "neonphantom_10": [
@@ -268,79 +268,79 @@
   1.0
  ],
  "duellantespezzato_2": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "duellantespezzato_5": [
-  -0.1,
+  -0.17,
   1.0
  ],
  "duellantespezzato_6": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "duellantespezzato_7": [
-  -0.1,
+  -0.16,
   1.0
  ],
  "duellantespezzato_8": [
-  -0.1,
+  -0.18,
   1.0
  ],
  "duellantespezzato_10": [
-  -0.1,
+  -0.17,
   1.0
  ],
  "guardianadiconfine_1": [
-  -0.1,
+  -0.18,
   1.0
  ],
  "guardianadiconfine_6": [
-  -0.1,
+  -0.14,
   1.0
  ],
  "guardianadiconfine_9": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "guardianadiconfine_18": [
-  -0.1,
+  -0.13,
   1.0
  ],
  "ironaegis_3": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "ironaegis_16": [
-  -0.1,
+  -0.14,
   1.0
  ],
  "lamaerrante_1": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "lamaerrante_4": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "lamaerrante_12": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "lamaerrante_13": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "sussurrodellabisso_12": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "architettoombra_7": [
-  -0.1,
+  -0.18,
   1.0
  ],
  "neonphantom_13": [
-  -0.1,
+  -0.15,
   1.0
  ],
  "neonphantom_16": [
@@ -348,23 +348,207 @@
   1.0
  ],
  "architettoombra_13": [
-  -0.1,
+  -0.17,
   1.0
  ],
  "lamaerrante_6": [
-  -0.1,
+  -0.16,
   1.0
  ],
  "lamaerrante_19": [
-  -0.08,
+  -0.12,
   1.0
  ],
  "duellantespezzato_18": [
-  -0.06,
+  -0.12,
   1.0
  ],
  "architettoombra_4": [
   -0.05,
+  1.0
+ ],
+ "architettoombra_17": [
+  -0.08,
+  1.0
+ ],
+ "duellantespezzato_1": [
+  -0.06,
+  1.0
+ ],
+ "duellantespezzato_9": [
+  -0.06,
+  1.0
+ ],
+ "duellantespezzato_11": [
+  -0.06,
+  1.0
+ ],
+ "duellantespezzato_12": [
+  -0.06,
+  1.0
+ ],
+ "duellantespezzato_13": [
+  -0.06,
+  1.0
+ ],
+ "guardianadiconfine_5": [
+  -0.05,
+  1.0
+ ],
+ "guardianadiconfine_8": [
+  -0.05,
+  1.0
+ ],
+ "guardianadiconfine_10": [
+  -0.06,
+  1.0
+ ],
+ "guardianadiconfine_12": [
+  -0.08,
+  1.0
+ ],
+ "guardianadiconfine_13": [
+  -0.08,
+  1.0
+ ],
+ "guardianadiconfine_14": [
+  -0.05,
+  1.0
+ ],
+ "guardianadiconfine_15": [
+  -0.05,
+  1.0
+ ],
+ "guardianadiconfine_17": [
+  -0.08,
+  1.0
+ ],
+ "guardianadiconfine_19": [
+  -0.06,
+  1.0
+ ],
+ "ironaegis_1": [
+  -0.06,
+  1.0
+ ],
+ "ironaegis_9": [
+  -0.08,
+  1.0
+ ],
+ "ironaegis_11": [
+  -0.08,
+  1.0
+ ],
+ "ironaegis_18": [
+  -0.06,
+  1.0
+ ],
+ "lamaerrante_2": [
+  -0.06,
+  1.0
+ ],
+ "lamaerrante_7": [
+  -0.06,
+  1.0
+ ],
+ "lamaerrante_8": [
+  -0.06,
+  1.0
+ ],
+ "lamaerrante_11": [
+  -0.05,
+  1.0
+ ],
+ "lamaerrante_16": [
+  -0.05,
+  1.0
+ ],
+ "neonphantom_3": [
+  -0.12,
+  1.0
+ ],
+ "neonphantom_4": [
+  -0.12,
+  1.0
+ ],
+ "neonphantom_5": [
+  -0.08,
+  1.0
+ ],
+ "neonphantom_7": [
+  -0.06,
+  1.0
+ ],
+ "neonphantom_9": [
+  -0.12,
+  1.0
+ ],
+ "neonphantom_12": [
+  -0.08,
+  1.0
+ ],
+ "neonphantom_15": [
+  -0.12,
+  1.0
+ ],
+ "neonphantom_17": [
+  -0.06,
+  1.0
+ ],
+ "neonphantom_18": [
+  -0.06,
+  1.0
+ ],
+ "neonphantom_19": [
+  -0.08,
+  1.0
+ ],
+ "sussurrodellabisso_3": [
+  -0.08,
+  1.0
+ ],
+ "sussurrodellabisso_13": [
+  -0.15,
+  1.0
+ ],
+ "sussurrodellabisso_14": [
+  -0.06,
+  1.0
+ ],
+ "sussurrodellabisso_15": [
+  -0.12,
+  1.0
+ ],
+ "sussurrodellabisso_16": [
+  -0.08,
+  1.0
+ ],
+ "sussurrodellabisso_17": [
+  -0.12,
+  1.0
+ ],
+ "titanodacciaio_1": [
+  -0.08,
+  1.0
+ ],
+ "titanodacciaio_8": [
+  -0.08,
+  1.0
+ ],
+ "titanodacciaio_9": [
+  -0.08,
+  1.0
+ ],
+ "titanodacciaio_10": [
+  -0.08,
+  1.0
+ ],
+ "titanodacciaio_11": [
+  -0.1,
+  1.0
+ ],
+ "titanodacciaio_17": [
+  -0.12,
   1.0
  ]
 }
