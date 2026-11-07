@@ -4526,7 +4526,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/titanoacciaio.webp",
+        "img": "assets/cards/gen/titanodacciaio_14.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -5365,7 +5365,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/generatoredisingolarita.webp",
+        "img": "assets/cards/gen/architettoombra_15.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -5399,7 +5399,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/frequenzadisturbante.webp",
+        "img": "assets/cards/gen/architettoombra_16.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -5440,7 +5440,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/architettoombra.webp",
+        "img": "assets/cards/gen/architettoombra_17.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -5481,7 +5481,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/barrieraolografica.webp",
+        "img": "assets/cards/gen/architettoombra_18.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -5527,7 +5527,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/generatoredisingolarita.webp",
+        "img": "assets/cards/gen/architettoombra_19.webp",
         "fx_list": [
           {
             "type": "fateSpend",
@@ -5605,7 +5605,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sussurrodellabisso.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_2.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -5646,7 +5646,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/toccatadalvelo.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_3.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -5689,7 +5689,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/pugnalepsichico.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_4.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -5723,7 +5723,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/mantocorrotto.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_5.webp",
         "fx_list": [
           {
             "type": "draw",
@@ -5757,7 +5757,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 3,
           "trm": 0
         },
-        "img": "assets/cards/dardodellabisso.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_6.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -5814,7 +5814,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sussurrodellabisso.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_7.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -5850,7 +5850,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/toccatadalvelo.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_8.webp",
         "fx_list": [
           {
             "type": "reflect",
@@ -5891,7 +5891,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/pugnalepsichico.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_9.webp",
         "fx_list": [
           {
             "type": "draw",
@@ -5932,7 +5932,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/mantocorrotto.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_10.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -5973,7 +5973,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/dardodellabisso.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_11.webp",
         "fx_list": [
           {
             "type": "boostNextCategory",
@@ -6016,7 +6016,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/sussurrodellabisso.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_12.webp",
         "fx_list": [
           {
             "type": "damageReduction",
@@ -6051,7 +6051,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/toccatadalvelo.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_13.webp",
         "fx_list": [
           {
             "type": "boostNextSacrifice",
@@ -6086,7 +6086,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/pugnalepsichico.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_14.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -6142,7 +6142,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/mantocorrotto.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_15.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -6199,7 +6199,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/dardodellabisso.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_16.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -6240,7 +6240,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/sussurrodellabisso.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_17.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -6281,7 +6281,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/toccatadalvelo.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_18.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -6327,7 +6327,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/pugnalepsichico.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_19.webp",
         "fx_list": [
           {
             "type": "fateSpend",
@@ -6405,7 +6405,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/duellanteitinerante.webp",
+        "img": "assets/cards/gen/duellantespezzato_2.webp",
         "fx_list": [
           {
             "type": "parry",
@@ -6454,7 +6454,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/assaltofluido.webp",
+        "img": "assets/cards/gen/duellantespezzato_3.webp",
         "fx_list": [
           {
             "type": "reflect",
@@ -6495,7 +6495,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/affondocalcolato.webp",
+        "img": "assets/cards/gen/duellantespezzato_4.webp",
         "fx_list": [
           {
             "type": "stun",
@@ -6535,7 +6535,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/duellantespezzato.webp",
+        "img": "assets/cards/gen/duellantespezzato_5.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -6577,7 +6577,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/duellanteitinerante.webp",
+        "img": "assets/cards/gen/duellantespezzato_6.webp",
         "fx_list": [
           {
             "type": "taunt",
@@ -6618,7 +6618,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/assaltofluido.webp",
+        "img": "assets/cards/gen/duellantespezzato_7.webp",
         "fx_list": [
           {
             "type": "draw",
@@ -6666,7 +6666,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/affondocalcolato.webp",
+        "img": "assets/cards/gen/duellantespezzato_8.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -6702,7 +6702,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/duellantespezzato.webp",
+        "img": "assets/cards/gen/duellantespezzato_9.webp",
         "fx_list": [
           {
             "type": "splitAreaAttack",
@@ -6748,7 +6748,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/duellanteitinerante.webp",
+        "img": "assets/cards/gen/duellantespezzato_10.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -6791,7 +6791,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 2,
           "trm": 0
         },
-        "img": "assets/cards/assaltofluido.webp",
+        "img": "assets/cards/gen/duellantespezzato_11.webp",
         "fx_list": [
           {
             "type": "heal",
@@ -6832,7 +6832,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/affondocalcolato.webp",
+        "img": "assets/cards/gen/duellantespezzato_12.webp",
         "fx_list": [
           {
             "type": "resistance",
@@ -6867,7 +6867,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/duellantespezzato.webp",
+        "img": "assets/cards/gen/duellantespezzato_13.webp",
         "fx_list": [
           {
             "type": "boostNextSacrifice",
@@ -6902,7 +6902,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 1
         },
-        "img": "assets/cards/duellanteitinerante.webp",
+        "img": "assets/cards/gen/duellantespezzato_14.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -6952,7 +6952,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/assaltofluido.webp",
+        "img": "assets/cards/gen/duellantespezzato_15.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -6993,7 +6993,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/affondocalcolato.webp",
+        "img": "assets/cards/gen/duellantespezzato_16.webp",
         "fx_list": [
           {
             "type": "stun",
@@ -7040,7 +7040,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 2
         },
-        "img": "assets/cards/duellantespezzato.webp",
+        "img": "assets/cards/gen/duellantespezzato_17.webp",
         "fx_list": [
           {
             "type": "trauma",
@@ -7081,7 +7081,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/duellanteitinerante.webp",
+        "img": "assets/cards/gen/duellantespezzato_18.webp",
         "fx_list": [
           {
             "type": "heroPoints",
@@ -7127,7 +7127,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/assaltofluido.webp",
+        "img": "assets/cards/gen/duellantespezzato_19.webp",
         "fx_list": [
           {
             "type": "fateSpend",
@@ -7396,8 +7396,8 @@ window.MONOMYTHOS_DATA = {
     "pellediferro": "assets/cards/gen/titanodacciaio_12.webp",
     "Sopraffazione": "assets/cards/gen/titanodacciaio_13.webp",
     "sopraffazione": "assets/cards/gen/titanodacciaio_13.webp",
-    "Furia Incontrollata": "assets/cards/titanoacciaio.webp",
-    "furiaincontrollata": "assets/cards/titanoacciaio.webp",
+    "Furia Incontrollata": "assets/cards/gen/titanodacciaio_14.webp",
+    "furiaincontrollata": "assets/cards/gen/titanodacciaio_14.webp",
     "Trono di Ossa": "assets/cards/gen/titanodacciaio_15.webp",
     "tronodiossa": "assets/cards/gen/titanodacciaio_15.webp",
     "Macello Indiscriminato": "assets/cards/gen/titanodacciaio_16.webp",
@@ -7438,90 +7438,90 @@ window.MONOMYTHOS_DATA = {
     "protocollozero": "assets/cards/gen/architettoombra_14.webp",
     "Singolarità Portatile": "assets/cards/generatoredisingolarita.webp",
     "singolaritaportatile": "assets/cards/generatoredisingolarita.webp",
-    "Backdoor": "assets/cards/frequenzadisturbante.webp",
-    "backdoor": "assets/cards/frequenzadisturbante.webp",
-    "Firmware Corrotto": "assets/cards/architettoombra.webp",
-    "firmwarecorrotto": "assets/cards/architettoombra.webp",
-    "Audit di Coscienza": "assets/cards/barrieraolografica.webp",
-    "auditdicoscienza": "assets/cards/barrieraolografica.webp",
+    "Backdoor": "assets/cards/gen/architettoombra_16.webp",
+    "backdoor": "assets/cards/gen/architettoombra_16.webp",
+    "Firmware Corrotto": "assets/cards/gen/architettoombra_17.webp",
+    "firmwarecorrotto": "assets/cards/gen/architettoombra_17.webp",
+    "Audit di Coscienza": "assets/cards/gen/architettoombra_18.webp",
+    "auditdicoscienza": "assets/cards/gen/architettoombra_18.webp",
     "Costo di Progetto": "assets/cards/generatoredisingolarita.webp",
     "costodiprogetto": "assets/cards/generatoredisingolarita.webp",
     "Dardo dell'Abisso": "assets/cards/gen/sussurrodellabisso_1.webp",
     "dardodellabisso": "assets/cards/gen/sussurrodellabisso_1.webp",
-    "Patto di Sangue": "assets/cards/sussurrodellabisso.webp",
-    "pattodisangue": "assets/cards/sussurrodellabisso.webp",
-    "Sifone Vitale": "assets/cards/toccatadalvelo.webp",
-    "sifonevitale": "assets/cards/toccatadalvelo.webp",
-    "Visione Proibita": "assets/cards/pugnalepsichico.webp",
-    "visioneproibita": "assets/cards/pugnalepsichico.webp",
-    "Bisbiglio Corruttore": "assets/cards/mantocorrotto.webp",
-    "bisbigliocorruttore": "assets/cards/mantocorrotto.webp",
-    "Prezzo del Patto": "assets/cards/dardodellabisso.webp",
-    "prezzodelpatto": "assets/cards/dardodellabisso.webp",
-    "Marchio dell'Abisso": "assets/cards/sussurrodellabisso.webp",
-    "marchiodellabisso": "assets/cards/sussurrodellabisso.webp",
-    "Legame Parassitico": "assets/cards/toccatadalvelo.webp",
-    "legameparassitico": "assets/cards/toccatadalvelo.webp",
-    "Scintilla Nera": "assets/cards/pugnalepsichico.webp",
-    "scintillanera": "assets/cards/pugnalepsichico.webp",
-    "Voto di Silenzio": "assets/cards/mantocorrotto.webp",
-    "votodisilenzio": "assets/cards/mantocorrotto.webp",
-    "Voto Infranto": "assets/cards/dardodellabisso.webp",
-    "votoinfranto": "assets/cards/dardodellabisso.webp",
-    "Scaglia Corrotta": "assets/cards/sussurrodellabisso.webp",
-    "scagliacorrotta": "assets/cards/sussurrodellabisso.webp",
-    "Calcolo Ereticale": "assets/cards/toccatadalvelo.webp",
-    "calcoloereticale": "assets/cards/toccatadalvelo.webp",
-    "Invocazione dell'Abisso": "assets/cards/pugnalepsichico.webp",
-    "invocazionedellabisso": "assets/cards/pugnalepsichico.webp",
-    "Patto Finale": "assets/cards/mantocorrotto.webp",
-    "pattofinale": "assets/cards/mantocorrotto.webp",
-    "Comunione Forzata": "assets/cards/dardodellabisso.webp",
-    "comunioneforzata": "assets/cards/dardodellabisso.webp",
-    "Eco dell'Abisso": "assets/cards/sussurrodellabisso.webp",
-    "ecodellabisso": "assets/cards/sussurrodellabisso.webp",
-    "Silenzio Interiore": "assets/cards/toccatadalvelo.webp",
-    "silenziointeriore": "assets/cards/toccatadalvelo.webp",
-    "Decima dell'Abisso": "assets/cards/pugnalepsichico.webp",
-    "decimadellabisso": "assets/cards/pugnalepsichico.webp",
+    "Patto di Sangue": "assets/cards/gen/sussurrodellabisso_2.webp",
+    "pattodisangue": "assets/cards/gen/sussurrodellabisso_2.webp",
+    "Sifone Vitale": "assets/cards/gen/sussurrodellabisso_3.webp",
+    "sifonevitale": "assets/cards/gen/sussurrodellabisso_3.webp",
+    "Visione Proibita": "assets/cards/gen/sussurrodellabisso_4.webp",
+    "visioneproibita": "assets/cards/gen/sussurrodellabisso_4.webp",
+    "Bisbiglio Corruttore": "assets/cards/gen/sussurrodellabisso_5.webp",
+    "bisbigliocorruttore": "assets/cards/gen/sussurrodellabisso_5.webp",
+    "Prezzo del Patto": "assets/cards/gen/sussurrodellabisso_6.webp",
+    "prezzodelpatto": "assets/cards/gen/sussurrodellabisso_6.webp",
+    "Marchio dell'Abisso": "assets/cards/gen/sussurrodellabisso_7.webp",
+    "marchiodellabisso": "assets/cards/gen/sussurrodellabisso_7.webp",
+    "Legame Parassitico": "assets/cards/gen/sussurrodellabisso_8.webp",
+    "legameparassitico": "assets/cards/gen/sussurrodellabisso_8.webp",
+    "Scintilla Nera": "assets/cards/gen/sussurrodellabisso_9.webp",
+    "scintillanera": "assets/cards/gen/sussurrodellabisso_9.webp",
+    "Voto di Silenzio": "assets/cards/gen/sussurrodellabisso_10.webp",
+    "votodisilenzio": "assets/cards/gen/sussurrodellabisso_10.webp",
+    "Voto Infranto": "assets/cards/gen/sussurrodellabisso_11.webp",
+    "votoinfranto": "assets/cards/gen/sussurrodellabisso_11.webp",
+    "Scaglia Corrotta": "assets/cards/gen/sussurrodellabisso_12.webp",
+    "scagliacorrotta": "assets/cards/gen/sussurrodellabisso_12.webp",
+    "Calcolo Ereticale": "assets/cards/gen/sussurrodellabisso_13.webp",
+    "calcoloereticale": "assets/cards/gen/sussurrodellabisso_13.webp",
+    "Invocazione dell'Abisso": "assets/cards/gen/sussurrodellabisso_14.webp",
+    "invocazionedellabisso": "assets/cards/gen/sussurrodellabisso_14.webp",
+    "Patto Finale": "assets/cards/gen/sussurrodellabisso_15.webp",
+    "pattofinale": "assets/cards/gen/sussurrodellabisso_15.webp",
+    "Comunione Forzata": "assets/cards/gen/sussurrodellabisso_16.webp",
+    "comunioneforzata": "assets/cards/gen/sussurrodellabisso_16.webp",
+    "Eco dell'Abisso": "assets/cards/gen/sussurrodellabisso_17.webp",
+    "ecodellabisso": "assets/cards/gen/sussurrodellabisso_17.webp",
+    "Silenzio Interiore": "assets/cards/gen/sussurrodellabisso_18.webp",
+    "silenziointeriore": "assets/cards/gen/sussurrodellabisso_18.webp",
+    "Decima dell'Abisso": "assets/cards/gen/sussurrodellabisso_19.webp",
+    "decimadellabisso": "assets/cards/gen/sussurrodellabisso_19.webp",
     "Affondo Sleale": "assets/cards/gen/duellantespezzato_1.webp",
     "affondosleale": "assets/cards/gen/duellantespezzato_1.webp",
-    "Schermo di Carne": "assets/cards/duellanteitinerante.webp",
-    "schermodicarne": "assets/cards/duellanteitinerante.webp",
-    "Ritorsione": "assets/cards/assaltofluido.webp",
-    "ritorsione": "assets/cards/assaltofluido.webp",
-    "Passo Rubato": "assets/cards/affondocalcolato.webp",
-    "passorubato": "assets/cards/affondocalcolato.webp",
-    "Affondo Basso": "assets/cards/duellantespezzato.webp",
-    "affondobasso": "assets/cards/duellantespezzato.webp",
-    "Provocazione": "assets/cards/duellanteitinerante.webp",
-    "provocazione": "assets/cards/duellanteitinerante.webp",
-    "Scatto Rubato": "assets/cards/assaltofluido.webp",
-    "scattorubato": "assets/cards/assaltofluido.webp",
-    "Lama Nascosta": "assets/cards/affondocalcolato.webp",
-    "lamanascosta": "assets/cards/affondocalcolato.webp",
-    "Voltafaccia": "assets/cards/duellantespezzato.webp",
-    "voltafaccia": "assets/cards/duellantespezzato.webp",
-    "Prezzo della Vendetta": "assets/cards/duellanteitinerante.webp",
-    "prezzodellavendetta": "assets/cards/duellanteitinerante.webp",
-    "Onore Ritrovato": "assets/cards/assaltofluido.webp",
-    "onoreritrovato": "assets/cards/assaltofluido.webp",
-    "Guardia Cinica": "assets/cards/affondocalcolato.webp",
-    "guardiacinica": "assets/cards/affondocalcolato.webp",
-    "Calcolo Spietato": "assets/cards/duellantespezzato.webp",
-    "calcolospietato": "assets/cards/duellantespezzato.webp",
-    "Duello all'Ultimo Sangue": "assets/cards/duellanteitinerante.webp",
-    "duelloallultimosangue": "assets/cards/duellanteitinerante.webp",
-    "Tradimento": "assets/cards/assaltofluido.webp",
-    "tradimento": "assets/cards/assaltofluido.webp",
-    "Nessuna Regola": "assets/cards/affondocalcolato.webp",
-    "nessunaregola": "assets/cards/affondocalcolato.webp",
-    "L'Ultimo a Restare": "assets/cards/duellantespezzato.webp",
-    "lultimoarestare": "assets/cards/duellantespezzato.webp",
-    "Onore Infranto": "assets/cards/duellanteitinerante.webp",
-    "onoreinfranto": "assets/cards/duellanteitinerante.webp",
-    "Riscatto della Lama": "assets/cards/assaltofluido.webp",
-    "riscattodellalama": "assets/cards/assaltofluido.webp",
+    "Schermo di Carne": "assets/cards/gen/duellantespezzato_2.webp",
+    "schermodicarne": "assets/cards/gen/duellantespezzato_2.webp",
+    "Ritorsione": "assets/cards/gen/duellantespezzato_3.webp",
+    "ritorsione": "assets/cards/gen/duellantespezzato_3.webp",
+    "Passo Rubato": "assets/cards/gen/duellantespezzato_4.webp",
+    "passorubato": "assets/cards/gen/duellantespezzato_4.webp",
+    "Affondo Basso": "assets/cards/gen/duellantespezzato_5.webp",
+    "affondobasso": "assets/cards/gen/duellantespezzato_5.webp",
+    "Provocazione": "assets/cards/gen/duellantespezzato_6.webp",
+    "provocazione": "assets/cards/gen/duellantespezzato_6.webp",
+    "Scatto Rubato": "assets/cards/gen/duellantespezzato_7.webp",
+    "scattorubato": "assets/cards/gen/duellantespezzato_7.webp",
+    "Lama Nascosta": "assets/cards/gen/duellantespezzato_8.webp",
+    "lamanascosta": "assets/cards/gen/duellantespezzato_8.webp",
+    "Voltafaccia": "assets/cards/gen/duellantespezzato_9.webp",
+    "voltafaccia": "assets/cards/gen/duellantespezzato_9.webp",
+    "Prezzo della Vendetta": "assets/cards/gen/duellantespezzato_10.webp",
+    "prezzodellavendetta": "assets/cards/gen/duellantespezzato_10.webp",
+    "Onore Ritrovato": "assets/cards/gen/duellantespezzato_11.webp",
+    "onoreritrovato": "assets/cards/gen/duellantespezzato_11.webp",
+    "Guardia Cinica": "assets/cards/gen/duellantespezzato_12.webp",
+    "guardiacinica": "assets/cards/gen/duellantespezzato_12.webp",
+    "Calcolo Spietato": "assets/cards/gen/duellantespezzato_13.webp",
+    "calcolospietato": "assets/cards/gen/duellantespezzato_13.webp",
+    "Duello all'Ultimo Sangue": "assets/cards/gen/duellantespezzato_14.webp",
+    "duelloallultimosangue": "assets/cards/gen/duellantespezzato_14.webp",
+    "Tradimento": "assets/cards/gen/duellantespezzato_15.webp",
+    "tradimento": "assets/cards/gen/duellantespezzato_15.webp",
+    "Nessuna Regola": "assets/cards/gen/duellantespezzato_16.webp",
+    "nessunaregola": "assets/cards/gen/duellantespezzato_16.webp",
+    "L'Ultimo a Restare": "assets/cards/gen/duellantespezzato_17.webp",
+    "lultimoarestare": "assets/cards/gen/duellantespezzato_17.webp",
+    "Onore Infranto": "assets/cards/gen/duellantespezzato_18.webp",
+    "onoreinfranto": "assets/cards/gen/duellantespezzato_18.webp",
+    "Riscatto della Lama": "assets/cards/gen/duellantespezzato_19.webp",
+    "riscattodellalama": "assets/cards/gen/duellantespezzato_19.webp",
     "Cultisti del Velo": "assets/cards/gen/t_cultistidelvelo.webp",
     "Il Campione Imbattuto": "assets/cards/gen/t_ilcampioneimbattuto.webp",
     "Il Rivale Traditore": "assets/cards/gen/t_ilrivaletraditore.webp",
