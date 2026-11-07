@@ -1516,6 +1516,11 @@ window.MONOMYTHOS_EN_REGOLE = [
 Object.assign(window.MONOMYTHOS_EN, {
   "Tocca per continuare": "Tap to continue",
   "Salta ▸▸": "Skip ▸▸",
+"Togli dal mazzo": "Remove from deck",
+"Nemici:": "Enemies:",
+"Aggiungi al mazzo": "Add to deck",
+"Non nel mazzo": "Not in deck",
+"🔒 Da sbloccare: la trovi nelle bustine Minacce o nella Storia.": "🔒 Locked: find it in Threat packs or in the Story.",
   "Prossime Minacce": "Next Threats",
   "Cima del tuo mazzo": "Top of your deck",
   "Scarta": "Discard",
