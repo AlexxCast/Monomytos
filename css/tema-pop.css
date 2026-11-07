@@ -1673,3 +1673,24 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 @keyframes stAcqua { to { background-position: -14px 160px; } }
 @media (prefers-reduced-motion: reduce) { .st-stelle::before { animation: none !important; } }
 .sm-prova { margin: 6px 0; padding: 6px 10px; border-left: 4px solid var(--gold, #f5b82e); background: rgba(245, 184, 46, .14); font-size: 13px; line-height: 1.35; }
+
+/* Mazzo Minacce: retro delle carte Minaccia in trasparenza, illustrazioni intere, carta ingrandita al tocco */
+#modalMinacce .bottom-sheet { position: relative; isolation: isolate; }
+#modalMinacce .bottom-sheet::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url('../assets/cards/cartaminacciaretro.webp') center / cover no-repeat;
+  opacity: .16; border-radius: inherit;
+}
+.minaccia-card img { aspect-ratio: 2 / 3 !important; object-fit: cover; object-position: center 40%; }
+.minaccia-card.locked { cursor: pointer; }
+.minaccia-zoom { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; padding: 16px;
+  background: rgba(5, 6, 20, .82); opacity: 0; pointer-events: none; transition: opacity .18s; }
+.minaccia-zoom.aperto { opacity: 1; pointer-events: auto; }
+.minaccia-zoom-box { width: min(340px, 86vw); max-height: 100%; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+  transform: scale(.92); transition: transform .2s cubic-bezier(.2, 1.4, .4, 1); }
+.minaccia-zoom.aperto .minaccia-zoom-box { transform: scale(1); }
+.minaccia-zoom .threat-silver-frame-wrap { width: 100%; aspect-ratio: 695 / 1024; position: relative; border-radius: 12px; overflow: hidden; flex: 0 0 auto; box-shadow: 6px 6px 0 #000; }
+.minaccia-zoom .peek-info { color: var(--cream, #f3ead6); font-size: 13px; line-height: 1.35; text-align: center; }
+.minaccia-zoom-azioni { display: flex; gap: 10px; }
+.minaccia-zoom-azioni .btn { flex: 1; }
+.minaccia-zoom-nota { flex: 1; margin: 0; color: var(--cream, #f3ead6); font-size: 13px; text-align: center; align-self: center; }

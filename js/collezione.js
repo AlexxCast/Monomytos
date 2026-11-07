@@ -178,10 +178,32 @@
           return `<button class="minaccia-card ${has ? '' : 'locked'} ${on ? 'on' : ''}" data-nome="${t.nome.replace(/"/g, '&quot;')}" ${has ? '' : 'disabled'}>
             <img src="${t.img || 'assets/icons/minaccia.webp'}" alt="" onerror="this.src='assets/icons/minaccia.webp'">
             <span class="minaccia-info"><b>${t.nome}</b><span class="rarity-badge" style="--rar:${r.colore}">${r.nome} · Liv ${t.livello}</span>
-            <small>${has ? (on ? 'Nel mazzo' : 'Tocca per aggiungere') : '🔒 Da sbloccare'}</small></span>
+            <small>${has ? (on ? 'Nel mazzo' : 'Non nel mazzo') : '🔒 Da sbloccare'}</small></span>
           </button>`;
         }).join('')}</div>`;
-      box.querySelectorAll('.minaccia-card:not(.locked)').forEach(b => { b.onclick = () => this.toggleMinaccia(b.dataset.nome); });
+      box.querySelectorAll('.minaccia-card').forEach(b => { b.disabled = false; b.onclick = () => this.vediMinaccia(b.dataset.nome); });
+    },
+    // Tocca una Minaccia: la vedi ingrandita con tutto il layout, e da lì la metti o la togli dal mazzo
+    vediMinaccia(nome) {
+      const t = this.tutteMinacce().find(x => x.nome === nome);
+      if (!t || !window.UI || !window.UI.threatPeekDOM) return;
+      let z = document.getElementById('minacciaZoom');
+      if (!z) {
+        z = document.createElement('div');
+        z.id = 'minacciaZoom'; z.className = 'minaccia-zoom';
+        document.body.appendChild(z);
+      }
+      const has = this.minaccePossedute().includes(nome), on = this.mazzoMinacce().includes(nome);
+      const azione = !has ? '<p class="minaccia-zoom-nota">🔒 Da sbloccare: la trovi nelle bustine Minacce o nella Storia.</p>'
+        : `<button class="btn btn-primary" id="mzToggle">${on ? 'Togli dal mazzo' : 'Aggiungi al mazzo'}</button>`;
+      z.innerHTML = `<div class="minaccia-zoom-box">${window.UI.threatPeekDOM(t)}<div class="minaccia-zoom-azioni">${azione}<button class="btn btn-subtle" id="mzChiudi">Chiudi</button></div></div>`;
+      const chiudi = () => z.classList.remove('aperto');
+      z.onclick = (ev) => { if (ev.target === z) chiudi(); };
+      z.querySelector('#mzChiudi').onclick = chiudi;
+      const tg = z.querySelector('#mzToggle');
+      if (tg) tg.onclick = () => { this.toggleMinaccia(nome); chiudi(); };
+      if (window.I18N && window.I18N.traduci) { try { window.I18N.traduci(z); } catch (e) {} }
+      requestAnimationFrame(() => z.classList.add('aperto'));
     },
 
 
