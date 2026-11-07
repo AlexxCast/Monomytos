@@ -1859,3 +1859,11 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .db-stat { white-space: nowrap; }
 .db-stat img, .db-pill-osc img { background: #f3ead6; border-radius: 50%; padding: 1.5px; box-sizing: border-box; width: 18px !important; height: 18px !important; }
 .db-nascoste a { color: var(--gold, #f5b82e) !important; font-weight: 800; }
+/* Minacce e Scambi: carte con le proporzioni giuste, più alte e al centro della barra */
+#scr-deckbuilder .deckbuilder-top-bar { position: relative; flex-wrap: wrap; }
+#scr-deckbuilder .db-azioni-top { width: 100%; justify-content: center; gap: 26px; }
+#scr-deckbuilder .db-azioni-top .btn-top-back { position: absolute; top: 12px; right: 14px; margin: 0; }
+#scr-deckbuilder .db-icona-img { width: 56px; height: 82px; aspect-ratio: auto; }
+#scr-deckbuilder .db-icona-scambi .db-icona-img { width: 74px; height: 82px; }
+#scr-deckbuilder .db-icona-scambi .db-icona-img img { width: 56px; height: 82px; }
+#scr-deckbuilder .db-icona-lbl { font-size: 14px; }
