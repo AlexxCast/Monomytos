@@ -1,16 +1,16 @@
 // Impagina le carte come appaiono nel gioco (cornice, fumetto del titolo, riquadro dell'effetto)
 // per controllare che il soggetto sia ben centrato e non coperto.
 // Uso: node strumenti/gemini/impagina.js out.png [id ...]   (id = t_xxx, c_xxx, eroe_xxx; vuoto = tutte le Minacce)
-// Le righe gialle segnano la finestra libera dell'illustrazione.
+// Con LINEE=1 righe al 24% e 62% (finestra libera dell'illustrazione) e al 43% (centro ideale).
 const { chromium } = require('playwright');
 const R = require('path').resolve(__dirname, '..', '..');
 (async () => {
   const b = await chromium.launch();
-  const p = await b.newPage({ viewport: { width: 1700, height: 1000 } });
+  const p = await b.newPage({ viewport: { width: 1700, height: 1000 }, deviceScaleFactor: 2 });
   await p.goto('file://' + R + '/index.html');
   await p.waitForTimeout(1500);
-  const out = process.argv[2], ids = process.argv.slice(3);
-  await p.evaluate((ids) => {
+  const out = process.argv[2], ids = process.argv.slice(3), linee = !!process.env.LINEE;
+  await p.evaluate(([ids, linee]) => {
     const D = window.MONOMYTHOS_DATA, tutte = [], vis = new Set();
     (function walk(o) {
       if (!o || typeof o !== 'object') return;
@@ -33,10 +33,11 @@ const R = require('path').resolve(__dirname, '..', '..');
         d.innerHTML = UI.getCardDOM(c, true);
         d.firstElementChild.style.width = '230px';
       }
+      if (linee) [24, 43, 62].forEach(y => d.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:0;right:0;top:${(y / 100 * 230 * 1024 / 695).toFixed(1)}px;border-top:1px dashed ${y === 43 ? 'lime' : 'yellow'};z-index:9"></div>`));
       d.insertAdjacentHTML('beforeend', '<div>' + id(o) + '</div>');
       g.appendChild(d);
     });
-  }, ids);
+  }, [ids, linee]);
   await p.waitForTimeout(2000);
   await (await p.$('#g')).screenshot({ path: out });
   await b.close();
