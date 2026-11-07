@@ -356,7 +356,8 @@ const RIPRESE = {
   async vignetta(p, r) {
     await p.evaluate(id => {
       const st = document.createElement('style');
-      st.textContent = '#storiaScena .ss-stage,#storiaScena .ss-top,#storiaScena .ss-hint{display:none!important}';
+      st.textContent = '#storiaScena .ss-stage,#storiaScena .ss-top,#storiaScena .ss-hint{display:none!important}@keyframes promoTic{0%{opacity:.01}100%{opacity:.02}}#promoTic{position:fixed;left:0;top:0;width:4px;height:4px;background:#000;animation:promoTic .1s linear infinite alternate;z-index:99999}';
+      const tic = document.createElement('div'); tic.id = 'promoTic'; document.body.appendChild(tic); // ridisegno continuo: lo screencast manda fotogrammi regolari anche se la scena è quasi ferma
       document.head.appendChild(st);
       Storia.scena([{ chi: 'narratore', v: id, testo: ' ' }], {});
     }, r.id);

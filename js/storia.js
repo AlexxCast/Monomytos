@@ -66,7 +66,7 @@
     s_metropoli: { musica: 'calma', suoni: ['vento'], fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: ['stelle'] },
     s_blackout: { musica: 'tensione', colpi: ['spegnimento'], fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'lampi', 'scintille'], pos: { stella: [78, 10], lampi: [55, 25] } },
     s_stella: { musica: 'stella', suoni: ['battito', 'folla'], fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stelle', 'stella'], pos: { stella: [73, 13] } },
-    s_piazza: { musica: 'stella', suoni: ['folla', 'battito'], fb: G + 't_lassediodeipredonidellerovine.webp', moto: 'zoom', strati: ['stella', 'occhi'], pos: { stella: [78, 10], occhi: 64 } },
+    s_piazza: { musica: 'stella', suoni: ['folla', 'battito'], fb: G + 't_lassediodeipredonidellerovine.webp', moto: 'zoom', strati: ['stella', 'occhi'], pos: { stella: [77, 13], occhi: 80 } },
     s_droni_folla: { musica: 'azione', suoni: ['laser', 'scintille', 'folla'], fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'laser', 'scintille', 'scuoti'], pos: { stella: [78, 10] } },
     s_schermi: { musica: 'tensione', fb: G + 't_incursionedeidronicinetici.webp', moto: 'zoomOut', strati: ['tv', 'acqua'], pos: { tv: [32, 20, 40, 25] } },
     s_infetti: { musica: 'stella', fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: ['stella', 'nebbia', 'occhi'], pos: { stella: [70, 7], occhi: 55 } },
@@ -114,7 +114,7 @@
       ],
       missioni: [
         {
-          id: 'c1m1', regole: 1, difficolta: 1.6, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Ataca', alleato: 'Iron Aegis', riserva: 'Guardiana di Confine',
+          id: 'c1m1', regole: 1, difficolta: 1.1, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Ataca', alleato: 'Iron Aegis', riserva: 'Guardiana di Confine',
           atti: ["L'Assedio dei Predoni delle Rovine", 'Blackout Ostile'],
           premio: { crediti: 150, bustine: 1 },
           prima: [
@@ -157,7 +157,7 @@
       ],
       missioni: [
         {
-          id: 'c2m1', regole: 2, difficolta: 1.8, titolo: "L'Arena di Sotto", luogo: 'La vecchia cisterna', alleato: 'Lama Errante', riserva: 'Neon Phantom',
+          id: 'c2m1', regole: 2, difficolta: 1.8, forza: 1, titolo: "L'Arena di Sotto", luogo: 'La vecchia cisterna', alleato: 'Lama Errante', riserva: 'Neon Phantom',
           atti: ['Torneo Clandestino', 'Incursione dei Droni Cinetici'],
           premio: { eroe: 1, crediti: 100 },
           prima: [
@@ -181,7 +181,7 @@
           sconfitta: 'L\'Arena vi ha spinti fuori. Rialzatevi e tornate giù.'
         },
         {
-          id: 'c2m2', difficolta: 2.6, titolo: "L'aria avvelenata", luogo: 'La Falesia di Ataca', alleato: "Sussurro dell'Abisso", riserva: 'Guardiana di Confine',
+          id: 'c2m2', difficolta: 3.4, forza: 1, titolo: "L'aria avvelenata", luogo: 'La Falesia di Ataca', alleato: "Sussurro dell'Abisso", riserva: 'Guardiana di Confine',
           atti: ['Imboscata sulla Falesia'],
           premio: { bustine: 1, epica: 1 },
           prima: [
@@ -214,7 +214,7 @@
       ],
       missioni: [
         {
-          id: 'c3m1', difficolta: 1.4, titolo: 'Il monastero sconsacrato', luogo: 'Le cripte e la torre', alleato: 'Duellante Spezzato', riserva: 'Lama Errante',
+          id: 'c3m1', difficolta: 2.2, forza: 2, titolo: 'Il monastero sconsacrato', luogo: 'Le cripte e la torre', alleato: 'Duellante Spezzato', riserva: 'Lama Errante',
           atti: ['Cultisti del Velo', 'Il Rivale Traditore'],
           premio: { eroe: 1, crediti: 200 },
           prima: [
@@ -233,7 +233,7 @@
           sconfitta: 'Il coro ricomincia a cantare. Riprova prima che finisca il rito.'
         },
         {
-          id: 'c3m2', difficolta: 2.4, titolo: 'La Fonderia in fiamme', luogo: 'La Fonderia Ardena', alleato: "Titano d'Acciaio", riserva: 'Iron Aegis',
+          id: 'c3m2', difficolta: 4.8, titolo: 'La Fonderia in fiamme', luogo: 'La Fonderia Ardena', alleato: "Titano d'Acciaio", riserva: 'Iron Aegis',
           atti: ['Rivolta della Fonderia'],
           premio: { crediti: 250, bustine: 1 },
           prima: [
@@ -266,7 +266,7 @@
       ],
       missioni: [
         {
-          id: 'c4m1', difficolta: 2.3, titolo: 'Il cuore della rete', luogo: 'La Torre di Prometeo', alleato: 'Architetto Ombra', riserva: 'Neon Phantom',
+          id: 'c4m1', difficolta: 3.7, forza: 1, titolo: 'Il cuore della rete', luogo: 'La Torre di Prometeo', alleato: 'Architetto Ombra', riserva: 'Neon Phantom',
           atti: ["L'Intelligenza Rogue"],
           premio: { eroe: 1, crediti: 200 },
           prima: [
@@ -287,7 +287,7 @@
           sconfitta: 'ARGO ha riacceso le difese. Riprova.'
         },
         {
-          id: 'c4m2', difficolta: 1.8, titolo: 'Il Campione Imbattuto', luogo: 'Il viadotto di Ataca', alleato: 'Guardiana di Confine', riserva: "Titano d'Acciaio",
+          id: 'c4m2', difficolta: 3.6, forza: 2, titolo: 'Il Campione Imbattuto', luogo: 'Il viadotto di Ataca', alleato: 'Guardiana di Confine', riserva: "Titano d'Acciaio",
           atti: ['Il Campione Imbattuto'],
           premio: { crediti: 250, bustine: 1, minaccia: 1 },
           prima: [
@@ -318,7 +318,7 @@
       ],
       missioni: [
         {
-          id: 'c5m1', difficolta: 0.9, titolo: 'Pietra e acciaio', luogo: 'Dalla piazza alla Fonderia', alleato: "Titano d'Acciaio", riserva: 'Architetto Ombra',
+          id: 'c5m1', difficolta: 1.8, forza: 2, titolo: 'Pietra e acciaio', luogo: 'Dalla piazza alla Fonderia', alleato: "Titano d'Acciaio", riserva: 'Architetto Ombra',
           atti: ['Il Colosso di Rovina', "Il Custode d'Acciaio"],
           premio: { eroe: 1, crediti: 300, epica: 1 },
           prima: [
@@ -338,7 +338,7 @@
           sconfitta: 'Il gigante è ancora in piedi. Riprovate.'
         },
         {
-          id: 'c5m2', difficolta: 1.9, titolo: 'Il rituale supremo', luogo: 'Il monastero sconsacrato', alleato: "Sussurro dell'Abisso", riserva: 'Duellante Spezzato', boss: true,
+          id: 'c5m2', difficolta: 3, titolo: 'Il rituale supremo', luogo: 'Il monastero sconsacrato', alleato: "Sussurro dell'Abisso", riserva: 'Duellante Spezzato', boss: true,
           atti: ["Il Mietitore dell'Astro Oscuro"],
           premio: { eroe: 1, crediti: 400, bustine: 2, leggendaria: 1 },
           prima: [
@@ -368,7 +368,7 @@
       ],
       missioni: [
         {
-          id: 'c6m1', difficolta: 2.3, titolo: "L'Eco Senza Nome", luogo: 'Lo strappo nel cielo', alleato: 'Neon Phantom', riserva: 'Iron Aegis', boss: true,
+          id: 'c6m1', difficolta: 3, forza: 1, titolo: "L'Eco Senza Nome", luogo: 'Lo strappo nel cielo', alleato: 'Neon Phantom', riserva: 'Iron Aegis', boss: true,
           atti: ["L'Eco Senza Nome"],
           premio: { crediti: 500, bustine: 2, leggendaria: 1, minaccia: 1 },
           prima: [
@@ -749,7 +749,9 @@
           // regole a strati: la missione 1 ha solo la Vita, la 2 aggiunge binari e Pesca (nel Velo servono tutte)
           livelloRegole: this.velo ? null : (m.regole || null),
           // nel Velo la Minaccia è dalla tua parte: un po' più forte, così il Portatore non la abbatte da solo
-          difficolta: (m.difficolta || 1) * (this.velo ? 1.4 : 1)
+          difficolta: (m.difficolta || 1) * (this.velo ? 1.4 : 1),
+          // Forza in più dei nemici della missione (bilanciamento 2026-11-07: la Storia era vinta quasi sempre)
+          forzaExtra: m.forza || 0
         });
         this._veloPartita = this.velo;
         ui.playMatchIntroLoading(E.state.currentThreat, () => {
