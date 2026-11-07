@@ -1,7 +1,7 @@
 // Impagina le carte come appaiono nel gioco (cornice, fumetto del titolo, riquadro dell'effetto)
 // per controllare che il soggetto sia ben centrato e non coperto.
 // Uso: node strumenti/gemini/impagina.js out.png [id ...]   (id = t_xxx, c_xxx, eroe_xxx; vuoto = tutte le Minacce)
-// Con LINEE=1 righe al 24% e 62% (finestra libera dell'illustrazione) e al 43% (centro ideale).
+// Con LINEE=1 righe gialle ai bordi della finestra libera dell'illustrazione (carte 22-60%, Minacce 22-58,6%) e verde al centro.
 const { chromium } = require('playwright');
 const R = require('path').resolve(__dirname, '..', '..');
 (async () => {
@@ -33,7 +33,8 @@ const R = require('path').resolve(__dirname, '..', '..');
         d.innerHTML = UI.getCardDOM(c, true);
         d.firstElementChild.style.width = '230px';
       }
-      if (linee) [24, 43, 62].forEach(y => d.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:0;right:0;top:${(y / 100 * 230 * 1024 / 695).toFixed(1)}px;border-top:1px dashed ${y === 43 ? 'lime' : 'yellow'};z-index:9"></div>`));
+      const fin = id(o).startsWith('t_') ? [22, 40, 58.6] : [22, 41, 60];
+      if (linee) fin.forEach((y, k) => d.firstElementChild.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:0;right:0;top:${y}%;border-top:1px dashed ${k === 1 ? 'lime' : 'yellow'};z-index:9"></div>`));
       d.insertAdjacentHTML('beforeend', '<div>' + id(o) + '</div>');
       g.appendChild(d);
     });
