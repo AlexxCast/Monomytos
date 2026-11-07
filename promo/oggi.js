@@ -20,7 +20,26 @@ if (riga) {
   out.lingua = riga.lingua_testi || out.lingua;
   out.manuale = riga.manuale || '';
 }
+// Uscita automatica (senza copione scelto a mano): niente doppioni e niente uscite a notte fonda.
+// GitHub a volte fa partire il cron con ore di ritardo, oppure il video è già stato lanciato a mano.
+async function giaUscito() {
+  if (process.env.COPIONE || !out.copione || !process.env.GITHUB_REPOSITORY) return false;
+  const ora = +new Intl.DateTimeFormat('en-GB', { timeZone: s.fuso_orario || 'Europe/Rome', hour: '2-digit', hourCycle: 'h23' }).format(new Date());
+  if (ora >= 22) { console.log(`Sono le ${ora}: troppo tardi per l'uscita di oggi, salto.`); return true; }
+  try {
+    const r = await fetch(`https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY}/hub-dati/pubblicazioni.json`);
+    if (!r.ok) return false;
+    const lista = await r.json();
+    const giorno = d => new Intl.DateTimeFormat('sv-SE', { timeZone: s.fuso_orario || 'Europe/Rome' }).format(new Date(d));
+    const fatto = (Array.isArray(lista) ? lista : []).find(v => !v.prova && v.data && giorno(v.data) === oggi);
+    if (fatto) { console.log(`Oggi è già uscito "${fatto.id}": salto.`); return true; }
+  } catch (e) { console.warn('Controllo pubblicazioni non riuscito:', e.message); }
+  return false;
+}
 // Controllo della scaletta: segnala i giorni con copioni inesistenti
 s.giorni.forEach(g => { if (!copioni.includes(g.copione)) console.warn(`Attenzione: ${g.data} usa il copione inesistente "${g.copione}"`); });
+(async () => {
+if (await giaUscito()) { out.copione = ''; riga = null; }
 console.log(riga ? `Oggi (${oggi}): ${out.copione} → ${out.piattaforme}` : `Oggi (${oggi}) nella scaletta non c'è nessun video.`);
 if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(out).map(([k, v]) => `${k}=${v}`).join('\n') + '\n');
+})();
