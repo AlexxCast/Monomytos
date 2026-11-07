@@ -4994,3 +4994,14 @@ body.in-match .mission-act-bar { padding: 6px 12px 0; }
   position: absolute; left: 0; right: 0; bottom: calc(100% + 4px); z-index: 25;
   height: 220px; background: rgba(10, 14, 22, 0.97); box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.6);
 }
+
+/* Regole a strati (prime missioni della Storia): si nasconde ciò che non è ancora stato spiegato.
+   Livello 1: niente binari, Sacrificio Tattico, Pesca regolabile e Trauma. Livello 2: niente Trauma. */
+body.regole-l1 #scr-game .track-binario,
+body.regole-l1 #scr-game .draw-stepper,
+body.regole-l1 #scr-game .trauma-box,
+body.regole-l2 #scr-game .trauma-box,
+body.regole-l1 #scr-game .companion-trauma-row,
+body.regole-l2 #scr-game .companion-trauma-row,
+body.regole-l1 #btnOptionSacrifice,
+body.regole-l1 #btnOptionSacrificeBruto { display: none !important; }

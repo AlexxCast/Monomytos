@@ -15,7 +15,7 @@ for(let i=0;i<N;i++){
   E.on('defense_window_opened',()=>q.push(()=>E.respondToDefense({type:'bot_fallback'})));
   E.on('act_advanced',(ev,d,st)=>{acts[st.actIndex-1].push(st.round-actStart+1); actStart=st.round+1;});
   E.on('player_corrupted',(ev,p,st)=>{vilCount++; if(fv===null) fv=st.round;});
-  E.startMatch({heroes:h.map((n,k)=>({name:n,isBot:true,isLocal:false,villain:k===0&&!!process.env.VILLAIN0})), threatPool: process.env.POOL ? JSON.parse(process.env.POOL) : null, actThreats: process.env.ATTI ? JSON.parse(process.env.ATTI) : null, story: process.env.ATTI ? 'sim' : null, difficolta: +process.env.DIFF || 1});
+  E.startMatch({heroes:h.map((n,k)=>({name:n,isBot:true,isLocal:false,villain:k===0&&!!process.env.VILLAIN0})), threatPool: process.env.POOL ? JSON.parse(process.env.POOL) : null, actThreats: process.env.ATTI ? JSON.parse(process.env.ATTI) : null, story: process.env.ATTI ? 'sim' : null, difficolta: +process.env.DIFF || 1, livelloRegole: +process.env.REGOLE || null});
   let steps=0; while(q.length&&steps<300000&&E.state.phase!=='gameover'){q.shift()();steps++;}
   if(E.state.phase==='gameover'){res[E.state.winner]++; games++; finalRound.push(E.state.round); actReached[E.state.actIndex]++; if(E.state.winner==='heroes') acts[2].push(E.state.round-actStart+1); if(fv!==null) firstVil.push(fv);} else res.stuck++;
 }

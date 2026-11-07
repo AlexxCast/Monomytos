@@ -8,6 +8,7 @@ window.MONOMYTHOS_BILANCIAMENTO = Object.assign({
   pesoEroiOltre2: 2,    // peso in più per ogni eroe oltre il secondo: squadre da 3-4 meno facili (2026-11-03)
   forzaPerEroe: 0.7,    // Forza in più dei nemici per ogni eroe oltre il primo (arrotondato per difetto)
   crisiComposita: true, // Atti I e II di Livello ≤ 3 si fondono con una seconda Minaccia
+  scalaSolo: 0.7,       // partita libera da soli: Vita e soglie ×0,7 (2026-11-07: con 1 eroe i bot vincevano il 16%, ora circa 50%)
   sogliaVillain: 5,     // Trauma che fa diventare Villain
   pescaMax: 4           // carte pescate al massimo a inizio round (manuale §8.5 diceva 5; 4 dal 2026-11-05: Neon Phantom troppo forte)
 }, window.MONOMYTHOS_BILANCIAMENTO || {});

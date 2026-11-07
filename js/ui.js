@@ -714,6 +714,13 @@ class UIController {
       }
     }
 
+    // Regole a strati: nelle prime missioni della Storia si vedono solo le regole già spiegate
+    {
+      const L = state.livelloRegole || null;
+      document.body.classList.toggle('regole-l1', L === 1);
+      document.body.classList.toggle('regole-l2', L === 2);
+    }
+
     // Multi-Path bars
     const primRatio = Math.min(1, th.primarioProgress / th.primarioMax);
     const fillPrim = document.getElementById('fillPrimario');
@@ -929,7 +936,7 @@ class UIController {
       // Screen fracture effect if TRM >= 3
       const fracture = document.getElementById('screenFractureOverlay');
       if (fracture) {
-        fracture.classList.toggle('on', localPlayer.trm >= 3);
+        fracture.classList.toggle('on', localPlayer.trm >= 3 && !(state.livelloRegole && state.livelloRegole < 3));
       }
 
       // Resource Slots (Point 4: Numbers with stat icons, safe normalized retrieval)
@@ -1658,11 +1665,16 @@ class UIController {
 
   confirmEndTurn() {
     const engine = window.GameEngine;
+    // mentre è aperto un consiglio del tutorial si legge prima il consiglio
+    if (document.querySelector('.tutorial-bolla')) return;
     const p = engine.state?.players.find(x => x.isLocal) || engine.state?.players[0];
     // Penalità per Passività e Scarto di Sopravvivenza (§3)
     if (p && !p.isDead && !p.actedThisRound) {
       if (engine.hasLegalMove(p)) {
-        window.Dialogo.conferma('Non hai fatto nessuna azione: a fine round subirai 1 Punto Trauma. Terminare comunque il turno?', { ok: 'Termina turno', annulla: 'Continua a giocare' })
+        const msg = engine.regola && !engine.regola('trauma')
+          ? 'Non hai fatto nessuna azione: hai ancora carte che puoi giocare. Terminare comunque il turno?'
+          : 'Non hai fatto nessuna azione: a fine round subirai 1 Punto Trauma. Terminare comunque il turno?';
+        window.Dialogo.conferma(msg, { ok: 'Termina turno', annulla: 'Continua a giocare' })
           .then(si => { if (si && engine.state && engine.state.phase === 'action' && engine.state.players[engine.state.turnIndex] === p) engine.endTurn(); });
         return;
       } else if (p.hand.length > 0) {
