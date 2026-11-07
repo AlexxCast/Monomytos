@@ -1,2 +1,4 @@
 promo/uscita/
 node_modules/
+__pycache__/
+*.pyc

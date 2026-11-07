@@ -63,6 +63,7 @@ def main():
     solo = {s.strip().lower().removesuffix('.png') for s in (os.environ.get('SOLO') or '').split(',') if s.strip()}
 
     client = genai.Client(vertexai=True, project=progetto, location=luogo)
+    modello = scegli_modello(client, types, modello)
     os.makedirs(NUOVE, exist_ok=True)
 
     lista = [x for x in leggi_prompt() if not solo or x[0] in solo]
@@ -103,6 +104,36 @@ def main():
         (fatte if ok else saltate).append(cid)
         print(f'{"OK" if ok else "SALTATA"} {cid} ({origine})')
     riepilogo(fatte, saltate)
+    if lista and not fatte:
+        sys.exit('Nessuna immagine generata.')
+
+
+# Nomi possibili del modello immagini (Google li cambia passando da preview a definitivo)
+CANDIDATI = ['gemini-3-pro-image', 'gemini-3-pro-image-preview', 'gemini-3.1-flash-image',
+             'gemini-3.1-flash-image-preview', 'gemini-2.5-flash-image']
+
+
+def scegli_modello(client, types, preferito):
+    """Prova il modello richiesto e poi i nomi alternativi con una richiesta minuscola di solo testo."""
+    for m in [preferito] + [c for c in CANDIDATI if c != preferito]:
+        try:
+            client.models.generate_content(model=m, contents='Say OK',
+                                           config=types.GenerateContentConfig(response_modalities=['TEXT', 'IMAGE']))
+            if m != preferito:
+                print(f'Il modello {preferito} non è disponibile: uso {m}')
+            return m
+        except Exception as e:
+            msg = str(e)
+            if '404' in msg or 'NOT_FOUND' in msg:
+                print(f'  modello {m}: non trovato'); continue
+            print(f'  modello {m}: {msg[:200]}')
+            return m  # esiste ma ha dato un altro errore: lo uso e vediamo
+    try:
+        nomi = [x.name for x in client.models.list() if 'image' in (x.name or '')]
+        print('Modelli immagini visibili nel progetto:', ', '.join(nomi) or 'nessuno')
+    except Exception as e:
+        print('Elenco modelli non disponibile:', str(e)[:200])
+    sys.exit('Nessun modello immagini disponibile in questo progetto/regione.')
 
 
 def riepilogo(fatte, saltate):
