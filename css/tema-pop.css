@@ -1782,24 +1782,8 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .db-azioni-top .btn-top-back { flex: 0 0 auto; width: auto !important; }
 .db-stepper .stepper-val { color: var(--on-night, #f3ead6) !important; }
 
-/* Pagina Mazzo: niente cosmo, pagina di fumetto vecchia e ingiallita con cornice cartoon */
-#scr-deckbuilder {
-  --on-night: #24180a;
-  background: #e8d8a8 url('../assets/bg/pagina_fumetto.webp') center / cover no-repeat;
-  padding: 10px;
-  box-sizing: border-box;
-}
-#scr-deckbuilder::before {
-  content: ''; position: absolute; inset: 8px; z-index: 0; pointer-events: none;
-  border: 4px solid #111; border-radius: 14px;
-  box-shadow: inset 0 0 0 3px #f6ecca, inset 0 0 0 6px #111, 5px 5px 0 #111;
-}
-#scr-deckbuilder > * { position: relative; z-index: 1; }
-#scr-deckbuilder .deckbuilder-top-bar { padding: 14px 18px 8px !important; }
-#scr-deckbuilder .deckbuilder-scroll-content { padding-left: 14px !important; padding-right: 14px !important; }
+/* Pagina Mazzo: fumetteria stilizzata (scaffali in alto) e tappetino da gioco con le zone delle carte */
+#scr-deckbuilder { background: #2b1c2e url('../assets/bg/libreria_tappetino.webp') center top / cover no-repeat; }
+#scr-deckbuilder .deckbuilder-top-bar { background: linear-gradient(rgba(25, 14, 28, .45), rgba(25, 14, 28, .15)) !important; border-bottom: 0 !important; backdrop-filter: none !important; }
 #scr-deckbuilder .deckbuilder-top-bar h2 { color: #fff6d6 !important; -webkit-text-stroke: 1.6px #000; text-shadow: 3px 3px 0 #000 !important; }
-#scr-deckbuilder .deckbuilder-top-bar > div > span { color: #3a2a12 !important; font-weight: 700; }
-#scr-deckbuilder .db-icona-lbl, #scr-deckbuilder .db-mazzo-nome, #scr-deckbuilder .db-stepper .stepper-val,
-#scr-deckbuilder .db-hai, #scr-deckbuilder .db-crea-nota, #scr-deckbuilder .db-vuoto, #scr-deckbuilder .db-mazzo small { text-shadow: none !important; }
-#scr-deckbuilder .db-crea { border-top-color: rgba(36, 24, 10, .35); }
-#scr-deckbuilder .deck-hero-creator-box { background: rgba(255, 250, 232, .7) !important; }
+#scr-deckbuilder .deckbuilder-top-bar > div > span { color: #fff6d6 !important; font-weight: 700; text-shadow: 0 0 4px #000, 1px 1px 0 #000; }
