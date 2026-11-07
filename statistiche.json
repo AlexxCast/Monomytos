@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-07T18:36:34.038Z",
+ "aggiornato": "2026-11-07T21:49:53.151Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -17,8 +17,8 @@
      "data": "2026-11-07T17:23:08Z",
      "link": "https://youtube.com/shorts/mi8RE3wDoHo",
      "privato": false,
-     "views": 0,
-     "likes": 0,
+     "views": 6,
+     "likes": 1,
      "commenti": 0
     },
     {
@@ -27,7 +27,7 @@
      "data": "2026-11-06T18:03:00Z",
      "link": "https://youtube.com/shorts/eLC5EshF6PA",
      "privato": false,
-     "views": 6,
+     "views": 3,
      "likes": 1,
      "commenti": 0
     },
@@ -43,8 +43,8 @@
     }
    ],
    "totali": {
-    "views": 26,
-    "likes": 3,
+    "views": 29,
+    "likes": 4,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -54,9 +54,9 @@
    "account": {
     "nome": "Monomythos",
     "follower": 2,
-    "likes": 18,
+    "likes": 21,
     "video": 3,
-    "link": "https://vm.tiktok.com/ZN8fqoEYg/"
+    "link": "https://vm.tiktok.com/ZN8fbcFuN/"
    },
    "video": [
     {
@@ -64,8 +64,8 @@
      "titolo": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché? 🤖 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori #monomythos #cardgame #indiegame #giochidicarte #gamedev",
      "data": "2026-11-07T17:45:16.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7705487064615193889?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 45,
-     "likes": 3,
+     "views": 318,
+     "likes": 6,
      "commenti": 0,
      "condivisioni": 0
     },
@@ -91,8 +91,8 @@
     }
    ],
    "totali": {
-    "views": 1530,
-    "likes": 18,
+    "views": 1803,
+    "likes": 21,
     "commenti": 1,
     "condivisioni": 0
    }
