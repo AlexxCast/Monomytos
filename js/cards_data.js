@@ -1828,7 +1828,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/pugnalepsichico.webp",
+        "img": "assets/cards/gen/neonphantom_3.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -7237,8 +7237,8 @@ window.MONOMYTHOS_DATA = {
     "passodombra": "assets/cards/gen/neonphantom_2.webp",
     "prezzo della velocità": "assets/cards/prezzodellavelocita.webp",
     "prezzodellavelocita": "assets/cards/gen/neonphantom_6.webp",
-    "Pugnale Psichico": "assets/cards/pugnalepsichico.webp",
-    "pugnalepsichico": "assets/cards/pugnalepsichico.webp",
+    "Pugnale Psichico": "assets/cards/gen/neonphantom_3.webp",
+    "pugnalepsichico": "assets/cards/gen/neonphantom_3.webp",
     "Rescissione": "assets/cards/gen/neonphantom_17.webp",
     "rescissione": "assets/cards/gen/neonphantom_17.webp",
     "Riflessi Accelerati": "assets/cards/gen/neonphantom_5.webp",
