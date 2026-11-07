@@ -197,6 +197,7 @@ class MonomythosEngine {
       noCrisi: !!options.story,
       // Moltiplicatore di difficoltà (Vita e soglie dei nemici), usato dalle missioni della Storia
       difficolta: options.difficolta || 1,
+      forzaExtra: options.forzaExtra || 0,
       threatPool: pool.map(t => t.nome),
       currentThreat: null,
       round: 1,
@@ -253,7 +254,7 @@ class MonomythosEngine {
     groups.forEach(g => {
       // Bilanciamento (scelta di Alessio): i nemici della carta secondaria usano il proprio Livello, non quello composito
       const groupLiv = g.card === raw ? liv : g.card.livello;
-      const groupHp = Math.max(g.count, Math.round(g.card.vu * (groupLiv + (numHeroes * (BIL.pesoEroi || 1) + Math.max(0, numHeroes - 2) * (BIL.pesoEroiOltre2 || 0))) * (BIL.scalaVita || 1) * (this.state.difficolta || 1)));
+      const groupHp = Math.max(g.count, Math.round(g.card.vu * (groupLiv + (numHeroes * (BIL.pesoEroi || 1) + Math.max(0, numHeroes - 2) * (BIL.pesoEroiOltre2 || 0))) * (BIL.scalaVita || 1) * (BIL.scalaGruppo && numHeroes > 1 ? BIL.scalaGruppo : 1) * (this.state.difficolta || 1)));
       totalHp += groupHp;
       const mookHp = Math.ceil(groupHp / g.count);
       for (let i = 0; i < g.count; i++) {
@@ -272,12 +273,13 @@ class MonomythosEngine {
     }
 
     // Thresholds: SogliaUnitaria × (Livello + NumeroEroi)
-    const D = this.state.difficolta || 1;
-    const primMax = Math.max(1, Math.round(raw.primario.val * (liv + (numHeroes * (BIL.pesoEroi || 1) + Math.max(0, numHeroes - 2) * (BIL.pesoEroiOltre2 || 0))) * (BIL.scalaSoglie || 1) * D));
-    const brutMax = Math.max(1, Math.round(raw.bruto.val * (liv + (numHeroes * (BIL.pesoEroi || 1) + Math.max(0, numHeroes - 2) * (BIL.pesoEroiOltre2 || 0))) * (BIL.scalaSoglie || 1) * D));
+    const primMax = this.sogliaBinario(raw.primario.val, liv, numHeroes);
+    const brutMax = this.sogliaBinario(raw.bruto.val, liv, numHeroes);
 
     this.state.currentThreat = {
       ...raw,
+      // Missioni della Storia: Forza in più dei nemici (campo forza della missione)
+      forza: (raw.forza || 0) + (this.state.forzaExtra || 0),
       livello: liv,
       fusedWith: secondary ? secondary.nome : null,
       parryRate: 1,
@@ -311,6 +313,14 @@ class MonomythosEngine {
       this.state.currentThreat.parryRate = rateMatch ? parseInt(rateMatch[1]) : 1;
       this.addLog('threat', `[COSMICO] STATE FREEZING & EFFETTO ATTIVO: ${raw.cosmico}`);
     }
+  }
+
+  // Soglia di un binario: SogliaUnitaria × (Livello + peso degli eroi) × manopole × difficoltà
+  sogliaBinario(val, liv, numHeroes) {
+    const BIL = window.MONOMYTHOS_BILANCIAMENTO || {};
+    const D = (this.state && this.state.difficolta) || 1;
+    const peso = numHeroes * (BIL.pesoEroi || 1) + Math.max(0, numHeroes - 2) * (BIL.pesoEroiOltre2 || 0);
+    return Math.max(1, Math.round(val * (liv + peso) * (BIL.scalaSoglie || 1) * (BIL.scalaGruppo && numHeroes > 1 ? BIL.scalaGruppo : 1) * D));
   }
 
   setupRogueHeroBoss(bossHeroName) {
@@ -367,6 +377,9 @@ class MonomythosEngine {
       p.pbExtraUsed = false;
       p.actedThisRound = false;
       p.retentionUsedThisRound = false;
+      p.tempResistance = 0;
+      p.damageReduction = 0;
+      p.attaccoGiocatoRound = false;
       p.slots = {
         Potenza: p.str,
         Agilità: p.spd,
@@ -404,6 +417,19 @@ class MonomythosEngine {
         if (p.weakened && p.weakenedRound != null && p.weakenedRound < this.state.round) { p.weakened = false; p.weakenedRound = null; }
       }
     });
+
+    // Turret Automatica e simili: 1 danno allo sgherro più ferito a inizio round, per i round rimasti
+    this.state.players.forEach(p => {
+      if (p.isDead || !(p.torretta > 0)) return;
+      p.torretta--;
+      if (this.sgherroBersaglio()) {
+        this.addLog('hero', `[TORRETTA] La torretta di ${p.name} spara`);
+        window.EffectRegistry.execute('damage', this, { source: p, card: { cat: 'Torretta' }, targetId: 'threat_boss', targetEntity: this.resolveTarget('threat_boss') }, { type: 'damage', amount: 1 });
+      }
+    });
+    this.checkThreatDefeated();
+    if (this.isGameOver()) return;
+    this.state.attacchiRound = 0;
 
     this.state.turnIndex = 0;
     this.addLog('sys', `--- Round ${this.state.round} ---`);
@@ -610,9 +636,7 @@ class MonomythosEngine {
         player.slots[k] = Math.max(0, player.slots[k] - cost);
       }
     }
-    if (player.slots[norm] !== undefined) {
-      player.slots[norm] = Math.max(0, player.slots[norm] - cost);
-    }
+    // (prima qui si toglieva il costo una seconda volta dallo slot minuscolo: ogni carta costava il doppio)
   }
 
   // Play a card for effect (Opzione A - Modular Data-Driven System via EffectRegistry)
@@ -978,7 +1002,7 @@ class MonomythosEngine {
       else if (m.stunned) intents[i] = { kind: 'stunned' };
       else intents[i] = { kind: 'support' };
     });
-    if (list.length === 0) intents.__boss = { kind: 'attack', dmg: th.forza, target: target.name };
+    if (list.length === 0 && !(th.mooks || []).some(m => !m.isDead)) intents.__boss = { kind: 'attack', dmg: th.forza, target: target.name };
     return intents;
   }
 
@@ -1002,12 +1026,9 @@ class MonomythosEngine {
       }
     });
 
-    // Reset temporary buffs
-    this.state.players.forEach(p => {
-      p.tempResistance = 0;
-      p.damageReduction = 0;
-      p.tempDrawRate = 0;
-    });
+    // Le difese preparate nel turno (Barriera Olografica, Pelle di Ferro...) valgono durante questa Fase Minaccia:
+    // si azzerano all'inizio del round successivo (startRound), non prima degli attacchi
+    this.state.players.forEach(p => { p.tempDrawRate = 0; });
 
     // Decrement Operational Timer
     th.timer--;
@@ -1036,7 +1057,10 @@ class MonomythosEngine {
     }
     // §5: le minacce sussidiarie della Crisi Composita sono solo potenziamento numerico, non attaccano
     const attackers = livingMooks.filter(m => !m.subsidiary);
-    const enemies = attackers.length > 0 ? attackers : (livingMooks.length > 0 ? livingMooks.slice(0, 1) : [{ name: th.nome, isBoss: true }]);
+    // Se restano solo nemici storditi, questo round non attacca nessuno (prima attaccava comunque la Minaccia)
+    const restanoStorditi = !!(th.mooks && th.mooks.some(m => !m.isDead && m.hp > 0));
+    const enemies = attackers.length > 0 ? attackers : (livingMooks.length > 0 ? livingMooks.slice(0, 1) : (restanoStorditi ? [] : [{ name: th.nome, isBoss: true }]));
+    if (!enemies.length) this.addLog('hero', `[STORDITO] I nemici sono storditi: questo round non attaccano`);
 
     let enemyIndex = 0;
     const processNextAttack = () => {
@@ -1118,6 +1142,7 @@ class MonomythosEngine {
       }
 
       target.vita = Math.max(0, target.vita - penetrated);
+      if (penetrated > 0) target.ultimoDanno = this.state.round;
 
       if (penetrated > 0) {
         this.addLog('threat', `${target.name} incassa ${penetrated} danni (Vita: ${target.vita}/${target.vitaMax})`);
@@ -1204,43 +1229,42 @@ class MonomythosEngine {
     return (th && th.parryRate) || 1;
   }
 
+  // Difesa dei bot (2026-11-07): schivata sui colpi forti, poi incassa se la Vita è alta, altrimenti para con le carte meno utili
   executeBotDefense(target, effectiveDmg, reactionCards, parryCards, applyRemainingDamage) {
-    const rCards = reactionCards || target.hand.filter(c => c.fx_list && c.fx_list.some(f => f.timing === 'reaction'));
-    if (rCards.length > 0) {
-      const rCard = rCards[0];
+    const fxOf = c => c.fx_list || [];
+    const reazioni = (reactionCards || target.hand.filter(c => fxOf(c).some(f => f.timing === 'reaction'))).filter(c => target.hand.includes(c));
+    const usa = rCard => {
       const rIdx = target.hand.findIndex(c => c.uid === rCard.uid);
       if (rIdx !== -1) target.hand.splice(rIdx, 1);
       target.discard.push(rCard);
-
-      const ctx = {
-        source: target,
-        card: rCard,
-        incomingAttack: { rawDmg: effectiveDmg, parried: 0, dodged: false }
-      };
-      rCard.fx_list.forEach(fx => {
-        if (fx.timing === 'reaction') {
-          window.EffectRegistry.execute(fx.type, this, ctx, fx);
-        }
-      });
+      const ctx = { source: target, card: rCard, incomingAttack: { rawDmg: effectiveDmg, parried: 0, dodged: false } };
+      fxOf(rCard).forEach(fx => { if (fx.timing === 'reaction') window.EffectRegistry.execute(fx.type, this, ctx, fx); });
       applyRemainingDamage(ctx.incomingAttack.parried || 0, ctx.incomingAttack.dodged, 0);
-    } else if (target.hand.length > 0 && effectiveDmg > 0) {
-      // Bot discards cards to absorb the mitigable damage
+    };
+    if (effectiveDmg <= 0) return applyRemainingDamage(0, false, 0);
+    const schiva = reazioni.find(c => fxOf(c).some(f => f.timing === 'reaction' && f.type === 'dodge'));
+    if (schiva && (effectiveDmg >= 3 || target.vita <= effectiveDmg + 2)) return usa(schiva);
+    const para = reazioni.find(c => fxOf(c).some(f => f.timing === 'reaction' && f.type === 'parry'));
+    if (para && effectiveDmg >= 2) return usa(para);
+    // Vita alta: incassa e tiene le carte
+    if (target.vita - effectiveDmg > target.vitaMax * 0.45 && target.vita > effectiveDmg + 4) return applyRemainingDamage(0, false, 0);
+    if (target.hand.length > 0) {
       const rate = this.getParryRate();
-      let valueSum = 0;
-      target.hand.sort((a, b) => (a.valore || 0) - (b.valore || 0));
+      const utile = c => (fxOf(c).some(f => f.type === 'damage') ? 2 : 0) + (fxOf(c).some(f => f.timing === 'reaction') ? 1 : 0) + (fxOf(c).some(f => f.type === 'boostNextSacrifice') ? 1 : 0);
+      const ordine = [...target.hand].sort((x, y) => utile(x) - utile(y) || (y.valore || 0) - (x.valore || 0));
       const maxParata = this.mx('maxCarteParata', Infinity);
-      let scartate = 0;
-      while (target.hand.length > 1 && scartate++ < maxParata && Math.floor(valueSum / rate) < effectiveDmg) {
-        const pCard = target.hand.pop();
+      let valueSum = 0, scartate = 0;
+      for (const pCard of ordine) {
+        if (Math.floor(valueSum / rate) >= effectiveDmg || scartate >= maxParata || target.hand.length <= 1) break;
+        target.hand.splice(target.hand.indexOf(pCard), 1);
         target.discard.push(pCard);
-        valueSum += (pCard.valore || 0);
+        valueSum += (pCard.valore || 0); scartate++;
       }
       const absorbedTotal = Math.floor(valueSum / rate);
       this.addLog('hero', `[PARATA] ${target.name} effettua Parata Dinamica, assorbendo ${absorbedTotal} danni`);
-      applyRemainingDamage(absorbedTotal, false, 0);
-    } else {
-      applyRemainingDamage(0, false, 0);
+      return applyRemainingDamage(absorbedTotal, false, 0);
     }
+    applyRemainingDamage(0, false, 0);
   }
 
   // Response callback from user defense window
@@ -1353,9 +1377,11 @@ class MonomythosEngine {
     const numLiving = this.state.players.filter(p => !p.isDead).length;
     if (numLiving > 0 && this.state.currentThreat) {
       const th = this.state.currentThreat;
+      if (th.isRogueHero) return;
       const liv = th.livello;
-      th.primarioMax = th.primario.val * (liv + numLiving);
-      th.brutoMax = th.bruto.val * (liv + numLiving);
+      // Stessa formula dell'inizio Atto (prima ignorava le manopole e le soglie salivano invece di scendere)
+      th.primarioMax = Math.max(th.primarioProgress + 1, this.sogliaBinario(th.primario.val, liv, numLiving));
+      th.brutoMax = Math.max(th.brutoProgress + 1, this.sogliaBinario(th.bruto.val, liv, numLiving));
       this.addLog('sys', `[SCALING] Ricalcolo Dinamico Multi-Path: soglie aggiornate a Primario ${th.primarioMax}, Bruto ${th.brutoMax}`);
     }
   }
@@ -1381,7 +1407,9 @@ class MonomythosEngine {
         this.setupCurrentThreat();
         this.addLog('sys', `=== AVANZAMENTO: ATTO ${this.state.actIndex === this.ultimoAtto() ? 'FINALE' : 'II'} — ${this.state.currentThreat.nome} ===`);
         this.emit('act_advanced', this.state);
-        this.startRound();
+        // Se l'Atto si chiude durante i turni degli eroi il round continua contro la nuova Minaccia:
+        // niente slot nuovi e la Fase Minaccia arriva lo stesso (prima ripartiva un round intero senza attacchi nemici)
+        if (this.state.phase !== 'action') this.startRound();
         return true;
       } else {
         // Final Victory!
@@ -1428,73 +1456,119 @@ class MonomythosEngine {
     return this.state.phase === 'gameover';
   }
 
-  // Simple, smart tactical Bot AI with Target Selection (Point 7)
+  // Bot tattico (2026-11-07): gioca come un giocatore esperto, così gli alleati e le simulazioni sono credibili.
+  // Ordine: chiudere un binario nel turno (anche con le carte di raddoppio) > Potere Base > attacchi più efficienti
+  // sui nemici che attaccano > controllo e cure > sacrifici delle carte che non servono.
   runBotTurn(bot) {
     if (this.isGameOver() || bot.isDead || this.state.phase !== 'action') return;
+    const th0 = this.state.currentThreat;
+    const fine = () => setTimeout(() => this.endTurn(), 600);
+    const attivo = () => !this.isGameOver() && !bot.isDead && this.state.phase === 'action' && this.getActivePlayer() === bot;
+    const fxOf = c => c.fx_list || [];
+    const vale = f => !f.condition || (f.condition === 'hero' ? bot.state === 'hero' : bot.state === 'villain');
+    const danno = c => fxOf(c).filter(f => f.type === 'damage' && vale(f) && (!f.timing || f.timing === 'play')).reduce((t, f) => t + (f.amount || 1), 0) || (c.fx && c.fx.dmg) || 0;
+    const trauma = c => fxOf(c).filter(f => f.type === 'trauma' && f.amount > 0 && vale(f)).reduce((t, f) => t + f.amount, 0);
+    const ha = (c, t) => fxOf(c).some(f => f.type === t && vale(f));
+    const reazione = c => fxOf(c).some(f => f.timing === 'reaction');
+    const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
+    const gioc = c => this.getPlayerSlot(bot, c.cat) >= (c.valore || 0) && (!window.Morale || window.Morale.puoPagare(c, bot));
+    const sicura = c => bot.state === 'villain' || bot.trm + trauma(c) < soglia - 1;
+    const norm = x => this.normalizeCategory(x);
+    const th = () => this.state.currentThreat;
+    const maxSac = () => this.mx('maxSacrifici', 2);
+    const binariOk = () => !this.regola || this.regola('binari');
+    const play = (c, t) => { const r = this.playCardEffect(bot.id, c.uid, t); return r && r.ok; };
+    const sac = (c, tr) => { const r = this.tacticalSacrifice(bot.id, c.uid, tr); return r && r.ok; };
+    const binari = () => [['primario', th().primario.cat, th().primarioMax - th().primarioProgress], ['bruto', th().bruto.cat, th().brutoMax - th().brutoProgress]];
+    const attaccanti = () => (th().mooks || []).filter(m => !m.isDead && !m.subsidiary);
+    const vivi = () => (th().mooks || []).filter(m => !m.isDead);
 
-    // 1. Try to use Base Power if available
-    if (!bot.pbUsedThisTurn) {
-      this.activateBasePower(bot.id, 0);
+    // Da Villain: attacca l'eroe più ferito con le carte che fanno danni
+    if (bot.state === 'villain') {
+      if (!bot.pbUsedThisTurn) this.activateBasePower(bot.id, 0);
+      for (let g = 0; g < 4 && attivo() && th() === th0; g++) {
+        const c = bot.hand.filter(x => gioc(x)).sort((a, b) => danno(b) - danno(a))[0];
+        if (!c) break;
+        const eroi = this.state.players.filter(p => !p.isDead && p.id !== bot.id && p.state === 'hero').sort((a, b) => a.vita - b.vita);
+        if (!play(c, danno(c) && eroi[0] ? eroi[0].id : 'threat_boss')) break;
+      }
+      if (attivo() && !bot.actedThisRound && bot.hand.length > 0) this.survivalDiscard(bot.id);
+      return fine();
     }
 
-    // 2. Decide between playing card or sacrificing
-    const th = this.state.currentThreat;
-    const primRatio = th.primarioProgress / th.primarioMax;
-    const brutRatio = th.brutoProgress / th.brutoMax;
-
-    // Carte giocabili: il bot evita le carte che danno Trauma quando è vicino al Punto di Rottura
-    const soglia = (window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5;
-    // Da Villain il bot gioca prima le carte che fanno danni, per colpire gli eroi
-    const attacca = c => ((c.fx_list || []).some(f => f.type === 'damage') ? 1 : 0);
-    const traumaOf = c => (c.fx_list || []).reduce((t, f) => t + (f.type === 'trauma' && f.amount > 0 ? f.amount : 0), 0);
-    const getPlayable = () => bot.hand.filter(c => this.getPlayerSlot(bot, c.cat) >= c.valore && (bot.state === 'villain' || bot.trm + traumaOf(c) < soglia - 1) && (!window.Morale || window.Morale.puoPagare(c, bot)))
-      .sort((a, b) => traumaOf(a) - traumaOf(b) || (bot.state === 'villain' ? attacca(b) - attacca(a) : 0));
-    let playableCards = getPlayable();
-    let plays = 0;
-
-    while (playableCards.length > 0 && plays < 4 && !this.isGameOver() && this.state.phase === 'action' && this.state.currentThreat === th && (th.hp > 0 || primRatio < 0.8)) {
-      const c = playableCards[0];
-      const targetInfo = this.getValidTargetsForCard(bot.id, c);
-      let chosenTargetId = 'threat_boss';
-      if (targetInfo.requiresTarget) {
-        const valids = targetInfo.candidates.filter(can => can.isValid);
-        // Prioritize wounded mooks, then boss
-        const validMook = valids.find(can => can.type === 'mook');
-        // Un bot diventato Villain attacca gli eroi (il più ferito), non più gli sgherri
-        const eroeBersaglio = bot.state === 'villain' && valids.filter(can => can.type === 'player' && !can.isSelf).sort((a, b) => a.hp - b.hp)[0];
-        if (eroeBersaglio) {
-          chosenTargetId = eroeBersaglio.id;
-        } else if (validMook) {
-          chosenTargetId = validMook.id;
-        } else if (valids.length > 0) {
-          chosenTargetId = valids[0].id;
+    // 1) Chiudere un binario in questo turno
+    const chiudiBinario = () => {
+      const left = maxSac() - bot.sacrificesThisRound;
+      if (left <= 0 || !binariOk()) return false;
+      for (const [tr, cat, need] of binari()) {
+        const adatte = bot.hand.filter(c => norm(c.cat) === norm(cat)).sort((a, b) => (b.valore || 0) - (a.valore || 0));
+        const scegli = escl => adatte.filter(c => c !== escl).slice(0, left);
+        const somma = (arr, x2) => arr.reduce((t, c) => t + (c.valore || 0), 0) + (x2 && arr[0] ? arr[0].valore || 0 : 0);
+        const base = scegli();
+        if (base.length && somma(base, !!bot.boostedSacrifice) >= need) { base.forEach(c => attivo() && th() === th0 && sac(c, tr)); return true; }
+        const raddoppio = !bot.boostedSacrifice && bot.hand.find(c => ha(c, 'boostNextSacrifice') && gioc(c));
+        if (raddoppio) {
+          const conR = scegli(raddoppio);
+          if (conR.length && somma(conR, true) >= need) { play(raddoppio); conR.forEach(c => attivo() && th() === th0 && sac(c, tr)); return true; }
         }
       }
-      const before = bot.hand.length;
-      this.playCardEffect(bot.id, c.uid, chosenTargetId);
-      plays++;
-      if (bot.hand.length === before || bot.isDead) break;
-      playableCards = getPlayable();
+      return false;
+    };
+    if (chiudiBinario() || !attivo() || th() !== th0) return fine();
+
+    // 2) Potere Base: l'opzione più utile in questo momento
+    if (!bot.pbUsedThisTurn) {
+      const opz = this.getBasePowerOptions(bot);
+      let best = -1, bv = 0;
+      opz.forEach((o, i) => {
+        if (o.ok && !o.ok(bot)) return;
+        const t = `${o.titolo} ${o.desc}`;
+        let v = /danno/.test(t) ? 3 : /Pesca|carta/.test(t) ? (bot.hand.length < bot.maxHand - 1 ? 2.5 : 0) : /Slot/.test(t) ? 2 : /Vita/.test(t) ? (bot.vita < bot.vitaMax ? 1.5 : 0) : /Scudo/.test(t) ? 1 : /Guarda/.test(t) ? 0.5 : 0;
+        if (/Villain/.test(o.desc)) v = 0;
+        if (v > bv) { bv = v; best = i; }
+      });
+      if (best >= 0) this.activateBasePower(bot.id, best);
     }
-    if (this.isGameOver() || this.state.currentThreat !== th) { setTimeout(() => this.endTurn(), 600); return; }
-    if (plays === 0 && bot.hand.length > 1 && bot.sacrificesThisRound < 2) {
-      // Tactical sacrifice: solo carte della Categoria richiesta; il bot resta sul binario già avviato (§5)
-      const preferred = primRatio >= brutRatio ? ['primario', 'bruto'] : ['bruto', 'primario'];
-      for (const track of preferred) {
-        const reqCat = this.normalizeCategory(track === 'primario' ? th.primario.cat : th.bruto.cat);
-        const c = bot.hand.find(x => this.normalizeCategory(x.cat) === reqCat);
-        if (c) { this.tacticalSacrifice(bot.id, c.uid, track); break; }
+    if (!attivo() || th() !== th0) return fine();
+
+    // 3) Attacchi e carte utili
+    const bersaglio = d => {
+      const a = attaccanti(), pool = a.length ? a : vivi();
+      const uccide = pool.filter(m => m.hp <= d).sort((x, y) => y.hp - x.hp)[0];
+      return (uccide || [...pool].sort((x, y) => x.hp - y.hp)[0] || { id: 'threat_boss' }).id;
+    };
+    for (let g = 0; g < 8 && attivo() && th() === th0; g++) {
+      if (chiudiBinario() || !attivo() || th() !== th0) return fine();
+      const attacchi = bot.hand.filter(c => gioc(c) && sicura(c) && danno(c) > 0).sort((a, b) => danno(b) / Math.max(1, b.valore) - danno(a) / Math.max(1, a.valore));
+      const utili = bot.hand.filter(c => gioc(c) && sicura(c) && !danno(c) && !reazione(c) && (
+        ((ha(c, 'weakenForza') || ha(c, 'stun') || ha(c, 'taunt')) && attaccanti().length) ||
+        (ha(c, 'heal') && bot.vita <= bot.vitaMax - 3) || (ha(c, 'draw') && bot.hand.length <= 3) || ha(c, 'heroPoints') || ha(c, 'shield') || ha(c, 'damageReduction')));
+      const c = attacchi[0] || utili[0];
+      if (!c) break;
+      const t = (danno(c) || ha(c, 'stun') || ha(c, 'weakenForza')) ? bersaglio(danno(c)) : (ha(c, 'heal') ? bot.id : null);
+      const prima = bot.hand.length;
+      if (!play(c, t) || bot.hand.length === prima) break;
+    }
+    if (!attivo() || th() !== th0) return fine();
+
+    // 4) Sacrifici con le carte che non servono (raddoppiati se conviene)
+    for (let g = 0; g < 3 && attivo() && th() === th0 && binariOk() && bot.sacrificesThisRound < maxSac(); g++) {
+      let fatto = false;
+      for (const [tr, cat] of binari().sort((a, b) => a[2] - b[2])) {
+        const inutile = bot.hand.filter(c => norm(c.cat) === norm(cat) && !(danno(c) > 0 && gioc(c) && sicura(c)) && !reazione(c)).sort((a, b) => (b.valore || 0) - (a.valore || 0))[0];
+        if (!inutile) continue;
+        const raddoppio = !bot.boostedSacrifice && (inutile.valore || 0) >= 2 && bot.hand.find(x => x !== inutile && ha(x, 'boostNextSacrifice') && gioc(x));
+        if (raddoppio) play(raddoppio);
+        if (attivo() && th() === th0) sac(inutile, tr);
+        fatto = true;
+        break;
       }
+      if (!fatto) break;
     }
 
     // Se non ha potuto agire, Scarto di Sopravvivenza per evitare la penalità per passività
-    if (!bot.actedThisRound && bot.hand.length > 0) {
-      this.survivalDiscard(bot.id);
-    }
-
-    setTimeout(() => {
-      this.endTurn();
-    }, 600);
+    if (attivo() && !bot.actedThisRound && bot.hand.length > 0) this.survivalDiscard(bot.id);
+    fine();
   }
 
   addLog(type, text) {
