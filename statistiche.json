@@ -1,16 +1,26 @@
 {
- "aggiornato": "2026-11-07T12:59:02.376Z",
+ "aggiornato": "2026-11-07T18:36:34.038Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 0,
-    "views": 17,
-    "video": 2,
+    "views": 23,
+    "video": 3,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "mi8RE3wDoHo",
+     "titolo": "Cosa è successo in piazza? #Shorts",
+     "data": "2026-11-07T17:23:08Z",
+     "link": "https://youtube.com/shorts/mi8RE3wDoHo",
+     "privato": false,
+     "views": 0,
+     "likes": 0,
+     "commenti": 0
+    },
     {
      "id": "eLC5EshF6PA",
      "titolo": "Se la guardi, diventi il Villain #Shorts",
@@ -27,13 +37,13 @@
      "data": "2026-11-05T19:41:32Z",
      "link": "https://youtube.com/shorts/N71Wh4FGnts",
      "privato": false,
-     "views": 17,
+     "views": 20,
      "likes": 2,
      "commenti": 0
     }
    ],
    "totali": {
-    "views": 23,
+    "views": 26,
     "likes": 3,
     "commenti": 0,
     "condivisioni": 0
@@ -44,17 +54,27 @@
    "account": {
     "nome": "Monomythos",
     "follower": 2,
-    "likes": 15,
-    "video": 2,
-    "link": "https://vm.tiktok.com/ZN8fXJ24M/"
+    "likes": 18,
+    "video": 3,
+    "link": "https://vm.tiktok.com/ZN8fqoEYg/"
    },
    "video": [
+    {
+     "id": "7705487064615193889",
+     "titolo": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché? 🤖 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori #monomythos #cardgame #indiegame #giochidicarte #gamedev",
+     "data": "2026-11-07T17:45:16.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7705487064615193889?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 45,
+     "likes": 3,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7705123584242371873",
      "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️ 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
      "data": "2026-11-06T18:14:47.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7705123584242371873?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 887,
+     "views": 888,
      "likes": 10,
      "commenti": 1,
      "condivisioni": 0
@@ -71,8 +91,8 @@
     }
    ],
    "totali": {
-    "views": 1484,
-    "likes": 15,
+    "views": 1530,
+    "likes": 18,
     "commenti": 1,
     "condivisioni": 0
    }
@@ -86,10 +106,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 0,
-    "video": 2,
+    "video": 3,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mzqg33bhen2n",
+     "titolo": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché?",
+     "data": "2026-11-07T17:24:59.773Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzqg33bhen2n",
+     "views": 0,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mznxtqwa6x24",
      "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️",
@@ -113,9 +143,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 6,
+    "likes": 8,
     "commenti": 0,
-    "condivisioni": 2
+    "condivisioni": 3
    }
   },
   "telegram": {
