@@ -1894,3 +1894,9 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 #modalPickCreationCard .sheet-header h3, #modalPickCreationCard .sheet-header p, #modalPickCreationCard .db-scelta small { color: #fff6d6 !important; }
 #modalPickCreationCard .sheet-handle { background: rgba(214, 170, 90, .7) !important; }
 #modalPickCreationCard .db-scelta.scelta { outline-color: var(--gold, #f5b82e); background: rgba(245, 184, 46, .12); }
+/* Mazzo Minacce: retro più evidente, con una patina rossa */
+#modalMinacce .bottom-sheet::before {
+  background: linear-gradient(rgba(170, 20, 45, .45), rgba(120, 10, 35, .55)), url('../assets/cards/cartaminacciaretro.webp') center / cover no-repeat !important;
+  opacity: .42 !important;
+}
+#modalMinacce .minacce-intro { font-weight: 600; }
