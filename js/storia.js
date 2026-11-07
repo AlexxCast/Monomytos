@@ -114,7 +114,7 @@
       ],
       missioni: [
         {
-          id: 'c1m1', difficolta: 1.6, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Ataca', alleato: 'Iron Aegis', riserva: 'Guardiana di Confine',
+          id: 'c1m1', regole: 1, difficolta: 1.6, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Ataca', alleato: 'Iron Aegis', riserva: 'Guardiana di Confine',
           atti: ["L'Assedio dei Predoni delle Rovine", 'Blackout Ostile'],
           premio: { crediti: 150, bustine: 1 },
           prima: [
@@ -157,7 +157,7 @@
       ],
       missioni: [
         {
-          id: 'c2m1', difficolta: 1.8, titolo: "L'Arena di Sotto", luogo: 'La vecchia cisterna', alleato: 'Lama Errante', riserva: 'Neon Phantom',
+          id: 'c2m1', regole: 2, difficolta: 1.8, titolo: "L'Arena di Sotto", luogo: 'La vecchia cisterna', alleato: 'Lama Errante', riserva: 'Neon Phantom',
           atti: ['Torneo Clandestino', 'Incursione dei Droni Cinetici'],
           premio: { eroe: 1, crediti: 100 },
           prima: [
@@ -166,6 +166,8 @@
             { chi: 'legato', testo: 'Sono cresciuta combattendo in posti come questo. Ma qui c\'è qualcosa di diverso.' },
             { chi: 'altro', testo: 'Nessuno raccoglie le scommesse. Nessuno comanda.' },
             { chi: 'legato', testo: 'È peggio. Sono venuti qui da soli, come api in un alveare. La Stella li chiama a sfogarsi tutti nello stesso punto.' },
+            { chi: 'legato', testo: "Nell'arena si impara una cosa: non serve stendere tutti. O togli la Vita a chi combatte, o spezzi quello che tiene in piedi il torneo." },
+            { chi: 'altro', testo: 'Due strade, allora. Ingegno o forza bruta: scegliamo la più vicina a cedere.' },
             { chi: 'narratore', testo: 'Qualcuno vi riconosce: i vostri occhi sono puliti, senza il viola. La folla si gira verso di voi.' },
             { chi: 'prometeo', testo: 'Voi due avete gli occhi troppo puliti per questo posto. Fermateli. Io ho una città da sistemare.', fx: 'VRRRM' }
           ],
@@ -187,6 +189,8 @@
             { chi: 'legato', testo: 'Fermi. Lo sentite anche voi? Questa nebbia non viene dal mare.' },
             { chi: 'altro', testo: 'È rossa e viola. Come la Stella.' },
             { chi: 'legato', testo: 'Io sono stata toccata da questa cosa, tanto tempo fa. Si chiama Velo. E qualcuno lo sta chiamando apposta.' },
+            { chi: 'legato', testo: 'Ogni respiro di questa nebbia vi scava dentro. Se cedete troppo, il Velo vi prende: e combatterete contro chi vi sta accanto.' },
+            { chi: 'altro', testo: 'Allora teniamoci d\'occhio. Se uno di noi comincia a vedere viola, lo dice subito.' },
             { chi: 'narratore', testo: 'Dalla nebbia saltano fuori dei banditi agili. Vi stavano aspettando.' }
           ],
           atto: [],
@@ -742,6 +746,8 @@
           heroes: [{ name: this.mioEroe(m), isBot: false, villain: this.velo, customDeck: this.mazzoPer(this.mioEroe(m)).mazzo || undefined }, { name: this.alleatoDi(m), isBot: true }],
           actThreats: m.atti,
           story: m.id,
+          // regole a strati: la missione 1 ha solo la Vita, la 2 aggiunge binari e Pesca (nel Velo servono tutte)
+          livelloRegole: this.velo ? null : (m.regole || null),
           // nel Velo la Minaccia è dalla tua parte: un po' più forte, così il Portatore non la abbatte da solo
           difficolta: (m.difficolta || 1) * (this.velo ? 1.4 : 1)
         });
@@ -749,6 +755,8 @@
         ui.playMatchIntroLoading(E.state.currentThreat, () => {
           ui.showScreen('scr-game');
           ui.fxBanner && ui.fxBanner(m.titolo.toUpperCase(), m.luogo, 'gold');
+          // i consigli partono appena si vede il tavolo, prima che si possa finire il turno
+          if (window.Tutorial) setTimeout(() => window.Tutorial.inizioPartita(E.state), 900);
         });
       } catch (e) {
         console.error('Storia:', e);
