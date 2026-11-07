@@ -1,5 +1,6 @@
 # Rifà lo spazio dentro i retro delle carte con le nebulose di Alessio,
-# lasciando identici cornice, logo, emblema e scritta.
+# lasciando identici cornice, emblema e scritta. Il logo del titolo vecchio (dentro gli originali)
+# viene coperto dalla nebulosa e sopra si appoggia il logo attuale assets/icons/logo_titolo.webp.
 #   python3 strumenti/retro/componi_retro.py
 import numpy as np
 from PIL import Image, ImageFilter
@@ -46,7 +47,17 @@ def nebula(path, size, darken):
     arr = np.array(neb).astype(float) * darken
     return arr
 
-def componi(card, neb_path, inner, frame_like, fg_mask, out, darken=0.85):
+def metti_logo(img, box):
+    # appoggia il logo del titolo attuale centrato nel riquadro del logo vecchio
+    x, y, w, h = box
+    logo = Image.open('assets/icons/logo_titolo.webp').convert('RGBA')
+    nh = round(logo.height * w / logo.width)
+    logo = logo.resize((w, nh), Image.LANCZOS)
+    base = img.convert('RGBA')
+    base.alpha_composite(logo, (x, y + (h - nh) // 2))
+    return base.convert('RGB')
+
+def componi(card, neb_path, inner, frame_like, fg_mask, out, darken=0.85, logo=None):
     img = Image.open(D + card).convert('RGB')
     a = np.array(img).astype(float)
     h, w = a.shape[:2]
@@ -64,9 +75,11 @@ def componi(card, neb_path, inner, frame_like, fg_mask, out, darken=0.85):
     m = np.array(m).astype(float)[..., None] / 255
     neb = np.zeros_like(a); nb = nebula(neb_path, (x1 - x0, y1 - y0), darken)
     neb[y0:y1, x0:x1] = nb
-    res = a * (1 - m) + neb * m
-    Image.fromarray(np.clip(res, 0, 255).astype(np.uint8)).save(out, quality=90, method=6)
-    return Image.fromarray(np.clip(res, 0, 255).astype(np.uint8))
+    res = Image.fromarray(np.clip(a * (1 - m) + neb * m, 0, 255).astype(np.uint8))
+    if logo:
+        res = metti_logo(res, logo)
+    res.save(out, quality=90, method=6)
+    return res
 
 # --- Retro del mazzo (eroi): cornice oro ---
 def frame_gold(hv, a):
@@ -75,8 +88,7 @@ def frame_gold(hv, a):
 
 def fg_hero(a, hv):
     shape = a.shape[:2]
-    m = tpl_mask(shape, 'assets/icons/logo_titolo.webp', 61, 212, 420, 98, 3)
-    m |= tpl_mask(shape, 'assets/icons/logo_monograma.webp', 208, 364, 125, 193, 3)
+    m = tpl_mask(shape, 'assets/icons/logo_monograma.webp', 208, 364, 125, 193, 3)
     return m
 
 # --- Retro Minaccia: cornice argento, teschio e scritta ---
@@ -95,8 +107,7 @@ def poly_mask(shape, poly, feather=0):
 
 def fg_threat(a, hv, logo=(56, 212, 430, 100), text_box=(170, 612, 375, 660)):
     shape = a.shape[:2]
-    m = tpl_mask(shape, 'assets/icons/logo_titolo.webp', *logo, 3)
-    m |= poly_mask(shape, SKULL_POLY)
+    m = poly_mask(shape, SKULL_POLY)
     if text_box:
         H, S, V = hv[..., 0] * 360 / 255, hv[..., 1] / 255, hv[..., 2] / 255
         x0, y0, x1, y1 = text_box
@@ -106,7 +117,7 @@ def fg_threat(a, hv, logo=(56, 212, 430, 100), text_box=(170, 612, 375, 660)):
     return m
 
 if __name__ == '__main__':
-    componi('originale_retrocartamazzo.webp', D + 'nebulosa_eroi.jpg', (22, 37, 520, 769), frame_gold, fg_hero, 'assets/cards/retrocartamazzo.webp')
-    componi('originale_cartaminacciaretro.webp', D + 'nebulosa_villain.jpg', (24, 38, 517, 763), frame_silver, fg_threat, 'assets/cards/cartaminacciaretro.webp')
-    componi('originale_cartathreatretro.webp', D + 'nebulosa_villain.jpg', (24, 38, 517, 764), frame_silver, fg_threat, 'assets/cards/cartathreatretro.webp')
+    componi('originale_retrocartamazzo.webp', D + 'nebulosa_eroi.jpg', (22, 37, 520, 769), frame_gold, fg_hero, 'assets/cards/retrocartamazzo.webp', logo=(61, 212, 420, 98))
+    componi('originale_cartaminacciaretro.webp', D + 'nebulosa_villain.jpg', (24, 38, 517, 763), frame_silver, fg_threat, 'assets/cards/cartaminacciaretro.webp', logo=(56, 212, 430, 100))
+    componi('originale_cartathreatretro.webp', D + 'nebulosa_villain.jpg', (24, 38, 517, 764), frame_silver, fg_threat, 'assets/cards/cartathreatretro.webp', logo=(56, 212, 430, 100))
     print('ok')
