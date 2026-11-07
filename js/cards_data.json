@@ -771,7 +771,7 @@
       "end": 0,
       "vita": 0,
       "testo": "Tag Autorizzati: Attacco Fisico, Burst, Difesa",
-      "img": "",
+      "img": "assets/cards/gen/c_lamarinnegata.webp",
       "layout_type": "silver"
     },
     {
@@ -786,7 +786,7 @@
       "end": 1,
       "vita": 0,
       "testo": "State Freezing: una volta in Stato Villain, la prima Leva del Sacrificio Altrui ogni turno non genera TRM.",
-      "img": "",
+      "img": "assets/cards/gen/c_lamaspezzata.webp",
       "layout_type": "silver"
     },
     {
@@ -801,7 +801,7 @@
       "end": 0,
       "vita": 0,
       "testo": "Azione gratuita 1/turno: Infliggi 1 danno OPPURE forza un alleato a scartare 1 carta per +1 danno al tuo prossimo attacco.",
-      "img": "",
+      "img": "assets/cards/gen/c_colposleale.webp",
       "layout_type": "silver"
     }
   ],
