@@ -21,12 +21,3 @@ Vertical 2:3 portrait illustration (taller than wide, e.g. 848x1264), one single
 # Minacce nello stile della Storia (richiesta di Alessio 7/11)
 
 # Minacce nello stile della Storia, secondo tentativo (il primo aveva il soggetto dentro un riquadro)
-
-## t_ilcampioneimbattuto.png (Minacce: Il Campione Imbattuto)
-
-Problema: deve essere il Campione del ritratto (versione corrotta).
-
-Riferimento: n_campione_nemico
-
-Vertical 2:3 portrait illustration (taller than wide, e.g. 848x1264), one single continuous scene that fills the entire image edge to edge. Wide shot seen from a distance: the main subject is drawn fairly small, centered horizontally and placed just below the middle of the image, with a vast open cosmic night sky above it that continues uninterrupted behind and around the subject, and dark ground, smoke and crowd shadows below it. Nothing important near the top edge or the bottom edge. The sky, the subject and the ground are all part of the same space, with no lines, frames or boxes separating them. Same art style as the Monomythos story scenes: bold cartoon comic-book illustration, thick black ink outlines, cel shading, halftone dots, night city of Ataca under a swirling cosmic nebula sky, high contrast, saturated colors, atmospheric smoke and glow. Palette: menacing villain mood, purple, magenta and crimson red for the threat and its energy, teal and cyan for the night sky and city lights. Characters are anonymous silhouettes, seen from behind, in shadow, hooded or masked, or as distant figures: no recognizable characters, no superheroes from movies or comics, no logos. No writing of any kind: no text, letters, numbers, captions, speech bubbles, sound effect words, signature or watermark. Not a comic page: no panels, no inset rectangle, no picture-in-picture, no border, no frame. Scene: the corrupted Undefeated Champion of the reference standing in the middle of a narrow bridge at night, fists bandaged, runic tattoos burning violet and red, eyes glowing purple, a pack of infected behind him.
-
