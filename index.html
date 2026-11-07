@@ -294,6 +294,7 @@
         <div class="act-pip"></div>
         <div class="act-pip"></div>
       </div>
+      <span class="mazzo-in-gioco" id="missionDeckName" style="display:none"></span>
       <button class="btn btn-top-back" onclick="UI.promptExitGame()">
         <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         <span>Esci</span>
@@ -379,13 +380,13 @@
             </div>
           </div>
 
-          <div class="deck-stack-item player-deck-stack" id="playerDeckStack" onclick="UI.showToast('Il tuo Mazzo: 60 carte tattiche!')">
+          <div class="deck-stack-item player-deck-stack" id="playerDeckStack" onclick="UI.showToast('Mazzo in uso: ' + (document.getElementById('playerDeckTitle').textContent || 'Tuo Mazzo'))">
             <div class="deck-stack-cards">
               <img class="deck-back-card deck-card-2" src="assets/cards/retrocartamazzo.webp" alt="Retro Mazzo">
               <img class="deck-back-card deck-card-1" src="assets/cards/retrocartamazzo.webp" alt="Retro Mazzo">
             </div>
             <div class="deck-stack-badge">
-              <span class="deck-badge-title">Tuo Mazzo</span>
+              <span class="deck-badge-title" id="playerDeckTitle">Tuo Mazzo</span>
               <span class="deck-badge-count" id="playerDeckCount">60 carte</span>
             </div>
           </div>

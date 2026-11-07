@@ -832,6 +832,14 @@ class UIController {
     if (playerDeckCount && localPlayer) {
       playerDeckCount.textContent = `${localPlayer.deck.length} carte`;
     }
+    // Nome del mazzo che si sta giocando
+    {
+      const nm = localPlayer && localPlayer.mazzoNome;
+      const t = document.getElementById('playerDeckTitle');
+      if (t) t.textContent = nm || 'Tuo Mazzo';
+      const chip = document.getElementById('missionDeckName');
+      if (chip) { chip.textContent = nm ? `🂠 ${nm}` : ''; chip.style.display = nm ? '' : 'none'; }
+    }
 
     const tableZone = document.getElementById('tableZone');
     if (tableZone) {

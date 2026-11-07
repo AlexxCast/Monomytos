@@ -54,6 +54,8 @@
       this.vista = v;
       const ids = { elenco: 'dbElenco', creazione: 'dbCreazione', costruzione: 'dbCostruzione' };
       Object.entries(ids).forEach(([k, id]) => { const el = document.getElementById(id); if (el) el.classList.toggle('attiva', k === v); });
+      const scr = document.getElementById('scr-deckbuilder');
+      if (scr) scr.dataset.vista = v;
       const tit = { elenco: ['I tuoi mazzi', 'Scegli un mazzo o creane uno nuovo'],
         creazione: ['Crea il tuo eroe', 'Tocca uno slot per scegliere la carta di quella categoria'],
         costruzione: ['Costruisci il mazzo', 'Tocca una carta per vederla ingrandita'] }[v];
@@ -64,6 +66,8 @@
       if (v === 'costruzione') { this.renderEroeRiga(); U().filterDeckCards(U().currentDeckFilter || 'all'); }
       const sc = document.querySelector('#scr-deckbuilder .deckbuilder-scroll-content');
       if (sc) sc.scrollTop = 0;
+      const gl = document.getElementById('deckCardsList');
+      if (gl) gl.scrollTop = 0;
     },
     indietro() {
       if (this.vista === 'costruzione') return this.vai(this.nomeOriginale ? 'elenco' : 'creazione');
@@ -212,7 +216,7 @@
       const ui = U();
       if (!el || !ui.currentDeckBuilding) return;
       const c = ui.currentDeckBuilding.creation || {};
-      el.innerHTML = `<span><b>${esc(c.origine)}</b> · ${esc(c.archetipo)} · ${esc(c.costume)} · ${esc(c.pb)}<br>
+      el.innerHTML = `<span><b>${esc(c.origine)}</b> · ${esc(c.pb)}<br>
         <small>Vita ${esc(c.vita)} · Pot ${esc(c.str)} · Agi ${esc(c.spd)} · Int ${esc(c.tech)} · Vig ${esc(c.end)}</small></span>
         <button class="btn btn-subtle btn-sm" onclick="Mazzi.vai('creazione')">Modifica eroe</button>`;
     },
@@ -234,8 +238,13 @@
       carte = carte.filter(c => P().getCardOwnedCount(c.id) > 0);
       if (window.Collezione) carte.sort((a, b) => window.Collezione.infoRarita(b).ordine - window.Collezione.infoRarita(a).ordine);
       const creaz = ui.currentDeckBuilding.creation;
+      // le carte che questo eroe non potrebbe mai giocare non si mostrano (Alessio 7/11)
+      const giocabili = carte.filter(c => !window.Collezione || !creaz || window.Collezione.giocabile(c, creaz));
+      const nonGioc = carte.length - giocabili.length;
+      carte = giocabili;
       let html = '';
-      if (tot > carte.length) html += `<div class="deck-locked-info db-span">Hai <b>${carte.length}</b> di ${tot} carte di questo filtro. Le altre si trovano nelle <a href="#" onclick="UI.openShop(); return false;">bustine</a> e nella Storia.</div>`;
+      if (tot > carte.length + nonGioc) html += `<div class="deck-locked-info db-span">Hai <b>${carte.length + nonGioc}</b> di ${tot} carte di questo filtro. Le altre si trovano nelle <a href="#" onclick="UI.openShop(); return false;">bustine</a> e nella Storia.</div>`;
+      if (nonGioc) html += `<div class="db-nascoste db-span">${nonGioc} ${nonGioc === 1 ? 'carta nascosta' : 'carte nascoste'}: con questo eroe non si possono giocare.</div>`;
       if (!carte.length) html += '<div class="db-vuoto db-span">Nessuna carta posseduta con questi filtri.</div>';
       html += carte.map(c => {
         const n = ui.currentDeckBuilding.cards[c.id] || 0;

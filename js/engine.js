@@ -70,6 +70,12 @@ class MonomythosEngine {
       if (!customDeckConfig && window.Progression && !cfg.isBot && !cfg.remoteUid) {
         customDeckConfig = window.Progression.getActiveDeckForHero(cfg.name) || (window.Progression.data.activeDeckName ? window.Progression.getCustomDeck(window.Progression.data.activeDeckName) : null);
       }
+      // Nome del mazzo usato, da mostrare in partita
+      let mazzoNome = cfg.mazzoNome || null;
+      if (!mazzoNome && customDeckConfig && window.Progression && !cfg.isBot && !cfg.remoteUid) {
+        const cd = window.Progression.data.customDecks || {};
+        mazzoNome = Object.keys(cd).find(k => cd[k] === customDeckConfig) || null;
+      }
 
       if (customDeckConfig && customDeckConfig.creation) {
         const cr = customDeckConfig.creation;
@@ -129,6 +135,7 @@ class MonomythosEngine {
       return {
         id: `p_${idx}`,
         name: cfg.name,
+        mazzoNome,
         isBot: !!cfg.isBot,
         uid: cfg.uid || null,
         remoteUid: cfg.remoteUid || null,
