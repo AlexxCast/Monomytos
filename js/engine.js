@@ -67,12 +67,19 @@ class MonomythosEngine {
       // Check if player has a custom deck specified or saved in progression
       let deck = [];
       let customDeckConfig = cfg.customDeck;
-      if (!customDeckConfig && window.Progression && !cfg.isBot && !cfg.remoteUid) {
-        customDeckConfig = window.Progression.getActiveDeckForHero(cfg.name) || (window.Progression.data.activeDeckName ? window.Progression.getCustomDeck(window.Progression.data.activeDeckName) : null);
+      // Un eroe precon gioca il SUO mazzo precon (mai il mazzo personalizzato attivo): il personalizzato arriva solo da cfg.customDeck
+      if (!customDeckConfig && cfg.name === 'Custom Hero' && window.Progression && !cfg.isBot && !cfg.remoteUid) {
+        const an = window.Progression.data.activeDeckName;
+        customDeckConfig = an ? window.Progression.getCustomDeck(an) : null;
+      }
+      let precon = false;
+      if (!customDeckConfig && window.Collezione && window.Collezione.mazzoStarterDati && data.action_cards[cfg.name]) {
+        // Mazzo precon: 30 carte diverse x2, solo carte che l'eroe può giocare (Tag dell'Archetipo e statistiche), con abbastanza attacchi
+        try { customDeckConfig = { hero: cfg.name, ...(({ carte, creation }) => ({ cards: carte, creation }))(window.Collezione.mazzoStarterDati(cfg.name)) }; precon = true; } catch (e) { customDeckConfig = null; }
       }
       // Nome del mazzo usato, da mostrare in partita
-      let mazzoNome = cfg.mazzoNome || null;
-      if (!mazzoNome && customDeckConfig && window.Progression && !cfg.isBot && !cfg.remoteUid) {
+      let mazzoNome = cfg.mazzoNome || (precon && !cfg.isBot ? 'Precon' : null);
+      if (!mazzoNome && customDeckConfig && !precon && window.Progression && !cfg.isBot && !cfg.remoteUid) {
         const cd = window.Progression.data.customDecks || {};
         mazzoNome = Object.keys(cd).find(k => cd[k] === customDeckConfig) || null;
       }

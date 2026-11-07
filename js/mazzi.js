@@ -160,7 +160,7 @@
       const k = d[nome]; const n = k ? Object.values(k.cards || {}).reduce((a, b) => a + b, 0) : 0;
       const R = window.Collezione ? window.Collezione.REGOLE_MAZZO : { carteMin: 60 };
       if (n < R.carteMin) return U().showToast(`"${nome}" non è completo (${n}/${R.carteMin}): tocca Modifica per finirlo.`);
-      P().data.activeDeckName = nome; P().save();
+      P().data.activeDeckName = nome; P().save(); U().mazzoScelto = null;
       try { window.AudioEngine?.playSfx('card_tap'); } catch (e) {}
       U().showToast(`Mazzo in uso: ${nome}`);
       this.renderElenco();
@@ -318,6 +318,83 @@
     }
   };
 
+  // ---------- Scelta in "Gioca": prima il mazzo personalizzato, poi i precon ----------
+  Mazzi.mazzoValido = (nome) => {
+    const m = nome && P() && P().getCustomDeck(nome);
+    const R = window.Collezione ? window.Collezione.REGOLE_MAZZO : { carteMin: 60 };
+    return !!(m && Object.values(m.cards || {}).reduce((a, b) => a + b, 0) >= R.carteMin);
+  };
+  Mazzi.eroeDelMazzo = (m) => {
+    const cm = DATA().chars_meta || {};
+    return m && m.hero && m.hero !== 'Custom Hero' && cm[m.hero] && (DATA().action_cards || {})[m.hero] ? m.hero : 'Custom Hero';
+  };
+  Mazzi.slidePersonalizzato = function () {
+    const ui = U(), p = P();
+    if (!p) return null;
+    const nome = p.data.activeDeckName, ok = this.mazzoValido(nome);
+    // false = il giocatore ha scelto un precon; altrimenti la prima opzione (il mazzo personalizzato) è quella selezionata
+    if (ui.mazzoScelto !== false) ui.mazzoScelto = ok ? nome : null;
+    const m = ok ? p.getCustomDeck(nome) : null, cr = (m && m.creation) || {};
+    const eroe = this.eroeDelMazzo(m), cc = DATA().creation_cards || [];
+    let art = 'assets/cards/retrocartamazzo.webp';
+    const slug = eroe.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (eroe !== 'Custom Hero' && DATA().card_img_map && DATA().card_img_map[slug]) art = DATA().card_img_map[slug];
+    else { const o = cc.find(c => c.role === 'origine' && c.name === cr.origine); if (o) art = ui.getCreationCardImage(o); }
+    const st = k => Math.min(5, 1 + (cr[k] || 0));
+    const slide = document.createElement('div');
+    slide.setAttribute('data-hero', '__mazzo__');
+    slide.className = `hero-slide hero-slide-mazzo ${ui.mazzoScelto ? 'selected' : ''} ${ok ? '' : 'vuoto'}`;
+    slide.innerHTML = ok ? `
+      <div class="hero-slide-etichetta">Il tuo mazzo</div>
+      <div class="hero-silver-frame-wrap">
+        <img class="hero-bg-img" src="${esc(art)}" alt="" onerror="this.src='assets/cards/retrocartamazzo.webp'">
+        <img class="hero-frame-img" src="assets/layouts/layout_silver.webp" alt="">
+        <div class="hero-vignette-bubble"><div class="hero-card-title">${esc(nome)}</div><div class="hero-card-tag">[Mazzo personalizzato]</div></div>
+        <div class="hero-card-desc-box"><div class="hero-card-pb-title">${esc(cr.pb || 'Potere Base')}</div><div class="hero-card-pb-text">${esc(cr.pb_desc || (cr.archetipo ? cr.archetipo + ' · ' + (cr.costume || '') : ''))}</div></div>
+        <div class="hero-card-val-circle">${esc(cr.vita || 25)}</div>
+        <div class="hero-card-icon-circle"><img src="assets/icons/azione.webp" alt=""></div>
+      </div>
+      <div class="stats-matrix" style="width:100%; margin-bottom:10px;">
+        <div class="stat-chip str"><span class="val">${st('str')}</span><span class="lbl">Pot</span></div>
+        <div class="stat-chip spd"><span class="val">${st('spd')}</span><span class="lbl">Agi</span></div>
+        <div class="stat-chip tech"><span class="val">${st('tech')}</span><span class="lbl">Int</span></div>
+        <div class="stat-chip end"><span class="val">${st('end')}</span><span class="lbl">Vig</span></div>
+      </div>` : `
+      <div class="hero-slide-etichetta">Il tuo mazzo</div>
+      <div class="hero-silver-frame-wrap hero-mazzo-vuoto">
+        <img class="hero-bg-img" src="assets/cards/retrocartamazzo.webp" alt="">
+        <div class="hero-mazzo-vuoto-testo">Non hai ancora un mazzo personalizzato da 60 carte</div>
+      </div>`;
+    const scegli = () => {
+      ui.mazzoScelto = nome;
+      if (eroe !== 'Custom Hero') ui.selectedHero = eroe;
+      document.querySelectorAll('#heroCarousel .hero-slide').forEach(s => s.classList.toggle('selected', s === slide));
+    };
+    const gioca = () => {
+      scegli();
+      if (ui.pendingMultiplayer) ui.openMultiplayerModal(true);
+      else ui.startSoloGame(eroe);
+    };
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-primary btn-block';
+    btn.textContent = ok ? 'Gioca questo mazzo' : 'Crea un mazzo';
+    btn.onclick = (e) => { e.stopPropagation(); try { window.AudioEngine?.playSfx('card_tap'); } catch (err) {} ok ? gioca() : this.apri(); };
+    slide.appendChild(btn);
+    if (ok) {
+      const cambia = document.createElement('button');
+      cambia.className = 'hero-mazzo-cambia';
+      cambia.textContent = 'Cambia mazzo';
+      cambia.onclick = (e) => { e.stopPropagation(); this.apri(); };
+      slide.appendChild(cambia);
+    }
+    slide.onclick = () => {
+      try { window.AudioEngine?.playSfx('card_tap'); } catch (err) {}
+      if (!ok) return this.apri();
+      if (ui.mazzoScelto === nome && slide.classList.contains('selected')) gioca(); else scegli();
+    };
+    return slide;
+  };
+
   window.Mazzi = Mazzi;
 
   // Collega la nuova pagina ai metodi esistenti dell'interfaccia
@@ -329,6 +406,15 @@
     ui.openCreationCardPicker = (r) => Mazzi.apriGrigliaRuolo(r);
     ui.renderDeckBuilderCards = (tags, cat) => Mazzi.renderGriglia(tags, cat || ui.currentDeckFilter || 'all');
     ui.saveCurrentDeck = () => Mazzi.salva();
+    // Giocatore locale: col mazzo personalizzato scelto in "Gioca" passa il mazzo al motore, altrimenti gioca il precon
+    ui.configGiocatore = function (heroName) {
+      const nome = this.mazzoScelto;
+      if (nome && Mazzi.mazzoValido(nome)) {
+        const m = P().getCustomDeck(nome);
+        return { name: Mazzi.eroeDelMazzo(m), isBot: false, customDeck: m, mazzoNome: nome };
+      }
+      return { name: heroName, isBot: false };
+    };
     // messaggio di validità corto dentro il tappetino (il testo completo resta al tocco)
     const contaOrig = ui.updateDeckBuilderCounts.bind(ui);
     ui.updateDeckBuilderCounts = () => {

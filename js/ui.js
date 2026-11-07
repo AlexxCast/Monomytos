@@ -364,15 +364,22 @@ class UIController {
       this.selectedHero = heroKeys.find(k => window.Progression.isHeroUnlocked(k)) || this.selectedHero;
     }
 
+    // Prima opzione: il mazzo personalizzato (con il suo nome); poi gli eroi precon
+    const slideMazzo = window.Mazzi && window.Mazzi.slidePersonalizzato ? window.Mazzi.slidePersonalizzato() : null;
+    if (slideMazzo) container.appendChild(slideMazzo);
+    const conMazzo = !!this.mazzoScelto;
+
     heroKeys.forEach((key, idx) => {
       const meta = data.chars_meta[key];
       const slide = document.createElement('div');
       slide.setAttribute('data-hero', key);
       const locked = window.Progression && !window.Progression.isHeroUnlocked(key);
-      slide.className = `hero-slide ${key === this.selectedHero ? 'selected' : ''} ${locked ? 'locked' : ''}`;
+      slide.className = `hero-slide ${key === this.selectedHero && !conMazzo ? 'selected' : ''} ${locked ? 'locked' : ''}`;
       slide.onclick = () => {
         try { window.AudioEngine?.playSfx('card_tap'); } catch (e) {}
-        if (this.selectedHero === key) {
+        const eraMazzo = !!this.mazzoScelto;
+        this.mazzoScelto = false;
+        if (this.selectedHero === key && !eraMazzo) {
           this.confirmHero(key);
         } else {
           this.selectHero(key);
@@ -392,6 +399,7 @@ class UIController {
       else if (meta.tech >= meta.str && meta.tech >= meta.spd && meta.tech >= meta.end) primaryStatIcon = 'assets/icons/inteligenza.png';
 
       slide.innerHTML = `
+        <div class="hero-slide-etichetta">Precon</div>
         <!-- Official Silver Personaggio Card Layout -->
         <div class="hero-silver-frame-wrap">
           <img class="hero-bg-img" src="${imgUrl}" alt="${key}" onerror="this.src='assets/cards/ironaegis.webp'">
@@ -435,6 +443,7 @@ class UIController {
       chooseBtn.onclick = (e) => {
         e.stopPropagation();
         try { window.AudioEngine?.playSfx('card_tap'); } catch (err) {}
+        this.mazzoScelto = false;
         this.confirmHero(key);
       };
       slide.appendChild(chooseBtn);
@@ -456,6 +465,7 @@ class UIController {
   selectHero(name) {
     this.selectedHero = name;
     document.querySelectorAll('.hero-slide').forEach(s => {
+      if (s.getAttribute('data-hero') === '__mazzo__') return s.classList.toggle('selected', !!this.mazzoScelto);
       const titleEl = s.querySelector('.hero-card-title');
       const isMatch = s.getAttribute('data-hero') === name || (titleEl && titleEl.textContent.trim() === name);
       s.classList.toggle('selected', isMatch);
@@ -556,7 +566,7 @@ class UIController {
       ];
       // Pick companions distinct from local hero
       const companions = allHeroes.filter(h => h !== heroName);
-      const heroesConfig = [{ name: heroName, isBot: false }];
+      const heroesConfig = [this.configGiocatore ? this.configGiocatore(heroName) : { name: heroName, isBot: false }];
 
       const count = this.squadSize || 2;
       for (let i = 0; i < count - 1; i++) {
@@ -573,7 +583,7 @@ class UIController {
       const threat = window.GameEngine.state.currentThreat;
       this.playMatchIntroLoading(threat, () => {
         this.showScreen('scr-game');
-        this.showToast(`Partita avviata con ${heroName}!`);
+        this.showToast(`Partita avviata con ${heroesConfig[0].mazzoNome || heroName}!`);
       });
     } catch (err) {
       console.error('startSoloGame error:', err);
@@ -2785,7 +2795,7 @@ class UIController {
       const companion = bossHeroName === 'Neon Phantom' ? 'Iron Aegis' : 'Neon Phantom';
       window.GameEngine.startMatch({
         heroes: [
-          { name: this.selectedHero || 'Iron Aegis', isBot: false },
+          this.configGiocatore ? this.configGiocatore(this.selectedHero || 'Iron Aegis') : { name: this.selectedHero || 'Iron Aegis', isBot: false },
           { name: companion, isBot: true }
         ],
         isRogueHeroBoss: true,

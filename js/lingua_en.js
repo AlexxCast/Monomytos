@@ -1516,6 +1516,13 @@ window.MONOMYTHOS_EN_REGOLE = [
 Object.assign(window.MONOMYTHOS_EN, {
   "Tocca per continuare": "Tap to continue",
   "Salta ▸▸": "Skip ▸▸",
+"Il tuo mazzo": "Your deck",
+"Mazzo personalizzato": "Custom deck",
+"Gioca questo mazzo": "Play this deck",
+"Crea un mazzo": "Build a deck",
+"Cambia mazzo": "Change deck",
+"Non hai ancora un mazzo personalizzato da 60 carte": "You don't have a 60-card custom deck yet",
+"Precon": "Precon",
 "✎ Modifica": "✎ Edit",
 "✓ Pronto": "✓ Ready",
 "⚠ Tocca qui": "⚠ Tap here",

@@ -1908,3 +1908,13 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 #modalMinacce .minacce-intro { font-weight: 600; }
 /* logo delle Carte Oscure (eclissi): niente cerchio chiaro dietro */
 .db-pill-osc img { background: none !important; padding: 0 !important; width: 20px !important; height: 20px !important; }
+
+/* Gioca: etichetta "Il tuo mazzo" / "Precon" sopra ogni scelta */
+.hero-slide { position: relative; }
+.hero-slide-etichetta { align-self: center; margin: 0 0 6px; padding: 2px 12px; border: 2px solid #000; border-radius: 999px; background: var(--cream); color: var(--ink); font-weight: 900; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; box-shadow: 2px 2px 0 #000; }
+.hero-slide-mazzo .hero-slide-etichetta { background: var(--pop-vino, #7a2a5c); color: #fff; }
+
+.hero-mazzo-vuoto { position: relative; }
+.hero-mazzo-vuoto .hero-bg-img { opacity: .55; }
+.hero-mazzo-vuoto-testo { position: absolute; left: 10%; right: 10%; top: 42%; text-align: center; background: var(--cream); color: var(--ink); border: 2.5px solid #000; border-radius: 10px; padding: 8px; font-weight: 800; font-size: 13px; box-shadow: 3px 3px 0 #000; }
+.hero-mazzo-cambia { margin-top: 6px; background: none; border: 0; color: var(--ink, #111); text-decoration: underline; font-weight: 700; font-size: 12px; cursor: pointer; }

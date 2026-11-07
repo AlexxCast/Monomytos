@@ -103,6 +103,9 @@
     return Math.max(1, Math.min(5, 1 + ((creation && creation[k]) || 0)));
   }
   const giocabile = (c, creation) => (c.valore || 0) <= slotMax(creation, c.cat);
+  // Carta d'attacco: infligge danni senza condizioni (non solo [Eroe]/[Villain])
+  const attacco = c => ((c.fx_list || []).some(f => f.type === 'damage' && !f.condition)) || !!(c.fx && c.fx.dmg > 0);
+  const MIN_ATTACCHI = 11;
 
   const Collezione = {
     slotMax, giocabile,
@@ -256,7 +259,7 @@
     },
 
     // Il mazzo starter di un eroe, senza regalarlo: lo usa anche la Storia come "mazzo in prova" del campione della missione
-    mazzoStarterDati(nome) {
+    mazzoStarterDati(nome, opz) {
       const D = window.MONOMYTHOS_DATA;
       const cc = D.creation_cards || [];
       const pick = role => cc.find(c => c.role === role && c.char === nome) || {};
@@ -278,8 +281,11 @@
       const altre = Object.keys(D.action_cards).filter(h => h !== nome).flatMap(h => D.action_cards[h])
         .filter(c => ['comune', 'noncomune'].includes(this.rarita(c)) && ok(c))
         .sort((x, y) => ordine[this.rarita(x)] - ordine[this.rarita(y)] || x.num - y.num);
-      const scelte = [];
-      [...proprie, ...altre].forEach(c => { if (scelte.length < REGOLE_MAZZO.carteMin / REGOLE_MAZZO.copieMax && !scelte.includes(c)) scelte.push(c); });
+      const scelte = [], diverse = REGOLE_MAZZO.carteMin / REGOLE_MAZZO.copieMax;
+      // Almeno 11 carte d'attacco diverse (22 su 60): così quasi ogni mano ha un attacco (prima Architetto Ombra ne aveva 10 su 60)
+      const rareAtk = Object.keys(D.action_cards).filter(h => h !== nome).flatMap(h => D.action_cards[h]).filter(c => this.rarita(c) === 'rara' && ok(c) && attacco(c));
+      if (!opz || opz.v !== 2) [...proprie, ...altre, ...rareAtk].filter(attacco).forEach(c => { if (scelte.length < MIN_ATTACCHI && !scelte.includes(c)) scelte.push(c); });
+      [...proprie, ...altre].forEach(c => { if (scelte.length < diverse && !scelte.includes(c)) scelte.push(c); });
       const carte = {};
       scelte.forEach(c => { carte[c.id] = REGOLE_MAZZO.copieMax; });
       const creation = { origine: o.name, archetipo: a.name, costume: co.name, pb: pb.name, str, spd, tech, end, vita: o.vita || 25, allowedTags: tags, pb_desc: pb.testo || '' };
@@ -289,16 +295,29 @@
     // Account creati prima di questa versione: se non hanno un mazzo da 60 valido, ricevono quello starter
     assicuraMazzoStarter() {
       const d = this.p && this.p.data;
-      if (!d || !d.starter || d.mazzoStarterV >= 2) return;
+      if (!d || !d.starter || d.mazzoStarterV >= 3) return;
+      // v3 (2026-11-07): almeno 11 attacchi diversi nello starter; si rifà solo se il mazzo starter non è stato modificato
+      if (d.mazzoStarterV === 2) {
+        d.mazzoStarterV = 3;
+        const s = STARTER.find(x => x.eroe === d.starter), k = s && d.customDecks && d.customDecks[s.mazzo];
+        const ugualeA = (a, b) => { const ka = Object.keys(a || {}), kb = Object.keys(b || {}); return ka.length === kb.length && ka.every(x => a[x] === b[x]); };
+        if (k && ugualeA(k.cards, this.mazzoStarterDati(d.starter, { v: 2 }).carte)) {
+          const attivo = d.activeDeckName;
+          this.creaMazzoStarter(d.starter);
+          d.activeDeckName = attivo;
+        }
+        this.p.save(true);
+        return;
+      }
       // v2 (2026-11-05): lo starter non conteneva Carte Oscure e aveva carte ingiocabili; si rifà
       if (d.mazzoStarterV === 1) {
-        d.mazzoStarterV = 2;
+        d.mazzoStarterV = 3;
         const s = STARTER.find(x => x.eroe === d.starter);
         if (s && d.customDecks && d.customDecks[s.mazzo]) this.creaMazzoStarter(d.starter);
         this.p.save(true);
         return;
       }
-      d.mazzoStarterV = 2;
+      d.mazzoStarterV = 3;
       const valido = Object.values(d.customDecks || {}).some(k => Object.values(k.cards || {}).reduce((x, y) => x + y, 0) >= REGOLE_MAZZO.carteMin);
       if (!valido) this.creaMazzoStarter(d.starter);
       this.p.save(true);
@@ -309,7 +328,7 @@
       if (!s) return;
       this.sbloccaEroe(nome);
       this.creaMazzoStarter(nome);
-      this.p.data.mazzoStarterV = 2;
+      this.p.data.mazzoStarterV = 3;
       MINACCE_STARTER.forEach(m => this.aggiungiMinaccia(m));
       this.p.data.mazzoMinacce = MINACCE_STARTER.slice();
       this.p.data.starter = nome;
