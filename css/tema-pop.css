@@ -1867,3 +1867,6 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 #scr-deckbuilder .db-icona-scambi .db-icona-img { width: 74px; height: 82px; }
 #scr-deckbuilder .db-icona-scambi .db-icona-img img { width: 56px; height: 82px; }
 #scr-deckbuilder .db-icona-lbl { font-size: 14px; }
+.db-mazzo-modifica { margin-top: 2px; font: 800 11.5px var(--font-ui); color: #fff; background: var(--pop-vino, #7a2a5c); border: 1.5px solid #000; border-radius: 6px; padding: 2px 9px; box-shadow: 1.5px 1.5px 0 #000; }
+.db-mazzo.attivo .db-mazzo-nome { color: var(--gold, #f5b82e); }
+.db-mazzo:not(.attivo) .db-mazzo-pila { opacity: .8; }

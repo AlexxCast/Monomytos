@@ -92,9 +92,12 @@
           <span class="db-mazzo-pila"><img src="assets/cards/retrocartamazzo.webp" alt=""><img src="assets/cards/retrocartamazzo.webp" alt=""><img src="assets/cards/retrocartamazzo.webp" alt=""></span>
           <b class="db-mazzo-nome">${esc(m.name)}</b>
           <small>${n} carte${m.name === attivo ? ' · in uso' : ''}</small>
+          <span class="db-mazzo-modifica" data-mod="${esc(m.name)}">✎ Modifica</span>
         </button>`;
       }).join('') : '<p class="db-vuoto">Non hai ancora mazzi personalizzati.</p>';
-      box.querySelectorAll('.db-mazzo').forEach(b => { b.onclick = () => this.apriMazzo(b.dataset.nome); });
+      // tocco = scegli il mazzo da usare; "Modifica" = apri la costruzione
+      box.querySelectorAll('.db-mazzo').forEach(b => { b.onclick = () => this.scegliMazzo(b.dataset.nome); });
+      box.querySelectorAll('.db-mazzo-modifica').forEach(b => { b.onclick = (ev) => { ev.stopPropagation(); this.apriMazzo(b.dataset.mod); }; });
     },
     // Carta creazione che gira: davanti cornice argento, dietro il retro classico; ogni giro una carta diversa
     avviaFlip() {
@@ -151,6 +154,16 @@
       let n = nomi.size + 1;
       while (nomi.has(`Mazzo ${n}`)) n++;
       return `Mazzo ${n}`;
+    },
+    scegliMazzo(nome) {
+      const d = P().data.customDecks || {};
+      const k = d[nome]; const n = k ? Object.values(k.cards || {}).reduce((a, b) => a + b, 0) : 0;
+      const R = window.Collezione ? window.Collezione.REGOLE_MAZZO : { carteMin: 60 };
+      if (n < R.carteMin) return U().showToast(`"${nome}" non è completo (${n}/${R.carteMin}): tocca Modifica per finirlo.`);
+      P().data.activeDeckName = nome; P().save();
+      try { window.AudioEngine?.playSfx('card_tap'); } catch (e) {}
+      U().showToast(`Mazzo in uso: ${nome}`);
+      this.renderElenco();
     },
     nuovo() { this.carica(null); this.vai('creazione'); },
     apriMazzo(nome) { this.carica(nome); this.vai('costruzione'); },

@@ -1516,6 +1516,7 @@ window.MONOMYTHOS_EN_REGOLE = [
 Object.assign(window.MONOMYTHOS_EN, {
   "Tocca per continuare": "Tap to continue",
   "Salta ▸▸": "Skip ▸▸",
+"✎ Modifica": "✎ Edit",
 "✓ Pronto": "✓ Ready",
 "⚠ Tocca qui": "⚠ Tap here",
 "carte nascoste: con questo eroe non si possono giocare.": "cards hidden: this hero can't play them.",
