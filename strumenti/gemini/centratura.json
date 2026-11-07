@@ -1,0 +1,166 @@
+{
+ "t_blackoutostile": [
+  0.27,
+  0.67
+ ],
+ "t_cultistidelvelo": [
+  0.44,
+  0.6
+ ],
+ "t_ilcampioneimbattuto": [
+  0.34,
+  0.6
+ ],
+ "t_ilcustodedacciaio": [
+  0.27,
+  0.6
+ ],
+ "t_ilrivaletraditore": [
+  0.21,
+  0.6
+ ],
+ "t_imboscatasullafalesia": [
+  0.31,
+  0.6
+ ],
+ "t_lassediodeipredonidellerovine": [
+  0.44,
+  0.6
+ ],
+ "t_lecosenzanome": [
+  0.0,
+  0.88
+ ],
+ "t_lintelligenzarogue": [
+  0.17,
+  0.75
+ ],
+ "t_rivoltadellafonderia": [
+  0.21,
+  0.65
+ ],
+ "t_torneoclandestino": [
+  0.48,
+  0.6
+ ],
+ "c_duellanteitinerante": [
+  0.22,
+  0.75
+ ],
+ "c_espulsadallagilda": [
+  0.34,
+  0.75
+ ],
+ "c_exgeniere": [
+  0.14,
+  0.75
+ ],
+ "c_foderoleggero": [
+  0.22,
+  0.75
+ ],
+ "c_ingegneretattico": [
+  0.28,
+  0.75
+ ],
+ "c_lamarinnegata": [
+  0.17,
+  0.75
+ ],
+ "c_lamasenzacasa": [
+  0.33,
+  0.75
+ ],
+ "c_lamaspezzata": [
+  0.22,
+  0.75
+ ],
+ "c_prototiporapido": [
+  0.24,
+  0.75
+ ],
+ "c_scattoquantistico": [
+  0.31,
+  0.75
+ ],
+ "c_schiacciata": [
+  0.31,
+  0.75
+ ],
+ "c_sentinelladifrontiera": [
+  0.26,
+  0.75
+ ],
+ "c_sopravvissutoallafonderia": [
+  0.31,
+  0.75
+ ],
+ "c_toccatadalvelo": [
+  0.33,
+  0.75
+ ],
+ "c_tutafotonica": [
+  0.24,
+  0.75
+ ],
+ "t_ilcolossodirovina": [
+  -0.1,
+  1.0
+ ],
+ "t_ilmietitoredellastrooscuro": [
+  -0.08,
+  1.0
+ ],
+ "t_incursionedeidronicinetici": [
+  0.13,
+  0.75
+ ],
+ "c_avanguardiapesante": [
+  -0.04,
+  0.93
+ ],
+ "c_caviaalpha": [
+  0.09,
+  0.93
+ ],
+ "c_devastatore": [
+  0.06,
+  0.93
+ ],
+ "c_colposleale": [
+  0.04,
+  0.93
+ ],
+ "c_genioespulsodallaboratorio": [
+  0.04,
+  0.75
+ ],
+ "c_presidio": [
+  0.12,
+  0.93
+ ],
+ "c_sovraccaricocinetico": [
+  0.06,
+  0.93
+ ],
+ "c_spettrocinetico": [
+  0.19,
+  0.93
+ ],
+ "c_sentinellaadattiva": [
+  0.14,
+  0.93
+ ],
+ "c_esoscheletroleggero": [
+  -0.07,
+  0.93
+ ],
+ "c_empitooscuro": [
+  0.14,
+  0.93
+ ],
+ "c_affondocalcolato": [
+  0.12,
+  0.8
+ ]
+}

@@ -7,7 +7,9 @@ da prompt_da_fare.md e da da_rifare.md. Lo lancia il workflow "Inserisci immagin
 """
 import glob, io, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import genera_immagini_carte as g
+import ricentra
 from PIL import Image
 
 QUI = os.path.dirname(os.path.abspath(__file__))
@@ -62,6 +64,8 @@ def main():
         else:
             b = io.BytesIO(); im.save(b, 'PNG')
             g.to_card_webp(b.getvalue(), os.path.join(g.OUT_DIR, f'{cid}.webp'))
+        # immagine nuova: la vecchia centratura non vale più (dopo il controllo con impagina.js se ne decide una nuova)
+        ricentra.dimentica(cid)
         c = carte[cid]; rel = f'{g.REL_DIR}/{cid}.webp'
         (g.update_extra_refs if 'kind' in c else g.update_card_refs)(data, c, rel)
         vers[cid] = g.PROMPT_VERSION; appr.add(cid)
