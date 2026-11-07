@@ -466,7 +466,7 @@ window.CARD_LAYOUT_CONFIG = {
     type: 'purple',
     name: 'Carte Oscure',
     frame: 'assets/layouts/layout_purple.webp',
-    icon: 'assets/icons/oscuro.webp',
+    icon: 'assets/icons/oscura.webp',
     color: '#9b59b6'
   },
   red: {

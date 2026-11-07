@@ -1900,3 +1900,5 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
   opacity: .42 !important;
 }
 #modalMinacce .minacce-intro { font-weight: 600; }
+/* logo delle Carte Oscure (eclissi): niente cerchio chiaro dietro */
+.db-pill-osc img { background: none !important; padding: 0 !important; width: 20px !important; height: 20px !important; }

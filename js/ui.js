@@ -1091,7 +1091,7 @@ class UIController {
       return { frame: 'assets/layouts/layout_silver.webp', icon: 'assets/icons/vigore.png', type: 'silver' };
     }
     if (card?.osc || card?.cat === 'Oscuro') {
-      return { frame: 'assets/layouts/layout_purple.webp', icon: 'assets/icons/oscuro.webp', type: 'purple' };
+      return { frame: 'assets/layouts/layout_purple.webp', icon: 'assets/icons/oscura.webp', type: 'purple' };
     }
     if (card?.deus || card?.tipo === 'deus' || card?.nome?.includes('Defibrillazione')) {
       return { frame: 'assets/layouts/layout_blue.webp', icon: 'assets/icons/latout_deus ex machina.webp', type: 'blue' };
