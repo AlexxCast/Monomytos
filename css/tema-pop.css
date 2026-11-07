@@ -1785,15 +1785,7 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 /* Pagina Mazzo: niente cosmo, pagina di fumetto vecchia e ingiallita con cornice cartoon */
 #scr-deckbuilder {
   --on-night: #24180a;
-  background-color: #e9d9ab;
-  background-image:
-    radial-gradient(rgba(70, 45, 10, .16) 1.1px, transparent 1.4px),
-    radial-gradient(120% 80% at 50% 45%, transparent 55%, rgba(140, 95, 30, .35) 100%),
-    radial-gradient(40% 30% at 12% 85%, rgba(160, 110, 40, .18), transparent 70%),
-    radial-gradient(35% 25% at 88% 20%, rgba(160, 110, 40, .14), transparent 70%),
-    repeating-linear-gradient(0deg, rgba(90, 60, 20, .025) 0 2px, transparent 2px 5px),
-    linear-gradient(180deg, #efe1b6, #e3cf98);
-  background-size: 9px 9px, auto, auto, auto, auto, auto;
+  background: #e8d8a8 url('../assets/bg/pagina_fumetto.webp') center / cover no-repeat;
   padding: 10px;
   box-sizing: border-box;
 }
