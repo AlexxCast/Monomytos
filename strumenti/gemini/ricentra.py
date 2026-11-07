@@ -4,7 +4,7 @@
 
 La tabella strumenti/gemini/centratura.json dice per ogni carta quale parte dell'originale usare:
   "t_xxx": [inizio, altezza]   frazioni dell'altezza dell'originale (es. [0.4, 0.6] = dal 40% al 100%).
-Se il ritaglio va oltre il fondo, il fondo viene completato a specchio (resta sotto il riquadro dell'effetto).
+Se il ritaglio va oltre il fondo o la cima (inizio negativo), si completa a specchio (resta sotto il riquadro dell'effetto).
 Uso: python strumenti/gemini/ricentra.py [id ...]   (vuoto = tutte quelle in tabella)
 Controllo: node strumenti/gemini/impagina.js anteprima.png id ...
 """
@@ -39,6 +39,11 @@ def ritaglia(im, inizio, altezza):
         tela.paste(im, (0, 0))
         tela.paste(ImageOps.flip(im.crop((0, h - sotto, w, h))), (0, h))
         im = tela
+    if y0 < 0:  # completa la cima a specchio (cielo)
+        tela = Image.new('RGB', (im.width, im.height - y0))
+        tela.paste(im, (0, -y0))
+        tela.paste(ImageOps.flip(im.crop((0, 0, im.width, -y0))), (0, 0))
+        im, y0 = tela, 0
     return im.crop((x0, y0, x0 + bw, y0 + bh)).resize((540, 810), Image.LANCZOS)
 
 

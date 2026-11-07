@@ -106,5 +106,17 @@
  "c_tutafotonica": [
   0.24,
   0.75
+ ],
+ "t_ilcolossodirovina": [
+  -0.1,
+  1.0
+ ],
+ "t_ilmietitoredellastrooscuro": [
+  -0.08,
+  1.0
+ ],
+ "t_incursionedeidronicinetici": [
+  0.13,
+  0.75
  ]
 }
