@@ -42,5 +42,69 @@
  "t_torneoclandestino": [
   0.48,
   0.6
+ ],
+ "c_affondocalcolato": [
+  0.2,
+  0.75
+ ],
+ "c_duellanteitinerante": [
+  0.22,
+  0.75
+ ],
+ "c_espulsadallagilda": [
+  0.34,
+  0.75
+ ],
+ "c_exgeniere": [
+  0.32,
+  0.75
+ ],
+ "c_foderoleggero": [
+  0.22,
+  0.75
+ ],
+ "c_ingegneretattico": [
+  0.21,
+  0.75
+ ],
+ "c_lamarinnegata": [
+  0.15,
+  0.75
+ ],
+ "c_lamasenzacasa": [
+  0.33,
+  0.75
+ ],
+ "c_lamaspezzata": [
+  0.17,
+  0.75
+ ],
+ "c_prototiporapido": [
+  0.2,
+  0.75
+ ],
+ "c_scattoquantistico": [
+  0.22,
+  0.75
+ ],
+ "c_schiacciata": [
+  0.19,
+  0.75
+ ],
+ "c_sentinelladifrontiera": [
+  0.28,
+  0.75
+ ],
+ "c_sopravvissutoallafonderia": [
+  0.31,
+  0.75
+ ],
+ "c_toccatadalvelo": [
+  0.33,
+  0.75
+ ],
+ "c_tutafotonica": [
+  0.24,
+  0.75
  ]
 }

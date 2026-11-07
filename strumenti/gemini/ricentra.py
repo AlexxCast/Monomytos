@@ -33,7 +33,8 @@ def ritaglia(im, inizio, altezza):
     bh = int(h * altezza); bw = min(w, int(bh * 2 / 3))
     y0 = int(h * inizio); x0 = (w - bw) // 2
     sotto = max(0, y0 + bh - h)
-    if sotto:  # completa il fondo a specchio
+    if sotto:  # completa il fondo a specchio (senza l'ultima striscia, a volte Gemini ci mette un bordo)
+        im = im.crop((0, 0, w, h - int(h * .03))); h = im.height; sotto = max(0, y0 + bh - h)
         tela = Image.new('RGB', (w, h + sotto))
         tela.paste(im, (0, 0))
         tela.paste(ImageOps.flip(im.crop((0, h - sotto, w, h))), (0, h))

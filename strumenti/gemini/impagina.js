@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
 const R = require('path').resolve(__dirname, '..', '..');
 (async () => {
   const b = await chromium.launch();
-  const p = await b.newPage({ viewport: { width: 1700, height: 1000 }, deviceScaleFactor: 2 });
+  const p = await b.newPage({ viewport: { width: 1700, height: 1000 }, deviceScaleFactor: +(process.env.SCALA || 2) });
   await p.goto('file://' + R + '/index.html');
   await p.waitForTimeout(1500);
   const out = process.argv[2], ids = process.argv.slice(3), linee = !!process.env.LINEE;
