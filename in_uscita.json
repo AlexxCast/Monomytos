@@ -1,5 +1,19 @@
 [
  {
+  "id": "video:42395879389",
+  "titolo": "mistero_prometeo",
+  "piattaforme": [
+   "youtube",
+   "tiktok",
+   "bluesky",
+   "telegram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-07_mistero_prometeo.mp4",
+  "creato": "2026-11-07T17:22:36.698Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-07T17:22:36.698Z"
+ },
+ {
   "id": "video:42299504450",
   "titolo": "aggancio_stella",
   "piattaforme": [
