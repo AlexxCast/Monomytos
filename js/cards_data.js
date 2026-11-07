@@ -667,7 +667,7 @@ window.MONOMYTHOS_DATA = {
       "end": 2,
       "vita": 0,
       "testo": "State Freezing: i Gadget costano 1 Tech in meno (minimo 0).",
-      "img": "",
+      "img": "assets/cards/gen/c_esoscheletroleggero.webp",
       "layout_type": "silver"
     },
     {
@@ -682,7 +682,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Azione gratuita 1/turno: spendi 1 Tech per +1 Valore a un Gadget giocato questo turno OPPURE guarda le prime 2 carte del tuo mazzo.",
-      "img": "",
+      "img": "assets/cards/gen/c_prototiporapido.webp",
       "layout_type": "silver"
     },
     {
@@ -697,7 +697,7 @@ window.MONOMYTHOS_DATA = {
       "end": 2,
       "vita": 20,
       "testo": "—",
-      "img": "assets/cards/toccatadalvelo.webp",
+      "img": "assets/cards/gen/c_toccatadalvelo.webp",
       "layout_type": "silver"
     },
     {
@@ -712,7 +712,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Tag Autorizzati: Abilità Poteri, Untagged, Burst",
-      "img": "assets/cards/pattoproibito.webp",
+      "img": "assets/cards/gen/c_pattoproibito.webp",
       "layout_type": "silver"
     },
     {
@@ -727,7 +727,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "State Freezing: una volta in Stato Villain, ogni carta Poteri scartata in Opzione B genera anche 1 VP (max 1/turno).",
-      "img": "assets/cards/mantocorrotto.webp",
+      "img": "assets/cards/gen/c_mantocorrotto.webp",
       "layout_type": "silver"
     },
     {
@@ -742,7 +742,7 @@ window.MONOMYTHOS_DATA = {
       "end": 0,
       "vita": 0,
       "testo": "Azione gratuita 1/turno: Infliggi 1 danno psichico ignorando Parata Dinamica OPPURE, se già in Stato Villain, genera 1 VP subendo 1 TRM.",
-      "img": "assets/cards/empitooscuro.webp",
+      "img": "assets/cards/gen/c_empitooscuro.webp",
       "layout_type": "silver"
     },
     {
@@ -757,7 +757,7 @@ window.MONOMYTHOS_DATA = {
       "end": 2,
       "vita": 26,
       "testo": "—",
-      "img": "",
+      "img": "assets/cards/gen/c_espulsadallagilda.webp",
       "layout_type": "silver"
     },
     {
