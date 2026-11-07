@@ -166,6 +166,8 @@
             { chi: 'legato', testo: 'Sono cresciuta combattendo in posti come questo. Ma qui c\'è qualcosa di diverso.' },
             { chi: 'altro', testo: 'Nessuno raccoglie le scommesse. Nessuno comanda.' },
             { chi: 'legato', testo: 'È peggio. Sono venuti qui da soli, come api in un alveare. La Stella li chiama a sfogarsi tutti nello stesso punto.' },
+            { chi: 'legato', testo: "Nell'arena si impara una cosa: non serve stendere tutti. O togli la Vita a chi combatte, o spezzi quello che tiene in piedi il torneo." },
+            { chi: 'altro', testo: 'Due strade, allora. Ingegno o forza bruta: scegliamo la più vicina a cedere.' },
             { chi: 'narratore', testo: 'Qualcuno vi riconosce: i vostri occhi sono puliti, senza il viola. La folla si gira verso di voi.' },
             { chi: 'prometeo', testo: 'Voi due avete gli occhi troppo puliti per questo posto. Fermateli. Io ho una città da sistemare.', fx: 'VRRRM' }
           ],
@@ -187,6 +189,8 @@
             { chi: 'legato', testo: 'Fermi. Lo sentite anche voi? Questa nebbia non viene dal mare.' },
             { chi: 'altro', testo: 'È rossa e viola. Come la Stella.' },
             { chi: 'legato', testo: 'Io sono stata toccata da questa cosa, tanto tempo fa. Si chiama Velo. E qualcuno lo sta chiamando apposta.' },
+            { chi: 'legato', testo: 'Ogni respiro di questa nebbia vi scava dentro. Se cedete troppo, il Velo vi prende: e combatterete contro chi vi sta accanto.' },
+            { chi: 'altro', testo: 'Allora teniamoci d\'occhio. Se uno di noi comincia a vedere viola, lo dice subito.' },
             { chi: 'narratore', testo: 'Dalla nebbia saltano fuori dei banditi agili. Vi stavano aspettando.' }
           ],
           atto: [],

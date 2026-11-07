@@ -16,11 +16,11 @@
     atto: { testo: 'Atto superato! Ora arriva una Minaccia più forte. Continua così.', dove: '#threatCentralCard' },
     fineTutorial: { testo: 'Tutorial completato! Continua la Storia per scoprire cosa succede ad Ataca, oppure gioca con gli amici dalla Home.', dove: null },
     // Missione 2 (livello 2): binari e Pesca
-    binari: { testo: 'Nuova regola: i binari! Oltre a togliere Vita, puoi battere la Minaccia riempiendo uno dei suoi due binari.', dove: '#lblPrimario' },
+    binari: { testo: 'Nuova regola: i binari! Come nell\'Arena, non serve stendere tutti: oltre a togliere Vita, puoi battere la Minaccia riempiendo uno dei suoi due binari, d\'ingegno o di forza.', dove: '#lblPrimario' },
     sacrificio: { testo: 'Tocca una carta e scegli Sacrificio Tattico: la scarti senza spendere slot e il binario avanza. Vale solo la Categoria del binario, al massimo 2 volte per round.', dove: '#lblPrimario' },
     pesca: { testo: 'Con + e − scegli quante carte pescare al prossimo round. Più carte = più scelte, ma il mazzo finisce prima.', dove: '#drawChoiceLabel' },
     // Missione 3 (tutte le regole): Trauma e Villain
-    trauma: { testo: 'Da questa missione conta il Trauma. Lo prendi se in un round non fai nessuna mossa, da alcuni nemici e se il mazzo finisce (molto!).', dove: '#playerDockTrauma' },
+    trauma: { testo: 'Da qui conta il Trauma: è il Velo che ti entra nella mente. Lo prendi se in un round non fai nessuna mossa, da alcuni nemici e se il mazzo finisce (molto!).', dove: '#playerDockTrauma' },
     villain: { testo: 'A 5 Trauma l\'eroe diventa Villain e gioca contro la squadra. Tienilo basso, e tieni d\'occhio quello dei compagni!', dove: '#playerDockTrauma' }
   };
 
