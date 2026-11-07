@@ -1566,6 +1566,12 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .ssv-q { --w: max(116vw, calc(116dvh * .5625)); position: absolute; width: var(--w); height: calc(var(--w) * 16 / 9);
   left: calc(50% - var(--w) / 2); top: calc(50% - var(--w) * 8 / 9); animation: vZoom 16s ease-out forwards; }
 .ssv-q > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Schermo largo (PC): la vignetta verticale resta intera al centro, ai lati la stessa immagine sfocata */
+.ssv-sfondo { display: none; }
+@media (min-aspect-ratio: 3/4) {
+  .ssv-q { --w: calc(104dvh * .5625); }
+  .ssv-sfondo { display: block; position: absolute; inset: -6%; width: 112%; height: 112%; object-fit: cover; filter: blur(28px) brightness(.45) saturate(1.2); }
+}
 .ssv::after { content: ''; position: absolute; inset: 0; pointer-events: none;
   background: radial-gradient(rgba(0, 0, 0, .22) 1px, transparent 1.4px) 0 0 / 6px 6px,
     linear-gradient(to bottom, rgba(3, 6, 20, .55) 0%, rgba(3, 6, 20, .05) 22%, rgba(3, 6, 20, .1) 48%, rgba(3, 6, 20, .78) 74%, rgba(3, 6, 20, .94) 100%); }

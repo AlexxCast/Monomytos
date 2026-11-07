@@ -938,7 +938,8 @@
           if (x === 'occhi' && pos.occhi) return `--oy:${pos.occhi}%`;
           return '';
         };
-        v.innerHTML = `<div class="ssv-q"><img src="${src}" alt="" onerror="this.onerror=null;this.src='${def.fb}'">`
+        // ssv-sfondo: copia sfocata che riempie i lati quando lo schermo è largo (PC, tablet orizzontale)
+        v.innerHTML = `<img class="ssv-sfondo" src="${src}" alt="" onerror="this.onerror=null;this.src='${def.fb}'"><div class="ssv-q"><img src="${src}" alt="" onerror="this.onerror=null;this.src='${def.fb}'">`
           + (def.strati || []).filter(x => x !== 'scuoti').map(x => `<i class="st st-${x}" style="${stile(x)}"></i>`).join('') + '</div>';
         vbox.querySelectorAll('.ssv').forEach(o => { o.classList.remove('on'); setTimeout(() => o.remove(), 1000); });
         vbox.appendChild(v);
