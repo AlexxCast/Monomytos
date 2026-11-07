@@ -196,7 +196,7 @@ class MonomythosEngine {
       story: options.story || null,
       noCrisi: !!options.story,
       // Moltiplicatore di difficoltà (Vita e soglie dei nemici), usato dalle missioni della Storia
-      difficolta: (options.difficolta || 1) * this.fattoreSolo(options, heroConfigs),
+      difficolta: options.difficolta || 1,
       // Regole a strati (prime missioni della Storia): 1 = solo Vita, 2 = + binari e Pesca, null = tutte le regole
       livelloRegole: options.livelloRegole || null,
       threatPool: pool.map(t => t.nome),
@@ -219,13 +219,6 @@ class MonomythosEngine {
 
     this.startRound();
     return this.state;
-  }
-
-  // Partita libera da soli contro la Minaccia: un po' più morbida (Vita e soglie), perché è la prima prova di quasi tutti
-  fattoreSolo(options, heroConfigs) {
-    const BIL = window.MONOMYTHOS_BILANCIAMENTO || {};
-    if (options.story || options.isRogueHeroBoss || heroConfigs.length !== 1) return 1;
-    return BIL.scalaSolo || 1;
   }
 
   // Regole a strati: quali regole sono attive in questa partita
