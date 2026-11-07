@@ -1,0 +1,46 @@
+{
+ "t_blackoutostile": [
+  0.33,
+  0.67
+ ],
+ "t_cultistidelvelo": [
+  0.5,
+  0.6
+ ],
+ "t_ilcampioneimbattuto": [
+  0.42,
+  0.6
+ ],
+ "t_ilcustodedacciaio": [
+  0.36,
+  0.6
+ ],
+ "t_ilrivaletraditore": [
+  0.28,
+  0.6
+ ],
+ "t_imboscatasullafalesia": [
+  0.38,
+  0.6
+ ],
+ "t_lassediodeipredonidellerovine": [
+  0.5,
+  0.6
+ ],
+ "t_lecosenzanome": [
+  0.1,
+  0.85
+ ],
+ "t_lintelligenzarogue": [
+  0.25,
+  0.75
+ ],
+ "t_rivoltadellafonderia": [
+  0.3,
+  0.65
+ ],
+ "t_torneoclandestino": [
+  0.55,
+  0.6
+ ]
+}
