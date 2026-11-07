@@ -44,6 +44,38 @@ class EffectRegistryClass {
       const th = engine.state.currentThreat;
       const targetEntity = ctx.targetEntity || engine.resolveTarget(ctx.targetId) || { type: 'boss', name: th.nome };
 
+      // Danno pari a un multiplo della Resistenza (Ultimatum Cinetico)
+      if (fx.perResistenza) amt = fx.perResistenza * ((source.end || 1) + (source.tempResistance || 0)) + (amt - (fx.amount || 1));
+      // Bonus condizionali scritti sulle carte (+N se la condizione è vera)
+      if (fx.bonus) {
+        const b = fx.bonus, st = engine.state, e = targetEntity.entity;
+        const vivi = st.players.filter(p => !p.isDead);
+        const vero = {
+          ferito: () => targetEntity.type === 'mook' && e && e.hp < e.maxHp,
+          primo: () => !(st.attacchiRound > 0),
+          ultimo: () => vivi[vivi.length - 1] === source,
+          colpito: () => source.ultimoDanno != null && source.ultimoDanno >= st.round - 1,
+          potere: () => !!source.pbUsedThisTurn,
+          indebolito: () => !!(e && (e.stunned || e.weakened))
+        }[b.se];
+        if (vero && vero()) { amt += b.amount || 1; engine.addLog('hero', `[BONUS] ${card && card.nome ? card.nome : 'Attacco'}: +${b.amount || 1} danno`); }
+      }
+      if (source.hand) engine.state.attacchiRound = (engine.state.attacchiRound || 0) + 1;
+
+      // Danno ad area vero: colpisce ogni nemico vivo con lo stesso danno (Protocollo Zero, Macello Indiscriminato...)
+      if (fx.target === 'all_enemies' && !fx.splash && th.mooks && th.mooks.some(m => !m.isDead)) {
+        let a = amt;
+        if (source.state !== 'villain') a = engine.mx('dannoEroe', a, { source });
+        th.mooks.forEach(m => {
+          if (m.isDead) return;
+          m.hp -= a;
+          engine.addLog('hero', `${source.name} infligge ${a} danni a ${m.name} (${Math.max(0, m.hp)} HP rimasti)`);
+          if (m.hp <= 0) { m.isDead = true; engine.addLog('hero', `[ELIMINATO] ${m.name} è stato sconfitto!`); }
+        });
+        engine.syncThreatHp();
+        return { ok: true, amount: a, area: true };
+      }
+
       if (targetEntity.type === 'mook') {
         const mook = targetEntity.entity;
         if (source.state !== 'villain') amt = engine.mx('dannoEroe', amt, { source });
@@ -423,6 +455,14 @@ class EffectRegistryClass {
         ctx.incomingAttack.target = targetAlly;
         engine.addLog('threat', `[VILLAIN TRADIMENTO] ${source.name} dirotta l'attacco su ${targetAlly.name}!`);
       }
+      return { ok: true };
+    });
+
+    // 26b. TORRETTA: 1 danno a inizio dei prossimi N round (engine.startRound)
+    this.register('torretta', (engine, ctx, fx) => {
+      const { source } = ctx;
+      source.torretta = (source.torretta || 0) + (fx.amount || 2);
+      engine.addLog('hero', `${source.name} piazza una torretta: 1 danno a inizio dei prossimi ${fx.amount || 2} round`);
       return { ok: true };
     });
 

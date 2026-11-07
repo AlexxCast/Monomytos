@@ -7,7 +7,7 @@ const res={heroes:0,threat:0,villain:0,stuck:0}; let acts=[[],[],[]], firstVil=[
 for(let i=0;i<N;i++){
   const q=[]; const ctx={console:{log(){},warn(){},error:console.error},Math,JSON,Object,Array,String,Set,Map,parseInt,Date,setTimeout:(f)=>q.push(f)};
   ctx.window=ctx; ctx.MONOMYTHOS_BILANCIAMENTO=JSON.parse(process.env.BIL||'{}'); vm.createContext(ctx);
-  for(const f of ['cards_data.js','morale.js','minacce_effetti.js','effects.js','bilanciamento.js','engine.js']) vm.runInContext(fs.readFileSync(dir+'/js/'+f,'utf8'),ctx);
+  for(const f of ['cards_data.js','morale.js','minacce_effetti.js','effects.js','bilanciamento.js','engine.js','collezione.js']) { try { vm.runInContext(fs.readFileSync(dir+'/js/'+f,'utf8'),ctx); } catch(e) { if (f !== 'collezione.js') throw e; } } // collezione.js: mazzi precon veri come nel gioco
   const E=ctx.GameEngine;
   const names=Object.keys(ctx.MONOMYTHOS_DATA.chars_meta).filter(n=>n!=='Custom Hero');
   const h=names.sort(()=>Math.random()-.5).slice(0,SQ);

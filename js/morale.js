@@ -18,10 +18,26 @@
     duellantespezzato_10: [H(dmg(4)), V(dmg(5))]
   };
 
+  // Carte che non facevano quello che dice il testo (test di difficoltà del 2026-11-07)
+  const atk = (n, extra) => Object.assign({ type: 'damage', amount: n, target: 'choose', timing: 'play', splash: 0 }, extra || {});
+  const CORREZIONI = {
+    neonphantom_12: f => f.concat([{ type: 'draw', amount: 2, target: 'self', timing: 'play', desc: 'Pesca 2 carte' }]),      // Scatto Cinetico: pescava 0 carte
+    ironaegis_17: f => [atk(1, { perResistenza: 2, desc: 'Danno pari al doppio della Resistenza' })].concat(f),               // Ultimatum Cinetico: non faceva danni
+    titanodacciaio_7: () => [atk(1, { bonus: { se: 'ferito', amount: 1 } })],                                                // Sventramento
+    duellantespezzato_8: () => [atk(1, { bonus: { se: 'ultimo', amount: 1 } })],                                             // Lama Nascosta
+    guardianadiconfine_7: () => [atk(1, { bonus: { se: 'colpito', amount: 1 } })],                                           // Colpo di Rimando
+    lamaerrante_7: () => [atk(1, { bonus: { se: 'primo', amount: 1 } })],                                                    // Affondo di Apertura
+    neonphantom_7: () => [atk(1, { bonus: { se: 'potere', amount: 1 } })],                                                   // Colpo di Slancio
+    architettoombra_9: () => [atk(1), { type: 'torretta', amount: 2, target: 'self', timing: 'play', desc: '1 danno a inizio dei prossimi 2 round' }], // Turret Automatica
+    titanodacciaio_8: () => [{ type: 'dodge', timing: 'reaction', target: 'self', desc: 'Reazione: assorbi un attacco intero' }],   // Corazza Improvvisata
+    lamaerrante_16: f => [atk(2, { bonus: { se: 'indebolito', amount: 3 } })].concat(f.filter(x => x.type !== 'damage' && x.type !== 'stun' && x.type !== 'weaken')) // Colpo alle Spalle: 5 solo su Stordito/Sfiancato (prima stordiva e sfiancava chi la giocava)
+  };
+
   function normalizza(data) {
     if (!data || data._moraleOk) return;
     data._moraleOk = true;
     Object.values(data.action_cards || {}).forEach(lista => (lista || []).forEach(c => {
+      if (CORREZIONI[c.id]) c.fx_list = CORREZIONI[c.id]((c.fx_list || []).map(f => Object.assign({}, f)));
       if (SPESA[c.id]) {
         c.fx_list = SPESA[c.id].map(f => Object.assign({}, f));
         c.costoMorale = { pe: 2, vp: 1 };
