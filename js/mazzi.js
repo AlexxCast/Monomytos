@@ -344,22 +344,14 @@
     const slide = document.createElement('div');
     slide.setAttribute('data-hero', '__mazzo__');
     slide.className = `hero-slide hero-slide-mazzo ${ui.mazzoScelto ? 'selected' : ''} ${ok ? '' : 'vuoto'}`;
+    const tot = m ? Object.values(m.cards || {}).reduce((x, y) => x + y, 0) : 0;
     slide.innerHTML = ok ? `
       <div class="hero-slide-etichetta">Il tuo mazzo</div>
-      <div class="hero-silver-frame-wrap">
-        <img class="hero-bg-img" src="${esc(art)}" alt="" onerror="this.src='assets/cards/retrocartamazzo.webp'">
-        <img class="hero-frame-img" src="assets/layouts/layout_silver.webp" alt="">
-        <div class="hero-vignette-bubble"><div class="hero-card-title">${esc(nome)}</div><div class="hero-card-tag">[Mazzo personalizzato]</div></div>
-        <div class="hero-card-desc-box"><div class="hero-card-pb-title">${esc(cr.pb || 'Potere Base')}</div><div class="hero-card-pb-text">${esc(cr.pb_desc || (cr.archetipo ? cr.archetipo + ' · ' + (cr.costume || '') : ''))}</div></div>
-        <div class="hero-card-val-circle">${esc(cr.vita || 25)}</div>
-        <div class="hero-card-icon-circle"><img src="assets/icons/azione.webp" alt=""></div>
+      <div class="hero-mazzo-pila">
+        <img src="assets/cards/retrocartamazzo.webp" alt=""><img src="assets/cards/retrocartamazzo.webp" alt=""><img src="assets/cards/retrocartamazzo.webp" alt="">
       </div>
-      <div class="stats-matrix" style="width:100%; margin-bottom:10px;">
-        <div class="stat-chip str"><span class="val">${st('str')}</span><span class="lbl">Pot</span></div>
-        <div class="stat-chip spd"><span class="val">${st('spd')}</span><span class="lbl">Agi</span></div>
-        <div class="stat-chip tech"><span class="val">${st('tech')}</span><span class="lbl">Int</span></div>
-        <div class="stat-chip end"><span class="val">${st('end')}</span><span class="lbl">Vig</span></div>
-      </div>` : `
+      <div class="hero-mazzo-nome">${esc(nome)}</div>
+      <div class="hero-mazzo-info">${tot} carte</div>` : `
       <div class="hero-slide-etichetta">Il tuo mazzo</div>
       <div class="hero-silver-frame-wrap hero-mazzo-vuoto">
         <img class="hero-bg-img" src="assets/cards/retrocartamazzo.webp" alt="">
