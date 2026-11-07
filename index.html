@@ -726,35 +726,46 @@
        SCREEN 5: DECK BUILDER
        ========================================== -->
   <section class="screen" id="scr-deckbuilder">
-    <!-- Pinned Top Navigation Bar: Back button ALWAYS in top right -->
     <div class="deckbuilder-top-bar">
       <div>
-        <h2 style="font-size:17px; color:var(--oro-soft); margin:0 0 2px;">Mazzo Personalizzato</h2>
-        <span style="font-size:11px; color:var(--muto);">Componi il tuo Eroe e un mazzo con le carte che possiedi</span>
+        <h2 style="font-size:17px; color:var(--oro-soft); margin:0 0 2px;" id="dbTitolo">I tuoi mazzi</h2>
+        <span style="font-size:11px; color:var(--muto);" id="dbSottotitolo">Scegli un mazzo o creane uno nuovo</span>
       </div>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="btn btn-sm btn-threat-deck" onclick="Collezione.apriMinacce()">Minacce</button>
-        <button class="btn btn-sm btn-trade" onclick="Scambi.apri()">Scambi <span class="scambi-badge" style="display:none">0</span></button>
-        <button class="btn btn-primary btn-sm" id="btnSaveDeck" onclick="UI.saveCurrentDeck()">Salva Mazzo</button>
-        <button class="btn btn-top-back" onclick="UI.showScreen('scr-lobby')" title="Torna al Menu">
+      <div class="db-azioni-top">
+        <button class="db-icona-carta" onclick="Collezione.apriMinacce()" title="Mazzo Minacce">
+          <span class="db-icona-img"><img src="assets/cards/cartaminacciaretro.webp" alt=""></span>
+          <span class="db-icona-lbl">Minacce</span>
+        </button>
+        <button class="db-icona-carta db-icona-scambi" onclick="Scambi.apri()" title="Scambi">
+          <span class="db-icona-img"><img class="s1" src="assets/cards/retrocartamazzo.webp" alt=""><img class="s2" src="assets/cards/retrocartamazzo.webp" alt="">
+            <svg class="db-frecce" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></span>
+          <span class="db-icona-lbl">Scambi</span>
+          <span class="scambi-badge" style="display:none">0</span>
+        </button>
+        <button class="btn btn-top-back" onclick="Mazzi.indietro()" title="Indietro">
           <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
           <span>Torna</span>
         </button>
       </div>
     </div>
 
-    <!-- Scrollable Deckbuilder Body (Natural scrolling, no visual overlapping glitches) -->
     <div class="deckbuilder-scroll-content">
-      <div>
-        <input type="text" id="deckNameInput" placeholder="Nome Mazzo Personalizzato" style="width:100%; box-sizing:border-box; background:#0f141d; border:1px solid var(--line); border-radius:8px; padding:8px 10px; color:var(--bone); font-size:13px; margin-bottom:4px;">
+      <!-- VISTA 1: elenco dei mazzi creati + crea mazzo -->
+      <div class="db-vista" id="dbElenco">
+        <div class="db-mazzi-grid" id="dbMazziGrid"></div>
+        <div class="db-crea" onclick="Mazzi.nuovo()">
+          <div class="db-flip" id="dbFlip"><div class="db-flip-in">
+            <div class="db-flip-front" id="dbFlipFront"></div>
+            <div class="db-flip-back"><img src="assets/cards/retrocartamazzo.webp" alt=""></div>
+          </div></div>
+          <button class="btn btn-primary db-crea-btn" type="button">+ Crea mazzo</button>
+          <p class="db-crea-nota">Scegli Origine, Archetipo, Costume e Potere Base, poi le carte del mazzo.</p>
+        </div>
       </div>
 
-      <!-- Visual Hero Creation Cards (Origine, Archetipo, Costume, Potere Base) -->
-      <div class="deck-hero-creator-box">
-        <div class="deck-roles-title">
-          <span>1. Componi il tuo Eroe (Tocca le carte per cambiarle):</span>
-        </div>
-
+      <!-- VISTA 2: creazione dell'eroe (uno slot per categoria) -->
+      <div class="db-vista" id="dbCreazione">
+        <div class="deck-hero-creator-box">
         <!-- Hidden Synchronized Selects for Full Backward Compatibility -->
         <div style="display:none;">
           <select id="deckSelOrigine" onchange="UI.onDeckCreationChanged()"></select>
@@ -763,12 +774,8 @@
           <select id="deckSelPb" onchange="UI.onDeckCreationChanged()"></select>
         </div>
 
-        <!-- Visual Creation Cards Grid (Point 2: Card Design & Indications) -->
-        <div class="creation-cards-visual-grid" id="deckCreationCardSlots">
-          <!-- Populated dynamically by UI.renderDeckCreationSlots() -->
-        </div>
-
-        <!-- Real-Time Hero Summary: Stats with Icons, HP, Allowed Tags, Base Power -->
+          <div class="db-slot-grid" id="deckCreationCardSlots"></div>
+  <!-- Real-Time Hero Summary: Stats with Icons, HP, Allowed Tags, Base Power -->
         <div class="deck-hero-summary-row">
           <div class="stats-matrix" style="margin:0; flex:1;">
             <div class="stat-chip str"><img src="assets/icons/potenza.png" class="slot-stat-icon-mini" alt="STR"><span class="val" id="deckHeroStr">2</span></div>
@@ -789,8 +796,14 @@
         <div class="deck-pb-banner" id="deckPbBanner">
           <b id="deckPbNameDisplay">Potere Base</b>: <span id="deckPbTextDisplay">...</span>
         </div>
+        </div>
+        <button class="btn btn-primary btn-block db-avanti" onclick="Mazzi.vai('costruzione')">Avanti: scegli le carte ➔</button>
       </div>
 
+      <!-- VISTA 3: costruzione del mazzo -->
+      <div class="db-vista" id="dbCostruzione">
+        <input type="text" id="deckNameInput" placeholder="Nome del mazzo" class="db-nome">
+        <div class="db-eroe-riga" id="dbEroeRiga"></div>
       <!-- Real-Time Deck Count & Rule Validation (Mazzo di 60 carte) -->
       <div class="deck-count-bar">
         <span>Carte nel Mazzo: <b id="deckTotalCount">0</b>/<span class="deckSizeLabel">60</span></span>
@@ -808,8 +821,12 @@
         <button class="deck-filter-tab" onclick="UI.filterDeckCards('Oscura', this)">Oscure</button>
       </div>
 
-      <!-- Card Picker Grid (60-card pool) -->
-      <div class="card-picker-grid" id="deckCardsList"></div>
+        <div class="db-grid" id="deckCardsList"></div>
+        <div class="db-fondo">
+          <button class="btn btn-primary" id="btnSaveDeck" onclick="UI.saveCurrentDeck()">Salva mazzo</button>
+          <button class="btn btn-subtle" id="dbElimina" onclick="Mazzi.elimina()">Elimina mazzo</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1245,6 +1262,7 @@
 <script src="js/firebase-config.js"></script>
 <script src="js/account.js"></script>
 <script src="js/collezione.js"></script>
+<script src="js/mazzi.js"></script>
 <script src="js/online.js"></script>
 <script src="js/scambi.js"></script>
 <script src="js/storia_suoni.js"></script>
