@@ -1,7 +1,7 @@
 # Scontorna il logo del titolo fornito su sfondo bianco (Gemini, 7/11/2026) e lo salva trasparente.
 # - sfondo = bianco collegato in zone grandi (fuori e dentro le O)
 # - lettere opache; frangia verso il bianco con "colore verso alfa" (niente alone chiaro)
-# - l'estrusione grigia chiara attaccata al bianco viene scurita: sugli sfondi scuri non fa da alone
+# - colori e rilievo restano identici all'originale
 # Uso: python3 strumenti/logo/scontorna_logo.py strumenti/logo/logo_titolo_bianco.jpg assets/icons/logo_titolo.webp [larghezza]
 import sys
 import numpy as np
@@ -31,22 +31,6 @@ alfa[sfondo] = 0
 col = (a - 255 * (1 - alfa[..., None])) / np.maximum(alfa, 1e-3)[..., None]
 col = np.clip(col, 0, 255)
 
-# estrusione/ombra grigia che tocca lo sfondo: diventa un'estrusione scura (blu notte), quasi opaca
-grigio = (sat < 20) & (lum > 50) & ~sfondo
-lg, ng = ndimage.label(grigio)
-tocca = np.unique(lg[ndimage.binary_dilation(sfondo, iterations=2) & grigio])
-estr = np.isin(lg, tocca[tocca > 0])
-# anche le macchie grigie chiuse tra estrusione e lettera (es. sotto le gambe della M)
-tocca2 = np.unique(lg[ndimage.binary_dilation(estr, iterations=3) & grigio])
-estr = np.isin(lg, tocca2[tocca2 > 0])
-estr = ndimage.binary_closing(estr, iterations=2) & ~sfondo & (sat < 26)
-chiaro = (sat < 30) & (lum > 120) & ~sfondo
-for _ in range(12):                                         # le macchie chiare attaccate all'estrusione
-    estr = estr | (ndimage.binary_dilation(estr) & chiaro)
-SCURO = np.array([26, 20, 40], np.float32)
-sfum = np.clip((lum - 50) / 205, 0, 1)[..., None]          # conserva un po' di chiaroscuro
-col = np.where(estr[..., None], SCURO + sfum * np.array([70, 62, 90], np.float32), col)
-alfa = np.where(estr, np.maximum(alfa, np.clip(d / 255 * 3, 0, 0.92)), alfa)
 ys, xs = np.where(alfa > 0.02)
 m = 8
 y0, y1 = max(ys.min() - m, 0), min(ys.max() + m, a.shape[0])
