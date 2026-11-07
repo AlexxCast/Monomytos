@@ -88,7 +88,7 @@
   0.75
  ],
  "c_schiacciata": [
-  0.25,
+  0.31,
   0.75
  ],
  "c_sentinelladifrontiera": [
@@ -120,7 +120,7 @@
   0.75
  ],
  "c_avanguardiapesante": [
-  -0.01,
+  -0.04,
   0.93
  ],
  "c_caviaalpha": [
@@ -149,6 +149,18 @@
  ],
  "c_spettrocinetico": [
   0.19,
+  0.93
+ ],
+ "c_sentinellaadattiva": [
+  0.07,
+  0.93
+ ],
+ "c_esoscheletroleggero": [
+  -0.03,
+  0.93
+ ],
+ "c_empitooscuro": [
+  0.07,
   0.93
  ]
 }
