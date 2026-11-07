@@ -5562,7 +5562,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/dardodellabisso.webp",
+        "img": "assets/cards/gen/sussurrodellabisso_1.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -6362,7 +6362,7 @@ window.MONOMYTHOS_DATA = {
           "heal": 0,
           "trm": 0
         },
-        "img": "assets/cards/duellantespezzato.webp",
+        "img": "assets/cards/gen/duellantespezzato_1.webp",
         "fx_list": [
           {
             "type": "damage",
@@ -7446,8 +7446,8 @@ window.MONOMYTHOS_DATA = {
     "auditdicoscienza": "assets/cards/barrieraolografica.webp",
     "Costo di Progetto": "assets/cards/generatoredisingolarita.webp",
     "costodiprogetto": "assets/cards/generatoredisingolarita.webp",
-    "Dardo dell'Abisso": "assets/cards/dardodellabisso.webp",
-    "dardodellabisso": "assets/cards/dardodellabisso.webp",
+    "Dardo dell'Abisso": "assets/cards/gen/sussurrodellabisso_1.webp",
+    "dardodellabisso": "assets/cards/gen/sussurrodellabisso_1.webp",
     "Patto di Sangue": "assets/cards/sussurrodellabisso.webp",
     "pattodisangue": "assets/cards/sussurrodellabisso.webp",
     "Sifone Vitale": "assets/cards/toccatadalvelo.webp",
@@ -7484,8 +7484,8 @@ window.MONOMYTHOS_DATA = {
     "silenziointeriore": "assets/cards/toccatadalvelo.webp",
     "Decima dell'Abisso": "assets/cards/pugnalepsichico.webp",
     "decimadellabisso": "assets/cards/pugnalepsichico.webp",
-    "Affondo Sleale": "assets/cards/duellantespezzato.webp",
-    "affondosleale": "assets/cards/duellantespezzato.webp",
+    "Affondo Sleale": "assets/cards/gen/duellantespezzato_1.webp",
+    "affondosleale": "assets/cards/gen/duellantespezzato_1.webp",
     "Schermo di Carne": "assets/cards/duellanteitinerante.webp",
     "schermodicarne": "assets/cards/duellanteitinerante.webp",
     "Ritorsione": "assets/cards/assaltofluido.webp",
