@@ -66,7 +66,7 @@
     s_metropoli: { musica: 'calma', suoni: ['vento'], fb: 'assets/bg/cosmo_eroe.webp', moto: 'panSu', strati: ['stelle'] },
     s_blackout: { musica: 'tensione', colpi: ['spegnimento'], fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'lampi', 'scintille'], pos: { stella: [78, 10], lampi: [55, 25] } },
     s_stella: { musica: 'stella', suoni: ['battito', 'folla'], fb: 'assets/bg/cosmo_villain.webp', moto: 'zoom', strati: ['stelle', 'stella'], pos: { stella: [73, 13] } },
-    s_piazza: { musica: 'stella', suoni: ['folla', 'battito'], fb: G + 't_lassediodeipredonidellerovine.webp', moto: 'zoom', strati: ['stella', 'occhi'], pos: { stella: [78, 10], occhi: 64 } },
+    s_piazza: { musica: 'stella', suoni: ['folla', 'battito'], fb: G + 't_lassediodeipredonidellerovine.webp', moto: 'zoom', strati: ['stella', 'occhi'], pos: { stella: [77, 13], occhi: 80 } },
     s_droni_folla: { musica: 'azione', suoni: ['laser', 'scintille', 'folla'], fb: G + 't_blackoutostile.webp', moto: 'zoom', strati: ['stella', 'laser', 'scintille', 'scuoti'], pos: { stella: [78, 10] } },
     s_schermi: { musica: 'tensione', fb: G + 't_incursionedeidronicinetici.webp', moto: 'zoomOut', strati: ['tv', 'acqua'], pos: { tv: [32, 20, 40, 25] } },
     s_infetti: { musica: 'stella', fb: G + 't_torneoclandestino.webp', moto: 'zoom', strati: ['stella', 'nebbia', 'occhi'], pos: { stella: [70, 7], occhi: 55 } },
