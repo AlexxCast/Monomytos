@@ -216,9 +216,10 @@
       const ui = U();
       if (!el || !ui.currentDeckBuilding) return;
       const c = ui.currentDeckBuilding.creation || {};
-      el.innerHTML = `<span><b>${esc(c.origine)}</b> · ${esc(c.pb)}<br>
-        <small>Vita ${esc(c.vita)} · Pot ${esc(c.str)} · Agi ${esc(c.spd)} · Int ${esc(c.tech)} · Vig ${esc(c.end)}</small></span>
-        <button class="btn btn-subtle btn-sm" onclick="Mazzi.vai('creazione')">Modifica eroe</button>`;
+      const v = (k) => Math.max(1, Math.min(5, 1 + (+c[k] || 0)));
+      el.innerHTML = `<span class="db-stat db-stat-vita" title="Vita">♥ ${esc(c.vita)}</span>` +
+        STAT.map(([k, l, ic]) => `<span class="db-stat" title="${l}"><img src="assets/icons/${ic}.png" alt="">${v(k)}</span>`).join('') +
+        `<span class="db-stat-nome" title="Origine · Potere Base">${esc(c.origine)}</span>`;
     },
     renderGriglia(allowedTags, category) {
       const ui = U();
@@ -243,7 +244,7 @@
       const nonGioc = carte.length - giocabili.length;
       carte = giocabili;
       let html = '';
-      if (tot > carte.length + nonGioc) html += `<div class="deck-locked-info db-span">Hai <b>${carte.length + nonGioc}</b> di ${tot} carte di questo filtro. Le altre si trovano nelle <a href="#" onclick="UI.openShop(); return false;">bustine</a> e nella Storia.</div>`;
+      if (tot > carte.length + nonGioc) html += `<div class="db-nascoste db-span">Possiedi ${carte.length + nonGioc} di ${tot} carte · le altre nelle <a href="#" onclick="UI.openShop(); return false;">bustine</a> e nella Storia</div>`;
       if (nonGioc) html += `<div class="db-nascoste db-span">${nonGioc} ${nonGioc === 1 ? 'carta nascosta' : 'carte nascoste'}: con questo eroe non si possono giocare.</div>`;
       if (!carte.length) html += '<div class="db-vuoto db-span">Nessuna carta posseduta con questi filtri.</div>';
       html += carte.map(c => {
@@ -315,6 +316,18 @@
     ui.openCreationCardPicker = (r) => Mazzi.apriGrigliaRuolo(r);
     ui.renderDeckBuilderCards = (tags, cat) => Mazzi.renderGriglia(tags, cat || ui.currentDeckFilter || 'all');
     ui.saveCurrentDeck = () => Mazzi.salva();
+    // messaggio di validità corto dentro il tappetino (il testo completo resta al tocco)
+    const contaOrig = ui.updateDeckBuilderCounts.bind(ui);
+    ui.updateDeckBuilderCounts = () => {
+      contaOrig();
+      const st = document.getElementById('deckValidationStatus');
+      if (!st || !ui.currentDeckBuilding) return;
+      const pieno = st.textContent;
+      const R = window.Collezione ? window.Collezione.REGOLE_MAZZO : { carteMin: 60, carteMax: 60 };
+      const tot = Object.values(ui.currentDeckBuilding.cards || {}).reduce((a, b) => a + b, 0);
+      st.title = pieno;
+      st.textContent = ui._deckValid ? '✓ Pronto' : tot < R.carteMin ? `Mancano ${R.carteMin - tot}` : tot > R.carteMax ? `${tot - R.carteMax} di troppo` : '⚠ Tocca qui';
+    };
     const selOrig = ui.selectCreationCard.bind(ui);
     ui.selectCreationCard = (r, n) => { selOrig(r, n); Mazzi.renderEroeRiga(); };
   };

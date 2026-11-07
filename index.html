@@ -803,26 +803,31 @@
 
       <!-- VISTA 3: costruzione del mazzo -->
       <div class="db-vista" id="dbCostruzione">
-        <input type="text" id="deckNameInput" placeholder="Nome del mazzo" class="db-nome">
-        <div class="db-eroe-riga" id="dbEroeRiga"></div>
-      <!-- Real-Time Deck Count & Rule Validation (Mazzo di 60 carte) -->
-      <div class="deck-count-bar">
-        <span>Carte nel Mazzo: <b id="deckTotalCount">0</b>/<span class="deckSizeLabel">60</span></span>
-        <span>Carte Oscure: <b id="deckDarkCount">0</b>/<span class="deckDarkMaxLabel">24</span> max</span>
-      </div>
-      <div class="deck-rule-validation-msg" id="deckValidationStatus">Componi 60 carte per completare il mazzo (0/60)</div>
-
-      <!-- Category Filter Tabs for Easy Selection of 60 Cards -->
-      <div class="deck-category-tabs">
-        <button class="deck-filter-tab active" onclick="UI.filterDeckCards('all', this)">Tutte</button>
-        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Potenza', this)"><img src="assets/icons/potenza.png" class="filter-tab-icon" alt=""> Potenza</button>
-        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Agilità', this)"><img src="assets/icons/agilita.png" class="filter-tab-icon" alt=""> Agilità</button>
-        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Intelligenza', this)"><img src="assets/icons/inteligenza.png" class="filter-tab-icon" alt=""> Intelligenza</button>
-        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Vigore', this)"><img src="assets/icons/vigore.png" class="filter-tab-icon" alt=""> Vigore</button>
-        <button class="deck-filter-tab" onclick="UI.filterDeckCards('Oscura', this)">Oscure</button>
-      </div>
-
-        <div class="db-grid" id="deckCardsList"></div>
+        <div class="db-tappeto">
+          <div class="db-tappeto-testa">
+            <div class="db-riga">
+              <input type="text" id="deckNameInput" placeholder="Nome del mazzo" class="db-nome">
+              <button class="db-btn-eroe" onclick="Mazzi.vai('creazione')" title="Modifica eroe" aria-label="Modifica eroe">
+                <img src="assets/icons/peronaggio.webp" alt=""><span>Eroe</span>
+              </button>
+            </div>
+            <div class="db-stat-riga" id="dbEroeRiga"></div>
+            <div class="db-riga db-conti">
+              <span class="db-pill" title="Carte nel mazzo"><img src="assets/cards/retrocartamazzo.webp" alt=""><b id="deckTotalCount">0</b>/<span class="deckSizeLabel">60</span></span>
+              <span class="db-pill db-pill-osc" title="Carte Oscure (massimo)"><img src="assets/icons/oscuro.webp" alt=""><b id="deckDarkCount">0</b>/<span class="deckDarkMaxLabel">24</span></span>
+              <span class="deck-rule-validation-msg db-stato" id="deckValidationStatus" onclick="UI.showToast(this.textContent)">Componi 60 carte</span>
+            </div>
+            <div class="deck-category-tabs db-filtri">
+              <button class="deck-filter-tab active" onclick="UI.filterDeckCards('all', this)" title="Tutte">Tutte</button>
+              <button class="deck-filter-tab" onclick="UI.filterDeckCards('Potenza', this)" title="Potenza"><img src="assets/icons/potenza.png" class="filter-tab-icon" alt="Potenza"></button>
+              <button class="deck-filter-tab" onclick="UI.filterDeckCards('Agilità', this)" title="Agilità"><img src="assets/icons/agilita.png" class="filter-tab-icon" alt="Agilità"></button>
+              <button class="deck-filter-tab" onclick="UI.filterDeckCards('Intelligenza', this)" title="Intelligenza"><img src="assets/icons/inteligenza.png" class="filter-tab-icon" alt="Intelligenza"></button>
+              <button class="deck-filter-tab" onclick="UI.filterDeckCards('Vigore', this)" title="Vigore"><img src="assets/icons/vigore.png" class="filter-tab-icon" alt="Vigore"></button>
+              <button class="deck-filter-tab" onclick="UI.filterDeckCards('Oscura', this)" title="Oscure"><img src="assets/icons/oscuro.webp" class="filter-tab-icon" alt="Oscure"></button>
+            </div>
+          </div>
+          <div class="db-grid" id="deckCardsList"></div>
+        </div>
         <div class="db-fondo">
           <button class="btn btn-primary" id="btnSaveDeck" onclick="UI.saveCurrentDeck()">Salva mazzo</button>
           <button class="btn btn-subtle" id="dbElimina" onclick="Mazzi.elimina()">Elimina mazzo</button>
