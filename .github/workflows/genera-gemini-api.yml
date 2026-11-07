@@ -14,7 +14,7 @@ on:
         default: ''
       modello:
         description: 'Modello immagini'
-        default: 'gemini-3-pro-image-preview'
+        default: 'gemini-3-pro-image'
 
 permissions:
   contents: write

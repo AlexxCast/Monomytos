@@ -40,6 +40,11 @@ def leggi_prompt():
     return out
 
 
+# Aggiunto a ogni prompt: Gemini tende a dividere la scena in riquadri da fumetto
+RINFORZO = (' IMPORTANT: one single continuous scene from edge to edge. Absolutely no panel borders, '
+            'no frames, no inset rectangles, no split layout, no gutters, no separate box for the sky.')
+
+
 def formato(prompt):
     for r in ('9:16', '3:4', '2:3', '16:9', '1:1'):
         if r in prompt[:200]:
@@ -57,7 +62,7 @@ def main():
         progetto = json.load(open(cred)).get('project_id')
     if not progetto:
         sys.exit('Manca il progetto Google Cloud (segreto GCP_SA_KEY non configurato?)')
-    modello = os.environ.get('GEMINI_MODELLO') or 'gemini-3-pro-image-preview'
+    modello = os.environ.get('GEMINI_MODELLO') or 'gemini-3-pro-image'
     luogo = os.environ.get('GEMINI_LUOGO') or 'global'
     quante = int(os.environ.get('QUANTE') or 20)
     solo = {s.strip().lower().removesuffix('.png') for s in (os.environ.get('SOLO') or '').split(',') if s.strip()}
@@ -75,7 +80,7 @@ def main():
         for tentativo in range(3):
             try:
                 r = client.models.generate_content(
-                    model=modello, contents=prompt,
+                    model=modello, contents=prompt + RINFORZO,
                     config=types.GenerateContentConfig(
                         response_modalities=['IMAGE'],
                         image_config=types.ImageConfig(aspect_ratio=formato(prompt))))
