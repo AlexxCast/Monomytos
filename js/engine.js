@@ -197,6 +197,8 @@ class MonomythosEngine {
       noCrisi: !!options.story,
       // Moltiplicatore di difficoltà (Vita e soglie dei nemici), usato dalle missioni della Storia
       difficolta: options.difficolta || 1,
+      // Regole a strati (prime missioni della Storia): 1 = solo Vita, 2 = + binari e Pesca, null = tutte le regole
+      livelloRegole: options.livelloRegole || null,
       forzaExtra: options.forzaExtra || 0,
       threatPool: pool.map(t => t.nome),
       currentThreat: null,
@@ -218,6 +220,15 @@ class MonomythosEngine {
 
     this.startRound();
     return this.state;
+  }
+
+  // Regole a strati: quali regole sono attive in questa partita
+  regola(nome) {
+    const L = this.state && this.state.livelloRegole;
+    if (!L) return true;
+    if (nome === 'binari' || nome === 'pesca') return L >= 2;
+    if (nome === 'villain' || nome === 'trauma') return L >= 3;
+    return true;
   }
 
   // Indice dell'Atto Finale (2 di solito; meno nelle missioni della Storia con 1 o 2 Minacce)
@@ -762,6 +773,7 @@ class MonomythosEngine {
   tacticalSacrifice(playerId, cardUid, trackChoice = 'primario') {
     const player = this.state.players.find(p => p.id === playerId);
     if (!player || player.isDead) return { ok: false, msg: 'Giocatore non attivo' };
+    if (!this.regola('binari')) return { ok: false, msg: 'I binari si sbloccano nella prossima missione' };
 
     const maxSac = this.mx('maxSacrifici', 2);
     if (player.sacrificesThisRound >= maxSac) {
@@ -946,6 +958,8 @@ class MonomythosEngine {
   checkBreakingPoint(player) {
     // §8.4: dopo lo State Freezing (Atto Finale) nessuno cambia schieramento
     if (player.stateFrozen) return;
+    // Regole a strati: nelle prime missioni nessuno diventa Villain (il Trauma arriva dalla missione 3)
+    if (!this.regola('villain')) { if (player.trm >= ((window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5)) player.trm = ((window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5) - 1; return; }
     if (player.trm >= ((window.MONOMYTHOS_BILANCIAMENTO || {}).sogliaVillain || 5) && player.state === 'hero') {
       player.state = 'villain';
       this.addLog('threat', `[TRAUMA] PUNTO DI ROTTURA! ${player.name} ha accumulato 5 Trauma e si trasforma in VILLAIN!`);

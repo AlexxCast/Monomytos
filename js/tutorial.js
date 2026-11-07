@@ -5,18 +5,23 @@
   const E = () => window.GameEngine;
 
   const PASSI = {
-    benvenuto: { testo: 'Benvenuto, Portatore! Questa è la Minaccia da sconfiggere. Si batte in due modi: porta a 0 la sua Vita oppure riempi uno dei suoi binari (Primario o Bruto).', dove: '#threatCentralCard' },
+    // Missione 1 (regole livello 1): solo Vita, carte, Potere Base, difesa
+    benvenuto: { testo: 'Benvenuto, Portatore! Questa è la Minaccia da sconfiggere: porta a 0 la sua Vita colpendo i suoi nemici.', dove: '#threatCentralCard' },
     mano: { testo: 'Queste sono le tue carte. Ogni carta costa slot della sua Categoria: i numeri colorati sopra la mano sono gli slot che hai in questo turno.', dove: '#playerHandCarousel' },
     gioca: { testo: 'Tocca una carta e scegli "Gioca Effetto" per usarla: per esempio infliggi danni a un nemico.', dove: '#playerHandCarousel' },
-    sacrificio: { testo: 'Ottimo! Una carta si può anche scartare come Sacrificio Tattico: non costa slot e fa avanzare un binario della Minaccia. Al massimo 2 volte per round.', dove: '#lblPrimario' },
     potere: { testo: 'Questo è il tuo Potere Base: è gratis, una volta per turno. Non dimenticarlo!', dove: '#btnPbDock' },
-    pesca: { testo: 'Con + e − scegli quante carte pescare al prossimo round. Attento: se il mazzo finisce prendi molto Trauma.', dove: '#drawChoiceLabel' },
-    fine: { testo: 'Quando hai finito tocca Fine Turno. Se in un round non fai nessuna mossa prendi 1 Trauma: muoviti sempre!', dove: '.btn-endturn' },
-    difesa: { testo: 'Un nemico ti attacca! Puoi scartare carte per parare il colpo: il loro Valore assorbe i danni. Se il danno supera la tua Resistenza, la parte in più passa comunque (Travolgere).', dove: '#modalDefenseWindow' },
+    fine: { testo: 'Quando hai finito tocca Fine Turno. Gioca sempre almeno una carta per round: il tempo della Minaccia scorre.', dove: '.btn-endturn' },
+    difesa: { testo: 'Un nemico ti attacca! Puoi scartare carte per parare il colpo: il loro Valore assorbe i danni.', dove: '#modalDefenseWindow' },
     nemici: { testo: 'Le etichette sopra i nemici ti dicono chi attaccheranno e con quanta Forza. Usale per decidere se difenderti o attaccare.', dove: '#mooksContainer' },
-    trauma: { testo: 'Questo è il tuo Trauma. A 5 Trauma l\'eroe diventa Villain e gioca contro la squadra: tienilo basso!', dove: '#playerDockTrauma' },
-    atto: { testo: 'Atto superato! Ogni missione ha 3 Minacce sempre più forti. Continua così.', dove: '#threatCentralCard' },
-    fineTutorial: { testo: 'Tutorial completato! Continua la Storia per scoprire cosa succede ad Ataca, oppure gioca con gli amici dalla Home.', dove: null }
+    atto: { testo: 'Atto superato! Ora arriva una Minaccia più forte. Continua così.', dove: '#threatCentralCard' },
+    fineTutorial: { testo: 'Tutorial completato! Continua la Storia per scoprire cosa succede ad Ataca, oppure gioca con gli amici dalla Home.', dove: null },
+    // Missione 2 (livello 2): binari e Pesca
+    binari: { testo: 'Nuova regola: i binari! Come nell\'Arena, non serve stendere tutti: oltre a togliere Vita, puoi battere la Minaccia riempiendo uno dei suoi due binari, d\'ingegno o di forza.', dove: '#lblPrimario' },
+    sacrificio: { testo: 'Tocca una carta e scegli Sacrificio Tattico: la scarti senza spendere slot e il binario avanza. Vale solo la Categoria del binario, al massimo 2 volte per round.', dove: '#lblPrimario' },
+    pesca: { testo: 'Con + e − scegli quante carte pescare al prossimo round. Più carte = più scelte, ma il mazzo finisce prima.', dove: '#drawChoiceLabel' },
+    // Missione 3 (tutte le regole): Trauma e Villain
+    trauma: { testo: 'Da qui conta il Trauma: è il Velo che ti entra nella mente. Lo prendi se in un round non fai nessuna mossa, da alcuni nemici e se il mazzo finisce (molto!).', dove: '#playerDockTrauma' },
+    villain: { testo: 'A 5 Trauma l\'eroe diventa Villain e gioca contro la squadra. Tienilo basso, e tieni d\'occhio quello dei compagni!', dove: '#playerDockTrauma' }
   };
 
   const Tutorial = {
@@ -65,21 +70,35 @@
       this._agganciato = true;
       const on = (ev, fn) => E().on(ev, (nome, d) => { if (this.attivo) { try { fn(d); } catch (e) { console.error('Tutorial', e); } } });
       const mioTurno = () => { const st = E().state, a = st && st.players[st.turnIndex]; return a && a.isLocal && st.phase === 'action'; };
-      on('match_started', () => setTimeout(() => {
-        this.mostra('benvenuto'); this.mostra('mano'); this.mostra('gioca');
-      }, 3200));
       on('turn_changed', () => { if (mioTurno() && this.visti.gioca) this.mostra('nemici'); });
       on('card_played', d => {
         if (!d.player || !d.player.isLocal) return;
-        this.mostra('sacrificio'); this.mostra('potere'); this.mostra('pesca'); this.mostra('fine');
+        this.mostra('potere'); this.mostra('fine');
       });
       on('defense_window_opened', () => this.mostra('difesa'));
-      on('round_started', st => {
-        const me = st.players.find(p => p.isLocal);
-        if (me && me.trm > 0) this.mostra('trauma');
-      });
       on('act_advanced', () => setTimeout(() => this.mostra('atto'), 2500));
       E().on('game_over', () => { if (this.inPartita) this.conclude(); });
+    },
+
+    // Chiamato dalla Storia appena si vede il tavolo di gioco (prima si poteva già finire il turno)
+    inizioPartita(state) {
+      if (!state) return;
+      if (this.attivo && this.inPartita) {
+        this.mostra('benvenuto'); this.mostra('mano'); this.mostra('gioca');
+        return;
+      }
+      // Regole a strati: la prima volta che una regola entra in gioco arriva il suo consiglio
+      if (!state.story || state.players.some(p => p.isLocal && p.state === 'villain')) return;
+      const d = P() && P().data;
+      if (!d) return;
+      const viste = d.consigliRegole || (d.consigliRegole = {});
+      const L = state.livelloRegole || 3;
+      const gruppi = [];
+      if (L >= 2 && !viste.l2) { viste.l2 = true; gruppi.push('binari', 'sacrificio', 'pesca'); }
+      if (L >= 3 && !viste.l3) { viste.l3 = true; gruppi.push('trauma', 'villain'); }
+      if (!gruppi.length) return;
+      P().save();
+      gruppi.forEach(id => { this.visti[id] = false; this.mostra(id); });
     },
 
     // Mette un consiglio in coda: ognuno si vede una sola volta
