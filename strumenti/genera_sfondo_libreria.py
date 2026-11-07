@@ -13,7 +13,7 @@ def ombra_box(box, r=0, off=10):
     d.rounded_rectangle([x0 + off, y0 + off, x1 + off, y1 + off], r, fill=(20, 12, 22))
 
 # ---------- parete con scaffali ----------
-PARETE_FINE = 720 * K
+PARETE_FINE = 0          # niente scaffali: solo la zona di lavoro (Alessio 7/11)
 # parete: gradiente scuro caldo con leggera luce dall'alto
 for y in range(PARETE_FINE):
     t = y / PARETE_FINE
@@ -23,7 +23,7 @@ for y in range(PARETE_FINE):
 for x in range(0, w, 90):
     d.line([(x, 0), (x, PARETE_FINE)], fill=(58, 38, 58), width=6)
 colori = [(230, 70, 80), (250, 190, 50), (60, 180, 220), (140, 100, 220), (70, 190, 120), (245, 130, 50), (235, 235, 220), (120, 60, 150), (40, 120, 170)]
-mensole = [300, 640]
+mensole = []
 for my in mensole:
     x = 40
     base = my * K
@@ -76,7 +76,6 @@ for my in mensole:
 
 # ---------- bordo del tavolo ----------
 TY = PARETE_FINE
-d.rectangle([0, TY, w, TY + 120], fill=(124, 74, 40), outline=INK, width=10)
 for gy in range(TY + 20, TY + 110, 22):
     pts = [(x, gy + 6 * math.sin(x / 140 + gy)) for x in range(0, w + 40, 40)]
     d.line(pts, fill=(102, 60, 32), width=5)
@@ -87,7 +86,7 @@ for gy in range(TY + 140, h, 30):
 
 # ---------- tappetino da gioco ----------
 M = 50
-mat = [M, TY + 70, w - M, h - M]
+mat = [M, M, w - M, h - M]
 ombra_box(mat, 60, 18)
 x0, y0, x1, y1 = mat
 tap = Image.new('RGB', (x1 - x0, y1 - y0)); td = ImageDraw.Draw(tap)
@@ -109,7 +108,7 @@ def tratteggio(box, col, wdt=6, seg=26):
         for i in range(0, n, 2):
             t0, t1 = i / n, min(1, (i + 1) / n)
             td.line([(ax + (bx - ax) * t0, ay + (by - ay) * t0), (ax + (bx - ax) * t1, ay + (by - ay) * t1)], fill=col, width=wdt)
-for y in (130, tap.height - 130 - ch):
+for y in (330, tap.height - 330 - ch):
     for i in range(3):
         bx = 90 + i * (cw + 60)
         tratteggio([bx, y, bx + cw, y + ch], (120, 90, 150))
