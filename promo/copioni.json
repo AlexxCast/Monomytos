@@ -1585,16 +1585,12 @@
       "musica_da": 0,
       "riprese": {
         "x": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_stella.webp",
-          "zoom": 0.35,
-          "centro_y": 0.25
+          "tipo": "vignetta",
+          "id": "s_stella"
         },
         "y": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_infetti.webp",
-          "zoom": 0.12,
-          "centro_y": 0.35
+          "tipo": "vignetta",
+          "id": "s_infetti"
         },
         "p": {
           "tipo": "partita",
@@ -1680,22 +1676,16 @@
       "musica_da": 0,
       "riprese": {
         "a": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_metropoli.webp",
-          "zoom": 0.18,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_metropoli"
         },
         "b": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_droni_folla.webp",
-          "zoom": 0.15,
-          "centro_y": 0.35
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
         },
         "c": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_schermi.webp",
-          "zoom": 0.12,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_schermi"
         }
       },
       "inquadrature": [
@@ -1766,22 +1756,16 @@
       "musica_da": 0,
       "riprese": {
         "a": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_piazza.webp",
-          "zoom": 0.15,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_piazza"
         },
         "b": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_infetti.webp",
-          "zoom": 0.12,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_infetti"
         },
         "c": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_blackout.webp",
-          "zoom": 0.15,
-          "centro_y": 0.35
+          "tipo": "vignetta",
+          "id": "s_blackout"
         }
       },
       "inquadrature": [
@@ -1852,22 +1836,16 @@
       "musica_da": 20,
       "riprese": {
         "a": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_stella.webp",
-          "zoom": 0.3,
-          "centro_y": 0.25
+          "tipo": "vignetta",
+          "id": "s_stella"
         },
         "b": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_schermi.webp",
-          "zoom": 0.12,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_schermi"
         },
         "c": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_infetti.webp",
-          "zoom": 0.1,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_infetti"
         }
       },
       "inquadrature": [
@@ -1938,22 +1916,16 @@
       "musica_da": 0,
       "riprese": {
         "a": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_cisterna.webp",
-          "zoom": 0.15,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_cisterna"
         },
         "b": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_cisterna.webp",
-          "zoom": 0.08,
-          "centro_y": 0.5
+          "tipo": "vignetta",
+          "id": "s_cisterna"
         },
         "c": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_infetti.webp",
-          "zoom": 0.12,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_infetti"
         }
       },
       "inquadrature": [
@@ -2024,22 +1996,16 @@
       "musica_da": 0,
       "riprese": {
         "a": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_piazza.webp",
-          "zoom": 0.12,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_piazza"
         },
         "b": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_blackout.webp",
-          "zoom": 0.15,
-          "centro_y": 0.35
+          "tipo": "vignetta",
+          "id": "s_blackout"
         },
         "c": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_stella.webp",
-          "zoom": 0.35,
-          "centro_y": 0.25
+          "tipo": "vignetta",
+          "id": "s_stella"
         }
       },
       "inquadrature": [
@@ -2110,28 +2076,20 @@
       "musica_da": 20,
       "riprese": {
         "a": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_metropoli.webp",
-          "zoom": 0.15,
-          "centro_y": 0.4
+          "tipo": "vignetta",
+          "id": "s_metropoli"
         },
         "b": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_cisterna.webp",
-          "zoom": 0.1,
-          "centro_y": 0.5
+          "tipo": "vignetta",
+          "id": "s_cisterna"
         },
         "c": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_stella.webp",
-          "zoom": 0.3,
-          "centro_y": 0.25
+          "tipo": "vignetta",
+          "id": "s_stella"
         },
         "d": {
-          "tipo": "immagine",
-          "file": "assets/storia/s_droni_folla.webp",
-          "zoom": 0.15,
-          "centro_y": 0.35
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
         }
       },
       "inquadrature": [

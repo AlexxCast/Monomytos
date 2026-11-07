@@ -352,6 +352,17 @@ const RIPRESE = {
       }
     };
   },
+  // "vignetta": un'illustrazione della Storia con le sue animazioni (stella che pulsa, lampi, occhi, schermi), senza fumetti
+  async vignetta(p, r) {
+    await p.evaluate(id => {
+      const st = document.createElement('style');
+      st.textContent = '#storiaScena .ss-stage,#storiaScena .ss-top,#storiaScena .ss-hint{display:none!important}';
+      document.head.appendChild(st);
+      Storia.scena([{ chi: 'narratore', v: id, testo: ' ' }], {});
+    }, r.id);
+    await attesa(p, 1600); // la vignetta entra in dissolvenza: si registra quando è già piena
+    return async durata => { await attesa(p, durata); };
+  },
   async mazzo(p, r) {
     await p.evaluate(() => UI.navTo ? UI.navTo('scr-deckbuilder') : UI.showScreen('scr-deckbuilder'));
     return async durata => { await attesa(p, 400); await scorri(p, null, durata - 400); };
