@@ -11,3 +11,7 @@ Aggiornato a ogni controllo. Le illustrazioni coprono TUTTA la carta: immagini V
 # Minacce nello stile della Storia, secondo tentativo (il primo aveva il soggetto dentro un riquadro)
 
 # Carte creazione generiche (Alessio 7/11): intercambiabili, non legate a nessun eroe
+
+# Carte azione con riquadri o bande (Alessio 7/11 sera): scena unica senza separazioni, soggetto un po più in basso
+
+# Carte azione, terzo tentativo (riquadri, bordo bianco o scritte ancora presenti)
