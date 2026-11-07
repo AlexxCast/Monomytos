@@ -32,17 +32,39 @@ def leggi_prompt():
             cid, corpo = m.group(1).strip().lower(), m.group(2)
             # tolgo le righe "Problema: ..." (sono note per noi, non per Gemini)
             righe = [r for r in corpo.strip().splitlines() if r.strip() and not r.startswith('Problema:')]
+            rif = []
+            for r in righe:
+                if r.startswith('Riferimento:'):
+                    rif += [x.strip().lower().removesuffix('.png') for x in r.split(':', 1)[1].split(',') if x.strip()]
+            righe = [r for r in righe if not r.startswith('Riferimento:')]
             prompt = ' '.join(r.strip() for r in righe).strip()
             if cid in visti or not prompt:
                 continue
             visti.add(cid)
-            out.append((cid, prompt, nome))
+            out.append((cid, prompt, nome, rif))
     return out
 
 
 # Aggiunto a ogni prompt: Gemini tende a dividere la scena in riquadri da fumetto
 RINFORZO = (' IMPORTANT: one single continuous scene from edge to edge. Absolutely no panel borders, '
             'no frames, no inset rectangles, no split layout, no gutters, no separate box for the sky.')
+
+
+# Personaggi ricorrenti: l'immagine di riferimento serve solo per il disegno del personaggio
+ISTR_RIF = ('The attached reference image(s) show a recurring character or object of this story. '
+            'Draw exactly the same character or object (same body shape, costume, colors, materials and details) so it is clearly recognizable, '
+            'but in the NEW scene described below: do not copy the background, the framing, the pose or the composition of the reference. ')
+ORIG = os.path.join(os.path.dirname(QUI), 'originali_gemini')
+
+
+def parti_riferimento(types, rif):
+    parti = []
+    for r in rif:
+        f = os.path.join(ORIG, r + '.webp')
+        if not os.path.exists(f):
+            sys.exit(f'Manca l\'immagine di riferimento {r} in strumenti/originali_gemini/')
+        parti.append(types.Part.from_bytes(data=open(f, 'rb').read(), mime_type='image/webp'))
+    return parti
 
 
 def formato(prompt):
@@ -75,12 +97,12 @@ def main():
     lista = [x for x in lista if not os.path.exists(os.path.join(NUOVE, x[0] + '.png'))]
     print(f'Da fare: {len(lista)} immagini. In questo giro: max {quante}. Modello: {modello}')
     fatte, saltate = [], []
-    for cid, prompt, origine in lista[:quante]:
+    for cid, prompt, origine, rif in lista[:quante]:
         ok = False
         for tentativo in range(3):
             try:
                 r = client.models.generate_content(
-                    model=modello, contents=prompt + RINFORZO,
+                    model=modello, contents=(parti_riferimento(types, rif) + [ISTR_RIF + prompt + RINFORZO]) if rif else prompt + RINFORZO,
                     config=types.GenerateContentConfig(
                         response_modalities=['IMAGE'],
                         image_config=types.ImageConfig(aspect_ratio=formato(prompt))))
@@ -107,7 +129,7 @@ def main():
                 else:
                     time.sleep(5)
         (fatte if ok else saltate).append(cid)
-        print(f'{"OK" if ok else "SALTATA"} {cid} ({origine})')
+        print(f'{"OK" if ok else "SALTATA"} {cid} ({origine}){" rif: " + ", ".join(rif) if rif else ""}')
     riepilogo(fatte, saltate)
     if lista and not fatte:
         sys.exit('Nessuna immagine generata.')
