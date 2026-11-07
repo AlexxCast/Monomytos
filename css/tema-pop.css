@@ -1870,3 +1870,27 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
 .db-mazzo-modifica { margin-top: 2px; font: 800 11.5px var(--font-ui); color: #fff; background: var(--pop-vino, #7a2a5c); border: 1.5px solid #000; border-radius: 6px; padding: 2px 9px; box-shadow: 1.5px 1.5px 0 #000; }
 .db-mazzo.attivo .db-mazzo-nome { color: var(--gold, #f5b82e); }
 .db-mazzo:not(.attivo) .db-mazzo-pila { opacity: .8; }
+
+/* Creazione eroe e scelta delle carte personaggio: stessa estetica del tappetino */
+#dbCreazione .deck-hero-creator-box {
+  border-radius: 18px !important; border: 3px solid #000 !important; padding: 14px 12px !important;
+  background: radial-gradient(120% 80% at 50% 30%, #3a2350, #22142f 70%) !important;
+  box-shadow: inset 0 0 0 5px #2a1838, inset 0 0 0 7px rgba(214, 170, 90, .6), 4px 4px 0 #000 !important;
+}
+#dbCreazione .deck-hero-creator-box * { color: #fff6d6 !important; }
+#dbCreazione .db-slot small { color: #e8dcc0 !important; }
+#dbCreazione .deck-hero-creator-box .hero-card-title, #dbCreazione .deck-hero-creator-box .hero-card-tag,
+#dbCreazione .deck-hero-creator-box .hero-card-val-circle { color: #111116 !important; }
+#dbCreazione .deck-hero-creator-box .hero-card-pb-title { color: var(--oro-soft, #f5b82e) !important; }
+#dbCreazione .deck-hero-summary-row, #dbCreazione .deck-tags-banner, #dbCreazione .deck-pb-banner {
+  background: rgba(0, 0, 0, .35) !important; border: 1.5px solid rgba(214, 170, 90, .6) !important; border-radius: 12px !important; box-shadow: none !important; }
+#dbCreazione .stat-chip { background: rgba(0, 0, 0, .3) !important; border-color: rgba(214, 170, 90, .6) !important; }
+#dbCreazione .stat-chip img { background: #f3ead6; border-radius: 50%; padding: 1.5px; }
+#dbCreazione .builder-tag-pill { background: var(--pop-vino, #7a2a5c) !important; border: 1.5px solid #000 !important; }
+#modalPickCreationCard .bottom-sheet {
+  background: radial-gradient(120% 70% at 50% 25%, #3a2350, #22142f 70%) !important;
+  border: 3px solid #000 !important; box-shadow: inset 0 0 0 5px #2a1838, inset 0 0 0 7px rgba(214, 170, 90, .6) !important;
+}
+#modalPickCreationCard .sheet-header h3, #modalPickCreationCard .sheet-header p, #modalPickCreationCard .db-scelta small { color: #fff6d6 !important; }
+#modalPickCreationCard .sheet-handle { background: rgba(214, 170, 90, .7) !important; }
+#modalPickCreationCard .db-scelta.scelta { outline-color: var(--gold, #f5b82e); background: rgba(245, 184, 46, .12); }
