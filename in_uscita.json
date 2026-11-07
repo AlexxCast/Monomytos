@@ -10,8 +10,27 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-07_mistero_prometeo.mp4",
   "creato": "2026-11-07T17:22:36.698Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-07T17:22:36.698Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-07T17:22:36.698Z",
+  "esito": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/mi8RE3wDoHo",
+    "stato": "public"
+   },
+   "tiktok": {
+    "esito": "ok",
+    "stato": "PROCESSING_UPLOAD (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzqg33bhen2n"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 6
+   }
+  }
  },
  {
   "id": "video:42299504450",

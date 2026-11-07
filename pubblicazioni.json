@@ -1,5 +1,34 @@
 [
  {
+  "id": "mistero_prometeo",
+  "lingua": "it",
+  "data": "2026-11-07T17:22:38.114Z",
+  "prova": false,
+  "didascalia_instagram": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché? 🤖\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/mi8RE3wDoHo",
+    "stato": "public"
+   },
+   "tiktok": {
+    "esito": "ok",
+    "stato": "PROCESSING_UPLOAD (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzqg33bhen2n"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 6
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-07_mistero_prometeo.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/42395879389"
+ },
+ {
   "id": "aggancio_stella",
   "lingua": "it",
   "data": "2026-11-06T22:52:47.872Z",
