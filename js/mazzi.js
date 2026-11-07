@@ -38,14 +38,14 @@
         titolo = 'Tag ammessi'; testo = m ? m[1].trim() : (card.testo || 'Tutti i tag');
       } else { titolo = 'Azione 1/turno'; testo = (card.testo || '').replace(/^Azione gratuita 1\/turno:\s*/i, ''); }
       const best = STAT.slice().sort((a, b) => (card[b[0]] || 0) - (card[a[0]] || 0))[0];
-      const icona = (card[best[0]] || 0) > 0 ? `assets/icons/${best[2]}.png` : 'assets/icons/azione.webp';
+      const icona = (card[best[0]] || 0) > 0 ? `assets/icons/${best[2]}.png` : '';
       return `<div class="hero-silver-frame-wrap db-carta-creaz">
         <img class="hero-bg-img" src="${esc(art)}" alt="" onerror="this.src='assets/cards/retrocartamazzo.webp'">
         <img class="hero-frame-img" src="assets/layouts/layout_silver.webp" alt="">
         <div class="hero-vignette-bubble"><div class="hero-card-title">${esc(card.name)}</div><div class="hero-card-tag">[${esc(NOME_RUOLO[card.role] || '')}]</div></div>
         <div class="hero-card-desc-box"><div class="hero-card-pb-title">${esc(titolo)}</div><div class="hero-card-pb-text">${esc(testo)}</div></div>
         <div class="hero-card-val-circle">${card.role === 'origine' ? esc(card.vita || 25) : ''}</div>
-        <div class="hero-card-icon-circle"><img src="${icona}" alt=""></div>
+        <div class="hero-card-icon-circle">${icona ? `<img src="${icona}" alt="">` : ''}</div>
       </div>`;
     },
 
