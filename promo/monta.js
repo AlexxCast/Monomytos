@@ -14,6 +14,11 @@ const RADICE = path.join(__dirname, '..');
 const dati = JSON.parse(fs.readFileSync(path.join(__dirname, 'copioni.json'), 'utf8'));
 const copione = dati.copioni.find(c => c.id === id);
 if (!copione) { console.error('Copione non trovato: ' + id); process.exit(1); }
+// Voce narrante (promo/voce.py, generata prima): ogni inquadratura dura almeno quanto la sua frase
+try {
+  const vd = JSON.parse(fs.readFileSync(path.join(outRoot, id, 'voce.json'), 'utf8'));
+  copione.inquadrature.forEach((q, i) => { if (vd[i]) q.durata = Math.max(q.durata, Math.round((vd[i] + 0.25) * 10) / 10); });
+} catch (e) { /* nessuna voce */ }
 const dir = path.join(outRoot, id);
 const reg = JSON.parse(fs.readFileSync(path.join(dir, 'riprese.json'), 'utf8'));
 const lingua = process.env.LINGUA_TESTI || copione.lingua_testi || 'it';

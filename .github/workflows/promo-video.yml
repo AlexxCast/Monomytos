@@ -87,6 +87,13 @@ jobs:
           timeout 300 npx playwright install chromium || (sudo pkill -f apt-get; sleep 3; timeout 600 npx playwright install --with-deps chromium)
           which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
 
+      - name: Voce narrante
+        if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
+        env:
+          LINGUA_TESTI: ${{ steps.oggi.outputs.lingua }}
+        run: |
+          if grep -q '"voce"' promo/copioni.json; then pip install -q edge-tts && python3 promo/voce.py "${{ steps.oggi.outputs.copione }}" promo/uscita || echo "Voce non riuscita: il video esce senza"; fi
+
       - name: Registra il gameplay
         if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
         env:
@@ -95,13 +102,6 @@ jobs:
           python3 -m http.server 8799 >/dev/null 2>&1 &
           sleep 2
           node promo/registra.js "${{ steps.oggi.outputs.copione }}" http://localhost:8799 promo/uscita
-
-      - name: Voce narrante
-        if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
-        env:
-          LINGUA_TESTI: ${{ steps.oggi.outputs.lingua }}
-        run: |
-          if grep -q '"voce"' promo/copioni.json; then pip install -q edge-tts && python3 promo/voce.py "${{ steps.oggi.outputs.copione }}" promo/uscita || echo "Voce non riuscita: il video esce senza"; fi
 
       - name: Monta il video
         if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
