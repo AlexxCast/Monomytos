@@ -17,8 +17,11 @@ jobs:
         env:
           TESTO: ${{ inputs.testo }}
         run: |
-          for v in it-IT-DiegoNeural it-IT-GiuseppeMultilingualNeural it-IT-IsabellaNeural it-IT-ElsaNeural; do
-            edge-tts --voice "$v" --rate=+8% --text "$TESTO" --write-media "voce_$v.mp3" || echo "salto $v"
+          sudo apt-get install -y -qq ffmpeg >/dev/null 2>&1 || true
+          # voci maschili più profonde e lente; la versione "epica" aggiunge bassi ed eco da trailer
+          for v in it-IT-DiegoNeural it-IT-GiuseppeMultilingualNeural; do
+            edge-tts --voice "$v" --rate=-12% --pitch=-14Hz --text "$TESTO" --write-media "voce_${v}_profonda.mp3" || continue
+            ffmpeg -y -v error -i "voce_${v}_profonda.mp3" -af "asetrate=24000*0.92,aresample=24000,atempo=1.04,bass=g=6:f=110,aecho=0.8:0.6:60|120:0.25|0.15,loudnorm=I=-16" "voce_${v}_epica.mp3"
           done
           ls -la
       - uses: actions/upload-artifact@v4
