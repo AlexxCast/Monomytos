@@ -1,0 +1,28 @@
+name: Prova voce
+# Campioni di voce sintetica (gratis) per i video: restano 3 giorni come artifact privato del workflow
+on:
+  workflow_dispatch:
+    inputs:
+      testo:
+        description: 'Testo da leggere'
+        default: 'Ogni eroe può cadere. Il Velo si nutre di paura. Chi ne assorbe troppa... passa al Velo.'
+permissions:
+  contents: read
+jobs:
+  voce:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pip install -q edge-tts
+      - name: Genera le voci
+        env:
+          TESTO: ${{ inputs.testo }}
+        run: |
+          for v in it-IT-DiegoNeural it-IT-GiuseppeMultilingualNeural it-IT-IsabellaNeural it-IT-ElsaNeural; do
+            edge-tts --voice "$v" --rate=+8% --text "$TESTO" --write-media "voce_$v.mp3" || echo "salto $v"
+          done
+          ls -la
+      - uses: actions/upload-artifact@v4
+        with:
+          name: voci
+          path: voce_*.mp3
+          retention-days: 3
