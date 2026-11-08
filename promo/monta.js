@@ -32,7 +32,7 @@ const TRANS = {
 
 // Ritmo: ogni inquadratura resta almeno 2 s (il gancio 2,2 s), così lo spettatore legge
 // il testo e capisce l'azione prima dello stacco. Niente scosse dello schermo.
-const DURATA_MIN = +(process.env.DURATA_MIN || 2);
+const DURATA_MIN = +(process.env.DURATA_MIN || copione.durata_min || 2); // copione.durata_min: ritmo più serrato per i video di aggancio
 copione.inquadrature.forEach((q, i) => {
   q.durata = Math.max(q.durata, i === 0 ? DURATA_MIN + 0.2 : DURATA_MIN);
   delete q.scossa;
