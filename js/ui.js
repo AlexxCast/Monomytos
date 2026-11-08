@@ -848,6 +848,8 @@ class UIController {
     const playerDeckCount = document.getElementById('playerDeckCount');
     if (playerDeckCount && localPlayer) {
       playerDeckCount.textContent = `${localPlayer.deck.length} carte`;
+      const pc = document.querySelector('#playerDeckStack .deck-stack-cards');
+      if (pc) { pc.dataset.n = localPlayer.deck.length; pc.title = `${localPlayer.deck.length} carte nel mazzo`; }
     }
     // Nome del mazzo che si sta giocando
     {

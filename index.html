@@ -380,7 +380,7 @@
             </div>
           </div>
 
-          <div class="deck-stack-item player-deck-stack" id="playerDeckStack" onclick="UI.showToast('Mazzo in uso: ' + (document.getElementById('playerDeckTitle').textContent || 'Tuo Mazzo'))">
+          <div class="deck-stack-item player-deck-stack" id="playerDeckStack" onclick="UI.showToast((document.getElementById('playerDeckTitle').textContent || 'Tuo Mazzo') + ': ' + document.getElementById('playerDeckCount').textContent + ' rimaste nel mazzo')">
             <div class="deck-stack-cards">
               <img class="deck-back-card deck-card-2" src="assets/cards/retrocartamazzo.webp" alt="Retro Mazzo">
               <img class="deck-back-card deck-card-1" src="assets/cards/retrocartamazzo.webp" alt="Retro Mazzo">
