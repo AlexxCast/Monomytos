@@ -2,6 +2,34 @@
  {
   "id": "eroe_o_villain",
   "lingua": "it",
+  "data": "2026-11-08T19:48:45.402Z",
+  "prova": true,
+  "didascalia_instagram": "In Monomythos il Velo di Tenebra si nutre della paura. Un eroe che ne assorbe troppa cambia lato, e da quel momento gioca contro i suoi compagni. 🌑\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "tiktok": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "bluesky": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "telegram": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-08_eroe_o_villain.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/42516770089"
+ },
+ {
+  "id": "eroe_o_villain",
+  "lingua": "it",
   "data": "2026-11-08T19:46:36.468Z",
   "prova": true,
   "didascalia_instagram": "In Monomythos il Velo di Tenebra si nutre della paura. Un eroe che ne assorbe troppa cambia lato, e da quel momento gioca contro i suoi compagni. 🌑\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
