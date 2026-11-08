@@ -15,8 +15,9 @@ if not cfg:
 lingua = os.environ.get('LINGUA_TESTI', 'it')
 cartella = os.path.join(out, cid)
 os.makedirs(cartella, exist_ok=True)
+durate = {}
 FILTRI = {
-    'epica': 'asetrate=24000*0.92,aresample=24000,atempo=1.04,bass=g=6:f=110,aecho=0.8:0.6:60|120:0.25|0.15',
+    'epica': 'asetrate=24000*0.92,aresample=24000,atempo=1.08,bass=g=6:f=110,aecho=0.8:0.6:60|120:0.25|0.15',
     'profonda': 'anull',
 }
 for i, q in enumerate(c['inquadrature']):
@@ -26,9 +27,11 @@ for i, q in enumerate(c['inquadrature']):
     t = re.sub(r'[*{}]', '', t).replace('\\N', ' ')
     t = t[0].upper() + t[1:].lower() if t.isupper() else t  # le scritte in maiuscolo si leggono normali
     grezzo = os.path.join(cartella, f'voce_{i}_grezza.mp3')
-    subprocess.run(['edge-tts', '--voice', cfg.get('nome', 'it-IT-DiegoNeural'), f"--rate={cfg.get('velocita', '+0%')}", f"--pitch={cfg.get('tono', '-14Hz')}",
+    subprocess.run(['edge-tts', '--voice', cfg.get('nome', 'it-IT-DiegoNeural'), f"--rate={cfg.get('velocita', '+12%')}", f"--pitch={cfg.get('tono', '-14Hz')}",
                     '--text', t, '--write-media', grezzo], check=True)
-    subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', grezzo, '-af', FILTRI.get(cfg.get('stile', 'epica'), 'anull') + ',loudnorm=I=-15',
+    subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', grezzo, '-af', 'silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse,' + FILTRI.get(cfg.get('stile', 'epica'), 'anull') + ',loudnorm=I=-15',
                     '-ar', '44100', '-ac', '2', os.path.join(cartella, f'voce_{i}.mp3')], check=True)
     os.remove(grezzo)
+    durate[i] = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', os.path.join(cartella, f'voce_{i}.mp3')], capture_output=True, text=True).stdout.strip() or 0)
     print(f'voce {i}: {t}')
+json.dump(durate, open(os.path.join(cartella, 'voce.json'), 'w'))
