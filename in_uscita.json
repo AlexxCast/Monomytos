@@ -1,5 +1,19 @@
 [
  {
+  "id": "video:42504539412",
+  "titolo": "pov_occhi",
+  "piattaforme": [
+   "youtube",
+   "tiktok",
+   "bluesky",
+   "telegram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-08_pov_occhi.mp4",
+  "creato": "2026-11-08T17:22:28.102Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-08T17:22:28.102Z"
+ },
+ {
   "id": "video:42395879389",
   "titolo": "mistero_prometeo",
   "piattaforme": [
