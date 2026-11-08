@@ -1842,7 +1842,7 @@
     },
     {
       "id": "eroe_o_villain",
-      "formato": "Regola della lore (con contesto)",
+      "formato": "Regola della lore, aggancio forte (6 s)",
       "tema": "villain",
       "titolo": {
         "it": "Perché gli eroi di Ataca diventano Villain",
@@ -1852,50 +1852,67 @@
       "musica_da": 20,
       "riprese": {
         "a": {
-          "tipo": "vignetta",
-          "id": "s_stella"
+          "tipo": "immagine",
+          "file": "assets/storia/s_stella.webp",
+          "zoom": 0.45,
+          "centro_y": 0.22
         },
         "b": {
           "tipo": "vignetta",
-          "id": "s_schermi"
+          "id": "s_rituale"
         },
         "c": {
           "tipo": "vignetta",
-          "id": "s_infetti"
+          "id": "s_velo_caduta"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
         }
       },
       "inquadrature": [
         {
           "ripresa": "a",
           "da": 0,
-          "durata": 1.8,
+          "durata": 1.4,
           "testo": {
-            "it": "Ad Ataca nessun eroe è al *sicuro*",
-            "en": "In Ataca no hero is *safe*"
+            "it": "OGNI EROE PUÒ *CADERE*",
+            "en": "EVERY HERO CAN *FALL*"
           },
           "stile": "grande"
         },
         {
           "ripresa": "b",
           "da": 0,
-          "durata": 2.7,
+          "durata": 1.3,
           "testo": {
-            "it": "Ogni paura nutre il *Velo*",
-            "en": "Every fear feeds the *Veil*"
+            "it": "Il Velo si nutre di *paura*",
+            "en": "The Veil feeds on *fear*"
           },
-          "transizione": "flash",
-          "stile": "grande"
+          "stile": "grande",
+          "transizione": "flash"
         },
         {
           "ripresa": "c",
           "da": 0,
-          "durata": 2.7,
+          "durata": 1.4,
           "testo": {
-            "it": "Chi ne assorbe troppa diventa *Villain*",
-            "en": "Absorb too much and you become the *Villain*"
+            "it": "Chi ne assorbe troppa…",
+            "en": "Absorb too much…"
           },
           "stile": "grande",
-          "transizione": "dissolvenza"
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.7,
+          "testo": {
+            "it": "…passa al *Velo*",
+            "en": "…and join the *Veil*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
         }
       ],
       "chiusura": {
@@ -1908,7 +1925,7 @@
           "en": "START NOW"
         }
       },
-      "durata_fine": 2.2,
+      "durata_fine": 2,
       "didascalia": {
         "it": "In Monomythos il Velo di Tenebra si nutre della paura. Un eroe che ne assorbe troppa cambia lato, e da quel momento gioca contro i suoi compagni. 🌑",
         "en": "In Monomythos the Veil of Darkness feeds on fear. A hero who absorbs too much switches sides and plays against their own team. 🌑"
@@ -1918,7 +1935,8 @@
         "lore",
         "boardgame"
       ],
-      "aggancio": "colpo"
+      "aggancio": "colpo",
+      "durata_min": 1.2
     },
     {
       "id": "archivio_arena",
