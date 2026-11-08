@@ -1,16 +1,26 @@
 {
- "aggiornato": "2026-11-08T13:23:37.002Z",
+ "aggiornato": "2026-11-08T22:03:58.570Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 0,
-    "views": 23,
-    "video": 3,
+    "views": 30,
+    "video": 4,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "0juY5piIJzM",
+     "titolo": "Non guardarla #Shorts",
+     "data": "2026-11-08T17:22:46Z",
+     "link": "https://youtube.com/shorts/0juY5piIJzM",
+     "privato": false,
+     "views": 23,
+     "likes": 1,
+     "commenti": 0
+    },
     {
      "id": "mi8RE3wDoHo",
      "titolo": "Cosa è successo in piazza? #Shorts",
@@ -43,8 +53,8 @@
     }
    ],
    "totali": {
-    "views": 30,
-    "likes": 3,
+    "views": 53,
+    "likes": 4,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -53,18 +63,28 @@
    "stato": "ok",
    "account": {
     "nome": "Monomythos",
-    "follower": 2,
-    "likes": 32,
-    "video": 3,
-    "link": "https://vm.tiktok.com/ZN8ftgu3T/"
+    "follower": 3,
+    "likes": 39,
+    "video": 4,
+    "link": "https://vm.tiktok.com/ZN8fcxbPW/"
    },
    "video": [
+    {
+     "id": "7705853589348044065",
+     "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa troppo a lungo passa dalla parte del Velo. Tu ce la faresti a non guardarla? 👁️ 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #cardgame #indiegame #giochidicarte #gamedev",
+     "data": "2026-11-08T17:27:38.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7705853589348044065?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 234,
+     "likes": 7,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7705487064615193889",
      "titolo": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché? 🤖 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori #monomythos #cardgame #indiegame #giochidicarte #gamedev",
      "data": "2026-11-07T17:45:16.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7705487064615193889?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 923,
+     "views": 927,
      "likes": 17,
      "commenti": 0,
      "condivisioni": 0
@@ -91,8 +111,8 @@
     }
    ],
    "totali": {
-    "views": 2408,
-    "likes": 32,
+    "views": 2646,
+    "likes": 39,
     "commenti": 1,
     "condivisioni": 0
    }
@@ -106,10 +126,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 0,
-    "video": 3,
+    "video": 4,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mzswguszvf2n",
+     "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa troppo a lungo passa dalla parte ",
+     "data": "2026-11-08T17:23:14.978Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzswguszvf2n",
+     "views": 0,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mzqg33bhen2n",
      "titolo": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché?",
@@ -143,9 +173,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 8,
+    "likes": 10,
     "commenti": 0,
-    "condivisioni": 3
+    "condivisioni": 4
    }
   },
   "telegram": {
