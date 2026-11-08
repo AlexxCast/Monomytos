@@ -1746,46 +1746,50 @@
     },
     {
       "id": "pov_occhi",
-      "formato": "POV",
+      "formato": "Avvertimento secco (7 s)",
       "tema": "villain",
       "titolo": {
-        "it": "POV: sei l'ultimo con gli occhi puliti",
-        "en": "POV: sei l'ultimo con gli occhi puliti"
+        "it": "Non guardarla",
+        "en": "Don't look at it"
       },
-      "musica": "storia_velo.mp3",
-      "musica_da": 0,
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
       "riprese": {
         "a": {
           "tipo": "vignetta",
-          "id": "s_piazza"
+          "id": "s_infetti"
         },
         "b": {
           "tipo": "vignetta",
-          "id": "s_infetti"
+          "id": "s_stella"
         },
         "c": {
           "tipo": "vignetta",
-          "id": "s_blackout"
+          "id": "s_incappucciati"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_caduta"
         }
       },
       "inquadrature": [
         {
           "ripresa": "a",
           "da": 0,
-          "durata": 1.8,
+          "durata": 1.4,
           "testo": {
-            "it": "POV: sei l'ultimo con gli occhi *puliti*",
-            "en": "POV: sei l'ultimo con gli occhi *puliti*"
+            "it": "NON *GUARDARLA*",
+            "en": "DON'T *LOOK*"
           },
           "stile": "grande"
         },
         {
           "ripresa": "b",
           "da": 0,
-          "durata": 2.7,
+          "durata": 1.3,
           "testo": {
-            "it": "Tutti intorno a te hanno gli occhi *viola*",
-            "en": "Tutti intorno a te hanno gli occhi *viola*"
+            "it": "La Stella della *Follia*",
+            "en": "The Star of *Madness*"
           },
           "stile": "grande",
           "transizione": "flash"
@@ -1793,13 +1797,24 @@
         {
           "ripresa": "c",
           "da": 0,
-          "durata": 2.7,
+          "durata": 1.4,
           "testo": {
-            "it": "E la Stella sta guardando *te*",
-            "en": "And the Star is watching *you*"
+            "it": "Chi la fissa…",
+            "en": "Whoever stares at it…"
           },
-          "transizione": "dissolvenza",
-          "stile": "grande"
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.7,
+          "testo": {
+            "it": "…diventa *Villain*",
+            "en": "…becomes the *Villain*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
         }
       ],
       "chiusura": {
@@ -1812,17 +1827,18 @@
           "en": "START NOW"
         }
       },
-      "durata_fine": 2.2,
+      "durata_fine": 2,
       "didascalia": {
-        "it": "Ad Ataca chi guarda la Stella cambia lato. Tu sei ancora pulito… per ora. 👁️",
-        "en": "Ad Ataca chi guarda la Stella cambia lato. Tu sei ancora pulito… per ora. 👁️"
+        "it": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa troppo a lungo passa dalla parte del Velo. Tu ce la faresti a non guardarla? 👁️",
+        "en": "The Star of Madness has risen over Ataca. Stare too long and you join the Veil. Could you look away? 👁️"
       },
       "hashtag": [
         "pov",
         "lore",
         "villain"
       ],
-      "aggancio": "risucchio"
+      "aggancio": "colpo",
+      "durata_min": 1.2
     },
     {
       "id": "eroe_o_villain",
