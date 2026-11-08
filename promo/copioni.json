@@ -1874,7 +1874,7 @@
         {
           "ripresa": "a",
           "da": 0,
-          "durata": 1.4,
+          "durata": 1.6,
           "testo": {
             "it": "OGNI EROE PUÒ *CADERE*",
             "en": "EVERY HERO CAN *FALL*"
@@ -1884,7 +1884,7 @@
         {
           "ripresa": "b",
           "da": 0,
-          "durata": 1.3,
+          "durata": 1.6,
           "testo": {
             "it": "Il Velo si nutre di *paura*",
             "en": "The Veil feeds on *fear*"
@@ -1895,18 +1895,22 @@
         {
           "ripresa": "c",
           "da": 0,
-          "durata": 1.4,
+          "durata": 1.6,
           "testo": {
             "it": "Chi ne assorbe troppa…",
             "en": "Absorb too much…"
           },
           "stile": "grande",
-          "transizione": "flash"
+          "transizione": "flash",
+          "voce": {
+            "it": "Chi ne assorbe troppa...",
+            "en": "Absorb too much..."
+          }
         },
         {
           "ripresa": "d",
           "da": 0,
-          "durata": 1.7,
+          "durata": 1.8,
           "testo": {
             "it": "…passa al *Velo*",
             "en": "…and join the *Veil*"
@@ -1936,7 +1940,11 @@
         "boardgame"
       ],
       "aggancio": "colpo",
-      "durata_min": 1.2
+      "durata_min": 1.2,
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      }
     },
     {
       "id": "archivio_arena",

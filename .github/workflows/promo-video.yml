@@ -96,6 +96,13 @@ jobs:
           sleep 2
           node promo/registra.js "${{ steps.oggi.outputs.copione }}" http://localhost:8799 promo/uscita
 
+      - name: Voce narrante
+        if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
+        env:
+          LINGUA_TESTI: ${{ steps.oggi.outputs.lingua }}
+        run: |
+          if grep -q '"voce"' promo/copioni.json; then pip install -q edge-tts && python3 promo/voce.py "${{ steps.oggi.outputs.copione }}" promo/uscita || echo "Voce non riuscita: il video esce senza"; fi
+
       - name: Monta il video
         if: steps.oggi.outputs.copione != '' && inputs.video_caricato == ''
         env:

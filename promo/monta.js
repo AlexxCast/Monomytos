@@ -266,7 +266,7 @@ const musica = copione.musica === false ? null : path.join(RADICE, 'assets/audio
 const audio = [];
 if (musica) {
   args.push('-ss', String(copione.musica_da != null ? copione.musica_da : 60), '-i', musica);
-  filtri.push(`[${n}:a]atrim=duration=${totale.toFixed(3)},asetpts=PTS-STARTPTS,aformat=sample_rates=44100:channel_layouts=stereo,volume=${copione.volume_musica || 0.8},afade=t=in:d=0.15,afade=t=out:st=${Math.max(0, totale - 1.2).toFixed(3)}:d=1.2[mus]`);
+  filtri.push(`[${n}:a]atrim=duration=${totale.toFixed(3)},asetpts=PTS-STARTPTS,aformat=sample_rates=44100:channel_layouts=stereo,volume=${copione.volume_musica || (copione.voce ? 0.45 : 0.8)},afade=t=in:d=0.15,afade=t=out:st=${Math.max(0, totale - 1.2).toFixed(3)}:d=1.2[mus]`);
   audio.push('[mus]');
   n++;
 }
@@ -275,6 +275,20 @@ suoni.forEach((s, k) => {
   const ritardo = Math.round(s.t * 1000);
   filtri.push(`[${n}:a]adelay=${ritardo}|${ritardo},volume=${s.s === 'impatto' ? 0.7 : ['colpo', 'risucchio', 'glitch'].includes(s.s) ? 0.9 : 0.45}[sfx${k}]`);
   audio.push(`[sfx${k}]`);
+  n++;
+});
+// Voce narrante (promo/voce.py): ogni frase parte con la sua inquadratura, mai sopra la precedente
+let fineVoce = 0;
+Q.forEach((q, i) => {
+  const f = path.join(dir, `voce_${i}.mp3`);
+  if (!fs.existsSync(f)) return;
+  const durata = +execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).toString().trim() || 1;
+  const t0 = Math.max(inizi[i] + (i === 0 ? 0.15 : 0.05), fineVoce);
+  fineVoce = t0 + durata + 0.05;
+  args.push('-i', f);
+  const ritardo = Math.round(t0 * 1000);
+  filtri.push(`[${n}:a]aformat=sample_rates=44100:channel_layouts=stereo,adelay=${ritardo}|${ritardo},volume=${copione.voce && copione.voce.volume || 1.1}[voce${i}]`);
+  audio.push(`[voce${i}]`);
   n++;
 });
 if (audio.length) filtri.push(`${audio.join('')}amix=inputs=${audio.length}:duration=first:dropout_transition=0:normalize=0,alimiter=limit=0.95,atrim=duration=${totale.toFixed(3)}[aout]`);
