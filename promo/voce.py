@@ -29,7 +29,7 @@ for i, q in enumerate(c['inquadrature']):
     grezzo = os.path.join(cartella, f'voce_{i}_grezza.mp3')
     subprocess.run(['edge-tts', '--voice', cfg.get('nome', 'it-IT-DiegoNeural'), f"--rate={cfg.get('velocita', '+12%')}", f"--pitch={cfg.get('tono', '-14Hz')}",
                     '--text', t, '--write-media', grezzo], check=True)
-    subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', grezzo, '-af', FILTRI.get(cfg.get('stile', 'epica'), 'anull') + ',loudnorm=I=-15',
+    subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', grezzo, '-af', 'silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse,' + FILTRI.get(cfg.get('stile', 'epica'), 'anull') + ',loudnorm=I=-15',
                     '-ar', '44100', '-ac', '2', os.path.join(cartella, f'voce_{i}.mp3')], check=True)
     os.remove(grezzo)
     durate[i] = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', os.path.join(cartella, f'voce_{i}.mp3')], capture_output=True, text=True).stdout.strip() or 0)
