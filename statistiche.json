@@ -1,12 +1,12 @@
 {
- "aggiornato": "2026-11-09T06:25:39.907Z",
+ "aggiornato": "2026-11-09T22:20:42.475Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 0,
-    "views": 30,
+    "views": 67,
     "video": 4,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
@@ -17,7 +17,7 @@
      "data": "2026-11-08T17:22:46Z",
      "link": "https://youtube.com/shorts/0juY5piIJzM",
      "privato": false,
-     "views": 33,
+     "views": 34,
      "likes": 1,
      "commenti": 0
     },
@@ -37,7 +37,7 @@
      "data": "2026-11-06T18:03:00Z",
      "link": "https://youtube.com/shorts/eLC5EshF6PA",
      "privato": false,
-     "views": 3,
+     "views": 4,
      "likes": 1,
      "commenti": 0
     },
@@ -53,7 +53,7 @@
     }
    ],
    "totali": {
-    "views": 65,
+    "views": 67,
     "likes": 4,
     "commenti": 0,
     "condivisioni": 0
@@ -63,10 +63,10 @@
    "stato": "ok",
    "account": {
     "nome": "Monomythos",
-    "follower": 3,
-    "likes": 39,
+    "follower": 4,
+    "likes": 41,
     "video": 4,
-    "link": "https://vm.tiktok.com/ZN8fTffgd/"
+    "link": "https://vm.tiktok.com/ZN8PFQfVL/"
    },
    "video": [
     {
@@ -74,8 +74,8 @@
      "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa troppo a lungo passa dalla parte del Velo. Tu ce la faresti a non guardarla? 👁️ 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #cardgame #indiegame #giochidicarte #gamedev",
      "data": "2026-11-08T17:27:38.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7705853589348044065?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 236,
-     "likes": 7,
+     "views": 240,
+     "likes": 9,
      "commenti": 0,
      "condivisioni": 0
     },
@@ -111,8 +111,8 @@
     }
    ],
    "totali": {
-    "views": 2648,
-    "likes": 39,
+    "views": 2652,
+    "likes": 41,
     "commenti": 1,
     "condivisioni": 0
    }
