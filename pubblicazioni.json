@@ -1,5 +1,34 @@
 [
  {
+  "id": "archivio_arena",
+  "lingua": "it",
+  "data": "2026-11-10T01:30:08.475Z",
+  "prova": false,
+  "didascalia_instagram": "Archivio segreto #1 — L'Arena di Sotto. Una vecchia cisterna sotto la città, trasformata in un mattatoio. Gli infetti ci arrivano da soli, attirati da un istinto di sciame. 🩸\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/VUv6e3yQHEE",
+    "stato": "public"
+   },
+   "tiktok": {
+    "esito": "ok",
+    "stato": "SEND_TO_USER_INBOX (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzwc7yjgkc2z"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 8
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-10_archivio_arena.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/42728519277"
+ },
+ {
   "id": "eroe_o_villain",
   "lingua": "it",
   "data": "2026-11-08T19:48:45.402Z",
