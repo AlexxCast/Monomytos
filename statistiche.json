@@ -1,16 +1,26 @@
 {
- "aggiornato": "2026-11-09T22:20:42.475Z",
+ "aggiornato": "2026-11-10T06:58:14.478Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
-    "follower": 0,
+    "follower": 1,
     "views": 67,
-    "video": 4,
+    "video": 5,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "VUv6e3yQHEE",
+     "titolo": "Archivio segreto: l'Arena di Sotto #Shorts",
+     "data": "2026-11-10T01:30:26Z",
+     "link": "https://youtube.com/shorts/VUv6e3yQHEE",
+     "privato": false,
+     "views": 357,
+     "likes": 8,
+     "commenti": 0
+    },
     {
      "id": "0juY5piIJzM",
      "titolo": "Non guardarla #Shorts",
@@ -37,7 +47,7 @@
      "data": "2026-11-06T18:03:00Z",
      "link": "https://youtube.com/shorts/eLC5EshF6PA",
      "privato": false,
-     "views": 4,
+     "views": 3,
      "likes": 1,
      "commenti": 0
     },
@@ -53,8 +63,8 @@
     }
    ],
    "totali": {
-    "views": 67,
-    "likes": 4,
+    "views": 423,
+    "likes": 12,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -64,11 +74,21 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 41,
-    "video": 4,
-    "link": "https://vm.tiktok.com/ZN8PFQfVL/"
+    "likes": 44,
+    "video": 5,
+    "link": "https://vm.tiktok.com/ZN8P2SDpb/"
    },
    "video": [
+    {
+     "id": "7706430748315651360",
+     "titolo": "Archivio segreto #1 — L'Arena di Sotto. Una vecchia cisterna sotto la città, trasformata in un mattatoio. Gli infetti ci arrivano da soli, attirati da un istinto di sciame. 🩸 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte ",
+     "data": "2026-11-10T06:47:19.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7706430748315651360?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 20,
+     "likes": 3,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7705853589348044065",
      "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa troppo a lungo passa dalla parte del Velo. Tu ce la faresti a non guardarla? 👁️ 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #cardgame #indiegame #giochidicarte #gamedev",
@@ -111,8 +131,8 @@
     }
    ],
    "totali": {
-    "views": 2652,
-    "likes": 41,
+    "views": 2672,
+    "likes": 44,
     "commenti": 1,
     "condivisioni": 0
    }
@@ -126,10 +146,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 0,
-    "video": 4,
+    "video": 5,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mzwc7yjgkc2z",
+     "titolo": "Archivio segreto #1 — L'Arena di Sotto. Una vecchia cisterna sotto la città, trasformata i",
+     "data": "2026-11-10T01:32:08.083Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3mzwc7yjgkc2z",
+     "views": 0,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3mzswguszvf2n",
      "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa troppo a lungo passa dalla parte ",
@@ -173,9 +203,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 10,
+    "likes": 12,
     "commenti": 0,
-    "condivisioni": 4
+    "condivisioni": 5
    }
   },
   "telegram": {
