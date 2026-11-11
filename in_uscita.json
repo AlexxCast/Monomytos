@@ -10,8 +10,27 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-11_ore_2347.mp4",
   "creato": "2026-11-11T19:05:32.660Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-11T19:05:32.660Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-11T19:05:32.660Z",
+  "esito": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
+    "stato": "public"
+   },
+   "tiktok": {
+    "esito": "ok",
+    "stato": "PROCESSING_UPLOAD (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n22nopfdhc2k"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 9
+   }
+  }
  },
  {
   "id": "video:42728519277",

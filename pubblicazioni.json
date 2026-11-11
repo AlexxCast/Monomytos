@@ -1,5 +1,34 @@
 [
  {
+  "id": "ore_2347",
+  "lingua": "it",
+  "data": "2026-11-11T19:05:33.956Z",
+  "prova": false,
+  "didascalia_instagram": "La notte in cui tutto è cambiato. Capitolo 1: L'Eclissi Sintetica. 🌑\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
+    "stato": "public"
+   },
+   "tiktok": {
+    "esito": "ok",
+    "stato": "PROCESSING_UPLOAD (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n22nopfdhc2k"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 9
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-11_ore_2347.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43083667645"
+ },
+ {
   "id": "archivio_arena",
   "lingua": "it",
   "data": "2026-11-10T01:30:08.475Z",
