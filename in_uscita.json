@@ -1,5 +1,19 @@
 [
  {
+  "id": "video:43083667645",
+  "titolo": "ore_2347",
+  "piattaforme": [
+   "youtube",
+   "tiktok",
+   "bluesky",
+   "telegram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-11_ore_2347.mp4",
+  "creato": "2026-11-11T19:05:32.660Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-11T19:05:32.660Z"
+ },
+ {
   "id": "video:42728519277",
   "titolo": "archivio_arena",
   "piattaforme": [
