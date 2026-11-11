@@ -1,5 +1,5 @@
 {
- "nota": "Scaletta dei video. Ogni giorno alle 17:50 (ora italiana) il workflow promo-video prepara il copione del giorno; esce un'ora dopo (~19:00) se non lo annulli dal Centro social. Settimana di prova 6-12/11: un formato diverso al giorno, solo lore (niente gameplay finché le carte non sono pronte). Poi si sceglie il formato vincente dalle statistiche. Instagram si pubblica a mano dall'app finché non è collegato.",
+ "nota": "Scaletta dei video. Ogni giorno alle 17:50 (ora italiana) il workflow promo-video prepara il copione del giorno; esce un'ora dopo (~19:00) se non lo annulli dal Centro social. Settimana di prova 6-12/11: un formato diverso al giorno, solo lore (niente gameplay finché le carte non sono pronte). Poi si sceglie il formato vincente dalle statistiche. Instagram si pubblica a mano dall'app finché non è collegato. Dal 12/11 (Alessio): contenuti diversi per piattaforma. Nel giorno 'per_piattaforma' sceglie il copione di YouTube (con Bluesky e Telegram), TikTok e Instagram: escono come video separati.",
  "fuso_orario": "Europe/Rome",
  "lingua_testi": "it",
  "piattaforme": [
@@ -42,7 +42,12 @@
   {
    "data": "2026-11-12",
    "copione": "tre_segreti",
-   "formato": "lista"
+   "formato": "lista",
+   "per_piattaforma": {
+    "youtube": "tre_segreti",
+    "tiktok": "tt_bussano",
+    "instagram": "ig_ultimo_eroe_1"
+   }
   }
  ],
  "vecchia_scaletta_gameplay": [
@@ -179,5 +184,18 @@
    "copione": "carta_settimana",
    "manuale": "#screenshotsaturday su Bluesky/X e diario di sviluppo su r/IndieDev"
   }
- ]
+ ],
+ "gruppi": {
+  "youtube": [
+   "youtube",
+   "bluesky",
+   "telegram"
+  ],
+  "tiktok": [
+   "tiktok"
+  ],
+  "instagram": [
+   "instagram"
+  ]
+ }
 }

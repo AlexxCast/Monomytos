@@ -2215,6 +2215,198 @@
         "stile": "epica"
       },
       "durata_min": 1.4
+    },
+    {
+      "id": "tt_bussano",
+      "formato": "TikTok: loop corto (5 s)",
+      "tema": "villain",
+      "titolo": {
+        "it": "Se bussano, non aprire",
+        "en": "Se bussano, non aprire"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_cripte"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_incappucciati"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "QUANDO SI SPEGNE *TUTTO*",
+            "en": "QUANDO SI SPEGNE *TUTTO*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.1,
+          "testo": {
+            "it": "resta in silenzio",
+            "en": "resta in silenzio"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "se senti *bussare*…",
+            "en": "se senti *bussare*…"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "NON *APRIRE*",
+            "en": "NON *APRIRE*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "Ad Ataca, quando arriva il blackout, il Culto del Velo bussa alle porte. Tu apriresti? 🚪 #monomythos",
+        "en": "Ad Ataca, quando arriva il blackout, il Culto del Velo bussa alle porte. Tu apriresti? 🚪 #monomythos"
+      },
+      "hashtag": [
+        "pov",
+        "horror",
+        "lore"
+      ],
+      "aggancio": "glitch",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_ultimo_eroe_1",
+      "formato": "Instagram: serie a puntate (parte 1/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "POV: sei l'ultimo eroe · Parte 1",
+        "en": "POV: sei l'ultimo eroe · Parte 1"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_velo_caduta"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_stella"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "POV: sei l'ultimo *eroe* di Ataca",
+            "en": "POV: sei l'ultimo *eroe* di Ataca"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Il Velo ha preso *tutti*",
+            "en": "Il Velo ha preso *tutti*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "Tranne *te*",
+            "en": "Tranne *te*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "…per ora",
+            "en": "…per ora"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "PARTE 1/3 · Segui per la parte 2",
+          "en": "PARTE 1/3 · Segui per la parte 2"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 1/3 👁️ Il Velo ha preso tutta Ataca. Resti solo tu. Segui per la parte 2: domani scopri chi ti sta guardando.",
+        "en": "Parte 1/3 👁️ Il Velo ha preso tutta Ataca. Resti solo tu. Segui per la parte 2: domani scopri chi ti sta guardando."
+      },
+      "hashtag": [
+        "pov",
+        "lore",
+        "serie"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
     }
   ]
 }

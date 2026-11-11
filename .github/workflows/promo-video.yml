@@ -48,8 +48,18 @@ jobs:
   video:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    # Dal 12/11 contenuti diversi per piattaforma: tre video separati (scaletta "per_piattaforma").
+    # Lancio a mano con copione/piattaforme/video caricato = un solo video come prima.
+    strategy:
+      fail-fast: false
+      matrix:
+        parte: ${{ fromJSON((inputs.copione != '' || inputs.piattaforme != '' || inputs.video_caricato != '') && '["tutte"]' || '["youtube","tiktok","instagram"]') }}
     steps:
       - uses: actions/checkout@v5
+
+      # i tre video scrivono negli stessi file del Centro social: li sfalso di poco
+      - name: Sfalsa le parti
+        run: case "${{ matrix.parte }}" in tiktok) sleep 100;; instagram) sleep 200;; esac
 
       - uses: actions/setup-node@v5
         with:
@@ -60,6 +70,7 @@ jobs:
         env:
           COPIONE: ${{ inputs.video_caricato != '' && 'caricato' || inputs.copione }}
           PIATTAFORME: ${{ inputs.piattaforme }}
+          PARTE: ${{ matrix.parte }}
         run: node promo/oggi.js
 
       # Video caricato dal Centro social: niente registrazione, si scarica il file e si fa la copertina
@@ -136,7 +147,7 @@ jobs:
         run: |
           bash promo/hub_dati.sh prepara
           T="${TITOLO:-${{ steps.oggi.outputs.copione }}}"
-          node promo/attesa.js "${{ github.run_id }}" "$T" "${{ steps.oggi.outputs.piattaforme }}" "${{ steps.file.outputs.url }}" ../hub-dati
+          node promo/attesa.js "${{ github.run_id }}-${{ matrix.parte }}" "$T" "${{ steps.oggi.outputs.piattaforme }}" "${{ steps.file.outputs.url }}" ../hub-dati
 
       - name: Pubblica sui social
         if: steps.oggi.outputs.copione != '' && steps.attesa.outputs.annullato != '1'
@@ -190,7 +201,7 @@ jobs:
             const e=require('./promo/uscita/${{ steps.oggi.outputs.copione }}/esito.json');
             e.video='${{ steps.file.outputs.url }}';e.titolo=process.env.TITOLO||'';e.run='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
             l.unshift(e);fs.writeFileSync(f,JSON.stringify(l.slice(0,300),null,1));
-            const u='../hub-dati/in_uscita.json';try{const q=JSON.parse(fs.readFileSync(u,'utf8'));const v=q.find(x=>x.id==='video:${{ github.run_id }}');if(v){v.stato=e.prova?'prova':'pubblicato';v.esito=e.piattaforme;fs.writeFileSync(u,JSON.stringify(q,null,1))}}catch(x){}
+            const u='../hub-dati/in_uscita.json';try{const q=JSON.parse(fs.readFileSync(u,'utf8'));const v=q.find(x=>x.id==='video:${{ github.run_id }}-${{ matrix.parte }}');if(v){v.stato=e.prova?'prova':'pubblicato';v.esito=e.piattaforme;fs.writeFileSync(u,JSON.stringify(q,null,1))}}catch(x){}
             const ok=Object.entries(e.piattaforme).filter(([k,v])=>v.esito==='ok').map(([k])=>k),ko=Object.entries(e.piattaforme).filter(([k,v])=>v.esito==='errore').map(([k])=>k);
             if(!e.prova)require('./promo/notifica')(ok.length?'✅ Video pubblicato':'⚠️ Video non pubblicato',(ok.length?'Uscito su '+ok.join(', ')+'. ':'')+(ko.length?'Errore su '+ko.join(', ')+'. ':'')+((e.piattaforme.instagram||{}).esito==='ok'?'':'Instagram: pronto da pubblicare dall\'app.'),{sezione:'controlla'});"
           bash promo/hub_dati.sh salva "Pubblicazione ${{ steps.oggi.outputs.data }}" || true
