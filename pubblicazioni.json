@@ -1,5 +1,33 @@
 [
  {
+  "id": "tt_campione",
+  "lingua": "it",
+  "data": "2026-11-12T12:55:34.110Z",
+  "prova": true,
+  "didascalia_instagram": "Il Campione Imbattuto di Ataca non ha mai perso. Mai. Tu ti fideresti? Scrivilo nei commenti 👇\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "tiktok": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "bluesky": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "telegram": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-12_tt_campione.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43222142342"
+ },
+ {
   "id": "tt_bussano",
   "lingua": "it",
   "data": "2026-11-12T00:11:57.978Z",
