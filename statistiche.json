@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-11T19:54:43.804Z",
+ "aggiornato": "2026-11-12T00:42:40.499Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -7,17 +7,27 @@
     "nome": "Monomythos Card Game",
     "follower": 1,
     "views": 1230,
-    "video": 6,
+    "video": 7,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "fwoUK-2xqao",
+     "titolo": "3 cose che non sai su Ataca #Shorts",
+     "data": "2026-11-12T00:11:17Z",
+     "link": "https://youtube.com/shorts/fwoUK-2xqao",
+     "privato": false,
+     "views": 0,
+     "likes": 0,
+     "commenti": 0
+    },
     {
      "id": "Sc_XTtBJQ3c",
      "titolo": "Ataca, ore 23:47 #Shorts",
      "data": "2026-11-11T19:05:54Z",
      "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
      "privato": false,
-     "views": 2,
+     "views": 137,
      "likes": 1,
      "commenti": 0
     },
@@ -73,7 +83,7 @@
     }
    ],
    "totali": {
-    "views": 1233,
+    "views": 1368,
     "likes": 20,
     "commenti": 0,
     "condivisioni": 0
@@ -84,9 +94,9 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 51,
+    "likes": 53,
     "video": 6,
-    "link": "https://vm.tiktok.com/ZN8PVE1kg/"
+    "link": "https://vm.tiktok.com/ZN8PgmL65/"
    },
    "video": [
     {
@@ -94,8 +104,8 @@
      "titolo": "La notte in cui tutto è cambiato. Capitolo 1: L'Eclissi Sintetica. 🌑 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
      "data": "2026-11-11T19:42:29.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7707001606314757409?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 18,
-     "likes": 3,
+     "views": 253,
+     "likes": 5,
      "commenti": 0,
      "condivisioni": 0
     },
@@ -151,8 +161,8 @@
     }
    ],
    "totali": {
-    "views": 2908,
-    "likes": 51,
+    "views": 3143,
+    "likes": 53,
     "commenti": 1,
     "condivisioni": 0
    }
@@ -165,11 +175,21 @@
    "stato": "ok",
    "account": {
     "nome": "monomythos.bsky.social",
-    "follower": 0,
-    "video": 6,
+    "follower": 1,
+    "video": 7,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n236mtwi6p2a",
+     "titolo": "3 segreti della città di Ataca, il mondo di Monomythos. 🌑",
+     "data": "2026-11-12T00:11:03.379Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n236mtwi6p2a",
+     "views": 0,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n22nopfdhc2k",
      "titolo": "La notte in cui tutto è cambiato. Capitolo 1: L'Eclissi Sintetica. 🌑",
@@ -233,9 +253,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 14,
+    "likes": 16,
     "commenti": 0,
-    "condivisioni": 6
+    "condivisioni": 7
    }
   },
   "telegram": {
