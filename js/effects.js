@@ -60,6 +60,10 @@ class EffectRegistryClass {
         }[b.se];
         if (vero && vero()) { amt += b.amount || 1; engine.addLog('hero', `[BONUS] ${card && card.nome ? card.nome : 'Attacco'}: +${b.amount || 1} danno`); }
       }
+      // Firmware Corrotto: +1 a tutti i tuoi attacchi per il resto dell'Atto
+      if (source.bonusDannoAtto != null && source.bonusDannoAtto === engine.state.actIndex) amt += 1;
+      // Gloria Personale: il prossimo attacco fa il doppio
+      if (source.raddoppiaAttacco && card && card.cat !== 'Torretta') { amt *= 2; delete source.raddoppiaAttacco; engine.addLog('hero', `[GLORIA PERSONALE] Danno raddoppiato: ${amt}`); }
       if (source.hand) engine.state.attacchiRound = (engine.state.attacchiRound || 0) + 1;
 
       // Danno ad area vero: colpisce ogni nemico vivo con lo stesso danno (Protocollo Zero, Macello Indiscriminato...)
@@ -79,12 +83,19 @@ class EffectRegistryClass {
       if (targetEntity.type === 'mook') {
         const mook = targetEntity.entity;
         if (source.state !== 'villain') amt = engine.mx('dannoEroe', amt, { source });
-        mook.hp -= amt;
-        engine.addLog('hero', `${source.name} infligge ${amt} danni a ${mook.name} (${Math.max(0, mook.hp)} HP rimasti)`);
-        if (mook.hp <= 0) {
-          mook.isDead = true;
-          engine.addLog('hero', `[ELIMINATO] ${mook.name} è stato sconfitto!`);
-        }
+        // Marchio dell'Abisso: il bersaglio marchiato subisce +1 dal colpo successivo
+        if (mook.marchio) { amt += mook.marchio; engine.addLog('hero', `[MARCHIO] ${mook.name} subisce +${mook.marchio} danno`); delete mook.marchio; }
+        const colpisci = (m, n) => {
+          m.hp -= n;
+          engine.addLog('hero', `${source.name} infligge ${n} danni a ${m.name} (${Math.max(0, m.hp)} HP rimasti)`);
+          if (m.hp <= 0) { m.isDead = true; engine.addLog('hero', `[ELIMINATO] ${m.name} è stato sconfitto!`); }
+        };
+        colpisci(mook, amt);
+        const altro = () => (th.mooks || []).filter(m => !m.isDead && m !== mook).sort((a, b) => a.hp - b.hp)[0];
+        // Fendente ad Arco: un colpo in più su un secondo nemico
+        if (fx.secondo && altro()) colpisci(altro(), fx.secondo);
+        // Lama senza Rimorso: se il bersaglio muore, l'attacco si ripete su un altro nemico
+        if (fx.ripetiSeMuore && mook.isDead && altro()) { engine.addLog('hero', `[DI NUOVO] ${card && card.nome ? card.nome : 'L\'attacco'} colpisce ancora`); colpisci(altro(), amt); }
         engine.syncThreatHp();
       } else if (targetEntity.type === 'player') {
         const pTarget = targetEntity.entity;
@@ -130,7 +141,7 @@ class EffectRegistryClass {
       const { source } = ctx;
       const amt = fx.amount || 1;
       let targetPlayer = source;
-      if (ctx.targetEntity && ctx.targetEntity.type === 'player') {
+      if (fx.target !== 'self' && ctx.targetEntity && ctx.targetEntity.type === 'player') {
         targetPlayer = ctx.targetEntity.entity;
       }
       const before = targetPlayer.vita;
@@ -393,13 +404,17 @@ class EffectRegistryClass {
         source.trm = Math.max(0, source.trm - 1);
         this.execute('draw', engine, ctx, { amount: 2 });
         engine.addLog('threat', `[SPESA DEL FATO] ${source.name} spende 2 VP: pesca 2 carte e rimuove 1 TRM!`);
-      } else {
-        const peCost = Math.min(source.pe || 0, 2);
-        source.pe = Math.max(0, (source.pe || 0) - 2);
+      } else if ((source.pe || 0) >= 2) {
+        source.pe -= 2;
         const th = engine.state.currentThreat;
-        th.primarioProgress = Math.min(th.primarioMax, th.primarioProgress + 2);
-        engine.addLog('hero', `[SPESA DEL FATO] ${source.name} spende 2 PE: avanza di +2 sul binario Multi-Path!`);
+        // "Il binario in testa": quello più vicino a chiudersi
+        const restaP = th.primarioMax - th.primarioProgress, restaB = th.brutoMax - th.brutoProgress;
+        if (restaB < restaP) th.brutoProgress = Math.min(th.brutoMax, th.brutoProgress + 2);
+        else th.primarioProgress = Math.min(th.primarioMax, th.primarioProgress + 2);
+        engine.addLog('hero', `[SPESA DEL FATO] ${source.name} spende 2 PE: +2 sul binario ${restaB < restaP ? 'Bruto' : 'Primario'}!`);
         engine.checkThreatDefeated();
+      } else {
+        engine.addLog('sys', `[SPESA DEL FATO] ${source.name} non ha abbastanza punti (servono 2 VP da Villain o 2 Punti Eroe): nessun effetto`);
       }
       return { ok: true };
     });
