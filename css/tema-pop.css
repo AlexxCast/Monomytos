@@ -1943,3 +1943,11 @@ body.in-match .tutorial-bolla.in-basso, html.in-match .tutorial-bolla.in-basso {
   min-width: 22px; padding: 1px 5px; border-radius: 999px; background: var(--cream, #f3ead6); color: var(--ink, #111);
   border: 2px solid #000; box-shadow: 1px 1px 0 #000; font-weight: 900; font-size: 12px; line-height: 16px; text-align: center;
 }
+
+/* Guarda il mazzo: le 3 carte in fila, pulsanti sempre visibili */
+#modalGuardaMazzo .peek-row { flex-wrap: nowrap; gap: 8px; }
+#modalGuardaMazzo .peek-item { width: min(150px, 28vw); }
+#modalGuardaMazzo .peek-item .peek-card .monomyth-card { width: min(150px, 28vw) !important; }
+#modalGuardaMazzo .peek-item .peek-info { display: none; }
+#modalGuardaMazzo .peek-item.scelta { transform: translateY(-6px); }
+#modalGuardaMazzo .peek-item:not(.scelta) { transition: transform .15s; }

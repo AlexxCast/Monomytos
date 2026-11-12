@@ -650,6 +650,36 @@ class MonomythosEngine {
     // (prima qui si toglieva il costo una seconda volta dallo slot minuscolo: ogni carta costava il doppio)
   }
 
+  // Condizioni delle carte. Alcune si leggono prima di giocare la carta (foto), altre dopo il colpo (bersaglio morto o vivo).
+  fotoCondizioni(player) {
+    const st = this.state;
+    const altri = st.players.filter(p => p !== player && !p.isDead);
+    return {
+      primo: !(st.attacchiRound > 0),
+      alleatoColpito: altri.some(p => p.ultimoDanno != null && p.ultimoDanno >= st.round - 1),
+      potere: !!player.pbUsedThisTurn,
+      vitaPiena: player.vita >= player.vitaMax
+    };
+  }
+
+  condizioneVera(se, player, targetEntity, foto) {
+    const f = foto || this.fotoCondizioni(player);
+    const e = targetEntity && targetEntity.entity;
+    switch (se) {
+      case 'primo': return f.primo;
+      case 'nonPrimo': return !f.primo;
+      case 'alleatoColpito': return f.alleatoColpito;
+      case 'potere': return f.potere;
+      case 'vitaPiena': return f.vitaPiena;
+      case 'mano4': return player.hand.length >= 4;
+      case 'bersaglioMorto': return !!(targetEntity && targetEntity.type === 'mook' && e && e.isDead);
+      case 'bersaglioVivo': return !!(targetEntity && targetEntity.type === 'mook' && e && !e.isDead);
+      case 'bersaglioGiocatore': return !!(targetEntity && targetEntity.type === 'player');
+      case 'bersaglioNemico': return !(targetEntity && targetEntity.type === 'player');
+      default: return true;
+    }
+  }
+
   // Play a card for effect (Opzione A - Modular Data-Driven System via EffectRegistry)
   playCardEffect(playerId, cardUid, targetId = null) {
     const player = this.state.players.find(p => p.id === playerId);
@@ -676,6 +706,10 @@ class MonomythosEngine {
     // Spesa Morale (§4.3): le carte con [Costo] spendono Punti Eroe (o VP da Villain)
     if (window.Morale && !window.Morale.puoPagare(card, player)) {
       return { ok: false, msg: window.Morale.motivo(card, player) };
+    }
+    // Spesa del Fato (§4.3): servono 2 VP da Villain oppure 2 Punti Eroe, altrimenti la carta si può solo sacrificare
+    if (fxList.some(f => f.type === 'fateSpend') && !((player.state === 'villain' && (player.vp || 0) >= 2) || (player.pe || 0) >= 2)) {
+      return { ok: false, msg: player.state === 'villain' ? `Servono 2 VP (ne hai ${player.vp || 0})` : `Servono 2 Punti Eroe (ne hai ${player.pe || 0})` };
     }
     const pagato = window.Morale ? window.Morale.paga(card, player) : null;
     if (pagato) this.addLog(pagato.tipo === 'pe' ? 'hero' : 'threat', `[SPESA MORALE] ${player.name} spende ${pagato.n} ${pagato.tipo === 'pe' ? 'Punti Eroe' : 'VP'} (rimasti: ${player[pagato.tipo]})`);
@@ -722,10 +756,13 @@ class MonomythosEngine {
         window.EffectRegistry.execute('heal', this, { source: player, card, targetId, targetEntity }, { type: 'heal', amount: card.fx.heal });
       }
     } else {
+      // Condizioni scritte sulla carta ("se attacchi per primo", "se hai 4+ carte"...): si leggono prima di giocarla
+      const foto = this.fotoCondizioni(player);
       fxList.forEach(fx => {
         // Evaluate conditions
         if (fx.condition === 'hero' && player.state !== 'hero') return;
         if (fx.condition === 'villain' && player.state !== 'villain') return;
+        if (fx.se && !this.condizioneVera(fx.se, player, targetEntity, foto)) return;
 
         // If played actively in-turn, reaction cards provide active defensive shield/prep
         if (fx.timing && fx.timing !== 'play') {
@@ -764,6 +801,9 @@ class MonomythosEngine {
       this.addLog('hero', `[RITENZIONE TATTICA] [${card.nome}] tornerà in mano a ${player.name} a fine round`);
     }
 
+    // Eco dell'Abisso copia l'ultima Carta Oscura giocata
+    if (card.osc && !fxList.some(f => f.type === 'eco')) this.state.ultimaOscura = { nome: card.nome, fx_list: fxList.map(f => Object.assign({}, f)) };
+
     this.emit('card_played', { player, card, targetId });
     this.checkThreatDefeated();
     return { ok: true };
@@ -780,6 +820,7 @@ class MonomythosEngine {
       return { ok: false, msg: maxSac === 1 ? 'Regole d\'Onore: massimo 1 Sacrificio Tattico per round' : 'Massimo 2 sacrifici tattici per round consentiti' };
     }
 
+    if (this.state.bloccoSacrificiRound === this.state.round) return { ok: false, msg: 'Gloria Personale: questo turno niente Sacrifici Tattici' };
     const cardIdx = player.hand.findIndex(c => c.uid === cardUid);
     if (cardIdx === -1) return { ok: false, msg: 'Carta non in mano' };
     const card = player.hand[cardIdx];
@@ -799,6 +840,11 @@ class MonomythosEngine {
       delete player.boostedSacrifice;
     }
 
+    // Il Mio Trionfo: per tutto il turno i tuoi sacrifici valgono il doppio
+    if (player.sacrDoppiRound === this.state.round) {
+      contribution *= 2;
+      this.addLog('hero', `[IL MIO TRIONFO] Sacrificio doppio: ${contribution}`);
+    }
     const contribPrima = contribution;
     contribution = this.mx('valoreSacrificio', contribution, { card, track: trackChoice, player });
     if (contribution !== contribPrima) this.addLog('threat', `[MINACCIA] Il sacrificio vale ${contribution} invece di ${contribPrima}`);
@@ -843,6 +889,37 @@ class MonomythosEngine {
     return { ok: true, nuova };
   }
 
+  // "Guarda il mazzo": il giocatore vede le prime N carte e può scartarne 1 o metterla in mezzo al mazzo.
+  // I bot mettono in mezzo una carta che non potrebbero giocare (costo più alto dei loro slot).
+  guardaMazzo(p, n) {
+    const top = p.deck.slice(-n).reverse();
+    if (!top.length) { this.addLog('hero', `${p.name} non ha carte nel mazzo da guardare`); return; }
+    this.addLog('hero', `[GUARDA IL MAZZO] ${p.name} guarda le prime ${top.length} carte del suo mazzo`);
+    if (p.isBot || (!p.isLocal && !p.remoteUid)) {
+      const brutta = top.find(c => this.getPlayerSlot({ slots: { potenza: p.str, agilita: p.spd, intelligenza: p.tech, vigore: p.end } }, c.cat) < (c.valore || 0));
+      if (brutta) this.riponiCartaMazzo(p.id, brutta.uid, 'mezzo');
+      return;
+    }
+    this.emit('guarda_mazzo', { player: p, carte: top });
+  }
+
+  // dove: 'scarta' (negli scarti) oppure 'mezzo' (a metà del mazzo)
+  riponiCartaMazzo(playerId, uid, dove) {
+    const p = this.state.players.find(x => x.id === playerId);
+    if (!p) return { ok: false };
+    const i = p.deck.findIndex(c => c.uid === uid);
+    if (i < 0) return { ok: false, msg: 'Carta non più nel mazzo' };
+    const [c] = p.deck.splice(i, 1);
+    if (dove === 'scarta') {
+      p.discard.push(c);
+      this.addLog('hero', `${p.name} scarta [${c.nome}] dalla cima del mazzo`);
+    } else {
+      p.deck.splice(Math.floor(p.deck.length / 2), 0, c);
+      this.addLog('hero', `${p.name} mette una carta in mezzo al mazzo`);
+    }
+    return { ok: true };
+  }
+
   discardFromDeckTop(playerId, uids) {
     const p = this.state.players.find(x => x.id === playerId);
     if (!p || !Array.isArray(uids)) return { ok: false };
@@ -871,7 +948,7 @@ class MonomythosEngine {
         { titolo: 'Schianto ad area', desc: 'Infliggi 1 danno a ogni sgherro (alla Minaccia se non ce ne sono).', badge: '1 danno a tutti', run: (e, p) => { const vivi = ((e.state.currentThreat.mooks) || []).filter(m => !m.isDead); if (vivi.length) vivi.forEach(m => e._pbDanno(p, m.id)); else e._pbDanno(p, 'threat_boss'); return '1 danno a tutti i nemici'; } },
         slot('Potenza')],
       'Architetto Ombra': [slot('Intelligenza'),
-        { titolo: 'Analisi', desc: 'Guarda le prime 2 carte del tuo mazzo e scegli se scartarle.', badge: 'Guarda 2', ok: p => p.deck.length > 0, run: (e, p) => { const top = p.deck.slice(-2).reverse(); e.emit('base_power_peek', { player: p, carte: top }); return 'guarda le prime 2 carte del suo mazzo'; } }],
+        { titolo: 'Analisi', desc: 'Guarda le prime 3 carte del tuo mazzo: puoi scartarne 1 o metterla in mezzo al mazzo.', badge: 'Guarda 3', ok: p => p.deck.length > 0, run: (e, p) => { e.guardaMazzo(p, 3); return 'guarda le prime 3 carte del suo mazzo'; } }],
       "Sussurro dell'Abisso": [dmg('Impeto oscuro'),
         { titolo: 'Patto oscuro', desc: 'Solo se sei Villain: ottieni 1 Punto Vittoria e subisci 1 Trauma.', badge: '+1 PV', ok: p => p.state === 'villain', run: (e, p) => { p.vp += 1; p.trm += 1; e.mx('vpGenerati', 1, { player: p }); return '+1 Punto Vittoria e +1 Trauma'; } }],
       'Duellante Spezzato': [dmg('Colpo sleale'),
@@ -897,6 +974,8 @@ class MonomythosEngine {
       const k = this.costoPbExtra(player);
       if (!k.ok) return { ok: false, msg: k.msg };
     }
+    if (player.noPbSempre) return { ok: false, msg: 'Con Rescissione hai rinunciato al Potere Base per tutta la partita' };
+    if (player.noPbRound === this.state.round) return { ok: false, msg: 'Questo turno niente Potere Base (malus della Carta Oscura)' };
     const opz = this.getBasePowerOptions(player)[optionIndex] || this.getBasePowerOptions(player)[0];
     if (opz.ok && !opz.ok(player)) return { ok: false, msg: 'Questa opzione ora non si può usare' };
     if (extra) {
@@ -989,6 +1068,14 @@ class MonomythosEngine {
   // Enemy & Threat Phase execution (Point 6: Interactive Defense Window)
   // Bersaglio di un attacco nemico: bersaglio forzato, poi Logica della Minaccia, poi Vita più bassa
   pickEnemyTarget(livingPlayers, th) {
+    // Muro Vivente: per tutto il round gli attacchi vanno su chi l'ha giocata
+    if (th.bersaglioRound && th.bersaglioRound.round === this.state.round) {
+      const mv = livingPlayers.find(p => p.id === th.bersaglioRound.id);
+      if (mv) return mv;
+    }
+    // L'Ultimo a Restare: chi l'ha giocata non viene bersagliata finché c'è qualcun altro
+    const altri = livingPlayers.filter(p => p.intoccabileRound !== this.state.round);
+    if (altri.length && altri.length < livingPlayers.length) livingPlayers = altri;
     if (th.forcedTarget) {
       const ft = livingPlayers.find(p => p.id === th.forcedTarget);
       if (ft) return ft;
@@ -1119,6 +1206,7 @@ class MonomythosEngine {
   // Resolve Enemy Attack with Defense Window for reactions & dynamic parry (Point 6)
   resolveEnemyAttack(enemy, target, rawDmg, onComplete = null) {
     let effectiveDmg = rawDmg;
+    this._nemicoAttacco = enemy;
 
     // Apply active damage reduction
     if (target.damageReduction) {
@@ -1137,7 +1225,7 @@ class MonomythosEngine {
     const reactionCards = target.hand.filter(c => c.fx_list && c.fx_list.some(f => f.timing === 'reaction'));
     const parryCards = [...target.hand];
 
-    const applyRemainingDamage = (absorbed, dodged, reflected) => {
+    const applyRemainingDamage = (absorbed, dodged, reflected, extra) => {
       if (dodged) {
         this.addLog('hero', `[DIFESA RIUSCITA] ${target.name} ha evitato l'attacco.`);
         this.emit('attack_dodged', { target, enemy });
@@ -1155,19 +1243,58 @@ class MonomythosEngine {
         this.addLog('threat', `[TRAVOLGERE] ${excess} danni oltre la Resistenza (${effectiveEnd}) vanno a segno senza parata!`);
       }
 
-      target.vita = Math.max(0, target.vita - penetrated);
-      if (penetrated > 0) target.ultimoDanno = this.state.round;
+      // Reazioni che spostano il colpo: su un altro giocatore (Villain, Intercetta), diviso a metà o tra tutti gli alleati
+      const ia = extra || {};
+      const quote = [];
+      const vivo = q => q && !q.isDead;
+      if (ia.dividiTra && ia.dividiTra.filter(vivo).length) {
+        const tra = ia.dividiTra.filter(vivo);
+        tra.forEach((q, i) => quote.push([q, Math.floor(penetrated / tra.length) + (i < penetrated % tra.length ? 1 : 0)]));
+        this.addLog('threat', `[REAZIONE] Il colpo si divide tra ${tra.map(q => q.name).join(', ')}`);
+      } else if (vivo(ia.dividiCon) && ia.dividiCon !== target) {
+        quote.push([ia.dividiCon, Math.ceil(penetrated / 2)], [target, Math.floor(penetrated / 2)]);
+        this.addLog('hero', `[REAZIONE] ${ia.dividiCon.name} divide il colpo a metà con ${target.name}`);
+      } else if (vivo(ia.target) && ia.target !== target) {
+        quote.push([ia.target, penetrated]);
+        this.addLog(ia.target === ia.da ? 'hero' : 'threat', `[REAZIONE] Il colpo diretto a ${target.name} finisce su ${ia.target.name}`);
+      } else quote.push([target, penetrated]);
 
-      if (penetrated > 0) {
-        this.addLog('threat', `${target.name} incassa ${penetrated} danni (Vita: ${target.vita}/${target.vitaMax})`);
-      } else {
-        this.addLog('hero', `[COLPO AMMORTIZZATO] Danno completamente assorbito dalla Parata Dinamica!`);
-      }
-      this.checkPlayerDeath(target);
-      if (!target.isDead) this.mx('colpito', null, { target, danni: penetrated });
-      this.emit('damage_taken', { target, dmg: penetrated, parried: absorbed, reflected, trample: isTrample });
+      if (penetrated <= 0) this.addLog('hero', `[COLPO AMMORTIZZATO] Danno completamente assorbito dalla Parata Dinamica!`);
+      quote.forEach(([q, n]) => {
+        q.vita = Math.max(0, q.vita - n);
+        if (n > 0) {
+          q.ultimoDanno = this.state.round;
+          this.addLog('threat', `${q.name} incassa ${n} danni (Vita: ${q.vita}/${q.vitaMax})`);
+        }
+        this.checkPlayerDeath(q);
+        if (!q.isDead) this.mx('colpito', null, { target: q, danni: n });
+        this.emit('damage_taken', { target: q, dmg: n, parried: absorbed, reflected, trample: isTrample });
+      });
       if (onComplete) onComplete();
     };
+
+    // Difese preparate nel proprio turno: attacco che va a vuoto, colpo girato su un alleato, niente Parata
+    const th = this.state.currentThreat;
+    const altriVivi = this.state.players.filter(p => p !== target && !p.isDead);
+    if (th && th.annullaProssimo) {
+      th.annullaProssimo = false;
+      this.addLog('hero', `[SINGOLARITÀ] L'attacco di ${enemy.name} si perde nel vuoto`);
+      return applyRemainingDamage(0, true, 0);
+    }
+    if (target.schivaProssimo) {
+      target.schivaProssimo = false;
+      this.addLog('hero', `[FORTEZZA] ${target.name} ignora completamente l'attacco`);
+      return applyRemainingDamage(0, true, 0);
+    }
+    if (target.tradimentoRound === this.state.round && altriVivi.length) {
+      const vittima = altriVivi[Math.floor(Math.random() * altriVivi.length)];
+      this.addLog('threat', `[TRADIMENTO] ${target.name} si fa scudo con ${vittima.name}`);
+      return applyRemainingDamage(0, false, 0, { target: vittima });
+    }
+    if (target.noParataRound === this.state.round) {
+      this.addLog('threat', `[SENZA DIFESA] ${target.name} non può parare questo attacco`);
+      return applyRemainingDamage(0, false, 0);
+    }
 
     // Online: l'attacco a un giocatore remoto apre la finestra di difesa sul suo dispositivo
     if (target.remoteUid && typeof this.onRemoteDefense === 'function') {
@@ -1237,6 +1364,24 @@ class MonomythosEngine {
     }
   }
 
+  // Effetti di una carta Reazione: solo quelli del proprio stato (Eroe o Villain); Ritenzione Tattica vale anche qui
+  eseguiReazione(card, ctx) {
+    const p = ctx.source;
+    (card.fx_list || []).forEach(fx => {
+      if (fx.timing !== 'reaction') return;
+      if (fx.condition === 'hero' && p.state !== 'hero') return;
+      if (fx.condition === 'villain' && p.state !== 'villain') return;
+      window.EffectRegistry.execute(fx.type, this, ctx, fx);
+    });
+    this.addLog('hero', `${p.name} reagisce con [${card.nome}]`);
+    const ret = String(card.effetto || '').match(/RITENZIONE TATTICA\s*\((\d+)\)/i);
+    if (ret && !p.retentionUsedThisRound && p.hand.length < parseInt(ret[1])) {
+      p.retentionUsedThisRound = true;
+      p.retainedCards.push(card);
+      this.addLog('hero', `[RITENZIONE TATTICA] [${card.nome}] tornerà in mano a ${p.name} a fine round`);
+    }
+  }
+
   // Tasso di conversione della Parata Dinamica (§3.3): assorbito = ⌊somma dei Valori ÷ tasso⌋
   getParryRate() {
     const th = this.state.currentThreat;
@@ -1251,9 +1396,9 @@ class MonomythosEngine {
       const rIdx = target.hand.findIndex(c => c.uid === rCard.uid);
       if (rIdx !== -1) target.hand.splice(rIdx, 1);
       target.discard.push(rCard);
-      const ctx = { source: target, card: rCard, incomingAttack: { rawDmg: effectiveDmg, parried: 0, dodged: false } };
-      fxOf(rCard).forEach(fx => { if (fx.timing === 'reaction') window.EffectRegistry.execute(fx.type, this, ctx, fx); });
-      applyRemainingDamage(ctx.incomingAttack.parried || 0, ctx.incomingAttack.dodged, 0);
+      const ctx = { source: target, target, card: rCard, incomingAttack: { enemy: this._nemicoAttacco, rawDmg: effectiveDmg, parried: 0, dodged: false, attaccato: target, da: target } };
+      this.eseguiReazione(rCard, ctx);
+      applyRemainingDamage(ctx.incomingAttack.parried || 0, ctx.incomingAttack.dodged, 0, ctx.incomingAttack);
     };
     if (effectiveDmg <= 0) return applyRemainingDamage(0, false, 0);
     const schiva = reazioni.find(c => fxOf(c).some(f => f.timing === 'reaction' && f.type === 'dodge'));
@@ -1299,16 +1444,10 @@ class MonomythosEngine {
           source: playerWithCard,
           target: target,
           card: card,
-          incomingAttack: { enemy, rawDmg, parried: 0, dodged: false }
+          incomingAttack: { enemy, rawDmg, parried: 0, dodged: false, attaccato: target, da: playerWithCard }
         };
-        if (card.fx_list) {
-          card.fx_list.forEach(fx => {
-            if (fx.timing === 'reaction') {
-              window.EffectRegistry.execute(fx.type, this, ctx, fx);
-            }
-          });
-        }
-        applyRemainingDamage(ctx.incomingAttack.parried || 0, ctx.incomingAttack.dodged, 0);
+        this.eseguiReazione(card, ctx);
+        applyRemainingDamage(ctx.incomingAttack.parried || 0, ctx.incomingAttack.dodged, 0, ctx.incomingAttack);
       } else {
         applyRemainingDamage(0, false, 0);
       }
@@ -1357,6 +1496,11 @@ class MonomythosEngine {
           p.discard.push(defibCard);
           player.vita = 1;
           revived = true;
+          if (p.state === 'villain' && p !== player && player.hand.length) {
+            const rubata = player.hand.splice(Math.floor(Math.random() * player.hand.length), 1)[0];
+            p.hand.push(rubata);
+            this.addLog('threat', `[VILLAIN] ${p.name} ruba [${rubata.nome}] a ${player.name} dopo averlo rianimato`);
+          }
           this.addLog('hero', `[DEFIBRILLAZIONE] Reazione Critica! ${p.name} gioca Protocollo Defibrillazione e rianima ${player.name} con 1 HP!`);
         }
       });

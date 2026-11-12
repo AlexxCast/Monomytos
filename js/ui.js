@@ -280,6 +280,12 @@ class UIController {
       if (!next.length) return this.showToast('Questa è l\'ultima Minaccia: non ce ne sono altre da guardare.');
       this.openPeek({ tipo: 'minacce', titolo: 'Prossime Minacce', carte: next, player: data.source, puoScartare: !st.story });
     });
+    // "Guarda il mazzo": le prime 3 carte, una si può scartare o mettere in mezzo al mazzo
+    window.GameEngine.on('guarda_mazzo', (ev, data) => {
+      if (!data || !data.player || !data.player.isLocal) return;
+      // aspetta che si chiuda la scheda della carta o del Potere Base
+      setTimeout(() => this.openGuardaMazzo(data.player, data.carte || []), 450);
+    });
     window.GameEngine.on('base_power_peek', (ev, data) => {
       if (!data || !data.player || !data.player.isLocal) return;
       this.openPeek({ tipo: 'mazzo', titolo: 'Cima del tuo mazzo', carte: data.carte || [], player: data.player, puoScartare: true });
@@ -1642,7 +1648,7 @@ class UIController {
     const res = window.GameEngine.activateBasePower(this.idLocale(), optIndex);
     if (!res.ok) {
       this.showToast(res.msg);
-    } else {
+    } else if (!document.getElementById('modalGuardaMazzo') || !document.getElementById('modalGuardaMazzo').classList.contains('active')) {
       this.hideModals();
     }
   }
@@ -1752,6 +1758,62 @@ class UIController {
     };
     m.onclick = (ev) => { if (ev.target === m) m.querySelector('#peekOk').click(); };
     this.showModal('modalPeek');
+  }
+
+  // Guarda il mazzo: tocca una carta, poi scegli "Scarta" o "In mezzo al mazzo" (oppure tienile tutte)
+  openGuardaMazzo(player, carte) {
+    let m = document.getElementById('modalGuardaMazzo');
+    if (!m) {
+      m = document.createElement('div');
+      m.className = 'modal-overlay'; m.id = 'modalGuardaMazzo';
+      m.innerHTML = `<div class="bottom-sheet peek-sheet"><div class="sheet-handle"></div>
+        <div class="sheet-header"><h3 class="sheet-title">Cima del tuo mazzo</h3></div>
+        <p class="peek-help" id="gmHelp"></p><div class="peek-row" id="gmRow"></div>
+        <div class="gm-azioni" style="display:flex;gap:8px;margin:10px 0">
+          <button class="btn btn-subtle" id="gmScarta" style="flex:1">Scarta</button>
+          <button class="btn btn-subtle" id="gmMezzo" style="flex:1">In mezzo al mazzo</button>
+        </div>
+        <button class="btn btn-primary btn-block" id="gmOk">Tienile tutte</button></div>`;
+      document.body.appendChild(m);
+    }
+    const E = window.GameEngine;
+    let scelta = null;
+    const help = m.querySelector('#gmHelp');
+    const bS = m.querySelector('#gmScarta'), bM = m.querySelector('#gmMezzo');
+    const aggiorna = () => {
+      help.textContent = scelta ? 'Ora scegli: scartarla oppure metterla in mezzo al mazzo.' : 'Sono le prossime carte che pescherai, la prima a sinistra. Toccane una se non ti piace.';
+      bS.disabled = bM.disabled = !scelta;
+      bS.style.opacity = bM.style.opacity = scelta ? '1' : '.45';
+    };
+    const row = m.querySelector('#gmRow');
+    row.innerHTML = '';
+    carte.forEach(c => {
+      const box = document.createElement('div');
+      box.className = 'peek-item';
+      box.style.cursor = 'pointer';
+      box.innerHTML = `<div class="peek-card">${this.getCardDOM(c, true)}</div><div class="peek-info"></div>`;
+      box.querySelector('.peek-info').textContent = c.effetto || '';
+      box.onclick = () => {
+        scelta = scelta === c.uid ? null : c.uid;
+        row.querySelectorAll('.peek-item').forEach(el => el.classList.toggle('scelta', el === box && !!scelta));
+        row.querySelectorAll('.peek-item').forEach(el => { el.style.outline = el.classList.contains('scelta') ? '3px solid var(--oro, #c8a24b)' : ''; el.style.borderRadius = '10px'; });
+        aggiorna();
+      };
+      row.appendChild(box);
+    });
+    const chiudi = () => { m.classList.remove('active'); this.hideModals(); if (E.state) this.renderGameView(E.state); };
+    const fai = dove => {
+      if (!scelta) return;
+      const r = E.riponiCartaMazzo(player.id, scelta, dove);
+      if (r.ok) this.showToast(dove === 'scarta' ? 'Carta scartata' : 'Carta messa in mezzo al mazzo');
+      chiudi();
+    };
+    bS.onclick = () => fai('scarta');
+    bM.onclick = () => fai('mezzo');
+    m.querySelector('#gmOk').onclick = chiudi;
+    m.onclick = (ev) => { if (ev.target === m) chiudi(); };
+    aggiorna();
+    this.showModal('modalGuardaMazzo');
   }
 
   inspectCard(card) {
