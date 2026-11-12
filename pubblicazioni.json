@@ -1,5 +1,21 @@
 [
  {
+  "id": "tt_bussano",
+  "lingua": "it",
+  "data": "2026-11-12T00:11:57.978Z",
+  "prova": false,
+  "didascalia_instagram": "Ad Ataca, quando arriva il blackout, il Culto del Velo bussa alle porte. Tu apriresti? 🚪 #monomythos\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "tiktok": {
+    "esito": "ok",
+    "stato": "PROCESSING_UPLOAD (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-12_tt_bussano.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43117428184"
+ },
+ {
   "id": "ig_ultimo_eroe_1",
   "lingua": "it",
   "data": "2026-11-12T00:13:31.664Z",
