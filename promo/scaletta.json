@@ -48,6 +48,36 @@
     "tiktok": "tt_bussano",
     "instagram": "ig_ultimo_eroe_1"
    }
+  },
+  {
+   "data": "2026-11-13",
+   "copione": "eroe_o_villain",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "eroe_o_villain",
+    "tiktok": "tt_campione",
+    "instagram": "ig_ultimo_eroe_2"
+   }
+  },
+  {
+   "data": "2026-11-14",
+   "copione": "yt_prometeo",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_prometeo",
+    "tiktok": "tt_mappa",
+    "instagram": "ig_ultimo_eroe_3"
+   }
+  },
+  {
+   "data": "2026-11-15",
+   "copione": "yt_eclissi",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_eclissi",
+    "tiktok": "tt_cisterna",
+    "instagram": "ig_culto_1"
+   }
   }
  ],
  "vecchia_scaletta_gameplay": [
