@@ -37,7 +37,7 @@ if (riga) {
 async function giaUscito() {
   if (process.env.COPIONE || !out.copione || !process.env.GITHUB_REPOSITORY) return false;
   const ora = +new Intl.DateTimeFormat('en-GB', { timeZone: s.fuso_orario || 'Europe/Rome', hour: '2-digit', hourCycle: 'h23' }).format(new Date());
-  if (ora >= 22) { console.log(`Sono le ${ora}: troppo tardi per l'uscita di oggi, salto.`); return true; }
+  if (ora >= 22 || ora < 12) { console.log(`Sono le ${ora}: fuori dall'orario delle uscite (12-22), salto.`); return true; }
   try {
     const r = await fetch(`https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY}/hub-dati/pubblicazioni.json`);
     if (!r.ok) return false;
