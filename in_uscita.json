@@ -31,8 +31,23 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-12_tre_segreti.mp4",
   "creato": "2026-11-11T23:10:29.978Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-12T00:10:29.978Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-12T00:10:29.978Z",
+  "esito": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/fwoUK-2xqao",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n236mtwi6p2a"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 10
+   }
+  }
  },
  {
   "id": "video:43083667645",

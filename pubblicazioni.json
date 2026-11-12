@@ -1,5 +1,30 @@
 [
  {
+  "id": "tre_segreti",
+  "lingua": "it",
+  "data": "2026-11-12T00:10:50.741Z",
+  "prova": false,
+  "didascalia_instagram": "3 segreti della città di Ataca, il mondo di Monomythos. 🌑\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/fwoUK-2xqao",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n236mtwi6p2a"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 10
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-12_tre_segreti.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43117428184"
+ },
+ {
   "id": "ig_ultimo_eroe_1",
   "lingua": "it",
   "data": "2026-11-11T21:05:49.439Z",
