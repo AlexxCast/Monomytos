@@ -1,12 +1,12 @@
 {
- "aggiornato": "2026-11-12T00:42:40.499Z",
+ "aggiornato": "2026-11-12T12:52:40.884Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
-    "follower": 1,
-    "views": 1230,
+    "follower": 2,
+    "views": 1231,
     "video": 7,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
@@ -17,8 +17,8 @@
      "data": "2026-11-12T00:11:17Z",
      "link": "https://youtube.com/shorts/fwoUK-2xqao",
      "privato": false,
-     "views": 0,
-     "likes": 0,
+     "views": 221,
+     "likes": 7,
      "commenti": 0
     },
     {
@@ -27,7 +27,7 @@
      "data": "2026-11-11T19:05:54Z",
      "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
      "privato": false,
-     "views": 137,
+     "views": 233,
      "likes": 1,
      "commenti": 0
     },
@@ -83,8 +83,8 @@
     }
    ],
    "totali": {
-    "views": 1368,
-    "likes": 20,
+    "views": 1685,
+    "likes": 27,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -94,17 +94,27 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 53,
-    "video": 6,
-    "link": "https://vm.tiktok.com/ZN8PgmL65/"
+    "likes": 56,
+    "video": 7,
+    "link": "https://vm.tiktok.com/ZN8P7qobu/"
    },
    "video": [
+    {
+     "id": "7707185483339664673",
+     "titolo": "Ad Ataca, quando arriva il blackout, il Culto del Velo bussa alle porte. Tu apriresti? 🚪 #monomythos 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte ",
+     "data": "2026-11-12T07:36:10.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7707185483339664673?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 2,
+     "likes": 3,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7707001606314757409",
      "titolo": "La notte in cui tutto è cambiato. Capitolo 1: L'Eclissi Sintetica. 🌑 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
      "data": "2026-11-11T19:42:29.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7707001606314757409?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 253,
+     "views": 260,
      "likes": 5,
      "commenti": 0,
      "condivisioni": 0
@@ -161,8 +171,8 @@
     }
    ],
    "totali": {
-    "views": 3143,
-    "likes": 53,
+    "views": 3152,
+    "likes": 56,
     "commenti": 1,
     "condivisioni": 0
    }
@@ -186,7 +196,7 @@
      "data": "2026-11-12T00:11:03.379Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n236mtwi6p2a",
      "views": 0,
-     "likes": 2,
+     "likes": 3,
      "commenti": 0,
      "condivisioni": 1
     },
@@ -253,7 +263,7 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 16,
+    "likes": 17,
     "commenti": 0,
     "condivisioni": 7
    }
