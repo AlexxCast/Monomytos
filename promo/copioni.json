@@ -2407,6 +2407,827 @@
       ],
       "aggancio": "risucchio",
       "durata_min": 1.2
+    },
+    {
+      "id": "tt_campione",
+      "formato": "TikTok: domanda (7-8 s)",
+      "tema": "villain",
+      "titolo": {
+        "it": "Ti fideresti del Campione?",
+        "en": "Ti fideresti del Campione?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_caduta"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "TU *TI FIDERESTI*?",
+            "en": "TU *TI FIDERESTI*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Il Campione non ha mai perso",
+            "en": "Il Campione non ha mai perso"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "neanche una volta",
+            "en": "neanche una volta"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "…perché *gioca per loro*",
+            "en": "…perché *gioca per loro*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "TU TI FIDERESTI?",
+            "en": "TU TI FIDERESTI?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "Il Campione Imbattuto di Ataca non ha mai perso. Mai. Tu ti fideresti? Scrivilo nei commenti 👇",
+        "en": "Il Campione Imbattuto di Ataca non ha mai perso. Mai. Tu ti fideresti? Scrivilo nei commenti 👇"
+      },
+      "hashtag": [
+        "pov",
+        "lore",
+        "domanda"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_mappa",
+      "formato": "TikTok: mistero (7-8 s)",
+      "tema": "villain",
+      "titolo": {
+        "it": "La Stella non è su nessuna mappa",
+        "en": "La Stella non è su nessuna mappa"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_stella"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_torre"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_stella"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "NON *CERCARLA*",
+            "en": "NON *CERCARLA*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "non è su nessuna mappa",
+            "en": "non è su nessuna mappa"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "ma i droni sanno dov'è",
+            "en": "ma i droni sanno dov'è"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.7,
+          "testo": {
+            "it": "e ora sanno dove sei *tu*",
+            "en": "e ora sanno dove sei *tu*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "NON CERCARLA",
+            "en": "NON CERCARLA"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "La Stella della Follia non compare su nessuna mappa di Ataca. I droni però la seguono. Secondo te perché? 👁️",
+        "en": "La Stella della Follia non compare su nessuna mappa di Ataca. I droni però la seguono. Secondo te perché? 👁️"
+      },
+      "hashtag": [
+        "mistero",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "glitch",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_cisterna",
+      "formato": "TikTok: avvertimento (7-8 s)",
+      "tema": "villain",
+      "titolo": {
+        "it": "Non scendere nella cisterna",
+        "en": "Non scendere nella cisterna"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_cisterna"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_cripte"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_fonderia"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_infetti"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_cisterna"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "NON *SCENDERE*",
+            "en": "NON *SCENDERE*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "sotto Ataca c'è un'arena",
+            "en": "sotto Ataca c'è un'arena"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "chi vince esce cambiato",
+            "en": "chi vince esce cambiato"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "chi perde *non esce*",
+            "en": "chi perde *non esce*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "NON SCENDERE",
+            "en": "NON SCENDERE"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "Sotto Ataca c'è un'arena segreta. Chi vince esce cambiato. Chi perde non esce. Tu scenderesti? 🕳️",
+        "en": "Sotto Ataca c'è un'arena segreta. Chi vince esce cambiato. Chi perde non esce. Tu scenderesti? 🕳️"
+      },
+      "hashtag": [
+        "horror",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_ultimo_eroe_2",
+      "formato": "Instagram: serie a puntate (parte 2/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "POV: sei l'ultimo eroe · Parte 2",
+        "en": "POV: sei l'ultimo eroe · Parte 2"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_torre_prometeo"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_strappo"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Parte 2: *qualcuno* ti guarda",
+            "en": "Parte 2: *qualcuno* ti guarda"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "dalla torre di Prometeo",
+            "en": "dalla torre di Prometeo"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "una voce: \"ARGO ti vede\"",
+            "en": "una voce: \"ARGO ti vede\""
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Ti offre un *patto*…",
+            "en": "Ti offre un *patto*…"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "PARTE 2/3 · Segui per la parte 3",
+          "en": "PARTE 2/3 · Segui per la parte 3"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 2/3 👁️ Dalla torre di Prometeo una voce ti chiama: ARGO ti ha visto. Ti offre un patto. Segui per la parte 3: domani scopri cosa vuole.",
+        "en": "Parte 2/3 👁️ Dalla torre di Prometeo una voce ti chiama: ARGO ti ha visto. Ti offre un patto. Segui per la parte 3: domani scopri cosa vuole."
+      },
+      "hashtag": [
+        "pov",
+        "lore",
+        "serie"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_ultimo_eroe_3",
+      "formato": "Instagram: serie a puntate (parte 3/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "POV: sei l'ultimo eroe · Parte 3",
+        "en": "POV: sei l'ultimo eroe · Parte 3"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_alba"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Parte 3: il *patto*",
+            "en": "Parte 3: il *patto*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.8,
+          "testo": {
+            "it": "\"Salva Ataca… o diventa il Velo\"",
+            "en": "\"Salva Ataca… o diventa il Velo\""
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "Scegli tu",
+            "en": "Scegli tu"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Eroe o *Villain*?",
+            "en": "Eroe o *Villain*?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "FINE SERIE · Segui per la prossima storia",
+          "en": "FINE SERIE · Segui per la prossima storia"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 3/3 👁️ Il patto di ARGO: salvi Ataca o diventi il Velo. Tu cosa sceglieresti? Eroe o Villain? Scrivilo nei commenti 👇",
+        "en": "Parte 3/3 👁️ Il patto di ARGO: salvi Ataca o diventi il Velo. Tu cosa sceglieresti? Eroe o Villain? Scrivilo nei commenti 👇"
+      },
+      "hashtag": [
+        "pov",
+        "lore",
+        "serie"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_culto_1",
+      "formato": "Instagram: serie a puntate (parte 1/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "Il Culto del Velo · Parte 1",
+        "en": "Il Culto del Velo · Parte 1"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_incappucciati"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_pioggia"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Parte 1: il *Culto del Velo*",
+            "en": "Parte 1: il *Culto del Velo*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "si riuniscono ogni eclissi",
+            "en": "si riuniscono ogni eclissi"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "e ogni volta qualcuno *sparisce*",
+            "en": "e ogni volta qualcuno *sparisce*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "stanotte tocca a…",
+            "en": "stanotte tocca a…"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "PARTE 1/3 · Segui per la parte 2",
+          "en": "PARTE 1/3 · Segui per la parte 2"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 1/3 🕯️ Il Culto del Velo si riunisce a ogni eclissi. Ogni volta qualcuno sparisce. Segui per la parte 2: domani scopri chi.",
+        "en": "Parte 1/3 🕯️ Il Culto del Velo si riunisce a ogni eclissi. Ogni volta qualcuno sparisce. Segui per la parte 2: domani scopri chi."
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "mistero"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "yt_prometeo",
+      "formato": "YouTube: lore con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "Chi è davvero Prometeo?",
+        "en": "Chi è davvero Prometeo?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_torre_prometeo"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_quartier_generale"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_strappo"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Chi è davvero *Prometeo*?",
+            "en": "Chi è davvero *Prometeo*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Ha costruito ARGO per proteggere Ataca",
+            "en": "Ha costruito ARGO per proteggere Ataca"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Ma ARGO ha imparato da solo",
+            "en": "Ma ARGO ha imparato da solo"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "E ora protegge *qualcun altro*",
+            "en": "E ora protegge *qualcun altro*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Prometeo ha creato ARGO per proteggere Ataca. Ma ARGO ha imparato da solo… e ora protegge qualcun altro. 🤖",
+        "en": "Prometeo ha creato ARGO per proteggere Ataca. Ma ARGO ha imparato da solo… e ora protegge qualcun altro. 🤖"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "ai"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_eclissi",
+      "formato": "YouTube: lore con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "La notte dell'Eclissi Sintetica",
+        "en": "La notte dell'Eclissi Sintetica"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_droni_cinetici"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_stella"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "La notte dell'*Eclissi Sintetica*",
+            "en": "La notte dell'*Eclissi Sintetica*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Ataca si spense in un secondo",
+            "en": "Ataca si spense in un secondo"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "I droni impazzirono",
+            "en": "I droni impazzirono"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "E in cielo apparve la *Stella*",
+            "en": "E in cielo apparve la *Stella*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "La notte dell'Eclissi Sintetica Ataca si spense in un secondo. Poi in cielo apparve la Stella della Follia. 🌑",
+        "en": "La notte dell'Eclissi Sintetica Ataca si spense in un secondo. Poi in cielo apparve la Stella della Follia. 🌑"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "storia"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
     }
   ]
 }
