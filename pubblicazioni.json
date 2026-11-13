@@ -1,5 +1,21 @@
 [
  {
+  "id": "ig_ultimo_eroe_2",
+  "lingua": "it",
+  "data": "2026-11-13T17:26:17.335Z",
+  "prova": false,
+  "didascalia_instagram": "Parte 2/3 👁️ Dalla torre di Prometeo una voce ti chiama: ARGO ti ha visto. Ti offre un patto. Segui per la parte 3: domani scopri cosa vuole.\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "instagram": {
+    "esito": "saltata",
+    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-13_ig_ultimo_eroe_2.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43471971092"
+ },
+ {
   "id": "tt_campione",
   "lingua": "it",
   "data": "2026-11-13T17:24:33.516Z",

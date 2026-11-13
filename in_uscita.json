@@ -7,8 +7,14 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-13_ig_ultimo_eroe_2.mp4",
   "creato": "2026-11-13T17:26:15.951Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-13T17:26:15.950Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-13T17:26:15.950Z",
+  "esito": {
+   "instagram": {
+    "esito": "saltata",
+    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+   }
+  }
  },
  {
   "id": "video:43471971092-tiktok",
