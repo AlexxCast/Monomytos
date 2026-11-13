@@ -1,23 +1,33 @@
 {
- "aggiornato": "2026-11-13T06:43:28.556Z",
+ "aggiornato": "2026-11-13T17:38:53.246Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 4,
-    "views": 1662,
-    "video": 7,
+    "views": 2604,
+    "video": 8,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "n_zKYfyaokg",
+     "titolo": "Perché gli eroi di Ataca diventano Villain #Shorts",
+     "data": "2026-11-13T17:23:51Z",
+     "link": "https://youtube.com/shorts/n_zKYfyaokg",
+     "privato": false,
+     "views": 0,
+     "likes": 0,
+     "commenti": 0
+    },
     {
      "id": "fwoUK-2xqao",
      "titolo": "3 cose che non sai su Ataca #Shorts",
      "data": "2026-11-12T00:11:17Z",
      "link": "https://youtube.com/shorts/fwoUK-2xqao",
      "privato": false,
-     "views": 803,
+     "views": 919,
      "likes": 22,
      "commenti": 0
     },
@@ -27,7 +37,7 @@
      "data": "2026-11-11T19:05:54Z",
      "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
      "privato": false,
-     "views": 516,
+     "views": 521,
      "likes": 7,
      "commenti": 0
     },
@@ -83,7 +93,7 @@
     }
    ],
    "totali": {
-    "views": 2555,
+    "views": 2676,
     "likes": 48,
     "commenti": 0,
     "condivisioni": 0
@@ -96,7 +106,7 @@
     "follower": 4,
     "likes": 57,
     "video": 7,
-    "link": "https://vm.tiktok.com/ZN85J78PG/"
+    "link": "https://vm.tiktok.com/ZN856Gxwx/"
    },
    "video": [
     {
@@ -144,7 +154,7 @@
      "titolo": "I droni di Prometeo dovevano proteggere Ataca. Stanotte hanno puntato sulla folla. Perché? 🤖 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori #monomythos #cardgame #indiegame #giochidicarte #gamedev",
      "data": "2026-11-07T17:45:16.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7705487064615193889?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 927,
+     "views": 928,
      "likes": 17,
      "commenti": 0,
      "condivisioni": 0
@@ -171,7 +181,7 @@
     }
    ],
    "totali": {
-    "views": 3158,
+    "views": 3159,
     "likes": 57,
     "commenti": 1,
     "condivisioni": 0
@@ -186,10 +196,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 1,
-    "video": 7,
+    "video": 8,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n27iseq2nr2k",
+     "titolo": "In Monomythos il Velo di Tenebra si nutre della paura. Un eroe che ne assorbe troppa cambi",
+     "data": "2026-11-13T17:23:44.981Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n27iseq2nr2k",
+     "views": 0,
+     "likes": 1,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n236mtwi6p2a",
      "titolo": "3 segreti della città di Ataca, il mondo di Monomythos. 🌑",
@@ -263,9 +283,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 17,
+    "likes": 18,
     "commenti": 0,
-    "condivisioni": 7
+    "condivisioni": 8
    }
   },
   "telegram": {
