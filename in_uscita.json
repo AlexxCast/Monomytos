@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:43471971092-tiktok",
+  "titolo": "tt_campione",
+  "piattaforme": [
+   "tiktok"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-13_tt_campione.mp4",
+  "creato": "2026-11-13T17:24:32.231Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-13T17:24:32.231Z"
+ },
+ {
   "id": "video:43471971092-youtube",
   "titolo": "eroe_o_villain",
   "piattaforme": [
