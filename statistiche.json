@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-13T17:38:53.246Z",
+ "aggiornato": "2026-11-13T19:41:25.595Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -17,8 +17,8 @@
      "data": "2026-11-13T17:23:51Z",
      "link": "https://youtube.com/shorts/n_zKYfyaokg",
      "privato": false,
-     "views": 0,
-     "likes": 0,
+     "views": 29,
+     "likes": 1,
      "commenti": 0
     },
     {
@@ -37,7 +37,7 @@
      "data": "2026-11-11T19:05:54Z",
      "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
      "privato": false,
-     "views": 521,
+     "views": 522,
      "likes": 7,
      "commenti": 0
     },
@@ -93,8 +93,8 @@
     }
    ],
    "totali": {
-    "views": 2676,
-    "likes": 48,
+    "views": 2706,
+    "likes": 49,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -104,11 +104,21 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 57,
-    "video": 7,
-    "link": "https://vm.tiktok.com/ZN856Gxwx/"
+    "likes": 58,
+    "video": 8,
+    "link": "https://vm.tiktok.com/ZN85rb7XN/"
    },
    "video": [
+    {
+     "id": "7707713485509037344",
+     "titolo": "Parte 1/3 👁️ Il Velo ha preso tutta Ataca. Resti solo tu. Segui per la parte 2: domani scopri chi ti sta guardando. 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
+     "data": "2026-11-13T17:44:55.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7707713485509037344?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 128,
+     "likes": 1,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7707185483339664673",
      "titolo": "Ad Ataca, quando arriva il blackout, il Culto del Velo bussa alle porte. Tu apriresti? 🚪 #monomythos 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte ",
@@ -181,8 +191,8 @@
     }
    ],
    "totali": {
-    "views": 3159,
-    "likes": 57,
+    "views": 3287,
+    "likes": 58,
     "commenti": 1,
     "condivisioni": 0
    }
@@ -206,7 +216,7 @@
      "data": "2026-11-13T17:23:44.981Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n27iseq2nr2k",
      "views": 0,
-     "likes": 1,
+     "likes": 2,
      "commenti": 0,
      "condivisioni": 1
     },
@@ -283,7 +293,7 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 18,
+    "likes": 19,
     "commenti": 0,
     "condivisioni": 8
    }
