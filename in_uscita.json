@@ -9,8 +9,23 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-13_eroe_o_villain.mp4",
   "creato": "2026-11-13T17:23:31.477Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-13T17:23:31.477Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-13T17:23:31.477Z",
+  "esito": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/n_zKYfyaokg",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n27iseq2nr2k"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 11
+   }
+  }
  },
  {
   "id": "video:43117428184-instagram",

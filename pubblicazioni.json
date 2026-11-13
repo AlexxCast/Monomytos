@@ -1,5 +1,30 @@
 [
  {
+  "id": "eroe_o_villain",
+  "lingua": "it",
+  "data": "2026-11-13T17:23:32.723Z",
+  "prova": false,
+  "didascalia_instagram": "In Monomythos il Velo di Tenebra si nutre della paura. Un eroe che ne assorbe troppa cambia lato, e da quel momento gioca contro i suoi compagni. 🌑\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/n_zKYfyaokg",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n27iseq2nr2k"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 11
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-13_eroe_o_villain.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43471971092"
+ },
+ {
   "id": "yt_prometeo",
   "lingua": "it",
   "data": "2026-11-12T12:58:07.809Z",
