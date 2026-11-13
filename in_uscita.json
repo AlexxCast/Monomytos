@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:43471971092-instagram",
+  "titolo": "ig_ultimo_eroe_2",
+  "piattaforme": [
+   "instagram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-13_ig_ultimo_eroe_2.mp4",
+  "creato": "2026-11-13T17:26:15.951Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-13T17:26:15.950Z"
+ },
+ {
   "id": "video:43471971092-tiktok",
   "titolo": "tt_campione",
   "piattaforme": [
