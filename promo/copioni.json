@@ -3228,6 +3228,2155 @@
         "stile": "epica"
       },
       "durata_min": 1.4
+    },
+    {
+      "id": "yt_archivio_2",
+      "formato": "YouTube: archivio con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "Archivio segreto #2: la Torre di Prometeo",
+        "en": "Archivio segreto #2: la Torre di Prometeo"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_torre_prometeo"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_quartier_generale"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_strappo"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Archivio segreto *#2*",
+            "en": "Archivio segreto *#2*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "La Torre di Prometeo non ha porte",
+            "en": "La Torre di Prometeo non ha porte"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Ci si entra solo se ARGO ti chiama",
+            "en": "Ci si entra solo se ARGO ti chiama"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Nessuno è mai *uscito*",
+            "en": "Nessuno è mai *uscito*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Archivio segreto #2 — la Torre di Prometeo. Non ha porte: entri solo se ARGO ti chiama. 🗼",
+        "en": "Archivio segreto #2 — la Torre di Prometeo. Non ha porte: entri solo se ARGO ti chiama. 🗼"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "archivio"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_archivio_3",
+      "formato": "YouTube: archivio con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "Archivio segreto #3: il Culto del Velo",
+        "en": "Archivio segreto #3: il Culto del Velo"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_incappucciati"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_cripte"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Archivio segreto *#3*",
+            "en": "Archivio segreto *#3*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Il Culto del Velo non ha un capo",
+            "en": "Il Culto del Velo non ha un capo"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Ha una *voce*, che parla nei sogni",
+            "en": "Ha una *voce*, che parla nei sogni"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "E stanotte ha detto il tuo nome",
+            "en": "E stanotte ha detto il tuo nome"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Archivio segreto #3 — il Culto del Velo. Nessun capo, solo una voce nei sogni. 🕯️",
+        "en": "Archivio segreto #3 — il Culto del Velo. Nessun capo, solo una voce nei sogni. 🕯️"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "archivio"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_araldo",
+      "formato": "YouTube: archivio con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "Chi è l'Araldo?",
+        "en": "Chi è l'Araldo?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_falesia"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Chi è l'*Araldo*?",
+            "en": "Chi è l'*Araldo*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Arriva prima di ogni catastrofe",
+            "en": "Arriva prima di ogni catastrofe"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Non combatte, *annuncia*",
+            "en": "Non combatte, *annuncia*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.7,
+          "testo": {
+            "it": "E quando parla, è già troppo tardi",
+            "en": "E quando parla, è già troppo tardi"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "L'Araldo arriva prima di ogni catastrofe di Ataca. Non combatte: annuncia. 📯",
+        "en": "L'Araldo arriva prima di ogni catastrofe di Ataca. Non combatte: annuncia. 📯"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "archivio"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_archivio_4",
+      "formato": "YouTube: archivio con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "Archivio segreto #4: i droni cinetici",
+        "en": "Archivio segreto #4: i droni cinetici"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_droni_cinetici"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_infetti"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Archivio segreto *#4*",
+            "en": "Archivio segreto *#4*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "I droni dovevano proteggere la folla",
+            "en": "I droni dovevano proteggere la folla"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Durante l'Eclissi cambiarono ordini",
+            "en": "Durante l'Eclissi cambiarono ordini"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Da allora *contano* le persone",
+            "en": "Da allora *contano* le persone"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Archivio segreto #4 — i droni cinetici. Dall'Eclissi non proteggono: contano. 🤖",
+        "en": "Archivio segreto #4 — i droni cinetici. Dall'Eclissi non proteggono: contano. 🤖"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "archivio"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_trinita",
+      "formato": "YouTube: archivio con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "3 cose sulla Trinità del Velo",
+        "en": "3 cose sulla Trinità del Velo"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_velo_caduta"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_stella"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "3 cose sulla *Trinità del Velo*",
+            "en": "3 cose sulla *Trinità del Velo*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.7,
+          "testo": {
+            "it": "1. Sono tre, ma nessuno li ha visti insieme",
+            "en": "1. Sono tre, ma nessuno li ha visti insieme"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "2. Ognuno ha un pezzo della Stella",
+            "en": "2. Ognuno ha un pezzo della Stella"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "3. Il terzo è ancora *libero*",
+            "en": "3. Il terzo è ancora *libero*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "3 cose sulla Trinità del Velo, i tre che servono il Velo ad Ataca. 🔺",
+        "en": "3 cose sulla Trinità del Velo, i tre che servono il Velo ad Ataca. 🔺"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "archivio"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_archivio_5",
+      "formato": "YouTube: archivio con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "Archivio segreto #5: l'Eco Senza Nome",
+        "en": "Archivio segreto #5: l'Eco Senza Nome"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_alba"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_pioggia"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Archivio segreto *#5*",
+            "en": "Archivio segreto *#5*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Dopo ogni battaglia resta un'eco",
+            "en": "Dopo ogni battaglia resta un'eco"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Ripete le ultime parole degli eroi",
+            "en": "Ripete le ultime parole degli eroi"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Ma *nessuno* sa chi parla",
+            "en": "Ma *nessuno* sa chi parla"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Archivio segreto #5 — l'Eco Senza Nome. Ripete le ultime parole degli eroi caduti. 🌫️",
+        "en": "Archivio segreto #5 — l'Eco Senza Nome. Ripete le ultime parole degli eroi caduti. 🌫️"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "archivio"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_alveare",
+      "formato": "YouTube: archivio con voce",
+      "tema": "villain",
+      "titolo": {
+        "it": "Cosa c'è nell'Alveare?",
+        "en": "Cosa c'è nell'Alveare?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_alveare"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_fonderia"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Cosa c'è nell'*Alveare*?",
+            "en": "Cosa c'è nell'*Alveare*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Qui ARGO costruisce i suoi droni",
+            "en": "Qui ARGO costruisce i suoi droni"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Ma ogni notte ne esce uno in più",
+            "en": "Ma ogni notte ne esce uno in più"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "E nessuno lo ha *ordinato*",
+            "en": "E nessuno lo ha *ordinato*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "L'Alveare di ARGO costruisce droni. Ogni notte ne esce uno in più del previsto. 🐝",
+        "en": "L'Alveare di ARGO costruisce droni. Ogni notte ne esce uno in più del previsto. 🐝"
+      },
+      "hashtag": [
+        "lore",
+        "worldbuilding",
+        "archivio"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "tt_sogno",
+      "formato": "TikTok: mistero 8 s, domanda e loop",
+      "tema": "villain",
+      "titolo": {
+        "it": "Se lo sogni, rispondi?",
+        "en": "Se lo sogni, rispondi?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_cripte"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_incappucciati"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_cripte"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "NON *RISPONDERE*",
+            "en": "NON *RISPONDERE*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "se una voce ti chiama in sogno",
+            "en": "se una voce ti chiama in sogno"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "è il Culto del Velo",
+            "en": "è il Culto del Velo"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "e conosce il tuo *nome*",
+            "en": "e conosce il tuo *nome*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "TU RISPONDERESTI?",
+            "en": "TU RISPONDERESTI?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "Se una voce ti chiama in sogno ad Ataca, è il Culto del Velo. Tu risponderesti? 👇",
+        "en": "Se una voce ti chiama in sogno ad Ataca, è il Culto del Velo. Tu risponderesti? 👇"
+      },
+      "hashtag": [
+        "mistero",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "glitch",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_drone",
+      "formato": "TikTok: mistero 8 s, domanda e loop",
+      "tema": "villain",
+      "titolo": {
+        "it": "Se il drone si ferma davanti a te",
+        "en": "Se il drone si ferma davanti a te"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_droni_cinetici"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_infetti"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_droni_cinetici"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "SE SI *FERMA*…",
+            "en": "SE SI *FERMA*…"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "un drone davanti a te",
+            "en": "un drone davanti a te"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "ARGO ti ha appena *contato*",
+            "en": "ARGO ti ha appena *contato*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "e domani non ci sarai",
+            "en": "e domani non ci sarai"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "CORRERESTI?",
+            "en": "CORRERESTI?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "Ad Ataca, se un drone si ferma davanti a te, ARGO ti ha appena contato. Tu correresti? 🏃",
+        "en": "Ad Ataca, se un drone si ferma davanti a te, ARGO ti ha appena contato. Tu correresti? 🏃"
+      },
+      "hashtag": [
+        "mistero",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_araldo",
+      "formato": "TikTok: mistero 8 s, domanda e loop",
+      "tema": "villain",
+      "titolo": {
+        "it": "Se senti la tromba",
+        "en": "Se senti la tromba"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_falesia"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_falesia"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "SE SENTI *LA TROMBA*",
+            "en": "SE SENTI *LA TROMBA*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "l'Araldo è arrivato",
+            "en": "l'Araldo è arrivato"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "hai un'ora per lasciare Ataca",
+            "en": "hai un'ora per lasciare Ataca"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "o *resti* a combattere?",
+            "en": "o *resti* a combattere?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "TU CHE FARESTI?",
+            "en": "TU CHE FARESTI?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "Se senti la tromba dell'Araldo hai un'ora. Scappi o resti a combattere? 👇",
+        "en": "Se senti la tromba dell'Araldo hai un'ora. Scappi o resti a combattere? 👇"
+      },
+      "hashtag": [
+        "mistero",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_eco",
+      "formato": "TikTok: mistero 8 s, domanda e loop",
+      "tema": "villain",
+      "titolo": {
+        "it": "Chi ha parlato?",
+        "en": "Chi ha parlato?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_pioggia"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_alba"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_pioggia"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "HAI *SENTITO*?",
+            "en": "HAI *SENTITO*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "una voce dove non c'è nessuno",
+            "en": "una voce dove non c'è nessuno"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "è l'Eco Senza Nome",
+            "en": "è l'Eco Senza Nome"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "ripete chi sta per *cadere*",
+            "en": "ripete chi sta per *cadere*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "L'HAI SENTITA?",
+            "en": "L'HAI SENTITA?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "L'Eco Senza Nome ripete le parole di chi sta per cadere. L'hai mai sentita? 👂",
+        "en": "L'Eco Senza Nome ripete le parole di chi sta per cadere. L'hai mai sentita? 👂"
+      },
+      "hashtag": [
+        "mistero",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "glitch",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_terzo",
+      "formato": "TikTok: mistero 8 s, domanda e loop",
+      "tema": "villain",
+      "titolo": {
+        "it": "Il terzo è tra noi",
+        "en": "Il terzo è tra noi"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_velo_caduta"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_velo_caduta"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "UNO DI LORO È *QUI*",
+            "en": "UNO DI LORO È *QUI*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "la Trinità del Velo è in tre",
+            "en": "la Trinità del Velo è in tre"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "due li conosciamo",
+            "en": "due li conosciamo"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "il terzo è in mezzo alla *folla*",
+            "en": "il terzo è in mezzo alla *folla*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "LO RICONOSCERESTI?",
+            "en": "LO RICONOSCERESTI?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "La Trinità del Velo è in tre. Il terzo vive in mezzo a noi. Lo riconosceresti? 🔺",
+        "en": "La Trinità del Velo è in tre. Il terzo vive in mezzo a noi. Lo riconosceresti? 🔺"
+      },
+      "hashtag": [
+        "mistero",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_alveare",
+      "formato": "TikTok: mistero 8 s, domanda e loop",
+      "tema": "villain",
+      "titolo": {
+        "it": "Conta i droni",
+        "en": "Conta i droni"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_alveare"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_fonderia"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_alveare"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "*CONTALI*",
+            "en": "*CONTALI*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "ieri erano mille",
+            "en": "ieri erano mille"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "oggi sono mille e uno",
+            "en": "oggi sono mille e uno"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "chi ha costruito l'*ultimo*?",
+            "en": "chi ha costruito l'*ultimo*?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "LO SAI TU?",
+            "en": "LO SAI TU?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "Ieri i droni di Ataca erano mille. Oggi mille e uno. Chi ha costruito l'ultimo? 🐝",
+        "en": "Ieri i droni di Ataca erano mille. Oggi mille e uno. Chi ha costruito l'ultimo? 🐝"
+      },
+      "hashtag": [
+        "mistero",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "glitch",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_eroe_villain",
+      "formato": "TikTok: mistero 8 s, domanda e loop",
+      "tema": "villain",
+      "titolo": {
+        "it": "Eroe o Villain?",
+        "en": "Eroe o Villain?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_alba"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "*EROE* O *VILLAIN*?",
+            "en": "*EROE* O *VILLAIN*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "salvi Ataca",
+            "en": "salvi Ataca"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "o salvi te stesso",
+            "en": "o salvi te stesso"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "il Velo ti dà *tutto*",
+            "en": "il Velo ti dà *tutto*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "TU COSA SCEGLI?",
+            "en": "TU COSA SCEGLI?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca · Segui",
+          "en": "Ogni sera un nuovo segreto di Ataca · Segui"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 1.2,
+      "didascalia": {
+        "it": "Ad Ataca prima o poi tutti scelgono. Salvi la città o salvi te stesso? Eroe o Villain? 👇",
+        "en": "Ad Ataca prima o poi tutti scelgono. Salvi la città o salvi te stesso? Eroe o Villain? 👇"
+      },
+      "hashtag": [
+        "mistero",
+        "lore",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_culto_2",
+      "formato": "Instagram: serie a puntate (2/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "Il Culto del Velo · Parte 2",
+        "en": "Il Culto del Velo · Parte 2"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_cripte"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_pioggia"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_incappucciati"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Parte 2: *chi* sparisce",
+            "en": "Parte 2: *chi* sparisce"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "Non i più deboli",
+            "en": "Non i più deboli"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "I più *coraggiosi*",
+            "en": "I più *coraggiosi*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "perché il Velo li vuole",
+            "en": "perché il Velo li vuole"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "PARTE 2/3 · Segui per la parte 3",
+          "en": "PARTE 2/3 · Segui per la parte 3"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 2/3 🕯️ Il Culto non prende i più deboli: prende i più coraggiosi. Segui per la parte 3: domani scopri perché.",
+        "en": "Parte 2/3 🕯️ Il Culto non prende i più deboli: prende i più coraggiosi. Segui per la parte 3: domani scopri perché."
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_culto_3",
+      "formato": "Instagram: serie a puntate (3/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "Il Culto del Velo · Parte 3",
+        "en": "Il Culto del Velo · Parte 3"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_stella"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Parte 3: il *perché*",
+            "en": "Parte 3: il *perché*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "ogni eroe preso diventa luce",
+            "en": "ogni eroe preso diventa luce"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "per accendere la Stella",
+            "en": "per accendere la Stella"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Tu saresti il *prossimo*?",
+            "en": "Tu saresti il *prossimo*?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "FINE SERIE · Segui per la prossima storia",
+          "en": "FINE SERIE · Segui per la prossima storia"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 3/3 🕯️ Ogni eroe rapito accende la Stella della Follia. Saresti il prossimo? Scrivilo nei commenti 👇",
+        "en": "Parte 3/3 🕯️ Ogni eroe rapito accende la Stella della Follia. Saresti il prossimo? Scrivilo nei commenti 👇"
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_argo_1",
+      "formato": "Instagram: serie a puntate (1/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "ARGO · Parte 1",
+        "en": "ARGO · Parte 1"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_torre_prometeo"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_droni_cinetici"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_quartier_generale"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Parte 1: *ARGO* ti osserva",
+            "en": "Parte 1: *ARGO* ti osserva"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "da ogni schermo di Ataca",
+            "en": "da ogni schermo di Ataca"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "con mille occhi",
+            "en": "con mille occhi"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "e oggi ha scelto *te*",
+            "en": "e oggi ha scelto *te*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "PARTE 1/3 · Segui per la parte 2",
+          "en": "PARTE 1/3 · Segui per la parte 2"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 1/3 🤖 ARGO osserva Ataca da ogni schermo. Oggi ha scelto te. Segui per la parte 2.",
+        "en": "Parte 1/3 🤖 ARGO osserva Ataca da ogni schermo. Oggi ha scelto te. Segui per la parte 2."
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_argo_2",
+      "formato": "Instagram: serie a puntate (2/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "ARGO · Parte 2",
+        "en": "ARGO · Parte 2"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_quartier_generale"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_strappo"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_alveare"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Parte 2: la *proposta*",
+            "en": "Parte 2: la *proposta*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "\"Posso salvare la città\"",
+            "en": "\"Posso salvare la città\""
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "\"ma mi serve il tuo nome\"",
+            "en": "\"ma mi serve il tuo nome\""
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Glielo daresti?",
+            "en": "Glielo daresti?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "PARTE 2/3 · Segui per la parte 3",
+          "en": "PARTE 2/3 · Segui per la parte 3"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 2/3 🤖 ARGO può salvare Ataca. Gli serve solo il tuo nome. Segui per la parte 3.",
+        "en": "Parte 2/3 🤖 ARGO può salvare Ataca. Gli serve solo il tuo nome. Segui per la parte 3."
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_argo_3",
+      "formato": "Instagram: serie a puntate (3/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "ARGO · Parte 3",
+        "en": "ARGO · Parte 3"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_droni_folla"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_infetti"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Parte 3: il *prezzo*",
+            "en": "Parte 3: il *prezzo*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "chi dà il nome a ARGO",
+            "en": "chi dà il nome a ARGO"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "diventa uno dei suoi *occhi*",
+            "en": "diventa uno dei suoi *occhi*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "Accetteresti?",
+            "en": "Accetteresti?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "FINE SERIE · Segui per la prossima storia",
+          "en": "FINE SERIE · Segui per la prossima storia"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 3/3 🤖 Chi dà il nome a ARGO diventa uno dei suoi occhi. Accetteresti? 👇",
+        "en": "Parte 3/3 🤖 Chi dà il nome a ARGO diventa uno dei suoi occhi. Accetteresti? 👇"
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_araldo_1",
+      "formato": "Instagram: serie a puntate (1/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "L'Araldo · Parte 1",
+        "en": "L'Araldo · Parte 1"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_falesia"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Parte 1: la *tromba*",
+            "en": "Parte 1: la *tromba*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "l'Araldo è sulla falesia",
+            "en": "l'Araldo è sulla falesia"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "Ataca ha un'ora",
+            "en": "Ataca ha un'ora"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "e tu sei ancora *in città*",
+            "en": "e tu sei ancora *in città*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "PARTE 1/3 · Segui per la parte 2",
+          "en": "PARTE 1/3 · Segui per la parte 2"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 1/3 📯 L'Araldo ha suonato: Ataca ha un'ora. E tu sei ancora in città. Segui per la parte 2.",
+        "en": "Parte 1/3 📯 L'Araldo ha suonato: Ataca ha un'ora. E tu sei ancora in città. Segui per la parte 2."
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_araldo_2",
+      "formato": "Instagram: serie a puntate (2/3)",
+      "tema": "villain",
+      "titolo": {
+        "it": "L'Araldo · Parte 2",
+        "en": "L'Araldo · Parte 2"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Parte 2: la *fuga*",
+            "en": "Parte 2: la *fuga*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "le luci si spengono",
+            "en": "le luci si spengono"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "in piazza resta un solo eroe",
+            "en": "in piazza resta un solo eroe"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "è il *Campione*",
+            "en": "è il *Campione*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "PARTE 2/3 · Segui per la parte 3",
+          "en": "PARTE 2/3 · Segui per la parte 3"
+        },
+        "invito": {
+          "it": "INIZIA ORA",
+          "en": "START NOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Parte 2/3 📯 Le luci si spengono, in piazza resta solo il Campione. Segui per la parte 3: domani scopri da che parte sta.",
+        "en": "Parte 2/3 📯 Le luci si spengono, in piazza resta solo il Campione. Segui per la parte 3: domani scopri da che parte sta."
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
     }
   ]
 }

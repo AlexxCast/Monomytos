@@ -1,5 +1,5 @@
 {
- "nota": "Scaletta dei video. Ogni giorno alle 17:50 (ora italiana) il workflow promo-video prepara il copione del giorno; esce un'ora dopo (~19:00) se non lo annulli dal Centro social. Settimana di prova 6-12/11: un formato diverso al giorno, solo lore (niente gameplay finché le carte non sono pronte). Poi si sceglie il formato vincente dalle statistiche. Instagram si pubblica a mano dall'app finché non è collegato. Dal 12/11 (Alessio): contenuti diversi per piattaforma. Nel giorno 'per_piattaforma' sceglie il copione di YouTube (con Bluesky e Telegram), TikTok e Instagram: escono come video separati.",
+ "nota": "Scaletta dei video. Ogni giorno alle 17:50 (ora italiana) il workflow promo-video prepara il copione del giorno; esce un'ora dopo (~19:00) se non lo annulli dal Centro social. Settimana di prova 6-12/11: un formato diverso al giorno, solo lore (niente gameplay finché le carte non sono pronte). Poi si sceglie il formato vincente dalle statistiche. Instagram si pubblica a mano dall'app finché non è collegato. Dal 12/11 (Alessio): contenuti diversi per piattaforma. Nel giorno 'per_piattaforma' sceglie il copione di YouTube (con Bluesky e Telegram), TikTok e Instagram: escono come video separati. 13/11: formato vincente per piattaforma (settimana di prova): YouTube = archivio/lista di lore CON VOCE (archivio_arena 1163 viste, tre_segreti 803, senza voce 4-38); TikTok = mistero ~8-9 s senza voce con domanda (mistero_prometeo 927, aggancio_stella 888; voce ~250); Instagram = POV a puntate.",
  "fuso_orario": "Europe/Rome",
  "lingua_testi": "it",
  "piattaforme": [
@@ -77,6 +77,76 @@
     "youtube": "yt_eclissi",
     "tiktok": "tt_cisterna",
     "instagram": "ig_culto_1"
+   }
+  },
+  {
+   "data": "2026-11-16",
+   "copione": "yt_archivio_2",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_archivio_2",
+    "tiktok": "tt_sogno",
+    "instagram": "ig_culto_2"
+   }
+  },
+  {
+   "data": "2026-11-17",
+   "copione": "yt_archivio_3",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_archivio_3",
+    "tiktok": "tt_drone",
+    "instagram": "ig_culto_3"
+   }
+  },
+  {
+   "data": "2026-11-18",
+   "copione": "yt_araldo",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_araldo",
+    "tiktok": "tt_araldo",
+    "instagram": "ig_argo_1"
+   }
+  },
+  {
+   "data": "2026-11-19",
+   "copione": "yt_archivio_4",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_archivio_4",
+    "tiktok": "tt_eco",
+    "instagram": "ig_argo_2"
+   }
+  },
+  {
+   "data": "2026-11-20",
+   "copione": "yt_trinita",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_trinita",
+    "tiktok": "tt_terzo",
+    "instagram": "ig_argo_3"
+   }
+  },
+  {
+   "data": "2026-11-21",
+   "copione": "yt_archivio_5",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_archivio_5",
+    "tiktok": "tt_alveare",
+    "instagram": "ig_araldo_1"
+   }
+  },
+  {
+   "data": "2026-11-22",
+   "copione": "yt_alveare",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_alveare",
+    "tiktok": "tt_eroe_villain",
+    "instagram": "ig_araldo_2"
    }
   }
  ],
