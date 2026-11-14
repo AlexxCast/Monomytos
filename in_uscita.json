@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:43620682160-tiktok",
+  "titolo": "tt_mappa",
+  "piattaforme": [
+   "tiktok"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-14_tt_mappa.mp4",
+  "creato": "2026-11-14T17:25:07.198Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-14T17:25:07.197Z"
+ },
+ {
   "id": "video:43620682160-youtube",
   "titolo": "yt_prometeo",
   "piattaforme": [
