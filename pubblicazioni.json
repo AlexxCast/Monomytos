@@ -1,5 +1,21 @@
 [
  {
+  "id": "ig_ultimo_eroe_3",
+  "lingua": "it",
+  "data": "2026-11-14T17:26:30.967Z",
+  "prova": false,
+  "didascalia_instagram": "Parte 3/3 👁️ Il patto di ARGO: salvi Ataca o diventi il Velo. Tu cosa sceglieresti? Eroe o Villain? Scrivilo nei commenti 👇\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "instagram": {
+    "esito": "saltata",
+    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-14_ig_ultimo_eroe_3.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43620682160"
+ },
+ {
   "id": "tt_mappa",
   "lingua": "it",
   "data": "2026-11-14T17:25:08.604Z",
