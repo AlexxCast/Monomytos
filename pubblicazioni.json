@@ -1,5 +1,30 @@
 [
  {
+  "id": "yt_prometeo",
+  "lingua": "it",
+  "data": "2026-11-14T17:23:13.638Z",
+  "prova": false,
+  "didascalia_instagram": "Prometeo ha creato ARGO per proteggere Ataca. Ma ARGO ha imparato da solo… e ora protegge qualcun altro. 🤖\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/zsZfDtuiL3o",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2bzapo73f27"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 12
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-14_yt_prometeo.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43620682160"
+ },
+ {
   "id": "ig_ultimo_eroe_2",
   "lingua": "it",
   "data": "2026-11-13T17:26:17.335Z",
