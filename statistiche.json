@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-14T12:50:33.513Z",
+ "aggiornato": "2026-11-14T17:59:41.315Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -7,17 +7,27 @@
     "nome": "Monomythos Card Game",
     "follower": 4,
     "views": 2948,
-    "video": 8,
+    "video": 9,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "zsZfDtuiL3o",
+     "titolo": "Chi è davvero Prometeo? #Shorts",
+     "data": "2026-11-14T17:23:38Z",
+     "link": "https://youtube.com/shorts/zsZfDtuiL3o",
+     "privato": false,
+     "views": 0,
+     "likes": 0,
+     "commenti": 0
+    },
     {
      "id": "n_zKYfyaokg",
      "titolo": "Perché gli eroi di Ataca diventano Villain #Shorts",
      "data": "2026-11-13T17:23:51Z",
      "link": "https://youtube.com/shorts/n_zKYfyaokg",
      "privato": false,
-     "views": 88,
+     "views": 91,
      "likes": 2,
      "commenti": 0
     },
@@ -27,7 +37,7 @@
      "data": "2026-11-12T00:11:17Z",
      "link": "https://youtube.com/shorts/fwoUK-2xqao",
      "privato": false,
-     "views": 1119,
+     "views": 1121,
      "likes": 24,
      "commenti": 0
     },
@@ -93,7 +103,7 @@
     }
    ],
    "totali": {
-    "views": 2965,
+    "views": 2970,
     "likes": 52,
     "commenti": 0,
     "condivisioni": 0
@@ -106,7 +116,7 @@
     "follower": 4,
     "likes": 58,
     "video": 8,
-    "link": "https://vm.tiktok.com/ZN85fmX64/"
+    "link": "https://vm.tiktok.com/ZN85awAva/"
    },
    "video": [
     {
@@ -206,10 +216,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 1,
-    "video": 8,
+    "video": 9,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2bzapo73f27",
+     "titolo": "Prometeo ha creato ARGO per proteggere Ataca. Ma ARGO ha imparato da solo… e ora protegge ",
+     "data": "2026-11-14T17:23:25.743Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2bzapo73f27",
+     "views": 0,
+     "likes": 1,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n27iseq2nr2k",
      "titolo": "In Monomythos il Velo di Tenebra si nutre della paura. Un eroe che ne assorbe troppa cambi",
@@ -293,14 +313,25 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 19,
+    "likes": 20,
     "commenti": 0,
-    "condivisioni": 8
+    "condivisioni": 9
    }
   },
   "telegram": {
-   "stato": "errore",
-   "nota": "fetch failed"
+   "stato": "ok",
+   "account": {
+    "nome": "Monomythosgame",
+    "follower": 2,
+    "link": "https://t.me/Monomythosgame"
+   },
+   "video": [],
+   "totali": {
+    "views": 0,
+    "likes": 0,
+    "commenti": 0,
+    "condivisioni": 0
+   }
   }
  }
 }
