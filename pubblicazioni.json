@@ -1,5 +1,21 @@
 [
  {
+  "id": "tt_mappa",
+  "lingua": "it",
+  "data": "2026-11-14T17:25:08.604Z",
+  "prova": false,
+  "didascalia_instagram": "La Stella della Follia non compare su nessuna mappa di Ataca. I droni però la seguono. Secondo te perché? 👁️\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "tiktok": {
+    "esito": "ok",
+    "stato": "SEND_TO_USER_INBOX (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-14_tt_mappa.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43620682160"
+ },
+ {
   "id": "yt_prometeo",
   "lingua": "it",
   "data": "2026-11-14T17:23:13.638Z",
