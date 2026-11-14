@@ -1,5 +1,18 @@
 [
  {
+  "id": "video:43620682160-youtube",
+  "titolo": "yt_prometeo",
+  "piattaforme": [
+   "youtube",
+   "bluesky",
+   "telegram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-14_yt_prometeo.mp4",
+  "creato": "2026-11-14T17:23:12.264Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-14T17:23:12.263Z"
+ },
+ {
   "id": "video:43471971092-instagram",
   "titolo": "ig_ultimo_eroe_2",
   "piattaforme": [
