@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-14T06:20:47.059Z",
+ "aggiornato": "2026-11-14T12:50:33.513Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -17,7 +17,7 @@
      "data": "2026-11-13T17:23:51Z",
      "link": "https://youtube.com/shorts/n_zKYfyaokg",
      "privato": false,
-     "views": 87,
+     "views": 88,
      "likes": 2,
      "commenti": 0
     },
@@ -27,7 +27,7 @@
      "data": "2026-11-12T00:11:17Z",
      "link": "https://youtube.com/shorts/fwoUK-2xqao",
      "privato": false,
-     "views": 1115,
+     "views": 1119,
      "likes": 24,
      "commenti": 0
     },
@@ -93,7 +93,7 @@
     }
    ],
    "totali": {
-    "views": 2960,
+    "views": 2965,
     "likes": 52,
     "commenti": 0,
     "condivisioni": 0
@@ -106,7 +106,7 @@
     "follower": 4,
     "likes": 58,
     "video": 8,
-    "link": "https://vm.tiktok.com/ZN85SBN9T/"
+    "link": "https://vm.tiktok.com/ZN85fmX64/"
    },
    "video": [
     {
@@ -114,7 +114,7 @@
      "titolo": "Parte 1/3 👁️ Il Velo ha preso tutta Ataca. Resti solo tu. Segui per la parte 2: domani scopri chi ti sta guardando. 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
      "data": "2026-11-13T17:44:55.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7707713485509037344?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 243,
+     "views": 244,
      "likes": 1,
      "commenti": 0,
      "condivisioni": 0
@@ -174,7 +174,7 @@
      "titolo": "Ad Ataca è comparsa la Stella della Follia. Chi la fissa cambia lato. Tu resisti? 👁️ 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
      "data": "2026-11-06T18:14:47.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7705123584242371873?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 888,
+     "views": 889,
      "likes": 10,
      "commenti": 1,
      "condivisioni": 0
@@ -191,7 +191,7 @@
     }
    ],
    "totali": {
-    "views": 3402,
+    "views": 3404,
     "likes": 58,
     "commenti": 1,
     "condivisioni": 0
@@ -299,19 +299,8 @@
    }
   },
   "telegram": {
-   "stato": "ok",
-   "account": {
-    "nome": "Monomythosgame",
-    "follower": 2,
-    "link": "https://t.me/Monomythosgame"
-   },
-   "video": [],
-   "totali": {
-    "views": 0,
-    "likes": 0,
-    "commenti": 0,
-    "condivisioni": 0
-   }
+   "stato": "errore",
+   "nota": "fetch failed"
   }
  }
 }
