@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-14T17:59:41.315Z",
+ "aggiornato": "2026-11-14T22:23:20.006Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -17,8 +17,8 @@
      "data": "2026-11-14T17:23:38Z",
      "link": "https://youtube.com/shorts/zsZfDtuiL3o",
      "privato": false,
-     "views": 0,
-     "likes": 0,
+     "views": 45,
+     "likes": 2,
      "commenti": 0
     },
     {
@@ -27,7 +27,7 @@
      "data": "2026-11-13T17:23:51Z",
      "link": "https://youtube.com/shorts/n_zKYfyaokg",
      "privato": false,
-     "views": 91,
+     "views": 93,
      "likes": 2,
      "commenti": 0
     },
@@ -37,7 +37,7 @@
      "data": "2026-11-12T00:11:17Z",
      "link": "https://youtube.com/shorts/fwoUK-2xqao",
      "privato": false,
-     "views": 1121,
+     "views": 1125,
      "likes": 24,
      "commenti": 0
     },
@@ -103,8 +103,8 @@
     }
    ],
    "totali": {
-    "views": 2970,
-    "likes": 52,
+    "views": 3021,
+    "likes": 54,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -114,11 +114,21 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 58,
-    "video": 8,
-    "link": "https://vm.tiktok.com/ZN85awAva/"
+    "likes": 60,
+    "video": 9,
+    "link": "https://vm.tiktok.com/ZN8596YBh/"
    },
    "video": [
+    {
+     "id": "7708097693175909664",
+     "titolo": "La Stella della Follia non compare su nessuna mappa di Ataca. I droni però la seguono. Secondo te perché? 👁️ 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
+     "data": "2026-11-14T18:35:53.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7708097693175909664?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 178,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7707713485509037344",
      "titolo": "Parte 1/3 👁️ Il Velo ha preso tutta Ataca. Resti solo tu. Segui per la parte 2: domani scopri chi ti sta guardando. 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
@@ -144,7 +154,7 @@
      "titolo": "La notte in cui tutto è cambiato. Capitolo 1: L'Eclissi Sintetica. 🌑 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
      "data": "2026-11-11T19:42:29.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7707001606314757409?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 262,
+     "views": 263,
      "likes": 5,
      "commenti": 0,
      "condivisioni": 0
@@ -201,8 +211,8 @@
     }
    ],
    "totali": {
-    "views": 3404,
-    "likes": 58,
+    "views": 3583,
+    "likes": 60,
     "commenti": 1,
     "condivisioni": 0
    }
@@ -226,7 +236,7 @@
      "data": "2026-11-14T17:23:25.743Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2bzapo73f27",
      "views": 0,
-     "likes": 1,
+     "likes": 2,
      "commenti": 0,
      "condivisioni": 1
     },
@@ -313,7 +323,7 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 20,
+    "likes": 21,
     "commenti": 0,
     "condivisioni": 9
    }
