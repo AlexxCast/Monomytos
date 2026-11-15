@@ -1,23 +1,33 @@
 {
- "aggiornato": "2026-11-15T06:30:06.753Z",
+ "aggiornato": "2026-11-15T18:50:27.431Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 4,
-    "views": 3033,
-    "video": 9,
+    "views": 3041,
+    "video": 10,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "nfipBqluwac",
+     "titolo": "La notte dell'Eclissi Sintetica #Shorts",
+     "data": "2026-11-15T17:23:52Z",
+     "link": "https://youtube.com/shorts/nfipBqluwac",
+     "privato": false,
+     "views": 9,
+     "likes": 0,
+     "commenti": 0
+    },
     {
      "id": "zsZfDtuiL3o",
      "titolo": "Chi è davvero Prometeo? #Shorts",
      "data": "2026-11-14T17:23:38Z",
      "link": "https://youtube.com/shorts/zsZfDtuiL3o",
      "privato": false,
-     "views": 57,
+     "views": 64,
      "likes": 2,
      "commenti": 0
     },
@@ -27,7 +37,7 @@
      "data": "2026-11-13T17:23:51Z",
      "link": "https://youtube.com/shorts/n_zKYfyaokg",
      "privato": false,
-     "views": 101,
+     "views": 112,
      "likes": 2,
      "commenti": 0
     },
@@ -87,7 +97,7 @@
      "data": "2026-11-06T18:03:00Z",
      "link": "https://youtube.com/shorts/eLC5EshF6PA",
      "privato": false,
-     "views": 4,
+     "views": 5,
      "likes": 1,
      "commenti": 0
     },
@@ -103,7 +113,7 @@
     }
    ],
    "totali": {
-    "views": 3039,
+    "views": 3067,
     "likes": 54,
     "commenti": 0,
     "condivisioni": 0
@@ -116,7 +126,7 @@
     "follower": 4,
     "likes": 60,
     "video": 9,
-    "link": "https://vm.tiktok.com/ZN85Qj6CP/"
+    "link": "https://vm.tiktok.com/ZN85bVMc6/"
    },
    "video": [
     {
@@ -226,10 +236,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 1,
-    "video": 9,
+    "video": 10,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2ejq4royz2t",
+     "titolo": "La notte dell'Eclissi Sintetica Ataca si spense in un secondo. Poi in cielo apparve la Ste",
+     "data": "2026-11-15T17:23:41.954Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2ejq4royz2t",
+     "views": 0,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2bzapo73f27",
      "titolo": "Prometeo ha creato ARGO per proteggere Ataca. Ma ARGO ha imparato da solo… e ora protegge ",
@@ -323,9 +343,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 21,
+    "likes": 23,
     "commenti": 0,
-    "condivisioni": 9
+    "condivisioni": 10
    }
   },
   "telegram": {
