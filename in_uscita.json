@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:43740688257-instagram",
+  "titolo": "ig_culto_1",
+  "piattaforme": [
+   "instagram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-15_ig_culto_1.mp4",
+  "creato": "2026-11-15T17:26:54.249Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-15T17:26:54.249Z"
+ },
+ {
   "id": "video:43740688257-tiktok",
   "titolo": "tt_cisterna",
   "piattaforme": [
