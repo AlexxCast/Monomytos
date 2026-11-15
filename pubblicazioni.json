@@ -1,5 +1,21 @@
 [
  {
+  "id": "tt_cisterna",
+  "lingua": "it",
+  "data": "2026-11-15T17:25:05.856Z",
+  "prova": false,
+  "didascalia_instagram": "Sotto Ataca c'è un'arena segreta. Chi vince esce cambiato. Chi perde non esce. Tu scenderesti? 🕳️\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "tiktok": {
+    "esito": "ok",
+    "stato": "SEND_TO_USER_INBOX (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-15_tt_cisterna.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43740688257"
+ },
+ {
   "id": "yt_eclissi",
   "lingua": "it",
   "data": "2026-11-15T17:23:27.642Z",
