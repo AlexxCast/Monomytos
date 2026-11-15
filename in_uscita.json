@@ -9,8 +9,23 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-15_yt_eclissi.mp4",
   "creato": "2026-11-15T17:23:26.203Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-15T17:23:26.202Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-15T17:23:26.202Z",
+  "esito": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/nfipBqluwac",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2ejq4royz2t"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 13
+   }
+  }
  },
  {
   "id": "video:43620682160-instagram",
