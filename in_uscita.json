@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:43917589849-instagram",
+  "titolo": "ig_culto_2",
+  "piattaforme": [
+   "instagram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-16_ig_culto_2.mp4",
+  "creato": "2026-11-16T17:26:38.957Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-16T17:26:38.957Z"
+ },
+ {
   "id": "video:43917589849-tiktok",
   "titolo": "tt_sogno",
   "piattaforme": [
