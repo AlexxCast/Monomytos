@@ -1,12 +1,12 @@
 {
- "aggiornato": "2026-11-15T18:50:27.431Z",
+ "aggiornato": "2026-11-16T06:27:11.601Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 4,
-    "views": 3041,
+    "views": 3130,
     "video": 10,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
@@ -17,7 +17,7 @@
      "data": "2026-11-15T17:23:52Z",
      "link": "https://youtube.com/shorts/nfipBqluwac",
      "privato": false,
-     "views": 9,
+     "views": 82,
      "likes": 0,
      "commenti": 0
     },
@@ -27,7 +27,7 @@
      "data": "2026-11-14T17:23:38Z",
      "link": "https://youtube.com/shorts/zsZfDtuiL3o",
      "privato": false,
-     "views": 64,
+     "views": 66,
      "likes": 2,
      "commenti": 0
     },
@@ -47,7 +47,7 @@
      "data": "2026-11-12T00:11:17Z",
      "link": "https://youtube.com/shorts/fwoUK-2xqao",
      "privato": false,
-     "views": 1124,
+     "views": 1129,
      "likes": 24,
      "commenti": 0
     },
@@ -57,7 +57,7 @@
      "data": "2026-11-11T19:05:54Z",
      "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
      "privato": false,
-     "views": 524,
+     "views": 525,
      "likes": 7,
      "commenti": 0
     },
@@ -113,7 +113,7 @@
     }
    ],
    "totali": {
-    "views": 3067,
+    "views": 3148,
     "likes": 54,
     "commenti": 0,
     "condivisioni": 0
@@ -126,7 +126,7 @@
     "follower": 4,
     "likes": 60,
     "video": 9,
-    "link": "https://vm.tiktok.com/ZN85bVMc6/"
+    "link": "https://vm.tiktok.com/ZN85GbgMR/"
    },
    "video": [
     {
@@ -235,7 +235,7 @@
    "stato": "ok",
    "account": {
     "nome": "monomythos.bsky.social",
-    "follower": 1,
+    "follower": 0,
     "video": 10,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
