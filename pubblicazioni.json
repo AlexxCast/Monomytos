@@ -1,5 +1,21 @@
 [
  {
+  "id": "tt_sogno",
+  "lingua": "it",
+  "data": "2026-11-16T17:25:05.858Z",
+  "prova": false,
+  "didascalia_instagram": "Se una voce ti chiama in sogno ad Ataca, è il Culto del Velo. Tu risponderesti? 👇\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "tiktok": {
+    "esito": "ok",
+    "stato": "SEND_TO_USER_INBOX (apri TikTok: il video è nella posta, pubblicalo da lì)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-16_tt_sogno.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/43917589849"
+ },
+ {
   "id": "yt_archivio_2",
   "lingua": "it",
   "data": "2026-11-16T17:23:33.026Z",
