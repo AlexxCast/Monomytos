@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-16T06:27:11.601Z",
+ "aggiornato": "2026-11-16T22:00:04.471Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -7,17 +7,27 @@
     "nome": "Monomythos Card Game",
     "follower": 4,
     "views": 3130,
-    "video": 10,
+    "video": 11,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "H9D8BxuohZA",
+     "titolo": "Archivio segreto #2: la Torre di Prometeo #Shorts",
+     "data": "2026-11-16T17:23:52Z",
+     "link": "https://youtube.com/shorts/H9D8BxuohZA",
+     "privato": false,
+     "views": 29,
+     "likes": 1,
+     "commenti": 0
+    },
     {
      "id": "nfipBqluwac",
      "titolo": "La notte dell'Eclissi Sintetica #Shorts",
      "data": "2026-11-15T17:23:52Z",
      "link": "https://youtube.com/shorts/nfipBqluwac",
      "privato": false,
-     "views": 82,
+     "views": 83,
      "likes": 0,
      "commenti": 0
     },
@@ -27,7 +37,7 @@
      "data": "2026-11-14T17:23:38Z",
      "link": "https://youtube.com/shorts/zsZfDtuiL3o",
      "privato": false,
-     "views": 66,
+     "views": 67,
      "likes": 2,
      "commenti": 0
     },
@@ -47,7 +57,7 @@
      "data": "2026-11-12T00:11:17Z",
      "link": "https://youtube.com/shorts/fwoUK-2xqao",
      "privato": false,
-     "views": 1129,
+     "views": 1130,
      "likes": 24,
      "commenti": 0
     },
@@ -57,7 +67,7 @@
      "data": "2026-11-11T19:05:54Z",
      "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
      "privato": false,
-     "views": 525,
+     "views": 526,
      "likes": 7,
      "commenti": 0
     },
@@ -113,8 +123,8 @@
     }
    ],
    "totali": {
-    "views": 3148,
-    "likes": 54,
+    "views": 3181,
+    "likes": 55,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -126,7 +136,7 @@
     "follower": 4,
     "likes": 60,
     "video": 9,
-    "link": "https://vm.tiktok.com/ZN85GbgMR/"
+    "link": "https://vm.tiktok.com/ZN8aeaWjs/"
    },
    "video": [
     {
@@ -164,7 +174,7 @@
      "titolo": "La notte in cui tutto è cambiato. Capitolo 1: L'Eclissi Sintetica. 🌑 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. Link in bio 👆 #monomythos #cardgame #indiegame #giochidicarte #gamedev ",
      "data": "2026-11-11T19:42:29.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7707001606314757409?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 263,
+     "views": 264,
      "likes": 5,
      "commenti": 0,
      "condivisioni": 0
@@ -221,7 +231,7 @@
     }
    ],
    "totali": {
-    "views": 3643,
+    "views": 3644,
     "likes": 60,
     "commenti": 1,
     "condivisioni": 0
@@ -236,10 +246,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 0,
-    "video": 10,
+    "video": 11,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2h275otjm2k",
+     "titolo": "Archivio segreto #2 — la Torre di Prometeo. Non ha porte: entri solo se ARGO ti chiama. 🗼",
+     "data": "2026-11-16T17:23:45.847Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2h275otjm2k",
+     "views": 0,
+     "likes": 1,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2ejq4royz2t",
      "titolo": "La notte dell'Eclissi Sintetica Ataca si spense in un secondo. Poi in cielo apparve la Ste",
@@ -343,9 +363,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 23,
+    "likes": 24,
     "commenti": 0,
-    "condivisioni": 10
+    "condivisioni": 11
    }
   },
   "telegram": {
