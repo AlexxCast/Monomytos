@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:44136112113-tiktok",
+  "titolo": "tt_drone",
+  "piattaforme": [
+   "tiktok"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-17_tt_drone.mp4",
+  "creato": "2026-11-17T17:24:50.585Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-17T17:24:50.585Z"
+ },
+ {
   "id": "video:44136112113-youtube",
   "titolo": "yt_archivio_3",
   "piattaforme": [
