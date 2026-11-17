@@ -1,5 +1,30 @@
 [
  {
+  "id": "yt_archivio_3",
+  "lingua": "it",
+  "data": "2026-11-17T17:23:17.582Z",
+  "prova": false,
+  "didascalia_instagram": "Archivio segreto #3 — il Culto del Velo. Nessun capo, solo una voce nei sogni. 🕯️\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\nLink in bio 👆\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/3Uzub-4osj8",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2jknluehw22"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 16
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-17_yt_archivio_3.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/44136112113"
+ },
+ {
   "id": "ig_culto_2",
   "lingua": "it",
   "data": "2026-11-16T17:26:40.301Z",

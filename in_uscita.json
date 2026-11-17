@@ -9,8 +9,23 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-17_yt_archivio_3.mp4",
   "creato": "2026-11-17T17:23:16.196Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-17T17:23:16.196Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-17T17:23:16.196Z",
+  "esito": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/3Uzub-4osj8",
+    "stato": "public"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2jknluehw22"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 16
+   }
+  }
  },
  {
   "id": "video:43917589849-instagram",
