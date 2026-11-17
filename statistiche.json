@@ -1,23 +1,33 @@
 {
- "aggiornato": "2026-11-17T07:53:31.171Z",
+ "aggiornato": "2026-11-17T20:54:19.128Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 4,
-    "views": 3192,
-    "video": 11,
+    "views": 3205,
+    "video": 12,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "3Uzub-4osj8",
+     "titolo": "Archivio segreto #3: il Culto del Velo #Shorts",
+     "data": "2026-11-17T17:23:34Z",
+     "link": "https://youtube.com/shorts/3Uzub-4osj8",
+     "privato": false,
+     "views": 33,
+     "likes": 0,
+     "commenti": 0
+    },
     {
      "id": "H9D8BxuohZA",
      "titolo": "Archivio segreto #2: la Torre di Prometeo #Shorts",
      "data": "2026-11-16T17:23:52Z",
      "link": "https://youtube.com/shorts/H9D8BxuohZA",
      "privato": false,
-     "views": 46,
+     "views": 56,
      "likes": 1,
      "commenti": 0
     },
@@ -27,7 +37,7 @@
      "data": "2026-11-15T17:23:52Z",
      "link": "https://youtube.com/shorts/nfipBqluwac",
      "privato": false,
-     "views": 86,
+     "views": 88,
      "likes": 0,
      "commenti": 0
     },
@@ -37,7 +47,7 @@
      "data": "2026-11-14T17:23:38Z",
      "link": "https://youtube.com/shorts/zsZfDtuiL3o",
      "privato": false,
-     "views": 68,
+     "views": 69,
      "likes": 2,
      "commenti": 0
     },
@@ -47,7 +57,7 @@
      "data": "2026-11-13T17:23:51Z",
      "link": "https://youtube.com/shorts/n_zKYfyaokg",
      "privato": false,
-     "views": 112,
+     "views": 110,
      "likes": 2,
      "commenti": 0
     },
@@ -57,7 +67,7 @@
      "data": "2026-11-12T00:11:17Z",
      "link": "https://youtube.com/shorts/fwoUK-2xqao",
      "privato": false,
-     "views": 1130,
+     "views": 1129,
      "likes": 24,
      "commenti": 0
     },
@@ -67,7 +77,7 @@
      "data": "2026-11-11T19:05:54Z",
      "link": "https://youtube.com/shorts/Sc_XTtBJQ3c",
      "privato": false,
-     "views": 526,
+     "views": 525,
      "likes": 7,
      "commenti": 0
     },
@@ -77,7 +87,7 @@
      "data": "2026-11-10T01:30:26Z",
      "link": "https://youtube.com/shorts/VUv6e3yQHEE",
      "privato": false,
-     "views": 1160,
+     "views": 1161,
      "likes": 15,
      "commenti": 0
     },
@@ -123,7 +133,7 @@
     }
    ],
    "totali": {
-    "views": 3202,
+    "views": 3245,
     "likes": 55,
     "commenti": 0,
     "condivisioni": 0
@@ -136,7 +146,7 @@
     "follower": 4,
     "likes": 60,
     "video": 9,
-    "link": "https://vm.tiktok.com/ZN8aLeens/"
+    "link": "https://vm.tiktok.com/ZN8aSVwhG/"
    },
    "video": [
     {
@@ -246,10 +256,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 0,
-    "video": 11,
+    "video": 12,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2jknluehw22",
+     "titolo": "Archivio segreto #3 — il Culto del Velo. Nessun capo, solo una voce nei sogni. 🕯️",
+     "data": "2026-11-17T17:23:29.751Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2jknluehw22",
+     "views": 0,
+     "likes": 1,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2h275otjm2k",
      "titolo": "Archivio segreto #2 — la Torre di Prometeo. Non ha porte: entri solo se ARGO ti chiama. 🗼",
@@ -363,9 +383,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 24,
+    "likes": 25,
     "commenti": 0,
-    "condivisioni": 11
+    "condivisioni": 12
    }
   },
   "telegram": {
