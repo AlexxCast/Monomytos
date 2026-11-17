@@ -7,8 +7,14 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-17_ig_culto_3.mp4",
   "creato": "2026-11-17T17:26:27.107Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-17T17:26:27.106Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-17T17:26:27.106Z",
+  "esito": {
+   "instagram": {
+    "esito": "saltata",
+    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+   }
+  }
  },
  {
   "id": "video:44136112113-tiktok",
