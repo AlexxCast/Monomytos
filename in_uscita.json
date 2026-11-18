@@ -1,5 +1,18 @@
 [
  {
+  "id": "video:44357849264-youtube",
+  "titolo": "yt_araldo",
+  "piattaforme": [
+   "youtube",
+   "bluesky",
+   "telegram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-18_yt_araldo.mp4",
+  "creato": "2026-11-18T17:23:25.765Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-18T17:23:25.765Z"
+ },
+ {
   "id": "video:44136112113-instagram",
   "titolo": "ig_culto_3",
   "piattaforme": [
