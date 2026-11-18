@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:44357849264-instagram",
+  "titolo": "ig_argo_1",
+  "piattaforme": [
+   "instagram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-18_ig_argo_1.mp4",
+  "creato": "2026-11-18T17:26:56.650Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-18T17:26:56.650Z"
+ },
+ {
   "id": "video:44357849264-youtube",
   "titolo": "yt_araldo",
   "piattaforme": [
