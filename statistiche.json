@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-18T07:26:41.138Z",
+ "aggiornato": "2026-11-18T20:29:41.008Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -7,17 +7,27 @@
     "nome": "Monomythos Card Game",
     "follower": 4,
     "views": 3216,
-    "video": 12,
+    "video": 13,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "m-QT530xyNw",
+     "titolo": "Chi è l'Araldo? #Shorts",
+     "data": "2026-11-18T17:23:49Z",
+     "link": "https://youtube.com/shorts/m-QT530xyNw",
+     "privato": false,
+     "views": 32,
+     "likes": 2,
+     "commenti": 0
+    },
     {
      "id": "3Uzub-4osj8",
      "titolo": "Archivio segreto #3: il Culto del Velo #Shorts",
      "data": "2026-11-17T17:23:34Z",
      "link": "https://youtube.com/shorts/3Uzub-4osj8",
      "privato": false,
-     "views": 64,
+     "views": 71,
      "likes": 0,
      "commenti": 0
     },
@@ -27,7 +37,7 @@
      "data": "2026-11-16T17:23:52Z",
      "link": "https://youtube.com/shorts/H9D8BxuohZA",
      "privato": false,
-     "views": 60,
+     "views": 63,
      "likes": 1,
      "commenti": 0
     },
@@ -57,7 +67,7 @@
      "data": "2026-11-13T17:23:51Z",
      "link": "https://youtube.com/shorts/n_zKYfyaokg",
      "privato": false,
-     "views": 111,
+     "views": 112,
      "likes": 2,
      "commenti": 0
     },
@@ -87,7 +97,7 @@
      "data": "2026-11-10T01:30:26Z",
      "link": "https://youtube.com/shorts/VUv6e3yQHEE",
      "privato": false,
-     "views": 1161,
+     "views": 1162,
      "likes": 15,
      "commenti": 0
     },
@@ -133,8 +143,8 @@
     }
    ],
    "totali": {
-    "views": 3281,
-    "likes": 55,
+    "views": 3325,
+    "likes": 57,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -144,11 +154,21 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 60,
-    "video": 9,
-    "link": "https://vm.tiktok.com/ZN8ay2bFJ/"
+    "likes": 63,
+    "video": 10,
+    "link": "https://vm.tiktok.com/ZN8aVA9E4/"
    },
    "video": [
+    {
+     "id": "7709437862491557152",
+     "titolo": "Ad Ataca, se un drone si ferma davanti a te, ARGO ti ha appena contato. Tu correresti? 🏃 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
+     "data": "2026-11-18T09:16:28.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7709437862491557152?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 259,
+     "likes": 3,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "7708097693175909664",
      "titolo": "La Stella della Follia non compare su nessuna mappa di Ataca. I droni però la seguono. Secondo te perché? 👁️ 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
@@ -241,10 +261,10 @@
     }
    ],
    "totali": {
-    "views": 3644,
-    "likes": 60,
+    "views": 3903,
+    "likes": 63,
     "commenti": 1,
-    "condivisioni": 0
+    "condivisioni": 1
    }
   },
   "instagram": {
@@ -255,20 +275,40 @@
    "stato": "ok",
    "account": {
     "nome": "monomythos.bsky.social",
-    "follower": 0,
-    "video": 12,
+    "follower": 1,
+    "video": 13,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2m34ubxea2v",
+     "titolo": "L'Araldo arriva prima di ogni catastrofe di Ataca. Non combatte: annuncia. 📯",
+     "data": "2026-11-18T17:23:41.348Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2m34ubxea2v",
+     "views": 0,
+     "likes": 1,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2jknluehw22",
      "titolo": "Archivio segreto #3 — il Culto del Velo. Nessun capo, solo una voce nei sogni. 🕯️",
      "data": "2026-11-17T17:23:29.751Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2jknluehw22",
      "views": 0,
-     "likes": 1,
+     "likes": 2,
      "commenti": 0,
-     "condivisioni": 1
+     "condivisioni": 2
+    },
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2jknluehw22",
+     "titolo": "Archivio segreto #3 — il Culto del Velo. Nessun capo, solo una voce nei sogni. 🕯️",
+     "data": "2026-11-17T17:23:29.751Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2jknluehw22",
+     "views": 0,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 2
     },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2h275otjm2k",
@@ -276,7 +316,7 @@
      "data": "2026-11-16T17:23:45.847Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2h275otjm2k",
      "views": 0,
-     "likes": 1,
+     "likes": 2,
      "commenti": 0,
      "condivisioni": 1
     },
@@ -383,9 +423,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 25,
+    "likes": 30,
     "commenti": 0,
-    "condivisioni": 12
+    "condivisioni": 16
    }
   },
   "telegram": {
