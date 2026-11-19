@@ -31,9 +31,11 @@ const titolo = T(copione.titolo);
 // Didascalia + dicitura sulle immagini AI (sempre presente, in fondo al testo)
 const didascalia = T(copione.didascalia);
 const notaAI = T(dati.nota_ai);
-const testo = notaAI ? `${didascalia}\n\n${notaAI}` : didascalia;
+// Invito a seguire (Alessio 19/11: follower fermi) se la didascalia non lo ha già
+const segui = /segui|follow/i.test(didascalia) ? '' : (lingua === 'it' ? '👉 Segui la pagina per il prossimo segreto di Ataca' : '👉 Follow for the next secret of Ataca');
+const testo = [didascalia, segui, notaAI].filter(Boolean).join('\n\n');
 // Didascalia Instagram: usata dall'API e, finché l'API non è attiva, mostrata nell'app per pubblicare a mano
-const caption = `${testo}\n\nLink in bio 👆\n\n${tag.slice(0, 5).join(' ')}`.slice(0, 2200); // Instagram: massimo 5 hashtag
+const caption = `${testo}\n\n${tag.slice(0, 5).join(' ')}`.slice(0, 2200); // Instagram: massimo 5 hashtag
 const linkTxt = lingua === 'it' ? 'Gioca gratis' : 'Play free';
 
 const attendi = ms => new Promise(r => setTimeout(r, ms));
