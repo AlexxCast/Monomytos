@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-18T20:29:41.008Z",
+ "aggiornato": "2026-11-19T07:24:18.575Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -17,7 +17,7 @@
      "data": "2026-11-18T17:23:49Z",
      "link": "https://youtube.com/shorts/m-QT530xyNw",
      "privato": false,
-     "views": 32,
+     "views": 68,
      "likes": 2,
      "commenti": 0
     },
@@ -27,7 +27,7 @@
      "data": "2026-11-17T17:23:34Z",
      "link": "https://youtube.com/shorts/3Uzub-4osj8",
      "privato": false,
-     "views": 71,
+     "views": 74,
      "likes": 0,
      "commenti": 0
     },
@@ -47,7 +47,7 @@
      "data": "2026-11-15T17:23:52Z",
      "link": "https://youtube.com/shorts/nfipBqluwac",
      "privato": false,
-     "views": 88,
+     "views": 87,
      "likes": 0,
      "commenti": 0
     },
@@ -143,7 +143,7 @@
     }
    ],
    "totali": {
-    "views": 3325,
+    "views": 3363,
     "likes": 57,
     "commenti": 0,
     "condivisioni": 0
@@ -156,7 +156,7 @@
     "follower": 4,
     "likes": 63,
     "video": 10,
-    "link": "https://vm.tiktok.com/ZN8aVA9E4/"
+    "link": "https://vm.tiktok.com/ZN8ag4guU/"
    },
    "video": [
     {
@@ -164,7 +164,7 @@
      "titolo": "Ad Ataca, se un drone si ferma davanti a te, ARGO ti ha appena contato. Tu correresti? 🏃 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
      "data": "2026-11-18T09:16:28.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7709437862491557152?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 259,
+     "views": 262,
      "likes": 3,
      "commenti": 0,
      "condivisioni": 1
@@ -261,7 +261,7 @@
     }
    ],
    "totali": {
-    "views": 3903,
+    "views": 3906,
     "likes": 63,
     "commenti": 1,
     "condivisioni": 1
@@ -286,7 +286,7 @@
      "data": "2026-11-18T17:23:41.348Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2m34ubxea2v",
      "views": 0,
-     "likes": 1,
+     "likes": 2,
      "commenti": 0,
      "condivisioni": 1
     },
@@ -296,7 +296,7 @@
      "data": "2026-11-17T17:23:29.751Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2jknluehw22",
      "views": 0,
-     "likes": 2,
+     "likes": 3,
      "commenti": 0,
      "condivisioni": 2
     },
@@ -306,7 +306,7 @@
      "data": "2026-11-17T17:23:29.751Z",
      "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2jknluehw22",
      "views": 0,
-     "likes": 2,
+     "likes": 3,
      "commenti": 0,
      "condivisioni": 2
     },
@@ -423,7 +423,7 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 30,
+    "likes": 33,
     "commenti": 0,
     "condivisioni": 16
    }
