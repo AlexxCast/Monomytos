@@ -1,5 +1,33 @@
 [
  {
+  "id": "yt_trinita",
+  "lingua": "it",
+  "data": "2026-11-19T23:03:04.422Z",
+  "prova": true,
+  "didascalia_instagram": "3 cose sulla Trinità del Velo, i tre che servono il Velo ad Ataca. 🔺\n\n👉 Segui la pagina per il prossimo segreto di Ataca\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "tiktok": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "bluesky": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "telegram": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-19_yt_trinita.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/44632574589"
+ },
+ {
   "id": "ig_argo_2",
   "lingua": "it",
   "data": "2026-11-19T17:26:36.818Z",
