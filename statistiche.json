@@ -1,24 +1,34 @@
 {
- "aggiornato": "2026-11-19T07:24:18.575Z",
+ "aggiornato": "2026-11-19T20:35:49.314Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
    "account": {
     "nome": "Monomythos Card Game",
     "follower": 4,
-    "views": 3216,
-    "video": 13,
+    "views": 3294,
+    "video": 14,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
+    {
+     "id": "GfO3gebVo9Y",
+     "titolo": "Archivio segreto #4: i droni cinetici #Shorts",
+     "data": "2026-11-19T17:23:47Z",
+     "link": "https://youtube.com/shorts/GfO3gebVo9Y",
+     "privato": false,
+     "views": 40,
+     "likes": 1,
+     "commenti": 0
+    },
     {
      "id": "m-QT530xyNw",
      "titolo": "Chi è l'Araldo? #Shorts",
      "data": "2026-11-18T17:23:49Z",
      "link": "https://youtube.com/shorts/m-QT530xyNw",
      "privato": false,
-     "views": 68,
-     "likes": 2,
+     "views": 86,
+     "likes": 3,
      "commenti": 0
     },
     {
@@ -27,7 +37,7 @@
      "data": "2026-11-17T17:23:34Z",
      "link": "https://youtube.com/shorts/3Uzub-4osj8",
      "privato": false,
-     "views": 74,
+     "views": 77,
      "likes": 0,
      "commenti": 0
     },
@@ -143,8 +153,8 @@
     }
    ],
    "totali": {
-    "views": 3363,
-    "likes": 57,
+    "views": 3424,
+    "likes": 59,
     "commenti": 0,
     "condivisioni": 0
    }
@@ -154,17 +164,27 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 63,
-    "video": 10,
-    "link": "https://vm.tiktok.com/ZN8ag4guU/"
+    "likes": 64,
+    "video": 11,
+    "link": "https://vm.tiktok.com/ZN8aEWy3g/"
    },
    "video": [
+    {
+     "id": "7709961756503723296",
+     "titolo": "L'Eco Senza Nome ripete le parole di chi sta per cadere. L'hai mai sentita? 👂 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
+     "data": "2026-11-19T19:09:25.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7709961756503723296?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 32,
+     "likes": 1,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7709437862491557152",
      "titolo": "Ad Ataca, se un drone si ferma davanti a te, ARGO ti ha appena contato. Tu correresti? 🏃 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
      "data": "2026-11-18T09:16:28.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7709437862491557152?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 262,
+     "views": 265,
      "likes": 3,
      "commenti": 0,
      "condivisioni": 1
@@ -261,8 +281,8 @@
     }
    ],
    "totali": {
-    "views": 3906,
-    "likes": 63,
+    "views": 3941,
+    "likes": 64,
     "commenti": 1,
     "condivisioni": 1
    }
@@ -276,10 +296,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 1,
-    "video": 13,
+    "video": 14,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2olls2idz2t",
+     "titolo": "Archivio segreto #4 — i droni cinetici. Dall'Eclissi non proteggono: contano. 🤖",
+     "data": "2026-11-19T17:23:41.563Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2olls2idz2t",
+     "views": 0,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2m34ubxea2v",
      "titolo": "L'Araldo arriva prima di ogni catastrofe di Ataca. Non combatte: annuncia. 📯",
@@ -423,9 +453,9 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 33,
+    "likes": 35,
     "commenti": 0,
-    "condivisioni": 16
+    "condivisioni": 17
    }
   },
   "telegram": {
