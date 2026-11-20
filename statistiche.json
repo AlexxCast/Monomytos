@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-20T10:02:02.808Z",
+ "aggiornato": "2026-11-20T20:16:36.900Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -12,12 +12,22 @@
    },
    "video": [
     {
+     "id": "5ydrABMT-bI",
+     "titolo": "3 cose sulla Trinità del Velo #Shorts",
+     "data": "2026-11-20T17:24:24Z",
+     "link": "https://youtube.com/shorts/5ydrABMT-bI",
+     "privato": true,
+     "views": 0,
+     "likes": 0,
+     "commenti": 0
+    },
+    {
      "id": "GfO3gebVo9Y",
      "titolo": "Archivio segreto #4: i droni cinetici #Shorts",
      "data": "2026-11-19T17:23:47Z",
      "link": "https://youtube.com/shorts/GfO3gebVo9Y",
      "privato": false,
-     "views": 84,
+     "views": 85,
      "likes": 1,
      "commenti": 0
     },
@@ -37,7 +47,7 @@
      "data": "2026-11-17T17:23:34Z",
      "link": "https://youtube.com/shorts/3Uzub-4osj8",
      "privato": false,
-     "views": 77,
+     "views": 79,
      "likes": 0,
      "commenti": 0
     },
@@ -153,7 +163,7 @@
     }
    ],
    "totali": {
-    "views": 3474,
+    "views": 3477,
     "likes": 59,
     "commenti": 0,
     "condivisioni": 0
@@ -164,18 +174,28 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 70,
-    "video": 11,
-    "link": "https://vm.tiktok.com/ZN8mRnvAw/"
+    "likes": 76,
+    "video": 12,
+    "link": "https://vm.tiktok.com/ZN8mhJkJM/"
    },
    "video": [
+    {
+     "id": "7710314798604389664",
+     "titolo": "La Trinità del Velo è in tre. Il terzo vive in mezzo a noi. Lo riconosceresti? 🔺 👉 Segui la pagina per il prossimo segreto di Ataca 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.  Trinità del Velo è in tre. Il terzo vive in mezzo a noi. Lo riconosceresti? 🔺 👉 Segui la pagina per il prossimo segreto di Ataca 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.     #monomythos #cardgame #indiegame #giochidicarte #gamedevLa ",
+     "data": "2026-11-20T17:59:21.000Z",
+     "link": "https://www.tiktok.com/@monomythosgame/video/7710314798604389664?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
+     "views": 14,
+     "likes": 3,
+     "commenti": 0,
+     "condivisioni": 0
+    },
     {
      "id": "7709961756503723296",
      "titolo": "L'Eco Senza Nome ripete le parole di chi sta per cadere. L'hai mai sentita? 👂 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
      "data": "2026-11-19T19:09:25.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7709961756503723296?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 371,
-     "likes": 7,
+     "views": 672,
+     "likes": 10,
      "commenti": 0,
      "condivisioni": 0
     },
@@ -281,8 +301,8 @@
     }
    ],
    "totali": {
-    "views": 4280,
-    "likes": 70,
+    "views": 4595,
+    "likes": 76,
     "commenti": 1,
     "condivisioni": 1
    }
@@ -296,10 +316,20 @@
    "account": {
     "nome": "monomythos.bsky.social",
     "follower": 1,
-    "video": 14,
+    "video": 15,
     "link": "https://bsky.app/profile/monomythos.bsky.social"
    },
    "video": [
+    {
+     "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2r44gg7pb2i",
+     "titolo": "3 cose sulla Trinità del Velo, i tre che servono il Velo ad Ataca. 🔺",
+     "data": "2026-11-20T17:24:38.944Z",
+     "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2r44gg7pb2i",
+     "views": 0,
+     "likes": 2,
+     "commenti": 0,
+     "condivisioni": 1
+    },
     {
      "id": "at://did:plc:vpie3lxyammwhdmmoebibz3i/app.bsky.feed.post/3n2olls2idz2t",
      "titolo": "Archivio segreto #4 — i droni cinetici. Dall'Eclissi non proteggono: contano. 🤖",
@@ -453,25 +483,14 @@
    ],
    "totali": {
     "views": 0,
-    "likes": 35,
+    "likes": 37,
     "commenti": 0,
-    "condivisioni": 17
+    "condivisioni": 18
    }
   },
   "telegram": {
-   "stato": "ok",
-   "account": {
-    "nome": "Monomythosgame",
-    "follower": 2,
-    "link": "https://t.me/Monomythosgame"
-   },
-   "video": [],
-   "totali": {
-    "views": 0,
-    "likes": 0,
-    "commenti": 0,
-    "condivisioni": 0
-   }
+   "stato": "errore",
+   "nota": "fetch failed"
   }
  }
 }
