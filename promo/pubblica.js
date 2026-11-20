@@ -54,6 +54,26 @@ const serve = (...chiavi) => chiavi.filter(k => !E[k]);
 
 // ---------------- YouTube Shorts (YouTube Data API v3) ----------------
 // Un video verticale sotto i 3 minuti diventa automaticamente uno Short.
+// Test dell'orario migliore su YouTube (Alessio 20/11): ogni giorno un'ora diversa a rotazione
+// (variabile YT_ORE, ora di Roma, es. "13,19,1"; "no" = subito). Il video si carica privato
+// e YouTube lo rende pubblico da solo all'ora scelta (publishAt).
+function ytStato() {
+  const base = { privacyStatus: E.YT_PRIVACY || 'public', selfDeclaredMadeForKids: false };
+  const ore = (E.YT_ORE || '13,19,1').split(',').map(Number).filter(n => n >= 0 && n < 24);
+  if (E.YT_ORE === 'no' || !ore.length || base.privacyStatus !== 'public') return base;
+  const giorno = Math.floor(Date.now() / 864e5);
+  const ora = ore[giorno % ore.length];
+  // prossima occorrenza di quell'ora a Roma, almeno 20 minuti nel futuro
+  for (let h = 0; h < 48; h++) {
+    const t = new Date(Math.ceil(Date.now() / 36e5) * 36e5 + h * 36e5);
+    const oraRoma = +new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Rome', hour: '2-digit', hourCycle: 'h23' }).format(t);
+    if (oraRoma === ora && t - Date.now() > 20 * 6e4) {
+      console.log(`YouTube: esce alle ${ora}:00 (ora di Roma), ${t.toISOString()}`);
+      return { privacyStatus: 'private', publishAt: t.toISOString(), selfDeclaredMadeForKids: false };
+    }
+  }
+  return base;
+}
 const youtube = {
   chiavi: ['YT_CLIENT_ID', 'YT_CLIENT_SECRET', 'YT_REFRESH_TOKEN'],
   async pubblica() {
@@ -69,7 +89,7 @@ const youtube = {
         categoryId: '20', // Gaming
         defaultLanguage: lingua
       },
-      status: { privacyStatus: E.YT_PRIVACY || 'public', selfDeclaredMadeForKids: false }
+      status: ytStato()
     };
     const init = await fetch('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status', {
       method: 'POST',
@@ -78,7 +98,7 @@ const youtube = {
     });
     if (!init.ok) throw new Error('avvio caricamento YouTube: HTTP ' + init.status + ' ' + (await init.text()).slice(0, 400));
     const su = await json(await fetch(init.headers.get('location'), { method: 'PUT', headers: { 'Content-Type': 'video/mp4' }, body: video }), 'caricamento YouTube');
-    return { link: 'https://youtube.com/shorts/' + su.id, stato: su.status && su.status.privacyStatus };
+    return { link: 'https://youtube.com/shorts/' + su.id, stato: su.status && su.status.privacyStatus, esce_alle: su.status && su.status.publishAt };
   }
 };
 
