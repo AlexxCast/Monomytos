@@ -1,5 +1,5 @@
 {
- "nota": "Scaletta dei video. Ogni giorno alle 17:50 (ora italiana) il workflow promo-video prepara il copione del giorno; esce un'ora dopo (~19:00) se non lo annulli dal Centro social. Settimana di prova 6-12/11: un formato diverso al giorno, solo lore (niente gameplay finché le carte non sono pronte). Poi si sceglie il formato vincente dalle statistiche. Instagram si pubblica a mano dall'app finché non è collegato. Dal 12/11 (Alessio): contenuti diversi per piattaforma. Nel giorno 'per_piattaforma' sceglie il copione di YouTube (con Bluesky e Telegram), TikTok e Instagram: escono come video separati. 13/11: formato vincente per piattaforma (settimana di prova): YouTube = archivio/lista di lore CON VOCE (archivio_arena 1163 viste, tre_segreti 803, senza voce 4-38); TikTok = mistero ~8-9 s senza voce con domanda (mistero_prometeo 927, aggancio_stella 888; voce ~250); Instagram = POV a puntate.",
+ "nota": "Scaletta dei video. Ogni giorno alle 17:50 (ora italiana) il workflow promo-video prepara il copione del giorno; esce un'ora dopo (~19:00) se non lo annulli dal Centro social. Settimana di prova 6-12/11: un formato diverso al giorno, solo lore (niente gameplay finché le carte non sono pronte). Poi si sceglie il formato vincente dalle statistiche. Instagram si pubblica a mano dall'app finché non è collegato. Dal 12/11 (Alessio): contenuti diversi per piattaforma. Nel giorno 'per_piattaforma' sceglie il copione di YouTube (con Bluesky e Telegram), TikTok e Instagram: escono come video separati. 13/11: formato vincente per piattaforma (settimana di prova): YouTube = archivio/lista di lore CON VOCE (archivio_arena 1163 viste, tre_segreti 803, senza voce 4-38); TikTok = mistero ~8-9 s senza voce con domanda (mistero_prometeo 927, aggancio_stella 888; voce ~250); Instagram = POV a puntate. 20/11 (analisi Alessio): STOP serie a puntate. Alternare lore autonomo con titolo misterioso e finale aperto + 'gioca gratis, link in bio', video interattivi ('Chi diventerà Villain?'), rivelazione carta (solo se Alessio conferma carte pronte). Misurare follower guadagnati per formato.",
  "fuso_orario": "Europe/Rome",
  "lingua_testi": "it",
  "piattaforme": [
@@ -136,7 +136,7 @@
    "per_piattaforma": {
     "youtube": "yt_archivio_5",
     "tiktok": "tt_alveare",
-    "instagram": "ig_araldo_1"
+    "instagram": "ig_tromba"
    }
   },
   {
@@ -146,7 +146,7 @@
    "per_piattaforma": {
     "youtube": "yt_alveare",
     "tiktok": "tt_eroe_villain",
-    "instagram": "ig_araldo_2"
+    "instagram": "ig_campione_solo"
    }
   }
  ],
