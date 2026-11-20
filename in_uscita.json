@@ -9,8 +9,24 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-20_yt_trinita.mp4",
   "creato": "2026-11-20T17:24:22.667Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-20T17:24:22.667Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-20T17:24:22.667Z",
+  "esito": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/5ydrABMT-bI",
+    "stato": "private",
+    "esce_alle": "2026-11-21T00:00:00Z"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2r44gg7pb2i"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 19
+   }
+  }
  },
  {
   "id": "video:44576310476-instagram",
