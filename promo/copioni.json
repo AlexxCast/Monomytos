@@ -5377,6 +5377,198 @@
       ],
       "aggancio": "risucchio",
       "durata_min": 1.2
+    },
+    {
+      "id": "ig_tromba",
+      "formato": "Lore autonomo, finale aperto",
+      "tema": "villain",
+      "titolo": {
+        "it": "Non ascoltare la tromba",
+        "en": "Non ascoltare la tromba"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_falesia"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "NON *ASCOLTARLA*",
+            "en": "NON *ASCOLTARLA*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "l'Araldo è sulla falesia",
+            "en": "l'Araldo è sulla falesia"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "Ataca ha un'ora",
+            "en": "Ataca ha un'ora"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "e tu sei ancora *in città*",
+            "en": "e tu sei ancora *in città*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "È una storia di Monomythos · Gioca gratis, link in bio",
+          "en": "A Monomythos story · Play free, link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Quando l'Araldo suona la tromba, Ataca ha un'ora. Tu scapperesti o resteresti a combattere? 👇 È una storia di Monomythos, il gioco di carte gratis: link in bio.",
+        "en": "Quando l'Araldo suona la tromba, Ataca ha un'ora. Tu scapperesti o resteresti a combattere? 👇 È una storia di Monomythos, il gioco di carte gratis: link in bio."
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_campione_solo",
+      "formato": "Lore autonomo, finale aperto",
+      "tema": "villain",
+      "titolo": {
+        "it": "L'ultimo in piazza",
+        "en": "L'ultimo in piazza"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "CHI RESTA *IN PIAZZA*?",
+            "en": "CHI RESTA *IN PIAZZA*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "le luci si spengono",
+            "en": "le luci si spengono"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "resta un solo eroe",
+            "en": "resta un solo eroe"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "ma da che parte *sta*?",
+            "en": "ma da che parte *sta*?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "È una storia di Monomythos · Gioca gratis, link in bio",
+          "en": "A Monomythos story · Play free, link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Le luci di Ataca si spengono e in piazza resta solo il Campione. Eroe o Villain? Scrivilo nei commenti 👇 È una storia di Monomythos, il gioco di carte gratis: link in bio.",
+        "en": "Le luci di Ataca si spengono e in piazza resta solo il Campione. Eroe o Villain? Scrivilo nei commenti 👇 È una storia di Monomythos, il gioco di carte gratis: link in bio."
+      },
+      "hashtag": [
+        "lore",
+        "serie",
+        "pov"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
     }
   ]
 }
