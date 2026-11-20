@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-19T20:35:49.314Z",
+ "aggiornato": "2026-11-20T07:14:08.325Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -17,7 +17,7 @@
      "data": "2026-11-19T17:23:47Z",
      "link": "https://youtube.com/shorts/GfO3gebVo9Y",
      "privato": false,
-     "views": 40,
+     "views": 82,
      "likes": 1,
      "commenti": 0
     },
@@ -27,7 +27,7 @@
      "data": "2026-11-18T17:23:49Z",
      "link": "https://youtube.com/shorts/m-QT530xyNw",
      "privato": false,
-     "views": 86,
+     "views": 92,
      "likes": 3,
      "commenti": 0
     },
@@ -153,7 +153,7 @@
     }
    ],
    "totali": {
-    "views": 3424,
+    "views": 3472,
     "likes": 59,
     "commenti": 0,
     "condivisioni": 0
@@ -164,9 +164,9 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 64,
+    "likes": 68,
     "video": 11,
-    "link": "https://vm.tiktok.com/ZN8aEWy3g/"
+    "link": "https://vm.tiktok.com/ZN8meBDNg/"
    },
    "video": [
     {
@@ -174,8 +174,8 @@
      "titolo": "L'Eco Senza Nome ripete le parole di chi sta per cadere. L'hai mai sentita? 👂 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
      "data": "2026-11-19T19:09:25.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7709961756503723296?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 32,
-     "likes": 1,
+     "views": 259,
+     "likes": 5,
      "commenti": 0,
      "condivisioni": 0
     },
@@ -281,8 +281,8 @@
     }
    ],
    "totali": {
-    "views": 3941,
-    "likes": 64,
+    "views": 4168,
+    "likes": 68,
     "commenti": 1,
     "condivisioni": 1
    }
