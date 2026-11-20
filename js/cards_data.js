@@ -820,7 +820,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Attacco Fisico, Abilità Tech, Gadget",
       "origine": "Ex-Geniere",
       "costume": "Armatura Exo-K",
-      "img": "assets/cards/gen/h_ironaegis.webp"
+      "img": "assets/cards/gen/h_aegisdacciaio.webp"
     },
     "Neon Phantom": {
       "name": "Neon Phantom",
@@ -7141,9 +7141,9 @@ window.MONOMYTHOS_DATA = {
     ]
   },
   "card_img_map": {
-    "ironaegis": "assets/cards/gen/h_ironaegis.webp",
-    "aegisdacciaio": "assets/cards/gen/h_ironaegis.webp",
-    "Aegis d'Acciaio": "assets/cards/gen/h_ironaegis.webp",
+    "ironaegis": "assets/cards/gen/h_aegisdacciaio.webp",
+    "aegisdacciaio": "assets/cards/gen/h_aegisdacciaio.webp",
+    "Aegis d'Acciaio": "assets/cards/gen/h_aegisdacciaio.webp",
     "neonphantom": "assets/cards/gen/h_neonphantom.webp",
     "Neon Phantom": "assets/cards/gen/h_neonphantom.webp",
     "guardianadiconfine": "assets/cards/gen/h_guardianadiconfine.webp",
