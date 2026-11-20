@@ -7,8 +7,14 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-20_ig_argo_3.mp4",
   "creato": "2026-11-20T17:27:40.610Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-20T17:27:40.610Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-20T17:27:40.610Z",
+  "esito": {
+   "instagram": {
+    "esito": "saltata",
+    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+   }
+  }
  },
  {
   "id": "video:44782533845-tiktok",

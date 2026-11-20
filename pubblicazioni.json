@@ -1,5 +1,21 @@
 [
  {
+  "id": "ig_argo_3",
+  "lingua": "it",
+  "data": "2026-11-20T17:27:41.851Z",
+  "prova": false,
+  "didascalia_instagram": "Parte 3/3 🤖 Chi dà il nome a ARGO diventa uno dei suoi occhi. Accetteresti? 👇\n\n👉 Segui la pagina per il prossimo segreto di Ataca\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "instagram": {
+    "esito": "saltata",
+    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-20_ig_argo_3.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/44782533845"
+ },
+ {
   "id": "tt_terzo",
   "lingua": "it",
   "data": "2026-11-20T17:25:51.686Z",
