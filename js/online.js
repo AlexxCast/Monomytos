@@ -259,7 +259,7 @@
     },
 
     async giocaConBot() {
-      const hero = (window.UI && window.UI.selectedHero) || 'Iron Aegis';
+      const hero = (window.UI && window.UI.selectedHero) || "Aegis d'Acciaio";
       await this.esci();
       window.UI.squadSize = 3;
       window.UI.startSoloGame(hero);

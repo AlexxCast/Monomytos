@@ -37,7 +37,7 @@ const report = { ok: 0, nulla: [], errori: [], reazioniOk: 0, reazioniNulla: [] 
 function prepara(eroe, stato) {
   const m = nuovoMotore();
   const { E } = m;
-  E.startMatch({ heroes: [{ name: eroe, isBot: false, isLocal: true }, { name: eroe === 'Neon Phantom' ? 'Iron Aegis' : 'Neon Phantom', isBot: true }] });
+  E.startMatch({ heroes: [{ name: eroe, isBot: false, isLocal: true }, { name: eroe === 'Neon Phantom' ? "Aegis d'Acciaio" : 'Neon Phantom', isBot: true }] });
   const st = E.state;
   st.phase = 'action'; st.turnIndex = 0;
   const me = st.players[0];

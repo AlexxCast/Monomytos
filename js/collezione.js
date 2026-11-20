@@ -21,7 +21,7 @@
     { eroe: 'Titano d\'Acciaio', mazzo: 'Colpo Pesante', stat: 'Potenza', testo: 'Danni enormi e pugni che spaccano gli scudi. Facile da giocare.' },
     { eroe: 'Neon Phantom', mazzo: 'Ombra Rapida', stat: 'Agilità', testo: 'Colpi veloci, schivate e combo nello stesso turno.' },
     { eroe: 'Architetto Ombra', mazzo: 'Mente Tattica', stat: 'Intelligenza', testo: 'Trappole, controllo dei nemici e carte che si potenziano.' },
-    { eroe: 'Iron Aegis', mazzo: 'Muro d\'Acciaio', stat: 'Vigore', testo: 'Scudi e cure: protegge la squadra e resiste a tutto.' }
+    { eroe: "Aegis d'Acciaio", mazzo: 'Muro d\'Acciaio', stat: 'Vigore', testo: 'Scudi e cure: protegge la squadra e resiste a tutto.' }
   ];
 
   // Quante copie dà lo sblocco di un eroe (starter compreso). Epiche e Leggendarie solo dalle bustine.
@@ -346,7 +346,7 @@
     },
 
     prossimoEroeBloccato() {
-      const ordine = ['Iron Aegis', 'Neon Phantom', 'Guardiana di Confine', 'Lama Errante',
+      const ordine = ["Aegis d'Acciaio", 'Neon Phantom', 'Guardia di Confine', 'Lama Errante',
         'Titano d\'Acciaio', 'Architetto Ombra', 'Sussurro dell\'Abisso', 'Duellante Spezzato'];
       return ordine.find(h => !this.p.isHeroUnlocked(h));
     },

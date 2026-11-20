@@ -127,7 +127,7 @@
           const loc = window.Progression.data || {};
           const piuRecenteQui = loc._uid === u.uid && (loc._modificato || 0) > (data.progression._modificato || 0);
           if (piuRecenteQui) this.queueSave();
-          else window.Progression.data = { ...window.Progression.getDefaultData(), ...data.progression };
+          else window.Progression.data = { ...window.Progression.getDefaultData(), ...(window.Progression.constructor.rinomina ? window.Progression.constructor.rinomina(data.progression) : data.progression) };
           window.Progression.data._uid = u.uid;
           window.Progression.save(true);
         } else {

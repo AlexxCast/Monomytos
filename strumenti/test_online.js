@@ -31,7 +31,7 @@ function client(uid,name){
   for(const f of ['cards_data.js','effects.js','bilanciamento.js','engine.js','online.js']) vm.runInContext(fs.readFileSync(dir+'/js/'+f,'utf8'),ctx);
   const log=[];
   ctx.Account={db,user:{uid},nickname:()=>name};
-  ctx.UI={showToast:t=>log.push('toast:'+t),showScreen:s=>log.push('screen:'+s),renderGameView(){},playMatchIntroLoading:(t,cb)=>cb(),openDefenseWindow:d=>{log.push('defense');setTimeout(()=>ctx.GameEngine.respondToDefense({type:'bot_fallback'}),5);},selectedHero:'Iron Aegis'};
+  ctx.UI={showToast:t=>log.push('toast:'+t),showScreen:s=>log.push('screen:'+s),renderGameView(){},playMatchIntroLoading:(t,cb)=>cb(),openDefenseWindow:d=>{log.push('defense');setTimeout(()=>ctx.GameEngine.respondToDefense({type:'bot_fallback'}),5);},selectedHero:"Aegis d'Acciaio"};
   ctx.GameEngine.on('defense_window_opened',()=>setTimeout(()=>ctx.GameEngine.respondToDefense({type:'bot_fallback'}),5));
   return {ctx,log};
 }
@@ -40,14 +40,14 @@ function client(uid,name){
   H.ctx.Collezione={mazzoMinacce:()=>['Blackout Ostile','Torneo Clandestino','Cultisti del Velo'],registraMinaccia(){}};
   G.ctx.Collezione={mazzoMinacce:()=>["Il Colosso di Rovina","L'Eco Senza Nome"],registraMinaccia(){}};
   if(process.env.GARA){ // i due cercano nello stesso momento: devono finire nella stessa stanza
-    await Promise.all([H.ctx.Online.cercaPartita('Iron Aegis'),G.ctx.Online.cercaPartita('Neon Phantom')]);
+    await Promise.all([H.ctx.Online.cercaPartita("Aegis d'Acciaio"),G.ctx.Online.cercaPartita('Neon Phantom')]);
     console.log('stanze subito',H.ctx.Online.code,G.ctx.Online.code);
     const t1=Date.now(); while(H.ctx.Online.code!==G.ctx.Online.code && Date.now()-t1<15000) await new Promise(r=>setTimeout(r,100));
     console.log('stanze dopo',H.ctx.Online.code,G.ctx.Online.code,'host',H.ctx.Online.isHost,G.ctx.Online.isHost);
     if(G.ctx.Online.isHost){const t=H;}
     process.exit(0);
   }
-  await H.ctx.Online.cercaPartita('Iron Aegis');
+  await H.ctx.Online.cercaPartita("Aegis d'Acciaio");
   const code=H.ctx.Online.code; console.log('host public room',code,store['rooms/'+code].public);
   await G.ctx.Online.cercaPartita('Neon Phantom');
   console.log('guest joined',G.ctx.Online.code===code);

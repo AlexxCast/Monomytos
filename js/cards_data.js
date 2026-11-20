@@ -326,7 +326,7 @@ window.MONOMYTHOS_DATA = {
   ],
   "creation_cards": [
     {
-      "char": "Iron Aegis",
+      "char": "Aegis d'Acciaio",
       "full_name": "Origine: Ex-Geniere",
       "name": "Ex-Geniere",
       "type": "Statistica + Vita Base",
@@ -341,7 +341,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Iron Aegis",
+      "char": "Aegis d'Acciaio",
       "full_name": "Archetipo: Avanguardia Pesante",
       "name": "Avanguardia Pesante",
       "type": "Tag ammessi (no statistiche)",
@@ -356,7 +356,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Iron Aegis",
+      "char": "Aegis d'Acciaio",
       "full_name": "Costume: Armatura Exo-K",
       "name": "Armatura Exo-K",
       "type": "Statistica + Passiva Eccelsa",
@@ -371,7 +371,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Iron Aegis",
+      "char": "Aegis d'Acciaio",
       "full_name": "Potere Base: Sovraccarico Cinetico",
       "name": "Sovraccarico Cinetico",
       "type": "Azione gratuita (no statistiche)",
@@ -446,7 +446,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Guardiana di Confine",
+      "char": "Guardia di Confine",
       "full_name": "Origine: Sentinella di Frontiera",
       "name": "Sentinella di Frontiera",
       "type": "Statistica + Vita Base",
@@ -461,7 +461,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Guardiana di Confine",
+      "char": "Guardia di Confine",
       "full_name": "Archetipo: Sentinella Adattiva",
       "name": "Sentinella Adattiva",
       "type": "Tag ammessi (no statistiche)",
@@ -476,7 +476,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Guardiana di Confine",
+      "char": "Guardia di Confine",
       "full_name": "Costume: Scudo Modulare",
       "name": "Scudo Modulare",
       "type": "Statistica + Passiva Eccelsa",
@@ -491,7 +491,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Guardiana di Confine",
+      "char": "Guardia di Confine",
       "full_name": "Potere Base: Presidio",
       "name": "Presidio",
       "type": "Azione gratuita (no statistiche)",
@@ -807,8 +807,8 @@ window.MONOMYTHOS_DATA = {
     }
   ],
   "chars_meta": {
-    "Iron Aegis": {
-      "name": "Iron Aegis",
+    "Aegis d'Acciaio": {
+      "name": "Aegis d'Acciaio",
       "str": 2,
       "spd": 0,
       "tech": 2,
@@ -820,7 +820,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Attacco Fisico, Abilità Tech, Gadget",
       "origine": "Ex-Geniere",
       "costume": "Armatura Exo-K",
-      "img": "assets/cards/gen/h_ironaegis.webp"
+      "img": "assets/cards/gen/h_aegisdacciaio.webp"
     },
     "Neon Phantom": {
       "name": "Neon Phantom",
@@ -837,8 +837,8 @@ window.MONOMYTHOS_DATA = {
       "costume": "Tuta Fotonica",
       "img": "assets/cards/gen/h_neonphantom.webp"
     },
-    "Guardiana di Confine": {
-      "name": "Guardiana di Confine",
+    "Guardia di Confine": {
+      "name": "Guardia di Confine",
       "str": 1,
       "spd": 2,
       "tech": 2,
@@ -850,7 +850,7 @@ window.MONOMYTHOS_DATA = {
       "arch_desc": "Tag Autorizzati: Difesa, Abilità Tech, Attacco Fisico",
       "origine": "Sentinella di Frontiera",
       "costume": "Scudo Modulare",
-      "img": "assets/cards/gen/h_guardianadiconfine.webp"
+      "img": "assets/cards/gen/h_guardiadiconfine.webp"
     },
     "Lama Errante": {
       "name": "Lama Errante",
@@ -929,10 +929,10 @@ window.MONOMYTHOS_DATA = {
     }
   },
   "action_cards": {
-    "Iron Aegis": [
+    "Aegis d'Acciaio": [
       {
         "id": "ironaegis_1",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 1,
         "nome": "Impatto Devastante",
         "copie": "x2",
@@ -984,7 +984,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_2",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 2,
         "nome": "Scudo Infrangibile",
         "copie": "x2",
@@ -1026,7 +1026,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_3",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 3,
         "nome": "Kit di Riparazione",
         "copie": "x2",
@@ -1060,7 +1060,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_4",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 4,
         "nome": "Granata a Frammentazione",
         "copie": "x2",
@@ -1096,7 +1096,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_5",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 5,
         "nome": "Barriera Olografica",
         "copie": "x2",
@@ -1131,7 +1131,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_6",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 6,
         "nome": "Analisi del Terreno",
         "copie": "x2",
@@ -1165,7 +1165,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_7",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 7,
         "nome": "Gancio Balistico",
         "copie": "x2",
@@ -1207,7 +1207,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_8",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 8,
         "nome": "Protocollo Defibrillazione",
         "copie": "x2",
@@ -1258,7 +1258,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_9",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 9,
         "nome": "Carica di Contenimento",
         "copie": "x2",
@@ -1300,7 +1300,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_10",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 10,
         "nome": "Prezzo dell'Acciaio",
         "copie": "x2",
@@ -1350,7 +1350,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_11",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 11,
         "nome": "Giuramento del Geniere",
         "copie": "x2",
@@ -1391,7 +1391,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_12",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 12,
         "nome": "Muro di Piastre",
         "copie": "x2",
@@ -1426,7 +1426,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_13",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 13,
         "nome": "Calcolo Balistico",
         "copie": "x2",
@@ -1461,7 +1461,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_14",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 14,
         "nome": "Generatore di Singolarità",
         "copie": "x2",
@@ -1510,7 +1510,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_15",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 15,
         "nome": "Sovraccarico del Core",
         "copie": "x2",
@@ -1560,7 +1560,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_16",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 16,
         "nome": "Corazza Sacrificale",
         "copie": "x2",
@@ -1601,7 +1601,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_17",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 17,
         "nome": "Ultimatum Cinetico",
         "copie": "x2",
@@ -1642,7 +1642,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_18",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 18,
         "nome": "Giuramento del Geniere",
         "copie": "x2",
@@ -1688,7 +1688,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_19",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 19,
         "nome": "Il Prezzo dell'Acciaio",
         "copie": "x2",
@@ -2481,10 +2481,10 @@ window.MONOMYTHOS_DATA = {
         "layout_type": "blue"
       }
     ],
-    "Guardiana di Confine": [
+    "Guardia di Confine": [
       {
         "id": "guardianadiconfine_1",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 1,
         "nome": "Presa Salda",
         "copie": "x2",
@@ -2526,7 +2526,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_2",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 2,
         "nome": "Baluardo Reattivo",
         "copie": "x2",
@@ -2560,7 +2560,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_3",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 3,
         "nome": "Rete di Sicurezza",
         "copie": "x2",
@@ -2602,7 +2602,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_4",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 4,
         "nome": "Manutenzione Preventiva",
         "copie": "x2",
@@ -2636,7 +2636,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_5",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 5,
         "nome": "Barriera a Strati",
         "copie": "x2",
@@ -2671,7 +2671,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_6",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 6,
         "nome": "Osservazione Tattica",
         "copie": "x2",
@@ -2705,7 +2705,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_7",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 7,
         "nome": "Colpo di Rimando",
         "copie": "x2",
@@ -2741,7 +2741,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_8",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 8,
         "nome": "Protocollo di Emergenza",
         "copie": "x2",
@@ -2792,7 +2792,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_9",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 9,
         "nome": "Presa d'Angolo",
         "copie": "x2",
@@ -2828,7 +2828,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_10",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 10,
         "nome": "Prezzo del Presidio",
         "copie": "x2",
@@ -2876,7 +2876,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_11",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 11,
         "nome": "Veglia al Confine",
         "copie": "x2",
@@ -2917,7 +2917,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_12",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 12,
         "nome": "Corazza Rinforzata",
         "copie": "x2",
@@ -2952,7 +2952,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_13",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 13,
         "nome": "Calcolo del Rischio",
         "copie": "x2",
@@ -2987,7 +2987,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_14",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 14,
         "nome": "Muro Vivente",
         "copie": "x2",
@@ -3027,7 +3027,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_15",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 15,
         "nome": "Ultima Trincea",
         "copie": "x2",
@@ -3077,7 +3077,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_16",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 16,
         "nome": "Fortezza Egoista",
         "copie": "x2",
@@ -3124,7 +3124,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_17",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 17,
         "nome": "Sacrificio Calcolato",
         "copie": "x2",
@@ -3165,7 +3165,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_18",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 18,
         "nome": "Veglia al Confine",
         "copie": "x2",
@@ -3211,7 +3211,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "guardianadiconfine_19",
-        "char": "Guardiana di Confine",
+        "char": "Guardia di Confine",
         "num": 19,
         "nome": "Pedaggio del Bastione",
         "copie": "x2",
@@ -7141,12 +7141,14 @@ window.MONOMYTHOS_DATA = {
     ]
   },
   "card_img_map": {
-    "ironaegis": "assets/cards/gen/h_ironaegis.webp",
-    "Iron Aegis": "assets/cards/gen/h_ironaegis.webp",
+    "ironaegis": "assets/cards/gen/h_aegisdacciaio.webp",
+    "aegisdacciaio": "assets/cards/gen/h_aegisdacciaio.webp",
+    "Aegis d'Acciaio": "assets/cards/gen/h_aegisdacciaio.webp",
     "neonphantom": "assets/cards/gen/h_neonphantom.webp",
     "Neon Phantom": "assets/cards/gen/h_neonphantom.webp",
-    "guardianadiconfine": "assets/cards/gen/h_guardianadiconfine.webp",
-    "Guardiana di Confine": "assets/cards/gen/h_guardianadiconfine.webp",
+    "guardianadiconfine": "assets/cards/gen/h_guardiadiconfine.webp",
+    "guardiadiconfine": "assets/cards/gen/h_guardiadiconfine.webp",
+    "Guardia di Confine": "assets/cards/gen/h_guardiadiconfine.webp",
     "lamaerrante": "assets/cards/gen/h_lamaerrante.webp",
     "Lama Errante": "assets/cards/gen/h_lamaerrante.webp",
     "titanodacciaio": "assets/cards/gen/h_titanodacciaio.webp",

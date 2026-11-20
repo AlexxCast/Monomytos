@@ -41,7 +41,7 @@ class MultiplayerNetwork {
     this.players = [{
       id: this.localPlayerId,
       name: playerName || 'Host',
-      hero: heroName || 'Iron Aegis',
+      hero: heroName || "Aegis d'Acciaio",
       ready: true,
       isHost: true
     }];

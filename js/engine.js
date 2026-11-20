@@ -39,7 +39,7 @@ class MonomythosEngine {
     if (!data) throw new Error('Monomythos data not loaded');
 
     const heroConfigs = options.heroes || [
-      { name: 'Iron Aegis', isBot: false },
+      { name: "Aegis d'Acciaio", isBot: false },
       { name: 'Neon Phantom', isBot: true }
     ];
 
@@ -115,7 +115,7 @@ class MonomythosEngine {
       }
 
       // Ensure deck has 60 cards (standard Monomythos deck rule)
-      const availableCards = data.action_cards[cfg.name] || data.action_cards['Iron Aegis'];
+      const availableCards = data.action_cards[cfg.name] || data.action_cards["Aegis d'Acciaio"];
       // §8.8: massimo 4 copie per carta e massimo 12 Carte Oscure
       const isDark = c => !!(c.osc || c.cat === 'Oscuro' || c.layout_type === 'purple');
       const copies = {};
@@ -935,11 +935,11 @@ class MonomythosEngine {
     const dmg = (titolo) => ({ titolo, desc: 'Infliggi 1 danno allo sgherro più ferito.', badge: '1 danno', run: (e, p) => e._pbDanno(p, 'threat_boss') });
     const slot = (cat) => ({ titolo: `+1 Slot ${cat}`, desc: `Ottieni 1 Slot ${cat} in più da spendere per giocare carte in questo turno.`, badge: `+1 ${cat}`, run: (e, p) => { p.slots[cat] = (p.slots[cat] || 0) + 1; const k = cat.toLowerCase().replace('à', 'a'); p.slots[k] = (p.slots[k] || 0) + 1; if (cat === 'Agilità') p.slots.Agilita = p.slots.Agilità; return `+1 Slot ${cat}`; } });
     const T = {
-      'Iron Aegis': [dmg('Colpo cinetico'), slot('Potenza')],
+      "Aegis d'Acciaio": [dmg('Colpo cinetico'), slot('Potenza')],
       'Neon Phantom': [
         { titolo: 'Scatto', desc: 'Pesca 1 carta extra (senza rischio se il mazzo è vuoto).', badge: '+1 carta', ok: p => p.deck.length > 0 && p.hand.length < p.maxHand, run: (e, p) => { p.hand.push(p.deck.pop()); return 'pesca 1 carta extra'; } },
         slot('Agilità')],
-      'Guardiana di Confine': [
+      'Guardia di Confine': [
         { titolo: 'Barriera', desc: 'Ottieni 1 Scudo: assorbe 1 danno del prossimo attacco.', badge: '+1 Scudo', run: (e, p) => { p.shield += 1; return '+1 Scudo'; } },
         { titolo: 'Cura', desc: 'Recuperi 1 Vita.', badge: '+1 Vita', ok: p => p.vita < p.vitaMax, run: (e, p) => { p.vita = Math.min(p.vitaMax, p.vita + 1); return 'recupera 1 Vita'; } }],
       'Lama Errante': [dmg('Affondo'),
