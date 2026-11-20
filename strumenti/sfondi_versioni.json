@@ -91,7 +91,6 @@
  "h_aegisdacciaio": 3,
  "h_architettoombra": 3,
  "h_duellantespezzato": 3,
- "h_guardianadiconfine": 3,
  "h_ironaegis": 3,
  "h_lamaerrante": 3,
  "h_neonphantom": 3,
@@ -205,5 +204,6 @@
  "titanodacciaio_6": 3,
  "titanodacciaio_7": 3,
  "titanodacciaio_8": 3,
- "titanodacciaio_9": 3
+ "titanodacciaio_9": 3,
+ "h_guardiadiconfine": 3
 }

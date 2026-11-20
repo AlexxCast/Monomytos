@@ -939,7 +939,7 @@ class MonomythosEngine {
       'Neon Phantom': [
         { titolo: 'Scatto', desc: 'Pesca 1 carta extra (senza rischio se il mazzo è vuoto).', badge: '+1 carta', ok: p => p.deck.length > 0 && p.hand.length < p.maxHand, run: (e, p) => { p.hand.push(p.deck.pop()); return 'pesca 1 carta extra'; } },
         slot('Agilità')],
-      'Guardiana di Confine': [
+      'Guardia di Confine': [
         { titolo: 'Barriera', desc: 'Ottieni 1 Scudo: assorbe 1 danno del prossimo attacco.', badge: '+1 Scudo', run: (e, p) => { p.shield += 1; return '+1 Scudo'; } },
         { titolo: 'Cura', desc: 'Recuperi 1 Vita.', badge: '+1 Vita', ok: p => p.vita < p.vitaMax, run: (e, p) => { p.vita = Math.min(p.vitaMax, p.vita + 1); return 'recupera 1 Vita'; } }],
       'Lama Errante': [dmg('Affondo'),

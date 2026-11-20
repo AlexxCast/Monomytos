@@ -114,7 +114,7 @@
       ],
       missioni: [
         {
-          id: 'c1m1', regole: 1, difficolta: 1.1, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Ataca', alleato: "Aegis d'Acciaio", riserva: 'Guardiana di Confine',
+          id: 'c1m1', regole: 1, difficolta: 1.1, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Ataca', alleato: "Aegis d'Acciaio", riserva: 'Guardia di Confine',
           atti: ["L'Assedio dei Predoni delle Rovine", 'Blackout Ostile'],
           premio: { crediti: 150, bustine: 1 },
           prima: [
@@ -124,7 +124,7 @@
               'Neon Phantom': 'Corro sui tetti ogni notte. Il laboratorio da cui vengo mi ha lasciato solo una cosa: la velocità.',
               "Titano d'Acciaio": 'Dieci anni fa la Fonderia mi ha tolto tutto. Da allora uso questa forza per chi non ne ha.',
               'Architetto Ombra': 'Mi hanno cacciato dal laboratorio di Prometeo. Ma i miei calcoli non sbagliano: stanotte qualcosa non torna.',
-              'Guardiana di Confine': 'Il mio posto è il confine tra la città e i quartieri abbandonati. Stanotte il confine è ovunque.',
+              'Guardia di Confine': 'Il mio posto è il confine tra la città e i quartieri abbandonati. Stanotte il confine è ovunque.',
               'Lama Errante': "Sono cresciuta nelle arene. Riconosco l'odore di una rissa prima che cominci.",
               "Sussurro dell'Abisso": 'Il Velo mi ha toccata da bambina. Stanotte lo sento ovunque, come un ronzio.',
               'Duellante Spezzato': 'La Gilda mi ha spezzato la lama e cacciata. Ma non ho mai smesso di combattere.',
@@ -181,7 +181,7 @@
           sconfitta: 'L\'Arena vi ha spinti fuori. Rialzatevi e tornate giù.'
         },
         {
-          id: 'c2m2', difficolta: 3.4, forza: 1, titolo: "L'aria avvelenata", luogo: 'La Falesia di Ataca', alleato: "Sussurro dell'Abisso", riserva: 'Guardiana di Confine',
+          id: 'c2m2', difficolta: 3.4, forza: 1, titolo: "L'aria avvelenata", luogo: 'La Falesia di Ataca', alleato: "Sussurro dell'Abisso", riserva: 'Guardia di Confine',
           atti: ['Imboscata sulla Falesia'],
           premio: { bustine: 1, epica: 1 },
           prima: [
@@ -287,7 +287,7 @@
           sconfitta: 'ARGO ha riacceso le difese. Riprova.'
         },
         {
-          id: 'c4m2', difficolta: 3.6, forza: 2, titolo: 'Il Campione Imbattuto', luogo: 'Il viadotto di Ataca', alleato: 'Guardiana di Confine', riserva: "Titano d'Acciaio",
+          id: 'c4m2', difficolta: 3.6, forza: 2, titolo: 'Il Campione Imbattuto', luogo: 'Il viadotto di Ataca', alleato: 'Guardia di Confine', riserva: "Titano d'Acciaio",
           atti: ['Il Campione Imbattuto'],
           premio: { crediti: 250, bustine: 1, minaccia: 1 },
           prima: [

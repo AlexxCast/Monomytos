@@ -7,7 +7,7 @@ class ProgressionSystem {
 
   getDefaultData() {
     const allHeroes = [
-      "Aegis d'Acciaio", 'Neon Phantom', 'Guardiana di Confine', 'Lama Errante',
+      "Aegis d'Acciaio", 'Neon Phantom', 'Guardia di Confine', 'Lama Errante',
       "Titano d'Acciaio", 'Architetto Ombra', "Sussurro dell'Abisso", 'Duellante Spezzato'
     ];
     return {
@@ -43,11 +43,16 @@ class ProgressionSystem {
     return initial;
   }
 
-  // Eroi rinominati (20/11/2026: Iron Aegis -> Aegis d'Acciaio): aggiorna i salvataggi vecchi
+  // Eroi rinominati (20/11/2026): aggiorna i salvataggi vecchi
   static rinomina(obj) {
     if (!obj) return obj;
-    const t = JSON.stringify(obj);
-    return t.includes('"Iron Aegis"') ? JSON.parse(t.split('"Iron Aegis"').join('"Aegis d\'Acciaio"')) : obj;
+    let t = JSON.stringify(obj);
+    const nomi = { 'Iron Aegis': "Aegis d'Acciaio", 'Guardiana di Confine': 'Guardia di Confine' };
+    let cambiato = false;
+    for (const [vecchio, nuovo] of Object.entries(nomi)) {
+      if (t.includes('"' + vecchio + '"')) { t = t.split('"' + vecchio + '"').join('"' + nuovo + '"'); cambiato = true; }
+    }
+    return cambiato ? JSON.parse(t) : obj;
   }
 
   save(localOnly = false) {

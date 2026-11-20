@@ -567,7 +567,7 @@ class UIController {
     try {
       this.pendingMultiplayer = false;
       const allHeroes = [
-        "Aegis d'Acciaio", 'Neon Phantom', 'Guardiana di Confine', 'Lama Errante',
+        "Aegis d'Acciaio", 'Neon Phantom', 'Guardia di Confine', 'Lama Errante',
         "Titano d'Acciaio", 'Architetto Ombra', "Sussurro dell'Abisso", 'Duellante Spezzato'
       ];
       // Pick companions distinct from local hero
