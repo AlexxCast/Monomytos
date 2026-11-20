@@ -20,17 +20,7 @@ Aggiornato a ogni controllo. Le illustrazioni coprono TUTTA la carta: immagini V
 
 
 
-## scheda_guardianadiconfine.png (Scheda illustrazione per i social, non va nel gioco)
 
-Riferimento: schizzo_guardianadiconfine
-
-Horizontal 16:9 character design sheet (model sheet). The reference is a quick rough sketch by the author of this character: turn it into a finished, polished comic-style character sheet while keeping the author's design EXACTLY (same costume, colors, proportions, helmet, white chest plate with vertical orange line, brown harness, belt and pouches, thigh holster, orange forearm inserts, white knee pads, dark boots with white and orange toe caps, tall orange tech tower shield, white long weapon on the back, orange four-pointed star emblem on the lower back). Layout: the same character shown full body three times side by side at the same scale: front view, three-quarter view, back view, standing in a neutral pose. On the right a few small close-up details without boxes: the helmet visor, the shield, the star emblem. Clean dark background with a soft teal and cyan cosmic nebula glow, subtle floor shadow under each figure. Bold comic ink style, thick black outlines, cel shading, light halftone. Leave a clear empty strip at the top for a title. No text, no letters, no labels, no numbers, no arrows, no logos, no signature, no watermark, no frames or boxes around the views.
-
-## scheda_ironaegis.png (Scheda illustrazione per i social, non va nel gioco)
-
-Riferimento: schizzo_ironaegis
-
-Horizontal 16:9 character design sheet (model sheet). The reference is a quick rough sketch by the author of this character: turn it into a finished, polished comic-style character sheet while keeping the author's design EXACTLY (matte slate blue-grey angular armor, rounded helmet with angular inverted-T faceplate and glowing cyan eye slits, glowing cyan trapezoid chest light, segmented ridged shoulder plates, darker navy blue joints at elbows, wrists, waist and the back of the knees, long narrow rectangular tower shield as tall as the hero, long thin blade in the right hand). Layout: the same character shown full body three times side by side at the same scale: front view, three-quarter view, back view, standing in a neutral pose. On the right a few small close-up details without boxes: the helmet faceplate, the chest light, the shield. Clean dark background with a soft teal and cyan cosmic nebula glow, subtle floor shadow under each figure. Bold comic ink style, thick black outlines, cel shading, light halftone. Leave a clear empty strip at the top for a title. No text, no letters, no labels, no numbers, no arrows, no logos, no signature, no watermark, no frames or boxes around the views.
 
 ## scheda_ironaegis.png (Scheda illustrazione per i social, non va nel gioco)
 
