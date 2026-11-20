@@ -114,13 +114,13 @@
       ],
       missioni: [
         {
-          id: 'c1m1', regole: 1, difficolta: 1.1, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Ataca', alleato: 'Iron Aegis', riserva: 'Guardiana di Confine',
+          id: 'c1m1', regole: 1, difficolta: 1.1, titolo: 'Il cielo si spegne', luogo: 'Piazza del Fondatore, Ataca', alleato: "Aegis d'Acciaio", riserva: 'Guardiana di Confine',
           atti: ["L'Assedio dei Predoni delle Rovine", 'Blackout Ostile'],
           premio: { crediti: 150, bustine: 1 },
           prima: [
             { chi: 'narratore', v: 's_piazza', testo: 'Ataca, ore 23:47. La piazza del Fondatore è piena di gente col naso all\'insù.' },
             { chi: 'eroe', per: {
-              'Iron Aegis': "Ho lasciato l'esercito per proteggere questa città. Stanotte sento che servirà tutto quello che so.",
+              "Aegis d'Acciaio": "Ho lasciato l'esercito per proteggere questa città. Stanotte sento che servirà tutto quello che so.",
               'Neon Phantom': 'Corro sui tetti ogni notte. Il laboratorio da cui vengo mi ha lasciato solo una cosa: la velocità.',
               "Titano d'Acciaio": 'Dieci anni fa la Fonderia mi ha tolto tutto. Da allora uso questa forza per chi non ne ha.',
               'Architetto Ombra': 'Mi hanno cacciato dal laboratorio di Prometeo. Ma i miei calcoli non sbagliano: stanotte qualcosa non torna.',
@@ -233,7 +233,7 @@
           sconfitta: 'Il coro ricomincia a cantare. Riprova prima che finisca il rito.'
         },
         {
-          id: 'c3m2', difficolta: 4.8, titolo: 'La Fonderia in fiamme', luogo: 'La Fonderia Ardena', alleato: "Titano d'Acciaio", riserva: 'Iron Aegis',
+          id: 'c3m2', difficolta: 4.8, titolo: 'La Fonderia in fiamme', luogo: 'La Fonderia Ardena', alleato: "Titano d'Acciaio", riserva: "Aegis d'Acciaio",
           atti: ['Rivolta della Fonderia'],
           premio: { crediti: 250, bustine: 1 },
           prima: [
@@ -368,7 +368,7 @@
       ],
       missioni: [
         {
-          id: 'c6m1', difficolta: 3, forza: 1, titolo: "L'Eco Senza Nome", luogo: 'Lo strappo nel cielo', alleato: 'Neon Phantom', riserva: 'Iron Aegis', boss: true,
+          id: 'c6m1', difficolta: 3, forza: 1, titolo: "L'Eco Senza Nome", luogo: 'Lo strappo nel cielo', alleato: 'Neon Phantom', riserva: "Aegis d'Acciaio", boss: true,
           atti: ["L'Eco Senza Nome"],
           premio: { crediti: 500, bustine: 2, leggendaria: 1, minaccia: 1 },
           prima: [
@@ -602,14 +602,14 @@
       const st = P && P.data && P.data.starter;
       if (st && P.isHeroUnlocked(st)) return st;
       let h = ui && ui.selectedHero;
-      if (!h || (P && !P.isHeroUnlocked(h))) h = (P && P.data.unlockedHeroes[0]) || 'Iron Aegis';
+      if (!h || (P && !P.isHeroUnlocked(h))) h = (P && P.data.unlockedHeroes[0]) || "Aegis d'Acciaio";
       return h;
     },
     alleatoDi(m) {
       const me = this.mioEroe(m);
       if (m.alleato !== me) return m.alleato;
       if (m.riserva && m.riserva !== me) return m.riserva;
-      return me === 'Neon Phantom' ? 'Iron Aegis' : 'Neon Phantom';
+      return me === 'Neon Phantom' ? "Aegis d'Acciaio" : 'Neon Phantom';
     },
 
     // Mazzo del campione: il tuo, se ne hai uno completo per quell'eroe; altrimenti il suo mazzo starter in prova (non viene regalato)

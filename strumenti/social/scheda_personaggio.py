@@ -33,7 +33,7 @@ def main(src, nome, ruolo, out):
     d.text((x, y), nome.upper(), font=titolo, fill=(255, 245, 225), stroke_width=int(H * .006), stroke_fill=(0, 0, 0))
     y2 = y + titolo.getbbox(nome.upper())[3] + int(H * .008)
     d.text((x, y2), ruolo.upper(), font=sotto, fill=(110, 230, 225), stroke_width=int(H * .004), stroke_fill=(0, 0, 0))
-    testo = 'MONOMYTHOS  ·  design di Alessio  ·  illustrazione generata con AI (fase iniziale)'
+    testo = 'MONOMYTHOS  ·  personaggio disegnato a mano da Alessio  ·  rifinitura con AI (fase iniziale)'
     tw = d.textlength(testo, font=nota)
     d.text((W - tw - int(W * .015), H - int(H * .045)), testo, font=nota, fill=(225, 225, 225),
            stroke_width=max(2, int(H * .002)), stroke_fill=(0, 0, 0))

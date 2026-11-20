@@ -7,7 +7,7 @@ class ProgressionSystem {
 
   getDefaultData() {
     const allHeroes = [
-      'Iron Aegis', 'Neon Phantom', 'Guardiana di Confine', 'Lama Errante',
+      "Aegis d'Acciaio", 'Neon Phantom', 'Guardiana di Confine', 'Lama Errante',
       "Titano d'Acciaio", 'Architetto Ombra', "Sussurro dell'Abisso", 'Duellante Spezzato'
     ];
     return {
@@ -23,7 +23,7 @@ class ProgressionSystem {
     try {
       const raw = localStorage.getItem(this.storageKey);
       if (raw) {
-        const parsed = JSON.parse(raw);
+        const parsed = ProgressionSystem.rinomina(JSON.parse(raw));
         return { ...this.getDefaultData(), ...parsed };
       }
     } catch (e) {
@@ -41,6 +41,13 @@ class ProgressionSystem {
       });
     }
     return initial;
+  }
+
+  // Eroi rinominati (20/11/2026: Iron Aegis -> Aegis d'Acciaio): aggiorna i salvataggi vecchi
+  static rinomina(obj) {
+    if (!obj) return obj;
+    const t = JSON.stringify(obj);
+    return t.includes('"Iron Aegis"') ? JSON.parse(t.split('"Iron Aegis"').join('"Aegis d\'Acciaio"')) : obj;
   }
 
   save(localOnly = false) {
@@ -113,7 +120,7 @@ class ProgressionSystem {
       }
     });
 
-    if (pool.length === 0) pool = data.action_cards['Iron Aegis'];
+    if (pool.length === 0) pool = data.action_cards["Aegis d'Acciaio"];
 
     // Pick 3 random cards
     const pulled = [];

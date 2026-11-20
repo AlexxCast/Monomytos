@@ -1,7 +1,7 @@
 // Monomythos Mobile UI Controller - Tactile Touch Controls & Animations
 class UIController {
   constructor() {
-    this.selectedHero = 'Iron Aegis';
+    this.selectedHero = "Aegis d'Acciaio";
     this.selectedCard = null;
     this.localPlayerId = 'p_0';
     this.activeScreen = 'scr-lobby';
@@ -364,7 +364,7 @@ class UIController {
     const heroKeys = Object.keys(data.chars_meta).filter(k => k !== 'Custom Hero');
     if (window.Progression) heroKeys.sort((x, y) => window.Progression.isHeroUnlocked(y) - window.Progression.isHeroUnlocked(x));
     if (!this.selectedHero || !data.chars_meta[this.selectedHero] || this.selectedHero === 'Custom Hero') {
-      this.selectedHero = heroKeys[0] || 'Iron Aegis';
+      this.selectedHero = heroKeys[0] || "Aegis d'Acciaio";
     }
     if (window.Progression && !window.Progression.isHeroUnlocked(this.selectedHero)) {
       this.selectedHero = heroKeys.find(k => window.Progression.isHeroUnlocked(k)) || this.selectedHero;
@@ -567,7 +567,7 @@ class UIController {
     try {
       this.pendingMultiplayer = false;
       const allHeroes = [
-        'Iron Aegis', 'Neon Phantom', 'Guardiana di Confine', 'Lama Errante',
+        "Aegis d'Acciaio", 'Neon Phantom', 'Guardiana di Confine', 'Lama Errante',
         "Titano d'Acciaio", 'Architetto Ombra', "Sussurro dell'Abisso", 'Duellante Spezzato'
       ];
       // Pick companions distinct from local hero
@@ -1912,7 +1912,7 @@ class UIController {
 
     // Preset deck: solo le carte che questo eroe può davvero giocare con le sue statistiche
     const meta = data.chars_meta[customKey];
-    data.action_cards[customKey] = data.action_cards['Iron Aegis'].filter(c => !window.Collezione || window.Collezione.giocabile(c, meta));
+    data.action_cards[customKey] = data.action_cards["Aegis d'Acciaio"].filter(c => !window.Collezione || window.Collezione.giocabile(c, meta));
 
     this.hideModals();
     this.startSoloGame(customKey);
@@ -2868,10 +2868,10 @@ class UIController {
   startRogueHeroBossMatch(bossHeroName = "Titano d'Acciaio") {
     try {
       this.pendingMultiplayer = false;
-      const companion = bossHeroName === 'Neon Phantom' ? 'Iron Aegis' : 'Neon Phantom';
+      const companion = bossHeroName === 'Neon Phantom' ? "Aegis d'Acciaio" : 'Neon Phantom';
       window.GameEngine.startMatch({
         heroes: [
-          this.configGiocatore ? this.configGiocatore(this.selectedHero || 'Iron Aegis') : { name: this.selectedHero || 'Iron Aegis', isBot: false },
+          this.configGiocatore ? this.configGiocatore(this.selectedHero || "Aegis d'Acciaio") : { name: this.selectedHero || "Aegis d'Acciaio", isBot: false },
           { name: companion, isBot: true }
         ],
         isRogueHeroBoss: true,
@@ -3003,7 +3003,7 @@ class UIController {
     if (crEl) crEl.textContent = `${window.Progression ? window.Progression.getCredits() : 500} CR`;
 
     const heroEl = document.getElementById('serverPlayerHero');
-    if (heroEl) heroEl.textContent = this.selectedHero || 'Iron Aegis';
+    if (heroEl) heroEl.textContent = this.selectedHero || "Aegis d'Acciaio";
 
     const badge = document.getElementById('serverConnectionBadge');
     if (badge) {

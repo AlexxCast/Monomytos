@@ -208,7 +208,7 @@ const RIPRESE = {
       UI.fxBanner = (titolo, ...resto) => (/^ROUND/i.test(titolo) ? null : banner(titolo, ...resto));
       // Anche la carta Minaccia che si gira a ogni atto copre la scena: nei video resta il banner ATTO
       UI.triggerThreatDrawAnimation = () => {};
-      const nome = eroe || Progression.data.unlockedHeroes[0] || 'Iron Aegis';
+      const nome = eroe || Progression.data.unlockedHeroes[0] || "Aegis d'Acciaio";
       if (intro) { UI.startSoloGame(nome); return; }
       // Senza animazione d'apertura: si entra subito nel vivo della partita
       const orig = UI.playMatchIntroLoading;

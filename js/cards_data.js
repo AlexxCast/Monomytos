@@ -326,7 +326,7 @@ window.MONOMYTHOS_DATA = {
   ],
   "creation_cards": [
     {
-      "char": "Iron Aegis",
+      "char": "Aegis d'Acciaio",
       "full_name": "Origine: Ex-Geniere",
       "name": "Ex-Geniere",
       "type": "Statistica + Vita Base",
@@ -341,7 +341,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Iron Aegis",
+      "char": "Aegis d'Acciaio",
       "full_name": "Archetipo: Avanguardia Pesante",
       "name": "Avanguardia Pesante",
       "type": "Tag ammessi (no statistiche)",
@@ -356,7 +356,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Iron Aegis",
+      "char": "Aegis d'Acciaio",
       "full_name": "Costume: Armatura Exo-K",
       "name": "Armatura Exo-K",
       "type": "Statistica + Passiva Eccelsa",
@@ -371,7 +371,7 @@ window.MONOMYTHOS_DATA = {
       "layout_type": "silver"
     },
     {
-      "char": "Iron Aegis",
+      "char": "Aegis d'Acciaio",
       "full_name": "Potere Base: Sovraccarico Cinetico",
       "name": "Sovraccarico Cinetico",
       "type": "Azione gratuita (no statistiche)",
@@ -807,8 +807,8 @@ window.MONOMYTHOS_DATA = {
     }
   ],
   "chars_meta": {
-    "Iron Aegis": {
-      "name": "Iron Aegis",
+    "Aegis d'Acciaio": {
+      "name": "Aegis d'Acciaio",
       "str": 2,
       "spd": 0,
       "tech": 2,
@@ -929,10 +929,10 @@ window.MONOMYTHOS_DATA = {
     }
   },
   "action_cards": {
-    "Iron Aegis": [
+    "Aegis d'Acciaio": [
       {
         "id": "ironaegis_1",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 1,
         "nome": "Impatto Devastante",
         "copie": "x2",
@@ -984,7 +984,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_2",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 2,
         "nome": "Scudo Infrangibile",
         "copie": "x2",
@@ -1026,7 +1026,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_3",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 3,
         "nome": "Kit di Riparazione",
         "copie": "x2",
@@ -1060,7 +1060,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_4",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 4,
         "nome": "Granata a Frammentazione",
         "copie": "x2",
@@ -1096,7 +1096,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_5",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 5,
         "nome": "Barriera Olografica",
         "copie": "x2",
@@ -1131,7 +1131,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_6",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 6,
         "nome": "Analisi del Terreno",
         "copie": "x2",
@@ -1165,7 +1165,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_7",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 7,
         "nome": "Gancio Balistico",
         "copie": "x2",
@@ -1207,7 +1207,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_8",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 8,
         "nome": "Protocollo Defibrillazione",
         "copie": "x2",
@@ -1258,7 +1258,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_9",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 9,
         "nome": "Carica di Contenimento",
         "copie": "x2",
@@ -1300,7 +1300,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_10",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 10,
         "nome": "Prezzo dell'Acciaio",
         "copie": "x2",
@@ -1350,7 +1350,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_11",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 11,
         "nome": "Giuramento del Geniere",
         "copie": "x2",
@@ -1391,7 +1391,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_12",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 12,
         "nome": "Muro di Piastre",
         "copie": "x2",
@@ -1426,7 +1426,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_13",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 13,
         "nome": "Calcolo Balistico",
         "copie": "x2",
@@ -1461,7 +1461,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_14",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 14,
         "nome": "Generatore di Singolarità",
         "copie": "x2",
@@ -1510,7 +1510,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_15",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 15,
         "nome": "Sovraccarico del Core",
         "copie": "x2",
@@ -1560,7 +1560,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_16",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 16,
         "nome": "Corazza Sacrificale",
         "copie": "x2",
@@ -1601,7 +1601,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_17",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 17,
         "nome": "Ultimatum Cinetico",
         "copie": "x2",
@@ -1642,7 +1642,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_18",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 18,
         "nome": "Giuramento del Geniere",
         "copie": "x2",
@@ -1688,7 +1688,7 @@ window.MONOMYTHOS_DATA = {
       },
       {
         "id": "ironaegis_19",
-        "char": "Iron Aegis",
+        "char": "Aegis d'Acciaio",
         "num": 19,
         "nome": "Il Prezzo dell'Acciaio",
         "copie": "x2",
@@ -7142,7 +7142,8 @@ window.MONOMYTHOS_DATA = {
   },
   "card_img_map": {
     "ironaegis": "assets/cards/gen/h_ironaegis.webp",
-    "Iron Aegis": "assets/cards/gen/h_ironaegis.webp",
+    "aegisdacciaio": "assets/cards/gen/h_ironaegis.webp",
+    "Aegis d'Acciaio": "assets/cards/gen/h_ironaegis.webp",
     "neonphantom": "assets/cards/gen/h_neonphantom.webp",
     "Neon Phantom": "assets/cards/gen/h_neonphantom.webp",
     "guardianadiconfine": "assets/cards/gen/h_guardianadiconfine.webp",
