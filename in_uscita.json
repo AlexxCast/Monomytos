@@ -1,5 +1,18 @@
 [
  {
+  "id": "video:44782533845-youtube",
+  "titolo": "yt_trinita",
+  "piattaforme": [
+   "youtube",
+   "bluesky",
+   "telegram"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-20_yt_trinita.mp4",
+  "creato": "2026-11-20T17:24:22.667Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-20T17:24:22.667Z"
+ },
+ {
   "id": "video:44576310476-instagram",
   "titolo": "ig_argo_2",
   "piattaforme": [
