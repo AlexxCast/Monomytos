@@ -1,5 +1,16 @@
 [
  {
+  "id": "video:44782533845-tiktok",
+  "titolo": "tt_terzo",
+  "piattaforme": [
+   "tiktok"
+  ],
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-20_tt_terzo.mp4",
+  "creato": "2026-11-20T17:25:50.230Z",
+  "stato": "in_pubblicazione",
+  "esce_alle": "2026-11-20T17:25:50.230Z"
+ },
+ {
   "id": "video:44782533845-youtube",
   "titolo": "yt_trinita",
   "piattaforme": [
