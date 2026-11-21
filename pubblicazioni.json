@@ -1,5 +1,33 @@
 [
  {
+  "id": "yt_carta_scudo",
+  "lingua": "it",
+  "data": "2026-11-21T09:05:00.101Z",
+  "prova": true,
+  "didascalia_instagram": "Scudo Infrangibile: da Eroe proteggi un alleato, da Villain lo usi come scudo. In Monomythos ogni carta ha due facce. Tu quale useresti? 🛡️\n\n👉 Segui la pagina per il prossimo segreto di Ataca\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "tiktok": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "bluesky": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "telegram": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-21_yt_carta_scudo.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/44887788490"
+ },
+ {
   "id": "tt_carta_gancio",
   "lingua": "it",
   "data": "2026-11-21T09:03:21.303Z",
