@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-20T20:16:36.900Z",
+ "aggiornato": "2026-11-21T07:05:35.409Z",
  "piattaforme": {
   "youtube": {
    "stato": "ok",
@@ -7,17 +7,17 @@
     "nome": "Monomythos Card Game",
     "follower": 4,
     "views": 3447,
-    "video": 14,
+    "video": 15,
     "link": "https://youtube.com/channel/UC13DCZwGHExAVWoKa0eqikQ"
    },
    "video": [
     {
      "id": "5ydrABMT-bI",
      "titolo": "3 cose sulla Trinità del Velo #Shorts",
-     "data": "2026-11-20T17:24:24Z",
+     "data": "2026-11-21T00:00:06Z",
      "link": "https://youtube.com/shorts/5ydrABMT-bI",
-     "privato": true,
-     "views": 0,
+     "privato": false,
+     "views": 1,
      "likes": 0,
      "commenti": 0
     },
@@ -27,7 +27,7 @@
      "data": "2026-11-19T17:23:47Z",
      "link": "https://youtube.com/shorts/GfO3gebVo9Y",
      "privato": false,
-     "views": 85,
+     "views": 88,
      "likes": 1,
      "commenti": 0
     },
@@ -163,7 +163,7 @@
     }
    ],
    "totali": {
-    "views": 3477,
+    "views": 3481,
     "likes": 59,
     "commenti": 0,
     "condivisioni": 0
@@ -174,9 +174,9 @@
    "account": {
     "nome": "Monomythos",
     "follower": 4,
-    "likes": 76,
+    "likes": 75,
     "video": 12,
-    "link": "https://vm.tiktok.com/ZN8mhJkJM/"
+    "link": "https://vm.tiktok.com/ZN8mSPMrW/"
    },
    "video": [
     {
@@ -184,7 +184,7 @@
      "titolo": "La Trinità del Velo è in tre. Il terzo vive in mezzo a noi. Lo riconosceresti? 🔺 👉 Segui la pagina per il prossimo segreto di Ataca 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.  Trinità del Velo è in tre. Il terzo vive in mezzo a noi. Lo riconosceresti? 🔺 👉 Segui la pagina per il prossimo segreto di Ataca 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.     #monomythos #cardgame #indiegame #giochidicarte #gamedevLa ",
      "data": "2026-11-20T17:59:21.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7710314798604389664?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 14,
+     "views": 103,
      "likes": 3,
      "commenti": 0,
      "condivisioni": 0
@@ -204,8 +204,8 @@
      "titolo": "Ad Ataca, se un drone si ferma davanti a te, ARGO ti ha appena contato. Tu correresti? 🏃 🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori. #monomythos #mistero #lore #pov #indiegame ",
      "data": "2026-11-18T09:16:28.000Z",
      "link": "https://www.tiktok.com/@monomythosgame/video/7709437862491557152?utm_campaign=tt4d_open_api&utm_source=sbaw9xik6fltokyb3b",
-     "views": 265,
-     "likes": 3,
+     "views": 266,
+     "likes": 2,
      "commenti": 0,
      "condivisioni": 1
     },
@@ -301,8 +301,8 @@
     }
    ],
    "totali": {
-    "views": 4595,
-    "likes": 76,
+    "views": 4685,
+    "likes": 75,
     "commenti": 1,
     "condivisioni": 1
    }
@@ -489,8 +489,19 @@
    }
   },
   "telegram": {
-   "stato": "errore",
-   "nota": "fetch failed"
+   "stato": "ok",
+   "account": {
+    "nome": "Monomythosgame",
+    "follower": 2,
+    "link": "https://t.me/Monomythosgame"
+   },
+   "video": [],
+   "totali": {
+    "views": 0,
+    "likes": 0,
+    "commenti": 0,
+    "condivisioni": 0
+   }
   }
  }
 }
