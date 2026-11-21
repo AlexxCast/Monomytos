@@ -148,6 +148,76 @@
     "tiktok": "tt_eroe_villain",
     "instagram": "ig_campione_solo"
    }
+  },
+  {
+   "data": "2026-11-23",
+   "copione": "yt_archivio_6",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_archivio_6",
+    "tiktok": "tt_salveresti",
+    "instagram": "ig_cisterna"
+   }
+  },
+  {
+   "data": "2026-11-24",
+   "copione": "yt_carta_scudo",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_carta_scudo",
+    "tiktok": "tt_carta_gancio",
+    "instagram": "ig_chi_villain"
+   }
+  },
+  {
+   "data": "2026-11-25",
+   "copione": "yt_archivio_7",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_archivio_7",
+    "tiktok": "tt_statua",
+    "instagram": "ig_carta_scudo"
+   }
+  },
+  {
+   "data": "2026-11-26",
+   "copione": "yt_viadotto",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_viadotto",
+    "tiktok": "tt_votate",
+    "instagram": "ig_statua"
+   }
+  },
+  {
+   "data": "2026-11-27",
+   "copione": "yt_carta_scatto",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_carta_scatto",
+    "tiktok": "tt_viadotto",
+    "instagram": "ig_salveresti"
+   }
+  },
+  {
+   "data": "2026-11-28",
+   "copione": "yt_archivio_8",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_archivio_8",
+    "tiktok": "tt_carta_silenzio",
+    "instagram": "ig_carta_scatto"
+   }
+  },
+  {
+   "data": "2026-11-29",
+   "copione": "yt_alba",
+   "formato": "per piattaforma",
+   "per_piattaforma": {
+    "youtube": "yt_alba",
+    "tiktok": "tt_tradiresti",
+    "instagram": "ig_viadotto"
+   }
   }
  ],
  "vecchia_scaletta_gameplay": [
