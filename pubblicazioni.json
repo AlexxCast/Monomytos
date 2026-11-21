@@ -1,5 +1,33 @@
 [
  {
+  "id": "tt_carta_gancio",
+  "lingua": "it",
+  "data": "2026-11-21T09:03:21.303Z",
+  "prova": true,
+  "didascalia_instagram": "Gancio Balistico: da Eroe liberi un alleato, da Villain lo sfianchi. Stessa carta, due scelte. Tu cosa faresti? 👇\n\n👉 Segui la pagina per il prossimo segreto di Ataca\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "tiktok": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "bluesky": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   },
+   "telegram": {
+    "esito": "prova",
+    "nota": "chiavi presenti, nessuna pubblicazione (modalità prova)"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-21_tt_carta_gancio.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/44887651054"
+ },
+ {
   "id": "ig_argo_3",
   "lingua": "it",
   "data": "2026-11-20T17:27:41.851Z",
