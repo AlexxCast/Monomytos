@@ -1,5 +1,31 @@
 [
  {
+  "id": "yt_archivio_5",
+  "lingua": "it",
+  "data": "2026-11-21T17:22:51.011Z",
+  "prova": false,
+  "didascalia_instagram": "Archivio segreto #5 — l'Eco Senza Nome. Ripete le ultime parole degli eroi caduti. 🌫️\n\n👉 Segui la pagina per il prossimo segreto di Ataca\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "youtube": {
+    "esito": "ok",
+    "link": "https://youtube.com/shorts/4Jq37m7oacE",
+    "stato": "private",
+    "esce_alle": "2026-11-22T12:00:00Z"
+   },
+   "bluesky": {
+    "esito": "ok",
+    "link": "https://bsky.app/profile/monomythos.bsky.social/post/3n2tmilab2d2a"
+   },
+   "telegram": {
+    "esito": "ok",
+    "id": 20
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-21_yt_archivio_5.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/44929582740"
+ },
+ {
   "id": "yt_carta_scudo",
   "lingua": "it",
   "data": "2026-11-21T09:05:00.101Z",
