@@ -5569,6 +5569,2075 @@
       ],
       "aggancio": "risucchio",
       "durata_min": 1.2
+    },
+    {
+      "id": "yt_archivio_6",
+      "formato": "YouTube: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Archivio segreto #6: la Cisterna",
+        "en": "Archivio segreto #6: la Cisterna"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_cisterna"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_cripte"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_fonderia"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_infetti"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Archivio segreto *#6*",
+            "en": "Archivio segreto *#6*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Sotto Ataca scorre acqua nera",
+            "en": "Sotto Ataca scorre acqua nera"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Chi la beve non dorme più",
+            "en": "Chi la beve non dorme più"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "E sente il Velo *chiamare*",
+            "en": "E sente il Velo *chiamare*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Archivio segreto #6 — la Cisterna di Ataca. Chi beve la sua acqua nera non dorme più. 💧",
+        "en": "Archivio segreto #6 — la Cisterna di Ataca. Chi beve la sua acqua nera non dorme più. 💧"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_carta_scudo",
+      "formato": "YouTube: rivelazione carta",
+      "tema": "villain",
+      "titolo": {
+        "it": "La carta che cambia faccia",
+        "en": "La carta che cambia faccia"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "carta",
+          "carta": "ironaegis_2"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Questa carta *cambia faccia*",
+            "en": "Questa carta *cambia faccia*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "a",
+          "da": 1.6,
+          "durata": 1.6,
+          "testo": {
+            "it": "Da Eroe: proteggi un alleato",
+            "en": "Da Eroe: proteggi un alleato"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "a",
+          "da": 3.2,
+          "durata": 1.7,
+          "testo": {
+            "it": "Da Villain: lo usi come *scudo*",
+            "en": "Da Villain: lo usi come *scudo*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "a",
+          "da": 4.9,
+          "durata": 1.4,
+          "testo": {
+            "it": "Tu chi saresti?",
+            "en": "Tu chi saresti?"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.8,
+      "didascalia": {
+        "it": "Scudo Infrangibile: da Eroe proteggi un alleato, da Villain lo usi come scudo. In Monomythos ogni carta ha due facce. Tu quale useresti? 🛡️",
+        "en": "Scudo Infrangibile: da Eroe proteggi un alleato, da Villain lo usi come scudo. In Monomythos ogni carta ha due facce. Tu quale useresti? 🛡️"
+      },
+      "hashtag": [
+        "cardgame",
+        "carte",
+        "villain"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_archivio_7",
+      "formato": "YouTube: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Archivio segreto #7: la Statua",
+        "en": "Archivio segreto #7: la Statua"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_pioggia"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_torre"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Archivio segreto *#7*",
+            "en": "Archivio segreto *#7*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "La statua in piazza non ha nome",
+            "en": "La statua in piazza non ha nome"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Ogni notte gira la testa",
+            "en": "Ogni notte gira la testa"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.7,
+          "testo": {
+            "it": "Verso chi sta per *tradire*",
+            "en": "Verso chi sta per *tradire*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Archivio segreto #7 — la statua senza nome di Ataca. Ogni notte guarda chi sta per tradire. 🗿",
+        "en": "Archivio segreto #7 — la statua senza nome di Ataca. Ogni notte guarda chi sta per tradire. 🗿"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_viadotto",
+      "formato": "YouTube: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Perché nessuno attraversa il Viadotto",
+        "en": "Perché nessuno attraversa il Viadotto"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_strappo"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Perché nessuno attraversa il *Viadotto*?",
+            "en": "Perché nessuno attraversa il *Viadotto*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "A metà ponte le luci muoiono",
+            "en": "A metà ponte le luci muoiono"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "e il tempo si strappa",
+            "en": "e il tempo si strappa"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Chi torna è *più vecchio*",
+            "en": "Chi torna è *più vecchio*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Il Viadotto di Ataca: a metà ponte le luci muoiono e il tempo si strappa. Chi torna è più vecchio. 🌉",
+        "en": "Il Viadotto di Ataca: a metà ponte le luci muoiono e il tempo si strappa. Chi torna è più vecchio. 🌉"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_carta_scatto",
+      "formato": "YouTube: rivelazione carta",
+      "tema": "villain",
+      "titolo": {
+        "it": "Paghi tu o paga lui?",
+        "en": "Paghi tu o paga lui?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "carta",
+          "carta": "duellantespezzato_7"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Paghi tu… o *paga lui*?",
+            "en": "Paghi tu… o *paga lui*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "a",
+          "da": 1.6,
+          "durata": 1.6,
+          "testo": {
+            "it": "Da Eroe paghi con la tua vita",
+            "en": "Da Eroe paghi con la tua vita"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "a",
+          "da": 3.2,
+          "durata": 1.7,
+          "testo": {
+            "it": "Da Villain con quella di un *alleato*",
+            "en": "Da Villain con quella di un *alleato*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "a",
+          "da": 4.9,
+          "durata": 1.4,
+          "testo": {
+            "it": "E peschi due carte",
+            "en": "E peschi due carte"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.8,
+      "didascalia": {
+        "it": "Scatto Rubato: da Eroe paghi con la tua vita, da Villain con quella di un alleato. In Monomythos il tradimento è una scelta. 🗡️",
+        "en": "Scatto Rubato: da Eroe paghi con la tua vita, da Villain con quella di un alleato. In Monomythos il tradimento è una scelta. 🗡️"
+      },
+      "hashtag": [
+        "cardgame",
+        "carte",
+        "villain"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_archivio_8",
+      "formato": "YouTube: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Archivio segreto #8: il Quartier Generale",
+        "en": "Archivio segreto #8: il Quartier Generale"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_quartier_generale"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_schermi"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_torre_prometeo"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Archivio segreto *#8*",
+            "en": "Archivio segreto *#8*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "Gli eroi si riuniscono qui",
+            "en": "Gli eroi si riuniscono qui"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Ma ARGO ascolta ogni parola",
+            "en": "Ma ARGO ascolta ogni parola"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "E sa già chi *cadrà*",
+            "en": "E sa già chi *cadrà*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "Archivio segreto #8 — il Quartier Generale degli eroi. ARGO ascolta ogni parola. 🎧",
+        "en": "Archivio segreto #8 — il Quartier Generale degli eroi. ARGO ascolta ogni parola. 🎧"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "yt_alba",
+      "formato": "YouTube: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "L'ultima alba di Ataca",
+        "en": "L'ultima alba di Ataca"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_alba"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_stella"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "L'ultima *alba* di Ataca",
+            "en": "L'ultima *alba* di Ataca"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "La Stella non tramonta più",
+            "en": "La Stella non tramonta più"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Il Velo copre il sole",
+            "en": "Il Velo copre il sole"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "Restano solo gli *eroi*",
+            "en": "Restano solo gli *eroi*"
+          },
+          "stile": "grande",
+          "transizione": "dissolvenza"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 2,
+      "didascalia": {
+        "it": "L'ultima alba di Ataca: la Stella non tramonta più e il Velo copre il sole. Restano solo gli eroi. 🌅",
+        "en": "L'ultima alba di Ataca: la Stella non tramonta più e il Velo copre il sole. Restano solo gli eroi. 🌅"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "voce": {
+        "nome": "it-IT-DiegoNeural",
+        "stile": "epica"
+      },
+      "durata_min": 1.4
+    },
+    {
+      "id": "tt_salveresti",
+      "formato": "TikTok: interattivo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Quale salveresti?",
+        "en": "Quale salveresti?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_caduta"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "*QUALE* SALVERESTI?",
+            "en": "*QUALE* SALVERESTI?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "il Campione",
+            "en": "il Campione"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "o il Custode",
+            "en": "o il Custode"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "uno solo resta *eroe*",
+            "en": "uno solo resta *eroe*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "SCRIVILO 👇",
+            "en": "SCRIVILO 👇"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "Uno solo resta eroe. Il Campione o il Custode? Scrivilo nei commenti 👇",
+        "en": "Uno solo resta eroe. Il Campione o il Custode? Scrivilo nei commenti 👇"
+      },
+      "hashtag": [
+        "domanda",
+        "lore",
+        "villain"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_carta_gancio",
+      "formato": "TikTok: rivelazione carta",
+      "tema": "villain",
+      "titolo": {
+        "it": "Aiuti o tradisci?",
+        "en": "Aiuti o tradisci?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "carta",
+          "carta": "ironaegis_7"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "AIUTI O *TRADISCI*?",
+            "en": "AIUTI O *TRADISCI*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "a",
+          "da": 1.4,
+          "durata": 1.2,
+          "testo": {
+            "it": "stessa carta",
+            "en": "stessa carta"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 2.6,
+          "durata": 1.5,
+          "testo": {
+            "it": "da Eroe salvi un alleato",
+            "en": "da Eroe salvi un alleato"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 4.1,
+          "durata": 1.5,
+          "testo": {
+            "it": "da Villain *sfianca* un alleato",
+            "en": "da Villain *sfianca* un alleato"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 5.6,
+          "durata": 1.0,
+          "testo": {
+            "it": "TU?",
+            "en": "TU?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.8,
+      "didascalia": {
+        "it": "Gancio Balistico: da Eroe liberi un alleato, da Villain un alleato a caso resta Sfiancato. Stessa carta, due scelte. Tu cosa faresti? 👇",
+        "en": "Gancio Balistico: da Eroe liberi un alleato, da Villain un alleato a caso resta Sfiancato. Stessa carta, due scelte. Tu cosa faresti? 👇"
+      },
+      "hashtag": [
+        "cardgame",
+        "carte",
+        "villain"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_statua",
+      "formato": "TikTok: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "La statua si è girata",
+        "en": "La statua si è girata"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_pioggia"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_torre"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "SI È *GIRATA*",
+            "en": "SI È *GIRATA*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "la statua senza nome",
+            "en": "la statua senza nome"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "guarda chi sta per tradire",
+            "en": "guarda chi sta per tradire"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "stanotte guarda *te*",
+            "en": "stanotte guarda *te*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.1,
+          "testo": {
+            "it": "PERCHÉ?",
+            "en": "PERCHÉ?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "La statua senza nome di Ataca si gira verso chi sta per tradire. Stanotte guarda te. Perché? 👁️",
+        "en": "La statua senza nome di Ataca si gira verso chi sta per tradire. Stanotte guarda te. Perché? 👁️"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_votate",
+      "formato": "TikTok: interattivo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Votate il Villain",
+        "en": "Votate il Villain"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_incappucciati"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_rituale"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.2,
+          "testo": {
+            "it": "*VOTATE*",
+            "en": "*VOTATE*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "uno di loro diventa Villain",
+            "en": "uno di loro diventa Villain"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "1, 2 o 3?",
+            "en": "1, 2 o 3?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "decidete *voi*",
+            "en": "decidete *voi*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.1,
+          "testo": {
+            "it": "COMMENTA 👇",
+            "en": "COMMENTA 👇"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "Uno di loro diventerà Villain. Decidete voi: 1, 2 o 3? Commenta 👇",
+        "en": "Uno di loro diventerà Villain. Decidete voi: 1, 2 o 3? Commenta 👇"
+      },
+      "hashtag": [
+        "domanda",
+        "lore",
+        "villain"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_viadotto",
+      "formato": "TikTok: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Non attraversarlo",
+        "en": "Non attraversarlo"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_strappo"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "NON *ATTRAVERSARLO*",
+            "en": "NON *ATTRAVERSARLO*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "a metà le luci muoiono",
+            "en": "a metà le luci muoiono"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "e il tempo si strappa",
+            "en": "e il tempo si strappa"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "chi torna è *più vecchio*",
+            "en": "chi torna è *più vecchio*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.1,
+          "testo": {
+            "it": "LO FARESTI?",
+            "en": "LO FARESTI?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "Il Viadotto di Ataca: chi lo attraversa torna più vecchio. Tu lo faresti? 🌉",
+        "en": "Il Viadotto di Ataca: chi lo attraversa torna più vecchio. Tu lo faresti? 🌉"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_carta_silenzio",
+      "formato": "TikTok: rivelazione carta",
+      "tema": "villain",
+      "titolo": {
+        "it": "Il silenzio vale 3",
+        "en": "Il silenzio vale 3"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "carta",
+          "carta": "sussurrodellabisso_10"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "IL SILENZIO *VALE 3*",
+            "en": "IL SILENZIO *VALE 3*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "a",
+          "da": 1.4,
+          "durata": 1.2,
+          "testo": {
+            "it": "Voto di Silenzio",
+            "en": "Voto di Silenzio"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 2.6,
+          "durata": 1.4,
+          "testo": {
+            "it": "da Eroe ti cura",
+            "en": "da Eroe ti cura"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 4.0,
+          "durata": 1.6,
+          "testo": {
+            "it": "da Villain ti dà *3 punti*",
+            "en": "da Villain ti dà *3 punti*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 5.6,
+          "durata": 1.0,
+          "testo": {
+            "it": "TU?",
+            "en": "TU?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.8,
+      "didascalia": {
+        "it": "Voto di Silenzio: da Eroe ti cura, da Villain vale 3 punti Villain. Resteresti eroe? 👇",
+        "en": "Voto di Silenzio: da Eroe ti cura, da Villain vale 3 punti Villain. Resteresti eroe? 👇"
+      },
+      "hashtag": [
+        "cardgame",
+        "carte",
+        "villain"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "tt_tradiresti",
+      "formato": "TikTok: interattivo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Tradiresti per vincere?",
+        "en": "Tradiresti per vincere?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_alba"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        },
+        "e": {
+          "tipo": "vignetta",
+          "id": "s_esplosione"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "TRADIRESTI *PER VINCERE*?",
+            "en": "TRADIRESTI *PER VINCERE*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "i tuoi amici contano su di te",
+            "en": "i tuoi amici contano su di te"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "il Velo ti offre la vittoria",
+            "en": "il Velo ti offre la vittoria"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "ma da *solo*",
+            "en": "ma da *solo*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "e",
+          "da": 0,
+          "durata": 1.1,
+          "testo": {
+            "it": "SÌ O NO? 👇",
+            "en": "SÌ O NO? 👇"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "In Monomythos puoi vincere da solo… passando al Velo. Tradiresti i tuoi amici per vincere? Sì o no 👇",
+        "en": "In Monomythos puoi vincere da solo… passando al Velo. Tradiresti i tuoi amici per vincere? Sì o no 👇"
+      },
+      "hashtag": [
+        "domanda",
+        "lore",
+        "villain"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_cisterna",
+      "formato": "Instagram: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Non bere quell'acqua",
+        "en": "Non bere quell'acqua"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_cisterna"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_cripte"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_fonderia"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_infetti"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "NON *BERLA*",
+            "en": "NON *BERLA*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "l'acqua nera della Cisterna",
+            "en": "l'acqua nera della Cisterna"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "chi la beve non dorme più",
+            "en": "chi la beve non dorme più"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "e sente il Velo *chiamare*",
+            "en": "e sente il Velo *chiamare*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "L'acqua nera sotto Ataca: chi la beve non dorme più e sente il Velo chiamare. Tu la berresti? 💧",
+        "en": "L'acqua nera sotto Ataca: chi la beve non dorme più e sente il Velo chiamare. Tu la berresti? 💧"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_chi_villain",
+      "formato": "Instagram: interattivo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Chi diventerà Villain?",
+        "en": "Chi diventerà Villain?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_incappucciati"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_finale"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "CHI DIVENTERÀ *VILLAIN*?",
+            "en": "CHI DIVENTERÀ *VILLAIN*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "il Campione?",
+            "en": "il Campione?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "il Custode?",
+            "en": "il Custode?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "o *tu*?",
+            "en": "o *tu*?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "Uno di loro passerà al Velo. Chi diventerà Villain? Scrivilo nei commenti 👇",
+        "en": "Uno di loro passerà al Velo. Chi diventerà Villain? Scrivilo nei commenti 👇"
+      },
+      "hashtag": [
+        "domanda",
+        "lore",
+        "villain"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_carta_scudo",
+      "formato": "Instagram: rivelazione carta",
+      "tema": "villain",
+      "titolo": {
+        "it": "Scudo o ostaggio?",
+        "en": "Scudo o ostaggio?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "carta",
+          "carta": "ironaegis_2"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "SCUDO O *OSTAGGIO*?",
+            "en": "SCUDO O *OSTAGGIO*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "a",
+          "da": 1.5,
+          "durata": 1.6,
+          "testo": {
+            "it": "Da Eroe proteggi un alleato",
+            "en": "Da Eroe proteggi un alleato"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 3.1,
+          "durata": 1.7,
+          "testo": {
+            "it": "Da Villain lo usi come *scudo*",
+            "en": "Da Villain lo usi come *scudo*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 4.8,
+          "durata": 1.4,
+          "testo": {
+            "it": "Tu quale useresti?",
+            "en": "Tu quale useresti?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.8,
+      "didascalia": {
+        "it": "Scudo Infrangibile: da Eroe proteggi un alleato, da Villain lo usi come scudo. Tu quale useresti? 🛡️",
+        "en": "Scudo Infrangibile: da Eroe proteggi un alleato, da Villain lo usi come scudo. Tu quale useresti? 🛡️"
+      },
+      "hashtag": [
+        "cardgame",
+        "carte",
+        "villain"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_statua",
+      "formato": "Instagram: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Si è girata verso di te",
+        "en": "Si è girata verso di te"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_piazza"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_pioggia"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_torre"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "SI È *GIRATA*",
+            "en": "SI È *GIRATA*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "la statua senza nome",
+            "en": "la statua senza nome"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "guarda chi sta per tradire",
+            "en": "guarda chi sta per tradire"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "stanotte guarda *te*",
+            "en": "stanotte guarda *te*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "La statua senza nome di Ataca si gira verso chi sta per tradire. Stanotte guarda te. 🗿",
+        "en": "La statua senza nome di Ataca si gira verso chi sta per tradire. Stanotte guarda te. 🗿"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_salveresti",
+      "formato": "Instagram: interattivo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Ne puoi salvare uno",
+        "en": "Ne puoi salvare uno"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_alba"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_statua"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_custode"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_velo_caduta"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "NE PUOI SALVARE *UNO*",
+            "en": "NE PUOI SALVARE *UNO*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "il Campione",
+            "en": "il Campione"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.3,
+          "testo": {
+            "it": "o il Custode",
+            "en": "o il Custode"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "l'altro passa al *Velo*",
+            "en": "l'altro passa al *Velo*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "Ne puoi salvare uno solo: il Campione o il Custode? L'altro passa al Velo. Scegli nei commenti 👇",
+        "en": "Ne puoi salvare uno solo: il Campione o il Custode? L'altro passa al Velo. Scegli nei commenti 👇"
+      },
+      "hashtag": [
+        "domanda",
+        "lore",
+        "villain"
+      ],
+      "aggancio": "risucchio",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_carta_scatto",
+      "formato": "Instagram: rivelazione carta",
+      "tema": "villain",
+      "titolo": {
+        "it": "Paghi tu o paga lui?",
+        "en": "Paghi tu o paga lui?"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "carta",
+          "carta": "duellantespezzato_7"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "PAGHI TU O *PAGA LUI*?",
+            "en": "PAGHI TU O *PAGA LUI*?"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "a",
+          "da": 1.5,
+          "durata": 1.6,
+          "testo": {
+            "it": "Da Eroe paghi con la tua vita",
+            "en": "Da Eroe paghi con la tua vita"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 3.1,
+          "durata": 1.7,
+          "testo": {
+            "it": "Da Villain con quella di un *alleato*",
+            "en": "Da Villain con quella di un *alleato*"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "a",
+          "da": 4.8,
+          "durata": 1.3,
+          "testo": {
+            "it": "Lo faresti?",
+            "en": "Lo faresti?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Monomythos · gioco di carte gratis · link in bio",
+          "en": "Monomythos · free card game · link in bio"
+        },
+        "invito": {
+          "it": "CHI DIVENTERÀ VILLAIN?",
+          "en": "WHO BECOMES THE VILLAIN?"
+        }
+      },
+      "durata_fine": 1.8,
+      "didascalia": {
+        "it": "Scatto Rubato: da Eroe paghi con la tua vita, da Villain con quella di un alleato. Lo faresti? 🗡️",
+        "en": "Scatto Rubato: da Eroe paghi con la tua vita, da Villain con quella di un alleato. Lo faresti? 🗡️"
+      },
+      "hashtag": [
+        "cardgame",
+        "carte",
+        "villain"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
+    },
+    {
+      "id": "ig_viadotto",
+      "formato": "Instagram: lore autonomo",
+      "tema": "villain",
+      "titolo": {
+        "it": "Chi torna è più vecchio",
+        "en": "Chi torna è più vecchio"
+      },
+      "musica": "storia_tensione.mp3",
+      "musica_da": 20,
+      "riprese": {
+        "a": {
+          "tipo": "vignetta",
+          "id": "s_viadotto"
+        },
+        "b": {
+          "tipo": "vignetta",
+          "id": "s_blackout"
+        },
+        "c": {
+          "tipo": "vignetta",
+          "id": "s_strappo"
+        },
+        "d": {
+          "tipo": "vignetta",
+          "id": "s_cielo_spezzato"
+        }
+      },
+      "inquadrature": [
+        {
+          "ripresa": "a",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "CHI TORNA È *PIÙ VECCHIO*",
+            "en": "CHI TORNA È *PIÙ VECCHIO*"
+          },
+          "stile": "grande"
+        },
+        {
+          "ripresa": "b",
+          "da": 0,
+          "durata": 1.6,
+          "testo": {
+            "it": "a metà ponte le luci muoiono",
+            "en": "a metà ponte le luci muoiono"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "c",
+          "da": 0,
+          "durata": 1.4,
+          "testo": {
+            "it": "e il tempo si strappa",
+            "en": "e il tempo si strappa"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        },
+        {
+          "ripresa": "d",
+          "da": 0,
+          "durata": 1.5,
+          "testo": {
+            "it": "tu lo *attraverseresti*?",
+            "en": "tu lo *attraverseresti*?"
+          },
+          "stile": "grande",
+          "transizione": "flash"
+        }
+      ],
+      "chiusura": {
+        "sopra": {
+          "it": "Ogni sera un nuovo segreto di Ataca",
+          "en": "A new secret of Ataca every night"
+        },
+        "invito": {
+          "it": "SEGUI LA PAGINA",
+          "en": "FOLLOW"
+        }
+      },
+      "durata_fine": 1.6,
+      "didascalia": {
+        "it": "Il Viadotto di Ataca: chi lo attraversa torna più vecchio. Tu lo attraverseresti? 🌉",
+        "en": "Il Viadotto di Ataca: chi lo attraversa torna più vecchio. Tu lo attraverseresti? 🌉"
+      },
+      "hashtag": [
+        "lore",
+        "mistero",
+        "pov"
+      ],
+      "aggancio": "colpo",
+      "durata_min": 1.2
     }
   ]
 }

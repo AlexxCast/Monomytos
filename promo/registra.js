@@ -390,6 +390,13 @@ const RIPRESE = {
       const tutte = Object.values(window.MONOMYTHOS_DATA.action_cards).flat();
       const c = (nome && tutte.find(x => x.id === nome || x.nome === nome)) || tutte[Math.floor(Math.random() * tutte.length)];
       UI.inspectCard(c);
+      // Nei video la carta sta da sola, grande e al centro: niente finestra, pulsanti o testi del gioco
+      if (!document.getElementById('promoCartaSola')) document.head.insertAdjacentHTML('beforeend', `<style id="promoCartaSola">
+        #modalInspect.modal-overlay, #modalInspect.modal-overlay.active { backdrop-filter: none !important; background: radial-gradient(circle at 50% 45%, rgba(40,20,70,.9), rgba(5,8,20,.98)) !important; align-items: center !important; justify-content: center !important; }
+        #modalInspect.modal-overlay .bottom-sheet, #modalInspect .full-card-inspect-wrap { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; transform: none !important; overflow: visible !important; max-height: none !important; height: auto !important; }
+        #modalInspect .sheet-handle, #modalInspect button, #modalInspect .full-card-inspect-wrap > :not(:first-child) { display: none !important; }
+        #modalInspect .full-card-inspect-wrap > :first-child { transform: scale(1.2); transform-origin: center; margin: 0 !important; }
+      </style>`);
     }, r.carta || null);
     return async durata => { await attesa(p, durata); };
   }
