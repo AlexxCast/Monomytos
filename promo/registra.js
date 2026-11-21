@@ -390,6 +390,13 @@ const RIPRESE = {
       const tutte = Object.values(window.MONOMYTHOS_DATA.action_cards).flat();
       const c = (nome && tutte.find(x => x.id === nome || x.nome === nome)) || tutte[Math.floor(Math.random() * tutte.length)];
       UI.inspectCard(c);
+      // Nei video la carta sta da sola, grande e al centro: niente finestra, pulsanti o testi del gioco
+      if (!document.getElementById('promoCartaSola')) document.head.insertAdjacentHTML('beforeend', `<style id="promoCartaSola">
+        #modalInspect { background: radial-gradient(circle at 50% 45%, rgba(40,20,70,.85), rgba(5,8,20,.97)) !important; align-items: center !important; }
+        #modalInspect .bottom-sheet { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+        #modalInspect .sheet-handle, #modalInspect button, #inspectCardTitle, #inspectCardDesc { display: none !important; }
+        #inspectCardImg { width: 86vw !important; max-width: none !important; border-radius: 14px; filter: drop-shadow(0 14px 30px rgba(0,0,0,.7)); }
+      </style>`);
     }, r.carta || null);
     return async durata => { await attesa(p, durata); };
   }

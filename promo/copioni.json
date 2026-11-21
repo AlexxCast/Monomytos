@@ -6411,8 +6411,8 @@
           "da": 4.1,
           "durata": 1.5,
           "testo": {
-            "it": "da Villain lo *sfianchi*",
-            "en": "da Villain lo *sfianchi*"
+            "it": "da Villain *sfianca* un alleato",
+            "en": "da Villain *sfianca* un alleato"
           },
           "stile": "grande",
           "transizione": "flash"
@@ -6441,8 +6441,8 @@
       },
       "durata_fine": 1.8,
       "didascalia": {
-        "it": "Gancio Balistico: da Eroe liberi un alleato, da Villain lo sfianchi. Stessa carta, due scelte. Tu cosa faresti? 👇",
-        "en": "Gancio Balistico: da Eroe liberi un alleato, da Villain lo sfianchi. Stessa carta, due scelte. Tu cosa faresti? 👇"
+        "it": "Gancio Balistico: da Eroe liberi un alleato, da Villain un alleato a caso resta Sfiancato. Stessa carta, due scelte. Tu cosa faresti? 👇",
+        "en": "Gancio Balistico: da Eroe liberi un alleato, da Villain un alleato a caso resta Sfiancato. Stessa carta, due scelte. Tu cosa faresti? 👇"
       },
       "hashtag": [
         "cardgame",
