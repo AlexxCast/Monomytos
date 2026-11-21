@@ -1,5 +1,21 @@
 [
  {
+  "id": "ig_tromba",
+  "lingua": "it",
+  "data": "2026-11-21T17:26:13.685Z",
+  "prova": false,
+  "didascalia_instagram": "Quando l'Araldo suona la tromba, Ataca ha un'ora. Tu scapperesti o resteresti a combattere? 👇 È una storia di Monomythos, il gioco di carte gratis: link in bio.\n\n👉 Segui la pagina per il prossimo segreto di Ataca\n\n🎨 Per ora le immagini sono create con l'AI: Monomythos è un progetto indipendente di una sola persona e così ho potuto partire. Più avanti saranno disegnate a mano, da me o da illustratori.\n\n#monomythos #cardgame #indiegame #giochidicarte #gamedev",
+  "piattaforme": {
+   "instagram": {
+    "esito": "saltata",
+    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+   }
+  },
+  "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-21_ig_tromba.mp4",
+  "titolo": "",
+  "run": "https://github.com/AlexxCast/Monomytos/actions/runs/44929582740"
+ },
+ {
   "id": "tt_alveare",
   "lingua": "it",
   "data": "2026-11-21T17:24:34.384Z",

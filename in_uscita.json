@@ -7,8 +7,14 @@
   ],
   "video": "https://github.com/AlexxCast/Monomytos/releases/download/promo-video/2026-11-21_ig_tromba.mp4",
   "creato": "2026-11-21T17:26:12.319Z",
-  "stato": "in_pubblicazione",
-  "esce_alle": "2026-11-21T17:26:12.318Z"
+  "stato": "pubblicato",
+  "esce_alle": "2026-11-21T17:26:12.318Z",
+  "esito": {
+   "instagram": {
+    "esito": "saltata",
+    "nota": "mancano i Secrets: IG_USER_ID, IG_ACCESS_TOKEN"
+   }
+  }
  },
  {
   "id": "video:44929582740-tiktok",
